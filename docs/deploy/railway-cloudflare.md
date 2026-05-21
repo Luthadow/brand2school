@@ -220,6 +220,8 @@ Set `SMOKE_API_BASE=https://api.<domain>` in Railway variables first.
 | WhatsApp verify fails | Token mismatch; try grey-cloud DNS on `api` |
 | 502 from Cloudflare | SSL mode not Full (strict); or Railway service not healthy |
 | Migrations fail | `DATABASE_URL` not linked; run `npm run railway:migrate` manually once |
+| Build `EBUSY` on `node_modules/.cache` | Nixpacks already runs `npm ci`; use build command `npm run build -w @brand2school/api` (not `npm ci && …` twice) |
+| `Missing script: railway:build:api` | Root Directory must be `/` (empty), not `apps/api` |
 | Web analytics empty | `B2S_INTERNAL_API_KEY` missing on **web** |
 
 ---
