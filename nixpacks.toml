@@ -5,7 +5,7 @@
 nixPkgs = ["nodejs_20", "openssl"]
 
 [phases.install]
-cmds = ["npm ci"]
+cmds = ["npm ci --include=dev"]
 
 [phases.build]
 cmds = ["npm run build -w @brand2school/api"]
@@ -14,5 +14,5 @@ cmds = ["npm run build -w @brand2school/api"]
 cmd = "npm run start -w @brand2school/api"
 
 [variables]
-# Prisma CLI lives in devDependencies; keep dev packages during install/build.
+# TypeScript + Prisma CLI are devDependencies — must not omit them during Railway build.
 NPM_CONFIG_PRODUCTION = "false"
