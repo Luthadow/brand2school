@@ -4,7 +4,8 @@
 
 [build]
 builder = "nixpacks"
-buildCommand = "npm run railway:build:api"
+# Nixpacks already runs `npm ci` in the install phase — do not run it again here (EBUSY on node_modules/.cache).
+buildCommand = "npm run build -w @brand2school/api"
 
 [deploy]
 startCommand = "npm run start -w @brand2school/api"
