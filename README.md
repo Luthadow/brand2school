@@ -22,7 +22,7 @@ This repository now includes:
 
 Recommended stack: **Railway + Cloudflare + your domain**.
 
-See **[docs/deploy/railway-cloudflare.md](docs/deploy/railway-cloudflare.md)** and `infra/railway/` for service layout, env templates, and DNS steps.
+See **[docs/deploy/RAILWAY_SETUP.md](docs/deploy/RAILWAY_SETUP.md)** (single API service checklist), **[docs/deploy/railway-cloudflare.md](docs/deploy/railway-cloudflare.md)** (full platform + Cloudflare), and `infra/railway/` for env templates.
 
 Email mailboxes, auto-responders, and SMTP: **[docs/email-communication.md](docs/email-communication.md)**.
 

@@ -18,7 +18,7 @@
       "name": "api",
       "rootDirectory": "/",
       "watchPaths": ["apps/api/**", "packages/**", "package.json", "package-lock.json", "brand2school.png"],
-      "buildCommand": "npm run railway:build:api",
+      "buildCommand": "npm run build -w @brand2school/api",
       "startCommand": "npm run start -w @brand2school/api",
       "preDeployCommand": "npm run railway:migrate",
       "healthcheckPath": "/health",
@@ -30,7 +30,7 @@
       "name": "web",
       "rootDirectory": "/",
       "watchPaths": ["apps/web/**", "packages/branding/**", "package.json", "package-lock.json"],
-      "buildCommand": "npm run railway:build:web",
+      "buildCommand": "npm run build -w @brand2school/web",
       "startCommand": "npm run start -w @brand2school/web",
       "publicDomain": "app.brand2school.co.za",
       "envFile": "infra/railway/env.web.example"
@@ -39,7 +39,7 @@
       "name": "admin-web",
       "rootDirectory": "/",
       "watchPaths": ["apps/admin-web/**", "packages/branding/**", "package.json", "package-lock.json"],
-      "buildCommand": "npm run railway:build:admin",
+      "buildCommand": "npm run build -w @brand2school/admin-web",
       "startCommand": "npm run start -w @brand2school/admin-web",
       "publicDomain": "admin.brand2school.co.za",
       "envFile": "infra/railway/env.admin.example"
@@ -48,7 +48,7 @@
       "name": "worker-whatsapp",
       "rootDirectory": "/",
       "watchPaths": ["apps/api/**", "package.json", "package-lock.json"],
-      "buildCommand": "npm run railway:build:api",
+      "buildCommand": "npm run build -w @brand2school/api",
       "startCommand": "npm run start:worker:whatsapp -w @brand2school/api",
       "publicNetworking": false,
       "envFile": "infra/railway/env.worker.example"
@@ -57,7 +57,7 @@
       "name": "worker-audit-export",
       "rootDirectory": "/",
       "watchPaths": ["apps/api/**", "package.json", "package-lock.json"],
-      "buildCommand": "npm run railway:build:api",
+      "buildCommand": "npm run build -w @brand2school/api",
       "startCommand": "npm run start:worker:audit-export -w @brand2school/api",
       "publicNetworking": false,
       "envFile": "infra/railway/env.worker.example"
@@ -66,7 +66,7 @@
       "name": "worker-esg",
       "rootDirectory": "/",
       "watchPaths": ["apps/api/**", "package.json", "package-lock.json"],
-      "buildCommand": "npm run railway:build:api",
+      "buildCommand": "npm run build -w @brand2school/api",
       "startCommand": "npm run start:worker:esg -w @brand2school/api",
       "publicNetworking": false,
       "envFile": "infra/railway/env.worker.example"
@@ -75,7 +75,7 @@
       "name": "worker-notifications",
       "rootDirectory": "/",
       "watchPaths": ["apps/api/**", "package.json", "package-lock.json", "brand2school.png"],
-      "buildCommand": "npm run railway:build:api",
+      "buildCommand": "npm run build -w @brand2school/api",
       "startCommand": "npm run start:worker:notifications -w @brand2school/api",
       "publicNetworking": false,
       "envFile": "infra/railway/env.worker.example"
@@ -84,7 +84,7 @@
       "name": "worker-subscriptions",
       "rootDirectory": "/",
       "watchPaths": ["apps/api/**", "package.json", "package-lock.json"],
-      "buildCommand": "npm run railway:build:api",
+      "buildCommand": "npm run build -w @brand2school/api",
       "startCommand": "npm run start:worker:subscriptions -w @brand2school/api",
       "publicNetworking": false,
       "envFile": "infra/railway/env.worker.example"

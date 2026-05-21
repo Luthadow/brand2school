@@ -3,21 +3,30 @@ import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 
 const apiDir = join(dirname(fileURLToPath(import.meta.url)), "..", "apps", "api");
+const FAILED_MIGRATION = "20260521180000_commercial_workflow_expiry";
 
-function run(cmd) {
-  execSync(cmd, { stdio: "inherit", cwd: apiDir, env: process.env });
+function run(cmd, { allowFail = false } = {}) {
+  try {
+    execSync(cmd, { stdio: "inherit", cwd: apiDir, env: process.env });
+    return true;
+  } catch (error) {
+    if (allowFail) return false;
+    throw error;
+  }
 }
 
-// One-time recovery: earlier deploy failed on enum changes inside a single transaction (P3009).
-try {
-  run(
-    "npx prisma migrate resolve --rolled-back 20260521180000_commercial_workflow_expiry"
-  );
-  console.log("Marked 20260521180000_commercial_workflow_expiry as rolled back.");
-} catch {
-  console.warn(
-    "migrate resolve skipped (already resolved or not in failed state)."
-  );
+console.log("Railway pre-deploy: prisma migrate");
+
+// Recover from P3009 if an earlier deploy failed on enum-in-transaction migration.
+if (
+  run(`npx prisma migrate resolve --rolled-back ${FAILED_MIGRATION}`, {
+    allowFail: true
+  })
+) {
+  console.log(`Resolved rolled-back: ${FAILED_MIGRATION}`);
+} else {
+  console.log(`Resolve skipped (not in failed state): ${FAILED_MIGRATION}`);
 }
 
 run("npx prisma migrate deploy");
+console.log("Railway pre-deploy: migrations complete.");

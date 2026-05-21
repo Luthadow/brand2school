@@ -97,9 +97,11 @@ In Cloudflare **DNS → Records**:
 
 ## Phase 3 — Railway project
 
+**Quick start (single API service):** [RAILWAY_SETUP.md](./RAILWAY_SETUP.md) — copy-paste settings, variables, P3009 recovery.
+
 1. Create a project at [railway.app](https://railway.app).
 2. **New → GitHub Repo** → connect this repository.
-3. Add **PostgreSQL** (Plugins → PostgreSQL). Note the `DATABASE_URL` reference.
+3. Add **PostgreSQL** (Plugins → PostgreSQL). **Connect** it to the API service (`DATABASE_URL`).
 
 ### Create services (8 compute + Postgres)
 
@@ -107,14 +109,14 @@ Use **monorepo root** `/` for every service. Reference matrix: `infra/railway/se
 
 | Service | Type | Build command | Start command | Public? |
 |---------|------|---------------|---------------|---------|
-| `api` | Web | `npm run railway:build:api` | `npm run start -w @brand2school/api` | Yes |
-| `web` | Web | `npm run railway:build:web` | `npm run start -w @brand2school/web` | Yes |
-| `admin-web` | Web | `npm run railway:build:admin` | `npm run start -w @brand2school/admin-web` | Yes |
-| `worker-whatsapp` | Worker | `npm run railway:build:api` | `npm run start:worker:whatsapp -w @brand2school/api` | No |
-| `worker-audit-export` | Worker | `npm run railway:build:api` | `npm run start:worker:audit-export -w @brand2school/api` | No |
-| `worker-esg` | Worker | `npm run railway:build:api` | `npm run start:worker:esg -w @brand2school/api` | No |
-| `worker-notifications` | Worker | `npm run railway:build:api` | `npm run start:worker:notifications -w @brand2school/api` | No |
-| `worker-subscriptions` | Worker | `npm run railway:build:api` | `npm run start:worker:subscriptions -w @brand2school/api` | No |
+| `api` | Web | `npm run build -w @brand2school/api` | `npm run start -w @brand2school/api` | Yes |
+| `web` | Web | `npm run build -w @brand2school/web` | `npm run start -w @brand2school/web` | Yes |
+| `admin-web` | Web | `npm run build -w @brand2school/admin-web` | `npm run start -w @brand2school/admin-web` | Yes |
+| `worker-whatsapp` | Worker | `npm run build -w @brand2school/api` | `npm run start:worker:whatsapp -w @brand2school/api` | No |
+| `worker-audit-export` | Worker | `npm run build -w @brand2school/api` | `npm run start:worker:audit-export -w @brand2school/api` | No |
+| `worker-esg` | Worker | `npm run build -w @brand2school/api` | `npm run start:worker:esg -w @brand2school/api` | No |
+| `worker-notifications` | Worker | `npm run build -w @brand2school/api` | `npm run start:worker:notifications -w @brand2school/api` | No |
+| `worker-subscriptions` | Worker | `npm run build -w @brand2school/api` | `npm run start:worker:subscriptions -w @brand2school/api` | No |
 
 **API deploy settings**
 
@@ -163,17 +165,9 @@ Then add matching CNAMEs in Cloudflare (Phase 2).
 
 ### Fix P3009 (failed migration on Postgres)
 
-If pre-deploy logs show `P3009` and `20260521180000_commercial_workflow_expiry` failed:
-
-1. **brand2school** → **Settings** → run a one-off command (or temporary shell):
-
-   ```bash
-   npm run railway:migrate:resolve-failed
-   ```
-
-2. **Deploy** latest `main` again so `prisma migrate deploy` can re-apply migrations.
-
-If the database has **no production data yet**, you can instead delete and recreate the Postgres service, then redeploy (cleanest).
+See [RAILWAY_SETUP.md § Fix P3009](./RAILWAY_SETUP.md#fix-p3009-failed-migration-stuck).  
+`npm run railway:migrate` auto-resolves `20260521180000_commercial_workflow_expiry` before deploy.  
+Manual SQL: `scripts/railway-p3009-fix.sql`.
 
 ---
 
