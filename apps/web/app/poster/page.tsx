@@ -1,6 +1,8 @@
 import Image from "next/image";
 import Link from "next/link";
 import brandLogo from "../../../../brand2school.png";
+import { formatCount } from "../../lib/formatCount";
+import { fetchPosterMetrics } from "../../lib/posterMetrics";
 
 const supporterGroups = [
   { icon: "🧒", title: "Early Childhood Centres" },
@@ -9,12 +11,14 @@ const supporterGroups = [
   { icon: "♿", title: "Special Needs Institutions" }
 ];
 
-export default function PosterModePage(): JSX.Element {
+export default async function PosterModePage(): Promise<JSX.Element> {
+  const { metrics, updatedAt, apiReachable } = await fetchPosterMetrics();
+
   return (
     <main className="container">
       <div className="poster-frame">
         <div className="poster-banner">BRANDS HAVE POWER. LETS USE IT FOR OUR CHILDREN.</div>
-        <div style={{ padding: "1rem" }}>
+        <div className="poster-body">
           <section className="hero poster-hero" style={{ marginBottom: "1rem" }}>
             <div style={{ marginBottom: "0.8rem" }}>
               <Image
@@ -35,10 +39,10 @@ export default function PosterModePage(): JSX.Element {
             </div>
           </section>
 
-          <section className="grid-2" style={{ marginBottom: "1rem" }}>
+          <section className="grid-2 poster-split" style={{ marginBottom: "1rem" }}>
             <article className="card panel-light">
               <h2 className="section-title">How It Works</h2>
-              <div className="grid-2">
+              <div className="grid-2 poster-tiles">
                 <div className="card mosaic-tile"><div className="icon-badge blue">🛒</div><strong>Buy</strong><p>Purchase partner products.</p></div>
                 <div className="card mosaic-tile"><div className="icon-badge green">💬</div><strong>Submit</strong><p>Send code via WhatsApp.</p></div>
                 <div className="card mosaic-tile"><div className="icon-badge orange">📈</div><strong>Contribute</strong><p>Grow school progress instantly.</p></div>
@@ -47,7 +51,7 @@ export default function PosterModePage(): JSX.Element {
             </article>
             <article className="card panel-dark">
               <h2 className="section-title">Who We Support</h2>
-              <div className="grid-2">
+              <div className="grid-2 poster-tiles">
                 {supporterGroups.map((group) => (
                   <div className="card mosaic-tile" key={group.title}>
                     <div style={{ fontSize: "1.8rem" }}>{group.icon}</div>
@@ -59,11 +63,19 @@ export default function PosterModePage(): JSX.Element {
           </section>
 
           <section className="illustration-block panel-light">
-            <h2 className="section-title">Pitch Metrics</h2>
-            <div className="grid-3">
-              <div className="card mosaic-tile"><div className="impact-counter count-delay-1">12K+</div><p>Learner actions</p></div>
-              <div className="card mosaic-tile"><div className="impact-counter count-delay-2">400+</div><p>Participating schools</p></div>
-              <div className="card mosaic-tile"><div className="impact-counter count-delay-3">80+</div><p>Verified support outcomes</p></div>
+            <h2 className="section-title">Live platform metrics</h2>
+            <p className="poster-metrics-note">
+              {apiReachable
+                ? `Updated ${new Date(updatedAt).toLocaleString("en-ZA", { dateStyle: "medium", timeStyle: "short" })} from verified platform data.`
+                : "Platform API unreachable — showing zeros until the live database is connected."}
+            </p>
+            <div className="grid-3 poster-metrics">
+              {metrics.map((m, i) => (
+                <div className="card mosaic-tile" key={m.label}>
+                  <div className={`impact-counter count-delay-${i + 1}`}>{formatCount(m.value)}</div>
+                  <p>{m.label}</p>
+                </div>
+              ))}
             </div>
           </section>
         </div>

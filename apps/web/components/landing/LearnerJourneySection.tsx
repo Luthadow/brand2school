@@ -44,22 +44,21 @@ const journeySteps = [
 ];
 
 const whatsappExample =
-  "SUBMIT | Your School Name | Your District | campaign-slug | BRAND-CODE-26-XXXXXX-XX";
+  "SUBMIT | Your School Name | Your District | campaign-slug | YOUR-PARTICIPATION-CODE";
 
 const whatsappReply = `✅ Code Verified
 
 Your submission helped:
-Rustenburg Secondary School
+[Your school name]
 
 Campaign:
-Back-to-School Essentials
+[Participating campaign]
 
 Help unlock:
-Classroom desks, books & uniforms
+[School infrastructure milestone]
 
 Progress:
-47 / 100 submissions
-47% toward target`;
+[verified count] / [campaign target] toward milestone`;
 
 export function LearnerJourneySection() {
   return (
@@ -112,7 +111,8 @@ export function LearnerJourneySection() {
                 </div>
               </div>
               <p className="lp-wa-caption">
-                Event-driven participation: each verified code is an immutable participation event credited to the school and brand campaign trail.
+                Example message format — your school and campaign names appear after verification. Each code is an immutable
+                participation event credited to the school and brand campaign trail.
               </p>
             </div>
 

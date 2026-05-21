@@ -374,6 +374,45 @@ a {
   overflow: hidden;
 }
 
+.poster-body {
+  padding: 1rem;
+  max-width: 100%;
+}
+
+.poster-split {
+  align-items: stretch;
+}
+
+.poster-tiles {
+  min-width: 0;
+}
+
+.poster-metrics-note {
+  margin: 0 0 1rem;
+  font-size: 0.88rem;
+  color: var(--text-muted);
+}
+
+.poster-metrics {
+  min-width: 0;
+}
+
+@media (max-width: 900px) {
+  .poster-frame .poster-split {
+    grid-template-columns: 1fr;
+  }
+
+  .poster-frame .poster-metrics {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 640px) {
+  .poster-frame .poster-tiles {
+    grid-template-columns: 1fr;
+  }
+}
+
 .poster-banner {
   background: linear-gradient(90deg, #062a73, #0b4ab4, #2fae3f);
   color: #fff;
