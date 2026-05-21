@@ -613,15 +613,15 @@ export default function ForBrandsPage(): JSX.Element {
         </div>
       </section>
 
-      <section id="register" className="lp-section lp-section-light">
-        <div className="lp-container" style={{ maxWidth: 720, margin: "0 auto" }}>
+      <section id="contact" className="lp-section lp-section-light">
+        <div className="lp-container brand-app-form-wrap">
           <FadeIn>
             <BrandApplicationForm />
           </FadeIn>
         </div>
       </section>
 
-      <section id="contact" className="lp-section lp-final-cta">
+      <section id="partner-outreach" className="lp-section lp-final-cta">
         <FadeIn className="lp-container lp-final-cta-inner">
           <p className="ds-eyebrow">Partner With Us</p>
           <h2 className="lp-final-title">Ready To Run A Verified Campaign?</h2>

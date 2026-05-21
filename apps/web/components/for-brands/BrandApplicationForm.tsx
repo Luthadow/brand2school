@@ -1,5 +1,6 @@
 "use client";
 
+import { Building2, FileCheck, MapPin, Send, User } from "lucide-react";
 import { useState } from "react";
 import {
   CONTRACT_PACKAGE_REQUIREMENTS,
@@ -89,140 +90,184 @@ export function BrandApplicationForm(): JSX.Element {
     );
     e.currentTarget.reset();
     setSelectedProvinces([]);
+    setSelectedPackageId("PROVINCIAL_IMPACT");
   };
 
   return (
-    <form className="lp-form-card" onSubmit={(e) => void submit(e)}>
-      <h3 className="ds-section-title ds-section-title--left">Enterprise brand registration</h3>
-      <p className="lp-problem-text">
-        Apply for transformation territory (school, district, provincial, or national). You pay a{" "}
-        <strong>mandatory platform access fee</strong> for verification, dashboards, and ESG intelligence.
-        An <strong>optional transformation contribution pool</strong> funds on-the-ground infrastructure when
-        you are ready — not required to start.
-      </p>
+    <form className="reg-form brand-app-form" onSubmit={(e) => void submit(e)}>
+      <header className="brand-app-form__intro">
+        <h2 className="brand-app-form__title">Enterprise brand registration</h2>
+        <p className="brand-app-form__lead">
+          Apply for transformation territory (school, district, provincial, or national). You pay a{" "}
+          <strong>mandatory platform access fee</strong> for verification, dashboards, and ESG intelligence.
+          An <strong>optional transformation contribution pool</strong> funds on-the-ground infrastructure when
+          you are ready — not required to start.
+        </p>
+      </header>
 
-      <div className="lp-form-grid">
-        <label>
-          Company / brand name
-          <input name="companyName" required minLength={2} />
-        </label>
-        <label>
-          Legal entity name
-          <input name="legalName" />
-        </label>
-        <label>
-          CIPC registration number
-          <input name="registrationNumber" required />
-        </label>
-        <label>
-          VAT number
-          <input name="vatNumber" />
-        </label>
-        <label>
-          Preferred code prefix (e.g. COKE)
-          <input name="codePrefix" pattern="[A-Za-z0-9]{2,8}" title="2–8 letters/numbers" />
-        </label>
-        <label>
-          Primary contact email
-          <input name="primaryContactEmail" type="email" required />
-        </label>
-        <label>
-          Contact person name
-          <input name="contactName" required />
-        </label>
-        <label>
-          Contact email
-          <input name="contactEmail" type="email" required />
-        </label>
-        <label>
-          Role
-          <input name="contactRole" placeholder="Marketing director" />
-        </label>
-        <label>
-          Phone
-          <input name="contactPhone" />
-        </label>
-        <label>
-          Proposed campaign name
-          <input name="proposedCampaignName" />
-        </label>
-        <label>
-          Transformation package
-          <select
-            name="territorialPackageId"
-            value={selectedPackageId}
-            onChange={(e) => setSelectedPackageId(e.target.value as TerritorialPackageId)}
-          >
-            {TERRITORIAL_PACKAGES.map((p) => (
-              <option key={p.id} value={p.id}>
-                {p.name} — {p.activationFee} + {p.monthlySubscription}
-              </option>
-            ))}
-          </select>
-        </label>
-        <label>
-          Transformation contribution pool (ZAR, optional)
-          <input
-            name="contributionPoolZar"
-            type="number"
-            min={0}
-            step={1000}
-            placeholder={selectedPackage?.recommendedContributionPool ?? "Optional"}
-          />
-          <small style={{ display: "block", color: "#64748b", marginTop: "0.25rem" }}>
-            Recommended: {selectedPackage?.recommendedContributionPool ?? "—"}. Not mandatory at application.
-          </small>
-        </label>
-      </div>
+      <section className="reg-section">
+        <h3>
+          <Building2 size={20} aria-hidden />
+          Company details
+        </h3>
+        <div className="reg-grid">
+          <label className="reg-field reg-field--full">
+            <span>Company / brand name</span>
+            <input name="companyName" required minLength={2} autoComplete="organization" />
+          </label>
+          <label className="reg-field reg-field--full">
+            <span>Legal entity name</span>
+            <input name="legalName" autoComplete="organization" />
+          </label>
+          <label className="reg-field">
+            <span>CIPC registration number</span>
+            <input name="registrationNumber" required />
+          </label>
+          <label className="reg-field">
+            <span>VAT number</span>
+            <input name="vatNumber" />
+          </label>
+          <label className="reg-field">
+            <span>Preferred code prefix</span>
+            <input
+              name="codePrefix"
+              pattern="[A-Za-z0-9]{2,8}"
+              title="2–8 letters or numbers"
+              placeholder="e.g. COKE"
+            />
+          </label>
+          <label className="reg-field">
+            <span>Primary contact email</span>
+            <input name="primaryContactEmail" type="email" required autoComplete="email" />
+          </label>
+        </div>
+      </section>
 
-      <fieldset style={{ marginTop: "1rem", border: "1px solid #e5e7eb", padding: "0.75rem", borderRadius: 8 }}>
-        <legend>Target provinces</legend>
-        <div style={{ display: "flex", flexWrap: "wrap", gap: "0.5rem" }}>
+      <section className="reg-section">
+        <h3>
+          <User size={20} aria-hidden />
+          Contact person
+        </h3>
+        <div className="reg-grid">
+          <label className="reg-field">
+            <span>Full name</span>
+            <input name="contactName" required autoComplete="name" />
+          </label>
+          <label className="reg-field">
+            <span>Email</span>
+            <input name="contactEmail" type="email" required autoComplete="email" />
+          </label>
+          <label className="reg-field">
+            <span>Role</span>
+            <input name="contactRole" placeholder="Marketing director" />
+          </label>
+          <label className="reg-field">
+            <span>Phone</span>
+            <input name="contactPhone" type="tel" autoComplete="tel" />
+          </label>
+        </div>
+      </section>
+
+      <section className="reg-section">
+        <h3>
+          <FileCheck size={20} aria-hidden />
+          Campaign &amp; package
+        </h3>
+        <div className="reg-grid">
+          <label className="reg-field reg-field--full">
+            <span>Proposed campaign name</span>
+            <input name="proposedCampaignName" />
+          </label>
+          <label className="reg-field reg-field--full">
+            <span>Transformation package</span>
+            <select
+              name="territorialPackageId"
+              value={selectedPackageId}
+              onChange={(e) => setSelectedPackageId(e.target.value as TerritorialPackageId)}
+            >
+              {TERRITORIAL_PACKAGES.map((p) => (
+                <option key={p.id} value={p.id}>
+                  {p.name} — {p.activationFee} + {p.monthlySubscription}
+                </option>
+              ))}
+            </select>
+          </label>
+          <label className="reg-field reg-field--full">
+            <span>Transformation contribution pool (ZAR, optional)</span>
+            <input
+              name="contributionPoolZar"
+              type="number"
+              min={0}
+              step={1000}
+              placeholder={selectedPackage?.recommendedContributionPool ?? "Optional"}
+            />
+            <small className="reg-field-hint">
+              Recommended: {selectedPackage?.recommendedContributionPool ?? "—"}. Not mandatory at application.
+            </small>
+          </label>
+        </div>
+      </section>
+
+      <section className="reg-section">
+        <h3>
+          <MapPin size={20} aria-hidden />
+          Target provinces
+        </h3>
+        <p className="reg-hint">Select every province where you intend to run verified campaigns.</p>
+        <div className="reg-province-grid" role="group" aria-label="Target provinces">
           {PROVINCES.map((p) => (
-            <label key={p} style={{ display: "flex", alignItems: "center", gap: "0.25rem" }}>
+            <label key={p} className="reg-check-card">
               <input
                 type="checkbox"
                 checked={selectedProvinces.includes(p)}
                 onChange={() => toggleProvince(p)}
               />
-              {p}
+              <span>{p}</span>
             </label>
           ))}
         </div>
-      </fieldset>
+      </section>
 
-      <label style={{ display: "block", marginTop: "1rem" }}>
-        Campaign intention
-        <textarea name="campaignIntention" required minLength={10} rows={3} />
-      </label>
-      <label style={{ display: "block", marginTop: "0.75rem" }}>
-        Products involved
-        <textarea name="productsInvolved" required rows={2} />
-      </label>
+      <section className="reg-section">
+        <h3>Campaign details</h3>
+        <div className="reg-grid">
+          <label className="reg-field reg-field--full">
+            <span>Campaign intention</span>
+            <textarea name="campaignIntention" required minLength={10} rows={4} />
+          </label>
+          <label className="reg-field reg-field--full">
+            <span>Products involved</span>
+            <textarea name="productsInvolved" required rows={3} />
+          </label>
+        </div>
+      </section>
 
-      <fieldset style={{ marginTop: "1rem", border: "1px solid #e5e7eb", padding: "0.75rem", borderRadius: 8 }}>
-        <legend>Contract prerequisites</legend>
-        <ul style={{ margin: "0 0 0.75rem", paddingLeft: "1.1rem", fontSize: "0.9rem" }}>
+      <section className="reg-section reg-section--muted">
+        <h3>Contract prerequisites</h3>
+        <ul className="brand-app-form__requirements">
           {CONTRACT_PACKAGE_REQUIREMENTS.map((req) => (
             <li key={req.label}>{req.label}</li>
           ))}
         </ul>
-        <label style={{ display: "flex", gap: "0.5rem", alignItems: "flex-start" }}>
+        <label className="reg-check-row">
           <input type="checkbox" name="popiaComplianceAccepted" required />
           <span>
             I accept Brand2School&apos;s POPIA-aligned data handling for participation verification,
             analytics, and ESG reporting.
           </span>
         </label>
-      </fieldset>
-
-      <button type="submit" className="ds-btn ds-btn-primary" style={{ marginTop: "1rem" }} disabled={status === "loading"}>
-        {status === "loading" ? "Submitting…" : "Submit application"}
-      </button>
+      </section>
 
       {message ? (
-        <p style={{ marginTop: "0.75rem", color: status === "error" ? "#b91c1c" : "#166534" }}>{message}</p>
+        <p className={status === "error" ? "reg-error" : "reg-message--ok"} role="status">
+          {message}
+        </p>
       ) : null}
+
+      <button type="submit" className="ds-btn ds-btn-primary ds-btn-lg reg-submit" disabled={status === "loading"}>
+        <Send size={18} aria-hidden />
+        {status === "loading" ? "Submitting…" : "Submit application"}
+      </button>
     </form>
   );
 }
