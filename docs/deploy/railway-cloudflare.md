@@ -179,7 +179,7 @@ Subscribe to message fields your integration uses.
 
 ## Phase 5 — Email (SMTP)
 
-Production API **requires** `SMTP_HOST` (see `assertProductionReadiness`).
+WhatsApp and SMTP are **optional at boot** — missing vars log `[production-readiness]` warnings only. Add Meta/SMTP when ready.
 
 **Brand2School on Register Domain:** use **`noreply@brand2school.co.za`** only for `MAIL_FROM` / `SMTP_USER`. Human inboxes (`info@`, `schools@`, `brands@`, `support@`) are not used for SMTP.
 

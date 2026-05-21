@@ -70,10 +70,12 @@ export function productionReadinessChecks(): ProductionCheck[] {
   ];
 }
 
-export function assertProductionReadiness(): void {
+/** Logs missing optional integrations; does not block API boot (healthcheck / core routes). */
+export function logProductionReadinessWarnings(): void {
   const failures = productionReadinessChecks().filter((check) => !check.ok);
   if (failures.length === 0) return;
 
-  const message = failures.map((f) => `${f.key}: ${f.detail}`).join("\n");
-  throw new Error(`Production environment incomplete:\n${message}`);
+  for (const failure of failures) {
+    console.warn(`[production-readiness] ${failure.key}: ${failure.detail}`);
+  }
 }

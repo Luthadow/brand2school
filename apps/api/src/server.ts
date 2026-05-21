@@ -1,10 +1,10 @@
-import { env, assertProductionReadiness } from "./config/env.js";
+import { env, logProductionReadinessWarnings } from "./config/env.js";
 import { runDatabaseMigrations } from "./bootstrap/migrate.js";
 import { app } from "./app.js";
 import { logger } from "./lib/logger.js";
 
 if (env.NODE_ENV === "production") {
-  assertProductionReadiness();
+  logProductionReadinessWarnings();
   runDatabaseMigrations();
 }
 
