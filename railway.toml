@@ -8,6 +8,7 @@ builder = "nixpacks"
 buildCommand = "npm run build -w @brand2school/api"
 
 [deploy]
+preDeployCommand = "npm run railway:migrate"
 startCommand = "npm run start -w @brand2school/api"
 healthcheckPath = "/health"
 healthcheckTimeout = 300
