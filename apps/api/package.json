@@ -25,6 +25,7 @@
     "db:migrate": "prisma migrate dev",
     "db:migrate:deploy": "prisma migrate deploy",
     "db:migrate:resolve": "prisma migrate resolve",
+    "db:migrate:resolve:commercial-expiry": "prisma migrate resolve --rolled-back 20260521180000_commercial_workflow_expiry",
     "db:migrate:reset": "prisma migrate reset --force",
     "db:migrate:status": "prisma migrate status",
     "db:seed": "tsx prisma/seed.ts"
