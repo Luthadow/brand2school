@@ -1,7 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
 import {
-  Award,
   BarChart3,
   BookOpen,
   Building2,
@@ -338,13 +337,6 @@ export default async function HomePage(): Promise<JSX.Element> {
               <div className="lp-hero-badge">
                 <CheckCircle2 size={18} />
                 Verified &amp; POPIA Compliant
-              </div>
-              <div className="lp-hero-float-card lp-hero-float-card--top">
-                <Award size={18} />
-                <div>
-                  <strong>Sports Field Mission</strong>
-                  <span>Netball court funded — Limpopo cluster</span>
-                </div>
               </div>
               <LiveHeroMonthCard />
             </div>
