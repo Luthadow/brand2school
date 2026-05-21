@@ -110,7 +110,6 @@
   text-decoration: none;
   box-shadow: 0 4px 14px rgba(108, 194, 74, 0.35);
   transition: transform 160ms ease, box-shadow 160ms ease, background 160ms ease;
-  white-space: nowrap;
 }
 
 .b2s-nav-cta:hover {
@@ -230,11 +229,13 @@
   }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 640px) {
   .b2s-nav-drawer-list {
     grid-template-columns: 1fr;
   }
+}
 
+@media (max-width: 480px) {
   .b2s-nav-toggle-label {
     display: none;
   }

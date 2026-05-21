@@ -61,28 +61,30 @@ export function SchoolRoadmapPage(): JSX.Element {
           <p className="sp-muted">
             Phases unlock at {development.phaseCompletionThreshold}% verified completion (not promises).
           </p>
-          <table className="sp-score-table">
-            <thead>
-              <tr>
-                <th>Item</th>
-                <th>Needed</th>
-                <th>Current</th>
-                <th>Done</th>
-                <th>Verified</th>
-              </tr>
-            </thead>
-            <tbody>
-              {activeInfra.items.map((row) => (
-                <tr key={row.category}>
-                  <td>{row.category}</td>
-                  <td>{row.needed}</td>
-                  <td>{row.current}</td>
-                  <td>{row.completionPercent}%</td>
-                  <td>{row.verificationStatus}</td>
+          <div className="sp-score-table-wrap">
+            <table className="sp-score-table">
+              <thead>
+                <tr>
+                  <th>Item</th>
+                  <th>Needed</th>
+                  <th>Current</th>
+                  <th>Done</th>
+                  <th>Verified</th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
+              </thead>
+              <tbody>
+                {activeInfra.items.map((row) => (
+                  <tr key={row.category}>
+                    <td>{row.category}</td>
+                    <td>{row.needed}</td>
+                    <td>{row.current}</td>
+                    <td>{row.completionPercent}%</td>
+                    <td>{row.verificationStatus}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         </section>
       ) : null}
 
@@ -115,28 +117,30 @@ export function SchoolRoadmapPage(): JSX.Element {
 
       <section className="sp-section">
         <h2>Development score</h2>
-        <table className="sp-score-table">
-          <thead>
-            <tr>
-              <th>Area</th>
-              <th>%</th>
-              <th>Bar</th>
-            </tr>
-          </thead>
-          <tbody>
-            {areaScores.map((row) => (
-              <tr key={row.area}>
-                <td>{row.area}</td>
-                <td>{row.percent}%</td>
-                <td>
-                  <div className="sp-progress sp-progress--inline">
-                    <span style={{ width: `${row.percent}%` }} />
-                  </div>
-                </td>
+        <div className="sp-score-table-wrap">
+          <table className="sp-score-table">
+            <thead>
+              <tr>
+                <th>Area</th>
+                <th>%</th>
+                <th>Bar</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {areaScores.map((row) => (
+                <tr key={row.area}>
+                  <td>{row.area}</td>
+                  <td>{row.percent}%</td>
+                  <td>
+                    <div className="sp-progress sp-progress--inline">
+                      <span style={{ width: `${row.percent}%` }} />
+                    </div>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       </section>
 
       <section className="sp-section">
