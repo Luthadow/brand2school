@@ -15,7 +15,7 @@ Use this for a **single API service** named `brand2school` connected to GitHub `
 | **Healthcheck path** | `/health` |
 | **Healthcheck timeout** | `300` |
 
-Config-as-code (same values): `railway.toml`, `railway.json`, `nixpacks.toml` at repo root.
+Config-as-code (API only): `railway.api.toml`, `nixpacks.toml` at repo root. Web uses `railway.web.toml` + `nixpacks.web.toml` (no pre-deploy).
 
 ---
 

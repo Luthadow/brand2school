@@ -1,3 +1,4 @@
+# Default Nixpacks (API). Web/admin services: set NIXPACKS_CONFIG_FILE=nixpacks.web.toml or nixpacks.admin.toml
 # Brand2School monorepo — default Nixpacks plan (API service).
 # For web/admin/workers, override Build/Start in Railway service settings (see infra/railway/services.json).
 

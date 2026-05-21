@@ -1,0 +1,13 @@
+# Web service ONLY. In Railway → web → Settings → Config file: railway.web.toml
+# Pre-deploy must stay EMPTY (web does not use DATABASE_URL).
+
+[build]
+builder = "nixpacks"
+buildCommand = "npm run build -w @brand2school/web"
+
+[deploy]
+startCommand = "npm run start -w @brand2school/web"
+healthcheckPath = "/"
+healthcheckTimeout = 300
+restartPolicyType = "ON_FAILURE"
+restartPolicyMaxRetries = 10

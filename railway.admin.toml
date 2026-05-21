@@ -1,0 +1,12 @@
+# Admin-web service ONLY. Config file: railway.admin.toml — no pre-deploy.
+
+[build]
+builder = "nixpacks"
+buildCommand = "npm run build -w @brand2school/admin-web"
+
+[deploy]
+startCommand = "npm run start -w @brand2school/admin-web"
+healthcheckPath = "/login"
+healthcheckTimeout = 300
+restartPolicyType = "ON_FAILURE"
+restartPolicyMaxRetries = 10

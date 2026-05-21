@@ -1,0 +1,14 @@
+# API service ONLY (brand2school). In Railway: set this service's config file to railway.api.toml
+# OR set these values manually in Settings. Do NOT use this file for web/admin/workers.
+
+[build]
+builder = "nixpacks"
+buildCommand = "npm run build -w @brand2school/api"
+
+[deploy]
+preDeployCommand = "npm run railway:migrate"
+startCommand = "npm run start -w @brand2school/api"
+healthcheckPath = "/health"
+healthcheckTimeout = 300
+restartPolicyType = "ON_FAILURE"
+restartPolicyMaxRetries = 10

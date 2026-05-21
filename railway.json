@@ -1,15 +1,4 @@
 {
   "$schema": "https://railway.com/railway.schema.json",
-  "build": {
-    "builder": "NIXPACKS",
-    "buildCommand": "npm run build -w @brand2school/api"
-  },
-  "deploy": {
-    "preDeployCommand": "npm run railway:migrate",
-    "startCommand": "npm run start -w @brand2school/api",
-    "healthcheckPath": "/health",
-    "healthcheckTimeout": 300,
-    "restartPolicyType": "ON_FAILURE",
-    "restartPolicyMaxRetries": 10
-  }
+  "_comment": "Do not use this file for all services. Use railway.api.toml, railway.web.toml, or railway.admin.toml per service in Railway Settings."
 }

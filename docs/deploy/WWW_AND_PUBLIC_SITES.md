@@ -19,8 +19,9 @@ API stays at **https://api.brand2school.co.za** (service `brand2school`).
 | **Root Directory** | *(empty)* |
 | **Build command** | `npm run build -w @brand2school/web` |
 | **Start command** | `npm run start -w @brand2school/web` |
-| **Pre-deploy** | *(empty)* |
+| **Pre-deploy** | ***(empty — delete `npm run railway:migrate` if present!)*** |
 | **Healthcheck path** | `/` |
+| **Config file** | `railway.web.toml` *(Settings → Config-as-code)* |
 
 ### Variables (required)
 
@@ -139,6 +140,7 @@ DNS propagation: 5–60 minutes.
 
 | Issue | Fix |
 |-------|-----|
+| Web fails: `DATABASE_URL is missing` on pre-deploy | **Remove** pre-deploy on **web** — only API runs `railway:migrate`. Set config file `railway.web.toml`. |
 | www does not resolve | Add CNAME `www` in Cloudflare → **web** Railway host |
 | www shows Railway 502 | **web** service not Online; check build logs |
 | www builds API instead of Next | Set `NIXPACKS_CONFIG_FILE=nixpacks.web.toml` on **web** service |
