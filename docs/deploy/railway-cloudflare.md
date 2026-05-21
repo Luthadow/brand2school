@@ -220,6 +220,7 @@ Set `SMOKE_API_BASE=https://api.<domain>` in Railway variables first.
 | WhatsApp verify fails | Token mismatch; try grey-cloud DNS on `api` |
 | 502 from Cloudflare | SSL mode not Full (strict); or Railway service not healthy |
 | Migrations fail | `DATABASE_URL` not linked; run `npm run railway:migrate` manually once |
+| `DATABASE_URL` resolved to an empty string | Delete empty var; use **Variable Reference** from Postgres plugin (not a blank manual value) |
 | Build `EBUSY` on `node_modules/.cache` | Nixpacks already runs `npm ci`; use build command `npm run build -w @brand2school/api` (not `npm ci && …` twice) |
 | Build `tsc: not found` (exit 127) | Install must include devDependencies (`npm ci --include=dev`); build uses `npx tsc`. Do not set `NODE_ENV=production` as a build-only override without `NPM_CONFIG_PRODUCTION=false` |
 | `Missing script: railway:build:api` | Root Directory must be `/` (empty), not `apps/api` |
