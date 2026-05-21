@@ -1,0 +1,16 @@
+# Railway **admin-web** service only. Set variable: NIXPACKS_CONFIG_FILE=nixpacks.admin.toml
+
+[phases.setup]
+nixPkgs = ["nodejs_20"]
+
+[phases.install]
+cmds = ["npm ci --include=dev"]
+
+[phases.build]
+cmds = ["npm run build -w @brand2school/admin-web"]
+
+[start]
+cmd = "npm run start -w @brand2school/admin-web"
+
+[variables]
+NPM_CONFIG_PRODUCTION = "false"

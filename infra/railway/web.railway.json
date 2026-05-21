@@ -8,5 +8,6 @@
     "startCommand": "npm run start -w @brand2school/web",
     "healthcheckPath": "/",
     "healthcheckTimeout": 300
-  }
+  },
+  "_comment": "Set NIXPACKS_CONFIG_FILE=nixpacks.web.toml. Custom domains: www.brand2school.co.za, app.brand2school.co.za"
 }

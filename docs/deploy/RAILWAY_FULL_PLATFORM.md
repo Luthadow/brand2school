@@ -2,6 +2,8 @@
 
 API is live at **https://api.brand2school.co.za**. This guide adds **web**, **admin**, **workers**, **seed**, **SMTP**, and **WhatsApp** (when ready).
 
+**Public website (www):** [WWW_AND_PUBLIC_SITES.md](./WWW_AND_PUBLIC_SITES.md)
+
 All services use the **same GitHub repo**, **root directory `/`**, project **abundant-grace**.
 
 ---
@@ -47,7 +49,7 @@ Save these in a password manager. Use **Railway Shared Variables** or paste on e
 | `JWT_REFRESH_SECRET` | *(generated)* |
 | `INTERNAL_API_KEY` | *(generated)* |
 | `NODE_ENV` | `production` |
-| `WEB_APP_URL` | `https://app.brand2school.co.za` |
+| `WEB_APP_URL` | `https://www.brand2school.co.za` |
 | `ADMIN_WEB_APP_URL` | `https://admin.brand2school.co.za` |
 | `MAIL_FROM` | `noreply@brand2school.co.za` |
 | `SMTP_HOST` | `mail.brand2school.co.za` *(when ready)* |
