@@ -1,5 +1,7 @@
 # Railway setup — brand2school API (copy-paste)
 
+**Full platform (web + admin + workers):** [RAILWAY_FULL_PLATFORM.md](./RAILWAY_FULL_PLATFORM.md)
+
 Use this for a **single API service** named `brand2school` connected to GitHub `Luthadow/brand2school`.
 
 ## Service settings
@@ -128,11 +130,13 @@ Delete Postgres → add new PostgreSQL → Connect → Deploy.
 
 ## Seed admin (first deploy only)
 
-Railway shell or run command on **brand2school**:
+Railway run command on **brand2school**:
 
 ```bash
-npm run db:seed -w @brand2school/api
+npm run railway:seed
 ```
+
+Login: `superadmin@brand2school.co.za` / `ChangeMe123!` (change after first login).
 
 ---
 
