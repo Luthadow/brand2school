@@ -42,8 +42,11 @@ export function AdminShell({ children }: { children: React.ReactNode }): JSX.Ele
 
   return (
     <main className="container">
-      <div className="card" style={{ marginBottom: "1rem", display: "flex", justifyContent: "space-between", gap: "1rem" }}>
-        <div>
+      <div
+        className="card admin-shell-head"
+        style={{ marginBottom: "1rem", display: "flex", flexWrap: "wrap", justifyContent: "space-between", gap: "1rem" }}
+      >
+        <div style={{ minWidth: 0, flex: "1 1 16rem" }}>
           <Image
             src={brandLogo}
             alt="Brand2School admin dashboard logo"

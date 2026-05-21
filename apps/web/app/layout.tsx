@@ -1,6 +1,6 @@
 import "./globals.css";
 import "@brand2school/branding/styles.css";
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import type { ReactNode } from "react";
 import { Inter, Montserrat } from "next/font/google";
 import { BrandedHeader } from "@brand2school/branding";
@@ -20,6 +20,12 @@ const inter = Inter({
   variable: "--font-body",
   display: "swap"
 });
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  viewportFit: "cover"
+};
 
 export const metadata: Metadata = {
   title: "Brand2School — Brands Have Power. Let's Use It For Our Schools.",

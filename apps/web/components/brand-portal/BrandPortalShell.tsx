@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import type { Route } from "next";
+import { useEffect, useState } from "react";
 import {
   BarChart3,
   Bell,
@@ -15,29 +16,33 @@ import {
   LogOut,
   Map,
   Megaphone,
+  Menu,
   School,
   Settings,
   Shield,
-  Sparkles
+  Sparkles,
+  X
 } from "lucide-react";
 import { brandCsrfHeaders } from "../../lib/brandClientFetch";
 import type { BrandPortal } from "../../lib/brandPortal";
 import { formatZar } from "../../lib/brandPortal";
 
-const NAV: Array<{ href: Route; label: string; icon: typeof LayoutDashboard }> = [
-  { href: "/brand/dashboard", label: "Overview", icon: LayoutDashboard },
-  { href: "/brand/dashboard/campaigns", label: "Campaigns", icon: Megaphone },
-  { href: "/brand/dashboard/schools", label: "School Needs", icon: School },
-  { href: "/brand/dashboard/submissions", label: "Submissions", icon: Shield },
-  { href: "/brand/dashboard/analytics", label: "Analytics", icon: BarChart3 },
-  { href: "/brand/dashboard/map", label: "Impact Map", icon: Map },
-  { href: "/brand/dashboard/reports", label: "Reports & ESG", icon: FileText },
-  { href: "/brand/dashboard/commercial", label: "Agreement", icon: FileSignature },
-  { href: "/brand/dashboard/financials", label: "Financials", icon: CircleDollarSign },
-  { href: "/brand/dashboard/media", label: "Media & Stories", icon: Film },
-  { href: "/brand/dashboard/notifications", label: "Notifications", icon: Bell },
-  { href: "/brand/dashboard/settings", label: "Settings", icon: Settings }
+const NAV: Array<{ href: Route; label: string; icon: typeof LayoutDashboard; short: string }> = [
+  { href: "/brand/dashboard", label: "Overview", icon: LayoutDashboard, short: "Home" },
+  { href: "/brand/dashboard/campaigns", label: "Campaigns", icon: Megaphone, short: "Campaigns" },
+  { href: "/brand/dashboard/schools", label: "School Needs", icon: School, short: "Schools" },
+  { href: "/brand/dashboard/submissions", label: "Submissions", icon: Shield, short: "Codes" },
+  { href: "/brand/dashboard/analytics", label: "Analytics", icon: BarChart3, short: "Analytics" },
+  { href: "/brand/dashboard/map", label: "Impact Map", icon: Map, short: "Map" },
+  { href: "/brand/dashboard/reports", label: "Reports & ESG", icon: FileText, short: "Reports" },
+  { href: "/brand/dashboard/commercial", label: "Agreement", icon: FileSignature, short: "Deal" },
+  { href: "/brand/dashboard/financials", label: "Financials", icon: CircleDollarSign, short: "Funds" },
+  { href: "/brand/dashboard/media", label: "Media & Stories", icon: Film, short: "Media" },
+  { href: "/brand/dashboard/notifications", label: "Notifications", icon: Bell, short: "Alerts" },
+  { href: "/brand/dashboard/settings", label: "Settings", icon: Settings, short: "Settings" }
 ];
+
+const BOTTOM_NAV = NAV.slice(0, 4);
 
 export function BrandPortalShell({
   portal,
@@ -48,6 +53,18 @@ export function BrandPortalShell({
 }): JSX.Element {
   const pathname = usePathname();
   const unread = portal.notifications.filter((n) => !n.read).length;
+  const [menuOpen, setMenuOpen] = useState(false);
+
+  useEffect(() => {
+    document.body.style.overflow = menuOpen ? "hidden" : "";
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [menuOpen]);
+
+  useEffect(() => {
+    setMenuOpen(false);
+  }, [pathname]);
 
   async function logout(): Promise<void> {
     await fetch("/api/brand/auth/logout", { method: "POST", headers: brandCsrfHeaders() });
@@ -56,7 +73,28 @@ export function BrandPortalShell({
 
   return (
     <div className="bp">
-      <aside className="bp-sidebar">
+      <header className="bp-mobile-bar">
+        <strong>{portal.brand.name}</strong>
+        <button
+          type="button"
+          className="bp-menu-toggle"
+          aria-expanded={menuOpen}
+          aria-controls="bp-sidebar"
+          onClick={() => setMenuOpen((o) => !o)}
+        >
+          {menuOpen ? <X size={18} /> : <Menu size={18} />}
+          Menu
+        </button>
+      </header>
+
+      <button
+        type="button"
+        className={`bp-sidebar-backdrop${menuOpen ? " bp-sidebar-backdrop--visible" : ""}`}
+        aria-label="Close menu"
+        onClick={() => setMenuOpen(false)}
+      />
+
+      <aside id="bp-sidebar" className={`bp-sidebar${menuOpen ? " bp-sidebar--open" : ""}`}>
         <div className="bp-brand">
           <Sparkles size={20} />
           <div>
@@ -75,6 +113,7 @@ export function BrandPortalShell({
                 key={item.href}
                 href={item.href}
                 className={`bp-nav-link${active ? " bp-nav-link--active" : ""}`}
+                onClick={() => setMenuOpen(false)}
               >
                 <Icon size={18} />
                 {item.label}
@@ -94,10 +133,36 @@ export function BrandPortalShell({
           </button>
         </div>
       </aside>
+
       <main className="bp-main">{children}</main>
+
+      <nav className="bp-bottom-nav" aria-label="Brand portal mobile navigation">
+        {BOTTOM_NAV.map((item) => {
+          const active =
+            pathname === item.href ||
+            (item.href !== "/brand/dashboard" && pathname.startsWith(item.href));
+          const Icon = item.icon;
+          return (
+            <Link
+              key={item.href}
+              href={item.href}
+              className={`bp-bottom-link${active ? " bp-bottom-link--active" : ""}`}
+            >
+              <Icon size={20} />
+              <span>{item.short}</span>
+            </Link>
+          );
+        })}
+        <button
+          type="button"
+          className={`bp-bottom-link${menuOpen ? " bp-bottom-link--active" : ""}`}
+          onClick={() => setMenuOpen(true)}
+          aria-label="Open full menu"
+        >
+          <Menu size={20} />
+          <span>More</span>
+        </button>
+      </nav>
     </div>
   );
 }
-
-
-

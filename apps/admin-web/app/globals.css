@@ -6,11 +6,17 @@
   box-sizing: border-box;
 }
 
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
 body {
   margin: 0;
   font-family: Arial, sans-serif;
   background: #f6f9ff;
   color: #0f1c2e;
+  overflow-x: clip;
 }
 
 a {
@@ -141,4 +147,46 @@ select {
 @media (max-width: 960px) {
   .exec-kpi-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .exec-two-col { grid-template-columns: 1fr; }
+}
+
+.admin-shell-head button {
+  align-self: flex-start;
+}
+
+@media (max-width: 640px) {
+  .container {
+    padding: 1rem;
+  }
+
+  .admin-shell-head {
+    flex-direction: column;
+  }
+
+  .exec-kpi-grid,
+  .exec-province-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .exec-feed li {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.25rem;
+  }
+
+  .exec-feed time {
+    white-space: normal;
+  }
+
+  .table th,
+  .table td {
+    overflow-wrap: anywhere;
+    word-break: break-word;
+  }
+
+  input,
+  select,
+  textarea,
+  button {
+    max-width: 100%;
+  }
 }
