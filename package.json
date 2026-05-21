@@ -1,0 +1,57 @@
+{
+  "name": "brand2school",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Brand2School platform monorepo",
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "dev:api": "npm run dev -w @brand2school/api",
+    "dev:worker:audit-export": "npm run dev:worker:audit-export -w @brand2school/api",
+    "dev:worker:whatsapp": "npm run dev:worker:whatsapp -w @brand2school/api",
+    "dev:worker:esg": "npm run dev:worker:esg -w @brand2school/api",
+    "dev:worker:notifications": "npm run dev:worker:notifications -w @brand2school/api",
+    "dev:worker:subscriptions": "npm run dev:worker:subscriptions -w @brand2school/api",
+    "smoke:test": "npm run smoke:test -w @brand2school/api",
+    "dev:web": "npm run dev -w @brand2school/web",
+    "dev:web:clean": "node -e \"require('fs').rmSync('apps/web/.next',{recursive:true,force:true})\" && npm run dev -w @brand2school/web",
+    "dev:admin": "npm run dev -w @brand2school/admin-web",
+    "dev:all": "node scripts/dev-all.mjs",
+    "build:api": "npm run build -w @brand2school/api",
+    "build:web": "npm run build -w @brand2school/web",
+    "build:admin": "npm run build -w @brand2school/admin-web",
+    "lint:api": "npm run lint -w @brand2school/api",
+    "lint:web": "npm run lint -w @brand2school/web",
+    "lint:admin": "npm run lint -w @brand2school/admin-web",
+    "db:generate": "npm run db:generate -w @brand2school/api",
+    "db:migrate": "npm run db:migrate -w @brand2school/api",
+    "db:migrate:deploy": "npm run db:migrate:deploy -w @brand2school/api",
+    "db:seed": "npm run db:seed -w @brand2school/api",
+    "db:wait": "node scripts/wait-for-postgres.mjs",
+    "db:up": "node scripts/db-up.mjs",
+    "db:reset": "npm run db:migrate:reset -w @brand2school/api",
+    "db:status": "npm run db:migrate:status -w @brand2school/api",
+    "db:setup": "npm run db:up && npm run ops:bootstrap",
+    "ops:bootstrap": "node scripts/ops-bootstrap.mjs",
+    "build": "npm run build -w @brand2school/api",
+    "start": "npm run start -w @brand2school/api",
+    "build:all": "npm run build:api && npm run build:web && npm run build:admin",
+    "verify:nervous-system": "node scripts/verify-nervous-system.mjs",
+    "railway:build:api": "npm ci && npm run build -w @brand2school/api",
+    "railway:build:web": "npm ci && npm run build -w @brand2school/web",
+    "railway:build:admin": "npm ci && npm run build -w @brand2school/admin-web",
+    "railway:migrate": "npm run db:migrate:deploy -w @brand2school/api"
+  },
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "keywords": [
+    "brand2school",
+    "social-impact",
+    "education",
+    "platform"
+  ],
+  "license": "UNLICENSED"
+}

@@ -1,0 +1,18 @@
+# Brand2School monorepo — default Nixpacks plan (API service).
+# For web/admin/workers, override Build/Start in Railway service settings (see infra/railway/services.json).
+
+[phases.setup]
+nixPkgs = ["nodejs_20", "openssl"]
+
+[phases.install]
+cmds = ["npm ci"]
+
+[phases.build]
+cmds = ["npm run build -w @brand2school/api"]
+
+[start]
+cmd = "npm run start -w @brand2school/api"
+
+[variables]
+# Prisma CLI lives in devDependencies; keep dev packages during install/build.
+NPM_CONFIG_PRODUCTION = "false"

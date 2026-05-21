@@ -1,0 +1,7 @@
+-- Continuous development ecosystem for schools
+ALTER TABLE "School" ADD COLUMN IF NOT EXISTS "developmentTier" INTEGER NOT NULL DEFAULT 1;
+ALTER TABLE "School" ADD COLUMN IF NOT EXISTS "currentPhase" INTEGER NOT NULL DEFAULT 1;
+ALTER TABLE "School" ADD COLUMN IF NOT EXISTS "developmentScores" JSONB;
+ALTER TABLE "School" ADD COLUMN IF NOT EXISTS "phaseHistory" JSONB;
+ALTER TABLE "School" ADD COLUMN IF NOT EXISTS "annualCycleYear" INTEGER;
+ALTER TABLE "School" ADD COLUMN IF NOT EXISTS "annualCycleFocus" TEXT;

@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="220" height="48" viewBox="0 0 220 48" role="img" aria-label="Brand2School">
+  <rect width="220" height="48" rx="8" fill="#003B8E"/>
+  <circle cx="24" cy="24" r="14" fill="#6CC24A"/>
+  <path d="M18 24 L22 28 L30 18" stroke="#fff" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="46" y="30" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="700" fill="#ffffff">Brand2School</text>
+</svg>

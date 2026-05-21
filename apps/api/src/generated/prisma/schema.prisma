@@ -1,0 +1,729 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum UserRole {
+  SUPER_ADMIN
+  ADMIN_STAFF
+  SCHOOL_ADMIN
+  BRAND_ADMIN
+  JUDGE
+  LEARNER
+}
+
+enum EntityStatus {
+  PENDING
+  VERIFIED
+  APPROVED
+  ACTIVE
+  SUSPENDED
+}
+
+enum SchoolVerificationStatus {
+  NOT_SUBMITTED
+  SUBMITTED
+  UNDER_REVIEW
+  APPROVED
+  REJECTED
+}
+
+enum CodeStatus {
+  UNUSED
+  PENDING
+  USED
+  DUPLICATE
+  INVALID
+  FLAGGED
+  EXPIRED
+  INVALIDATED
+  BLOCKED
+}
+
+enum SubmissionState {
+  VALID
+  REJECTED
+  FLAGGED_FOR_REVIEW
+}
+
+enum CampaignScopeType {
+  NATIONAL
+  PROVINCIAL
+  DISTRICT
+  SCHOOL_CLUSTER
+}
+
+enum BrandOnboardingStatus {
+  PENDING_REVIEW
+  UNDER_APPROVAL
+  AGREEMENT_PENDING
+  COMMERCIALLY_ACTIVE
+  SUSPENDED
+}
+
+enum BrandSubscriptionStatus {
+  ACTIVE
+  PAST_DUE
+  SUSPENDED
+}
+
+enum BrandSubscriptionPlan {
+  SCHOOL
+  DISTRICT
+  PROVINCIAL
+  NATIONAL
+}
+
+enum BillingCycle {
+  MONTHLY
+  QUARTERLY
+  ANNUAL
+}
+
+enum BrandAgreementStatus {
+  DRAFT
+  GENERATED
+  AWAITING_SIGNATURE
+  UPLOADED
+  APPROVED
+  REJECTED
+}
+
+enum CampaignCommercialStatus {
+  DRAFT
+  AWAITING_AGREEMENT
+  AWAITING_PAYMENT
+  AWAITING_CODES
+  AWAITING_LAUNCH
+  READY_FOR_APPROVAL
+  LIVE
+  PAUSED
+  SUSPENDED
+  EXPIRED
+}
+
+enum CampaignRenewalStatus {
+  NONE
+  PENDING_RENEWAL
+  RENEWED
+  LAPSED
+}
+
+enum CampaignInvoiceType {
+  SETUP_FEE
+  CONTRIBUTION_POOL
+  SAAS_SUBSCRIPTION
+}
+
+enum CampaignInvoiceStatus {
+  DRAFT
+  ISSUED
+  PAYMENT_REPORTED
+  VERIFIED
+  VOID
+}
+
+enum ExportJobStatus {
+  QUEUED
+  PROCESSING
+  COMPLETED
+  FAILED
+}
+
+enum WhatsAppMessageStatus {
+  QUEUED
+  SENDING
+  SENT
+  FAILED
+  DEAD_LETTER
+}
+
+enum EsgReportCadence {
+  WEEKLY
+  MONTHLY
+  QUARTERLY
+}
+
+enum EsgReportDeliveryStatus {
+  SENT
+  FAILED
+}
+
+enum NotificationChannel {
+  EMAIL
+}
+
+enum NotificationTemplate {
+  SCHOOL_REGISTRATION
+  SCHOOL_APPROVED
+  BRAND_WELCOME
+  PASSWORD_RESET
+  CONTACT_INQUIRY_INFO
+  CONTACT_ACK
+  ESG_REPORT
+}
+
+enum NotificationDeliveryStatus {
+  QUEUED
+  PROCESSING
+  SENT
+  FAILED
+}
+
+model User {
+  id                  String               @id @default(cuid())
+  fullName            String
+  email               String               @unique
+  passwordHash        String
+  role                UserRole
+  status              EntityStatus         @default(PENDING)
+  schoolId            String?              @unique
+  brandId             String?
+  createdAt           DateTime             @default(now())
+  updatedAt           DateTime             @updatedAt
+  school              School?              @relation(fields: [schoolId], references: [id], onDelete: SetNull)
+  brand               Brand?               @relation(fields: [brandId], references: [id], onDelete: SetNull)
+  sessions            RefreshSession[]
+  queuePresets        AdminQueuePreset[]
+  exportJobs          AuditExportJob[]
+  passwordResetTokens PasswordResetToken[]
+}
+
+model PasswordResetToken {
+  id        String    @id @default(cuid())
+  userId    String
+  tokenHash String    @unique
+  expiresAt DateTime
+  usedAt    DateTime?
+  createdAt DateTime  @default(now())
+  user      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+}
+
+model School {
+  id                   String                @id @default(cuid())
+  name                 String
+  province             String
+  district             String
+  principalName        String
+  contactEmail         String?
+  whatsappPhone        String                @unique
+  schoolCode           String                @unique
+  status               EntityStatus          @default(PENDING)
+  developmentTier      Int                   @default(1)
+  currentPhase         Int                   @default(1)
+  developmentScores    Json?
+  phaseHistory         Json?
+  infrastructureItems  Json?
+  fundingBalanceZar    Decimal               @default(0) @db.Decimal(14, 2)
+  annualCycleYear      Int?
+  annualCycleFocus     String?
+  createdAt            DateTime              @default(now())
+  updatedAt            DateTime              @updatedAt
+  learners             Learner[]
+  submissions          Submission[]
+  fundingContributions FundingContribution[]
+  adminUser            User?
+  verification         SchoolVerification?
+}
+
+model SchoolVerification {
+  id               String                   @id @default(cuid())
+  schoolId         String                   @unique
+  school           School                   @relation(fields: [schoolId], references: [id], onDelete: Cascade)
+  emisNumber       String?
+  status           SchoolVerificationStatus @default(NOT_SUBMITTED)
+  principalIdPath  String?
+  schoolLetterPath String?
+  emisEvidencePath String?
+  submittedAt      DateTime?
+  reviewedAt       DateTime?
+  reviewedByUserId String?
+  reviewerNotes    String?
+  rejectionReason  String?
+  createdAt        DateTime                 @default(now())
+  updatedAt        DateTime                 @updatedAt
+
+  @@index([status, submittedAt])
+}
+
+model Learner {
+  id            String       @id @default(cuid())
+  schoolId      String
+  fullName      String
+  grade         String
+  learnerCode   String       @unique
+  guardianPhone String?
+  createdAt     DateTime     @default(now())
+  updatedAt     DateTime     @updatedAt
+  school        School       @relation(fields: [schoolId], references: [id], onDelete: Cascade)
+  submissions   Submission[]
+}
+
+model Brand {
+  id                    String                   @id @default(cuid())
+  name                  String
+  codePrefix            String                   @unique
+  slug                  String                   @unique
+  verificationPolicy    Json?
+  status                EntityStatus             @default(PENDING)
+  onboardingStatus      BrandOnboardingStatus    @default(PENDING_REVIEW)
+  legalName             String?
+  registrationNumber    String?
+  vatNumber             String?
+  primaryContactEmail   String?
+  contactPersons        Json?
+  intendedProvinces     String[]                 @default([])
+  campaignIntention     String?
+  productsInvolved      String?
+  internalReviewNotes   String?
+  logoUrl               String?
+  featuredOnHome        Boolean                  @default(false)
+  publicProfileEnabled  Boolean                  @default(false)
+  description           String?
+  websiteUrl            String?
+  brandColor            String?
+  subscriptionStatus    BrandSubscriptionStatus?
+  subscriptionPlan      BrandSubscriptionPlan?
+  subscriptionStartDate DateTime?
+  subscriptionEndDate   DateTime?
+  activationFeePaid     Boolean                  @default(false)
+  recurringAmountZar    Decimal?                 @db.Decimal(12, 2)
+  billingCycle          BillingCycle             @default(MONTHLY)
+  gracePeriodUntil      DateTime?
+  createdAt             DateTime                 @default(now())
+  updatedAt             DateTime                 @updatedAt
+  campaigns             Campaign[]
+  users                 User[]
+  esgSchedules          EsgReportSchedule[]
+  codes                 Code[]
+  agreements            BrandAgreement[]
+}
+
+model Campaign {
+  id                     String                   @id @default(cuid())
+  brandId                String
+  name                   String
+  slug                   String                   @unique
+  campaignCode           String
+  category               String?
+  infrastructureGoal     String?
+  startsAt               DateTime
+  endsAt                 DateTime
+  isActive               Boolean                  @default(false)
+  targetSubmissions      Int                      @default(100)
+  contributionPerCodeZar Decimal                  @default(1) @db.Decimal(10, 2)
+  fundSplit              Json?
+  impactTarget           Json?
+  fundingRaisedZar       Decimal                  @default(0) @db.Decimal(14, 2)
+  scopeType              CampaignScopeType        @default(NATIONAL)
+  allowedProvinces       String[]                 @default([])
+  allowedDistricts       String[]                 @default([])
+  allowedSchoolIds       String[]                 @default([])
+  budgetAllocatedZar     Decimal?                 @db.Decimal(14, 2)
+  budgetConsumedZar      Decimal                  @default(0) @db.Decimal(14, 2)
+  pauseOnBudgetExhausted Boolean                  @default(true)
+  overflowCampaignId     String?
+  commercialStatus       CampaignCommercialStatus @default(DRAFT)
+  setupFeeZar            Decimal                  @default(0) @db.Decimal(12, 2)
+  contributionPoolZar    Decimal?                 @db.Decimal(14, 2)
+  paymentVerifiedAt      DateTime?
+  codesApprovedAt        DateTime?
+  rulesConfiguredAt      DateTime?
+  launchApprovedAt       DateTime?
+  gracePeriodDays        Int                      @default(14)
+  gracePeriodEndsAt      DateTime?
+  renewalStatus          CampaignRenewalStatus    @default(NONE)
+  autoSuspendOnExpiry    Boolean                  @default(true)
+  expiredAt              DateTime?
+  impactCommitment       Json?
+  impactDelivered        Json?
+  partnershipLabel       String?
+  sponsorshipTrack       String?
+  licenseTermMonths      Int                      @default(12)
+  createdAt              DateTime                 @default(now())
+  updatedAt              DateTime                 @updatedAt
+  brand                  Brand                    @relation(fields: [brandId], references: [id], onDelete: Cascade)
+  overflowCampaign       Campaign?                @relation("CampaignOverflow", fields: [overflowCampaignId], references: [id], onDelete: SetNull)
+  overflowFor            Campaign[]               @relation("CampaignOverflow")
+  products               Product[]
+  codeBatches            CodeBatch[]
+  submissions            Submission[]
+  codes                  Code[]
+  fundingContributions   FundingContribution[]
+  invoices               CampaignInvoice[]
+
+  @@unique([brandId, campaignCode])
+  @@index([scopeType, isActive])
+  @@index([commercialStatus])
+}
+
+model BrandAgreement {
+  id               String               @id @default(cuid())
+  brandId          String
+  version          Int                  @default(1)
+  status           BrandAgreementStatus @default(DRAFT)
+  generatedPdfPath String?
+  signedPdfPath    String?
+  scopeSnapshot    Json?
+  generatedAt      DateTime?
+  uploadedAt       DateTime?
+  approvedAt       DateTime?
+  approvedByUserId String?
+  rejectionReason  String?
+  createdAt        DateTime             @default(now())
+  updatedAt        DateTime             @updatedAt
+  brand            Brand                @relation(fields: [brandId], references: [id], onDelete: Cascade)
+
+  @@unique([brandId, version])
+  @@index([brandId, status])
+}
+
+model CampaignInvoice {
+  id                String                @id @default(cuid())
+  campaignId        String
+  invoiceNumber     String                @unique
+  invoiceType       CampaignInvoiceType
+  amountZar         Decimal               @db.Decimal(12, 2)
+  status            CampaignInvoiceStatus @default(DRAFT)
+  eftReference      String?
+  issuedAt          DateTime?
+  paymentReportedAt DateTime?
+  verifiedAt        DateTime?
+  verifiedByUserId  String?
+  notes             String?
+  createdAt         DateTime              @default(now())
+  updatedAt         DateTime              @updatedAt
+  campaign          Campaign              @relation(fields: [campaignId], references: [id], onDelete: Cascade)
+
+  @@index([campaignId, status])
+  @@index([invoiceType, status])
+}
+
+model Product {
+  id         String   @id @default(cuid())
+  campaignId String
+  name       String
+  slug       String
+  sku        String?
+  createdAt  DateTime @default(now())
+  campaign   Campaign @relation(fields: [campaignId], references: [id], onDelete: Cascade)
+  codes      Code[]
+
+  @@unique([campaignId, slug])
+}
+
+model CodeBatch {
+  id          String    @id @default(cuid())
+  campaignId  String
+  batchName   String
+  batchCode   String
+  codeVersion String    @default("V1")
+  expiresAt   DateTime?
+  createdAt   DateTime  @default(now())
+  campaign    Campaign  @relation(fields: [campaignId], references: [id], onDelete: Cascade)
+  codes       Code[]
+
+  @@unique([campaignId, batchCode, codeVersion])
+}
+
+model Code {
+  id                 String      @id @default(cuid())
+  batchId            String
+  brandId            String?
+  campaignId         String?
+  productId          String?
+  value              String      @unique
+  token              String?
+  checksum           String?
+  codeVersion        String?     @default("V1")
+  status             CodeStatus  @default(UNUSED)
+  usedAt             DateTime?
+  usedSchoolId       String?
+  usedDistrict       String?
+  redeemedProvince   String?
+  redeemedBy         String?
+  usedBySubmissionId String?     @unique
+  batch              CodeBatch   @relation(fields: [batchId], references: [id], onDelete: Cascade)
+  brand              Brand?      @relation(fields: [brandId], references: [id], onDelete: SetNull)
+  campaign           Campaign?   @relation(fields: [campaignId], references: [id], onDelete: SetNull)
+  product            Product?    @relation(fields: [productId], references: [id], onDelete: SetNull)
+  submission         Submission? @relation("CodeSubmission", fields: [usedBySubmissionId], references: [id])
+
+  @@index([brandId, campaignId, status])
+  @@index([token])
+}
+
+model SubmissionAttempt {
+  id             String   @id @default(cuid())
+  codeValue      String
+  campaignSlug   String?
+  schoolId       String?
+  district       String?
+  whatsappMsisdn String?
+  outcome        String
+  riskScore      Int      @default(0)
+  fraudSignals   Json?
+  source         String   @default("whatsapp")
+  createdAt      DateTime @default(now())
+
+  @@index([whatsappMsisdn, createdAt])
+  @@index([codeValue, createdAt])
+  @@index([outcome, createdAt])
+}
+
+model Submission {
+  id                  String               @id @default(cuid())
+  schoolId            String
+  learnerId           String?
+  campaignId          String
+  codeValue           String
+  area                String
+  district            String?
+  source              String               @default("whatsapp")
+  whatsappMsisdn      String?
+  state               SubmissionState      @default(VALID)
+  riskScore           Int                  @default(0)
+  rejectionReason     String?
+  createdAt           DateTime             @default(now())
+  reviewedAt          DateTime?
+  school              School               @relation(fields: [schoolId], references: [id], onDelete: Cascade)
+  learner             Learner?             @relation(fields: [learnerId], references: [id], onDelete: SetNull)
+  campaign            Campaign             @relation(fields: [campaignId], references: [id], onDelete: Cascade)
+  code                Code?                @relation("CodeSubmission")
+  fraudFlags          FraudFlag[]
+  fundingContribution FundingContribution?
+
+  @@index([schoolId, campaignId])
+  @@index([learnerId, campaignId])
+  @@index([campaignId, createdAt])
+}
+
+model AuditLog {
+  id         String   @id @default(cuid())
+  actorId    String?
+  action     String
+  targetType String
+  targetId   String
+  payload    Json?
+  createdAt  DateTime @default(now())
+}
+
+model RefreshSession {
+  id         String    @id @default(cuid())
+  userId     String
+  tokenHash  String    @unique
+  expiresAt  DateTime
+  revokedAt  DateTime?
+  userAgent  String?
+  ipAddress  String?
+  lastUsedAt DateTime?
+  createdAt  DateTime  @default(now())
+  user       User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId, revokedAt])
+}
+
+model FraudFlag {
+  id             String     @id @default(cuid())
+  submissionId   String
+  reason         String
+  severity       String
+  riskScore      Int        @default(0)
+  policy         String?
+  status         String     @default("OPEN")
+  resolutionNote String?
+  createdAt      DateTime   @default(now())
+  resolvedAt     DateTime?
+  submission     Submission @relation(fields: [submissionId], references: [id], onDelete: Cascade)
+
+  @@index([status, createdAt])
+}
+
+model AdminQueuePreset {
+  id        String   @id @default(cuid())
+  userId    String
+  module    String
+  name      String
+  filters   Json
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, module, name])
+  @@index([userId, module])
+}
+
+model AuditExportJob {
+  id            String          @id @default(cuid())
+  requestedById String
+  status        ExportJobStatus @default(QUEUED)
+  filters       Json?
+  rowCount      Int?
+  csvContent    String?
+  errorMessage  String?
+  retryCount    Int             @default(0)
+  maxRetries    Int             @default(5)
+  nextRetryAt   DateTime?
+  lockToken     String?
+  lockedAt      DateTime?
+  createdAt     DateTime        @default(now())
+  startedAt     DateTime?
+  completedAt   DateTime?
+  expiresAt     DateTime?
+  requestedBy   User            @relation(fields: [requestedById], references: [id], onDelete: Cascade)
+
+  @@index([requestedById, status, createdAt])
+  @@index([status, nextRetryAt, createdAt])
+}
+
+model WhatsAppMessage {
+  id                String                @id @default(cuid())
+  toMsisdn          String
+  body              String
+  templateName      String?
+  providerMessageId String?
+  deliveryStatus    String?
+  status            WhatsAppMessageStatus @default(QUEUED)
+  attempts          Int                   @default(0)
+  maxAttempts       Int                   @default(3)
+  lastError         String?
+  nextRetryAt       DateTime?
+  sentAt            DateTime?
+  deliveredAt       DateTime?
+  readAt            DateTime?
+  failedAt          DateTime?
+  deadLetterReason  String?
+  createdAt         DateTime              @default(now())
+  updatedAt         DateTime              @updatedAt
+
+  @@index([status, nextRetryAt, createdAt])
+  @@index([toMsisdn, createdAt])
+  @@index([providerMessageId])
+}
+
+model WebhookDedup {
+  id        String   @id
+  source    String   @default("whatsapp")
+  createdAt DateTime @default(now())
+
+  @@index([createdAt])
+}
+
+model EsgReportSchedule {
+  id             String              @id @default(cuid())
+  brandId        String
+  cadence        EsgReportCadence
+  recipientEmail String
+  enabled        Boolean             @default(true)
+  nextRunAt      DateTime
+  lastRunAt      DateTime?
+  createdAt      DateTime            @default(now())
+  updatedAt      DateTime            @updatedAt
+  brand          Brand               @relation(fields: [brandId], references: [id], onDelete: Cascade)
+  deliveries     EsgReportDelivery[]
+
+  @@unique([brandId, cadence])
+  @@index([enabled, nextRunAt])
+}
+
+model FundingContribution {
+  id             String     @id @default(cuid())
+  submissionId   String     @unique
+  schoolId       String
+  campaignId     String
+  brandId        String
+  grossAmountZar Decimal    @db.Decimal(10, 2)
+  allocations    Json
+  createdAt      DateTime   @default(now())
+  school         School     @relation(fields: [schoolId], references: [id], onDelete: Cascade)
+  campaign       Campaign   @relation(fields: [campaignId], references: [id], onDelete: Cascade)
+  submission     Submission @relation(fields: [submissionId], references: [id], onDelete: Cascade)
+
+  @@index([schoolId, createdAt])
+  @@index([campaignId, createdAt])
+  @@index([brandId, createdAt])
+}
+
+model EsgReportDelivery {
+  id           String                  @id @default(cuid())
+  scheduleId   String
+  status       EsgReportDeliveryStatus
+  periodLabel  String
+  errorMessage String?
+  sentAt       DateTime?
+  createdAt    DateTime                @default(now())
+  schedule     EsgReportSchedule       @relation(fields: [scheduleId], references: [id], onDelete: Cascade)
+
+  @@index([scheduleId, createdAt])
+}
+
+model NotificationLog {
+  id           String                     @id @default(cuid())
+  channel      NotificationChannel        @default(EMAIL)
+  template     NotificationTemplate
+  recipient    String
+  subject      String?
+  status       NotificationDeliveryStatus
+  entityType   String?
+  entityId     String?
+  errorMessage String?
+  metadata     Json?
+  sentAt       DateTime?
+  createdAt    DateTime                   @default(now())
+  job          NotificationJob?
+
+  @@index([template, createdAt])
+  @@index([entityType, entityId])
+  @@index([recipient, createdAt])
+  @@index([status, createdAt])
+}
+
+model NotificationJob {
+  id          String                     @id @default(cuid())
+  channel     NotificationChannel        @default(EMAIL)
+  template    NotificationTemplate
+  recipient   String
+  payload     Json
+  status      NotificationDeliveryStatus @default(QUEUED)
+  priority    Int                        @default(0)
+  attempts    Int                        @default(0)
+  maxAttempts Int                        @default(5)
+  scheduledAt DateTime                   @default(now())
+  lockedAt    DateTime?
+  processedAt DateTime?
+  lastError   String?
+  entityType  String?
+  entityId    String?
+  createdAt   DateTime                   @default(now())
+  logId       String                     @unique
+  log         NotificationLog            @relation(fields: [logId], references: [id], onDelete: Cascade)
+
+  @@index([status, scheduledAt, priority])
+  @@index([entityType, entityId])
+}
+
+model ProvinceNomination {
+  id           String   @id @default(cuid())
+  provinceCode String
+  provinceName String
+  schoolName   String?
+  district     String?
+  contactName  String?
+  contactEmail String?
+  contactPhone String?
+  campaignSlug String?
+  message      String?
+  source       String   @default("web")
+  status       String   @default("NEW")
+  createdAt    DateTime @default(now())
+
+  @@index([provinceCode, createdAt])
+  @@index([status, createdAt])
+}

@@ -1,0 +1,14 @@
+# Config-as-code for the primary API service (service name may differ in Railway UI).
+# Path is always repo root — Root Directory in Railway must stay "/" (not apps/api).
+# Other services (web, admin, workers): copy build/start from infra/railway/services.json.
+
+[build]
+builder = "nixpacks"
+buildCommand = "npm run railway:build:api"
+
+[deploy]
+startCommand = "npm run start -w @brand2school/api"
+healthcheckPath = "/health"
+healthcheckTimeout = 300
+restartPolicyType = "ON_FAILURE"
+restartPolicyMaxRetries = 10

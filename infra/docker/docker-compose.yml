@@ -1,0 +1,47 @@
+services:
+  postgres:
+    image: postgres:16
+    container_name: brand2school-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: brand2school
+      POSTGRES_PASSWORD: brand2school
+      POSTGRES_DB: brand2school
+    ports:
+      - "5432:5432"
+    volumes:
+      - b2s_postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U brand2school -d brand2school"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+      start_period: 10s
+
+  redis:
+    image: redis:7
+    container_name: brand2school-redis
+    restart: unless-stopped
+    ports:
+      - "6379:6379"
+    volumes:
+      - b2s_redis_data:/data
+
+  whatsapp-worker:
+    image: node:20-alpine
+    container_name: brand2school-whatsapp-worker
+    restart: unless-stopped
+    working_dir: /app
+    volumes:
+      - ../..:/app
+    command: sh -c "npm run dev:worker:whatsapp -w @brand2school/api"
+    environment:
+      - DATABASE_URL=postgresql://brand2school:brand2school@postgres:5432/brand2school
+      - NODE_ENV=development
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+volumes:
+  b2s_postgres_data:
+  b2s_redis_data:

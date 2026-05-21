@@ -1,0 +1,124 @@
+version: "3.9"
+
+services:
+  postgres:
+    image: postgres:16
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-brand2school}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-brand2school}
+      POSTGRES_DB: ${POSTGRES_DB:-brand2school}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./backups:/backups
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-brand2school}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  redis:
+    image: redis:7
+    restart: unless-stopped
+    volumes:
+      - redis_data:/data
+
+  api:
+    image: node:20-alpine
+    restart: unless-stopped
+    working_dir: /app/apps/api
+    command: sh -c "npm ci && npx prisma migrate deploy && npm run start"
+    environment:
+      NODE_ENV: production
+      PORT: 4000
+      DATABASE_URL: postgresql://${POSTGRES_USER:-brand2school}:${POSTGRES_PASSWORD:-brand2school}@postgres:5432/${POSTGRES_DB:-brand2school}
+    volumes:
+      - ../..:/app
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+  whatsapp-worker:
+    image: node:20-alpine
+    restart: unless-stopped
+    working_dir: /app
+    command: sh -c "npm run dev:worker:whatsapp -w @brand2school/api"
+    environment:
+      NODE_ENV: production
+      DATABASE_URL: postgresql://${POSTGRES_USER:-brand2school}:${POSTGRES_PASSWORD:-brand2school}@postgres:5432/${POSTGRES_DB:-brand2school}
+    volumes:
+      - ../..:/app
+    depends_on:
+      - api
+
+  audit-export-worker:
+    image: node:20-alpine
+    restart: unless-stopped
+    working_dir: /app
+    command: sh -c "npm run dev:worker:audit-export -w @brand2school/api"
+    environment:
+      NODE_ENV: production
+      DATABASE_URL: postgresql://${POSTGRES_USER:-brand2school}:${POSTGRES_PASSWORD:-brand2school}@postgres:5432/${POSTGRES_DB:-brand2school}
+    volumes:
+      - ../..:/app
+    depends_on:
+      - api
+
+  esg-report-worker:
+    image: node:20-alpine
+    restart: unless-stopped
+    working_dir: /app
+    command: sh -c "npm run dev:worker:esg -w @brand2school/api"
+    environment:
+      NODE_ENV: production
+      DATABASE_URL: postgresql://${POSTGRES_USER:-brand2school}:${POSTGRES_PASSWORD:-brand2school}@postgres:5432/${POSTGRES_DB:-brand2school}
+    volumes:
+      - ../..:/app
+    depends_on:
+      - api
+
+  web:
+    image: node:20-alpine
+    restart: unless-stopped
+    working_dir: /app/apps/web
+    command: sh -c "npm ci && npm run build && npm run start"
+    environment:
+      NODE_ENV: production
+      NEXT_PUBLIC_API_BASE_URL: http://api:4000
+    ports:
+      - "3000:3000"
+    volumes:
+      - ../..:/app
+    depends_on:
+      - api
+
+  admin-web:
+    image: node:20-alpine
+    restart: unless-stopped
+    working_dir: /app/apps/admin-web
+    command: sh -c "npm ci && npm run build && npm run start"
+    environment:
+      NODE_ENV: production
+      NEXT_PUBLIC_API_BASE_URL: http://api:4000
+    ports:
+      - "3001:3000"
+    volumes:
+      - ../..:/app
+    depends_on:
+      - api
+
+  nginx:
+    image: nginx:1.27-alpine
+    restart: unless-stopped
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx/default.conf:/etc/nginx/conf.d/default.conf:ro
+    depends_on:
+      - web
+      - api
+      - admin-web
+
+volumes:
+  postgres_data:
+  redis_data:

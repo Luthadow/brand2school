@@ -1,0 +1,93 @@
+{
+  "$schema": "Brand2School Railway service matrix (reference — configure in Railway UI or CLI)",
+  "project": "brand2school-production",
+  "monorepoRoot": "/",
+  "domainPlan": {
+    "apex": "brand2school.co.za",
+    "app": "app.brand2school.co.za",
+    "api": "api.brand2school.co.za",
+    "admin": "admin.brand2school.co.za"
+  },
+  "services": [
+    {
+      "name": "postgres",
+      "type": "plugin",
+      "plugin": "postgresql"
+    },
+    {
+      "name": "api",
+      "rootDirectory": "/",
+      "watchPaths": ["apps/api/**", "packages/**", "package.json", "package-lock.json", "brand2school.png"],
+      "buildCommand": "npm run railway:build:api",
+      "startCommand": "npm run start -w @brand2school/api",
+      "preDeployCommand": "npm run railway:migrate",
+      "healthcheckPath": "/health",
+      "healthcheckTimeout": 300,
+      "publicDomain": "api.brand2school.co.za",
+      "envFile": "infra/railway/env.api.example"
+    },
+    {
+      "name": "web",
+      "rootDirectory": "/",
+      "watchPaths": ["apps/web/**", "packages/branding/**", "package.json", "package-lock.json"],
+      "buildCommand": "npm run railway:build:web",
+      "startCommand": "npm run start -w @brand2school/web",
+      "publicDomain": "app.brand2school.co.za",
+      "envFile": "infra/railway/env.web.example"
+    },
+    {
+      "name": "admin-web",
+      "rootDirectory": "/",
+      "watchPaths": ["apps/admin-web/**", "packages/branding/**", "package.json", "package-lock.json"],
+      "buildCommand": "npm run railway:build:admin",
+      "startCommand": "npm run start -w @brand2school/admin-web",
+      "publicDomain": "admin.brand2school.co.za",
+      "envFile": "infra/railway/env.admin.example"
+    },
+    {
+      "name": "worker-whatsapp",
+      "rootDirectory": "/",
+      "watchPaths": ["apps/api/**", "package.json", "package-lock.json"],
+      "buildCommand": "npm run railway:build:api",
+      "startCommand": "npm run start:worker:whatsapp -w @brand2school/api",
+      "publicNetworking": false,
+      "envFile": "infra/railway/env.worker.example"
+    },
+    {
+      "name": "worker-audit-export",
+      "rootDirectory": "/",
+      "watchPaths": ["apps/api/**", "package.json", "package-lock.json"],
+      "buildCommand": "npm run railway:build:api",
+      "startCommand": "npm run start:worker:audit-export -w @brand2school/api",
+      "publicNetworking": false,
+      "envFile": "infra/railway/env.worker.example"
+    },
+    {
+      "name": "worker-esg",
+      "rootDirectory": "/",
+      "watchPaths": ["apps/api/**", "package.json", "package-lock.json"],
+      "buildCommand": "npm run railway:build:api",
+      "startCommand": "npm run start:worker:esg -w @brand2school/api",
+      "publicNetworking": false,
+      "envFile": "infra/railway/env.worker.example"
+    },
+    {
+      "name": "worker-notifications",
+      "rootDirectory": "/",
+      "watchPaths": ["apps/api/**", "package.json", "package-lock.json", "brand2school.png"],
+      "buildCommand": "npm run railway:build:api",
+      "startCommand": "npm run start:worker:notifications -w @brand2school/api",
+      "publicNetworking": false,
+      "envFile": "infra/railway/env.worker.example"
+    },
+    {
+      "name": "worker-subscriptions",
+      "rootDirectory": "/",
+      "watchPaths": ["apps/api/**", "package.json", "package-lock.json"],
+      "buildCommand": "npm run railway:build:api",
+      "startCommand": "npm run start:worker:subscriptions -w @brand2school/api",
+      "publicNetworking": false,
+      "envFile": "infra/railway/env.worker.example"
+    }
+  ]
+}
