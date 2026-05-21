@@ -161,6 +161,20 @@ Then add matching CNAMEs in Cloudflare (Phase 2).
    `npm run db:seed -w @brand2school/api`  
    (only on first deploy; use strong passwords in production)
 
+### Fix P3009 (failed migration on Postgres)
+
+If pre-deploy logs show `P3009` and `20260521180000_commercial_workflow_expiry` failed:
+
+1. **brand2school** → **Settings** → run a one-off command (or temporary shell):
+
+   ```bash
+   npm run railway:migrate:resolve-failed
+   ```
+
+2. **Deploy** latest `main` again so `prisma migrate deploy` can re-apply migrations.
+
+If the database has **no production data yet**, you can instead delete and recreate the Postgres service, then redeploy (cleanest).
+
 ---
 
 ## Phase 4 — Meta WhatsApp
@@ -221,6 +235,7 @@ Set `SMOKE_API_BASE=https://api.<domain>` in Railway variables first.
 | 502 from Cloudflare | SSL mode not Full (strict); or Railway service not healthy |
 | Migrations fail | `DATABASE_URL` not linked; run `npm run railway:migrate` manually once |
 | `DATABASE_URL` resolved to an empty string | Delete empty var; use **Variable Reference** from Postgres plugin (not a blank manual value) |
+| P3009 failed migration `20260521180000_commercial_workflow_expiry` | Run `npm run railway:migrate:resolve-failed` once on the service, then redeploy (see below) |
 | Build `EBUSY` on `node_modules/.cache` | Nixpacks already runs `npm ci`; use build command `npm run build -w @brand2school/api` (not `npm ci && …` twice) |
 | Build `tsc: not found` (exit 127) | Install must include devDependencies (`npm ci --include=dev`); build uses `npx tsc`. Do not set `NODE_ENV=production` as a build-only override without `NPM_CONFIG_PRODUCTION=false` |
 | `Missing script: railway:build:api` | Root Directory must be `/` (empty), not `apps/api` |

@@ -1,0 +1,1 @@
+ALTER TYPE "CampaignCommercialStatus" ADD VALUE IF NOT EXISTS 'SUSPENDED';
