@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { useBrandPortal } from "../BrandPortalContext";
 import { BrandPageHeader } from "../BrandPageHeader";
-import { NEED_CATEGORIES, formatZar } from "../../../lib/brandPortal";
+import { formatZar } from "../../../lib/brandPortal";
 import { formatCount } from "../../../lib/formatCount";
 
 const CARD_IMAGES: Record<string, string> = {
@@ -25,13 +25,12 @@ export function BrandSchoolsPage(): JSX.Element {
         title="Real school needs"
         description="Browse verified schools, priority infrastructure, and estimated project costs — sponsorship made tangible."
       />
-      <div className="bp-filter-chips">
-        {NEED_CATEGORIES.map((cat) => (
-          <span key={cat} className="bp-chip">
-            {cat}
-          </span>
-        ))}
-      </div>
+      {schoolNeeds.length === 0 ? (
+        <p className="bp-empty-note">
+          No schools linked to your campaigns yet. Schools appear here after verified submissions on your
+          active campaigns.
+        </p>
+      ) : (
       <div className="bp-school-grid bp-school-grid--full">
         {schoolNeeds.map((school) => (
           <article key={school.id} className="bp-school-card bp-school-card--detail">
@@ -62,6 +61,7 @@ export function BrandSchoolsPage(): JSX.Element {
           </article>
         ))}
       </div>
+      )}
     </div>
   );
 }

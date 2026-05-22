@@ -73,14 +73,6 @@ export const ANNUAL_CYCLES = [
   { year: 2029, focus: "STEM Development", phase: 5 }
 ] as const;
 
-export const BRAND_CATEGORY_FOCUS: Array<{ brand: string; categories: string[] }> = [
-  { brand: "Telecom / MTN-style partners", categories: ["Digital Access", "WiFi", "Coding Labs"] },
-  { brand: "Retail / Shoprite-style partners", categories: ["Feeding Schemes", "Nutrition"] },
-  { brand: "Sports brands", categories: ["Sports Development", "Fields", "Equipment"] },
-  { brand: "Financial services", categories: ["Safety & Wellness", "Security"] },
-  { brand: "Builders / materials", categories: ["Infrastructure", "Classrooms", "Roofing"] }
-];
-
 export type PhaseStatus = "completed" | "active" | "locked";
 
 export type DevelopmentPhaseView = {
@@ -127,20 +119,23 @@ type StoredDevelopment = {
   infrastructureItems?: InfrastructureItemRecord[];
 };
 
-function hashSeed(id: string): number {
-  let h = 0;
-  for (let i = 0; i < id.length; i++) h = (h + id.charCodeAt(i) * (i + 1)) % 9973;
-  return h;
+function zeroAreaScores(): Record<string, number> {
+  const scores: Record<string, number> = {};
+  for (const area of DEVELOPMENT_AREAS) scores[area] = 0;
+  return scores;
 }
 
-function baseAreaScores(schoolId: string, validSubmissions: number): Record<string, number> {
-  const seed = hashSeed(schoolId);
-  const boost = Math.min(35, Math.floor(validSubmissions / 15));
-  const scores: Record<string, number> = {};
-  for (let i = 0; i < DEVELOPMENT_AREAS.length; i++) {
-    const area = DEVELOPMENT_AREAS[i];
-    const base = 25 + (seed % 40) + i * 5;
-    scores[area] = Math.min(100, base + boost + (i < 2 ? 15 : 0));
+function scoresFromInfrastructure(
+  infrastructure: ReturnType<typeof buildInfrastructureProfile>
+): Record<string, number> {
+  const scores = zeroAreaScores();
+  for (const phaseView of infrastructure.phases) {
+    const def = DEVELOPMENT_PHASES.find((d) => d.phase === phaseView.phase);
+    if (!def) continue;
+    const pct = phaseView.isComplete ? 100 : phaseView.verifiedProgressPercent;
+    for (const area of def.areas) {
+      if (area in scores) scores[area] = Math.max(scores[area], pct);
+    }
   }
   return scores;
 }
@@ -193,10 +188,7 @@ export function buildSchoolDevelopmentProfile(input: {
 
   let currentPhase = infrastructure.activePhase;
 
-  let scores = stored.developmentScores
-    ? { ...stored.developmentScores }
-    : baseAreaScores(input.schoolId, input.validSubmissions);
-
+  let scores = scoresFromInfrastructure(infrastructure);
   scores = applyPhaseProgress(scores, currentPhase, phaseHistory);
 
   const phases: DevelopmentPhaseView[] = DEVELOPMENT_PHASES.map((def) => {
@@ -226,7 +218,7 @@ export function buildSchoolDevelopmentProfile(input: {
   });
 
   const avgScore = Math.round(areaScores.reduce((s, a) => s + a.percent, 0) / areaScores.length);
-  const tier = stored.developmentTier ?? computeTier(currentPhase, avgScore);
+  const tier = computeTier(currentPhase, avgScore);
   const tierMeta = SCHOOL_TIERS[tier - 1] ?? SCHOOL_TIERS[0];
 
   const year = new Date().getFullYear();

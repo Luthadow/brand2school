@@ -20,6 +20,12 @@ export function BrandMediaPage(): JSX.Element {
         title="Shareable impact content"
         description="Before/after transformations, learner testimonials, and milestone moments brands love to share."
       />
+      {media.length === 0 ? (
+        <p className="bp-empty-note">
+          No published impact stories yet. Stories appear when schools have verified participation and
+          approved media on your campaigns.
+        </p>
+      ) : (
       <div className="bp-media-row bp-media-row--full">
         {media.map((story) => (
           <article key={story.id} className="bp-story-card">
@@ -40,6 +46,7 @@ export function BrandMediaPage(): JSX.Element {
           </article>
         ))}
       </div>
+      )}
     </div>
   );
 }

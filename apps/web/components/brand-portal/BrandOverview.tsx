@@ -79,20 +79,27 @@ export function BrandOverview(): JSX.Element {
             ))}
           </ol>
           <ul className="bp-pipeline-mini">
-            {impactPipeline.slice(0, 4).map((item) => (
-              <li key={item.id}>
-                <strong>{item.schoolName}</strong>
-                <span>
-                  {item.campaignName} · {item.stage}
-                </span>
-              </li>
-            ))}
+            {impactPipeline.length === 0 ? (
+              <li className="bp-empty-note">No verified submissions on your campaigns yet.</li>
+            ) : (
+              impactPipeline.slice(0, 4).map((item) => (
+                <li key={item.id}>
+                  <strong>{item.schoolName}</strong>
+                  <span>
+                    {item.campaignName} · {item.stage}
+                  </span>
+                </li>
+              ))
+            )}
           </ul>
         </article>
       </section>
 
       <section className="bp-section">
-        <h2>School needs you&apos;re funding</h2>
+        <h2>Schools on your campaigns</h2>
+        {schoolNeeds.length === 0 ? (
+          <p className="bp-empty-note">Schools appear here after verified submissions on your campaigns.</p>
+        ) : (
         <div className="bp-school-grid">
           {schoolNeeds.slice(0, 3).map((school) => (
             <article key={school.id} className="bp-school-card">
@@ -119,8 +126,10 @@ export function BrandOverview(): JSX.Element {
             </article>
           ))}
         </div>
+        )}
       </section>
 
+      {media.length > 0 ? (
       <section className="bp-section">
         <h2>Transformation stories</h2>
         <div className="bp-media-row">
@@ -143,6 +152,7 @@ export function BrandOverview(): JSX.Element {
           ))}
         </div>
       </section>
+      ) : null}
     </div>
   );
 }

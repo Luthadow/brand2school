@@ -107,18 +107,6 @@ export type BrandPortal = {
   notifications: BrandNotification[];
 };
 
-const NEED_CATEGORIES = [
-  "Classrooms",
-  "Toilets",
-  "Feeding Schemes",
-  "Sports Fields",
-  "Computer Labs",
-  "Libraries",
-  "Science Labs",
-  "Safety & Wellness",
-  "Solar Power"
-] as const;
-
 function campaignStatus(c: { isActive: boolean; startsAt: Date; endsAt: Date }): PortalCampaign["status"] {
   const now = Date.now();
   if (!c.isActive && c.endsAt.getTime() < now) return "completed";
@@ -204,27 +192,26 @@ export async function getBrandPortal(campaignId?: string, brandId?: string): Pro
       : [];
     const brandSchoolIds = brandSchoolRows.map((r) => r.schoolId);
 
-    const schools = await prisma.school.findMany({
-      where:
-        brandSchoolIds.length > 0
-          ? { id: { in: brandSchoolIds } }
-          : { status: { in: ["ACTIVE", "APPROVED", "VERIFIED", "PENDING"] } },
-      include: { _count: { select: { learners: true, submissions: true } } },
-      take: 24,
-      orderBy: { submissions: { _count: "desc" } }
-    });
+    const schools =
+      brandSchoolIds.length > 0
+        ? await prisma.school.findMany({
+            where: { id: { in: brandSchoolIds } },
+            include: { _count: { select: { learners: true, submissions: true } } },
+            orderBy: { name: "asc" }
+          })
+        : [];
 
-    const schoolNeeds: SchoolNeed[] = schools.map((s, i) => ({
+    const schoolNeeds: SchoolNeed[] = schools.map((s) => ({
       id: s.id,
       name: s.name,
       province: normalizeProvinceCode(s.province),
       district: s.district,
-      learnerCount: s._count.learners || Math.max(s._count.submissions * 12, 120),
-      priorityNeed: NEED_CATEGORIES[i % NEED_CATEGORIES.length],
-      estimatedCostZar: 250_000 + (i % 5) * 100_000,
-      progressPercent: Math.min(95, 15 + s._count.submissions * 8),
+      learnerCount: s._count.learners,
+      priorityNeed: s._count.submissions > 0 ? "Verified participation" : "Awaiting first submission",
+      estimatedCostZar: 0,
+      progressPercent: 0,
       verificationStatus: s.status,
-      imageCategory: NEED_CATEGORIES[i % NEED_CATEGORIES.length].toLowerCase().replace(/\s+/g, "-")
+      imageCategory: "libraries"
     }));
 
     const recentSubmissions = await prisma.submission.findMany({
@@ -346,23 +333,9 @@ export async function getBrandPortal(campaignId?: string, brandId?: string): Pro
         platformOperationalZar,
         transformationPoolCommittedZar,
         transformationPoolUsedZar,
-        projects: schoolNeeds.slice(0, 5).map((s) => ({
-          name: `${s.name} — ${s.priorityNeed}`,
-          budgetZar: s.estimatedCostZar,
-          spentZar: Math.round(s.estimatedCostZar * (s.progressPercent / 100)),
-          status: s.progressPercent >= 100 ? "Completed" : s.progressPercent >= 50 ? "In progress" : "Planned"
-        }))
+        projects: []
       },
-      media: schoolNeeds.slice(0, 6).map((s, i) => ({
-        id: `media-${s.id}`,
-        title: `${s.priorityNeed} transformation at ${s.name}`,
-        schoolName: s.name,
-        province: s.province,
-        type: (["before_after", "milestone", "testimonial", "event"] as const)[i % 4],
-        excerpt: `Verified participation is funding ${s.priorityNeed.toLowerCase()} infrastructure for ${s.learnerCount} learners.`,
-        imageCategory: s.imageCategory,
-        publishedAt: new Date().toISOString()
-      })),
+      media: [],
       notifications
     };
   } catch {

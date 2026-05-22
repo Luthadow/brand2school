@@ -5,7 +5,7 @@ import { getSchoolRankings } from "./schoolParticipation.js";
 import { getSchoolFundingLedger } from "../funding/fundingConversion.js";
 import { ANNUAL_CYCLES, buildSchoolDevelopmentProfile, type SchoolDevelopmentProfile } from "./schoolDevelopment.js";
 import { buildSchoolNeedsEngine, summarizeNeedsEngine } from "./schoolNeedsEngine.js";
-import { countValidSubmissionsForSchool, persistSchoolInfrastructure } from "./syncSchoolInfrastructure.js";
+import { schoolRecordToStored } from "./syncSchoolInfrastructure.js";
 import { getOrCreateSchoolVerification } from "./schoolVerification/verificationGate.js";
 
 export type SchoolNeedItem = {
@@ -125,6 +125,14 @@ export type SchoolPortal = {
 };
 
 function gamificationLevel(validSubmissions: number): SchoolPortal["gamification"] {
+  if (validSubmissions === 0) {
+    return {
+      level: "bronze",
+      label: "Getting started",
+      badges: [],
+      nationalRank: null
+    };
+  }
   if (validSubmissions >= 500) {
     return {
       level: "gold",
@@ -287,36 +295,26 @@ export async function getSchoolPortal(userId: string): Promise<SchoolPortal | nu
 
   const schoolRecord = await prisma.school.findUnique({ where: { id: school.id } });
 
-  const infraSync = schoolRecord
-    ? await persistSchoolInfrastructure({
-        school: {
-          id: school.id,
-          name: school.name,
-          province: school.province,
-          district: school.district,
-          principalName: school.principalName,
-          contactEmail: school.contactEmail,
-          currentPhase: schoolRecord.currentPhase,
-          developmentTier: schoolRecord.developmentTier,
-          developmentScores: schoolRecord.developmentScores,
-          phaseHistory: schoolRecord.phaseHistory,
-          infrastructureItems: schoolRecord.infrastructureItems,
-          annualCycleYear: schoolRecord.annualCycleYear,
-          annualCycleFocus: schoolRecord.annualCycleFocus
-        },
-        validSubmissions,
-        notifyGovernance: schoolRecord.infrastructureItems != null
-      })
-    : null;
-
-  const development =
-    infraSync?.development ??
-    buildSchoolDevelopmentProfile({
-      schoolId: school.id,
-      schoolName: school.name,
-      validSubmissions,
-      stored: undefined
-    });
+  const development = buildSchoolDevelopmentProfile({
+    schoolId: school.id,
+    schoolName: school.name,
+    validSubmissions,
+    stored: schoolRecord ? schoolRecordToStored({
+      id: school.id,
+      name: school.name,
+      province: school.province,
+      district: school.district,
+      principalName: school.principalName,
+      contactEmail: school.contactEmail,
+      currentPhase: schoolRecord.currentPhase,
+      developmentTier: schoolRecord.developmentTier,
+      developmentScores: schoolRecord.developmentScores,
+      phaseHistory: schoolRecord.phaseHistory,
+      infrastructureItems: schoolRecord.infrastructureItems,
+      annualCycleYear: schoolRecord.annualCycleYear,
+      annualCycleFocus: schoolRecord.annualCycleFocus
+    }) : undefined
+  });
 
   if (development.phaseTransition) {
     notifications.unshift({
@@ -351,7 +349,7 @@ export async function getSchoolPortal(userId: string): Promise<SchoolPortal | nu
     subcategory: row.statusLabel,
     urgency,
     description: row.ecosystemNote,
-    learnerImpact: Math.max(50, Math.round(row.progressPercent * 4)),
+    learnerImpact: row.progressPercent > 0 ? Math.round(row.progressPercent * 4) : 0,
     estimatedCostZar: row.estimatedCostZar,
     progressPercent: row.progressPercent,
     status: row.status,
@@ -392,7 +390,7 @@ export async function getSchoolPortal(userId: string): Promise<SchoolPortal | nu
       contactEmail: school.contactEmail,
       whatsappPhone: school.whatsappPhone,
       status: school.status,
-      learnerCount: learnerCount || Math.max(validSubmissions * 8, 120),
+      learnerCount,
       verificationStatus: verificationRow.status
     },
     verification: {

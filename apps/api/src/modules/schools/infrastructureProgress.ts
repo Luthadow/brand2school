@@ -1,6 +1,7 @@
 /**
  * Infrastructure Progress System — verified category completion drives phase unlocks.
  * Schools never reset; completed phases stay completed permanently.
+ * Unverified rows stay at zero until governance verifies (no synthetic progress).
  */
 
 import { DEVELOPMENT_PHASES } from "./schoolDevelopment.js";
@@ -39,7 +40,8 @@ export type InfrastructureProfile = {
   phaseCompletionThreshold: number;
 };
 
-const PHASE_ITEM_DEFAULTS: Record<
+/** Planning catalog — targets only; progress starts at zero until verified. */
+export const PHASE_ITEM_CATALOG: Record<
   number,
   Array<{
     category: string;
@@ -49,32 +51,32 @@ const PHASE_ITEM_DEFAULTS: Record<
   }>
 > = {
   1: [
-    { category: "Toilets", needed: 20, priority: "Critical", estimatedCostZar: 180_000 },
-    { category: "Water Tanks", needed: 2, priority: "Critical", estimatedCostZar: 45_000 },
-    { category: "Sanitation", needed: 1, priority: "High", estimatedCostZar: 60_000 },
-    { category: "Fencing", needed: "Full perimeter", priority: "High", estimatedCostZar: 95_000 },
-    { category: "Lighting", needed: 15, priority: "Medium", estimatedCostZar: 35_000 }
+    { category: "Toilets", needed: 0, priority: "Critical", estimatedCostZar: 0 },
+    { category: "Water Tanks", needed: 0, priority: "Critical", estimatedCostZar: 0 },
+    { category: "Sanitation", needed: 0, priority: "High", estimatedCostZar: 0 },
+    { category: "Fencing", needed: "Not assessed", priority: "High", estimatedCostZar: 0 },
+    { category: "Lighting", needed: 0, priority: "Medium", estimatedCostZar: 0 }
   ],
   2: [
-    { category: "Classrooms", needed: 12, priority: "High", estimatedCostZar: 420_000 },
-    { category: "Desks", needed: 300, priority: "High", estimatedCostZar: 90_000 },
-    { category: "Libraries", needed: 1, priority: "Medium", estimatedCostZar: 75_000 },
-    { category: "Roofing", needed: 8, priority: "Critical", estimatedCostZar: 160_000 }
+    { category: "Classrooms", needed: 0, priority: "High", estimatedCostZar: 0 },
+    { category: "Desks", needed: 0, priority: "High", estimatedCostZar: 0 },
+    { category: "Libraries", needed: 0, priority: "Medium", estimatedCostZar: 0 },
+    { category: "Roofing", needed: 0, priority: "Critical", estimatedCostZar: 0 }
   ],
   3: [
-    { category: "Computer Labs", needed: 1, priority: "High", estimatedCostZar: 250_000 },
-    { category: "WiFi", needed: "Campus-wide", priority: "High", estimatedCostZar: 80_000 },
-    { category: "Smart Classrooms", needed: 4, priority: "Medium", estimatedCostZar: 120_000 }
+    { category: "Computer Labs", needed: 0, priority: "High", estimatedCostZar: 0 },
+    { category: "WiFi", needed: "Not assessed", priority: "High", estimatedCostZar: 0 },
+    { category: "Smart Classrooms", needed: 0, priority: "Medium", estimatedCostZar: 0 }
   ],
   4: [
-    { category: "Sports Fields", needed: 1, priority: "Medium", estimatedCostZar: 200_000 },
-    { category: "Nutrition", needed: 200, priority: "Critical", estimatedCostZar: 50_000 },
-    { category: "Science Labs", needed: 1, priority: "High", estimatedCostZar: 180_000 }
+    { category: "Sports Fields", needed: 0, priority: "Medium", estimatedCostZar: 0 },
+    { category: "Nutrition", needed: 0, priority: "Critical", estimatedCostZar: 0 },
+    { category: "Science Labs", needed: 0, priority: "High", estimatedCostZar: 0 }
   ],
   5: [
-    { category: "Robotics Labs", needed: 1, priority: "Medium", estimatedCostZar: 300_000 },
-    { category: "Solar Systems", needed: 1, priority: "High", estimatedCostZar: 220_000 },
-    { category: "Innovation Hubs", needed: 1, priority: "Medium", estimatedCostZar: 350_000 }
+    { category: "Robotics Labs", needed: 0, priority: "Medium", estimatedCostZar: 0 },
+    { category: "Solar Systems", needed: 0, priority: "High", estimatedCostZar: 0 },
+    { category: "Innovation Hubs", needed: 0, priority: "Medium", estimatedCostZar: 0 }
   ]
 };
 
@@ -82,10 +84,8 @@ function slugKey(phase: number, category: string): string {
   return `p${phase}-${category.toLowerCase().replace(/\s+/g, "-")}`;
 }
 
-function hashSeed(id: string): number {
-  let h = 0;
-  for (let i = 0; i < id.length; i++) h = (h + id.charCodeAt(i) * (i + 1)) % 9973;
-  return h;
+function zeroCurrent(needed: number | string): number | string {
+  return typeof needed === "number" ? 0 : "Not started";
 }
 
 function numericProgress(needed: number | string, current: number | string): number {
@@ -95,31 +95,72 @@ function numericProgress(needed: number | string, current: number | string): num
   if (typeof needed === "string" && typeof current === "string") {
     if (current.toLowerCase().includes("full") || current === needed) return 100;
     if (current.toLowerCase().includes("half") || current.toLowerCase().includes("partial")) return 50;
-    return 25;
+    return 0;
   }
   return 0;
 }
 
-function defaultCurrent(
-  schoolId: string,
-  phase: number,
-  category: string,
-  needed: number | string,
-  validSubmissions: number
-): number | string {
-  const seed = hashSeed(`${schoolId}:${phase}:${category}`);
-  const boost = Math.min(40, Math.floor(validSubmissions / 20));
-  if (typeof needed === "number") {
-    const pct = Math.min(95, 15 + (seed % 50) + boost + (phase === 1 ? 10 : 0));
-    return Math.max(0, Math.round((needed * pct) / 100));
+/** Drop legacy synthetic progress saved before live-only dashboards. */
+export function sanitizeInfrastructureItem(item: InfrastructureItemRecord): InfrastructureItemRecord {
+  if (item.verificationStatus === "verified" && item.verifiedAt) {
+    const completionPercent =
+      item.completionPercent ?? numericProgress(item.needed, item.current);
+    return { ...item, completionPercent };
   }
-  if (pctFromSeed(seed, boost) >= 85) return "Full perimeter";
-  if (pctFromSeed(seed, boost) >= 50) return "Half perimeter";
-  return "Partial";
+  const current = zeroCurrent(item.needed);
+  return {
+    ...item,
+    current,
+    completionPercent: 0,
+    verificationStatus: "unverified",
+    verifiedAt: null
+  };
 }
 
-function pctFromSeed(seed: number, boost: number): number {
-  return Math.min(100, 15 + (seed % 50) + boost);
+export function catalogInfrastructureItems(): InfrastructureItemRecord[] {
+  const items: InfrastructureItemRecord[] = [];
+  for (const [phaseStr, defs] of Object.entries(PHASE_ITEM_CATALOG)) {
+    const phase = Number(phaseStr);
+    for (const def of defs) {
+      const current = zeroCurrent(def.needed);
+      items.push({
+        key: slugKey(phase, def.category),
+        phase,
+        category: def.category,
+        needed: def.needed,
+        current,
+        completionPercent: 0,
+        verificationStatus: "unverified",
+        priority: def.priority,
+        estimatedCostZar: def.estimatedCostZar,
+        verifiedAt: null
+      });
+    }
+  }
+  return items;
+}
+
+export function mergeInfrastructureItems(
+  stored: InfrastructureItemRecord[] | null | undefined,
+  _schoolId: string,
+  _validSubmissions: number
+): InfrastructureItemRecord[] {
+  const catalog = catalogInfrastructureItems();
+  if (!stored?.length) return catalog;
+  const map = new Map(stored.map((i) => [i.key, sanitizeInfrastructureItem(i)]));
+  return catalog.map((d) => {
+    const existing = map.get(d.key);
+    if (!existing) return d;
+    const completionPercent =
+      existing.completionPercent ??
+      numericProgress(existing.needed ?? d.needed, existing.current ?? d.current);
+    return {
+      ...d,
+      ...existing,
+      completionPercent,
+      verificationStatus: existing.verificationStatus ?? d.verificationStatus
+    };
+  });
 }
 
 function verifiedCompletionPercent(item: InfrastructureItemRecord): number {
@@ -138,55 +179,6 @@ function phaseRawAverage(items: InfrastructureItemRecord[]): number {
   return Math.round(items.reduce((s, i) => s + i.completionPercent, 0) / items.length);
 }
 
-export function defaultInfrastructureItems(schoolId: string, validSubmissions: number): InfrastructureItemRecord[] {
-  const items: InfrastructureItemRecord[] = [];
-  for (const [phaseStr, defs] of Object.entries(PHASE_ITEM_DEFAULTS)) {
-    const phase = Number(phaseStr);
-    for (const def of defs) {
-      const current = defaultCurrent(schoolId, phase, def.category, def.needed, validSubmissions);
-      const completionPercent = numericProgress(def.needed, current);
-      const verificationStatus: VerificationStatus =
-        completionPercent >= 100 ? "verified" : completionPercent >= 70 ? "pending" : "unverified";
-      items.push({
-        key: slugKey(phase, def.category),
-        phase,
-        category: def.category,
-        needed: def.needed,
-        current,
-        completionPercent,
-        verificationStatus,
-        priority: def.priority,
-        estimatedCostZar: def.estimatedCostZar,
-        verifiedAt: verificationStatus === "verified" ? new Date().toISOString() : null
-      });
-    }
-  }
-  return items;
-}
-
-export function mergeInfrastructureItems(
-  stored: InfrastructureItemRecord[] | null | undefined,
-  schoolId: string,
-  validSubmissions: number
-): InfrastructureItemRecord[] {
-  const defaults = defaultInfrastructureItems(schoolId, validSubmissions);
-  if (!stored?.length) return defaults;
-  const map = new Map(stored.map((i) => [i.key, i]));
-  return defaults.map((d) => {
-    const existing = map.get(d.key);
-    if (!existing) return d;
-    const completionPercent =
-      existing.completionPercent ??
-      numericProgress(existing.needed ?? d.needed, existing.current ?? d.current);
-    return {
-      ...d,
-      ...existing,
-      completionPercent,
-      verificationStatus: existing.verificationStatus ?? d.verificationStatus
-    };
-  });
-}
-
 export function buildInfrastructureProfile(input: {
   schoolId: string;
   storedItems?: InfrastructureItemRecord[] | null;
@@ -194,7 +186,7 @@ export function buildInfrastructureProfile(input: {
   phaseHistory?: Record<string, string>;
   validSubmissions: number;
 }): InfrastructureProfile {
-  let items = mergeInfrastructureItems(input.storedItems, input.schoolId, input.validSubmissions);
+  const items = mergeInfrastructureItems(input.storedItems, input.schoolId, input.validSubmissions);
   const phaseHistory = { ...(input.phaseHistory ?? {}) };
 
   let activePhase = input.storedPhase ?? 1;

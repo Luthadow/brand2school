@@ -61,30 +61,38 @@ export function SchoolRoadmapPage(): JSX.Element {
           <p className="sp-muted">
             Phases unlock at {development.phaseCompletionThreshold}% verified completion (not promises).
           </p>
-          <div className="sp-score-table-wrap">
-            <table className="sp-score-table">
-              <thead>
-                <tr>
-                  <th>Item</th>
-                  <th>Needed</th>
-                  <th>Current</th>
-                  <th>Done</th>
-                  <th>Verified</th>
-                </tr>
-              </thead>
-              <tbody>
-                {activeInfra.items.map((row) => (
-                  <tr key={row.category}>
-                    <td>{row.category}</td>
-                    <td>{row.needed}</td>
-                    <td>{row.current}</td>
-                    <td>{row.completionPercent}%</td>
-                    <td>{row.verificationStatus}</td>
+          {activeInfra.verifiedProgressPercent === 0 &&
+          activeInfra.items.every((row) => row.verificationStatus !== "verified") ? (
+            <p className="sp-empty-note">
+              No verified infrastructure items yet. Progress appears here after governance verification or
+              verified campaign participation.
+            </p>
+          ) : (
+            <div className="sp-score-table-wrap">
+              <table className="sp-score-table">
+                <thead>
+                  <tr>
+                    <th>Item</th>
+                    <th>Needed</th>
+                    <th>Current</th>
+                    <th>Done</th>
+                    <th>Verified</th>
                   </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
+                </thead>
+                <tbody>
+                  {activeInfra.items.map((row) => (
+                    <tr key={row.category}>
+                      <td>{row.category}</td>
+                      <td>{row.needed}</td>
+                      <td>{row.current}</td>
+                      <td>{row.completionPercent}%</td>
+                      <td>{row.verificationStatus}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          )}
         </section>
       ) : null}
 
@@ -159,17 +167,19 @@ export function SchoolRoadmapPage(): JSX.Element {
         </ul>
       </section>
 
-      <section className="sp-section">
-        <h2>Brand category partners</h2>
-        <ul className="sp-partner-list">
-          {brandPartners.map((b) => (
-            <li key={b.brand}>
-              <strong>{b.brand}</strong>
-              <span>{b.categories.join(" · ")}</span>
-            </li>
-          ))}
-        </ul>
-      </section>
+      {brandPartners.length > 0 ? (
+        <section className="sp-section">
+          <h2>Active brand partners</h2>
+          <ul className="sp-partner-list">
+            {brandPartners.map((b) => (
+              <li key={b.brand}>
+                <strong>{b.brand}</strong>
+                {b.categories.length > 0 ? <span>{b.categories.join(" · ")}</span> : null}
+              </li>
+            ))}
+          </ul>
+        </section>
+      ) : null}
 
       <section className="sp-section">
         <h2>Active goals</h2>

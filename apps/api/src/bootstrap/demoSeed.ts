@@ -73,17 +73,10 @@ export async function runDemoSeed(prisma: PrismaClient): Promise<DemoSeedSummary
       whatsappPhone: "27821234567",
       schoolCode: DEMO_LOGINS.school.schoolCode,
       status: "ACTIVE",
-      developmentTier: 2,
-      currentPhase: 2,
+      developmentTier: 1,
+      currentPhase: 1,
       annualCycleYear: year,
-      annualCycleFocus: "Safety & Sanitation",
-      developmentScores: {
-        infrastructure: 42,
-        digital: 28,
-        sports: 35,
-        nutrition: 30,
-        governance: 55
-      }
+      annualCycleFocus: "Safety & Sanitation"
     }
   });
 
