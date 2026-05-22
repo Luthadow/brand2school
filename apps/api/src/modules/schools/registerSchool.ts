@@ -3,6 +3,7 @@ import { z } from "zod";
 import { prisma } from "../../lib/prisma.js";
 import { generateSchoolCode } from "../../lib/codes.js";
 import { queueEmail } from "../../lib/notifications/dispatch.js";
+import { notifyAdminsNewSchoolRegistration } from "../../lib/registrationNotify.js";
 import { normalizePhone } from "../../lib/phones.js";
 import { env } from "../../config/env.js";
 
@@ -141,6 +142,16 @@ export async function registerSchool(input: Omit<SchoolRegisterInput, "confirmPa
   } catch (err) {
     console.error("[mail] Failed to send school registration email:", err);
   }
+
+  void notifyAdminsNewSchoolRegistration({
+    schoolId: school.id,
+    schoolName: school.name,
+    province: school.province,
+    district: school.district,
+    principalName: input.principalName.trim(),
+    principalEmail: email,
+    schoolCode: school.schoolCode
+  });
 
   return {
     ok: true as const,

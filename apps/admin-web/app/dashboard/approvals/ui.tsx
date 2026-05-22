@@ -220,7 +220,7 @@ export function ApprovalsClient(): JSX.Element {
 
       <section className="card">
         <h2>Brands</h2>
-        <div className="table-wrap"><table className="table"><thead><tr><th></th><th>Name</th><th>Status</th><th>Action</th></tr></thead><tbody>
+        <div className="table-wrap"><table className="table"><thead><tr><th></th><th>Name</th><th>Status</th><th>Review</th><th>Action</th></tr></thead><tbody>
           {data.pendingBrands.map((item) => (
             <tr key={item.id}>
               <td>
@@ -235,6 +235,9 @@ export function ApprovalsClient(): JSX.Element {
                 />
               </td>
               <td>{item.name}</td><td>{item.status}</td>
+              <td>
+                <Link href={`/dashboard/commercial?brandId=${item.id}`}>Commercial</Link>
+              </td>
               <td><button disabled={!nextStatus(item.status)} onClick={() => void approve("brands", item.id, item.status)}>Move Forward</button></td></tr>
           ))}
         </tbody></table></div>

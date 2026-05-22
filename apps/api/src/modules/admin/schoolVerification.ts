@@ -1,5 +1,6 @@
 import { Router } from "express";
 import { prisma } from "../../lib/prisma.js";
+import { requestSchoolRegistrationInfo } from "./registrationFollowup.js";
 import { reviewSchoolVerificationPacket } from "../schools/schoolVerification/reviewSchoolVerification.js";
 import { serializeSchoolVerification } from "../schools/schoolVerification/serializeSchoolVerification.js";
 
@@ -73,6 +74,28 @@ adminSchoolVerificationRouter.patch("/:schoolId", async (req, res) => {
   const result = await reviewSchoolVerificationPacket({
     schoolId: req.params.schoolId,
     reviewerUserId: req.user.id,
+    body: req.body
+  });
+
+  if (!result.ok) {
+    res.status(result.status).json(
+      "issues" in result ? { message: result.message, issues: result.issues } : { message: result.message }
+    );
+    return;
+  }
+
+  res.json(result);
+});
+
+adminSchoolVerificationRouter.post("/:schoolId/request-info", async (req, res) => {
+  if (!req.user?.id) {
+    res.status(401).json({ message: "Unauthorized." });
+    return;
+  }
+
+  const result = await requestSchoolRegistrationInfo({
+    schoolId: req.params.schoolId,
+    actorUserId: req.user.id,
     body: req.body
   });
 

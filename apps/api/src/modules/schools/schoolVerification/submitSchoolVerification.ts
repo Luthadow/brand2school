@@ -1,11 +1,6 @@
 import { z } from "zod";
 import { prisma } from "../../../lib/prisma.js";
-import {
-  adminReviewUrlForSchool,
-  buildSchoolVerificationSubmittedOpsEmail
-} from "../../../lib/emails/schoolVerificationEmails.js";
-import { sendSchoolVerificationOpsEmail } from "../../../lib/mail.js";
-import { CONTACT } from "../../../lib/contacts.js";
+import { notifyAdminsSchoolVerificationSubmitted } from "../../../lib/registrationNotify.js";
 import {
   assertAllowedVerificationMime,
   saveSchoolVerificationFile,
@@ -121,20 +116,14 @@ export async function submitSchoolVerificationPacket(input: {
     }
   });
 
-  const mail = buildSchoolVerificationSubmittedOpsEmail({
+  void notifyAdminsSchoolVerificationSubmitted({
+    schoolId: school.id,
     schoolName: school.name,
     province: school.province,
     district: school.district,
     emisNumber: parsedEmis.data,
-    principalName: school.principalName,
-    reviewUrl: adminReviewUrlForSchool(school.id)
+    principalName: school.principalName
   });
-  void sendSchoolVerificationOpsEmail({
-    to: CONTACT.schools,
-    subject: mail.subject,
-    text: mail.text,
-    html: mail.html
-  }).catch((err) => console.error("[mail] school verification ops notify failed:", err));
 
   return { ok: true as const, status: 200, verification: serializeSchoolVerification(updated) };
 }

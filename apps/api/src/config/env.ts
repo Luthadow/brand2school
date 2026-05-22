@@ -29,7 +29,9 @@ const envSchema = z.object({
   PASSWORD_RESET_MAX_PER_HOUR: z.coerce.number().int().min(1).max(20).default(5),
   NOTIFICATION_DELIVERY: z.enum(["sync", "queue"]).default("queue"),
   NOTIFICATION_BATCH_SIZE: z.coerce.number().int().min(1).max(100).default(25),
-  NOTIFICATION_POLL_MS: z.coerce.number().int().min(500).default(3000)
+  NOTIFICATION_POLL_MS: z.coerce.number().int().min(500).default(3000),
+  /** Comma-separated extra admin inboxes for registration alerts (optional). */
+  ADMIN_NOTIFY_EMAILS: z.string().optional()
 });
 
 const parsed = envSchema.safeParse(process.env);

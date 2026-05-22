@@ -38,6 +38,8 @@ import {
   sendBrandVerificationApprovedEmail
 } from "../../lib/mail.js";
 import { trySendBrandLifecycleEmail } from "./brandEmailNotify.js";
+import { notifyAdminsNewBrandApplication } from "../../lib/registrationNotify.js";
+import { requestBrandRegistrationInfo } from "../admin/registrationFollowup.js";
 import { processAnnualLicenseRenewalGovernance } from "./campaignRenewal.js";
 import {
   notifySubscriptionReactivated,
@@ -274,6 +276,15 @@ commercialPublicRouter.post("/brand-applications", async (req, res) => {
       console.error("[mail] brand registration guide failed:", err);
     }
   }
+
+  void notifyAdminsNewBrandApplication({
+    brandId: brand.id,
+    brandName: brand.name,
+    codePrefix: brand.codePrefix,
+    primaryContactEmail: brand.primaryContactEmail,
+    registrationNumber: brand.registrationNumber,
+    intendedProvinces: brand.intendedProvinces
+  });
 
   res.status(201).json({
     brandId: brand.id,
@@ -519,6 +530,28 @@ commercialAdminRouter.patch("/brands/:brandId/review", async (req, res) => {
   }
 
   res.json(brand);
+});
+
+commercialAdminRouter.post("/brands/:brandId/request-info", async (req, res) => {
+  if (!req.user?.id) {
+    res.status(401).json({ message: "Unauthorized." });
+    return;
+  }
+
+  const result = await requestBrandRegistrationInfo({
+    brandId: req.params.brandId,
+    actorUserId: req.user.id,
+    body: req.body
+  });
+
+  if (!result.ok) {
+    res.status(result.status).json(
+      "issues" in result ? { message: result.message, issues: result.issues } : { message: result.message }
+    );
+    return;
+  }
+
+  res.json(result);
 });
 
 commercialAdminRouter.post("/brands/:brandId/agreements/generate", async (req, res) => {

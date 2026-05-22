@@ -1,5 +1,6 @@
 "use client";
 
+import { useSearchParams } from "next/navigation";
 import { useCallback, useEffect, useState } from "react";
 import { csrfFetch } from "../admin-client-utils";
 import { useAdminSession } from "../useAdminSession";
@@ -135,6 +136,8 @@ export function CommercialGovernanceClient(): JSX.Element {
   const [impactProjects, setImpactProjects] = useState("");
   const [toast, setToast] = useState<string | null>(null);
   const [busy, setBusy] = useState(false);
+  const [infoRequest, setInfoRequest] = useState("");
+  const searchParams = useSearchParams();
 
   const selectedBrand = applications.find((b) => b.id === selectedBrandId) ?? null;
   const brandCampaigns = campaigns.filter((c) => c.brandId === selectedBrandId);
@@ -164,6 +167,11 @@ export function CommercialGovernanceClient(): JSX.Element {
   useEffect(() => {
     if (!loading && session) void load();
   }, [loading, session, load]);
+
+  useEffect(() => {
+    const brandId = searchParams.get("brandId");
+    if (brandId) setSelectedBrandId(brandId);
+  }, [searchParams]);
 
   useEffect(() => {
     if (selectedCampaignId) void loadActivation(selectedCampaignId);
@@ -389,7 +397,36 @@ export function CommercialGovernanceClient(): JSX.Element {
                 <br />
                 Provinces: {selectedBrand.intendedProvinces.join(", ") || "—"}
               </p>
-              <div style={{ display: "flex", flexWrap: "wrap", gap: "0.5rem" }}>
+              <label style={{ display: "block", marginTop: "0.75rem" }}>
+                Request documents or information (emailed to applicant)
+                <textarea
+                  value={infoRequest}
+                  onChange={(e) => setInfoRequest(e.target.value)}
+                  rows={3}
+                  placeholder="e.g. CIPC registration certificate, signed POPIA acknowledgement, VAT letter."
+                  style={{ width: "100%", marginTop: "0.35rem" }}
+                />
+              </label>
+              <button
+                type="button"
+                disabled={busy || infoRequest.trim().length < 10}
+                style={{ marginTop: "0.35rem" }}
+                onClick={() =>
+                  void run("Email requirements", () =>
+                    csrfFetch(`/api/admin/commercial/brands/${selectedBrand.id}/request-info`, {
+                      method: "POST",
+                      headers: { "Content-Type": "application/json" },
+                      body: JSON.stringify({ message: infoRequest.trim() })
+                    }).then((res) => {
+                      if (res.ok) setInfoRequest("");
+                      return res;
+                    })
+                  )
+                }
+              >
+                Email requirements to brand
+              </button>
+              <div style={{ display: "flex", flexWrap: "wrap", gap: "0.5rem", marginTop: "0.75rem" }}>
                 <button
                   type="button"
                   disabled={busy}

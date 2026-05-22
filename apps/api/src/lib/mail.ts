@@ -80,7 +80,7 @@ function transporter() {
   });
 }
 
-async function sendBrandedMail(input: {
+export async function sendBrandedMail(input: {
   to: string;
   subject: string;
   text: string;
