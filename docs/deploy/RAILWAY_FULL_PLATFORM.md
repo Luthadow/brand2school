@@ -56,7 +56,7 @@ Save these in a password manager. Use **Railway Shared Variables** or paste on e
 | `SMTP_PORT` | `465` |
 | `SMTP_SECURE` | `true` |
 | `SMTP_USER` | `noreply@brand2school.co.za` |
-| `SMTP_PASS` | *(cPanel mailbox password)* |
+| `SMTP_PASS` | *(cPanel mailbox password — see [NOREPLY_SMTP_SETUP.md](NOREPLY_SMTP_SETUP.md))* |
 
 **Networking → Custom domain:** `api.brand2school.co.za` *(done)*
 

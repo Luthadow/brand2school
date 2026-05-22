@@ -58,7 +58,18 @@ SMTP_PASS=<mailbox password — set in Railway only>
 WEB_APP_URL=https://app.brand2school.co.za
 ```
 
-Register Domain SMTP (typical cPanel): port **465** + SSL, or **587** + STARTTLS (`SMTP_SECURE=false`).
+Register Domain SMTP (cPanel **Secure SSL/TLS Settings** for `noreply@`):
+
+| | Value |
+|--|--------|
+| Outgoing server | `mail.brand2school.co.za` |
+| SMTP port | **465** |
+| Username | `noreply@brand2school.co.za` |
+| Authentication | Required |
+
+Use `SMTP_SECURE=true` with port 465. Alternative: port **587** with `SMTP_SECURE=false` (STARTTLS).
+
+Step-by-step deploy: **[deploy/NOREPLY_SMTP_SETUP.md](deploy/NOREPLY_SMTP_SETUP.md)**. Test locally: `npm run test:smtp`.
 
 ## cPanel — create mailboxes
 
