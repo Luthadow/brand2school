@@ -173,6 +173,11 @@ export function ApprovalsClient(): JSX.Element {
 
       <section className="card" style={{ marginBottom: "1rem" }}>
         <h2>Schools</h2>
+        <p style={{ color: "#5a6d8a", fontSize: "0.9rem", marginTop: 0 }}>
+          To email a principal about missing EMIS documents or other pending information, open{" "}
+          <strong>Request info</strong> for that school (not &quot;Move Forward&quot; — that only changes approval status after
+          the packet is approved).
+        </p>
         <div className="table-wrap"><table className="table"><thead><tr><th></th><th>Name</th><th>District</th><th>Status</th><th>EMIS packet</th><th>Review</th><th>Action</th></tr></thead><tbody>
           {data.pendingSchools.map((item) => {
             const packetApproved = item.verification?.status === "APPROVED";
@@ -197,6 +202,8 @@ export function ApprovalsClient(): JSX.Element {
               </td>
               <td>
                 <Link href={`/dashboard/schools/${item.id}/verification`}>Verify</Link>
+                {" · "}
+                <Link href={`/dashboard/schools/${item.id}/verification#request-info`}>Request info</Link>
                 {" · "}
                 <Link href={`/dashboard/schools/${item.id}/infrastructure`}>Infra</Link>
               </td>

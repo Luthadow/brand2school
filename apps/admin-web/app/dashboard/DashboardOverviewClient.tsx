@@ -23,20 +23,18 @@ import { useAdminSession } from "./useAdminSession";
 
 const CHART_COLORS = ["#003b8e", "#6cc24a", "#f7931e", "#4da3ff", "#0e9f6e", "#dc2626"];
 
-type PageMeta = { page: number; pageSize: number; total: number; totalPages: number };
-
-type QueueMeta = {
-  pendingUsers: PageMeta;
-  pendingSchools: PageMeta;
-  pendingBrands: PageMeta;
-  openFraudFlags: PageMeta;
-};
-
-type QueueResponse = {
-  pendingSchools: Array<{ id: string; name: string; district: string; status: string }>;
-  pendingBrands: Array<{ id: string; name: string; status: string }>;
-  openFraudFlags: Array<{ id: string; reason: string }>;
-  pageMeta: QueueMeta;
+type PlatformSnapshot = {
+  generatedAt: string;
+  schoolsRegistered: number;
+  schoolsPendingApproval: number;
+  schoolsInApprovalPipeline: number;
+  schoolsActive: number;
+  pendingBrands: number;
+  openFraudFlags: number;
+  pendingUsers: number;
+  totalSubmissions: number;
+  verifiedSubmissions: number;
+  schoolRegistrationTrend: Array<{ period: string; count: number }>;
 };
 
 type WorkflowResponse = {
@@ -54,7 +52,7 @@ export function DashboardOverviewClient(): JSX.Element {
   const { session } = useAdminSession();
   const isSuperAdmin = session?.user.role === "SUPER_ADMIN";
   const [analytics, setAnalytics] = useState<PlatformExecutiveAnalytics | null>(null);
-  const [queue, setQueue] = useState<QueueResponse | null>(null);
+  const [snapshot, setSnapshot] = useState<PlatformSnapshot | null>(null);
   const [workflow, setWorkflow] = useState<WorkflowResponse | null>(null);
   const [error, setError] = useState<string | null>(null);
 
@@ -62,30 +60,42 @@ export function DashboardOverviewClient(): JSX.Element {
     void (async () => {
       try {
         const fetches: Promise<Response>[] = [
-          fetch("/api/admin/analytics/executive", { cache: "no-store" }),
-          fetch("/api/admin/queue?page=1&pageSize=5", { cache: "no-store" })
+          fetch("/api/admin/platform-snapshot", { cache: "no-store" })
         ];
         if (isSuperAdmin) {
-          fetches.push(fetch("/api/admin/commercial/workflow", { cache: "no-store" }));
+          fetches.push(
+            fetch("/api/admin/analytics/executive", { cache: "no-store" }),
+            fetch("/api/admin/commercial/workflow", { cache: "no-store" })
+          );
         }
         const results = await Promise.all(fetches);
         if (!results[0].ok) {
-          setError("Could not load platform analytics.");
+          setError("Could not load platform snapshot.");
           return;
         }
-        setAnalytics((await results[0].json()) as PlatformExecutiveAnalytics);
-        if (results[1].ok) setQueue((await results[1].json()) as QueueResponse);
-        if (isSuperAdmin && results[2]?.ok) setWorkflow((await results[2].json()) as WorkflowResponse);
+        setSnapshot((await results[0].json()) as PlatformSnapshot);
+        if (isSuperAdmin) {
+          if (results[1]?.ok) setAnalytics((await results[1].json()) as PlatformExecutiveAnalytics);
+          if (results[2]?.ok) setWorkflow((await results[2].json()) as WorkflowResponse);
+        }
       } catch {
         setError("Dashboard data failed to load.");
       }
     })();
   }, [isSuperAdmin]);
 
-  const trendData = useMemo(
-    () => analytics?.submissionTrend.weekly ?? [],
-    [analytics]
+  const submissionTrendData = useMemo(() => {
+    const weekly = analytics?.submissionTrend.weekly ?? [];
+    if (weekly.length > 0) return weekly;
+    return [{ period: "No submissions yet", verified: 0, total: 0 }];
+  }, [analytics]);
+
+  const registrationTrendData = useMemo(
+    () => snapshot?.schoolRegistrationTrend ?? [{ period: "—", count: 0 }],
+    [snapshot]
   );
+
+  const showRegistrationTrend = (analytics?.submissionTrend.weekly.length ?? 0) === 0;
 
   const pipelineData = useMemo(() => {
     if (!workflow?.pipeline) return [];
@@ -98,14 +108,8 @@ export function DashboardOverviewClient(): JSX.Element {
       .slice(0, 8);
   }, [workflow]);
 
-  const pendingTotal = useMemo(() => {
-    if (!queue?.pageMeta) return 0;
-    const m = queue.pageMeta;
-    return m.pendingUsers.total + m.pendingSchools.total + m.pendingBrands.total;
-  }, [queue]);
-
   if (error) return <p className="admin-alert admin-alert--error">{error}</p>;
-  if (!analytics) {
+  if (!snapshot) {
     return (
       <div className="admin-loading">
         <div className="admin-loading__spinner" aria-hidden />
@@ -114,7 +118,34 @@ export function DashboardOverviewClient(): JSX.Element {
     );
   }
 
-  const kpis = analytics.kpis.slice(0, 4);
+  const kpis = analytics
+    ? analytics.kpis.slice(0, 4)
+    : [
+        {
+          key: "schoolsRegistered",
+          label: "Schools registered",
+          value: snapshot.schoolsRegistered,
+          format: "count" as const
+        },
+        {
+          key: "totalSubmissions",
+          label: "Total submissions",
+          value: snapshot.totalSubmissions,
+          format: "count" as const
+        },
+        {
+          key: "verifiedSubmissions",
+          label: "Verified submissions",
+          value: snapshot.verifiedSubmissions,
+          format: "count" as const
+        },
+        {
+          key: "schoolsActive",
+          label: "Schools active",
+          value: snapshot.schoolsActive,
+          format: "count" as const
+        }
+      ];
 
   return (
     <div className="admin-dashboard">
@@ -126,31 +157,35 @@ export function DashboardOverviewClient(): JSX.Element {
             Live governance, registrations, and measurable education infrastructure impact.
           </p>
         </div>
-        <time className="admin-page-head__time" dateTime={analytics.generatedAt}>
-          Updated {new Date(analytics.generatedAt).toLocaleString("en-ZA")}
+        <time className="admin-page-head__time" dateTime={snapshot.generatedAt}>
+          Updated {new Date(snapshot.generatedAt).toLocaleString("en-ZA")}
         </time>
       </header>
 
-      {queue ? (
-        <section className="admin-pending-strip" aria-label="Pending actions">
-          <Link href="/dashboard/approvals" className="admin-pending-pill">
-            <span className="admin-pending-pill__value">{queue.pageMeta.pendingSchools.total}</span>
-            <span className="admin-pending-pill__label">Schools pending</span>
-          </Link>
-          <Link href="/dashboard/approvals" className="admin-pending-pill">
-            <span className="admin-pending-pill__value">{queue.pageMeta.pendingBrands.total}</span>
-            <span className="admin-pending-pill__label">Brands pending</span>
-          </Link>
-          <Link href="/dashboard/moderation" className="admin-pending-pill admin-pending-pill--warn">
-            <span className="admin-pending-pill__value">{queue.pageMeta.openFraudFlags.total}</span>
-            <span className="admin-pending-pill__label">Open fraud flags</span>
-          </Link>
-          <Link href="/dashboard/approvals" className="admin-pending-pill">
-            <span className="admin-pending-pill__value">{pendingTotal}</span>
-            <span className="admin-pending-pill__label">Total in queue</span>
-          </Link>
-        </section>
-      ) : null}
+      <section className="admin-pending-strip" aria-label="Platform counts">
+        <div className="admin-pending-pill admin-pending-pill--static">
+          <span className="admin-pending-pill__value">{snapshot.schoolsRegistered}</span>
+          <span className="admin-pending-pill__label">Schools registered</span>
+        </div>
+        <Link href="/dashboard/approvals" className="admin-pending-pill">
+          <span className="admin-pending-pill__value">{snapshot.schoolsPendingApproval}</span>
+          <span className="admin-pending-pill__label">Awaiting approval (PENDING)</span>
+        </Link>
+        <Link href="/dashboard/approvals" className="admin-pending-pill">
+          <span className="admin-pending-pill__value">{snapshot.pendingBrands}</span>
+          <span className="admin-pending-pill__label">Brands in pipeline</span>
+        </Link>
+        <Link href="/dashboard/moderation" className="admin-pending-pill admin-pending-pill--warn">
+          <span className="admin-pending-pill__value">{snapshot.openFraudFlags}</span>
+          <span className="admin-pending-pill__label">Open fraud flags</span>
+        </Link>
+      </section>
+
+      <p className="admin-metrics-note">
+        Registered = all schools that completed signup (includes demo + live). &quot;Awaiting approval&quot; is entity
+        status <strong>PENDING</strong> only — e.g. 2 registered and 1 awaiting approval means one school is already ACTIVE
+        or past PENDING.
+      </p>
 
       <section className="admin-kpi-grid">
         {kpis.map((kpi) => (
@@ -172,11 +207,24 @@ export function DashboardOverviewClient(): JSX.Element {
       <section className="admin-chart-grid admin-chart-grid--2">
         <article className="admin-chart-card">
           <div className="admin-chart-card__head">
-            <h2>Submission trend</h2>
-            <span className="admin-chart-card__meta">Weekly verified vs total</span>
+            <h2>{showRegistrationTrend ? "School registrations" : "Submission trend"}</h2>
+            <span className="admin-chart-card__meta">
+              {showRegistrationTrend ? "New schools per week (live DB)" : "Weekly verified vs total"}
+            </span>
           </div>
+          {showRegistrationTrend ? (
+            <ResponsiveContainer width="100%" height={280}>
+              <BarChart data={registrationTrendData}>
+                <CartesianGrid stroke="#e8f0ff" strokeDasharray="4 4" />
+                <XAxis dataKey="period" tick={{ fontSize: 11, fill: "#6b7c96" }} />
+                <YAxis allowDecimals={false} tick={{ fontSize: 11, fill: "#6b7c96" }} />
+                <Tooltip contentStyle={{ borderRadius: 10, border: "1px solid #dfebff" }} />
+                <Bar dataKey="count" fill="#003b8e" radius={[8, 8, 0, 0]} />
+              </BarChart>
+            </ResponsiveContainer>
+          ) : (
           <ResponsiveContainer width="100%" height={280}>
-            <AreaChart data={trendData}>
+            <AreaChart data={submissionTrendData}>
               <defs>
                 <linearGradient id="verifiedGrad" x1="0" y1="0" x2="0" y2="1">
                   <stop offset="0%" stopColor="#6cc24a" stopOpacity={0.35} />
@@ -196,21 +244,22 @@ export function DashboardOverviewClient(): JSX.Element {
               <Area type="monotone" dataKey="total" stroke="#003b8e" fill="url(#totalGrad)" strokeWidth={2} />
             </AreaChart>
           </ResponsiveContainer>
+          )}
         </article>
 
         <article className="admin-chart-card">
           <div className="admin-chart-card__head">
             <h2>Transformation funnel</h2>
-            <span className="admin-chart-card__meta">Participation stages</span>
+            <span className="admin-chart-card__meta">Registered schools through campaigns</span>
           </div>
           <ResponsiveContainer width="100%" height={280}>
-            <BarChart data={analytics.funnel}>
+            <BarChart data={analytics?.funnel ?? [{ stage: "Registered", count: snapshot.schoolsRegistered }]}>
               <CartesianGrid stroke="#e8f0ff" strokeDasharray="4 4" />
               <XAxis dataKey="stage" tick={{ fontSize: 10, fill: "#6b7c96" }} interval={0} angle={-12} textAnchor="end" height={56} />
               <YAxis allowDecimals={false} tick={{ fontSize: 11, fill: "#6b7c96" }} />
               <Tooltip contentStyle={{ borderRadius: 10, border: "1px solid #dfebff" }} />
               <Bar dataKey="count" radius={[8, 8, 0, 0]}>
-                {analytics.funnel.map((_, i) => (
+                {(analytics?.funnel ?? [{ stage: "Registered", count: snapshot.schoolsRegistered }]).map((_, i) => (
                   <Cell key={i} fill={CHART_COLORS[i % CHART_COLORS.length]} />
                 ))}
               </Bar>
@@ -219,6 +268,7 @@ export function DashboardOverviewClient(): JSX.Element {
         </article>
       </section>
 
+      {analytics ? (
       <section className="admin-chart-grid admin-chart-grid--3">
         <article className="admin-chart-card">
           <div className="admin-chart-card__head">
@@ -226,8 +276,15 @@ export function DashboardOverviewClient(): JSX.Element {
           </div>
           <ResponsiveContainer width="100%" height={240}>
             <PieChart>
-              <Pie data={analytics.channelMix} dataKey="count" nameKey="channel" innerRadius={52} outerRadius={88} paddingAngle={2}>
-                {analytics.channelMix.map((row, index) => (
+              <Pie
+                data={analytics.channelMix.length > 0 ? analytics.channelMix : [{ channel: "No data", count: 1 }]}
+                dataKey="count"
+                nameKey="channel"
+                innerRadius={52}
+                outerRadius={88}
+                paddingAngle={2}
+              >
+                {(analytics.channelMix.length > 0 ? analytics.channelMix : [{ channel: "No data", count: 1 }]).map((row, index) => (
                   <Cell key={row.channel} fill={CHART_COLORS[index % CHART_COLORS.length]} />
                 ))}
               </Pie>
@@ -268,8 +325,9 @@ export function DashboardOverviewClient(): JSX.Element {
           </ResponsiveContainer>
         </article>
       </section>
+      ) : null}
 
-      {isSuperAdmin && pipelineData.length > 0 ? (
+      {isSuperAdmin && analytics && pipelineData.length > 0 ? (
         <section className="admin-chart-card">
           <div className="admin-chart-card__head">
             <h2>Commercial pipeline</h2>
@@ -289,6 +347,7 @@ export function DashboardOverviewClient(): JSX.Element {
         </section>
       ) : null}
 
+      {analytics ? (
       <section className="admin-bottom-grid">
         <article className="admin-chart-card">
           <div className="admin-chart-card__head">
@@ -298,7 +357,13 @@ export function DashboardOverviewClient(): JSX.Element {
             </Link>
           </div>
           <ResponsiveContainer width="100%" height={220}>
-            <BarChart data={analytics.brandRankings.slice(0, 6)}>
+            <BarChart
+              data={
+                analytics.brandRankings.length > 0
+                  ? analytics.brandRankings.slice(0, 6)
+                  : [{ brandName: "No brand submissions", impactScore: 0 }]
+              }
+            >
               <CartesianGrid stroke="#e8f0ff" strokeDasharray="4 4" />
               <XAxis dataKey="brandName" tick={{ fontSize: 10, fill: "#6b7c96" }} interval={0} angle={-15} textAnchor="end" height={56} />
               <YAxis allowDecimals={false} tick={{ fontSize: 11, fill: "#6b7c96" }} />
@@ -322,6 +387,7 @@ export function DashboardOverviewClient(): JSX.Element {
           </ul>
         </article>
       </section>
+      ) : null}
 
       {isSuperAdmin ? (
         <section className="admin-quick-grid">

@@ -18,6 +18,7 @@ import {
 } from "../schools/schoolVerification/verificationGate.js";
 import { commercialAdminRouter } from "../commercial/routes.js";
 import { getPlatformExecutiveAnalytics } from "../analytics/getPlatformExecutiveAnalytics.js";
+import { getAdminPlatformSnapshot } from "./platformSnapshot.js";
 import { listProvinceNominations } from "../platform/provinceNominations.js";
 
 const updateStatusSchema = z.object({
@@ -797,6 +798,11 @@ adminRouter.post("/notifications/jobs/:id/retry", async (req, res) => {
   ]);
 
   res.json({ message: "Notification queued for retry." });
+});
+
+adminRouter.get("/platform-snapshot", async (_req, res) => {
+  const snapshot = await getAdminPlatformSnapshot();
+  res.json(snapshot);
 });
 
 adminRouter.get("/analytics/executive", async (req, res) => {

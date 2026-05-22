@@ -110,7 +110,7 @@ export function SchoolVerificationClient({ schoolId }: { schoolId: string }): JS
         {data.school.schoolCode}
       </p>
 
-      <section className="card" style={{ marginTop: "1rem" }}>
+      <section id="request-info" className="card" style={{ marginTop: "1rem" }}>
         <h2 style={{ fontSize: "1.1rem", marginTop: 0 }}>Request documents or information</h2>
         <p style={{ color: "#4b5563", fontSize: "0.9rem" }}>
           Email the principal with required EMIS documents or corrections. Use{" "}

@@ -388,6 +388,23 @@ body:has(.admin-app) {
   background: linear-gradient(135deg, #fff 0%, #fff5f5 100%);
 }
 
+.admin-pending-pill--static {
+  cursor: default;
+  background: linear-gradient(135deg, #fff 0%, #e8f2ff 100%);
+  border-color: var(--admin-navy);
+}
+
+.admin-pending-pill--static:hover {
+  transform: none;
+}
+
+.admin-metrics-note {
+  margin: 0;
+  font-size: 0.82rem;
+  color: var(--admin-muted);
+  line-height: 1.5;
+}
+
 .admin-pending-pill__value {
   font-size: 1.5rem;
   font-weight: 800;
