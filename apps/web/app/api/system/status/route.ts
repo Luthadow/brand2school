@@ -18,14 +18,42 @@ async function probe(path: string, timeoutMs = 6000): Promise<Check> {
   }
 }
 
+const FETCH_TIMEOUT_MS = 6000;
+
+async function probeLiveStats(): Promise<Check & { schoolsRegistered?: number; validSubmissions?: number }> {
+  try {
+    const res = await fetch(`${apiBase()}/api/v1/platform/live`, {
+      cache: "no-store",
+      signal: AbortSignal.timeout(FETCH_TIMEOUT_MS)
+    });
+    if (!res.ok) return { ok: false, detail: `HTTP ${res.status}` };
+    const data = (await res.json()) as {
+      dataSource?: string;
+      stats?: { schoolsRegistered?: number; activeSchools?: number; validSubmissions?: number };
+    };
+    const schoolsRegistered = data.stats?.schoolsRegistered ?? data.stats?.activeSchools ?? 0;
+    const validSubmissions = data.stats?.validSubmissions ?? 0;
+    return {
+      ok: true,
+      detail: `live (${data.dataSource ?? "unknown"}): ${schoolsRegistered} schools registered, ${validSubmissions} verified`,
+      schoolsRegistered,
+      validSubmissions
+    };
+  } catch (err) {
+    const message = err instanceof Error ? err.message : "request failed";
+    return { ok: false, detail: message };
+  }
+}
+
 /** Public wiring check: web → API nervous system (no secrets). */
 export async function GET(): Promise<NextResponse> {
-  const [health, ready, live, credibility, impact] = await Promise.all([
+  const [health, ready, live, credibility, impact, liveStats] = await Promise.all([
     probe("/health"),
     probe("/health/ready"),
     probe("/api/v1/platform/live"),
     probe("/api/v1/platform/credibility"),
-    probe("/api/v1/platform/impact")
+    probe("/api/v1/platform/impact"),
+    probeLiveStats()
   ]);
 
   const checks = {
@@ -33,6 +61,7 @@ export async function GET(): Promise<NextResponse> {
     health,
     ready,
     platformLive: live,
+    platformLiveStats: liveStats,
     platformCredibility: credibility,
     platformImpact: impact
   };

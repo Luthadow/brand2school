@@ -1,4 +1,5 @@
 import { prisma } from "../../lib/prisma.js";
+import { registeredSchoolWhere } from "../../lib/schoolMetrics.js";
 
 export type FunnelStageMetric = {
   stage: string;
@@ -8,7 +9,7 @@ export type FunnelStageMetric = {
 export async function buildTransformationFunnel(
   scope?: { campaignId?: string; brandId?: string }
 ): Promise<FunnelStageMetric[]> {
-  const schoolWhere = { status: { in: ["PENDING", "VERIFIED", "APPROVED", "ACTIVE"] as Array<"PENDING" | "VERIFIED" | "APPROVED" | "ACTIVE"> } };
+  const schoolWhere = registeredSchoolWhere;
   const submissionWhere = scope?.campaignId
     ? { campaignId: scope.campaignId, ...(scope.brandId ? { campaign: { brandId: scope.brandId } } : {}) }
     : scope?.brandId

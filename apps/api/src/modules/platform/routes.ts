@@ -119,8 +119,9 @@ platformRouter.get("/overview", async (req, res) => {
     return;
   }
 
-  const [activeSchools, schoolsWithSubmissions, validSubmissions, flaggedSubmissions, activeCampaigns, openFraudFlags] =
+  const [schoolsRegistered, activeSchools, schoolsWithSubmissions, validSubmissions, flaggedSubmissions, activeCampaigns, openFraudFlags] =
     await Promise.all([
+      prisma.school.count({ where: { status: { in: ["PENDING", "VERIFIED", "APPROVED", "ACTIVE"] } } }),
       prisma.school.count({ where: { status: "ACTIVE" } }),
       prisma.submission.findMany({
         where: { state: "VALID" },
@@ -147,6 +148,7 @@ platformRouter.get("/overview", async (req, res) => {
     role,
     highlights: roleHighlights[role],
     metrics: {
+      schoolsRegistered,
       activeSchools,
       schoolsWithSubmissions,
       validSubmissions,

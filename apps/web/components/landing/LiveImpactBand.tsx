@@ -10,7 +10,10 @@ export function LiveImpactBand(): JSX.Element {
   return (
     <div className="lp-metrics-grid">
       <FadeIn>
-        <ImpactCounter value={stats.activeSchools} label="School Ecosystems Active" />
+        <ImpactCounter
+          value={stats.schoolsRegistered ?? stats.activeSchools}
+          label="Schools Registered"
+        />
       </FadeIn>
       <FadeIn delay={0.05}>
         <ImpactCounter value={stats.validSubmissions} label="Verified Participations" />

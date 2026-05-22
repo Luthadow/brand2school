@@ -6,12 +6,12 @@ import { formatCount } from "../../lib/formatCount";
 import { FadeIn, ImpactCounter } from "./FadeIn";
 
 const PRIMARY_KEYS = [
+  "schoolsRegistered",
   "verifiedSubmissions",
   "schoolsImpacted",
   "fraudBlocked",
   "provincesReached",
-  "activeCampaigns",
-  "infrastructureMilestones"
+  "activeCampaigns"
 ] as const;
 
 export function HomepageCredibilityBand({

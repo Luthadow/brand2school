@@ -17,14 +17,14 @@ export function LiveHeroProofStrip(): JSX.Element {
     >
       <span>
         <motion.strong
-          key={stats.activeSchools}
+          key={stats.schoolsRegistered}
           initial={{ scale: 1.08 }}
           animate={{ scale: 1 }}
           transition={{ duration: 0.35 }}
         >
-          {formatCount(stats.activeSchools)}
+          {formatCount(stats.schoolsRegistered ?? stats.activeSchools)}
         </motion.strong>{" "}
-        schools active
+        schools registered
       </span>
       <span className="lp-hero-proof-dot" />
       <span>

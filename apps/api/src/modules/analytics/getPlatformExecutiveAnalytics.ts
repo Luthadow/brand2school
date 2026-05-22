@@ -1,4 +1,5 @@
 import { prisma } from "../../lib/prisma.js";
+import { registeredSchoolWhere } from "../../lib/schoolMetrics.js";
 import { normalizeProvinceCode, SA_PROVINCES } from "./provinces.js";
 import { getBrandTrustMetrics } from "./getBrandTrustMetrics.js";
 import { buildPlatformInfrastructureProgress, type InfrastructureProgressMetric } from "./infrastructureMetrics.js";
@@ -81,6 +82,7 @@ export async function getPlatformExecutiveAnalytics(): Promise<PlatformExecutive
   const [
     totalSubmissions,
     verifiedSubmissions,
+    schoolsRegistered,
     schoolsImpactedGroups,
     activeCampaigns,
     activeBrands,
@@ -97,6 +99,7 @@ export async function getPlatformExecutiveAnalytics(): Promise<PlatformExecutive
   ] = await Promise.all([
     prisma.submission.count(),
     prisma.submission.count({ where: { state: "VALID" } }),
+    prisma.school.count({ where: registeredSchoolWhere }),
     prisma.submission.groupBy({
       by: ["schoolId"],
       where: { state: "VALID" }
@@ -275,9 +278,10 @@ export async function getPlatformExecutiveAnalytics(): Promise<PlatformExecutive
   );
 
   const kpis: ExecutiveKpi[] = [
+    { key: "schoolsRegistered", label: "Schools registered", value: schoolsRegistered, format: "count" },
     { key: "totalSubmissions", label: "Total submissions", value: totalSubmissions, format: "count", trendPercent: growthPercent(thisMonthVerified, prevMonthVerified) },
     { key: "verifiedSubmissions", label: "Verified submissions", value: verifiedSubmissions, format: "count", trendPercent: growthPercent(thisMonthVerified, prevMonthVerified) },
-    { key: "schoolsImpacted", label: "Schools impacted", value: schoolsImpactedGroups.length, format: "count" },
+    { key: "schoolsImpacted", label: "Schools with verified codes", value: schoolsImpactedGroups.length, format: "count" },
     { key: "activeCampaigns", label: "Active campaigns", value: activeCampaigns, format: "count" },
     { key: "activeBrands", label: "Active brands", value: activeBrands, format: "count" },
     { key: "fraudBlocked", label: "Fraud blocked", value: trust.fraudAttemptsBlocked, format: "count" },

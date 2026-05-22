@@ -137,6 +137,8 @@ export function emptyPlatformLive(): PlatformLivePayload {
     dataSource: "live",
     updatedAt: now.toISOString(),
     stats: {
+      schoolsRegistered: 0,
+      schoolsParticipating: 0,
       activeSchools: 0,
       validSubmissions: 0,
       submissionsThisMonth: 0,

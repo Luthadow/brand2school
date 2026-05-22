@@ -1,4 +1,5 @@
 import { prisma } from "../../lib/prisma.js";
+import { registeredSchoolWhere } from "../../lib/schoolMetrics.js";
 import { buildPlatformInfrastructureProgress, type InfrastructureProgressMetric } from "../analytics/infrastructureMetrics.js";
 import { buildTransformationFunnel } from "../analytics/funnelMetrics.js";
 import { computeFraudVelocitySnapshot, detectSuspiciousProvinces } from "../analytics/fraudVelocity.js";
@@ -43,7 +44,8 @@ export async function getPublicImpactDashboard(): Promise<PublicImpactDashboard>
   const now = new Date();
 
   const [
-    activeSchools,
+    schoolsRegistered,
+    schoolsParticipating,
     validSubmissions,
     activeCampaigns,
     liveCommercialCampaigns,
@@ -55,7 +57,10 @@ export async function getPublicImpactDashboard(): Promise<PublicImpactDashboard>
     funnel,
     publicCampaigns
   ] = await Promise.all([
-    prisma.school.count({ where: { status: { in: ["ACTIVE", "APPROVED", "VERIFIED"] } } }),
+    prisma.school.count({ where: registeredSchoolWhere }),
+    prisma.submission
+      .findMany({ where: { state: "VALID" }, distinct: ["schoolId"], select: { schoolId: true } })
+      .then((rows) => rows.length),
     prisma.submission.count({ where: { state: "VALID" } }),
     prisma.campaign.count({ where: { isActive: true } }),
     prisma.campaign.count({ where: { isActive: true, commercialStatus: "LIVE" } }),
@@ -139,11 +144,18 @@ export async function getPublicImpactDashboard(): Promise<PublicImpactDashboard>
 
   const kpis: PublicImpactKpi[] = [
     {
-      key: "activeSchools",
-      label: "Verified schools in network",
-      value: activeSchools,
+      key: "schoolsRegistered",
+      label: "Schools registered",
+      value: schoolsRegistered,
       format: "count",
-      hint: "Approved or active school profiles"
+      hint: "Includes schools awaiting governance approval"
+    },
+    {
+      key: "schoolsParticipating",
+      label: "Schools with verified codes",
+      value: schoolsParticipating,
+      format: "count",
+      hint: "At least one verified participation"
     },
     {
       key: "validSubmissions",

@@ -39,6 +39,7 @@
     "start": "npm run start -w @brand2school/api",
     "build:all": "npm run build:api && npm run build:web && npm run build:admin",
     "verify:nervous-system": "node scripts/verify-nervous-system.mjs",
+    "check:live-wiring": "node scripts/check-live-wiring.mjs",
     "railway:build:api": "npm run build -w @brand2school/api",
     "railway:build:web": "npm run build -w @brand2school/web",
     "railway:build:admin": "npm run build -w @brand2school/admin-web",

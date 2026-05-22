@@ -16,7 +16,7 @@ export function platformLiveStreamHandler(req: Request, res: Response): void {
     if (closed) return;
     try {
       const live = await getPlatformLive();
-      const fingerprint = `${live.updatedAt}:${live.stats.validSubmissions}:${live.feed[0]?.id ?? ""}`;
+      const fingerprint = `${live.updatedAt}:${live.stats.schoolsRegistered}:${live.stats.validSubmissions}:${live.feed[0]?.id ?? ""}`;
       if (fingerprint !== lastFingerprint) {
         lastFingerprint = fingerprint;
         res.write(`event: live\ndata: ${JSON.stringify(live)}\n\n`);

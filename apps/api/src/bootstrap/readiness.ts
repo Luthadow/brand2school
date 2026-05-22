@@ -1,4 +1,5 @@
 import { prisma } from "../lib/prisma.js";
+import { registeredSchoolWhere } from "../lib/schoolMetrics.js";
 import { env } from "../config/env.js";
 
 export async function readinessCheck(): Promise<{
@@ -29,16 +30,18 @@ export async function readinessCheck(): Promise<{
   }
 
   try {
-    const [brands, campaigns, codes, users] = await Promise.all([
+    const [brands, campaigns, codes, users, schoolsRegistered] = await Promise.all([
       prisma.brand.count(),
       prisma.campaign.count({ where: { isActive: true } }),
       prisma.code.count({ where: { status: "UNUSED" } }),
-      prisma.user.count()
+      prisma.user.count(),
+      prisma.school.count({ where: registeredSchoolWhere })
     ]);
     checks.seedBrands = String(brands);
     checks.activeCampaigns = String(campaigns);
     checks.unusedCodes = String(codes);
     checks.users = String(users);
+    checks.schoolsRegistered = String(schoolsRegistered);
     if (brands === 0 || campaigns === 0) {
       checks.seed = "run_db_seed";
       return { ok: false, checks };

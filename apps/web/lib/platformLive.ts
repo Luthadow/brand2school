@@ -46,6 +46,8 @@ export type PlatformLivePayload = {
   dataSource: "live";
   updatedAt: string;
   stats: {
+    schoolsRegistered: number;
+    schoolsParticipating: number;
     activeSchools: number;
     validSubmissions: number;
     submissionsThisMonth: number;

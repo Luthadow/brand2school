@@ -18,7 +18,7 @@ export function ForBrandsLiveProof(): JSX.Element {
 
   const stats = [
     { label: "Verified participations", value: live.stats.validSubmissions },
-    { label: "Active schools", value: live.stats.activeSchools },
+    { label: "Schools registered", value: live.stats.schoolsRegistered ?? live.stats.activeSchools },
     { label: "Live campaigns", value: live.stats.activeCampaigns },
     { label: "Provinces active", value: live.stats.provincesActive }
   ];

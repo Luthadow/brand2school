@@ -1,4 +1,5 @@
 import { prisma } from "../../lib/prisma.js";
+import { registeredSchoolWhere } from "../../lib/schoolMetrics.js";
 import { countInfrastructureMilestones } from "../analytics/funnelMetrics.js";
 import { getBrandTrustMetrics } from "../analytics/getBrandTrustMetrics.js";
 import { normalizeProvinceCode } from "../analytics/provinces.js";
@@ -37,6 +38,7 @@ export async function getPlatformCredibility(): Promise<PlatformCredibilityPaylo
   const [
     totalSubmissions,
     verifiedSubmissions,
+    schoolsRegistered,
     schoolsImpactedGroups,
     activeCampaigns,
     activeBrands,
@@ -47,6 +49,7 @@ export async function getPlatformCredibility(): Promise<PlatformCredibilityPaylo
   ] = await Promise.all([
     prisma.submission.count(),
     prisma.submission.count({ where: { state: "VALID" } }),
+    prisma.school.count({ where: registeredSchoolWhere }),
     prisma.submission.groupBy({
       by: ["schoolId"],
       where: { state: "VALID" }
@@ -77,8 +80,9 @@ export async function getPlatformCredibility(): Promise<PlatformCredibilityPaylo
   ).size;
 
   const kpis: PublicCredibilityKpi[] = [
+    { key: "schoolsRegistered", label: "Schools registered", value: schoolsRegistered, hint: "Live registrations" },
     { key: "verifiedSubmissions", label: "Verified submissions", value: verifiedSubmissions, hint: "Trust" },
-    { key: "schoolsImpacted", label: "Schools impacted", value: schoolsImpactedGroups.length, hint: "Social proof" },
+    { key: "schoolsImpacted", label: "Schools with verified codes", value: schoolsImpactedGroups.length, hint: "Participation" },
     { key: "activeCampaigns", label: "Active campaigns", value: activeCampaigns, hint: "Momentum" },
     { key: "activeBrands", label: "Active brand partners", value: activeBrands, hint: "Ecosystem" },
     { key: "fraudBlocked", label: "Fraud blocked", value: trust.fraudAttemptsBlocked, hint: "Integrity" },

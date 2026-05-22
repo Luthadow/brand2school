@@ -25,7 +25,7 @@ export async function fetchPosterMetrics(): Promise<{
 
   const metrics: PosterMetric[] = [
     { value: live.stats.validSubmissions, label: "Verified participations" },
-    { value: live.stats.activeSchools, label: "Participating schools" },
+    { value: live.stats.schoolsRegistered ?? live.stats.activeSchools, label: "Schools registered" },
     {
       value: kpiValue(cred.kpis, "infrastructureMilestones"),
       label: "Infrastructure milestones"

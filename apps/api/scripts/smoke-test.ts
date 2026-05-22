@@ -65,9 +65,16 @@ async function main(): Promise<void> {
   const adminToken = await login(ADMIN_EMAIL);
   pass("super admin login");
 
-  const live = await jsonFetch<{ dataSource?: string; stats?: { activeSchools?: number } }>("/api/v1/platform/live");
+  const live = await jsonFetch<{
+    dataSource?: string;
+    stats?: { schoolsRegistered?: number; activeSchools?: number; validSubmissions?: number };
+  }>("/api/v1/platform/live");
   if (live.status !== 200) fail("platform live", `HTTP ${live.status}`);
-  pass("platform live", live.data.dataSource === "live" ? "live payload" : String(live.data.dataSource));
+  const schoolsRegistered = live.data.stats?.schoolsRegistered ?? live.data.stats?.activeSchools ?? 0;
+  pass(
+    "platform live",
+    `${live.data.dataSource ?? "unknown"} — ${schoolsRegistered} schools registered, ${live.data.stats?.validSubmissions ?? 0} verified`
+  );
 
   const queueRes = await jsonFetch<{ pageMeta?: { openFraudFlags?: { total?: number } } }>(
     "/api/v1/admin/queue?module=MODERATION_QUEUE",

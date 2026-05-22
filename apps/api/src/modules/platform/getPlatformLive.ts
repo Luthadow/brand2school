@@ -1,5 +1,6 @@
 import { emptyPlatformLive } from "../../lib/emptyPayloads.js";
 import { prisma } from "../../lib/prisma.js";
+import { registeredSchoolWhere } from "../../lib/schoolMetrics.js";
 import { normalizeProvinceCode, provinceNameFromCode, SA_PROVINCES } from "../analytics/provinces.js";
 import { getSchoolRankings, type SchoolRankingRow } from "../schools/schoolParticipation.js";
 import { describeCampaignScope } from "../campaigns/campaignEligibility.js";
@@ -43,6 +44,11 @@ export type PlatformLivePayload = {
   dataSource: "live";
   updatedAt: string;
   stats: {
+    /** All registered schools (includes PENDING approval). */
+    schoolsRegistered: number;
+    /** Schools with at least one verified submission. */
+    schoolsParticipating: number;
+    /** @deprecated Use schoolsRegistered — kept for older clients. */
     activeSchools: number;
     validSubmissions: number;
     submissionsThisMonth: number;
@@ -80,11 +86,23 @@ function formatAgo(date: Date): string {
 
 function buildPulseMessages(input: {
   recentHour: Array<{ school: { name: string; district: string; province: string } }>;
+  recentRegistrations: Array<{ name: string; province: string }>;
   campaigns: LiveCampaignRow[];
   provinces: LiveProvinceRow[];
   submissionsThisMonth: number;
+  schoolsRegistered: number;
 }): string[] {
   const pulse: string[] = [];
+
+  if (input.recentRegistrations.length > 0) {
+    const latest = input.recentRegistrations[0];
+    pulse.push(
+      `✔ ${latest.name} registered on Brand2School (${provinceNameFromCode(normalizeProvinceCode(latest.province))})`
+    );
+  } else if (input.schoolsRegistered > 0) {
+    pulse.push(`✔ ${input.schoolsRegistered.toLocaleString("en-ZA")} schools registered on the platform`);
+  }
+
   const byDistrict = new Map<string, number>();
   for (const row of input.recentHour) {
     const key = row.school.district || row.school.province;
@@ -124,56 +142,82 @@ export async function getPlatformLive(): Promise<PlatformLivePayload> {
     startOfMonth.setDate(1);
     startOfMonth.setHours(0, 0, 0, 0);
 
-    const [activeSchools, validSubmissions, submissionsThisMonth, activeCampaigns, recent, recentHour, leaderboard, allValid, campaignsRaw] =
-      await Promise.all([
-        prisma.school.count({ where: { status: { in: ["ACTIVE", "APPROVED", "VERIFIED"] } } }),
-        prisma.submission.count({ where: { state: "VALID" } }),
-        prisma.submission.count({ where: { state: "VALID", createdAt: { gte: startOfMonth } } }),
-        prisma.campaign.count({ where: { isActive: true } }),
-        prisma.submission.findMany({
-          where: { state: "VALID" },
-          orderBy: { createdAt: "desc" },
-          take: 20,
-          select: {
-            id: true,
-            createdAt: true,
-            school: { select: { name: true, province: true } },
-            campaign: { select: { name: true, brand: { select: { name: true } } } }
+    const [
+      schoolsRegistered,
+      registeredSchools,
+      schoolsParticipating,
+      validSubmissions,
+      submissionsThisMonth,
+      activeCampaigns,
+      recent,
+      recentHour,
+      leaderboard,
+      allValid,
+      campaignsRaw
+    ] = await Promise.all([
+      prisma.school.count({ where: registeredSchoolWhere }),
+      prisma.school.findMany({
+        where: registeredSchoolWhere,
+        select: { id: true, name: true, province: true, district: true, createdAt: true },
+        orderBy: { createdAt: "desc" },
+        take: 12
+      }),
+      prisma.submission
+        .findMany({ where: { state: "VALID" }, distinct: ["schoolId"], select: { schoolId: true } })
+        .then((rows) => rows.length),
+      prisma.submission.count({ where: { state: "VALID" } }),
+      prisma.submission.count({ where: { state: "VALID", createdAt: { gte: startOfMonth } } }),
+      prisma.campaign.count({ where: { isActive: true } }),
+      prisma.submission.findMany({
+        where: { state: "VALID" },
+        orderBy: { createdAt: "desc" },
+        take: 20,
+        select: {
+          id: true,
+          createdAt: true,
+          school: { select: { name: true, province: true } },
+          campaign: { select: { name: true, brand: { select: { name: true } } } }
+        }
+      }),
+      prisma.submission.findMany({
+        where: { state: "VALID", createdAt: { gte: new Date(Date.now() - 60 * 60 * 1000) } },
+        select: { school: { select: { name: true, district: true, province: true } } }
+      }),
+      getSchoolRankings(10),
+      prisma.submission.findMany({
+        where: { state: "VALID" },
+        select: {
+          schoolId: true,
+          school: { select: { province: true } }
+        }
+      }),
+      prisma.campaign.findMany({
+        where: { isActive: true },
+        include: {
+          brand: { select: { name: true } },
+          submissions: {
+            where: { state: "VALID" },
+            select: { schoolId: true }
           }
-        }),
-        prisma.submission.findMany({
-          where: { state: "VALID", createdAt: { gte: new Date(Date.now() - 60 * 60 * 1000) } },
-          select: { school: { select: { name: true, district: true, province: true } } }
-        }),
-        getSchoolRankings(10),
-        prisma.submission.findMany({
-          where: { state: "VALID" },
-          select: {
-            schoolId: true,
-            school: { select: { province: true } }
-          }
-        }),
-        prisma.campaign.findMany({
-          where: { isActive: true },
-          include: {
-            brand: { select: { name: true } },
-            submissions: {
-              where: { state: "VALID" },
-              select: { schoolId: true }
-            }
-          },
-          orderBy: { startsAt: "desc" },
-          take: 6
-        })
-      ]);
+        },
+        orderBy: { startsAt: "desc" },
+        take: 6
+      })
+    ]);
 
-    if (validSubmissions === 0 && activeSchools === 0 && activeCampaigns === 0) {
+    if (schoolsRegistered === 0 && validSubmissions === 0 && activeCampaigns === 0) {
       return emptyPlatformLive();
     }
 
     const provinceMap = new Map<string, { schools: Set<string>; submissions: number }>();
     for (const p of SA_PROVINCES) {
       provinceMap.set(p.code, { schools: new Set(), submissions: 0 });
+    }
+    for (const school of registeredSchools) {
+      const code = normalizeProvinceCode(school.province);
+      const bucket = provinceMap.get(code) ?? { schools: new Set(), submissions: 0 };
+      bucket.schools.add(school.id);
+      provinceMap.set(code, bucket);
     }
     for (const row of allValid) {
       const code = normalizeProvinceCode(row.school.province);
@@ -195,11 +239,13 @@ export async function getPlatformLive(): Promise<PlatformLivePayload> {
       };
     })
       .filter((p) => p.submissions > 0 || p.schools > 0)
-      .sort((a, b) => b.submissions - a.submissions);
+      .sort((a, b) => b.submissions - a.submissions || b.schools - a.schools);
 
-    const provincesActive = [...provinceMap.values()].filter((v) => v.submissions > 0).length;
+    const provincesActive = [...provinceMap.values()].filter(
+      (v) => v.submissions > 0 || v.schools.size > 0
+    ).length;
 
-    const feed: LiveFeedItem[] = recent.map((row) => {
+    const submissionFeed: LiveFeedItem[] = recent.map((row) => {
       const createdAt = row.createdAt;
       const province = provinceNameFromCode(normalizeProvinceCode(row.school.province));
       const ago = formatAgo(createdAt);
@@ -214,6 +260,26 @@ export async function getPlatformLive(): Promise<PlatformLivePayload> {
         message: `✔ ${row.campaign.name} verified in ${province} — ${row.school.name} (${ago})`
       };
     });
+
+    const registrationFeed: LiveFeedItem[] = registeredSchools.slice(0, 8).map((school) => {
+      const createdAt = school.createdAt;
+      const province = provinceNameFromCode(normalizeProvinceCode(school.province));
+      const ago = formatAgo(createdAt);
+      return {
+        id: `reg-${school.id}`,
+        schoolName: school.name,
+        province,
+        campaignName: "",
+        brandName: "",
+        createdAt: createdAt.toISOString(),
+        ago,
+        message: `✔ ${school.name} registered (${school.district}, ${province}) — ${ago}`
+      };
+    });
+
+    const feed = [...registrationFeed, ...submissionFeed]
+      .sort((a, b) => b.createdAt.localeCompare(a.createdAt))
+      .slice(0, 20);
 
     if (feed.length === 0) {
       feed.push({
@@ -230,7 +296,7 @@ export async function getPlatformLive(): Promise<PlatformLivePayload> {
 
     const campaigns = campaignsRaw.map((c) => {
       const validCount = c.submissions.length;
-      const schoolsParticipating = new Set(c.submissions.map((s) => s.schoolId)).size;
+      const schoolsParticipatingCount = new Set(c.submissions.map((s) => s.schoolId)).size;
       const target = Math.max(c.targetSubmissions, 1);
       const scopeLabel = describeCampaignScope(c);
       return {
@@ -242,7 +308,7 @@ export async function getPlatformLive(): Promise<PlatformLivePayload> {
         infrastructureGoal: c.infrastructureGoal,
         validSubmissions: validCount,
         targetSubmissions: c.targetSubmissions,
-        schoolsParticipating,
+        schoolsParticipating: schoolsParticipatingCount,
         percentToTarget: Math.min(100, Math.round((validCount / target) * 100)),
         scopeType: c.scopeType,
         scopeLabel,
@@ -252,16 +318,20 @@ export async function getPlatformLive(): Promise<PlatformLivePayload> {
 
     const pulse = buildPulseMessages({
       recentHour,
+      recentRegistrations: registeredSchools,
       campaigns,
       provinces,
-      submissionsThisMonth
+      submissionsThisMonth,
+      schoolsRegistered
     });
 
     return {
       dataSource: "live",
       updatedAt: new Date().toISOString(),
       stats: {
-        activeSchools,
+        schoolsRegistered,
+        schoolsParticipating,
+        activeSchools: schoolsRegistered,
         validSubmissions,
         submissionsThisMonth,
         provincesActive,
