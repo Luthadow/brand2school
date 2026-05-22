@@ -21,7 +21,8 @@ import {
 } from "./provinceNominations.js";
 import { platformLiveStreamHandler } from "./liveStream.js";
 import { requireInternalApiKey } from "../../middleware/requireInternalApiKey.js";
-import { runDemoSeed } from "../../bootstrap/demoSeed.js";
+import { bootstrapSuperAdmin } from "../../bootstrap/bootstrapSuperAdmin.js";
+import { purgeDemoData } from "../../bootstrap/purgeDemoData.js";
 
 const querySchema = z.object({
   role: z
@@ -159,13 +160,24 @@ platformRouter.get("/overview", async (req, res) => {
   });
 });
 
-/** Idempotent demo seed for production (requires INTERNAL_API_KEY). */
-platformRouter.post("/bootstrap-demo-seed", requireInternalApiKey, async (_req, res) => {
+/** Create or update super admin only (requires INTERNAL_API_KEY). */
+platformRouter.post("/bootstrap-super-admin", requireInternalApiKey, async (_req, res) => {
   try {
-    const summary = await runDemoSeed(prisma);
-    res.json({ ok: true, message: "Demo seed applied.", ...summary });
+    const result = await bootstrapSuperAdmin(prisma);
+    res.json({ ok: true, message: "Super admin bootstrapped.", ...result });
   } catch (err) {
-    const message = err instanceof Error ? err.message : "Seed failed.";
+    const message = err instanceof Error ? err.message : "Bootstrap failed.";
+    res.status(500).json({ ok: false, message });
+  }
+});
+
+/** Remove demo school, brand, campaign, and demo portal users (requires INTERNAL_API_KEY). */
+platformRouter.post("/purge-demo-data", requireInternalApiKey, async (_req, res) => {
+  try {
+    const summary = await purgeDemoData(prisma);
+    res.json({ ok: true, message: "Demo data removed.", ...summary });
+  } catch (err) {
+    const message = err instanceof Error ? err.message : "Purge failed.";
     res.status(500).json({ ok: false, message });
   }
 });

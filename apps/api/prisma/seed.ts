@@ -1,28 +1,25 @@
 import { PrismaClient } from "../src/generated/prisma/index.js";
-import { DEMO_LOGINS, DEMO_PASSWORD, runDemoSeed } from "../src/bootstrap/demoSeed.js";
+import {
+  BOOTSTRAP_DEFAULT_PASSWORD,
+  BOOTSTRAP_SUPER_ADMIN_EMAIL,
+  bootstrapSuperAdmin
+} from "../src/bootstrap/bootstrapSuperAdmin.js";
+import { purgeDemoData } from "../src/bootstrap/purgeDemoData.js";
 
 const prisma = new PrismaClient();
 
 async function main(): Promise<void> {
-  await runDemoSeed(prisma);
-
-  console.log("\nBrand2School demo accounts seeded.\n");
-  console.log(`Password for all demo users: ${DEMO_PASSWORD}`);
-  console.log("(Change after first login in production.)\n");
-
-  for (const row of Object.values(DEMO_LOGINS)) {
-    console.log(`${row.portal} portal`);
-    console.log(`  URL:      ${row.url}`);
-    console.log(`  Email:    ${row.email}`);
-    if ("schoolCode" in row) console.log(`  School:   ${row.schoolCode}`);
-    if ("brand" in row) console.log(`  Brand:    ${row.brand}`);
-    console.log("");
+  const purged = await purgeDemoData(prisma);
+  if (purged.removedSchoolId || purged.removedBrandId || purged.removedUsers.length > 0) {
+    console.log("Removed legacy demo records:", purged);
   }
 
-  console.log("Local dev URLs:");
-  console.log("  Admin:  http://localhost:3001/login");
-  console.log("  School: http://localhost:3000/school/login");
-  console.log("  Brand:  http://localhost:3000/brand/login\n");
+  const result = await bootstrapSuperAdmin(prisma);
+  console.log("\nBrand2School bootstrap complete.\n");
+  console.log(`Super admin: ${BOOTSTRAP_SUPER_ADMIN_EMAIL}`);
+  console.log(`Password:    ${BOOTSTRAP_DEFAULT_PASSWORD}`);
+  console.log(`Account:     ${result.created ? "created" : "updated"}`);
+  console.log("\nLocal admin: http://localhost:3001/login\n");
 }
 
 main()

@@ -1,10 +1,10 @@
 /**
- * Apply demo users/brands/campaigns on a remote API (e.g. Railway production).
+ * Bootstrap super admin on remote API (no demo school/brand).
  *
  * Usage:
  *   B2S_API_URL=https://api.brand2school.co.za \
  *   B2S_INTERNAL_API_KEY=your_internal_key \
- *   node scripts/remote-demo-seed.mjs
+ *   node scripts/remote-bootstrap-admin.mjs
  */
 
 const apiBase = (process.env.B2S_API_URL ?? "https://api.brand2school.co.za").replace(/\/$/, "");
@@ -15,7 +15,7 @@ if (!internalKey) {
   process.exit(1);
 }
 
-const url = `${apiBase}/api/v1/platform/bootstrap-demo-seed`;
+const url = `${apiBase}/api/v1/platform/bootstrap-super-admin`;
 
 const res = await fetch(url, {
   method: "POST",
@@ -28,10 +28,10 @@ const res = await fetch(url, {
 const body = await res.json().catch(() => ({}));
 
 if (!res.ok) {
-  console.error(`Seed failed (${res.status}):`, body.message ?? body);
+  console.error(`Bootstrap failed (${res.status}):`, body.message ?? body);
   process.exit(1);
 }
 
-console.log("Demo seed applied successfully.\n");
+console.log("Super admin ready.\n");
 console.log(JSON.stringify(body, null, 2));
-console.log("\nLog in with password ChangeMe123! — see docs/DEMO_LOGINS.md");
+console.log("\nLogin: superadmin@brand2school.co.za — see docs/SUPERADMIN_SETUP.md");

@@ -1,6 +1,6 @@
 import { env, logProductionReadinessWarnings } from "./config/env.js";
 import { app } from "./app.js";
-import { ensureDemoSeedIfMissing } from "./bootstrap/ensureDemoSeed.js";
+import { ensureSuperAdminIfMissing } from "./bootstrap/ensureSuperAdmin.js";
 import { logger } from "./lib/logger.js";
 import { processDueNotificationJobs } from "./lib/notifications/process.js";
 
@@ -13,7 +13,7 @@ app.listen(port, "0.0.0.0", () => {
     logProductionReadinessWarnings();
   }
 
-  void ensureDemoSeedIfMissing();
+  void ensureSuperAdminIfMissing();
 
   if (env.SMTP_HOST && env.SMTP_USER && env.SMTP_PASS) {
     void processDueNotificationJobs(50)

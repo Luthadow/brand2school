@@ -182,9 +182,8 @@ export function DashboardOverviewClient(): JSX.Element {
       </section>
 
       <p className="admin-metrics-note">
-        Registered = all schools that completed signup (includes demo + live). &quot;Awaiting approval&quot; is entity
-        status <strong>PENDING</strong> only — e.g. 2 registered and 1 awaiting approval means one school is already ACTIVE
-        or past PENDING.
+        Registered = all schools that completed public signup. &quot;Awaiting approval&quot; is entity status{" "}
+        <strong>PENDING</strong> only.
       </p>
 
       <section className="admin-kpi-grid">

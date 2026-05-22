@@ -136,7 +136,7 @@ Railway run command on **brand2school**:
 npm run railway:seed
 ```
 
-Login: see **[DEMO_LOGINS.md](../DEMO_LOGINS.md)** — `superadmin@`, `demo.school@`, `demo.brand@` (password `ChangeMe123!`).
+Login: see **[SUPERADMIN_SETUP.md](../SUPERADMIN_SETUP.md)** — `superadmin@brand2school.co.za` (bootstrap password in docs).
 
 ---
 
