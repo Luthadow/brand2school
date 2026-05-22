@@ -20,6 +20,8 @@ import {
   listProvinceNominations
 } from "./provinceNominations.js";
 import { platformLiveStreamHandler } from "./liveStream.js";
+import { requireInternalApiKey } from "../../middleware/requireInternalApiKey.js";
+import { runDemoSeed } from "../../bootstrap/demoSeed.js";
 
 const querySchema = z.object({
   role: z
@@ -153,4 +155,15 @@ platformRouter.get("/overview", async (req, res) => {
       openFraudFlags
     }
   });
+});
+
+/** Idempotent demo seed for production (requires INTERNAL_API_KEY). */
+platformRouter.post("/bootstrap-demo-seed", requireInternalApiKey, async (_req, res) => {
+  try {
+    const summary = await runDemoSeed(prisma);
+    res.json({ ok: true, message: "Demo seed applied.", ...summary });
+  } catch (err) {
+    const message = err instanceof Error ? err.message : "Seed failed.";
+    res.status(500).json({ ok: false, message });
+  }
 });

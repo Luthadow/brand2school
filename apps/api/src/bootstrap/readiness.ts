@@ -29,14 +29,16 @@ export async function readinessCheck(): Promise<{
   }
 
   try {
-    const [brands, campaigns, codes] = await Promise.all([
+    const [brands, campaigns, codes, users] = await Promise.all([
       prisma.brand.count(),
       prisma.campaign.count({ where: { isActive: true } }),
-      prisma.code.count({ where: { status: "UNUSED" } })
+      prisma.code.count({ where: { status: "UNUSED" } }),
+      prisma.user.count()
     ]);
     checks.seedBrands = String(brands);
     checks.activeCampaigns = String(campaigns);
     checks.unusedCodes = String(codes);
+    checks.users = String(users);
     if (brands === 0 || campaigns === 0) {
       checks.seed = "run_db_seed";
       return { ok: false, checks };

@@ -53,6 +53,28 @@ Dashboard: overview, campaigns, analytics, financials, agreement, reports.
 
 ---
 
+## Troubleshooting “Invalid credentials”
+
+If school or brand login returns **Invalid credentials** but the API is up:
+
+1. Check readiness: `https://api.brand2school.co.za/health/ready`
+   - `database: ok`, `schema: ok` — migrations applied.
+   - `seed: run_db_seed` or `users: 0` — **demo data was never seeded** on that database.
+
+2. **Seed production** (pick one):
+   - **Railway API shell** (linked Postgres): `npm run railway:seed`
+   - **From your machine** (needs API `INTERNAL_API_KEY` on Railway):
+     ```bash
+     set B2S_INTERNAL_API_KEY=your_railway_INTERNAL_API_KEY
+     npm run railway:remote-seed
+     ```
+
+3. Retry login with password exactly `ChangeMe123!` (case-sensitive).
+
+**Admin portal DNS:** `admin.brand2school.co.za` must have a Cloudflare CNAME to the Railway **admin-web** service. Until DNS exists, use the Railway admin URL from the dashboard.
+
+---
+
 ## Security
 
 - These accounts are for **demo and staging only**.

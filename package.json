@@ -45,6 +45,8 @@
     "railway:migrate": "node scripts/check-database-url.mjs && node scripts/railway-migrate.mjs",
     "railway:migrate:resolve-failed": "node scripts/check-database-url.mjs && npm run db:migrate:resolve:commercial-expiry -w @brand2school/api",
     "railway:seed": "node scripts/railway-seed.mjs",
+    "railway:remote-seed": "node scripts/remote-demo-seed.mjs",
+    "railway:sync-env": "node scripts/sync-railway-api-env.mjs",
     "test:smtp": "node scripts/test-smtp.mjs"
   },
   "engines": {
