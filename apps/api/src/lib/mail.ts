@@ -90,6 +90,11 @@ async function sendBrandedMail(input: {
 }): Promise<void> {
   const tx = transporter();
   if (!tx) {
+    if (env.NODE_ENV === "production") {
+      throw new Error(
+        "SMTP is not configured on the API service. Set SMTP_HOST, SMTP_USER, and SMTP_PASS on Railway."
+      );
+    }
     console.info("[mail:dev]", input.subject);
     console.info(`To: ${input.to}`);
     if (input.replyTo) console.info(`Reply-To: ${input.replyTo}`);

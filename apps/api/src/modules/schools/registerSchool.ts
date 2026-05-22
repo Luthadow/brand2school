@@ -110,13 +110,15 @@ export async function registerSchool(input: Omit<SchoolRegisterInput, "confirmPa
 
   const loginUrl = `${env.WEB_APP_URL}/school/login`;
 
+  let emailSent = false;
   try {
-    await queueEmail({
+    const jobId = await queueEmail({
       template: "SCHOOL_REGISTRATION",
       recipient: email,
       entityType: "SCHOOL",
       entityId: school.id,
-      priority: 1,
+      priority: 10,
+      immediate: true,
       payload: {
         principalName: input.principalName.trim(),
         schoolName: school.name,
@@ -125,17 +127,29 @@ export async function registerSchool(input: Omit<SchoolRegisterInput, "confirmPa
         loginUrl
       }
     });
+    const job = await prisma.notificationJob.findUnique({
+      where: { id: jobId },
+      select: { status: true, lastError: true }
+    });
+    emailSent = job?.status === "SENT";
+    if (!emailSent) {
+      console.error(
+        "[mail] School registration email not sent:",
+        job?.lastError ?? "delivery failed"
+      );
+    }
   } catch (err) {
-    console.error("[mail] Failed to queue school registration email:", err);
+    console.error("[mail] Failed to send school registration email:", err);
   }
 
   return {
     ok: true as const,
     status: 201,
     payload: {
-      message:
-        "School registered successfully. A confirmation email has been sent. WhatsApp is linked to your number.",
-      emailSent: true,
+      message: emailSent
+        ? `School registered successfully. A confirmation email was sent to ${email}. WhatsApp is linked to your number.`
+        : "School registered successfully. We could not send the confirmation email — save your school code below. Check spam, or contact schools@brand2school.co.za for help.",
+      emailSent,
       principal: { id: user.id, email: user.email },
       school: {
         id: school.id,

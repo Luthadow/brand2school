@@ -14,14 +14,14 @@ export async function notifySchoolActivatedIfNeeded(
 ): Promise<void> {
   const input = await buildSchoolActivationEmail(schoolId, previousStatus);
   if (!input) return;
-  await queueEmail({ ...input, priority: 2 });
+  await queueEmail({ ...input, priority: 2, immediate: true });
 }
 
 export async function notifyBrandActivatedIfNeeded(brandId: string, previousStatus: string): Promise<void> {
   const inputs = await buildBrandActivationEmails(brandId, previousStatus);
   if (inputs.length === 0) return;
   for (const input of inputs) {
-    await queueEmail({ ...input, priority: 2 });
+    await queueEmail({ ...input, priority: 2, immediate: true });
   }
 }
 

@@ -59,8 +59,8 @@ export function productionReadinessChecks(): ProductionCheck[] {
     },
     {
       key: "SMTP_HOST",
-      ok: Boolean(env.SMTP_HOST),
-      detail: "School onboarding emails require SMTP_HOST."
+      ok: Boolean(env.SMTP_HOST && env.SMTP_USER && env.SMTP_PASS),
+      detail: "Transactional email requires SMTP_HOST, SMTP_USER, and SMTP_PASS (noreply@brand2school.co.za)."
     },
     {
       key: "INTERNAL_API_KEY",

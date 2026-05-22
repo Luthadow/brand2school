@@ -1,6 +1,7 @@
 import { env, logProductionReadinessWarnings } from "./config/env.js";
 import { app } from "./app.js";
 import { logger } from "./lib/logger.js";
+import { processDueNotificationJobs } from "./lib/notifications/process.js";
 
 const port = Number(env.PORT);
 
@@ -9,5 +10,15 @@ app.listen(port, "0.0.0.0", () => {
 
   if (env.NODE_ENV === "production") {
     logProductionReadinessWarnings();
+  }
+
+  if (env.SMTP_HOST && env.SMTP_USER && env.SMTP_PASS) {
+    void processDueNotificationJobs(50)
+      .then((processed) => {
+        if (processed > 0) {
+          logger.info({ processed }, "Processed queued notification emails on API startup");
+        }
+      })
+      .catch((err) => logger.error({ err }, "Failed to process queued notifications on startup"));
   }
 });

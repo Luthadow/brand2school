@@ -40,13 +40,27 @@ ADMIN_WEB_APP_URL=https://admin.brand2school.co.za
 
 **Redeploy the API** after saving variables.
 
-## 3. Notification worker (if deployed)
+## 3. Immediate delivery (school registration email)
 
-If you run the **notifications** worker on Railway, give it the **same** SMTP variables (copy from API or use Railway Shared Variables).
+School registration, password reset, and contact forms send **immediately** from the API (`immediate: true`).
+
+You do **not** need a separate worker for those emails — but you **must** set all SMTP variables on the **API** service and redeploy.
+
+Optional on API:
+
+```env
+NOTIFICATION_DELIVERY=sync
+```
+
+This also sends any other queued mail inline (useful if you skip `worker-notifications`).
+
+## 4. Notification worker (optional)
+
+For ESG PDFs and bulk mail, run **worker-notifications** with the **same** SMTP variables.
 
 See `infra/railway/env.worker.example`.
 
-## 4. Test from your machine
+## 5. Test from your machine
 
 Never put the mailbox password in git. Use a local file only:
 
@@ -61,7 +75,7 @@ npm run test:smtp -- --send-to your-personal@email.com
 
 You should see `SMTP connection verified` and receive the test email.
 
-## 5. Test in production
+## 6. Test in production
 
 After Railway redeploy:
 
@@ -69,11 +83,11 @@ After Railway redeploy:
 2. Use **Forgot password** on school or brand login — reset email from noreply@.
 3. Check API logs on Railway for `[mail:dev]` — if you still see that prefix, SMTP is **not** configured (emails are logged only, not sent).
 
-## 6. DNS (deliverability)
+## 7. DNS (deliverability)
 
 In **Cloudflare**, keep MX / SPF / DKIM / DMARC records as **DNS only** (grey cloud), not proxied. Use the exact values from cPanel → **Email Deliverability**.
 
-## 7. Security
+## 8. Security
 
 - Rotate the mailbox password if it was ever pasted in chat or email.
 - Store `SMTP_PASS` only in Railway Variables or a password manager.

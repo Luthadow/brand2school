@@ -8,6 +8,7 @@ import { CONTACT, mailto } from "../../lib/contact";
 
 type RegisterResult = {
   message: string;
+  emailSent?: boolean;
   school: { name: string; schoolCode: string; status: string; province: string; district: string };
   whatsapp: {
     menuCommand: string;
@@ -82,6 +83,12 @@ export function SchoolRegisterForm(): JSX.Element {
         </div>
         <h2>School Registered</h2>
         <p>{result.message}</p>
+        {result.emailSent === false ? (
+          <p className="reg-email-warn">
+            No confirmation email was sent. Save your school code below. If you expected email, check spam or{" "}
+            <a href={mailto(CONTACT.schools)}>{CONTACT.schools}</a>.
+          </p>
+        ) : null}
 
         <div className="reg-success-card">
           <h3>{result.school.name}</h3>
