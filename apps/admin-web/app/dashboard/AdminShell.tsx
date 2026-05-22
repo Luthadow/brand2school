@@ -2,27 +2,34 @@
 
 import Link from "next/link";
 import type { Route } from "next";
-import { usePathname, useRouter } from "next/navigation";
 import Image from "next/image";
+import { usePathname, useRouter } from "next/navigation";
 import { useAdminSession } from "./useAdminSession";
 import { csrfFetch } from "./admin-client-utils";
 import brandLogo from "../../../../brand2school.png";
 
-const baseLinks: Array<{ href: Route; label: string }> = [{ href: "/dashboard", label: "Overview" }];
-const superAdminLinks = [
-  { href: "/dashboard/analytics", label: "Analytics" },
-  { href: "/dashboard/approvals", label: "Approvals" },
-  { href: "/dashboard/moderation", label: "Moderation" },
-  { href: "/dashboard/audit", label: "Audit" },
-  { href: "/dashboard/notifications", label: "Notifications" },
-  { href: "/dashboard/brands", label: "Brands" },
-  { href: "/dashboard/campaigns", label: "Campaigns" },
-  { href: "/dashboard/commercial", label: "Commercial" }
-] as Array<{ href: Route; label: string }>;
-const adminStaffLinks: Array<{ href: Route; label: string }> = [
-  { href: "/dashboard/moderation", label: "Moderation" },
-  { href: "/dashboard/audit", label: "Audit" }
+const overviewLink = { href: "/dashboard" as Route, label: "Overview", icon: "◉" };
+
+const superAdminLinks: Array<{ href: Route; label: string; icon: string }> = [
+  { href: "/dashboard/analytics", label: "Analytics", icon: "▣" },
+  { href: "/dashboard/approvals", label: "Approvals", icon: "✓" },
+  { href: "/dashboard/commercial", label: "Commercial", icon: "◎" },
+  { href: "/dashboard/brands", label: "Brands", icon: "◇" },
+  { href: "/dashboard/campaigns", label: "Campaigns", icon: "◆" },
+  { href: "/dashboard/moderation", label: "Moderation", icon: "!" },
+  { href: "/dashboard/audit", label: "Audit", icon: "≡" },
+  { href: "/dashboard/notifications", label: "Notifications", icon: "✉" }
 ];
+
+const adminStaffLinks: Array<{ href: Route; label: string; icon: string }> = [
+  { href: "/dashboard/moderation", label: "Moderation", icon: "!" },
+  { href: "/dashboard/audit", label: "Audit", icon: "≡" }
+];
+
+function isActive(pathname: string, href: string): boolean {
+  if (href === "/dashboard") return pathname === "/dashboard";
+  return pathname === href || pathname.startsWith(`${href}/`);
+}
 
 export function AdminShell({ children }: { children: React.ReactNode }): JSX.Element {
   const pathname = usePathname();
@@ -35,45 +42,68 @@ export function AdminShell({ children }: { children: React.ReactNode }): JSX.Ele
   };
 
   if (loading || !session) {
-    return <main className="container">Loading session...</main>;
+    return (
+      <div className="admin-shell admin-shell--loading">
+        <div className="admin-loading">
+          <div className="admin-loading__spinner" aria-hidden />
+          <p>Loading session…</p>
+        </div>
+      </div>
+    );
   }
 
-  const roleLinks = session.user.role === "SUPER_ADMIN" ? superAdminLinks : adminStaffLinks;
+  const navLinks = session.user.role === "SUPER_ADMIN" ? superAdminLinks : adminStaffLinks;
 
   return (
-    <main className="container">
-      <div
-        className="card admin-shell-head"
-        style={{ marginBottom: "1rem", display: "flex", flexWrap: "wrap", justifyContent: "space-between", gap: "1rem" }}
-      >
-        <div style={{ minWidth: 0, flex: "1 1 16rem" }}>
-          <Image
-            src={brandLogo}
-            alt="Brand2School admin dashboard logo"
-            priority
-            style={{ width: "100%", maxWidth: "280px", height: "auto", borderRadius: "10px", marginBottom: "0.6rem", border: "1px solid #d5e4ff" }}
-          />
-          <strong>{session.user.fullName}</strong> ({session.user.role})
-          <div style={{ marginTop: "0.5rem", display: "flex", gap: "0.5rem", flexWrap: "wrap" }}>
-            {[...baseLinks, ...roleLinks].map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                style={{
-                  padding: "0.35rem 0.6rem",
-                  borderRadius: "8px",
-                  border: "1px solid #c6d9ff",
-                  background: pathname === link.href ? "#dfe9ff" : "#fff"
-                }}
-              >
-                {link.label}
-              </Link>
-            ))}
-          </div>
+    <div className="admin-shell">
+      <aside className="admin-sidebar">
+        <Link href="/dashboard" className="admin-sidebar__brand">
+          <Image src={brandLogo} alt="Brand2School" width={120} height={80} priority className="admin-sidebar__logo" />
+          <span>Admin</span>
+        </Link>
+
+        <nav className="admin-sidebar__nav" aria-label="Admin navigation">
+          <Link
+            href={overviewLink.href}
+            className={`admin-sidebar__link${isActive(pathname, overviewLink.href) ? " admin-sidebar__link--active" : ""}`}
+          >
+            <span className="admin-sidebar__icon" aria-hidden>
+              {overviewLink.icon}
+            </span>
+            {overviewLink.label}
+          </Link>
+          {navLinks.map((link) => (
+            <Link
+              key={link.href}
+              href={link.href}
+              className={`admin-sidebar__link${isActive(pathname, link.href) ? " admin-sidebar__link--active" : ""}`}
+            >
+              <span className="admin-sidebar__icon" aria-hidden>
+                {link.icon}
+              </span>
+              {link.label}
+            </Link>
+          ))}
+        </nav>
+
+        <div className="admin-sidebar__foot">
+          <p className="admin-sidebar__user">{session.user.fullName}</p>
+          <p className="admin-sidebar__role">{session.user.role.replace(/_/g, " ")}</p>
+          <button type="button" className="admin-sidebar__logout" onClick={() => void logout()}>
+            Sign out
+          </button>
         </div>
-        <button onClick={() => void logout()}>Logout</button>
+      </aside>
+
+      <div className="admin-main">
+        <header className="admin-topbar">
+          <p className="admin-topbar__title">Brand2School governance</p>
+          <button type="button" className="admin-topbar__logout" onClick={() => void logout()}>
+            Logout
+          </button>
+        </header>
+        <div className="admin-content">{children}</div>
       </div>
-      {children}
-    </main>
+    </div>
   );
 }
