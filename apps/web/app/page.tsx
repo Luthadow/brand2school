@@ -282,11 +282,13 @@ const audienceTabs = [
 ];
 
 export default async function HomePage(): Promise<JSX.Element> {
-  const [liveInitial, partners, credibilityInitial] = await Promise.all([
+  const [liveInitial, partnersRaw, credibilityInitial] = await Promise.all([
     fetchPlatformLive(),
     fetchPlatformPartners(),
     fetchPlatformCredibility()
   ]);
+  const { withAbsoluteBrandLogoUrls } = await import("../lib/brandLogoSrc");
+  const partners = withAbsoluteBrandLogoUrls(partnersRaw);
   const live = liveInitial ?? emptyPlatformLive();
   const credibility = credibilityInitial ?? emptyPlatformCredibility();
 

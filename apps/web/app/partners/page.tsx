@@ -1,11 +1,11 @@
-import Image from "next/image";
 import Link from "next/link";
 import type { Route } from "next";
+import { withAbsoluteBrandLogoUrls } from "../../lib/brandLogoSrc";
 import { fetchPartnerDirectory } from "../../lib/platformPublic";
 import { formatCount } from "../../lib/formatCount";
 
 export default async function PartnersDirectoryPage(): Promise<JSX.Element> {
-  const partners = await fetchPartnerDirectory();
+  const partners = withAbsoluteBrandLogoUrls(await fetchPartnerDirectory());
 
   return (
     <div className="lp pp-page">
@@ -26,12 +26,14 @@ export default async function PartnersDirectoryPage(): Promise<JSX.Element> {
               {partners.map((partner) => (
                 <Link key={partner.slug} href={`/brand/${partner.slug}` as Route} className="card pp-directory-card">
                   {partner.logoUrl ? (
-                    <Image
+                    // eslint-disable-next-line @next/next/no-img-element
+                    <img
                       src={partner.logoUrl}
                       alt={`${partner.name} logo`}
                       width={140}
                       height={60}
                       className="lp-trust-logo-img"
+                      style={{ objectFit: "contain", maxHeight: 60 }}
                     />
                   ) : (
                     <strong>{partner.name}</strong>

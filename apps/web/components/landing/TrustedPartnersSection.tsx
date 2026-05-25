@@ -1,4 +1,3 @@
-import Image from "next/image";
 import Link from "next/link";
 import type { Route } from "next";
 import type { PlatformPartner } from "../../lib/platformPartners";
@@ -14,12 +13,14 @@ export function TrustedPartnersSection({ partners }: { partners: PlatformPartner
           {partners.map((partner) => (
             <li key={partner.slug}>
               <Link href={`/brand/${partner.slug}` as Route} className="lp-trust-logo-link" title={partner.name}>
-                <Image
+                {/* eslint-disable-next-line @next/next/no-img-element -- API-hosted PNG; avoids next/image relative URL issues */}
+                <img
                   src={partner.logoUrl}
                   alt={`${partner.name} logo`}
                   width={140}
                   height={60}
                   className="lp-trust-logo-img"
+                  style={{ objectFit: "contain", maxHeight: 60 }}
                 />
               </Link>
             </li>

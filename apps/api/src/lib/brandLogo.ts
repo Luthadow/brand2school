@@ -1,5 +1,6 @@
 import fs from "node:fs/promises";
 import { prisma } from "./prisma.js";
+import { apiPublicBaseUrl } from "./publicAssetUrl.js";
 import { brandLogoAbsolutePath, removeBrandLogoFile, saveBrandLogo, type LogoUploadInput } from "./brandStorage.js";
 
 export type { LogoUploadInput };
@@ -48,9 +49,10 @@ export async function readBrandLogoBuffer(brandId: string): Promise<Buffer | nul
   }
 }
 
-/** Same-origin path on the public web app (works on brand2school.co.za and www). */
+/** Public HTTPS URL for <img src> (served directly from API, stored in PostgreSQL). */
 export function brandLogoWebPath(slug: string): string {
-  return `/api/public/brand-logo/${encodeURIComponent(slug)}`;
+  const base = apiPublicBaseUrl().replace(/\/$/, "");
+  return `${base}/api/v1/platform/brand-logo/${encodeURIComponent(slug)}`;
 }
 
 export function hasBrandLogo(logoUrl: string | null | undefined): boolean {

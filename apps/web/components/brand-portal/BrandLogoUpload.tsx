@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { brandCsrfHeaders } from "../../lib/brandClientFetch";
+import { brandLogoPreviewUrl } from "../../lib/brandLogoSrc";
 
 type Props = {
   brandSlug: string;
@@ -15,15 +16,15 @@ export function BrandLogoUpload({ brandSlug, logoUrl, brandName, onUpdated }: Pr
   const [error, setError] = useState<string | null>(null);
   const [message, setMessage] = useState<string | null>(null);
   const [previewRev, setPreviewRev] = useState(0);
+  const [previewBroken, setPreviewBroken] = useState(false);
 
-  const previewSrc = logoUrl
-    ? `/api/public/brand-logo/${encodeURIComponent(brandSlug)}?rev=${previewRev}`
-    : null;
+  const previewSrc = logoUrl ? brandLogoPreviewUrl(brandSlug, previewRev) : null;
 
   const upload = async (file: File): Promise<void> => {
     setLoading(true);
     setError(null);
     setMessage(null);
+    setPreviewBroken(false);
     const form = new FormData();
     form.append("logo", file);
     try {
@@ -37,7 +38,7 @@ export function BrandLogoUpload({ brandSlug, logoUrl, brandName, onUpdated }: Pr
         setError(data.message ?? "Upload failed.");
         return;
       }
-      onUpdated(data.logoUrl ?? `/api/public/brand-logo/${brandSlug}`);
+      onUpdated(data.logoUrl ?? brandLogoPreviewUrl(brandSlug));
       setPreviewRev(Date.now());
       setMessage(data.message ?? "Logo uploaded.");
     } finally {
@@ -61,6 +62,7 @@ export function BrandLogoUpload({ brandSlug, logoUrl, brandName, onUpdated }: Pr
       }
       onUpdated(null);
       setPreviewRev(0);
+      setPreviewBroken(false);
       setMessage(data.message ?? "Logo removed.");
     } finally {
       setLoading(false);
@@ -70,15 +72,23 @@ export function BrandLogoUpload({ brandSlug, logoUrl, brandName, onUpdated }: Pr
   return (
     <div>
       <div style={{ display: "flex", alignItems: "center", gap: "1rem", marginBottom: "0.75rem", minHeight: 72 }}>
-        {previewSrc ? (
-          // eslint-disable-next-line @next/next/no-img-element -- same-origin public logo route
+        {previewSrc && !previewBroken ? (
+          // eslint-disable-next-line @next/next/no-img-element -- loaded from API CDN URL
           <img
             src={previewSrc}
             alt={`${brandName} logo`}
             width={140}
             height={56}
             style={{ objectFit: "contain", maxHeight: 56 }}
+            onError={() => {
+              setPreviewBroken(true);
+              setError(
+                "Logo could not be loaded. Upload your PNG again (Settings saves it to the database after the latest deploy)."
+              );
+            }}
           />
+        ) : previewBroken ? (
+          <span className="bp-muted">Logo not loaded — upload again</span>
         ) : (
           <span className="bp-muted">No logo uploaded yet</span>
         )}
