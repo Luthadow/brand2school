@@ -127,7 +127,7 @@ export async function importCodeBatchFromFile(input: {
   }
 
   const uniqueValid = [...new Set(parsed.codes.map((c) => c.trim().toUpperCase()))];
-  const { valid } = filterCodesForBrand(uniqueValid, campaign.brand.codePrefix);
+  const { valid } = filterCodesForBrand(uniqueValid, validation.brandPrefix);
 
   const existing = await prisma.code.findMany({
     where: { value: { in: valid } },

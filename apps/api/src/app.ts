@@ -20,6 +20,7 @@ import { commercialBrandRouter, commercialPublicRouter } from "./modules/commerc
 import { commercialUploadsDir } from "./lib/commercialStorage.js";
 import { schoolVerificationUploadsDir } from "./lib/schoolVerificationStorage.js";
 import { readinessCheck } from "./bootstrap/readiness.js";
+import { logger } from "./lib/logger.js";
 
 export const app = express();
 
@@ -84,6 +85,11 @@ app.use("/api/v1/contact", contactRouter);
 app.use("/api/v1/commercial", commercialPublicRouter);
 app.use("/api/v1/commercial/brand", commercialBrandRouter);
 
-app.use((err: Error, _req: express.Request, res: express.Response) => {
-  res.status(500).json({ message: err.message || "Unexpected server error." });
+// Four-argument handler required — otherwise Express passes `next` as `res` (res.status is not a function).
+app.use((err: Error, _req: express.Request, res: express.Response, _next: express.NextFunction) => {
+  if (typeof res.status === "function") {
+    res.status(500).json({ message: err.message || "Unexpected server error." });
+    return;
+  }
+  logger.error({ err }, "Unhandled error (invalid response object)");
 });

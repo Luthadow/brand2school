@@ -124,6 +124,10 @@ Delete Postgres → add new PostgreSQL → Connect → Deploy.
 | `dist/generated/prisma/index.js` missing | Build must run `copy-prisma-client.mjs` (in `apps/api` build script) |
 | `DATABASE_URL` empty | Connect Postgres or paste private URL |
 | Healthcheck fails before listen | Migrations run in **pre-deploy** only; server listens on `0.0.0.0` immediately |
+| `Brand.homeSortOrder` does not exist (P2022) | DB behind schema — set **Pre-deploy** to `npm run railway:migrate`, or redeploy (API runs `migrate deploy` on startup in production) |
+| `res.status is not a function` | Fixed in API error handler — redeploy latest `main` |
+| `[production-readiness] WHATSAPP_*` | Warnings only — set Meta WhatsApp env vars when enabling WhatsApp |
+| `Super admin bootstrap failed` | Usually missing migrations or `DATABASE_URL`; fix migrate first, then redeploy |
 | P3009 commercial_workflow_expiry | See above |
 
 ---
