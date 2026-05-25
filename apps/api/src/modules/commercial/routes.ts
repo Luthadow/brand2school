@@ -47,7 +47,12 @@ import {
   processSubscriptionGovernance
 } from "./subscriptionGovernance.js";
 import { buildProcurementPackZip, procurementPackFilename } from "./procurementPack/buildProcurementPack.js";
-import { removeBrandLogoFile, resolveLogoPublicUrl, saveBrandLogo } from "../../lib/brandStorage.js";
+import {
+  BRAND_LOGO_MAX_BYTES,
+  removeBrandLogoFile,
+  resolveLogoPublicUrl,
+  saveBrandLogo
+} from "../../lib/brandStorage.js";
 import {
   buildPartnershipLabel,
   computeLicenseEndsAt,
@@ -62,7 +67,7 @@ const upload = multer({
 
 const logoUpload = multer({
   storage: multer.memoryStorage(),
-  limits: { fileSize: 2 * 1024 * 1024 }
+  limits: { fileSize: BRAND_LOGO_MAX_BYTES }
 });
 
 function brandIdForCommercialRequest(req: import("express").Request): string | null {

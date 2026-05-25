@@ -3,7 +3,7 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { toPublicAssetUrl } from "./publicAssetUrl.js";
 
-const MAX_BYTES = 2 * 1024 * 1024;
+export const BRAND_LOGO_MAX_BYTES = 15 * 1024 * 1024;
 const MIN_DIMENSION = 512;
 
 const apiRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "../..");
@@ -32,8 +32,8 @@ export async function saveBrandLogo(brandId: string, file: LogoUpload): Promise<
   if (file.mimetype !== "image/png") {
     throw new Error("Logo must be a PNG file.");
   }
-  if (file.size > MAX_BYTES) {
-    throw new Error("Logo must be 2MB or smaller.");
+  if (file.size > BRAND_LOGO_MAX_BYTES) {
+    throw new Error("Logo must be 15MB or smaller.");
   }
 
   const dims = await readPngDimensions(file.buffer);

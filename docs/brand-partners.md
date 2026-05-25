@@ -66,7 +66,7 @@ Obtain written brand consent before enabling public logos (trademark policy).
 ## Admin workflow
 
 1. Approve brand → **ACTIVE** (Approvals).
-2. **Logo** — brand uploads in **Brand portal → Settings → Brand logo** (PNG, min 512×512, max 2MB), or admin uploads in **Admin → Dashboard → Brands**.
+2. **Logo** — brand uploads in **Brand portal → Settings → Brand logo** (PNG, min 512×512, max 15MB), or admin uploads in **Admin → Dashboard → Brands**.
 3. Set **public slug**, description, website, brand color.
 4. Enable **Public partner profile** and/or **Featured on homepage**.
 5. Set **Homepage order** to `0` (or `1`) for your flagship partner — lower numbers appear first on the homepage strip and `/partners`.

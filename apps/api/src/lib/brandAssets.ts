@@ -1,4 +1,5 @@
 export {
+  BRAND_LOGO_MAX_BYTES,
   brandUploadsDir,
   brandLogoAbsolutePath,
   removeBrandLogoFile,

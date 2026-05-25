@@ -159,7 +159,7 @@ export function BrandsClient(): JSX.Element {
     <>
       <h1>Brand Partners</h1>
       <p style={{ marginTop: 0, color: "#4a5f7a" }}>
-        Upload logos and feature verified ACTIVE brands on the public homepage. PNG, 512×512 minimum, 2MB max.
+        Upload logos and feature verified ACTIVE brands on the public homepage. PNG, 512×512 minimum, 15MB max.
       </p>
 
       <div className="card" style={{ marginBottom: "1rem", display: "grid", gap: "0.5rem", gridTemplateColumns: "1fr 1fr auto" }}>

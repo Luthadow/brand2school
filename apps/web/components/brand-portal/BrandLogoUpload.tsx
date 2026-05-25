@@ -70,7 +70,7 @@ export function BrandLogoUpload({ logoUrl, brandName, onUpdated }: Props): JSX.E
         )}
       </div>
       <label className="bp-muted" style={{ display: "block" }}>
-        Upload logo (PNG, min 512×512, max 2MB)
+        Upload logo (PNG, min 512×512, max 15MB)
         <input
           type="file"
           accept="image/png"

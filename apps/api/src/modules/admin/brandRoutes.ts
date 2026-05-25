@@ -2,13 +2,18 @@ import { Router } from "express";
 import multer from "multer";
 import { z } from "zod";
 import { prisma } from "../../lib/prisma.js";
-import { removeBrandLogoFile, resolveLogoPublicUrl, saveBrandLogo } from "../../lib/brandAssets.js";
+import {
+  BRAND_LOGO_MAX_BYTES,
+  removeBrandLogoFile,
+  resolveLogoPublicUrl,
+  saveBrandLogo
+} from "../../lib/brandAssets.js";
 import { requireRole } from "../../middleware/auth.js";
 import { applyManualBrandVerificationPatch } from "../platform/syncBrandVerification.js";
 
 const upload = multer({
   storage: multer.memoryStorage(),
-  limits: { fileSize: 2 * 1024 * 1024 }
+  limits: { fileSize: BRAND_LOGO_MAX_BYTES }
 });
 
 const listQuerySchema = z.object({
