@@ -1,4 +1,5 @@
 import { emptyBrandPortal } from "../../lib/emptyPayloads.js";
+import { resolveLogoPublicUrl } from "../../lib/brandStorage.js";
 import { prisma } from "../../lib/prisma.js";
 import { getBrandAnalytics, type BrandAnalytics } from "./getBrandAnalytics.js";
 import { normalizeProvinceCode, SA_PROVINCES } from "./provinces.js";
@@ -85,7 +86,7 @@ export type BrandNotification = {
 };
 
 export type BrandPortal = {
-  brand: { id: string; name: string };
+  brand: { id: string; name: string; logoUrl: string | null };
   overview: {
     totalSubmissions: number;
     schoolsSupported: number;
@@ -135,6 +136,7 @@ export async function getBrandPortal(campaignId?: string, brandId?: string): Pro
           select: {
             id: true,
             name: true,
+            logoUrl: true,
             subscriptionStatus: true,
             activationFeePaid: true,
             recurringAmountZar: true
@@ -308,7 +310,13 @@ export async function getBrandPortal(campaignId?: string, brandId?: string): Pro
     });
 
     return {
-      brand: brand ?? { id: brandId ?? "national", name: analytics.campaigns[0]?.brandName ?? "Brand Partner" },
+      brand: brand
+        ? { id: brand.id, name: brand.name, logoUrl: resolveLogoPublicUrl(brand.logoUrl) }
+        : {
+            id: brandId ?? "national",
+            name: analytics.campaigns[0]?.brandName ?? "Brand Partner",
+            logoUrl: null
+          },
       overview: {
         totalSubmissions: analytics.summary.totalSubmissions,
         schoolsSupported: analytics.summary.schoolsReached,

@@ -1,26 +1,35 @@
 "use client";
 
-import { Shield, Users } from "lucide-react";
+import { useState } from "react";
+import { ImageIcon, Shield, Users } from "lucide-react";
 import { useBrandPortal } from "../BrandPortalContext";
 import { BrandPageHeader } from "../BrandPageHeader";
+import { BrandLogoUpload } from "../BrandLogoUpload";
 
 export function BrandSettingsPage(): JSX.Element {
-  const { brand, analytics } = useBrandPortal();
+  const portal = useBrandPortal();
+  const [logoUrl, setLogoUrl] = useState(portal.brand.logoUrl);
 
   return (
     <div className="bp-page">
       <BrandPageHeader
         eyebrow="Admin & Security"
         title="Settings"
-        description="User roles, fraud detection, code validation, and audit logging for enterprise partners."
+        description="Brand profile, logo, user roles, and security for enterprise partners."
       />
+      <article className="bp-panel" style={{ marginBottom: "1rem" }}>
+        <h2>
+          <ImageIcon size={20} /> Brand logo
+        </h2>
+        <BrandLogoUpload logoUrl={logoUrl} brandName={portal.brand.name} onUpdated={setLogoUrl} />
+      </article>
       <div className="bp-two-col">
         <article className="bp-panel">
           <h2>
             <Users size={20} /> Organisation
           </h2>
           <p>
-            <strong>{brand.name}</strong>
+            <strong>{portal.brand.name}</strong>
           </p>
           <p className="bp-muted">Brand partner · role-based access · session security enabled</p>
         </article>
@@ -29,7 +38,7 @@ export function BrandSettingsPage(): JSX.Element {
             <Shield size={20} /> Trust layer
           </h2>
           <ul>
-            {analytics.trust.protections.map((p) => (
+            {portal.analytics.trust.protections.map((p) => (
               <li key={p}>{p}</li>
             ))}
           </ul>

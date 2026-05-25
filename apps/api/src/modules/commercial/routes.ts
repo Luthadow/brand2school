@@ -47,6 +47,7 @@ import {
   processSubscriptionGovernance
 } from "./subscriptionGovernance.js";
 import { buildProcurementPackZip, procurementPackFilename } from "./procurementPack/buildProcurementPack.js";
+import { removeBrandLogoFile, resolveLogoPublicUrl, saveBrandLogo } from "../../lib/brandStorage.js";
 import {
   buildPartnershipLabel,
   computeLicenseEndsAt,
@@ -58,6 +59,17 @@ const upload = multer({
   storage: multer.memoryStorage(),
   limits: { fileSize: 8 * 1024 * 1024 }
 });
+
+const logoUpload = multer({
+  storage: multer.memoryStorage(),
+  limits: { fileSize: 2 * 1024 * 1024 }
+});
+
+function brandIdForCommercialRequest(req: import("express").Request): string | null {
+  if (req.user?.role === "BRAND_ADMIN") return req.user.brandId ?? null;
+  const q = req.query.brandId;
+  return typeof q === "string" && q.length > 0 ? q : null;
+}
 
 const contactPersonSchema = z.object({
   name: z.string().min(2),
@@ -303,6 +315,62 @@ commercialPublicRouter.post("/brand-applications", async (req, res) => {
 
 export const commercialBrandRouter = Router();
 commercialBrandRouter.use(requireAuth, requireRole(["BRAND_ADMIN", "SUPER_ADMIN", "ADMIN_STAFF"]));
+
+commercialBrandRouter.post("/logo", logoUpload.single("logo"), async (req, res) => {
+  const brandId = brandIdForCommercialRequest(req);
+  if (!brandId) {
+    res.status(400).json({ message: "Brand context required." });
+    return;
+  }
+
+  const file = req.file;
+  if (!file) {
+    res.status(400).json({ message: "Missing logo file (field name: logo)." });
+    return;
+  }
+
+  const brand = await prisma.brand.findUnique({ where: { id: brandId } });
+  if (!brand) {
+    res.status(404).json({ message: "Brand not found." });
+    return;
+  }
+
+  try {
+    const storedPath = await saveBrandLogo(brand.id, file);
+    const updated = await prisma.brand.update({
+      where: { id: brand.id },
+      data: { logoUrl: storedPath }
+    });
+    res.json({
+      logoUrl: resolveLogoPublicUrl(updated.logoUrl),
+      message: "Logo uploaded. It may appear on the homepage after admin enables featuring."
+    });
+  } catch (err) {
+    const message = err instanceof Error ? err.message : "Logo upload failed.";
+    res.status(400).json({ message });
+  }
+});
+
+commercialBrandRouter.delete("/logo", async (req, res) => {
+  const brandId = brandIdForCommercialRequest(req);
+  if (!brandId) {
+    res.status(400).json({ message: "Brand context required." });
+    return;
+  }
+
+  const brand = await prisma.brand.findUnique({ where: { id: brandId } });
+  if (!brand) {
+    res.status(404).json({ message: "Brand not found." });
+    return;
+  }
+
+  await removeBrandLogoFile(brand.id, brand.logoUrl);
+  const updated = await prisma.brand.update({
+    where: { id: brand.id },
+    data: { logoUrl: null, featuredOnHome: false }
+  });
+  res.json({ logoUrl: resolveLogoPublicUrl(updated.logoUrl), message: "Logo removed." });
+});
 
 commercialBrandRouter.get("/onboarding", async (req, res) => {
   const brandId = req.user?.role === "BRAND_ADMIN" ? req.user.brandId : (req.query.brandId as string | undefined);

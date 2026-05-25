@@ -46,7 +46,7 @@ export type ImpactPipelineItem = {
 };
 
 export type BrandPortal = {
-  brand: { id: string; name: string };
+  brand: { id: string; name: string; logoUrl: string | null };
   overview: {
     totalSubmissions: number;
     schoolsSupported: number;
