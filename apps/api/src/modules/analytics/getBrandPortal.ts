@@ -1,5 +1,5 @@
 import { emptyBrandPortal } from "../../lib/emptyPayloads.js";
-import { brandLogoWebPath, hasBrandLogo } from "../../lib/brandLogo.js";
+import { hasBrandLogo } from "../../lib/brandLogo.js";
 import { prisma } from "../../lib/prisma.js";
 import { getBrandAnalytics, type BrandAnalytics } from "./getBrandAnalytics.js";
 import { normalizeProvinceCode, SA_PROVINCES } from "./provinces.js";
@@ -316,7 +316,9 @@ export async function getBrandPortal(campaignId?: string, brandId?: string): Pro
             id: brand.id,
             name: brand.name,
             slug: brand.slug,
-            logoUrl: hasBrandLogo(brand.logoUrl) ? brandLogoWebPath(brand.slug) : null
+            logoUrl: hasBrandLogo(brand.logoUrl)
+              ? `/api/public/brand-logo/${encodeURIComponent(brand.slug)}`
+              : null
           }
         : {
             id: brandId ?? "national",

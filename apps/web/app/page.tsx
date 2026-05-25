@@ -287,8 +287,8 @@ export default async function HomePage(): Promise<JSX.Element> {
     fetchPlatformPartners(),
     fetchPlatformCredibility()
   ]);
-  const { withAbsoluteBrandLogoUrls } = await import("../lib/brandLogoSrc");
-  const partners = withAbsoluteBrandLogoUrls(partnersRaw);
+  const { withWebBrandLogoUrls } = await import("../lib/brandLogoSrc");
+  const partners = withWebBrandLogoUrls(partnersRaw);
   const live = liveInitial ?? emptyPlatformLive();
   const credibility = credibilityInitial ?? emptyPlatformCredibility();
 

@@ -24,7 +24,7 @@ export async function GET(
   return new NextResponse(buffer, {
     status: 200,
     headers: {
-      "Content-Type": "image/png",
+      "Content-Type": response.headers.get("content-type") ?? "image/png",
       "Cache-Control": "public, max-age=3600"
     }
   });

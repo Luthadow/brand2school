@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { brandCsrfHeaders } from "../../lib/brandClientFetch";
-import { brandLogoPreviewUrl } from "../../lib/brandLogoSrc";
+import { brandLogoDisplayPath } from "../../lib/brandLogoSrc";
 
 type Props = {
   brandSlug: string;
@@ -18,7 +18,7 @@ export function BrandLogoUpload({ brandSlug, logoUrl, brandName, onUpdated }: Pr
   const [previewRev, setPreviewRev] = useState(0);
   const [previewBroken, setPreviewBroken] = useState(false);
 
-  const previewSrc = logoUrl ? brandLogoPreviewUrl(brandSlug, previewRev) : null;
+  const previewSrc = logoUrl ? brandLogoDisplayPath(brandSlug, previewRev) : null;
 
   const upload = async (file: File): Promise<void> => {
     setLoading(true);
@@ -38,7 +38,7 @@ export function BrandLogoUpload({ brandSlug, logoUrl, brandName, onUpdated }: Pr
         setError(data.message ?? "Upload failed.");
         return;
       }
-      onUpdated(data.logoUrl ?? brandLogoPreviewUrl(brandSlug));
+      onUpdated(data.logoUrl ?? brandLogoDisplayPath(brandSlug));
       setPreviewRev(Date.now());
       setMessage(data.message ?? "Logo uploaded.");
     } finally {

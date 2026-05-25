@@ -1,11 +1,11 @@
 import Link from "next/link";
 import type { Route } from "next";
-import { withAbsoluteBrandLogoUrls } from "../../lib/brandLogoSrc";
+import { withWebBrandLogoUrls } from "../../lib/brandLogoSrc";
 import { fetchPartnerDirectory } from "../../lib/platformPublic";
 import { formatCount } from "../../lib/formatCount";
 
 export default async function PartnersDirectoryPage(): Promise<JSX.Element> {
-  const partners = withAbsoluteBrandLogoUrls(await fetchPartnerDirectory());
+  const partners = withWebBrandLogoUrls(await fetchPartnerDirectory());
 
   return (
     <div className="lp pp-page">

@@ -1,27 +1,25 @@
 import type { PlatformPartner } from "./platformPartners";
 
-/** Ensure partner logos use an absolute API URL (works with next/image and plain img). */
-export function withAbsoluteBrandLogoUrls<T extends { slug: string; logoUrl: string | null }>(
-  partners: T[]
-): T[] {
-  const apiBase = (process.env.NEXT_PUBLIC_API_BASE_URL ?? "http://localhost:4000").replace(/\/$/, "");
-  return partners.map((p) => {
-    if (!p.logoUrl) return p;
-    if (p.logoUrl.startsWith("http://") || p.logoUrl.startsWith("https://")) return p;
-    if (p.logoUrl.startsWith("/api/public/")) {
-      return { ...p, logoUrl: `${apiBase}/api/v1/platform/brand-logo/${encodeURIComponent(p.slug)}` };
-    }
-    if (p.logoUrl.startsWith("/api/v1/")) {
-      return { ...p, logoUrl: `${apiBase}${p.logoUrl}` };
-    }
-    return p;
-  });
+/** Same-origin logo URL (proxied to API at runtime — works in client + server, no build-time API env). */
+export function brandLogoDisplayPath(slug: string, cacheRev = 0): string {
+  const qs = cacheRev > 0 ? `?rev=${cacheRev}` : "";
+  return `/api/public/brand-logo/${encodeURIComponent(slug)}${qs}`;
 }
 
-export function brandLogoPreviewUrl(slug: string, cacheRev = 0): string {
-  const apiBase = (process.env.NEXT_PUBLIC_API_BASE_URL ?? "http://localhost:4000").replace(/\/$/, "");
-  const qs = cacheRev > 0 ? `?rev=${cacheRev}` : "";
-  return `${apiBase}/api/v1/platform/brand-logo/${encodeURIComponent(slug)}${qs}`;
+/** Map API partner rows to web-app logo paths (never localhost from missing NEXT_PUBLIC_* at build). */
+export function withWebBrandLogoUrls<T extends { slug: string; logoUrl: string | null }>(
+  partners: T[]
+): T[] {
+  return partners.map((p) => ({
+    ...p,
+    logoUrl: p.logoUrl ? brandLogoDisplayPath(p.slug) : null
+  }));
 }
+
+/** @deprecated Use brandLogoDisplayPath */
+export const brandLogoPreviewUrl = brandLogoDisplayPath;
+
+/** @deprecated Use withWebBrandLogoUrls */
+export const withAbsoluteBrandLogoUrls = withWebBrandLogoUrls;
 
 export type { PlatformPartner };
