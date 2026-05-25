@@ -1,5 +1,6 @@
 import { z } from "zod";
 import dotenv from "dotenv";
+import { envBoolean } from "./parseEnvBoolean.js";
 
 dotenv.config();
 
@@ -16,9 +17,11 @@ const envSchema = z.object({
   MAIL_FROM: z.string().email().default("noreply@brand2school.co.za"),
   SMTP_HOST: z.string().optional(),
   SMTP_PORT: z.coerce.number().default(587),
-  SMTP_SECURE: z.coerce.boolean().default(false),
+  SMTP_SECURE: envBoolean(false),
   SMTP_USER: z.string().optional(),
   SMTP_PASS: z.string().optional(),
+  /** HTTPS email API — works on Railway Hobby (SMTP ports are blocked there). */
+  RESEND_API_KEY: z.string().optional(),
   INTERNAL_API_KEY: z.string().min(16).optional(),
   WHATSAPP_APP_SECRET: z.string().min(8).optional(),
   WHATSAPP_WEBHOOK_VERIFY_TOKEN: z.string().min(8).optional(),
@@ -27,7 +30,7 @@ const envSchema = z.object({
   LOG_LEVEL: z.enum(["fatal", "error", "warn", "info", "debug", "trace"]).default("info"),
   PASSWORD_RESET_EXPIRES_MINUTES: z.coerce.number().int().min(15).max(1440).default(30),
   PASSWORD_RESET_MAX_PER_HOUR: z.coerce.number().int().min(1).max(20).default(5),
-  NOTIFICATION_DELIVERY: z.enum(["sync", "queue"]).default("queue"),
+  NOTIFICATION_DELIVERY: z.enum(["sync", "queue"]).default("sync"),
   NOTIFICATION_BATCH_SIZE: z.coerce.number().int().min(1).max(100).default(25),
   NOTIFICATION_POLL_MS: z.coerce.number().int().min(500).default(3000),
   /** Comma-separated extra admin inboxes for registration alerts (optional). */
@@ -62,9 +65,16 @@ export function productionReadinessChecks(): ProductionCheck[] {
       detail: "Inbound WhatsApp webhook requires WHATSAPP_APP_SECRET and WHATSAPP_WEBHOOK_VERIFY_TOKEN."
     },
     {
-      key: "SMTP_HOST",
-      ok: Boolean(env.SMTP_HOST && env.SMTP_USER && env.SMTP_PASS),
-      detail: "Transactional email requires SMTP_HOST, SMTP_USER, and SMTP_PASS (noreply@brand2school.co.za)."
+      key: "EMAIL_DELIVERY",
+      ok: Boolean(env.RESEND_API_KEY?.trim() || (env.SMTP_HOST && env.SMTP_USER && env.SMTP_PASS)),
+      detail:
+        "Set RESEND_API_KEY (HTTPS, works on Railway Hobby) or SMTP_HOST + SMTP_USER + SMTP_PASS (Railway Pro+ only for outbound SMTP)."
+    },
+    {
+      key: "NOTIFICATION_DELIVERY",
+      ok: env.NOTIFICATION_DELIVERY === "sync",
+      detail:
+        "NOTIFICATION_DELIVERY=queue requires worker-notifications with the same SMTP_* vars, or set NOTIFICATION_DELIVERY=sync on the API."
     },
     {
       key: "INTERNAL_API_KEY",

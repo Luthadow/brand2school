@@ -1,5 +1,6 @@
-import nodemailer from "nodemailer";
+import type nodemailer from "nodemailer";
 import { env } from "../config/env.js";
+import { deliverMail } from "./mailDelivery.js";
 import { CONTACT } from "./contacts.js";
 import {
   buildBrandRegistrationGuideHtml,
@@ -69,17 +70,6 @@ type SchoolConfirmationInput = {
   loginUrl: string;
 };
 
-function transporter() {
-  if (!env.SMTP_HOST) return null;
-  return nodemailer.createTransport({
-    host: env.SMTP_HOST,
-    port: env.SMTP_PORT,
-    secure: env.SMTP_SECURE,
-    auth: env.SMTP_USER && env.SMTP_PASS ? { user: env.SMTP_USER, pass: env.SMTP_PASS } : undefined,
-    tls: { minVersion: "TLSv1.2" }
-  });
-}
-
 export async function sendBrandedMail(input: {
   to: string;
   subject: string;
@@ -88,30 +78,12 @@ export async function sendBrandedMail(input: {
   attachments?: nodemailer.SendMailOptions["attachments"];
   replyTo?: string;
 }): Promise<void> {
-  const tx = transporter();
-  if (!tx) {
-    if (env.NODE_ENV === "production") {
-      throw new Error(
-        "SMTP is not configured on the API service. Set SMTP_HOST, SMTP_USER, and SMTP_PASS on Railway."
-      );
-    }
-    console.info("[mail:dev]", input.subject);
-    console.info(`To: ${input.to}`);
-    if (input.replyTo) console.info(`Reply-To: ${input.replyTo}`);
-    if (input.attachments?.length) {
-      console.info(`Attachments: ${input.attachments.map((a) => a.filename).join(", ")}`);
-    }
-    console.info(input.text);
-    return;
-  }
-
-  await tx.sendMail({
-    from: `"Brand2School" <${env.MAIL_FROM}>`,
+  await deliverMail({
     to: input.to,
-    replyTo: input.replyTo,
     subject: input.subject,
     text: input.text,
     html: input.html,
+    replyTo: input.replyTo,
     attachments: input.attachments
   });
 }

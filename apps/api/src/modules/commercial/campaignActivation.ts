@@ -124,20 +124,25 @@ export function evaluateActivationGate(campaign: CampaignWithCommercial, codeCou
 
   const setupPaymentVerified = activationFeeVerified;
 
-  const codesApproved = Boolean(campaign.codesApprovedAt) && codeCount > 0;
-  if (!campaign.codesApprovedAt) {
-    blockers.push("Product codes must be uploaded/generated and approved by admin.");
-  } else if (codeCount === 0) {
-    blockers.push("At least one product code must exist for this campaign.");
+  const founderPass = Boolean(campaign.brand.founderExempt);
+
+  const codesApproved = founderPass || (Boolean(campaign.codesApprovedAt) && codeCount > 0);
+  if (!founderPass) {
+    if (!campaign.codesApprovedAt) {
+      blockers.push("Product codes must be uploaded/generated and approved by admin.");
+    } else if (codeCount === 0) {
+      blockers.push("At least one product code must exist for this campaign.");
+    }
   }
 
-  const rulesConfigured = Boolean(campaign.rulesConfiguredAt) && campaignRulesConfigured(campaign);
-  if (!rulesConfigured) {
+  const rulesConfigured =
+    founderPass || (Boolean(campaign.rulesConfiguredAt) && campaignRulesConfigured(campaign));
+  if (!rulesConfigured && !founderPass) {
     blockers.push("Campaign eligibility rules (scope, provinces/districts/schools, budget) must be configured.");
   }
 
-  const launchApproved = Boolean(campaign.launchApprovedAt);
-  if (!launchApproved) {
+  const launchApproved = founderPass || Boolean(campaign.launchApprovedAt);
+  if (!launchApproved && !founderPass) {
     blockers.push("Admin launch approval is required.");
   }
 

@@ -44,11 +44,15 @@ export async function getCampaignCommercialBlockReason(campaignId: string): Prom
   if (!campaign.paymentVerifiedAt && !campaign.brand.activationFeePaid) {
     return "Activation fee has not been verified.";
   }
-  if (!campaign.codesApprovedAt || campaign._count.codes === 0) {
-    return "Campaign codes are not yet approved for public use.";
-  }
-  if (!campaign.launchApprovedAt) {
-    return "Campaign launch has not been approved.";
+  if (!campaign.brand.founderExempt) {
+    if (!campaign.codesApprovedAt || campaign._count.codes === 0) {
+      return "Campaign codes are not yet approved for public use.";
+    }
+    if (!campaign.launchApprovedAt) {
+      return "Campaign launch has not been approved.";
+    }
+  } else if (campaign._count.codes === 0) {
+    return "Campaign codes are not yet available.";
   }
   return null;
 }

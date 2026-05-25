@@ -53,7 +53,8 @@
     "brand:backfill-verification": "node scripts/backfill-brand-verification.mjs",
     "railway:bootstrap-admin": "node scripts/remote-bootstrap-admin.mjs",
     "railway:sync-env": "node scripts/sync-railway-api-env.mjs",
-    "test:smtp": "node scripts/test-smtp.mjs"
+    "test:smtp": "node scripts/test-smtp.mjs",
+    "verify:smtp:remote": "node scripts/remote-verify-smtp.mjs"
   },
   "engines": {
     "node": ">=20.0.0"

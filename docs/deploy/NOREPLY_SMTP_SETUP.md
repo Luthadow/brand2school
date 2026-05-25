@@ -1,6 +1,10 @@
-# noreply@brand2school.co.za — SMTP setup
+# noreply@brand2school.co.za — email setup
 
-The platform sends **all automated email** from `noreply@brand2school.co.za` only (registration, password reset, brand guides, ESG PDFs). Human inboxes (`info@`, `schools@`, `brands@`) are **not** used for SMTP.
+The platform sends **all automated email** from `noreply@brand2school.co.za` only (registration, password reset, brand guides, ESG PDFs). Human inboxes (`info@`, `schools@`, `brands@`) are **not** used for sending.
+
+## Railway Hobby: SMTP variables are not enough
+
+If SMTP_* are set on Railway but mail still fails, read **[RAILWAY_EMAIL.md](./RAILWAY_EMAIL.md)** — Hobby plans **block outbound SMTP**. Use **RESEND_API_KEY** or upgrade to **Pro** and redeploy.
 
 ## 1. cPanel mailbox (Register Domain)
 
@@ -79,9 +83,20 @@ You should see `SMTP connection verified` and receive the test email.
 
 After Railway redeploy:
 
-1. Submit the **brand application** on https://www.brand2school.co.za/for-brands#contact — a registration guide email should arrive from noreply@.
-2. Use **Forgot password** on school or brand login — reset email from noreply@.
-3. Check API logs on Railway for `[mail:dev]` — if you still see that prefix, SMTP is **not** configured (emails are logged only, not sent).
+1. Open **https://api.brand2school.co.za/health/email** — expect HTTP 200 with `"configured": true` and `"verified": true`. HTTP 503 means SMTP vars are missing or the mailbox password is wrong.
+2. Or run from your machine (uses `INTERNAL_API_KEY` on the API):
+
+```bash
+B2S_API_URL=https://api.brand2school.co.za \
+B2S_INTERNAL_API_KEY=your_key \
+npm run verify:smtp:remote
+
+npm run verify:smtp:remote -- --send-to your@email.com
+```
+
+3. Submit the **brand application** on https://www.brand2school.co.za/for-brands#contact — a registration guide email should arrive from noreply@.
+4. Use **Forgot password** on school or brand login — reset email from noreply@.
+5. Check API **Deploy logs** on startup for `SMTP connection verified` or `SMTP verify failed` / `SMTP not configured`.
 
 ## 7. DNS (deliverability)
 

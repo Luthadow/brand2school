@@ -33,6 +33,7 @@ import { bootstrapFounderBrand } from "../../bootstrap/bootstrapFounderBrand.js"
 import { backfillBrandVerification } from "../../bootstrap/backfillBrandVerification.js";
 import { purgeDemoData } from "../../bootstrap/purgeDemoData.js";
 import { readBrandLogoBuffer } from "../../lib/brandLogo.js";
+import { runMailVerifyAndOptionalSend } from "../../lib/healthEmail.js";
 
 const querySchema = z.object({
   role: z
@@ -260,6 +261,31 @@ platformRouter.get("/overview", async (req, res) => {
       openFraudFlags
     }
   });
+});
+
+const verifySmtpBodySchema = z.object({
+  sendTo: z.string().email().optional()
+});
+
+/** Verify noreply SMTP on the API (optional test send). Requires INTERNAL_API_KEY. */
+platformRouter.post("/verify-smtp", requireInternalApiKey, async (req, res) => {
+  const parsed = verifySmtpBodySchema.safeParse(req.body ?? {});
+  if (!parsed.success) {
+    res.status(400).json({ ok: false, message: "Invalid body.", issues: parsed.error.flatten() });
+    return;
+  }
+
+  try {
+    const result = await runMailVerifyAndOptionalSend(parsed.data.sendTo);
+    if (!result.verified) {
+      res.status(503).json({ ok: false, ...result });
+      return;
+    }
+    res.json({ ok: true, ...result });
+  } catch (err) {
+    const message = err instanceof Error ? err.message : "SMTP verify failed.";
+    res.status(500).json({ ok: false, message });
+  }
 });
 
 /** Create or update super admin only (requires INTERNAL_API_KEY). */

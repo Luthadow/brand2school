@@ -20,6 +20,7 @@ import { commercialBrandRouter, commercialPublicRouter } from "./modules/commerc
 import { commercialUploadsDir } from "./lib/commercialStorage.js";
 import { schoolVerificationUploadsDir } from "./lib/schoolVerificationStorage.js";
 import { readinessCheck } from "./bootstrap/readiness.js";
+import { getEmailHealthStatus } from "./lib/healthEmail.js";
 import { logger } from "./lib/logger.js";
 
 export const app = express();
@@ -45,6 +46,13 @@ app.get("/health", (_req, res) => {
 app.get("/health/ready", async (_req, res) => {
   const result = await readinessCheck();
   res.status(result.ok ? 200 : 503).json(result);
+});
+
+/** SMTP configuration status for noreply@ mail (does not expose secrets). */
+app.get("/health/email", async (_req, res) => {
+  const status = await getEmailHealthStatus();
+  const ok = status.configured && status.verified === true;
+  res.status(ok ? 200 : 503).json(status);
 });
 
 app.use(

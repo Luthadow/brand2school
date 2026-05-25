@@ -9,6 +9,7 @@ import {
 } from "../modules/commercial/transformationLicense.js";
 import { syncCampaignCommercialStatus } from "../modules/commercial/campaignActivation.js";
 import { ensureBrandVerificationCode } from "../lib/brandVerificationCode.js";
+import { ensureFounderCampaignParticipationReady } from "./activateFounderCampaign.js";
 
 /** Flagship founder water brand — R2kay Liquid Freeze */
 export const FOUNDER_BRAND_NAME = "R2kay Liquid Freeze";
@@ -212,6 +213,7 @@ export async function bootstrapFounderBrand(
 
   if (campaignId) {
     await syncCampaignCommercialStatus(campaignId);
+    await ensureFounderCampaignParticipationReady(prisma, brandId, campaignId);
   }
 
   let brandAdminCreated = false;
