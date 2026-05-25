@@ -1,5 +1,6 @@
 import { env, logProductionReadinessWarnings } from "./config/env.js";
 import { app } from "./app.js";
+import { ensureFounderBrandIfMissing } from "./bootstrap/ensureFounderBrand.js";
 import { ensureSuperAdminIfMissing } from "./bootstrap/ensureSuperAdmin.js";
 import { runPendingMigrations } from "./bootstrap/runMigrations.js";
 import { logger } from "./lib/logger.js";
@@ -24,6 +25,7 @@ app.listen(port, "0.0.0.0", () => {
   }
 
   void ensureSuperAdminIfMissing();
+  void ensureFounderBrandIfMissing();
 
   if (env.SMTP_HOST && env.SMTP_USER && env.SMTP_PASS) {
     void processDueNotificationJobs(50)

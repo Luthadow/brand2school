@@ -86,6 +86,16 @@ npm run railway:bootstrap-founder
 
 Requires `B2S_INTERNAL_API_KEY` and `B2S_API_URL`. Upload the logo in **admin → Brands** for the homepage strip.
 
+### R2kay brand portal login
+
+| | |
+|--|--|
+| **URL** | `https://brand2school.co.za/brand/login` |
+| **Email** | `siphokwape@gmail.com` (not `siphokwapwe` — no extra `p`) |
+| **Password** | `ChangeMe123!` (until you change it) |
+
+The account is created when `npm run railway:bootstrap-founder` runs, or automatically on API startup if that user is still missing. If login says **Invalid credentials**, the user row does not exist yet — run the bootstrap command above, then try again.
+
 ## Public API
 
 | Endpoint | Purpose |
