@@ -1,6 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-
-const apiBase = (): string => process.env.API_URL ?? process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:4000";
+import { serverApiBaseUrl } from "../../../../lib/serverApiBase";
 
 const ALLOWED_PACKAGES = new Set([
   "SCHOOL_TRANSFORMATION",
@@ -15,13 +14,24 @@ export async function GET(req: NextRequest): Promise<NextResponse> {
   const qs =
     pkg && ALLOWED_PACKAGES.has(pkg) ? `?package=${encodeURIComponent(pkg)}` : "";
 
-  const response = await fetch(`${apiBase()}/api/v1/commercial/procurement-pack${qs}`, {
+  const response = await fetch(`${serverApiBaseUrl()}/api/v1/commercial/procurement-pack${qs}`, {
     cache: "no-store"
   });
 
   if (!response.ok) {
-    const data = await response.json().catch(() => ({ message: "Download failed." }));
+    const data = await response.json().catch(() => ({
+      message:
+        response.status === 502 || response.status === 503
+          ? "Partnership pack service is temporarily unavailable. Try again shortly."
+          : "Download failed."
+    }));
     return NextResponse.json(data, { status: response.status });
+  }
+
+  const contentType = response.headers.get("content-type") ?? "";
+  if (!contentType.includes("zip") && !contentType.includes("octet-stream")) {
+    const data = await response.json().catch(() => ({ message: "Unexpected response from API." }));
+    return NextResponse.json(data, { status: 502 });
   }
 
   const buffer = await response.arrayBuffer();
