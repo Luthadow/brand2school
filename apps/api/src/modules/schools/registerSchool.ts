@@ -172,8 +172,8 @@ export async function registerSchool(input: Omit<SchoolRegisterInput, "confirmPa
       },
       whatsapp: {
         menuCommand: "MENU",
-        submitCommand: "SUBMIT | School Name | District | campaign-slug | PRODUCT_CODE",
-        progressCommand: "PROGRESS | School Name | District",
+        submitCommand: "Reply 1 → select province → district → school → campaign → product code",
+        progressCommand: "Reply 2 → select province → district → school",
         linkedPhone: whatsappPhone
       },
       portal: { loginUrl }

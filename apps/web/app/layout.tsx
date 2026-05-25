@@ -55,6 +55,7 @@ export default function RootLayout({ children }: { children: ReactNode }): JSX.E
             { href: "/impact", label: "Impact" },
             { href: "/#for-schools", label: "For Schools" },
             { href: "/movement", label: "The Movement" },
+            { href: "/submit", label: "Submit Code" },
             { href: "/schools/register", label: "Register School" },
             { href: "/school/login", label: "School Login" },
             { href: "/school/dashboard", label: "School Dashboard" },

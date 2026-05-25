@@ -1,5 +1,34 @@
 # Brand partners (all phases)
 
+Full schema ↔ feature wiring: **[docs/schema-nervous-system.md](schema-nervous-system.md)**
+
+## Brand verification codes
+
+Each registered brand receives a unique public code: **`{PREFIX}-{YY}-{ID}`** (e.g. `R2K-26-84XQ19` for R2kay).
+
+| Verification status | Meaning |
+|---------------------|---------|
+| `PENDING` | Registered, awaiting approval |
+| `VERIFIED` | Admin-approved partner |
+| `FOUNDER_VERIFIED` | Founding partner — lifetime pass, no activation fee (`founderExempt`) |
+| `SUSPENDED` | Disabled |
+| `REJECTED` | Not approved |
+
+Public lookup: `https://brand2school.co.za/verify/R2K-26-84XQ19`  
+Brand profile: `https://brand2school.co.za/brand/r2kay-liquid-freeze` (QR, certificate download, impact stats).
+
+**Assets (API):**
+
+| Asset | URL |
+|-------|-----|
+| Verification QR (PNG) | `GET /api/v1/platform/verify/{code}/qr` |
+| Certificate (PDF) | `GET /api/v1/platform/verify/{code}/certificate` |
+| Brand profile QR | `GET /api/v1/platform/brands/{slug}/qr` |
+
+Codes are issued on **enterprise registration** and confirmed when the brand is approved **ACTIVE** in admin.
+
+After deploy, run once: `npm run brand:backfill-verification` (requires `B2S_INTERNAL_API_KEY`) to align legacy rows.
+
 ## Governance
 
 Public visibility requires **ACTIVE** status plus admin approval:
@@ -21,6 +50,22 @@ Obtain written brand consent before enabling public logos (trademark policy).
 2. **Dashboard → Brands** — upload PNG logo (512×512 min, 2MB max).
 3. Set **public slug**, description, website, brand color.
 4. Enable **Public partner profile** and/or **Featured on homepage**.
+5. Set **Homepage order** to `0` (or `1`) for your flagship partner — lower numbers appear first on the homepage strip and `/partners`.
+
+**R2kay Liquid Freeze** (flagship founder water partner): provision with founder pass (no R10,000 activation fee), homepage order `0`, and public profile enabled.
+
+```bash
+npm run db:migrate:deploy -w @brand2school/api
+FOUNDER_BRAND_ADMIN_EMAIL=siphokwape@gmail.com npm run brand:bootstrap-founder
+```
+
+Production (Railway, after API deploy + migrate):
+
+```bash
+npm run railway:bootstrap-founder
+```
+
+Requires `B2S_INTERNAL_API_KEY` and `B2S_API_URL`. Upload the logo in **admin → Brands** for the homepage strip.
 
 ## Public API
 
@@ -57,4 +102,4 @@ Obtain written brand consent before enabling public logos (trademark policy).
 npm run db:migrate -w @brand2school/api
 ```
 
-Applies `20260520120000_brand_partner_profile` and `20260520140000_brand_public_profiles`.
+Includes `20260525100000_brand_home_sort_order` (`homeSortOrder` on `Brand`).

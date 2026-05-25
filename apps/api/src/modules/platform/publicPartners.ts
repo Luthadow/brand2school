@@ -7,6 +7,12 @@ const publicBrandWhere = {
   OR: [{ publicProfileEnabled: true }, { featuredOnHome: true }]
 };
 
+const TRUSTED_VERIFICATION = new Set(["VERIFIED", "FOUNDER_VERIFIED"]);
+
+function platformAssetPath(path: string): string {
+  return `/api/v1/platform${path}`;
+}
+
 export type PlatformPartner = {
   slug: string;
   name: string;
@@ -32,6 +38,15 @@ export type PublicPartnerSummary = {
 
 export type PublicBrandProfile = PublicPartnerSummary & {
   verifiedPartner: boolean;
+  verificationCode: string | null;
+  verificationStatus: string | null;
+  founderVerified: boolean;
+  isTrusted: boolean;
+  verifyUrl: string | null;
+  brandProfileUrl: string;
+  certificatePdfUrl: string | null;
+  verifyQrImageUrl: string | null;
+  brandQrImageUrl: string | null;
   provinces: Array<{ code: string; name: string; schools: number; submissions: number; intensity: number }>;
   campaigns: Array<{
     id: string;
@@ -64,7 +79,7 @@ export async function getPlatformPartners(): Promise<PlatformPartner[]> {
       brandColor: true,
       featuredOnHome: true
     },
-    orderBy: { name: "asc" }
+    orderBy: [{ homeSortOrder: "asc" }, { name: "asc" }]
   });
 
   return brands
@@ -94,6 +109,7 @@ export async function listPublicPartners(): Promise<PublicPartnerSummary[]> {
       websiteUrl: true,
       brandColor: true,
       featuredOnHome: true,
+      homeSortOrder: true,
       publicProfileEnabled: true,
       description: true,
       campaigns: {
@@ -107,10 +123,10 @@ export async function listPublicPartners(): Promise<PublicPartnerSummary[]> {
         }
       }
     },
-    orderBy: [{ featuredOnHome: "desc" }, { name: "asc" }]
+    orderBy: [{ homeSortOrder: "asc" }, { featuredOnHome: "desc" }, { name: "asc" }]
   });
 
-  const summaries: PublicPartnerSummary[] = [];
+  const summaries: Array<PublicPartnerSummary & { homeSortOrder: number }> = [];
 
   for (const brand of brands) {
     const validSubmissions = brand.campaigns.reduce((sum, c) => sum + c.submissions.length, 0);
@@ -129,11 +145,18 @@ export async function listPublicPartners(): Promise<PublicPartnerSummary[]> {
       description: brand.description,
       validSubmissions,
       schoolsReached,
-      activeCampaigns: brand.campaigns.length
+      activeCampaigns: brand.campaigns.length,
+      homeSortOrder: brand.homeSortOrder
     });
   }
 
-  return summaries.sort((a, b) => b.validSubmissions - a.validSubmissions);
+  return summaries
+    .sort((a, b) => {
+      if (a.homeSortOrder !== b.homeSortOrder) return a.homeSortOrder - b.homeSortOrder;
+      if (b.validSubmissions !== a.validSubmissions) return b.validSubmissions - a.validSubmissions;
+      return a.name.localeCompare(b.name);
+    })
+    .map(({ homeSortOrder: _homeSortOrder, ...row }) => row);
 }
 
 async function getPartnerRank(brandId: string): Promise<number | null> {
@@ -263,6 +286,10 @@ export async function getPublicBrandBySlug(slug: string): Promise<PublicBrandPro
 
   const partnerRank = await getPartnerRank(brand.id);
 
+  const isTrusted = TRUSTED_VERIFICATION.has(brand.verificationStatus);
+  const verificationCode = brand.verificationCode;
+  const brandProfileUrl = `/brand/${brand.slug}`;
+
   return {
     slug: brand.slug,
     name: brand.name,
@@ -276,6 +303,20 @@ export async function getPublicBrandBySlug(slug: string): Promise<PublicBrandPro
     schoolsReached,
     activeCampaigns: campaigns.filter((c) => c.isActive).length,
     verifiedPartner: brand.status === "ACTIVE" && (brand.publicProfileEnabled || brand.featuredOnHome),
+    verificationCode,
+    verificationStatus: brand.verificationStatus,
+    founderVerified: brand.verificationStatus === "FOUNDER_VERIFIED" || brand.founderExempt,
+    isTrusted,
+    verifyUrl: verificationCode ? `/verify/${verificationCode}` : null,
+    brandProfileUrl,
+    certificatePdfUrl:
+      isTrusted && verificationCode
+        ? platformAssetPath(`/verify/${encodeURIComponent(verificationCode)}/certificate`)
+        : null,
+    verifyQrImageUrl: verificationCode
+      ? platformAssetPath(`/verify/${encodeURIComponent(verificationCode)}/qr`)
+      : null,
+    brandQrImageUrl: platformAssetPath(`/brands/${encodeURIComponent(brand.slug)}/qr`),
     provinces,
     campaigns,
     topSchools,

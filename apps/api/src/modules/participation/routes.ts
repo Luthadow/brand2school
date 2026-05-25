@@ -2,8 +2,13 @@ import { Router } from "express";
 import { z } from "zod";
 import { processParticipationSubmission } from "./services/processParticipationSubmission.js";
 import { participationRateLimit } from "../../middleware/rateLimit.js";
-import { findSchoolByNameAndDistrict } from "../schools/registerSchool.js";
 import { prisma } from "../../lib/prisma.js";
+import {
+  listDistrictsForProvince,
+  listParticipationProvinces,
+  listSchoolsForProvinceDistrict
+} from "./listParticipationSchoolOptions.js";
+import { resolveParticipationSchool } from "./resolveParticipationSchool.js";
 import {
   describeCampaignScope,
   evaluateCampaignEligibility,
@@ -14,22 +19,59 @@ import {
 } from "../campaigns/campaignEligibility.js";
 import { buildParticipationEligibilityPayload } from "./services/buildEligibilityPayload.js";
 
-const participationSchema = z.object({
-  schoolName: z.string().min(2),
-  district: z.string().min(2),
-  campaignSlug: z.string().min(2),
-  productCode: z.string().min(2),
-  whatsappMsisdn: z.string().min(8).optional(),
-  source: z.string().min(2).optional()
-});
+const schoolSelectionSchema = z
+  .object({
+    schoolId: z.string().cuid().optional(),
+    schoolName: z.string().min(2).optional(),
+    district: z.string().min(2).optional()
+  })
+  .refine((d) => Boolean(d.schoolId) || (Boolean(d.schoolName) && Boolean(d.district)), {
+    message: "Select a school from the list."
+  });
 
-const eligibilityCheckSchema = z.object({
-  schoolName: z.string().min(2),
-  district: z.string().min(2),
-  campaignSlug: z.string().min(2)
+const participationSchema = schoolSelectionSchema.and(
+  z.object({
+    campaignSlug: z.string().min(2),
+    productCode: z.string().min(2),
+    whatsappMsisdn: z.string().min(8).optional(),
+    source: z.string().min(2).optional()
+  })
+);
+
+const eligibilityCheckSchema = schoolSelectionSchema.and(
+  z.object({
+    campaignSlug: z.string().min(2)
+  })
+);
+
+const schoolOptionsQuerySchema = z.object({
+  province: z.string().min(2).optional(),
+  district: z.string().min(2).optional()
 });
 
 export const participationRouter = Router();
+
+participationRouter.get("/school-options", participationRateLimit, async (req, res) => {
+  const query = schoolOptionsQuerySchema.safeParse(req.query);
+  if (!query.success) {
+    res.status(400).json({ message: "Validation failed.", issues: query.error.flatten() });
+    return;
+  }
+
+  if (!query.data.province) {
+    res.json({ provinces: listParticipationProvinces() });
+    return;
+  }
+
+  if (!query.data.district) {
+    const districts = await listDistrictsForProvince(query.data.province);
+    res.json({ districts });
+    return;
+  }
+
+  const schools = await listSchoolsForProvinceDistrict(query.data.province, query.data.district);
+  res.json({ schools });
+});
 
 participationRouter.post("/eligibility-check", participationRateLimit, async (req, res) => {
   const payload = eligibilityCheckSchema.safeParse(req.body);
@@ -38,7 +80,7 @@ participationRouter.post("/eligibility-check", participationRateLimit, async (re
     return;
   }
 
-  const school = await findSchoolByNameAndDistrict(payload.data.schoolName, payload.data.district);
+  const school = await resolveParticipationSchool(payload.data);
   if (!school) {
     res.status(404).json({ message: "School not found.", outcome: "SCHOOL_NOT_FOUND" });
     return;

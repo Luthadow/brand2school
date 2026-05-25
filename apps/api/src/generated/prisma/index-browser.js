@@ -201,6 +201,10 @@ exports.Prisma.BrandScalarFieldEnum = {
   slug: 'slug',
   verificationPolicy: 'verificationPolicy',
   status: 'status',
+  verificationCode: 'verificationCode',
+  verificationStatus: 'verificationStatus',
+  verifiedAt: 'verifiedAt',
+  verifiedByUserId: 'verifiedByUserId',
   onboardingStatus: 'onboardingStatus',
   legalName: 'legalName',
   registrationNumber: 'registrationNumber',
@@ -213,6 +217,8 @@ exports.Prisma.BrandScalarFieldEnum = {
   internalReviewNotes: 'internalReviewNotes',
   logoUrl: 'logoUrl',
   featuredOnHome: 'featuredOnHome',
+  homeSortOrder: 'homeSortOrder',
+  founderExempt: 'founderExempt',
   publicProfileEnabled: 'publicProfileEnabled',
   description: 'description',
   websiteUrl: 'websiteUrl',
@@ -441,6 +447,14 @@ exports.Prisma.AuditExportJobScalarFieldEnum = {
   expiresAt: 'expiresAt'
 };
 
+exports.Prisma.WhatsAppConversationScalarFieldEnum = {
+  msisdn: 'msisdn',
+  step: 'step',
+  data: 'data',
+  updatedAt: 'updatedAt',
+  createdAt: 'createdAt'
+};
+
 exports.Prisma.WhatsAppMessageScalarFieldEnum = {
   id: 'id',
   toMsisdn: 'toMsisdn',
@@ -606,6 +620,14 @@ exports.SchoolVerificationStatus = exports.$Enums.SchoolVerificationStatus = {
   REJECTED: 'REJECTED'
 };
 
+exports.BrandVerificationStatus = exports.$Enums.BrandVerificationStatus = {
+  PENDING: 'PENDING',
+  VERIFIED: 'VERIFIED',
+  FOUNDER_VERIFIED: 'FOUNDER_VERIFIED',
+  SUSPENDED: 'SUSPENDED',
+  REJECTED: 'REJECTED'
+};
+
 exports.BrandOnboardingStatus = exports.$Enums.BrandOnboardingStatus = {
   PENDING_REVIEW: 'PENDING_REVIEW',
   UNDER_APPROVAL: 'UNDER_APPROVAL',
@@ -768,6 +790,7 @@ exports.Prisma.ModelName = {
   FraudFlag: 'FraudFlag',
   AdminQueuePreset: 'AdminQueuePreset',
   AuditExportJob: 'AuditExportJob',
+  WhatsAppConversation: 'WhatsAppConversation',
   WhatsAppMessage: 'WhatsAppMessage',
   WebhookDedup: 'WebhookDedup',
   EsgReportSchedule: 'EsgReportSchedule',

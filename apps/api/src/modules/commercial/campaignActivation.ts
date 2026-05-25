@@ -72,11 +72,16 @@ export function brandSubscriptionActive(
 }
 
 export function brandActivationFeeVerified(
-  brand: Pick<Brand, "activationFeePaid">,
+  brand: Pick<Brand, "activationFeePaid" | "founderExempt">,
   invoices: CampaignInvoice[],
   paymentVerifiedAt: Date | null
 ): boolean {
-  return Boolean(brand.activationFeePaid) || Boolean(paymentVerifiedAt) || setupInvoiceVerified(invoices);
+  return (
+    Boolean(brand.founderExempt) ||
+    Boolean(brand.activationFeePaid) ||
+    Boolean(paymentVerifiedAt) ||
+    setupInvoiceVerified(invoices)
+  );
 }
 
 export function evaluateActivationGate(campaign: CampaignWithCommercial, codeCount: number): ActivationGateResult {

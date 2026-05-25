@@ -20,6 +20,7 @@ import { commercialAdminRouter } from "../commercial/routes.js";
 import { getPlatformExecutiveAnalytics } from "../analytics/getPlatformExecutiveAnalytics.js";
 import { getAdminPlatformSnapshot } from "./platformSnapshot.js";
 import { listProvinceNominations } from "../platform/provinceNominations.js";
+import { applyBrandVerificationSideEffects } from "../platform/syncBrandVerification.js";
 
 const updateStatusSchema = z.object({
   status: z.enum(["PENDING", "VERIFIED", "APPROVED", "ACTIVE"])
@@ -219,6 +220,7 @@ adminRouter.patch("/approvals/brands/:id/status", async (req, res) => {
     return;
   }
 
+
   const updated = await prisma.brand.update({
     where: { id: brand.id },
     data: {
@@ -226,6 +228,20 @@ adminRouter.patch("/approvals/brands/:id/status", async (req, res) => {
       ...(payload.data.status !== "ACTIVE" ? { featuredOnHome: false, publicProfileEnabled: false } : {})
     }
   });
+
+  await applyBrandVerificationSideEffects(
+    prisma,
+    {
+      id: brand.id,
+      codePrefix: brand.codePrefix,
+      founderExempt: brand.founderExempt,
+      verificationStatus: brand.verificationStatus,
+      verificationCode: brand.verificationCode
+    },
+    payload.data.status,
+    req.user?.id
+  );
+
   await writeAudit(req.user?.id, "APPROVAL_STATUS_CHANGE", "BRAND", updated.id, {
     from: brand.status,
     to: updated.status

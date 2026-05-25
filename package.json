@@ -47,6 +47,10 @@
     "railway:migrate:resolve-failed": "node scripts/check-database-url.mjs && npm run db:migrate:resolve:commercial-expiry -w @brand2school/api",
     "railway:seed": "node scripts/railway-seed.mjs",
     "railway:purge-demo": "node scripts/remote-purge-demo.mjs",
+    "brand:set-home-order": "node scripts/set-brand-home-order.mjs",
+    "brand:bootstrap-founder": "node scripts/bootstrap-founder-brand.mjs",
+    "railway:bootstrap-founder": "node scripts/remote-bootstrap-founder-brand.mjs",
+    "brand:backfill-verification": "node scripts/backfill-brand-verification.mjs",
     "railway:bootstrap-admin": "node scripts/remote-bootstrap-admin.mjs",
     "railway:sync-env": "node scripts/sync-railway-api-env.mjs",
     "test:smtp": "node scripts/test-smtp.mjs"

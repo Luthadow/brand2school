@@ -13,7 +13,7 @@ export function TrustedPartnersSection({ partners }: { partners: PlatformPartner
         <ul className="lp-trust-logos">
           {partners.map((partner) => (
             <li key={partner.slug}>
-              <Link href={`/partners/${partner.slug}` as Route} className="lp-trust-logo-link" title={partner.name}>
+              <Link href={`/brand/${partner.slug}` as Route} className="lp-trust-logo-link" title={partner.name}>
                 <Image
                   src={partner.logoUrl}
                   alt={`${partner.name} logo`}

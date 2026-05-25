@@ -57,8 +57,8 @@ const howSteps = [
   {
     icon: MessageCircle,
     color: "orange",
-    title: "Submit on WhatsApp",
-    text: "Open WhatsApp, enter your school name, district, campaign, and code — no app required.",
+    title: "Submit your code",
+    text: "Use brand2school.co.za/submit or WhatsApp — school name, district, campaign, and product code. No app install.",
     imageSrc: "/images/cards/submit-whatsapp.png"
   },
   {

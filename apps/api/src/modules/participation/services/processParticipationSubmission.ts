@@ -4,7 +4,7 @@ import { scoreFraudRisk } from "../fraud/engine.js";
 import { enforceSchoolAnomalyFreeze } from "../fraud/anomaly.js";
 import { enforceFraudVelocityGovernance } from "../fraud/fraudVelocityGovernance.js";
 import { getSchoolCampaignProgress } from "./campaignProgress.js";
-import { findSchoolByNameAndDistrict } from "../../schools/registerSchool.js";
+import { resolveParticipationSchool } from "../resolveParticipationSchool.js";
 import { verifyParticipationCode } from "./verifyParticipationCode.js";
 import { logParticipationAudit, recordSubmissionAttempt } from "./auditTrail.js";
 import { recordVerifiedCodeFunding } from "../../funding/fundingConversion.js";
@@ -19,8 +19,9 @@ import {
 import { buildParticipationEligibilityPayload } from "./buildEligibilityPayload.js";
 
 export type ParticipationInput = {
-  schoolName: string;
-  district: string;
+  schoolId?: string;
+  schoolName?: string;
+  district?: string;
   campaignSlug: string;
   productCode: string;
   whatsappMsisdn?: string;
@@ -102,7 +103,7 @@ export async function processParticipationSubmission(
   const now = new Date();
   const normalizedCode = input.productCode.trim().toUpperCase();
 
-  const school = await findSchoolByNameAndDistrict(input.schoolName, input.district);
+  const school = await resolveParticipationSchool(input);
   if (!school) {
     await recordSubmissionAttempt({
       codeValue: normalizedCode,
@@ -116,7 +117,9 @@ export async function processParticipationSubmission(
       ok: false,
       status: 404,
       payload: {
-        message: `School not found for "${input.schoolName}" in ${input.district}. Check the name and district, or ask your principal to register the school.`,
+        message: input.schoolId
+          ? "Selected school is not active for submissions. Ask your principal to complete registration."
+          : `School not found. Select your school from the list, or ask your principal to register at Brand2School.`,
         outcome: "SCHOOL_NOT_FOUND"
       }
     };

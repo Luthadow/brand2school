@@ -13,6 +13,13 @@ type BrandRow = {
   status: string;
   logoUrl: string | null;
   featuredOnHome: boolean;
+  homeSortOrder: number;
+  founderExempt: boolean;
+  verificationCode: string | null;
+  verificationStatus: string;
+  verifiedAt: string | null;
+  verifyUrl: string | null;
+  certificatePdfUrl: string | null;
   publicProfileEnabled: boolean;
   description: string | null;
   websiteUrl: string | null;
@@ -37,6 +44,9 @@ export function BrandsClient(): JSX.Element {
   const [websiteUrl, setWebsiteUrl] = useState("");
   const [brandColor, setBrandColor] = useState("");
   const [featuredOnHome, setFeaturedOnHome] = useState(false);
+  const [homeSortOrder, setHomeSortOrder] = useState(100);
+  const [founderExempt, setFounderExempt] = useState(false);
+  const [verificationStatus, setVerificationStatus] = useState("PENDING");
   const [publicProfileEnabled, setPublicProfileEnabled] = useState(false);
   const [description, setDescription] = useState("");
   const [slug, setSlug] = useState("");
@@ -71,6 +81,9 @@ export function BrandsClient(): JSX.Element {
     setWebsiteUrl(selected.websiteUrl ?? "");
     setBrandColor(selected.brandColor ?? "");
     setFeaturedOnHome(selected.featuredOnHome);
+    setHomeSortOrder(selected.homeSortOrder);
+    setFounderExempt(selected.founderExempt);
+    setVerificationStatus(selected.verificationStatus);
     setPublicProfileEnabled(selected.publicProfileEnabled);
     setDescription(selected.description ?? "");
     setSlug(selected.slug);
@@ -86,6 +99,9 @@ export function BrandsClient(): JSX.Element {
         websiteUrl: websiteUrl.trim() ? websiteUrl.trim() : null,
         brandColor: brandColor.trim() ? brandColor.trim() : null,
         featuredOnHome,
+        homeSortOrder,
+        founderExempt,
+        verificationStatus,
         publicProfileEnabled,
         description: description.trim() ? description.trim() : null,
         slug: slug.trim() || undefined
@@ -209,14 +225,46 @@ export function BrandsClient(): JSX.Element {
               <p style={{ color: "#4a5f7a", fontSize: "0.9rem" }}>
                 Code: {selected.codePrefix} · Slug: {selected.slug} · Status: {selected.status}
               </p>
+              {selected.verificationCode ? (
+                <p style={{ marginTop: "0.35rem", fontSize: "0.9rem" }}>
+                  <strong>Verification:</strong> <code>{selected.verificationCode}</code> ·{" "}
+                  {selected.verificationStatus}
+                  {selected.verifyUrl ? (
+                    <>
+                      {" "}
+                      ·{" "}
+                      <a
+                        href={`${process.env.NEXT_PUBLIC_WEB_APP_URL ?? "http://localhost:3000"}${selected.verifyUrl}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        Verify page
+                      </a>
+                    </>
+                  ) : null}
+                  {selected.certificatePdfUrl ? (
+                    <>
+                      {" "}
+                      ·{" "}
+                      <a
+                        href={`${process.env.NEXT_PUBLIC_API_BASE_URL ?? "http://localhost:4000"}${selected.certificatePdfUrl}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        Certificate PDF
+                      </a>
+                    </>
+                  ) : null}
+                </p>
+              ) : null}
               {selected.publicProfileEnabled || selected.featuredOnHome ? (
                 <p style={{ marginTop: "0.35rem" }}>
                   <a
-                    href={`${process.env.NEXT_PUBLIC_WEB_APP_URL ?? "http://localhost:3000"}/partners/${selected.slug}`}
+                    href={`${process.env.NEXT_PUBLIC_WEB_APP_URL ?? "http://localhost:3000"}/brand/${selected.slug}`}
                     target="_blank"
                     rel="noopener noreferrer"
                   >
-                    View public profile
+                    View brand profile
                   </a>
                 </p>
               ) : null}
@@ -300,7 +348,7 @@ export function BrandsClient(): JSX.Element {
                 Public partner profile (/partners/slug)
               </label>
 
-              <label style={{ display: "flex", alignItems: "center", gap: "0.5rem", marginBottom: "1rem" }}>
+              <label style={{ display: "flex", alignItems: "center", gap: "0.5rem", marginBottom: "0.5rem" }}>
                 <input
                   type="checkbox"
                   checked={featuredOnHome}
@@ -308,6 +356,42 @@ export function BrandsClient(): JSX.Element {
                   onChange={(e) => setFeaturedOnHome(e.target.checked)}
                 />
                 Featured on homepage (ACTIVE brands with logo only)
+              </label>
+
+              <label style={{ display: "block", marginBottom: "0.75rem" }}>
+                Verification status
+                <select
+                  value={verificationStatus}
+                  onChange={(e) => setVerificationStatus(e.target.value)}
+                  style={{ display: "block", marginTop: "0.35rem", width: "100%" }}
+                >
+                  <option value="PENDING">Pending</option>
+                  <option value="VERIFIED">Verified</option>
+                  <option value="FOUNDER_VERIFIED">Founder verified (lifetime)</option>
+                  <option value="SUSPENDED">Suspended</option>
+                  <option value="REJECTED">Rejected</option>
+                </select>
+              </label>
+
+              <label style={{ display: "flex", alignItems: "center", gap: "0.5rem", marginBottom: "0.5rem" }}>
+                <input
+                  type="checkbox"
+                  checked={founderExempt}
+                  onChange={(e) => setFounderExempt(e.target.checked)}
+                />
+                Founder pass (waives R10,000 activation fee gate)
+              </label>
+
+              <label style={{ display: "block", marginBottom: "1rem" }}>
+                Homepage order (lower = first)
+                <input
+                  type="number"
+                  min={0}
+                  max={9999}
+                  value={homeSortOrder}
+                  onChange={(e) => setHomeSortOrder(Number(e.target.value))}
+                  style={{ display: "block", marginTop: "0.35rem", width: "100%" }}
+                />
               </label>
 
               <button disabled={saving} onClick={() => void saveProfile()}>

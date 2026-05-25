@@ -4,6 +4,7 @@ import type { Route } from "next";
 import { notFound } from "next/navigation";
 import { CampaignScopeBadge } from "../../../components/campaigns/CampaignScopeBadge";
 import { ProvinceNominationForm } from "../../../components/campaigns/ProvinceNominationForm";
+import { ParticipationSubmitForm } from "../../../components/participation/ParticipationSubmitForm";
 import { fetchPublicCampaign } from "../../../lib/platformPublic";
 import { formatCount } from "../../../lib/formatCount";
 
@@ -22,7 +23,7 @@ export default async function PublicCampaignPage({
       <section className="lp-section lp-section-light" style={{ borderBottom: `4px solid ${accent}` }}>
         <div className="lp-container">
           <p className="ds-eyebrow">
-            <Link href={`/partners/${campaign.brandSlug}` as Route}>{campaign.brandName}</Link>
+            <Link href={`/brand/${campaign.brandSlug}` as Route}>{campaign.brandName}</Link>
             {campaign.category ? ` · ${campaign.category}` : ""}
           </p>
           <h1 className="ds-section-title ds-section-title--left">{campaign.name}</h1>
@@ -57,9 +58,14 @@ export default async function PublicCampaignPage({
             <p style={{ marginTop: "1rem" }}>
               <strong>Campaign slug:</strong> <code>{campaign.slug}</code>
             </p>
-            <Link href="/schools/register" className="ds-btn ds-btn-primary" style={{ marginTop: "1rem", display: "inline-block" }}>
-              Register your school
-            </Link>
+            <div style={{ marginTop: "1rem", display: "flex", flexWrap: "wrap", gap: "0.75rem" }}>
+              <Link href={`/submit?campaign=${campaign.slug}` as Route} className="ds-btn ds-btn-primary">
+                Submit a code online
+              </Link>
+              <Link href="/schools/register" className="ds-btn ds-btn-secondary">
+                Register your school
+              </Link>
+            </div>
           </div>
           <div className="card">
             <h2>Campaign details</h2>
@@ -77,6 +83,19 @@ export default async function PublicCampaignPage({
               ) : null}
             </ul>
           </div>
+        </div>
+      </section>
+
+      <section className="lp-section lp-section-light">
+        <div className="lp-container" style={{ maxWidth: "42rem" }}>
+          <h2 className="ds-section-title ds-section-title--left">Submit on the website</h2>
+          <p className="lp-problem-text" style={{ marginBottom: "1.25rem" }}>
+            Use the form below or WhatsApp — same verification engine.
+          </p>
+          <ParticipationSubmitForm
+            campaigns={[{ slug: campaign.slug, name: campaign.name, brandName: campaign.brandName }]}
+            defaultCampaignSlug={campaign.slug}
+          />
         </div>
       </section>
 

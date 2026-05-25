@@ -109,6 +109,11 @@ export type AdminQueuePreset = $Result.DefaultSelection<Prisma.$AdminQueuePreset
  */
 export type AuditExportJob = $Result.DefaultSelection<Prisma.$AuditExportJobPayload>
 /**
+ * Model WhatsAppConversation
+ * Select-based WhatsApp submit flow (province → district → school → campaign → code).
+ */
+export type WhatsAppConversation = $Result.DefaultSelection<Prisma.$WhatsAppConversationPayload>
+/**
  * Model WhatsAppMessage
  * 
  */
@@ -185,6 +190,17 @@ export const SchoolVerificationStatus: {
 };
 
 export type SchoolVerificationStatus = (typeof SchoolVerificationStatus)[keyof typeof SchoolVerificationStatus]
+
+
+export const BrandVerificationStatus: {
+  PENDING: 'PENDING',
+  VERIFIED: 'VERIFIED',
+  FOUNDER_VERIFIED: 'FOUNDER_VERIFIED',
+  SUSPENDED: 'SUSPENDED',
+  REJECTED: 'REJECTED'
+};
+
+export type BrandVerificationStatus = (typeof BrandVerificationStatus)[keyof typeof BrandVerificationStatus]
 
 
 export const BrandOnboardingStatus: {
@@ -398,6 +414,10 @@ export const EntityStatus: typeof $Enums.EntityStatus
 export type SchoolVerificationStatus = $Enums.SchoolVerificationStatus
 
 export const SchoolVerificationStatus: typeof $Enums.SchoolVerificationStatus
+
+export type BrandVerificationStatus = $Enums.BrandVerificationStatus
+
+export const BrandVerificationStatus: typeof $Enums.BrandVerificationStatus
 
 export type BrandOnboardingStatus = $Enums.BrandOnboardingStatus
 
@@ -787,6 +807,16 @@ export class PrismaClient<
     * ```
     */
   get auditExportJob(): Prisma.AuditExportJobDelegate<ExtArgs>;
+
+  /**
+   * `prisma.whatsAppConversation`: Exposes CRUD operations for the **WhatsAppConversation** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more WhatsAppConversations
+    * const whatsAppConversations = await prisma.whatsAppConversation.findMany()
+    * ```
+    */
+  get whatsAppConversation(): Prisma.WhatsAppConversationDelegate<ExtArgs>;
 
   /**
    * `prisma.whatsAppMessage`: Exposes CRUD operations for the **WhatsAppMessage** model.
@@ -1327,6 +1357,7 @@ export namespace Prisma {
     FraudFlag: 'FraudFlag',
     AdminQueuePreset: 'AdminQueuePreset',
     AuditExportJob: 'AuditExportJob',
+    WhatsAppConversation: 'WhatsAppConversation',
     WhatsAppMessage: 'WhatsAppMessage',
     WebhookDedup: 'WebhookDedup',
     EsgReportSchedule: 'EsgReportSchedule',
@@ -1350,7 +1381,7 @@ export namespace Prisma {
 
   export type TypeMap<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> = {
     meta: {
-      modelProps: "user" | "passwordResetToken" | "school" | "schoolVerification" | "learner" | "brand" | "campaign" | "brandAgreement" | "campaignInvoice" | "product" | "codeBatch" | "code" | "submissionAttempt" | "submission" | "auditLog" | "refreshSession" | "fraudFlag" | "adminQueuePreset" | "auditExportJob" | "whatsAppMessage" | "webhookDedup" | "esgReportSchedule" | "fundingContribution" | "esgReportDelivery" | "notificationLog" | "notificationJob" | "provinceNomination"
+      modelProps: "user" | "passwordResetToken" | "school" | "schoolVerification" | "learner" | "brand" | "campaign" | "brandAgreement" | "campaignInvoice" | "product" | "codeBatch" | "code" | "submissionAttempt" | "submission" | "auditLog" | "refreshSession" | "fraudFlag" | "adminQueuePreset" | "auditExportJob" | "whatsAppConversation" | "whatsAppMessage" | "webhookDedup" | "esgReportSchedule" | "fundingContribution" | "esgReportDelivery" | "notificationLog" | "notificationJob" | "provinceNomination"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -2684,6 +2715,76 @@ export namespace Prisma {
           }
         }
       }
+      WhatsAppConversation: {
+        payload: Prisma.$WhatsAppConversationPayload<ExtArgs>
+        fields: Prisma.WhatsAppConversationFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.WhatsAppConversationFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$WhatsAppConversationPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.WhatsAppConversationFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$WhatsAppConversationPayload>
+          }
+          findFirst: {
+            args: Prisma.WhatsAppConversationFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$WhatsAppConversationPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.WhatsAppConversationFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$WhatsAppConversationPayload>
+          }
+          findMany: {
+            args: Prisma.WhatsAppConversationFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$WhatsAppConversationPayload>[]
+          }
+          create: {
+            args: Prisma.WhatsAppConversationCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$WhatsAppConversationPayload>
+          }
+          createMany: {
+            args: Prisma.WhatsAppConversationCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.WhatsAppConversationCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$WhatsAppConversationPayload>[]
+          }
+          delete: {
+            args: Prisma.WhatsAppConversationDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$WhatsAppConversationPayload>
+          }
+          update: {
+            args: Prisma.WhatsAppConversationUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$WhatsAppConversationPayload>
+          }
+          deleteMany: {
+            args: Prisma.WhatsAppConversationDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.WhatsAppConversationUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          upsert: {
+            args: Prisma.WhatsAppConversationUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$WhatsAppConversationPayload>
+          }
+          aggregate: {
+            args: Prisma.WhatsAppConversationAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateWhatsAppConversation>
+          }
+          groupBy: {
+            args: Prisma.WhatsAppConversationGroupByArgs<ExtArgs>
+            result: $Utils.Optional<WhatsAppConversationGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.WhatsAppConversationCountArgs<ExtArgs>
+            result: $Utils.Optional<WhatsAppConversationCountAggregateOutputType> | number
+          }
+        }
+      }
       WhatsAppMessage: {
         payload: Prisma.$WhatsAppMessagePayload<ExtArgs>
         fields: Prisma.WhatsAppMessageFieldRefs
@@ -3405,6 +3506,7 @@ export namespace Prisma {
    */
 
   export type UserCountOutputType = {
+    brandsVerified: number
     sessions: number
     queuePresets: number
     exportJobs: number
@@ -3412,6 +3514,7 @@ export namespace Prisma {
   }
 
   export type UserCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    brandsVerified?: boolean | UserCountOutputTypeCountBrandsVerifiedArgs
     sessions?: boolean | UserCountOutputTypeCountSessionsArgs
     queuePresets?: boolean | UserCountOutputTypeCountQueuePresetsArgs
     exportJobs?: boolean | UserCountOutputTypeCountExportJobsArgs
@@ -3427,6 +3530,13 @@ export namespace Prisma {
      * Select specific fields to fetch from the UserCountOutputType
      */
     select?: UserCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountBrandsVerifiedArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: BrandWhereInput
   }
 
   /**
@@ -4024,6 +4134,7 @@ export namespace Prisma {
     updatedAt?: boolean
     school?: boolean | User$schoolArgs<ExtArgs>
     brand?: boolean | User$brandArgs<ExtArgs>
+    brandsVerified?: boolean | User$brandsVerifiedArgs<ExtArgs>
     sessions?: boolean | User$sessionsArgs<ExtArgs>
     queuePresets?: boolean | User$queuePresetsArgs<ExtArgs>
     exportJobs?: boolean | User$exportJobsArgs<ExtArgs>
@@ -4062,6 +4173,7 @@ export namespace Prisma {
   export type UserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     school?: boolean | User$schoolArgs<ExtArgs>
     brand?: boolean | User$brandArgs<ExtArgs>
+    brandsVerified?: boolean | User$brandsVerifiedArgs<ExtArgs>
     sessions?: boolean | User$sessionsArgs<ExtArgs>
     queuePresets?: boolean | User$queuePresetsArgs<ExtArgs>
     exportJobs?: boolean | User$exportJobsArgs<ExtArgs>
@@ -4078,6 +4190,7 @@ export namespace Prisma {
     objects: {
       school: Prisma.$SchoolPayload<ExtArgs> | null
       brand: Prisma.$BrandPayload<ExtArgs> | null
+      brandsVerified: Prisma.$BrandPayload<ExtArgs>[]
       sessions: Prisma.$RefreshSessionPayload<ExtArgs>[]
       queuePresets: Prisma.$AdminQueuePresetPayload<ExtArgs>[]
       exportJobs: Prisma.$AuditExportJobPayload<ExtArgs>[]
@@ -4460,6 +4573,7 @@ export namespace Prisma {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     school<T extends User$schoolArgs<ExtArgs> = {}>(args?: Subset<T, User$schoolArgs<ExtArgs>>): Prisma__SchoolClient<$Result.GetResult<Prisma.$SchoolPayload<ExtArgs>, T, "findUniqueOrThrow"> | null, null, ExtArgs>
     brand<T extends User$brandArgs<ExtArgs> = {}>(args?: Subset<T, User$brandArgs<ExtArgs>>): Prisma__BrandClient<$Result.GetResult<Prisma.$BrandPayload<ExtArgs>, T, "findUniqueOrThrow"> | null, null, ExtArgs>
+    brandsVerified<T extends User$brandsVerifiedArgs<ExtArgs> = {}>(args?: Subset<T, User$brandsVerifiedArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$BrandPayload<ExtArgs>, T, "findMany"> | Null>
     sessions<T extends User$sessionsArgs<ExtArgs> = {}>(args?: Subset<T, User$sessionsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RefreshSessionPayload<ExtArgs>, T, "findMany"> | Null>
     queuePresets<T extends User$queuePresetsArgs<ExtArgs> = {}>(args?: Subset<T, User$queuePresetsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AdminQueuePresetPayload<ExtArgs>, T, "findMany"> | Null>
     exportJobs<T extends User$exportJobsArgs<ExtArgs> = {}>(args?: Subset<T, User$exportJobsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AuditExportJobPayload<ExtArgs>, T, "findMany"> | Null>
@@ -4848,6 +4962,26 @@ export namespace Prisma {
      */
     include?: BrandInclude<ExtArgs> | null
     where?: BrandWhereInput
+  }
+
+  /**
+   * User.brandsVerified
+   */
+  export type User$brandsVerifiedArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Brand
+     */
+    select?: BrandSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BrandInclude<ExtArgs> | null
+    where?: BrandWhereInput
+    orderBy?: BrandOrderByWithRelationInput | BrandOrderByWithRelationInput[]
+    cursor?: BrandWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: BrandScalarFieldEnum | BrandScalarFieldEnum[]
   }
 
   /**
@@ -9175,10 +9309,12 @@ export namespace Prisma {
   }
 
   export type BrandAvgAggregateOutputType = {
+    homeSortOrder: number | null
     recurringAmountZar: Decimal | null
   }
 
   export type BrandSumAggregateOutputType = {
+    homeSortOrder: number | null
     recurringAmountZar: Decimal | null
   }
 
@@ -9188,6 +9324,10 @@ export namespace Prisma {
     codePrefix: string | null
     slug: string | null
     status: $Enums.EntityStatus | null
+    verificationCode: string | null
+    verificationStatus: $Enums.BrandVerificationStatus | null
+    verifiedAt: Date | null
+    verifiedByUserId: string | null
     onboardingStatus: $Enums.BrandOnboardingStatus | null
     legalName: string | null
     registrationNumber: string | null
@@ -9198,6 +9338,8 @@ export namespace Prisma {
     internalReviewNotes: string | null
     logoUrl: string | null
     featuredOnHome: boolean | null
+    homeSortOrder: number | null
+    founderExempt: boolean | null
     publicProfileEnabled: boolean | null
     description: string | null
     websiteUrl: string | null
@@ -9220,6 +9362,10 @@ export namespace Prisma {
     codePrefix: string | null
     slug: string | null
     status: $Enums.EntityStatus | null
+    verificationCode: string | null
+    verificationStatus: $Enums.BrandVerificationStatus | null
+    verifiedAt: Date | null
+    verifiedByUserId: string | null
     onboardingStatus: $Enums.BrandOnboardingStatus | null
     legalName: string | null
     registrationNumber: string | null
@@ -9230,6 +9376,8 @@ export namespace Prisma {
     internalReviewNotes: string | null
     logoUrl: string | null
     featuredOnHome: boolean | null
+    homeSortOrder: number | null
+    founderExempt: boolean | null
     publicProfileEnabled: boolean | null
     description: string | null
     websiteUrl: string | null
@@ -9253,6 +9401,10 @@ export namespace Prisma {
     slug: number
     verificationPolicy: number
     status: number
+    verificationCode: number
+    verificationStatus: number
+    verifiedAt: number
+    verifiedByUserId: number
     onboardingStatus: number
     legalName: number
     registrationNumber: number
@@ -9265,6 +9417,8 @@ export namespace Prisma {
     internalReviewNotes: number
     logoUrl: number
     featuredOnHome: number
+    homeSortOrder: number
+    founderExempt: number
     publicProfileEnabled: number
     description: number
     websiteUrl: number
@@ -9284,10 +9438,12 @@ export namespace Prisma {
 
 
   export type BrandAvgAggregateInputType = {
+    homeSortOrder?: true
     recurringAmountZar?: true
   }
 
   export type BrandSumAggregateInputType = {
+    homeSortOrder?: true
     recurringAmountZar?: true
   }
 
@@ -9297,6 +9453,10 @@ export namespace Prisma {
     codePrefix?: true
     slug?: true
     status?: true
+    verificationCode?: true
+    verificationStatus?: true
+    verifiedAt?: true
+    verifiedByUserId?: true
     onboardingStatus?: true
     legalName?: true
     registrationNumber?: true
@@ -9307,6 +9467,8 @@ export namespace Prisma {
     internalReviewNotes?: true
     logoUrl?: true
     featuredOnHome?: true
+    homeSortOrder?: true
+    founderExempt?: true
     publicProfileEnabled?: true
     description?: true
     websiteUrl?: true
@@ -9329,6 +9491,10 @@ export namespace Prisma {
     codePrefix?: true
     slug?: true
     status?: true
+    verificationCode?: true
+    verificationStatus?: true
+    verifiedAt?: true
+    verifiedByUserId?: true
     onboardingStatus?: true
     legalName?: true
     registrationNumber?: true
@@ -9339,6 +9505,8 @@ export namespace Prisma {
     internalReviewNotes?: true
     logoUrl?: true
     featuredOnHome?: true
+    homeSortOrder?: true
+    founderExempt?: true
     publicProfileEnabled?: true
     description?: true
     websiteUrl?: true
@@ -9362,6 +9530,10 @@ export namespace Prisma {
     slug?: true
     verificationPolicy?: true
     status?: true
+    verificationCode?: true
+    verificationStatus?: true
+    verifiedAt?: true
+    verifiedByUserId?: true
     onboardingStatus?: true
     legalName?: true
     registrationNumber?: true
@@ -9374,6 +9546,8 @@ export namespace Prisma {
     internalReviewNotes?: true
     logoUrl?: true
     featuredOnHome?: true
+    homeSortOrder?: true
+    founderExempt?: true
     publicProfileEnabled?: true
     description?: true
     websiteUrl?: true
@@ -9484,6 +9658,10 @@ export namespace Prisma {
     slug: string
     verificationPolicy: JsonValue | null
     status: $Enums.EntityStatus
+    verificationCode: string | null
+    verificationStatus: $Enums.BrandVerificationStatus
+    verifiedAt: Date | null
+    verifiedByUserId: string | null
     onboardingStatus: $Enums.BrandOnboardingStatus
     legalName: string | null
     registrationNumber: string | null
@@ -9496,6 +9674,8 @@ export namespace Prisma {
     internalReviewNotes: string | null
     logoUrl: string | null
     featuredOnHome: boolean
+    homeSortOrder: number
+    founderExempt: boolean
     publicProfileEnabled: boolean
     description: string | null
     websiteUrl: string | null
@@ -9538,6 +9718,10 @@ export namespace Prisma {
     slug?: boolean
     verificationPolicy?: boolean
     status?: boolean
+    verificationCode?: boolean
+    verificationStatus?: boolean
+    verifiedAt?: boolean
+    verifiedByUserId?: boolean
     onboardingStatus?: boolean
     legalName?: boolean
     registrationNumber?: boolean
@@ -9550,6 +9734,8 @@ export namespace Prisma {
     internalReviewNotes?: boolean
     logoUrl?: boolean
     featuredOnHome?: boolean
+    homeSortOrder?: boolean
+    founderExempt?: boolean
     publicProfileEnabled?: boolean
     description?: boolean
     websiteUrl?: boolean
@@ -9564,6 +9750,7 @@ export namespace Prisma {
     gracePeriodUntil?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    verifiedBy?: boolean | Brand$verifiedByArgs<ExtArgs>
     campaigns?: boolean | Brand$campaignsArgs<ExtArgs>
     users?: boolean | Brand$usersArgs<ExtArgs>
     esgSchedules?: boolean | Brand$esgSchedulesArgs<ExtArgs>
@@ -9579,6 +9766,10 @@ export namespace Prisma {
     slug?: boolean
     verificationPolicy?: boolean
     status?: boolean
+    verificationCode?: boolean
+    verificationStatus?: boolean
+    verifiedAt?: boolean
+    verifiedByUserId?: boolean
     onboardingStatus?: boolean
     legalName?: boolean
     registrationNumber?: boolean
@@ -9591,6 +9782,8 @@ export namespace Prisma {
     internalReviewNotes?: boolean
     logoUrl?: boolean
     featuredOnHome?: boolean
+    homeSortOrder?: boolean
+    founderExempt?: boolean
     publicProfileEnabled?: boolean
     description?: boolean
     websiteUrl?: boolean
@@ -9605,6 +9798,7 @@ export namespace Prisma {
     gracePeriodUntil?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    verifiedBy?: boolean | Brand$verifiedByArgs<ExtArgs>
   }, ExtArgs["result"]["brand"]>
 
   export type BrandSelectScalar = {
@@ -9614,6 +9808,10 @@ export namespace Prisma {
     slug?: boolean
     verificationPolicy?: boolean
     status?: boolean
+    verificationCode?: boolean
+    verificationStatus?: boolean
+    verifiedAt?: boolean
+    verifiedByUserId?: boolean
     onboardingStatus?: boolean
     legalName?: boolean
     registrationNumber?: boolean
@@ -9626,6 +9824,8 @@ export namespace Prisma {
     internalReviewNotes?: boolean
     logoUrl?: boolean
     featuredOnHome?: boolean
+    homeSortOrder?: boolean
+    founderExempt?: boolean
     publicProfileEnabled?: boolean
     description?: boolean
     websiteUrl?: boolean
@@ -9643,6 +9843,7 @@ export namespace Prisma {
   }
 
   export type BrandInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    verifiedBy?: boolean | Brand$verifiedByArgs<ExtArgs>
     campaigns?: boolean | Brand$campaignsArgs<ExtArgs>
     users?: boolean | Brand$usersArgs<ExtArgs>
     esgSchedules?: boolean | Brand$esgSchedulesArgs<ExtArgs>
@@ -9650,11 +9851,14 @@ export namespace Prisma {
     agreements?: boolean | Brand$agreementsArgs<ExtArgs>
     _count?: boolean | BrandCountOutputTypeDefaultArgs<ExtArgs>
   }
-  export type BrandIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+  export type BrandIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    verifiedBy?: boolean | Brand$verifiedByArgs<ExtArgs>
+  }
 
   export type $BrandPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Brand"
     objects: {
+      verifiedBy: Prisma.$UserPayload<ExtArgs> | null
       campaigns: Prisma.$CampaignPayload<ExtArgs>[]
       users: Prisma.$UserPayload<ExtArgs>[]
       esgSchedules: Prisma.$EsgReportSchedulePayload<ExtArgs>[]
@@ -9667,7 +9871,20 @@ export namespace Prisma {
       codePrefix: string
       slug: string
       verificationPolicy: Prisma.JsonValue | null
+      /**
+       * Operational lifecycle (admin approvals, participation gates).
+       */
       status: $Enums.EntityStatus
+      /**
+       * Public certificate code (PREFIX-YY-ID), e.g. R2K-26-84XQ19. Issued at registration; confirmed when trusted.
+       */
+      verificationCode: string | null
+      /**
+       * Public trust layer: pending → verified / founder_verified (QR, PDF certificate, /verify URL).
+       */
+      verificationStatus: $Enums.BrandVerificationStatus
+      verifiedAt: Date | null
+      verifiedByUserId: string | null
       onboardingStatus: $Enums.BrandOnboardingStatus
       legalName: string | null
       registrationNumber: string | null
@@ -9680,6 +9897,14 @@ export namespace Prisma {
       internalReviewNotes: string | null
       logoUrl: string | null
       featuredOnHome: boolean
+      /**
+       * Lower values appear first on the homepage partner strip and partner directory.
+       */
+      homeSortOrder: number
+      /**
+       * Platform founder / launch partner — skips activation fee gates when true.
+       */
+      founderExempt: boolean
       publicProfileEnabled: boolean
       description: string | null
       websiteUrl: string | null
@@ -10058,6 +10283,7 @@ export namespace Prisma {
    */
   export interface Prisma__BrandClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
+    verifiedBy<T extends Brand$verifiedByArgs<ExtArgs> = {}>(args?: Subset<T, Brand$verifiedByArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow"> | null, null, ExtArgs>
     campaigns<T extends Brand$campaignsArgs<ExtArgs> = {}>(args?: Subset<T, Brand$campaignsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CampaignPayload<ExtArgs>, T, "findMany"> | Null>
     users<T extends Brand$usersArgs<ExtArgs> = {}>(args?: Subset<T, Brand$usersArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findMany"> | Null>
     esgSchedules<T extends Brand$esgSchedulesArgs<ExtArgs> = {}>(args?: Subset<T, Brand$esgSchedulesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EsgReportSchedulePayload<ExtArgs>, T, "findMany"> | Null>
@@ -10098,6 +10324,10 @@ export namespace Prisma {
     readonly slug: FieldRef<"Brand", 'String'>
     readonly verificationPolicy: FieldRef<"Brand", 'Json'>
     readonly status: FieldRef<"Brand", 'EntityStatus'>
+    readonly verificationCode: FieldRef<"Brand", 'String'>
+    readonly verificationStatus: FieldRef<"Brand", 'BrandVerificationStatus'>
+    readonly verifiedAt: FieldRef<"Brand", 'DateTime'>
+    readonly verifiedByUserId: FieldRef<"Brand", 'String'>
     readonly onboardingStatus: FieldRef<"Brand", 'BrandOnboardingStatus'>
     readonly legalName: FieldRef<"Brand", 'String'>
     readonly registrationNumber: FieldRef<"Brand", 'String'>
@@ -10110,6 +10340,8 @@ export namespace Prisma {
     readonly internalReviewNotes: FieldRef<"Brand", 'String'>
     readonly logoUrl: FieldRef<"Brand", 'String'>
     readonly featuredOnHome: FieldRef<"Brand", 'Boolean'>
+    readonly homeSortOrder: FieldRef<"Brand", 'Int'>
+    readonly founderExempt: FieldRef<"Brand", 'Boolean'>
     readonly publicProfileEnabled: FieldRef<"Brand", 'Boolean'>
     readonly description: FieldRef<"Brand", 'String'>
     readonly websiteUrl: FieldRef<"Brand", 'String'>
@@ -10345,6 +10577,10 @@ export namespace Prisma {
      */
     data: BrandCreateManyInput | BrandCreateManyInput[]
     skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BrandIncludeCreateManyAndReturn<ExtArgs> | null
   }
 
   /**
@@ -10435,6 +10671,21 @@ export namespace Prisma {
      * Filter which Brands to delete
      */
     where?: BrandWhereInput
+  }
+
+  /**
+   * Brand.verifiedBy
+   */
+  export type Brand$verifiedByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the User
+     */
+    select?: UserSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserInclude<ExtArgs> | null
+    where?: UserWhereInput
   }
 
   /**
@@ -24516,6 +24767,880 @@ export namespace Prisma {
 
 
   /**
+   * Model WhatsAppConversation
+   */
+
+  export type AggregateWhatsAppConversation = {
+    _count: WhatsAppConversationCountAggregateOutputType | null
+    _min: WhatsAppConversationMinAggregateOutputType | null
+    _max: WhatsAppConversationMaxAggregateOutputType | null
+  }
+
+  export type WhatsAppConversationMinAggregateOutputType = {
+    msisdn: string | null
+    step: string | null
+    updatedAt: Date | null
+    createdAt: Date | null
+  }
+
+  export type WhatsAppConversationMaxAggregateOutputType = {
+    msisdn: string | null
+    step: string | null
+    updatedAt: Date | null
+    createdAt: Date | null
+  }
+
+  export type WhatsAppConversationCountAggregateOutputType = {
+    msisdn: number
+    step: number
+    data: number
+    updatedAt: number
+    createdAt: number
+    _all: number
+  }
+
+
+  export type WhatsAppConversationMinAggregateInputType = {
+    msisdn?: true
+    step?: true
+    updatedAt?: true
+    createdAt?: true
+  }
+
+  export type WhatsAppConversationMaxAggregateInputType = {
+    msisdn?: true
+    step?: true
+    updatedAt?: true
+    createdAt?: true
+  }
+
+  export type WhatsAppConversationCountAggregateInputType = {
+    msisdn?: true
+    step?: true
+    data?: true
+    updatedAt?: true
+    createdAt?: true
+    _all?: true
+  }
+
+  export type WhatsAppConversationAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which WhatsAppConversation to aggregate.
+     */
+    where?: WhatsAppConversationWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of WhatsAppConversations to fetch.
+     */
+    orderBy?: WhatsAppConversationOrderByWithRelationInput | WhatsAppConversationOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: WhatsAppConversationWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` WhatsAppConversations from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` WhatsAppConversations.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned WhatsAppConversations
+    **/
+    _count?: true | WhatsAppConversationCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: WhatsAppConversationMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: WhatsAppConversationMaxAggregateInputType
+  }
+
+  export type GetWhatsAppConversationAggregateType<T extends WhatsAppConversationAggregateArgs> = {
+        [P in keyof T & keyof AggregateWhatsAppConversation]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateWhatsAppConversation[P]>
+      : GetScalarType<T[P], AggregateWhatsAppConversation[P]>
+  }
+
+
+
+
+  export type WhatsAppConversationGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: WhatsAppConversationWhereInput
+    orderBy?: WhatsAppConversationOrderByWithAggregationInput | WhatsAppConversationOrderByWithAggregationInput[]
+    by: WhatsAppConversationScalarFieldEnum[] | WhatsAppConversationScalarFieldEnum
+    having?: WhatsAppConversationScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: WhatsAppConversationCountAggregateInputType | true
+    _min?: WhatsAppConversationMinAggregateInputType
+    _max?: WhatsAppConversationMaxAggregateInputType
+  }
+
+  export type WhatsAppConversationGroupByOutputType = {
+    msisdn: string
+    step: string
+    data: JsonValue
+    updatedAt: Date
+    createdAt: Date
+    _count: WhatsAppConversationCountAggregateOutputType | null
+    _min: WhatsAppConversationMinAggregateOutputType | null
+    _max: WhatsAppConversationMaxAggregateOutputType | null
+  }
+
+  type GetWhatsAppConversationGroupByPayload<T extends WhatsAppConversationGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<WhatsAppConversationGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof WhatsAppConversationGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], WhatsAppConversationGroupByOutputType[P]>
+            : GetScalarType<T[P], WhatsAppConversationGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type WhatsAppConversationSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    msisdn?: boolean
+    step?: boolean
+    data?: boolean
+    updatedAt?: boolean
+    createdAt?: boolean
+  }, ExtArgs["result"]["whatsAppConversation"]>
+
+  export type WhatsAppConversationSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    msisdn?: boolean
+    step?: boolean
+    data?: boolean
+    updatedAt?: boolean
+    createdAt?: boolean
+  }, ExtArgs["result"]["whatsAppConversation"]>
+
+  export type WhatsAppConversationSelectScalar = {
+    msisdn?: boolean
+    step?: boolean
+    data?: boolean
+    updatedAt?: boolean
+    createdAt?: boolean
+  }
+
+
+  export type $WhatsAppConversationPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "WhatsAppConversation"
+    objects: {}
+    scalars: $Extensions.GetPayloadResult<{
+      msisdn: string
+      step: string
+      data: Prisma.JsonValue
+      updatedAt: Date
+      createdAt: Date
+    }, ExtArgs["result"]["whatsAppConversation"]>
+    composites: {}
+  }
+
+  type WhatsAppConversationGetPayload<S extends boolean | null | undefined | WhatsAppConversationDefaultArgs> = $Result.GetResult<Prisma.$WhatsAppConversationPayload, S>
+
+  type WhatsAppConversationCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = 
+    Omit<WhatsAppConversationFindManyArgs, 'select' | 'include' | 'distinct'> & {
+      select?: WhatsAppConversationCountAggregateInputType | true
+    }
+
+  export interface WhatsAppConversationDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['WhatsAppConversation'], meta: { name: 'WhatsAppConversation' } }
+    /**
+     * Find zero or one WhatsAppConversation that matches the filter.
+     * @param {WhatsAppConversationFindUniqueArgs} args - Arguments to find a WhatsAppConversation
+     * @example
+     * // Get one WhatsAppConversation
+     * const whatsAppConversation = await prisma.whatsAppConversation.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends WhatsAppConversationFindUniqueArgs>(args: SelectSubset<T, WhatsAppConversationFindUniqueArgs<ExtArgs>>): Prisma__WhatsAppConversationClient<$Result.GetResult<Prisma.$WhatsAppConversationPayload<ExtArgs>, T, "findUnique"> | null, null, ExtArgs>
+
+    /**
+     * Find one WhatsAppConversation that matches the filter or throw an error with `error.code='P2025'` 
+     * if no matches were found.
+     * @param {WhatsAppConversationFindUniqueOrThrowArgs} args - Arguments to find a WhatsAppConversation
+     * @example
+     * // Get one WhatsAppConversation
+     * const whatsAppConversation = await prisma.whatsAppConversation.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends WhatsAppConversationFindUniqueOrThrowArgs>(args: SelectSubset<T, WhatsAppConversationFindUniqueOrThrowArgs<ExtArgs>>): Prisma__WhatsAppConversationClient<$Result.GetResult<Prisma.$WhatsAppConversationPayload<ExtArgs>, T, "findUniqueOrThrow">, never, ExtArgs>
+
+    /**
+     * Find the first WhatsAppConversation that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {WhatsAppConversationFindFirstArgs} args - Arguments to find a WhatsAppConversation
+     * @example
+     * // Get one WhatsAppConversation
+     * const whatsAppConversation = await prisma.whatsAppConversation.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends WhatsAppConversationFindFirstArgs>(args?: SelectSubset<T, WhatsAppConversationFindFirstArgs<ExtArgs>>): Prisma__WhatsAppConversationClient<$Result.GetResult<Prisma.$WhatsAppConversationPayload<ExtArgs>, T, "findFirst"> | null, null, ExtArgs>
+
+    /**
+     * Find the first WhatsAppConversation that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {WhatsAppConversationFindFirstOrThrowArgs} args - Arguments to find a WhatsAppConversation
+     * @example
+     * // Get one WhatsAppConversation
+     * const whatsAppConversation = await prisma.whatsAppConversation.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends WhatsAppConversationFindFirstOrThrowArgs>(args?: SelectSubset<T, WhatsAppConversationFindFirstOrThrowArgs<ExtArgs>>): Prisma__WhatsAppConversationClient<$Result.GetResult<Prisma.$WhatsAppConversationPayload<ExtArgs>, T, "findFirstOrThrow">, never, ExtArgs>
+
+    /**
+     * Find zero or more WhatsAppConversations that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {WhatsAppConversationFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all WhatsAppConversations
+     * const whatsAppConversations = await prisma.whatsAppConversation.findMany()
+     * 
+     * // Get first 10 WhatsAppConversations
+     * const whatsAppConversations = await prisma.whatsAppConversation.findMany({ take: 10 })
+     * 
+     * // Only select the `msisdn`
+     * const whatsAppConversationWithMsisdnOnly = await prisma.whatsAppConversation.findMany({ select: { msisdn: true } })
+     * 
+     */
+    findMany<T extends WhatsAppConversationFindManyArgs>(args?: SelectSubset<T, WhatsAppConversationFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$WhatsAppConversationPayload<ExtArgs>, T, "findMany">>
+
+    /**
+     * Create a WhatsAppConversation.
+     * @param {WhatsAppConversationCreateArgs} args - Arguments to create a WhatsAppConversation.
+     * @example
+     * // Create one WhatsAppConversation
+     * const WhatsAppConversation = await prisma.whatsAppConversation.create({
+     *   data: {
+     *     // ... data to create a WhatsAppConversation
+     *   }
+     * })
+     * 
+     */
+    create<T extends WhatsAppConversationCreateArgs>(args: SelectSubset<T, WhatsAppConversationCreateArgs<ExtArgs>>): Prisma__WhatsAppConversationClient<$Result.GetResult<Prisma.$WhatsAppConversationPayload<ExtArgs>, T, "create">, never, ExtArgs>
+
+    /**
+     * Create many WhatsAppConversations.
+     * @param {WhatsAppConversationCreateManyArgs} args - Arguments to create many WhatsAppConversations.
+     * @example
+     * // Create many WhatsAppConversations
+     * const whatsAppConversation = await prisma.whatsAppConversation.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends WhatsAppConversationCreateManyArgs>(args?: SelectSubset<T, WhatsAppConversationCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many WhatsAppConversations and returns the data saved in the database.
+     * @param {WhatsAppConversationCreateManyAndReturnArgs} args - Arguments to create many WhatsAppConversations.
+     * @example
+     * // Create many WhatsAppConversations
+     * const whatsAppConversation = await prisma.whatsAppConversation.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many WhatsAppConversations and only return the `msisdn`
+     * const whatsAppConversationWithMsisdnOnly = await prisma.whatsAppConversation.createManyAndReturn({ 
+     *   select: { msisdn: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends WhatsAppConversationCreateManyAndReturnArgs>(args?: SelectSubset<T, WhatsAppConversationCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$WhatsAppConversationPayload<ExtArgs>, T, "createManyAndReturn">>
+
+    /**
+     * Delete a WhatsAppConversation.
+     * @param {WhatsAppConversationDeleteArgs} args - Arguments to delete one WhatsAppConversation.
+     * @example
+     * // Delete one WhatsAppConversation
+     * const WhatsAppConversation = await prisma.whatsAppConversation.delete({
+     *   where: {
+     *     // ... filter to delete one WhatsAppConversation
+     *   }
+     * })
+     * 
+     */
+    delete<T extends WhatsAppConversationDeleteArgs>(args: SelectSubset<T, WhatsAppConversationDeleteArgs<ExtArgs>>): Prisma__WhatsAppConversationClient<$Result.GetResult<Prisma.$WhatsAppConversationPayload<ExtArgs>, T, "delete">, never, ExtArgs>
+
+    /**
+     * Update one WhatsAppConversation.
+     * @param {WhatsAppConversationUpdateArgs} args - Arguments to update one WhatsAppConversation.
+     * @example
+     * // Update one WhatsAppConversation
+     * const whatsAppConversation = await prisma.whatsAppConversation.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends WhatsAppConversationUpdateArgs>(args: SelectSubset<T, WhatsAppConversationUpdateArgs<ExtArgs>>): Prisma__WhatsAppConversationClient<$Result.GetResult<Prisma.$WhatsAppConversationPayload<ExtArgs>, T, "update">, never, ExtArgs>
+
+    /**
+     * Delete zero or more WhatsAppConversations.
+     * @param {WhatsAppConversationDeleteManyArgs} args - Arguments to filter WhatsAppConversations to delete.
+     * @example
+     * // Delete a few WhatsAppConversations
+     * const { count } = await prisma.whatsAppConversation.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends WhatsAppConversationDeleteManyArgs>(args?: SelectSubset<T, WhatsAppConversationDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more WhatsAppConversations.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {WhatsAppConversationUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many WhatsAppConversations
+     * const whatsAppConversation = await prisma.whatsAppConversation.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends WhatsAppConversationUpdateManyArgs>(args: SelectSubset<T, WhatsAppConversationUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one WhatsAppConversation.
+     * @param {WhatsAppConversationUpsertArgs} args - Arguments to update or create a WhatsAppConversation.
+     * @example
+     * // Update or create a WhatsAppConversation
+     * const whatsAppConversation = await prisma.whatsAppConversation.upsert({
+     *   create: {
+     *     // ... data to create a WhatsAppConversation
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the WhatsAppConversation we want to update
+     *   }
+     * })
+     */
+    upsert<T extends WhatsAppConversationUpsertArgs>(args: SelectSubset<T, WhatsAppConversationUpsertArgs<ExtArgs>>): Prisma__WhatsAppConversationClient<$Result.GetResult<Prisma.$WhatsAppConversationPayload<ExtArgs>, T, "upsert">, never, ExtArgs>
+
+
+    /**
+     * Count the number of WhatsAppConversations.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {WhatsAppConversationCountArgs} args - Arguments to filter WhatsAppConversations to count.
+     * @example
+     * // Count the number of WhatsAppConversations
+     * const count = await prisma.whatsAppConversation.count({
+     *   where: {
+     *     // ... the filter for the WhatsAppConversations we want to count
+     *   }
+     * })
+    **/
+    count<T extends WhatsAppConversationCountArgs>(
+      args?: Subset<T, WhatsAppConversationCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], WhatsAppConversationCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a WhatsAppConversation.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {WhatsAppConversationAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends WhatsAppConversationAggregateArgs>(args: Subset<T, WhatsAppConversationAggregateArgs>): Prisma.PrismaPromise<GetWhatsAppConversationAggregateType<T>>
+
+    /**
+     * Group by WhatsAppConversation.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {WhatsAppConversationGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends WhatsAppConversationGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: WhatsAppConversationGroupByArgs['orderBy'] }
+        : { orderBy?: WhatsAppConversationGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, WhatsAppConversationGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetWhatsAppConversationGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the WhatsAppConversation model
+   */
+  readonly fields: WhatsAppConversationFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for WhatsAppConversation.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__WhatsAppConversationClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the WhatsAppConversation model
+   */ 
+  interface WhatsAppConversationFieldRefs {
+    readonly msisdn: FieldRef<"WhatsAppConversation", 'String'>
+    readonly step: FieldRef<"WhatsAppConversation", 'String'>
+    readonly data: FieldRef<"WhatsAppConversation", 'Json'>
+    readonly updatedAt: FieldRef<"WhatsAppConversation", 'DateTime'>
+    readonly createdAt: FieldRef<"WhatsAppConversation", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * WhatsAppConversation findUnique
+   */
+  export type WhatsAppConversationFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the WhatsAppConversation
+     */
+    select?: WhatsAppConversationSelect<ExtArgs> | null
+    /**
+     * Filter, which WhatsAppConversation to fetch.
+     */
+    where: WhatsAppConversationWhereUniqueInput
+  }
+
+  /**
+   * WhatsAppConversation findUniqueOrThrow
+   */
+  export type WhatsAppConversationFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the WhatsAppConversation
+     */
+    select?: WhatsAppConversationSelect<ExtArgs> | null
+    /**
+     * Filter, which WhatsAppConversation to fetch.
+     */
+    where: WhatsAppConversationWhereUniqueInput
+  }
+
+  /**
+   * WhatsAppConversation findFirst
+   */
+  export type WhatsAppConversationFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the WhatsAppConversation
+     */
+    select?: WhatsAppConversationSelect<ExtArgs> | null
+    /**
+     * Filter, which WhatsAppConversation to fetch.
+     */
+    where?: WhatsAppConversationWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of WhatsAppConversations to fetch.
+     */
+    orderBy?: WhatsAppConversationOrderByWithRelationInput | WhatsAppConversationOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for WhatsAppConversations.
+     */
+    cursor?: WhatsAppConversationWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` WhatsAppConversations from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` WhatsAppConversations.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of WhatsAppConversations.
+     */
+    distinct?: WhatsAppConversationScalarFieldEnum | WhatsAppConversationScalarFieldEnum[]
+  }
+
+  /**
+   * WhatsAppConversation findFirstOrThrow
+   */
+  export type WhatsAppConversationFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the WhatsAppConversation
+     */
+    select?: WhatsAppConversationSelect<ExtArgs> | null
+    /**
+     * Filter, which WhatsAppConversation to fetch.
+     */
+    where?: WhatsAppConversationWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of WhatsAppConversations to fetch.
+     */
+    orderBy?: WhatsAppConversationOrderByWithRelationInput | WhatsAppConversationOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for WhatsAppConversations.
+     */
+    cursor?: WhatsAppConversationWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` WhatsAppConversations from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` WhatsAppConversations.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of WhatsAppConversations.
+     */
+    distinct?: WhatsAppConversationScalarFieldEnum | WhatsAppConversationScalarFieldEnum[]
+  }
+
+  /**
+   * WhatsAppConversation findMany
+   */
+  export type WhatsAppConversationFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the WhatsAppConversation
+     */
+    select?: WhatsAppConversationSelect<ExtArgs> | null
+    /**
+     * Filter, which WhatsAppConversations to fetch.
+     */
+    where?: WhatsAppConversationWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of WhatsAppConversations to fetch.
+     */
+    orderBy?: WhatsAppConversationOrderByWithRelationInput | WhatsAppConversationOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing WhatsAppConversations.
+     */
+    cursor?: WhatsAppConversationWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` WhatsAppConversations from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` WhatsAppConversations.
+     */
+    skip?: number
+    distinct?: WhatsAppConversationScalarFieldEnum | WhatsAppConversationScalarFieldEnum[]
+  }
+
+  /**
+   * WhatsAppConversation create
+   */
+  export type WhatsAppConversationCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the WhatsAppConversation
+     */
+    select?: WhatsAppConversationSelect<ExtArgs> | null
+    /**
+     * The data needed to create a WhatsAppConversation.
+     */
+    data: XOR<WhatsAppConversationCreateInput, WhatsAppConversationUncheckedCreateInput>
+  }
+
+  /**
+   * WhatsAppConversation createMany
+   */
+  export type WhatsAppConversationCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many WhatsAppConversations.
+     */
+    data: WhatsAppConversationCreateManyInput | WhatsAppConversationCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * WhatsAppConversation createManyAndReturn
+   */
+  export type WhatsAppConversationCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the WhatsAppConversation
+     */
+    select?: WhatsAppConversationSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * The data used to create many WhatsAppConversations.
+     */
+    data: WhatsAppConversationCreateManyInput | WhatsAppConversationCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * WhatsAppConversation update
+   */
+  export type WhatsAppConversationUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the WhatsAppConversation
+     */
+    select?: WhatsAppConversationSelect<ExtArgs> | null
+    /**
+     * The data needed to update a WhatsAppConversation.
+     */
+    data: XOR<WhatsAppConversationUpdateInput, WhatsAppConversationUncheckedUpdateInput>
+    /**
+     * Choose, which WhatsAppConversation to update.
+     */
+    where: WhatsAppConversationWhereUniqueInput
+  }
+
+  /**
+   * WhatsAppConversation updateMany
+   */
+  export type WhatsAppConversationUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update WhatsAppConversations.
+     */
+    data: XOR<WhatsAppConversationUpdateManyMutationInput, WhatsAppConversationUncheckedUpdateManyInput>
+    /**
+     * Filter which WhatsAppConversations to update
+     */
+    where?: WhatsAppConversationWhereInput
+  }
+
+  /**
+   * WhatsAppConversation upsert
+   */
+  export type WhatsAppConversationUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the WhatsAppConversation
+     */
+    select?: WhatsAppConversationSelect<ExtArgs> | null
+    /**
+     * The filter to search for the WhatsAppConversation to update in case it exists.
+     */
+    where: WhatsAppConversationWhereUniqueInput
+    /**
+     * In case the WhatsAppConversation found by the `where` argument doesn't exist, create a new WhatsAppConversation with this data.
+     */
+    create: XOR<WhatsAppConversationCreateInput, WhatsAppConversationUncheckedCreateInput>
+    /**
+     * In case the WhatsAppConversation was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<WhatsAppConversationUpdateInput, WhatsAppConversationUncheckedUpdateInput>
+  }
+
+  /**
+   * WhatsAppConversation delete
+   */
+  export type WhatsAppConversationDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the WhatsAppConversation
+     */
+    select?: WhatsAppConversationSelect<ExtArgs> | null
+    /**
+     * Filter which WhatsAppConversation to delete.
+     */
+    where: WhatsAppConversationWhereUniqueInput
+  }
+
+  /**
+   * WhatsAppConversation deleteMany
+   */
+  export type WhatsAppConversationDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which WhatsAppConversations to delete
+     */
+    where?: WhatsAppConversationWhereInput
+  }
+
+  /**
+   * WhatsAppConversation without action
+   */
+  export type WhatsAppConversationDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the WhatsAppConversation
+     */
+    select?: WhatsAppConversationSelect<ExtArgs> | null
+  }
+
+
+  /**
    * Model WhatsAppMessage
    */
 
@@ -32634,6 +33759,10 @@ export namespace Prisma {
     slug: 'slug',
     verificationPolicy: 'verificationPolicy',
     status: 'status',
+    verificationCode: 'verificationCode',
+    verificationStatus: 'verificationStatus',
+    verifiedAt: 'verifiedAt',
+    verifiedByUserId: 'verifiedByUserId',
     onboardingStatus: 'onboardingStatus',
     legalName: 'legalName',
     registrationNumber: 'registrationNumber',
@@ -32646,6 +33775,8 @@ export namespace Prisma {
     internalReviewNotes: 'internalReviewNotes',
     logoUrl: 'logoUrl',
     featuredOnHome: 'featuredOnHome',
+    homeSortOrder: 'homeSortOrder',
+    founderExempt: 'founderExempt',
     publicProfileEnabled: 'publicProfileEnabled',
     description: 'description',
     websiteUrl: 'websiteUrl',
@@ -32914,6 +34045,17 @@ export namespace Prisma {
   };
 
   export type AuditExportJobScalarFieldEnum = (typeof AuditExportJobScalarFieldEnum)[keyof typeof AuditExportJobScalarFieldEnum]
+
+
+  export const WhatsAppConversationScalarFieldEnum: {
+    msisdn: 'msisdn',
+    step: 'step',
+    data: 'data',
+    updatedAt: 'updatedAt',
+    createdAt: 'createdAt'
+  };
+
+  export type WhatsAppConversationScalarFieldEnum = (typeof WhatsAppConversationScalarFieldEnum)[keyof typeof WhatsAppConversationScalarFieldEnum]
 
 
   export const WhatsAppMessageScalarFieldEnum: {
@@ -33206,6 +34348,20 @@ export namespace Prisma {
    * Reference to a field of type 'SchoolVerificationStatus[]'
    */
   export type ListEnumSchoolVerificationStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'SchoolVerificationStatus[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'BrandVerificationStatus'
+   */
+  export type EnumBrandVerificationStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'BrandVerificationStatus'>
+    
+
+
+  /**
+   * Reference to a field of type 'BrandVerificationStatus[]'
+   */
+  export type ListEnumBrandVerificationStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'BrandVerificationStatus[]'>
     
 
 
@@ -33515,6 +34671,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"User"> | Date | string
     school?: XOR<SchoolNullableRelationFilter, SchoolWhereInput> | null
     brand?: XOR<BrandNullableRelationFilter, BrandWhereInput> | null
+    brandsVerified?: BrandListRelationFilter
     sessions?: RefreshSessionListRelationFilter
     queuePresets?: AdminQueuePresetListRelationFilter
     exportJobs?: AuditExportJobListRelationFilter
@@ -33534,6 +34691,7 @@ export namespace Prisma {
     updatedAt?: SortOrder
     school?: SchoolOrderByWithRelationInput
     brand?: BrandOrderByWithRelationInput
+    brandsVerified?: BrandOrderByRelationAggregateInput
     sessions?: RefreshSessionOrderByRelationAggregateInput
     queuePresets?: AdminQueuePresetOrderByRelationAggregateInput
     exportJobs?: AuditExportJobOrderByRelationAggregateInput
@@ -33556,6 +34714,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"User"> | Date | string
     school?: XOR<SchoolNullableRelationFilter, SchoolWhereInput> | null
     brand?: XOR<BrandNullableRelationFilter, BrandWhereInput> | null
+    brandsVerified?: BrandListRelationFilter
     sessions?: RefreshSessionListRelationFilter
     queuePresets?: AdminQueuePresetListRelationFilter
     exportJobs?: AuditExportJobListRelationFilter
@@ -33976,6 +35135,10 @@ export namespace Prisma {
     slug?: StringFilter<"Brand"> | string
     verificationPolicy?: JsonNullableFilter<"Brand">
     status?: EnumEntityStatusFilter<"Brand"> | $Enums.EntityStatus
+    verificationCode?: StringNullableFilter<"Brand"> | string | null
+    verificationStatus?: EnumBrandVerificationStatusFilter<"Brand"> | $Enums.BrandVerificationStatus
+    verifiedAt?: DateTimeNullableFilter<"Brand"> | Date | string | null
+    verifiedByUserId?: StringNullableFilter<"Brand"> | string | null
     onboardingStatus?: EnumBrandOnboardingStatusFilter<"Brand"> | $Enums.BrandOnboardingStatus
     legalName?: StringNullableFilter<"Brand"> | string | null
     registrationNumber?: StringNullableFilter<"Brand"> | string | null
@@ -33988,6 +35151,8 @@ export namespace Prisma {
     internalReviewNotes?: StringNullableFilter<"Brand"> | string | null
     logoUrl?: StringNullableFilter<"Brand"> | string | null
     featuredOnHome?: BoolFilter<"Brand"> | boolean
+    homeSortOrder?: IntFilter<"Brand"> | number
+    founderExempt?: BoolFilter<"Brand"> | boolean
     publicProfileEnabled?: BoolFilter<"Brand"> | boolean
     description?: StringNullableFilter<"Brand"> | string | null
     websiteUrl?: StringNullableFilter<"Brand"> | string | null
@@ -34002,6 +35167,7 @@ export namespace Prisma {
     gracePeriodUntil?: DateTimeNullableFilter<"Brand"> | Date | string | null
     createdAt?: DateTimeFilter<"Brand"> | Date | string
     updatedAt?: DateTimeFilter<"Brand"> | Date | string
+    verifiedBy?: XOR<UserNullableRelationFilter, UserWhereInput> | null
     campaigns?: CampaignListRelationFilter
     users?: UserListRelationFilter
     esgSchedules?: EsgReportScheduleListRelationFilter
@@ -34016,6 +35182,10 @@ export namespace Prisma {
     slug?: SortOrder
     verificationPolicy?: SortOrderInput | SortOrder
     status?: SortOrder
+    verificationCode?: SortOrderInput | SortOrder
+    verificationStatus?: SortOrder
+    verifiedAt?: SortOrderInput | SortOrder
+    verifiedByUserId?: SortOrderInput | SortOrder
     onboardingStatus?: SortOrder
     legalName?: SortOrderInput | SortOrder
     registrationNumber?: SortOrderInput | SortOrder
@@ -34028,6 +35198,8 @@ export namespace Prisma {
     internalReviewNotes?: SortOrderInput | SortOrder
     logoUrl?: SortOrderInput | SortOrder
     featuredOnHome?: SortOrder
+    homeSortOrder?: SortOrder
+    founderExempt?: SortOrder
     publicProfileEnabled?: SortOrder
     description?: SortOrderInput | SortOrder
     websiteUrl?: SortOrderInput | SortOrder
@@ -34042,6 +35214,7 @@ export namespace Prisma {
     gracePeriodUntil?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    verifiedBy?: UserOrderByWithRelationInput
     campaigns?: CampaignOrderByRelationAggregateInput
     users?: UserOrderByRelationAggregateInput
     esgSchedules?: EsgReportScheduleOrderByRelationAggregateInput
@@ -34053,12 +35226,16 @@ export namespace Prisma {
     id?: string
     codePrefix?: string
     slug?: string
+    verificationCode?: string
     AND?: BrandWhereInput | BrandWhereInput[]
     OR?: BrandWhereInput[]
     NOT?: BrandWhereInput | BrandWhereInput[]
     name?: StringFilter<"Brand"> | string
     verificationPolicy?: JsonNullableFilter<"Brand">
     status?: EnumEntityStatusFilter<"Brand"> | $Enums.EntityStatus
+    verificationStatus?: EnumBrandVerificationStatusFilter<"Brand"> | $Enums.BrandVerificationStatus
+    verifiedAt?: DateTimeNullableFilter<"Brand"> | Date | string | null
+    verifiedByUserId?: StringNullableFilter<"Brand"> | string | null
     onboardingStatus?: EnumBrandOnboardingStatusFilter<"Brand"> | $Enums.BrandOnboardingStatus
     legalName?: StringNullableFilter<"Brand"> | string | null
     registrationNumber?: StringNullableFilter<"Brand"> | string | null
@@ -34071,6 +35248,8 @@ export namespace Prisma {
     internalReviewNotes?: StringNullableFilter<"Brand"> | string | null
     logoUrl?: StringNullableFilter<"Brand"> | string | null
     featuredOnHome?: BoolFilter<"Brand"> | boolean
+    homeSortOrder?: IntFilter<"Brand"> | number
+    founderExempt?: BoolFilter<"Brand"> | boolean
     publicProfileEnabled?: BoolFilter<"Brand"> | boolean
     description?: StringNullableFilter<"Brand"> | string | null
     websiteUrl?: StringNullableFilter<"Brand"> | string | null
@@ -34085,12 +35264,13 @@ export namespace Prisma {
     gracePeriodUntil?: DateTimeNullableFilter<"Brand"> | Date | string | null
     createdAt?: DateTimeFilter<"Brand"> | Date | string
     updatedAt?: DateTimeFilter<"Brand"> | Date | string
+    verifiedBy?: XOR<UserNullableRelationFilter, UserWhereInput> | null
     campaigns?: CampaignListRelationFilter
     users?: UserListRelationFilter
     esgSchedules?: EsgReportScheduleListRelationFilter
     codes?: CodeListRelationFilter
     agreements?: BrandAgreementListRelationFilter
-  }, "id" | "codePrefix" | "slug">
+  }, "id" | "codePrefix" | "slug" | "verificationCode">
 
   export type BrandOrderByWithAggregationInput = {
     id?: SortOrder
@@ -34099,6 +35279,10 @@ export namespace Prisma {
     slug?: SortOrder
     verificationPolicy?: SortOrderInput | SortOrder
     status?: SortOrder
+    verificationCode?: SortOrderInput | SortOrder
+    verificationStatus?: SortOrder
+    verifiedAt?: SortOrderInput | SortOrder
+    verifiedByUserId?: SortOrderInput | SortOrder
     onboardingStatus?: SortOrder
     legalName?: SortOrderInput | SortOrder
     registrationNumber?: SortOrderInput | SortOrder
@@ -34111,6 +35295,8 @@ export namespace Prisma {
     internalReviewNotes?: SortOrderInput | SortOrder
     logoUrl?: SortOrderInput | SortOrder
     featuredOnHome?: SortOrder
+    homeSortOrder?: SortOrder
+    founderExempt?: SortOrder
     publicProfileEnabled?: SortOrder
     description?: SortOrderInput | SortOrder
     websiteUrl?: SortOrderInput | SortOrder
@@ -34142,6 +35328,10 @@ export namespace Prisma {
     slug?: StringWithAggregatesFilter<"Brand"> | string
     verificationPolicy?: JsonNullableWithAggregatesFilter<"Brand">
     status?: EnumEntityStatusWithAggregatesFilter<"Brand"> | $Enums.EntityStatus
+    verificationCode?: StringNullableWithAggregatesFilter<"Brand"> | string | null
+    verificationStatus?: EnumBrandVerificationStatusWithAggregatesFilter<"Brand"> | $Enums.BrandVerificationStatus
+    verifiedAt?: DateTimeNullableWithAggregatesFilter<"Brand"> | Date | string | null
+    verifiedByUserId?: StringNullableWithAggregatesFilter<"Brand"> | string | null
     onboardingStatus?: EnumBrandOnboardingStatusWithAggregatesFilter<"Brand"> | $Enums.BrandOnboardingStatus
     legalName?: StringNullableWithAggregatesFilter<"Brand"> | string | null
     registrationNumber?: StringNullableWithAggregatesFilter<"Brand"> | string | null
@@ -34154,6 +35344,8 @@ export namespace Prisma {
     internalReviewNotes?: StringNullableWithAggregatesFilter<"Brand"> | string | null
     logoUrl?: StringNullableWithAggregatesFilter<"Brand"> | string | null
     featuredOnHome?: BoolWithAggregatesFilter<"Brand"> | boolean
+    homeSortOrder?: IntWithAggregatesFilter<"Brand"> | number
+    founderExempt?: BoolWithAggregatesFilter<"Brand"> | boolean
     publicProfileEnabled?: BoolWithAggregatesFilter<"Brand"> | boolean
     description?: StringNullableWithAggregatesFilter<"Brand"> | string | null
     websiteUrl?: StringNullableWithAggregatesFilter<"Brand"> | string | null
@@ -35495,6 +36687,58 @@ export namespace Prisma {
     expiresAt?: DateTimeNullableWithAggregatesFilter<"AuditExportJob"> | Date | string | null
   }
 
+  export type WhatsAppConversationWhereInput = {
+    AND?: WhatsAppConversationWhereInput | WhatsAppConversationWhereInput[]
+    OR?: WhatsAppConversationWhereInput[]
+    NOT?: WhatsAppConversationWhereInput | WhatsAppConversationWhereInput[]
+    msisdn?: StringFilter<"WhatsAppConversation"> | string
+    step?: StringFilter<"WhatsAppConversation"> | string
+    data?: JsonFilter<"WhatsAppConversation">
+    updatedAt?: DateTimeFilter<"WhatsAppConversation"> | Date | string
+    createdAt?: DateTimeFilter<"WhatsAppConversation"> | Date | string
+  }
+
+  export type WhatsAppConversationOrderByWithRelationInput = {
+    msisdn?: SortOrder
+    step?: SortOrder
+    data?: SortOrder
+    updatedAt?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type WhatsAppConversationWhereUniqueInput = Prisma.AtLeast<{
+    msisdn?: string
+    AND?: WhatsAppConversationWhereInput | WhatsAppConversationWhereInput[]
+    OR?: WhatsAppConversationWhereInput[]
+    NOT?: WhatsAppConversationWhereInput | WhatsAppConversationWhereInput[]
+    step?: StringFilter<"WhatsAppConversation"> | string
+    data?: JsonFilter<"WhatsAppConversation">
+    updatedAt?: DateTimeFilter<"WhatsAppConversation"> | Date | string
+    createdAt?: DateTimeFilter<"WhatsAppConversation"> | Date | string
+  }, "msisdn">
+
+  export type WhatsAppConversationOrderByWithAggregationInput = {
+    msisdn?: SortOrder
+    step?: SortOrder
+    data?: SortOrder
+    updatedAt?: SortOrder
+    createdAt?: SortOrder
+    _count?: WhatsAppConversationCountOrderByAggregateInput
+    _max?: WhatsAppConversationMaxOrderByAggregateInput
+    _min?: WhatsAppConversationMinOrderByAggregateInput
+  }
+
+  export type WhatsAppConversationScalarWhereWithAggregatesInput = {
+    AND?: WhatsAppConversationScalarWhereWithAggregatesInput | WhatsAppConversationScalarWhereWithAggregatesInput[]
+    OR?: WhatsAppConversationScalarWhereWithAggregatesInput[]
+    NOT?: WhatsAppConversationScalarWhereWithAggregatesInput | WhatsAppConversationScalarWhereWithAggregatesInput[]
+    msisdn?: StringWithAggregatesFilter<"WhatsAppConversation"> | string
+    step?: StringWithAggregatesFilter<"WhatsAppConversation"> | string
+    data?: JsonWithAggregatesFilter<"WhatsAppConversation">
+    updatedAt?: DateTimeWithAggregatesFilter<"WhatsAppConversation"> | Date | string
+    createdAt?: DateTimeWithAggregatesFilter<"WhatsAppConversation"> | Date | string
+  }
+
   export type WhatsAppMessageWhereInput = {
     AND?: WhatsAppMessageWhereInput | WhatsAppMessageWhereInput[]
     OR?: WhatsAppMessageWhereInput[]
@@ -36188,6 +37432,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     school?: SchoolCreateNestedOneWithoutAdminUserInput
     brand?: BrandCreateNestedOneWithoutUsersInput
+    brandsVerified?: BrandCreateNestedManyWithoutVerifiedByInput
     sessions?: RefreshSessionCreateNestedManyWithoutUserInput
     queuePresets?: AdminQueuePresetCreateNestedManyWithoutUserInput
     exportJobs?: AuditExportJobCreateNestedManyWithoutRequestedByInput
@@ -36205,6 +37450,7 @@ export namespace Prisma {
     brandId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    brandsVerified?: BrandUncheckedCreateNestedManyWithoutVerifiedByInput
     sessions?: RefreshSessionUncheckedCreateNestedManyWithoutUserInput
     queuePresets?: AdminQueuePresetUncheckedCreateNestedManyWithoutUserInput
     exportJobs?: AuditExportJobUncheckedCreateNestedManyWithoutRequestedByInput
@@ -36222,6 +37468,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     school?: SchoolUpdateOneWithoutAdminUserNestedInput
     brand?: BrandUpdateOneWithoutUsersNestedInput
+    brandsVerified?: BrandUpdateManyWithoutVerifiedByNestedInput
     sessions?: RefreshSessionUpdateManyWithoutUserNestedInput
     queuePresets?: AdminQueuePresetUpdateManyWithoutUserNestedInput
     exportJobs?: AuditExportJobUpdateManyWithoutRequestedByNestedInput
@@ -36239,6 +37486,7 @@ export namespace Prisma {
     brandId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    brandsVerified?: BrandUncheckedUpdateManyWithoutVerifiedByNestedInput
     sessions?: RefreshSessionUncheckedUpdateManyWithoutUserNestedInput
     queuePresets?: AdminQueuePresetUncheckedUpdateManyWithoutUserNestedInput
     exportJobs?: AuditExportJobUncheckedUpdateManyWithoutRequestedByNestedInput
@@ -36723,6 +37971,9 @@ export namespace Prisma {
     slug: string
     verificationPolicy?: NullableJsonNullValueInput | InputJsonValue
     status?: $Enums.EntityStatus
+    verificationCode?: string | null
+    verificationStatus?: $Enums.BrandVerificationStatus
+    verifiedAt?: Date | string | null
     onboardingStatus?: $Enums.BrandOnboardingStatus
     legalName?: string | null
     registrationNumber?: string | null
@@ -36735,6 +37986,8 @@ export namespace Prisma {
     internalReviewNotes?: string | null
     logoUrl?: string | null
     featuredOnHome?: boolean
+    homeSortOrder?: number
+    founderExempt?: boolean
     publicProfileEnabled?: boolean
     description?: string | null
     websiteUrl?: string | null
@@ -36749,6 +38002,7 @@ export namespace Prisma {
     gracePeriodUntil?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    verifiedBy?: UserCreateNestedOneWithoutBrandsVerifiedInput
     campaigns?: CampaignCreateNestedManyWithoutBrandInput
     users?: UserCreateNestedManyWithoutBrandInput
     esgSchedules?: EsgReportScheduleCreateNestedManyWithoutBrandInput
@@ -36763,6 +38017,10 @@ export namespace Prisma {
     slug: string
     verificationPolicy?: NullableJsonNullValueInput | InputJsonValue
     status?: $Enums.EntityStatus
+    verificationCode?: string | null
+    verificationStatus?: $Enums.BrandVerificationStatus
+    verifiedAt?: Date | string | null
+    verifiedByUserId?: string | null
     onboardingStatus?: $Enums.BrandOnboardingStatus
     legalName?: string | null
     registrationNumber?: string | null
@@ -36775,6 +38033,8 @@ export namespace Prisma {
     internalReviewNotes?: string | null
     logoUrl?: string | null
     featuredOnHome?: boolean
+    homeSortOrder?: number
+    founderExempt?: boolean
     publicProfileEnabled?: boolean
     description?: string | null
     websiteUrl?: string | null
@@ -36803,6 +38063,9 @@ export namespace Prisma {
     slug?: StringFieldUpdateOperationsInput | string
     verificationPolicy?: NullableJsonNullValueInput | InputJsonValue
     status?: EnumEntityStatusFieldUpdateOperationsInput | $Enums.EntityStatus
+    verificationCode?: NullableStringFieldUpdateOperationsInput | string | null
+    verificationStatus?: EnumBrandVerificationStatusFieldUpdateOperationsInput | $Enums.BrandVerificationStatus
+    verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     onboardingStatus?: EnumBrandOnboardingStatusFieldUpdateOperationsInput | $Enums.BrandOnboardingStatus
     legalName?: NullableStringFieldUpdateOperationsInput | string | null
     registrationNumber?: NullableStringFieldUpdateOperationsInput | string | null
@@ -36815,6 +38078,8 @@ export namespace Prisma {
     internalReviewNotes?: NullableStringFieldUpdateOperationsInput | string | null
     logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
     featuredOnHome?: BoolFieldUpdateOperationsInput | boolean
+    homeSortOrder?: IntFieldUpdateOperationsInput | number
+    founderExempt?: BoolFieldUpdateOperationsInput | boolean
     publicProfileEnabled?: BoolFieldUpdateOperationsInput | boolean
     description?: NullableStringFieldUpdateOperationsInput | string | null
     websiteUrl?: NullableStringFieldUpdateOperationsInput | string | null
@@ -36829,6 +38094,7 @@ export namespace Prisma {
     gracePeriodUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    verifiedBy?: UserUpdateOneWithoutBrandsVerifiedNestedInput
     campaigns?: CampaignUpdateManyWithoutBrandNestedInput
     users?: UserUpdateManyWithoutBrandNestedInput
     esgSchedules?: EsgReportScheduleUpdateManyWithoutBrandNestedInput
@@ -36843,6 +38109,10 @@ export namespace Prisma {
     slug?: StringFieldUpdateOperationsInput | string
     verificationPolicy?: NullableJsonNullValueInput | InputJsonValue
     status?: EnumEntityStatusFieldUpdateOperationsInput | $Enums.EntityStatus
+    verificationCode?: NullableStringFieldUpdateOperationsInput | string | null
+    verificationStatus?: EnumBrandVerificationStatusFieldUpdateOperationsInput | $Enums.BrandVerificationStatus
+    verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    verifiedByUserId?: NullableStringFieldUpdateOperationsInput | string | null
     onboardingStatus?: EnumBrandOnboardingStatusFieldUpdateOperationsInput | $Enums.BrandOnboardingStatus
     legalName?: NullableStringFieldUpdateOperationsInput | string | null
     registrationNumber?: NullableStringFieldUpdateOperationsInput | string | null
@@ -36855,6 +38125,8 @@ export namespace Prisma {
     internalReviewNotes?: NullableStringFieldUpdateOperationsInput | string | null
     logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
     featuredOnHome?: BoolFieldUpdateOperationsInput | boolean
+    homeSortOrder?: IntFieldUpdateOperationsInput | number
+    founderExempt?: BoolFieldUpdateOperationsInput | boolean
     publicProfileEnabled?: BoolFieldUpdateOperationsInput | boolean
     description?: NullableStringFieldUpdateOperationsInput | string | null
     websiteUrl?: NullableStringFieldUpdateOperationsInput | string | null
@@ -36883,6 +38155,10 @@ export namespace Prisma {
     slug: string
     verificationPolicy?: NullableJsonNullValueInput | InputJsonValue
     status?: $Enums.EntityStatus
+    verificationCode?: string | null
+    verificationStatus?: $Enums.BrandVerificationStatus
+    verifiedAt?: Date | string | null
+    verifiedByUserId?: string | null
     onboardingStatus?: $Enums.BrandOnboardingStatus
     legalName?: string | null
     registrationNumber?: string | null
@@ -36895,6 +38171,8 @@ export namespace Prisma {
     internalReviewNotes?: string | null
     logoUrl?: string | null
     featuredOnHome?: boolean
+    homeSortOrder?: number
+    founderExempt?: boolean
     publicProfileEnabled?: boolean
     description?: string | null
     websiteUrl?: string | null
@@ -36918,6 +38196,9 @@ export namespace Prisma {
     slug?: StringFieldUpdateOperationsInput | string
     verificationPolicy?: NullableJsonNullValueInput | InputJsonValue
     status?: EnumEntityStatusFieldUpdateOperationsInput | $Enums.EntityStatus
+    verificationCode?: NullableStringFieldUpdateOperationsInput | string | null
+    verificationStatus?: EnumBrandVerificationStatusFieldUpdateOperationsInput | $Enums.BrandVerificationStatus
+    verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     onboardingStatus?: EnumBrandOnboardingStatusFieldUpdateOperationsInput | $Enums.BrandOnboardingStatus
     legalName?: NullableStringFieldUpdateOperationsInput | string | null
     registrationNumber?: NullableStringFieldUpdateOperationsInput | string | null
@@ -36930,6 +38211,8 @@ export namespace Prisma {
     internalReviewNotes?: NullableStringFieldUpdateOperationsInput | string | null
     logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
     featuredOnHome?: BoolFieldUpdateOperationsInput | boolean
+    homeSortOrder?: IntFieldUpdateOperationsInput | number
+    founderExempt?: BoolFieldUpdateOperationsInput | boolean
     publicProfileEnabled?: BoolFieldUpdateOperationsInput | boolean
     description?: NullableStringFieldUpdateOperationsInput | string | null
     websiteUrl?: NullableStringFieldUpdateOperationsInput | string | null
@@ -36953,6 +38236,10 @@ export namespace Prisma {
     slug?: StringFieldUpdateOperationsInput | string
     verificationPolicy?: NullableJsonNullValueInput | InputJsonValue
     status?: EnumEntityStatusFieldUpdateOperationsInput | $Enums.EntityStatus
+    verificationCode?: NullableStringFieldUpdateOperationsInput | string | null
+    verificationStatus?: EnumBrandVerificationStatusFieldUpdateOperationsInput | $Enums.BrandVerificationStatus
+    verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    verifiedByUserId?: NullableStringFieldUpdateOperationsInput | string | null
     onboardingStatus?: EnumBrandOnboardingStatusFieldUpdateOperationsInput | $Enums.BrandOnboardingStatus
     legalName?: NullableStringFieldUpdateOperationsInput | string | null
     registrationNumber?: NullableStringFieldUpdateOperationsInput | string | null
@@ -36965,6 +38252,8 @@ export namespace Prisma {
     internalReviewNotes?: NullableStringFieldUpdateOperationsInput | string | null
     logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
     featuredOnHome?: BoolFieldUpdateOperationsInput | boolean
+    homeSortOrder?: IntFieldUpdateOperationsInput | number
+    founderExempt?: BoolFieldUpdateOperationsInput | boolean
     publicProfileEnabled?: BoolFieldUpdateOperationsInput | boolean
     description?: NullableStringFieldUpdateOperationsInput | string | null
     websiteUrl?: NullableStringFieldUpdateOperationsInput | string | null
@@ -38495,6 +39784,62 @@ export namespace Prisma {
     expiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
+  export type WhatsAppConversationCreateInput = {
+    msisdn: string
+    step: string
+    data?: JsonNullValueInput | InputJsonValue
+    updatedAt?: Date | string
+    createdAt?: Date | string
+  }
+
+  export type WhatsAppConversationUncheckedCreateInput = {
+    msisdn: string
+    step: string
+    data?: JsonNullValueInput | InputJsonValue
+    updatedAt?: Date | string
+    createdAt?: Date | string
+  }
+
+  export type WhatsAppConversationUpdateInput = {
+    msisdn?: StringFieldUpdateOperationsInput | string
+    step?: StringFieldUpdateOperationsInput | string
+    data?: JsonNullValueInput | InputJsonValue
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type WhatsAppConversationUncheckedUpdateInput = {
+    msisdn?: StringFieldUpdateOperationsInput | string
+    step?: StringFieldUpdateOperationsInput | string
+    data?: JsonNullValueInput | InputJsonValue
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type WhatsAppConversationCreateManyInput = {
+    msisdn: string
+    step: string
+    data?: JsonNullValueInput | InputJsonValue
+    updatedAt?: Date | string
+    createdAt?: Date | string
+  }
+
+  export type WhatsAppConversationUpdateManyMutationInput = {
+    msisdn?: StringFieldUpdateOperationsInput | string
+    step?: StringFieldUpdateOperationsInput | string
+    data?: JsonNullValueInput | InputJsonValue
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type WhatsAppConversationUncheckedUpdateManyInput = {
+    msisdn?: StringFieldUpdateOperationsInput | string
+    step?: StringFieldUpdateOperationsInput | string
+    data?: JsonNullValueInput | InputJsonValue
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type WhatsAppMessageCreateInput = {
     id?: string
     toMsisdn: string
@@ -39339,6 +40684,12 @@ export namespace Prisma {
     isNot?: BrandWhereInput | null
   }
 
+  export type BrandListRelationFilter = {
+    every?: BrandWhereInput
+    some?: BrandWhereInput
+    none?: BrandWhereInput
+  }
+
   export type RefreshSessionListRelationFilter = {
     every?: RefreshSessionWhereInput
     some?: RefreshSessionWhereInput
@@ -39366,6 +40717,10 @@ export namespace Prisma {
   export type SortOrderInput = {
     sort: SortOrder
     nulls?: NullsOrder
+  }
+
+  export type BrandOrderByRelationAggregateInput = {
+    _count?: SortOrder
   }
 
   export type RefreshSessionOrderByRelationAggregateInput = {
@@ -39898,6 +41253,13 @@ export namespace Prisma {
     updatedAt?: SortOrder
   }
 
+  export type EnumBrandVerificationStatusFilter<$PrismaModel = never> = {
+    equals?: $Enums.BrandVerificationStatus | EnumBrandVerificationStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.BrandVerificationStatus[] | ListEnumBrandVerificationStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.BrandVerificationStatus[] | ListEnumBrandVerificationStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumBrandVerificationStatusFilter<$PrismaModel> | $Enums.BrandVerificationStatus
+  }
+
   export type EnumBrandOnboardingStatusFilter<$PrismaModel = never> = {
     equals?: $Enums.BrandOnboardingStatus | EnumBrandOnboardingStatusFieldRefInput<$PrismaModel>
     in?: $Enums.BrandOnboardingStatus[] | ListEnumBrandOnboardingStatusFieldRefInput<$PrismaModel>
@@ -40007,6 +41369,10 @@ export namespace Prisma {
     slug?: SortOrder
     verificationPolicy?: SortOrder
     status?: SortOrder
+    verificationCode?: SortOrder
+    verificationStatus?: SortOrder
+    verifiedAt?: SortOrder
+    verifiedByUserId?: SortOrder
     onboardingStatus?: SortOrder
     legalName?: SortOrder
     registrationNumber?: SortOrder
@@ -40019,6 +41385,8 @@ export namespace Prisma {
     internalReviewNotes?: SortOrder
     logoUrl?: SortOrder
     featuredOnHome?: SortOrder
+    homeSortOrder?: SortOrder
+    founderExempt?: SortOrder
     publicProfileEnabled?: SortOrder
     description?: SortOrder
     websiteUrl?: SortOrder
@@ -40036,6 +41404,7 @@ export namespace Prisma {
   }
 
   export type BrandAvgOrderByAggregateInput = {
+    homeSortOrder?: SortOrder
     recurringAmountZar?: SortOrder
   }
 
@@ -40045,6 +41414,10 @@ export namespace Prisma {
     codePrefix?: SortOrder
     slug?: SortOrder
     status?: SortOrder
+    verificationCode?: SortOrder
+    verificationStatus?: SortOrder
+    verifiedAt?: SortOrder
+    verifiedByUserId?: SortOrder
     onboardingStatus?: SortOrder
     legalName?: SortOrder
     registrationNumber?: SortOrder
@@ -40055,6 +41428,8 @@ export namespace Prisma {
     internalReviewNotes?: SortOrder
     logoUrl?: SortOrder
     featuredOnHome?: SortOrder
+    homeSortOrder?: SortOrder
+    founderExempt?: SortOrder
     publicProfileEnabled?: SortOrder
     description?: SortOrder
     websiteUrl?: SortOrder
@@ -40077,6 +41452,10 @@ export namespace Prisma {
     codePrefix?: SortOrder
     slug?: SortOrder
     status?: SortOrder
+    verificationCode?: SortOrder
+    verificationStatus?: SortOrder
+    verifiedAt?: SortOrder
+    verifiedByUserId?: SortOrder
     onboardingStatus?: SortOrder
     legalName?: SortOrder
     registrationNumber?: SortOrder
@@ -40087,6 +41466,8 @@ export namespace Prisma {
     internalReviewNotes?: SortOrder
     logoUrl?: SortOrder
     featuredOnHome?: SortOrder
+    homeSortOrder?: SortOrder
+    founderExempt?: SortOrder
     publicProfileEnabled?: SortOrder
     description?: SortOrder
     websiteUrl?: SortOrder
@@ -40104,7 +41485,18 @@ export namespace Prisma {
   }
 
   export type BrandSumOrderByAggregateInput = {
+    homeSortOrder?: SortOrder
     recurringAmountZar?: SortOrder
+  }
+
+  export type EnumBrandVerificationStatusWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.BrandVerificationStatus | EnumBrandVerificationStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.BrandVerificationStatus[] | ListEnumBrandVerificationStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.BrandVerificationStatus[] | ListEnumBrandVerificationStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumBrandVerificationStatusWithAggregatesFilter<$PrismaModel> | $Enums.BrandVerificationStatus
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumBrandVerificationStatusFilter<$PrismaModel>
+    _max?: NestedEnumBrandVerificationStatusFilter<$PrismaModel>
   }
 
   export type EnumBrandOnboardingStatusWithAggregatesFilter<$PrismaModel = never> = {
@@ -41176,6 +42568,28 @@ export namespace Prisma {
     _max?: NestedEnumExportJobStatusFilter<$PrismaModel>
   }
 
+  export type WhatsAppConversationCountOrderByAggregateInput = {
+    msisdn?: SortOrder
+    step?: SortOrder
+    data?: SortOrder
+    updatedAt?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type WhatsAppConversationMaxOrderByAggregateInput = {
+    msisdn?: SortOrder
+    step?: SortOrder
+    updatedAt?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type WhatsAppConversationMinOrderByAggregateInput = {
+    msisdn?: SortOrder
+    step?: SortOrder
+    updatedAt?: SortOrder
+    createdAt?: SortOrder
+  }
+
   export type EnumWhatsAppMessageStatusFilter<$PrismaModel = never> = {
     equals?: $Enums.WhatsAppMessageStatus | EnumWhatsAppMessageStatusFieldRefInput<$PrismaModel>
     in?: $Enums.WhatsAppMessageStatus[] | ListEnumWhatsAppMessageStatusFieldRefInput<$PrismaModel>
@@ -41677,6 +43091,13 @@ export namespace Prisma {
     connect?: BrandWhereUniqueInput
   }
 
+  export type BrandCreateNestedManyWithoutVerifiedByInput = {
+    create?: XOR<BrandCreateWithoutVerifiedByInput, BrandUncheckedCreateWithoutVerifiedByInput> | BrandCreateWithoutVerifiedByInput[] | BrandUncheckedCreateWithoutVerifiedByInput[]
+    connectOrCreate?: BrandCreateOrConnectWithoutVerifiedByInput | BrandCreateOrConnectWithoutVerifiedByInput[]
+    createMany?: BrandCreateManyVerifiedByInputEnvelope
+    connect?: BrandWhereUniqueInput | BrandWhereUniqueInput[]
+  }
+
   export type RefreshSessionCreateNestedManyWithoutUserInput = {
     create?: XOR<RefreshSessionCreateWithoutUserInput, RefreshSessionUncheckedCreateWithoutUserInput> | RefreshSessionCreateWithoutUserInput[] | RefreshSessionUncheckedCreateWithoutUserInput[]
     connectOrCreate?: RefreshSessionCreateOrConnectWithoutUserInput | RefreshSessionCreateOrConnectWithoutUserInput[]
@@ -41703,6 +43124,13 @@ export namespace Prisma {
     connectOrCreate?: PasswordResetTokenCreateOrConnectWithoutUserInput | PasswordResetTokenCreateOrConnectWithoutUserInput[]
     createMany?: PasswordResetTokenCreateManyUserInputEnvelope
     connect?: PasswordResetTokenWhereUniqueInput | PasswordResetTokenWhereUniqueInput[]
+  }
+
+  export type BrandUncheckedCreateNestedManyWithoutVerifiedByInput = {
+    create?: XOR<BrandCreateWithoutVerifiedByInput, BrandUncheckedCreateWithoutVerifiedByInput> | BrandCreateWithoutVerifiedByInput[] | BrandUncheckedCreateWithoutVerifiedByInput[]
+    connectOrCreate?: BrandCreateOrConnectWithoutVerifiedByInput | BrandCreateOrConnectWithoutVerifiedByInput[]
+    createMany?: BrandCreateManyVerifiedByInputEnvelope
+    connect?: BrandWhereUniqueInput | BrandWhereUniqueInput[]
   }
 
   export type RefreshSessionUncheckedCreateNestedManyWithoutUserInput = {
@@ -41769,6 +43197,20 @@ export namespace Prisma {
     update?: XOR<XOR<BrandUpdateToOneWithWhereWithoutUsersInput, BrandUpdateWithoutUsersInput>, BrandUncheckedUpdateWithoutUsersInput>
   }
 
+  export type BrandUpdateManyWithoutVerifiedByNestedInput = {
+    create?: XOR<BrandCreateWithoutVerifiedByInput, BrandUncheckedCreateWithoutVerifiedByInput> | BrandCreateWithoutVerifiedByInput[] | BrandUncheckedCreateWithoutVerifiedByInput[]
+    connectOrCreate?: BrandCreateOrConnectWithoutVerifiedByInput | BrandCreateOrConnectWithoutVerifiedByInput[]
+    upsert?: BrandUpsertWithWhereUniqueWithoutVerifiedByInput | BrandUpsertWithWhereUniqueWithoutVerifiedByInput[]
+    createMany?: BrandCreateManyVerifiedByInputEnvelope
+    set?: BrandWhereUniqueInput | BrandWhereUniqueInput[]
+    disconnect?: BrandWhereUniqueInput | BrandWhereUniqueInput[]
+    delete?: BrandWhereUniqueInput | BrandWhereUniqueInput[]
+    connect?: BrandWhereUniqueInput | BrandWhereUniqueInput[]
+    update?: BrandUpdateWithWhereUniqueWithoutVerifiedByInput | BrandUpdateWithWhereUniqueWithoutVerifiedByInput[]
+    updateMany?: BrandUpdateManyWithWhereWithoutVerifiedByInput | BrandUpdateManyWithWhereWithoutVerifiedByInput[]
+    deleteMany?: BrandScalarWhereInput | BrandScalarWhereInput[]
+  }
+
   export type RefreshSessionUpdateManyWithoutUserNestedInput = {
     create?: XOR<RefreshSessionCreateWithoutUserInput, RefreshSessionUncheckedCreateWithoutUserInput> | RefreshSessionCreateWithoutUserInput[] | RefreshSessionUncheckedCreateWithoutUserInput[]
     connectOrCreate?: RefreshSessionCreateOrConnectWithoutUserInput | RefreshSessionCreateOrConnectWithoutUserInput[]
@@ -41827,6 +43269,20 @@ export namespace Prisma {
 
   export type NullableStringFieldUpdateOperationsInput = {
     set?: string | null
+  }
+
+  export type BrandUncheckedUpdateManyWithoutVerifiedByNestedInput = {
+    create?: XOR<BrandCreateWithoutVerifiedByInput, BrandUncheckedCreateWithoutVerifiedByInput> | BrandCreateWithoutVerifiedByInput[] | BrandUncheckedCreateWithoutVerifiedByInput[]
+    connectOrCreate?: BrandCreateOrConnectWithoutVerifiedByInput | BrandCreateOrConnectWithoutVerifiedByInput[]
+    upsert?: BrandUpsertWithWhereUniqueWithoutVerifiedByInput | BrandUpsertWithWhereUniqueWithoutVerifiedByInput[]
+    createMany?: BrandCreateManyVerifiedByInputEnvelope
+    set?: BrandWhereUniqueInput | BrandWhereUniqueInput[]
+    disconnect?: BrandWhereUniqueInput | BrandWhereUniqueInput[]
+    delete?: BrandWhereUniqueInput | BrandWhereUniqueInput[]
+    connect?: BrandWhereUniqueInput | BrandWhereUniqueInput[]
+    update?: BrandUpdateWithWhereUniqueWithoutVerifiedByInput | BrandUpdateWithWhereUniqueWithoutVerifiedByInput[]
+    updateMany?: BrandUpdateManyWithWhereWithoutVerifiedByInput | BrandUpdateManyWithWhereWithoutVerifiedByInput[]
+    deleteMany?: BrandScalarWhereInput | BrandScalarWhereInput[]
   }
 
   export type RefreshSessionUncheckedUpdateManyWithoutUserNestedInput = {
@@ -42195,6 +43651,12 @@ export namespace Prisma {
     set: string[]
   }
 
+  export type UserCreateNestedOneWithoutBrandsVerifiedInput = {
+    create?: XOR<UserCreateWithoutBrandsVerifiedInput, UserUncheckedCreateWithoutBrandsVerifiedInput>
+    connectOrCreate?: UserCreateOrConnectWithoutBrandsVerifiedInput
+    connect?: UserWhereUniqueInput
+  }
+
   export type CampaignCreateNestedManyWithoutBrandInput = {
     create?: XOR<CampaignCreateWithoutBrandInput, CampaignUncheckedCreateWithoutBrandInput> | CampaignCreateWithoutBrandInput[] | CampaignUncheckedCreateWithoutBrandInput[]
     connectOrCreate?: CampaignCreateOrConnectWithoutBrandInput | CampaignCreateOrConnectWithoutBrandInput[]
@@ -42265,6 +43727,10 @@ export namespace Prisma {
     connect?: BrandAgreementWhereUniqueInput | BrandAgreementWhereUniqueInput[]
   }
 
+  export type EnumBrandVerificationStatusFieldUpdateOperationsInput = {
+    set?: $Enums.BrandVerificationStatus
+  }
+
   export type EnumBrandOnboardingStatusFieldUpdateOperationsInput = {
     set?: $Enums.BrandOnboardingStatus
   }
@@ -42296,6 +43762,16 @@ export namespace Prisma {
 
   export type EnumBillingCycleFieldUpdateOperationsInput = {
     set?: $Enums.BillingCycle
+  }
+
+  export type UserUpdateOneWithoutBrandsVerifiedNestedInput = {
+    create?: XOR<UserCreateWithoutBrandsVerifiedInput, UserUncheckedCreateWithoutBrandsVerifiedInput>
+    connectOrCreate?: UserCreateOrConnectWithoutBrandsVerifiedInput
+    upsert?: UserUpsertWithoutBrandsVerifiedInput
+    disconnect?: UserWhereInput | boolean
+    delete?: UserWhereInput | boolean
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutBrandsVerifiedInput, UserUpdateWithoutBrandsVerifiedInput>, UserUncheckedUpdateWithoutBrandsVerifiedInput>
   }
 
   export type CampaignUpdateManyWithoutBrandNestedInput = {
@@ -43719,6 +45195,13 @@ export namespace Prisma {
     _max?: NestedEnumSchoolVerificationStatusFilter<$PrismaModel>
   }
 
+  export type NestedEnumBrandVerificationStatusFilter<$PrismaModel = never> = {
+    equals?: $Enums.BrandVerificationStatus | EnumBrandVerificationStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.BrandVerificationStatus[] | ListEnumBrandVerificationStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.BrandVerificationStatus[] | ListEnumBrandVerificationStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumBrandVerificationStatusFilter<$PrismaModel> | $Enums.BrandVerificationStatus
+  }
+
   export type NestedEnumBrandOnboardingStatusFilter<$PrismaModel = never> = {
     equals?: $Enums.BrandOnboardingStatus | EnumBrandOnboardingStatusFieldRefInput<$PrismaModel>
     in?: $Enums.BrandOnboardingStatus[] | ListEnumBrandOnboardingStatusFieldRefInput<$PrismaModel>
@@ -43761,6 +45244,16 @@ export namespace Prisma {
     in?: $Enums.BillingCycle[] | ListEnumBillingCycleFieldRefInput<$PrismaModel>
     notIn?: $Enums.BillingCycle[] | ListEnumBillingCycleFieldRefInput<$PrismaModel>
     not?: NestedEnumBillingCycleFilter<$PrismaModel> | $Enums.BillingCycle
+  }
+
+  export type NestedEnumBrandVerificationStatusWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.BrandVerificationStatus | EnumBrandVerificationStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.BrandVerificationStatus[] | ListEnumBrandVerificationStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.BrandVerificationStatus[] | ListEnumBrandVerificationStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumBrandVerificationStatusWithAggregatesFilter<$PrismaModel> | $Enums.BrandVerificationStatus
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumBrandVerificationStatusFilter<$PrismaModel>
+    _max?: NestedEnumBrandVerificationStatusFilter<$PrismaModel>
   }
 
   export type NestedEnumBrandOnboardingStatusWithAggregatesFilter<$PrismaModel = never> = {
@@ -44168,6 +45661,9 @@ export namespace Prisma {
     slug: string
     verificationPolicy?: NullableJsonNullValueInput | InputJsonValue
     status?: $Enums.EntityStatus
+    verificationCode?: string | null
+    verificationStatus?: $Enums.BrandVerificationStatus
+    verifiedAt?: Date | string | null
     onboardingStatus?: $Enums.BrandOnboardingStatus
     legalName?: string | null
     registrationNumber?: string | null
@@ -44180,6 +45676,8 @@ export namespace Prisma {
     internalReviewNotes?: string | null
     logoUrl?: string | null
     featuredOnHome?: boolean
+    homeSortOrder?: number
+    founderExempt?: boolean
     publicProfileEnabled?: boolean
     description?: string | null
     websiteUrl?: string | null
@@ -44194,6 +45692,7 @@ export namespace Prisma {
     gracePeriodUntil?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    verifiedBy?: UserCreateNestedOneWithoutBrandsVerifiedInput
     campaigns?: CampaignCreateNestedManyWithoutBrandInput
     esgSchedules?: EsgReportScheduleCreateNestedManyWithoutBrandInput
     codes?: CodeCreateNestedManyWithoutBrandInput
@@ -44207,6 +45706,10 @@ export namespace Prisma {
     slug: string
     verificationPolicy?: NullableJsonNullValueInput | InputJsonValue
     status?: $Enums.EntityStatus
+    verificationCode?: string | null
+    verificationStatus?: $Enums.BrandVerificationStatus
+    verifiedAt?: Date | string | null
+    verifiedByUserId?: string | null
     onboardingStatus?: $Enums.BrandOnboardingStatus
     legalName?: string | null
     registrationNumber?: string | null
@@ -44219,6 +45722,8 @@ export namespace Prisma {
     internalReviewNotes?: string | null
     logoUrl?: string | null
     featuredOnHome?: boolean
+    homeSortOrder?: number
+    founderExempt?: boolean
     publicProfileEnabled?: boolean
     description?: string | null
     websiteUrl?: string | null
@@ -44242,6 +45747,106 @@ export namespace Prisma {
   export type BrandCreateOrConnectWithoutUsersInput = {
     where: BrandWhereUniqueInput
     create: XOR<BrandCreateWithoutUsersInput, BrandUncheckedCreateWithoutUsersInput>
+  }
+
+  export type BrandCreateWithoutVerifiedByInput = {
+    id?: string
+    name: string
+    codePrefix: string
+    slug: string
+    verificationPolicy?: NullableJsonNullValueInput | InputJsonValue
+    status?: $Enums.EntityStatus
+    verificationCode?: string | null
+    verificationStatus?: $Enums.BrandVerificationStatus
+    verifiedAt?: Date | string | null
+    onboardingStatus?: $Enums.BrandOnboardingStatus
+    legalName?: string | null
+    registrationNumber?: string | null
+    vatNumber?: string | null
+    primaryContactEmail?: string | null
+    contactPersons?: NullableJsonNullValueInput | InputJsonValue
+    intendedProvinces?: BrandCreateintendedProvincesInput | string[]
+    campaignIntention?: string | null
+    productsInvolved?: string | null
+    internalReviewNotes?: string | null
+    logoUrl?: string | null
+    featuredOnHome?: boolean
+    homeSortOrder?: number
+    founderExempt?: boolean
+    publicProfileEnabled?: boolean
+    description?: string | null
+    websiteUrl?: string | null
+    brandColor?: string | null
+    subscriptionStatus?: $Enums.BrandSubscriptionStatus | null
+    subscriptionPlan?: $Enums.BrandSubscriptionPlan | null
+    subscriptionStartDate?: Date | string | null
+    subscriptionEndDate?: Date | string | null
+    activationFeePaid?: boolean
+    recurringAmountZar?: Decimal | DecimalJsLike | number | string | null
+    billingCycle?: $Enums.BillingCycle
+    gracePeriodUntil?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    campaigns?: CampaignCreateNestedManyWithoutBrandInput
+    users?: UserCreateNestedManyWithoutBrandInput
+    esgSchedules?: EsgReportScheduleCreateNestedManyWithoutBrandInput
+    codes?: CodeCreateNestedManyWithoutBrandInput
+    agreements?: BrandAgreementCreateNestedManyWithoutBrandInput
+  }
+
+  export type BrandUncheckedCreateWithoutVerifiedByInput = {
+    id?: string
+    name: string
+    codePrefix: string
+    slug: string
+    verificationPolicy?: NullableJsonNullValueInput | InputJsonValue
+    status?: $Enums.EntityStatus
+    verificationCode?: string | null
+    verificationStatus?: $Enums.BrandVerificationStatus
+    verifiedAt?: Date | string | null
+    onboardingStatus?: $Enums.BrandOnboardingStatus
+    legalName?: string | null
+    registrationNumber?: string | null
+    vatNumber?: string | null
+    primaryContactEmail?: string | null
+    contactPersons?: NullableJsonNullValueInput | InputJsonValue
+    intendedProvinces?: BrandCreateintendedProvincesInput | string[]
+    campaignIntention?: string | null
+    productsInvolved?: string | null
+    internalReviewNotes?: string | null
+    logoUrl?: string | null
+    featuredOnHome?: boolean
+    homeSortOrder?: number
+    founderExempt?: boolean
+    publicProfileEnabled?: boolean
+    description?: string | null
+    websiteUrl?: string | null
+    brandColor?: string | null
+    subscriptionStatus?: $Enums.BrandSubscriptionStatus | null
+    subscriptionPlan?: $Enums.BrandSubscriptionPlan | null
+    subscriptionStartDate?: Date | string | null
+    subscriptionEndDate?: Date | string | null
+    activationFeePaid?: boolean
+    recurringAmountZar?: Decimal | DecimalJsLike | number | string | null
+    billingCycle?: $Enums.BillingCycle
+    gracePeriodUntil?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    campaigns?: CampaignUncheckedCreateNestedManyWithoutBrandInput
+    users?: UserUncheckedCreateNestedManyWithoutBrandInput
+    esgSchedules?: EsgReportScheduleUncheckedCreateNestedManyWithoutBrandInput
+    codes?: CodeUncheckedCreateNestedManyWithoutBrandInput
+    agreements?: BrandAgreementUncheckedCreateNestedManyWithoutBrandInput
+  }
+
+  export type BrandCreateOrConnectWithoutVerifiedByInput = {
+    where: BrandWhereUniqueInput
+    create: XOR<BrandCreateWithoutVerifiedByInput, BrandUncheckedCreateWithoutVerifiedByInput>
+  }
+
+  export type BrandCreateManyVerifiedByInputEnvelope = {
+    data: BrandCreateManyVerifiedByInput | BrandCreateManyVerifiedByInput[]
+    skipDuplicates?: boolean
   }
 
   export type RefreshSessionCreateWithoutUserInput = {
@@ -44457,6 +46062,9 @@ export namespace Prisma {
     slug?: StringFieldUpdateOperationsInput | string
     verificationPolicy?: NullableJsonNullValueInput | InputJsonValue
     status?: EnumEntityStatusFieldUpdateOperationsInput | $Enums.EntityStatus
+    verificationCode?: NullableStringFieldUpdateOperationsInput | string | null
+    verificationStatus?: EnumBrandVerificationStatusFieldUpdateOperationsInput | $Enums.BrandVerificationStatus
+    verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     onboardingStatus?: EnumBrandOnboardingStatusFieldUpdateOperationsInput | $Enums.BrandOnboardingStatus
     legalName?: NullableStringFieldUpdateOperationsInput | string | null
     registrationNumber?: NullableStringFieldUpdateOperationsInput | string | null
@@ -44469,6 +46077,8 @@ export namespace Prisma {
     internalReviewNotes?: NullableStringFieldUpdateOperationsInput | string | null
     logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
     featuredOnHome?: BoolFieldUpdateOperationsInput | boolean
+    homeSortOrder?: IntFieldUpdateOperationsInput | number
+    founderExempt?: BoolFieldUpdateOperationsInput | boolean
     publicProfileEnabled?: BoolFieldUpdateOperationsInput | boolean
     description?: NullableStringFieldUpdateOperationsInput | string | null
     websiteUrl?: NullableStringFieldUpdateOperationsInput | string | null
@@ -44483,6 +46093,7 @@ export namespace Prisma {
     gracePeriodUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    verifiedBy?: UserUpdateOneWithoutBrandsVerifiedNestedInput
     campaigns?: CampaignUpdateManyWithoutBrandNestedInput
     esgSchedules?: EsgReportScheduleUpdateManyWithoutBrandNestedInput
     codes?: CodeUpdateManyWithoutBrandNestedInput
@@ -44496,6 +46107,10 @@ export namespace Prisma {
     slug?: StringFieldUpdateOperationsInput | string
     verificationPolicy?: NullableJsonNullValueInput | InputJsonValue
     status?: EnumEntityStatusFieldUpdateOperationsInput | $Enums.EntityStatus
+    verificationCode?: NullableStringFieldUpdateOperationsInput | string | null
+    verificationStatus?: EnumBrandVerificationStatusFieldUpdateOperationsInput | $Enums.BrandVerificationStatus
+    verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    verifiedByUserId?: NullableStringFieldUpdateOperationsInput | string | null
     onboardingStatus?: EnumBrandOnboardingStatusFieldUpdateOperationsInput | $Enums.BrandOnboardingStatus
     legalName?: NullableStringFieldUpdateOperationsInput | string | null
     registrationNumber?: NullableStringFieldUpdateOperationsInput | string | null
@@ -44508,6 +46123,8 @@ export namespace Prisma {
     internalReviewNotes?: NullableStringFieldUpdateOperationsInput | string | null
     logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
     featuredOnHome?: BoolFieldUpdateOperationsInput | boolean
+    homeSortOrder?: IntFieldUpdateOperationsInput | number
+    founderExempt?: BoolFieldUpdateOperationsInput | boolean
     publicProfileEnabled?: BoolFieldUpdateOperationsInput | boolean
     description?: NullableStringFieldUpdateOperationsInput | string | null
     websiteUrl?: NullableStringFieldUpdateOperationsInput | string | null
@@ -44526,6 +46143,66 @@ export namespace Prisma {
     esgSchedules?: EsgReportScheduleUncheckedUpdateManyWithoutBrandNestedInput
     codes?: CodeUncheckedUpdateManyWithoutBrandNestedInput
     agreements?: BrandAgreementUncheckedUpdateManyWithoutBrandNestedInput
+  }
+
+  export type BrandUpsertWithWhereUniqueWithoutVerifiedByInput = {
+    where: BrandWhereUniqueInput
+    update: XOR<BrandUpdateWithoutVerifiedByInput, BrandUncheckedUpdateWithoutVerifiedByInput>
+    create: XOR<BrandCreateWithoutVerifiedByInput, BrandUncheckedCreateWithoutVerifiedByInput>
+  }
+
+  export type BrandUpdateWithWhereUniqueWithoutVerifiedByInput = {
+    where: BrandWhereUniqueInput
+    data: XOR<BrandUpdateWithoutVerifiedByInput, BrandUncheckedUpdateWithoutVerifiedByInput>
+  }
+
+  export type BrandUpdateManyWithWhereWithoutVerifiedByInput = {
+    where: BrandScalarWhereInput
+    data: XOR<BrandUpdateManyMutationInput, BrandUncheckedUpdateManyWithoutVerifiedByInput>
+  }
+
+  export type BrandScalarWhereInput = {
+    AND?: BrandScalarWhereInput | BrandScalarWhereInput[]
+    OR?: BrandScalarWhereInput[]
+    NOT?: BrandScalarWhereInput | BrandScalarWhereInput[]
+    id?: StringFilter<"Brand"> | string
+    name?: StringFilter<"Brand"> | string
+    codePrefix?: StringFilter<"Brand"> | string
+    slug?: StringFilter<"Brand"> | string
+    verificationPolicy?: JsonNullableFilter<"Brand">
+    status?: EnumEntityStatusFilter<"Brand"> | $Enums.EntityStatus
+    verificationCode?: StringNullableFilter<"Brand"> | string | null
+    verificationStatus?: EnumBrandVerificationStatusFilter<"Brand"> | $Enums.BrandVerificationStatus
+    verifiedAt?: DateTimeNullableFilter<"Brand"> | Date | string | null
+    verifiedByUserId?: StringNullableFilter<"Brand"> | string | null
+    onboardingStatus?: EnumBrandOnboardingStatusFilter<"Brand"> | $Enums.BrandOnboardingStatus
+    legalName?: StringNullableFilter<"Brand"> | string | null
+    registrationNumber?: StringNullableFilter<"Brand"> | string | null
+    vatNumber?: StringNullableFilter<"Brand"> | string | null
+    primaryContactEmail?: StringNullableFilter<"Brand"> | string | null
+    contactPersons?: JsonNullableFilter<"Brand">
+    intendedProvinces?: StringNullableListFilter<"Brand">
+    campaignIntention?: StringNullableFilter<"Brand"> | string | null
+    productsInvolved?: StringNullableFilter<"Brand"> | string | null
+    internalReviewNotes?: StringNullableFilter<"Brand"> | string | null
+    logoUrl?: StringNullableFilter<"Brand"> | string | null
+    featuredOnHome?: BoolFilter<"Brand"> | boolean
+    homeSortOrder?: IntFilter<"Brand"> | number
+    founderExempt?: BoolFilter<"Brand"> | boolean
+    publicProfileEnabled?: BoolFilter<"Brand"> | boolean
+    description?: StringNullableFilter<"Brand"> | string | null
+    websiteUrl?: StringNullableFilter<"Brand"> | string | null
+    brandColor?: StringNullableFilter<"Brand"> | string | null
+    subscriptionStatus?: EnumBrandSubscriptionStatusNullableFilter<"Brand"> | $Enums.BrandSubscriptionStatus | null
+    subscriptionPlan?: EnumBrandSubscriptionPlanNullableFilter<"Brand"> | $Enums.BrandSubscriptionPlan | null
+    subscriptionStartDate?: DateTimeNullableFilter<"Brand"> | Date | string | null
+    subscriptionEndDate?: DateTimeNullableFilter<"Brand"> | Date | string | null
+    activationFeePaid?: BoolFilter<"Brand"> | boolean
+    recurringAmountZar?: DecimalNullableFilter<"Brand"> | Decimal | DecimalJsLike | number | string | null
+    billingCycle?: EnumBillingCycleFilter<"Brand"> | $Enums.BillingCycle
+    gracePeriodUntil?: DateTimeNullableFilter<"Brand"> | Date | string | null
+    createdAt?: DateTimeFilter<"Brand"> | Date | string
+    updatedAt?: DateTimeFilter<"Brand"> | Date | string
   }
 
   export type RefreshSessionUpsertWithWhereUniqueWithoutUserInput = {
@@ -44665,6 +46342,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     school?: SchoolCreateNestedOneWithoutAdminUserInput
     brand?: BrandCreateNestedOneWithoutUsersInput
+    brandsVerified?: BrandCreateNestedManyWithoutVerifiedByInput
     sessions?: RefreshSessionCreateNestedManyWithoutUserInput
     queuePresets?: AdminQueuePresetCreateNestedManyWithoutUserInput
     exportJobs?: AuditExportJobCreateNestedManyWithoutRequestedByInput
@@ -44681,6 +46359,7 @@ export namespace Prisma {
     brandId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    brandsVerified?: BrandUncheckedCreateNestedManyWithoutVerifiedByInput
     sessions?: RefreshSessionUncheckedCreateNestedManyWithoutUserInput
     queuePresets?: AdminQueuePresetUncheckedCreateNestedManyWithoutUserInput
     exportJobs?: AuditExportJobUncheckedCreateNestedManyWithoutRequestedByInput
@@ -44713,6 +46392,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     school?: SchoolUpdateOneWithoutAdminUserNestedInput
     brand?: BrandUpdateOneWithoutUsersNestedInput
+    brandsVerified?: BrandUpdateManyWithoutVerifiedByNestedInput
     sessions?: RefreshSessionUpdateManyWithoutUserNestedInput
     queuePresets?: AdminQueuePresetUpdateManyWithoutUserNestedInput
     exportJobs?: AuditExportJobUpdateManyWithoutRequestedByNestedInput
@@ -44729,6 +46409,7 @@ export namespace Prisma {
     brandId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    brandsVerified?: BrandUncheckedUpdateManyWithoutVerifiedByNestedInput
     sessions?: RefreshSessionUncheckedUpdateManyWithoutUserNestedInput
     queuePresets?: AdminQueuePresetUncheckedUpdateManyWithoutUserNestedInput
     exportJobs?: AuditExportJobUncheckedUpdateManyWithoutRequestedByNestedInput
@@ -44854,6 +46535,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     brand?: BrandCreateNestedOneWithoutUsersInput
+    brandsVerified?: BrandCreateNestedManyWithoutVerifiedByInput
     sessions?: RefreshSessionCreateNestedManyWithoutUserInput
     queuePresets?: AdminQueuePresetCreateNestedManyWithoutUserInput
     exportJobs?: AuditExportJobCreateNestedManyWithoutRequestedByInput
@@ -44870,6 +46552,7 @@ export namespace Prisma {
     brandId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    brandsVerified?: BrandUncheckedCreateNestedManyWithoutVerifiedByInput
     sessions?: RefreshSessionUncheckedCreateNestedManyWithoutUserInput
     queuePresets?: AdminQueuePresetUncheckedCreateNestedManyWithoutUserInput
     exportJobs?: AuditExportJobUncheckedCreateNestedManyWithoutRequestedByInput
@@ -45035,6 +46718,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     brand?: BrandUpdateOneWithoutUsersNestedInput
+    brandsVerified?: BrandUpdateManyWithoutVerifiedByNestedInput
     sessions?: RefreshSessionUpdateManyWithoutUserNestedInput
     queuePresets?: AdminQueuePresetUpdateManyWithoutUserNestedInput
     exportJobs?: AuditExportJobUpdateManyWithoutRequestedByNestedInput
@@ -45051,6 +46735,7 @@ export namespace Prisma {
     brandId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    brandsVerified?: BrandUncheckedUpdateManyWithoutVerifiedByNestedInput
     sessions?: RefreshSessionUncheckedUpdateManyWithoutUserNestedInput
     queuePresets?: AdminQueuePresetUncheckedUpdateManyWithoutUserNestedInput
     exportJobs?: AuditExportJobUncheckedUpdateManyWithoutRequestedByNestedInput
@@ -45404,6 +47089,45 @@ export namespace Prisma {
     data: XOR<SubmissionUpdateManyMutationInput, SubmissionUncheckedUpdateManyWithoutLearnerInput>
   }
 
+  export type UserCreateWithoutBrandsVerifiedInput = {
+    id?: string
+    fullName: string
+    email: string
+    passwordHash: string
+    role: $Enums.UserRole
+    status?: $Enums.EntityStatus
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    school?: SchoolCreateNestedOneWithoutAdminUserInput
+    brand?: BrandCreateNestedOneWithoutUsersInput
+    sessions?: RefreshSessionCreateNestedManyWithoutUserInput
+    queuePresets?: AdminQueuePresetCreateNestedManyWithoutUserInput
+    exportJobs?: AuditExportJobCreateNestedManyWithoutRequestedByInput
+    passwordResetTokens?: PasswordResetTokenCreateNestedManyWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutBrandsVerifiedInput = {
+    id?: string
+    fullName: string
+    email: string
+    passwordHash: string
+    role: $Enums.UserRole
+    status?: $Enums.EntityStatus
+    schoolId?: string | null
+    brandId?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    sessions?: RefreshSessionUncheckedCreateNestedManyWithoutUserInput
+    queuePresets?: AdminQueuePresetUncheckedCreateNestedManyWithoutUserInput
+    exportJobs?: AuditExportJobUncheckedCreateNestedManyWithoutRequestedByInput
+    passwordResetTokens?: PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutBrandsVerifiedInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutBrandsVerifiedInput, UserUncheckedCreateWithoutBrandsVerifiedInput>
+  }
+
   export type CampaignCreateWithoutBrandInput = {
     id?: string
     name: string
@@ -45526,6 +47250,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     school?: SchoolCreateNestedOneWithoutAdminUserInput
+    brandsVerified?: BrandCreateNestedManyWithoutVerifiedByInput
     sessions?: RefreshSessionCreateNestedManyWithoutUserInput
     queuePresets?: AdminQueuePresetCreateNestedManyWithoutUserInput
     exportJobs?: AuditExportJobCreateNestedManyWithoutRequestedByInput
@@ -45542,6 +47267,7 @@ export namespace Prisma {
     schoolId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    brandsVerified?: BrandUncheckedCreateNestedManyWithoutVerifiedByInput
     sessions?: RefreshSessionUncheckedCreateNestedManyWithoutUserInput
     queuePresets?: AdminQueuePresetUncheckedCreateNestedManyWithoutUserInput
     exportJobs?: AuditExportJobUncheckedCreateNestedManyWithoutRequestedByInput
@@ -45678,6 +47404,51 @@ export namespace Prisma {
   export type BrandAgreementCreateManyBrandInputEnvelope = {
     data: BrandAgreementCreateManyBrandInput | BrandAgreementCreateManyBrandInput[]
     skipDuplicates?: boolean
+  }
+
+  export type UserUpsertWithoutBrandsVerifiedInput = {
+    update: XOR<UserUpdateWithoutBrandsVerifiedInput, UserUncheckedUpdateWithoutBrandsVerifiedInput>
+    create: XOR<UserCreateWithoutBrandsVerifiedInput, UserUncheckedCreateWithoutBrandsVerifiedInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutBrandsVerifiedInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutBrandsVerifiedInput, UserUncheckedUpdateWithoutBrandsVerifiedInput>
+  }
+
+  export type UserUpdateWithoutBrandsVerifiedInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    fullName?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    passwordHash?: StringFieldUpdateOperationsInput | string
+    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    status?: EnumEntityStatusFieldUpdateOperationsInput | $Enums.EntityStatus
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    school?: SchoolUpdateOneWithoutAdminUserNestedInput
+    brand?: BrandUpdateOneWithoutUsersNestedInput
+    sessions?: RefreshSessionUpdateManyWithoutUserNestedInput
+    queuePresets?: AdminQueuePresetUpdateManyWithoutUserNestedInput
+    exportJobs?: AuditExportJobUpdateManyWithoutRequestedByNestedInput
+    passwordResetTokens?: PasswordResetTokenUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutBrandsVerifiedInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    fullName?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    passwordHash?: StringFieldUpdateOperationsInput | string
+    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    status?: EnumEntityStatusFieldUpdateOperationsInput | $Enums.EntityStatus
+    schoolId?: NullableStringFieldUpdateOperationsInput | string | null
+    brandId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    sessions?: RefreshSessionUncheckedUpdateManyWithoutUserNestedInput
+    queuePresets?: AdminQueuePresetUncheckedUpdateManyWithoutUserNestedInput
+    exportJobs?: AuditExportJobUncheckedUpdateManyWithoutRequestedByNestedInput
+    passwordResetTokens?: PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type CampaignUpsertWithWhereUniqueWithoutBrandInput = {
@@ -45888,6 +47659,9 @@ export namespace Prisma {
     slug: string
     verificationPolicy?: NullableJsonNullValueInput | InputJsonValue
     status?: $Enums.EntityStatus
+    verificationCode?: string | null
+    verificationStatus?: $Enums.BrandVerificationStatus
+    verifiedAt?: Date | string | null
     onboardingStatus?: $Enums.BrandOnboardingStatus
     legalName?: string | null
     registrationNumber?: string | null
@@ -45900,6 +47674,8 @@ export namespace Prisma {
     internalReviewNotes?: string | null
     logoUrl?: string | null
     featuredOnHome?: boolean
+    homeSortOrder?: number
+    founderExempt?: boolean
     publicProfileEnabled?: boolean
     description?: string | null
     websiteUrl?: string | null
@@ -45914,6 +47690,7 @@ export namespace Prisma {
     gracePeriodUntil?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    verifiedBy?: UserCreateNestedOneWithoutBrandsVerifiedInput
     users?: UserCreateNestedManyWithoutBrandInput
     esgSchedules?: EsgReportScheduleCreateNestedManyWithoutBrandInput
     codes?: CodeCreateNestedManyWithoutBrandInput
@@ -45927,6 +47704,10 @@ export namespace Prisma {
     slug: string
     verificationPolicy?: NullableJsonNullValueInput | InputJsonValue
     status?: $Enums.EntityStatus
+    verificationCode?: string | null
+    verificationStatus?: $Enums.BrandVerificationStatus
+    verifiedAt?: Date | string | null
+    verifiedByUserId?: string | null
     onboardingStatus?: $Enums.BrandOnboardingStatus
     legalName?: string | null
     registrationNumber?: string | null
@@ -45939,6 +47720,8 @@ export namespace Prisma {
     internalReviewNotes?: string | null
     logoUrl?: string | null
     featuredOnHome?: boolean
+    homeSortOrder?: number
+    founderExempt?: boolean
     publicProfileEnabled?: boolean
     description?: string | null
     websiteUrl?: string | null
@@ -46425,6 +48208,9 @@ export namespace Prisma {
     slug?: StringFieldUpdateOperationsInput | string
     verificationPolicy?: NullableJsonNullValueInput | InputJsonValue
     status?: EnumEntityStatusFieldUpdateOperationsInput | $Enums.EntityStatus
+    verificationCode?: NullableStringFieldUpdateOperationsInput | string | null
+    verificationStatus?: EnumBrandVerificationStatusFieldUpdateOperationsInput | $Enums.BrandVerificationStatus
+    verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     onboardingStatus?: EnumBrandOnboardingStatusFieldUpdateOperationsInput | $Enums.BrandOnboardingStatus
     legalName?: NullableStringFieldUpdateOperationsInput | string | null
     registrationNumber?: NullableStringFieldUpdateOperationsInput | string | null
@@ -46437,6 +48223,8 @@ export namespace Prisma {
     internalReviewNotes?: NullableStringFieldUpdateOperationsInput | string | null
     logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
     featuredOnHome?: BoolFieldUpdateOperationsInput | boolean
+    homeSortOrder?: IntFieldUpdateOperationsInput | number
+    founderExempt?: BoolFieldUpdateOperationsInput | boolean
     publicProfileEnabled?: BoolFieldUpdateOperationsInput | boolean
     description?: NullableStringFieldUpdateOperationsInput | string | null
     websiteUrl?: NullableStringFieldUpdateOperationsInput | string | null
@@ -46451,6 +48239,7 @@ export namespace Prisma {
     gracePeriodUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    verifiedBy?: UserUpdateOneWithoutBrandsVerifiedNestedInput
     users?: UserUpdateManyWithoutBrandNestedInput
     esgSchedules?: EsgReportScheduleUpdateManyWithoutBrandNestedInput
     codes?: CodeUpdateManyWithoutBrandNestedInput
@@ -46464,6 +48253,10 @@ export namespace Prisma {
     slug?: StringFieldUpdateOperationsInput | string
     verificationPolicy?: NullableJsonNullValueInput | InputJsonValue
     status?: EnumEntityStatusFieldUpdateOperationsInput | $Enums.EntityStatus
+    verificationCode?: NullableStringFieldUpdateOperationsInput | string | null
+    verificationStatus?: EnumBrandVerificationStatusFieldUpdateOperationsInput | $Enums.BrandVerificationStatus
+    verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    verifiedByUserId?: NullableStringFieldUpdateOperationsInput | string | null
     onboardingStatus?: EnumBrandOnboardingStatusFieldUpdateOperationsInput | $Enums.BrandOnboardingStatus
     legalName?: NullableStringFieldUpdateOperationsInput | string | null
     registrationNumber?: NullableStringFieldUpdateOperationsInput | string | null
@@ -46476,6 +48269,8 @@ export namespace Prisma {
     internalReviewNotes?: NullableStringFieldUpdateOperationsInput | string | null
     logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
     featuredOnHome?: BoolFieldUpdateOperationsInput | boolean
+    homeSortOrder?: IntFieldUpdateOperationsInput | number
+    founderExempt?: BoolFieldUpdateOperationsInput | boolean
     publicProfileEnabled?: BoolFieldUpdateOperationsInput | boolean
     description?: NullableStringFieldUpdateOperationsInput | string | null
     websiteUrl?: NullableStringFieldUpdateOperationsInput | string | null
@@ -46773,6 +48568,9 @@ export namespace Prisma {
     slug: string
     verificationPolicy?: NullableJsonNullValueInput | InputJsonValue
     status?: $Enums.EntityStatus
+    verificationCode?: string | null
+    verificationStatus?: $Enums.BrandVerificationStatus
+    verifiedAt?: Date | string | null
     onboardingStatus?: $Enums.BrandOnboardingStatus
     legalName?: string | null
     registrationNumber?: string | null
@@ -46785,6 +48583,8 @@ export namespace Prisma {
     internalReviewNotes?: string | null
     logoUrl?: string | null
     featuredOnHome?: boolean
+    homeSortOrder?: number
+    founderExempt?: boolean
     publicProfileEnabled?: boolean
     description?: string | null
     websiteUrl?: string | null
@@ -46799,6 +48599,7 @@ export namespace Prisma {
     gracePeriodUntil?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    verifiedBy?: UserCreateNestedOneWithoutBrandsVerifiedInput
     campaigns?: CampaignCreateNestedManyWithoutBrandInput
     users?: UserCreateNestedManyWithoutBrandInput
     esgSchedules?: EsgReportScheduleCreateNestedManyWithoutBrandInput
@@ -46812,6 +48613,10 @@ export namespace Prisma {
     slug: string
     verificationPolicy?: NullableJsonNullValueInput | InputJsonValue
     status?: $Enums.EntityStatus
+    verificationCode?: string | null
+    verificationStatus?: $Enums.BrandVerificationStatus
+    verifiedAt?: Date | string | null
+    verifiedByUserId?: string | null
     onboardingStatus?: $Enums.BrandOnboardingStatus
     legalName?: string | null
     registrationNumber?: string | null
@@ -46824,6 +48629,8 @@ export namespace Prisma {
     internalReviewNotes?: string | null
     logoUrl?: string | null
     featuredOnHome?: boolean
+    homeSortOrder?: number
+    founderExempt?: boolean
     publicProfileEnabled?: boolean
     description?: string | null
     websiteUrl?: string | null
@@ -46867,6 +48674,9 @@ export namespace Prisma {
     slug?: StringFieldUpdateOperationsInput | string
     verificationPolicy?: NullableJsonNullValueInput | InputJsonValue
     status?: EnumEntityStatusFieldUpdateOperationsInput | $Enums.EntityStatus
+    verificationCode?: NullableStringFieldUpdateOperationsInput | string | null
+    verificationStatus?: EnumBrandVerificationStatusFieldUpdateOperationsInput | $Enums.BrandVerificationStatus
+    verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     onboardingStatus?: EnumBrandOnboardingStatusFieldUpdateOperationsInput | $Enums.BrandOnboardingStatus
     legalName?: NullableStringFieldUpdateOperationsInput | string | null
     registrationNumber?: NullableStringFieldUpdateOperationsInput | string | null
@@ -46879,6 +48689,8 @@ export namespace Prisma {
     internalReviewNotes?: NullableStringFieldUpdateOperationsInput | string | null
     logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
     featuredOnHome?: BoolFieldUpdateOperationsInput | boolean
+    homeSortOrder?: IntFieldUpdateOperationsInput | number
+    founderExempt?: BoolFieldUpdateOperationsInput | boolean
     publicProfileEnabled?: BoolFieldUpdateOperationsInput | boolean
     description?: NullableStringFieldUpdateOperationsInput | string | null
     websiteUrl?: NullableStringFieldUpdateOperationsInput | string | null
@@ -46893,6 +48705,7 @@ export namespace Prisma {
     gracePeriodUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    verifiedBy?: UserUpdateOneWithoutBrandsVerifiedNestedInput
     campaigns?: CampaignUpdateManyWithoutBrandNestedInput
     users?: UserUpdateManyWithoutBrandNestedInput
     esgSchedules?: EsgReportScheduleUpdateManyWithoutBrandNestedInput
@@ -46906,6 +48719,10 @@ export namespace Prisma {
     slug?: StringFieldUpdateOperationsInput | string
     verificationPolicy?: NullableJsonNullValueInput | InputJsonValue
     status?: EnumEntityStatusFieldUpdateOperationsInput | $Enums.EntityStatus
+    verificationCode?: NullableStringFieldUpdateOperationsInput | string | null
+    verificationStatus?: EnumBrandVerificationStatusFieldUpdateOperationsInput | $Enums.BrandVerificationStatus
+    verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    verifiedByUserId?: NullableStringFieldUpdateOperationsInput | string | null
     onboardingStatus?: EnumBrandOnboardingStatusFieldUpdateOperationsInput | $Enums.BrandOnboardingStatus
     legalName?: NullableStringFieldUpdateOperationsInput | string | null
     registrationNumber?: NullableStringFieldUpdateOperationsInput | string | null
@@ -46918,6 +48735,8 @@ export namespace Prisma {
     internalReviewNotes?: NullableStringFieldUpdateOperationsInput | string | null
     logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
     featuredOnHome?: BoolFieldUpdateOperationsInput | boolean
+    homeSortOrder?: IntFieldUpdateOperationsInput | number
+    founderExempt?: BoolFieldUpdateOperationsInput | boolean
     publicProfileEnabled?: BoolFieldUpdateOperationsInput | boolean
     description?: NullableStringFieldUpdateOperationsInput | string | null
     websiteUrl?: NullableStringFieldUpdateOperationsInput | string | null
@@ -47754,6 +49573,9 @@ export namespace Prisma {
     slug: string
     verificationPolicy?: NullableJsonNullValueInput | InputJsonValue
     status?: $Enums.EntityStatus
+    verificationCode?: string | null
+    verificationStatus?: $Enums.BrandVerificationStatus
+    verifiedAt?: Date | string | null
     onboardingStatus?: $Enums.BrandOnboardingStatus
     legalName?: string | null
     registrationNumber?: string | null
@@ -47766,6 +49588,8 @@ export namespace Prisma {
     internalReviewNotes?: string | null
     logoUrl?: string | null
     featuredOnHome?: boolean
+    homeSortOrder?: number
+    founderExempt?: boolean
     publicProfileEnabled?: boolean
     description?: string | null
     websiteUrl?: string | null
@@ -47780,6 +49604,7 @@ export namespace Prisma {
     gracePeriodUntil?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    verifiedBy?: UserCreateNestedOneWithoutBrandsVerifiedInput
     campaigns?: CampaignCreateNestedManyWithoutBrandInput
     users?: UserCreateNestedManyWithoutBrandInput
     esgSchedules?: EsgReportScheduleCreateNestedManyWithoutBrandInput
@@ -47793,6 +49618,10 @@ export namespace Prisma {
     slug: string
     verificationPolicy?: NullableJsonNullValueInput | InputJsonValue
     status?: $Enums.EntityStatus
+    verificationCode?: string | null
+    verificationStatus?: $Enums.BrandVerificationStatus
+    verifiedAt?: Date | string | null
+    verifiedByUserId?: string | null
     onboardingStatus?: $Enums.BrandOnboardingStatus
     legalName?: string | null
     registrationNumber?: string | null
@@ -47805,6 +49634,8 @@ export namespace Prisma {
     internalReviewNotes?: string | null
     logoUrl?: string | null
     featuredOnHome?: boolean
+    homeSortOrder?: number
+    founderExempt?: boolean
     publicProfileEnabled?: boolean
     description?: string | null
     websiteUrl?: string | null
@@ -48052,6 +49883,9 @@ export namespace Prisma {
     slug?: StringFieldUpdateOperationsInput | string
     verificationPolicy?: NullableJsonNullValueInput | InputJsonValue
     status?: EnumEntityStatusFieldUpdateOperationsInput | $Enums.EntityStatus
+    verificationCode?: NullableStringFieldUpdateOperationsInput | string | null
+    verificationStatus?: EnumBrandVerificationStatusFieldUpdateOperationsInput | $Enums.BrandVerificationStatus
+    verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     onboardingStatus?: EnumBrandOnboardingStatusFieldUpdateOperationsInput | $Enums.BrandOnboardingStatus
     legalName?: NullableStringFieldUpdateOperationsInput | string | null
     registrationNumber?: NullableStringFieldUpdateOperationsInput | string | null
@@ -48064,6 +49898,8 @@ export namespace Prisma {
     internalReviewNotes?: NullableStringFieldUpdateOperationsInput | string | null
     logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
     featuredOnHome?: BoolFieldUpdateOperationsInput | boolean
+    homeSortOrder?: IntFieldUpdateOperationsInput | number
+    founderExempt?: BoolFieldUpdateOperationsInput | boolean
     publicProfileEnabled?: BoolFieldUpdateOperationsInput | boolean
     description?: NullableStringFieldUpdateOperationsInput | string | null
     websiteUrl?: NullableStringFieldUpdateOperationsInput | string | null
@@ -48078,6 +49914,7 @@ export namespace Prisma {
     gracePeriodUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    verifiedBy?: UserUpdateOneWithoutBrandsVerifiedNestedInput
     campaigns?: CampaignUpdateManyWithoutBrandNestedInput
     users?: UserUpdateManyWithoutBrandNestedInput
     esgSchedules?: EsgReportScheduleUpdateManyWithoutBrandNestedInput
@@ -48091,6 +49928,10 @@ export namespace Prisma {
     slug?: StringFieldUpdateOperationsInput | string
     verificationPolicy?: NullableJsonNullValueInput | InputJsonValue
     status?: EnumEntityStatusFieldUpdateOperationsInput | $Enums.EntityStatus
+    verificationCode?: NullableStringFieldUpdateOperationsInput | string | null
+    verificationStatus?: EnumBrandVerificationStatusFieldUpdateOperationsInput | $Enums.BrandVerificationStatus
+    verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    verifiedByUserId?: NullableStringFieldUpdateOperationsInput | string | null
     onboardingStatus?: EnumBrandOnboardingStatusFieldUpdateOperationsInput | $Enums.BrandOnboardingStatus
     legalName?: NullableStringFieldUpdateOperationsInput | string | null
     registrationNumber?: NullableStringFieldUpdateOperationsInput | string | null
@@ -48103,6 +49944,8 @@ export namespace Prisma {
     internalReviewNotes?: NullableStringFieldUpdateOperationsInput | string | null
     logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
     featuredOnHome?: BoolFieldUpdateOperationsInput | boolean
+    homeSortOrder?: IntFieldUpdateOperationsInput | number
+    founderExempt?: BoolFieldUpdateOperationsInput | boolean
     publicProfileEnabled?: BoolFieldUpdateOperationsInput | boolean
     description?: NullableStringFieldUpdateOperationsInput | string | null
     websiteUrl?: NullableStringFieldUpdateOperationsInput | string | null
@@ -48935,6 +50778,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     school?: SchoolCreateNestedOneWithoutAdminUserInput
     brand?: BrandCreateNestedOneWithoutUsersInput
+    brandsVerified?: BrandCreateNestedManyWithoutVerifiedByInput
     queuePresets?: AdminQueuePresetCreateNestedManyWithoutUserInput
     exportJobs?: AuditExportJobCreateNestedManyWithoutRequestedByInput
     passwordResetTokens?: PasswordResetTokenCreateNestedManyWithoutUserInput
@@ -48951,6 +50795,7 @@ export namespace Prisma {
     brandId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    brandsVerified?: BrandUncheckedCreateNestedManyWithoutVerifiedByInput
     queuePresets?: AdminQueuePresetUncheckedCreateNestedManyWithoutUserInput
     exportJobs?: AuditExportJobUncheckedCreateNestedManyWithoutRequestedByInput
     passwordResetTokens?: PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
@@ -48983,6 +50828,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     school?: SchoolUpdateOneWithoutAdminUserNestedInput
     brand?: BrandUpdateOneWithoutUsersNestedInput
+    brandsVerified?: BrandUpdateManyWithoutVerifiedByNestedInput
     queuePresets?: AdminQueuePresetUpdateManyWithoutUserNestedInput
     exportJobs?: AuditExportJobUpdateManyWithoutRequestedByNestedInput
     passwordResetTokens?: PasswordResetTokenUpdateManyWithoutUserNestedInput
@@ -48999,6 +50845,7 @@ export namespace Prisma {
     brandId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    brandsVerified?: BrandUncheckedUpdateManyWithoutVerifiedByNestedInput
     queuePresets?: AdminQueuePresetUncheckedUpdateManyWithoutUserNestedInput
     exportJobs?: AuditExportJobUncheckedUpdateManyWithoutRequestedByNestedInput
     passwordResetTokens?: PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
@@ -49107,6 +50954,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     school?: SchoolCreateNestedOneWithoutAdminUserInput
     brand?: BrandCreateNestedOneWithoutUsersInput
+    brandsVerified?: BrandCreateNestedManyWithoutVerifiedByInput
     sessions?: RefreshSessionCreateNestedManyWithoutUserInput
     exportJobs?: AuditExportJobCreateNestedManyWithoutRequestedByInput
     passwordResetTokens?: PasswordResetTokenCreateNestedManyWithoutUserInput
@@ -49123,6 +50971,7 @@ export namespace Prisma {
     brandId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    brandsVerified?: BrandUncheckedCreateNestedManyWithoutVerifiedByInput
     sessions?: RefreshSessionUncheckedCreateNestedManyWithoutUserInput
     exportJobs?: AuditExportJobUncheckedCreateNestedManyWithoutRequestedByInput
     passwordResetTokens?: PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
@@ -49155,6 +51004,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     school?: SchoolUpdateOneWithoutAdminUserNestedInput
     brand?: BrandUpdateOneWithoutUsersNestedInput
+    brandsVerified?: BrandUpdateManyWithoutVerifiedByNestedInput
     sessions?: RefreshSessionUpdateManyWithoutUserNestedInput
     exportJobs?: AuditExportJobUpdateManyWithoutRequestedByNestedInput
     passwordResetTokens?: PasswordResetTokenUpdateManyWithoutUserNestedInput
@@ -49171,6 +51021,7 @@ export namespace Prisma {
     brandId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    brandsVerified?: BrandUncheckedUpdateManyWithoutVerifiedByNestedInput
     sessions?: RefreshSessionUncheckedUpdateManyWithoutUserNestedInput
     exportJobs?: AuditExportJobUncheckedUpdateManyWithoutRequestedByNestedInput
     passwordResetTokens?: PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
@@ -49187,6 +51038,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     school?: SchoolCreateNestedOneWithoutAdminUserInput
     brand?: BrandCreateNestedOneWithoutUsersInput
+    brandsVerified?: BrandCreateNestedManyWithoutVerifiedByInput
     sessions?: RefreshSessionCreateNestedManyWithoutUserInput
     queuePresets?: AdminQueuePresetCreateNestedManyWithoutUserInput
     passwordResetTokens?: PasswordResetTokenCreateNestedManyWithoutUserInput
@@ -49203,6 +51055,7 @@ export namespace Prisma {
     brandId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    brandsVerified?: BrandUncheckedCreateNestedManyWithoutVerifiedByInput
     sessions?: RefreshSessionUncheckedCreateNestedManyWithoutUserInput
     queuePresets?: AdminQueuePresetUncheckedCreateNestedManyWithoutUserInput
     passwordResetTokens?: PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
@@ -49235,6 +51088,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     school?: SchoolUpdateOneWithoutAdminUserNestedInput
     brand?: BrandUpdateOneWithoutUsersNestedInput
+    brandsVerified?: BrandUpdateManyWithoutVerifiedByNestedInput
     sessions?: RefreshSessionUpdateManyWithoutUserNestedInput
     queuePresets?: AdminQueuePresetUpdateManyWithoutUserNestedInput
     passwordResetTokens?: PasswordResetTokenUpdateManyWithoutUserNestedInput
@@ -49251,6 +51105,7 @@ export namespace Prisma {
     brandId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    brandsVerified?: BrandUncheckedUpdateManyWithoutVerifiedByNestedInput
     sessions?: RefreshSessionUncheckedUpdateManyWithoutUserNestedInput
     queuePresets?: AdminQueuePresetUncheckedUpdateManyWithoutUserNestedInput
     passwordResetTokens?: PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
@@ -49263,6 +51118,9 @@ export namespace Prisma {
     slug: string
     verificationPolicy?: NullableJsonNullValueInput | InputJsonValue
     status?: $Enums.EntityStatus
+    verificationCode?: string | null
+    verificationStatus?: $Enums.BrandVerificationStatus
+    verifiedAt?: Date | string | null
     onboardingStatus?: $Enums.BrandOnboardingStatus
     legalName?: string | null
     registrationNumber?: string | null
@@ -49275,6 +51133,8 @@ export namespace Prisma {
     internalReviewNotes?: string | null
     logoUrl?: string | null
     featuredOnHome?: boolean
+    homeSortOrder?: number
+    founderExempt?: boolean
     publicProfileEnabled?: boolean
     description?: string | null
     websiteUrl?: string | null
@@ -49289,6 +51149,7 @@ export namespace Prisma {
     gracePeriodUntil?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    verifiedBy?: UserCreateNestedOneWithoutBrandsVerifiedInput
     campaigns?: CampaignCreateNestedManyWithoutBrandInput
     users?: UserCreateNestedManyWithoutBrandInput
     codes?: CodeCreateNestedManyWithoutBrandInput
@@ -49302,6 +51163,10 @@ export namespace Prisma {
     slug: string
     verificationPolicy?: NullableJsonNullValueInput | InputJsonValue
     status?: $Enums.EntityStatus
+    verificationCode?: string | null
+    verificationStatus?: $Enums.BrandVerificationStatus
+    verifiedAt?: Date | string | null
+    verifiedByUserId?: string | null
     onboardingStatus?: $Enums.BrandOnboardingStatus
     legalName?: string | null
     registrationNumber?: string | null
@@ -49314,6 +51179,8 @@ export namespace Prisma {
     internalReviewNotes?: string | null
     logoUrl?: string | null
     featuredOnHome?: boolean
+    homeSortOrder?: number
+    founderExempt?: boolean
     publicProfileEnabled?: boolean
     description?: string | null
     websiteUrl?: string | null
@@ -49385,6 +51252,9 @@ export namespace Prisma {
     slug?: StringFieldUpdateOperationsInput | string
     verificationPolicy?: NullableJsonNullValueInput | InputJsonValue
     status?: EnumEntityStatusFieldUpdateOperationsInput | $Enums.EntityStatus
+    verificationCode?: NullableStringFieldUpdateOperationsInput | string | null
+    verificationStatus?: EnumBrandVerificationStatusFieldUpdateOperationsInput | $Enums.BrandVerificationStatus
+    verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     onboardingStatus?: EnumBrandOnboardingStatusFieldUpdateOperationsInput | $Enums.BrandOnboardingStatus
     legalName?: NullableStringFieldUpdateOperationsInput | string | null
     registrationNumber?: NullableStringFieldUpdateOperationsInput | string | null
@@ -49397,6 +51267,8 @@ export namespace Prisma {
     internalReviewNotes?: NullableStringFieldUpdateOperationsInput | string | null
     logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
     featuredOnHome?: BoolFieldUpdateOperationsInput | boolean
+    homeSortOrder?: IntFieldUpdateOperationsInput | number
+    founderExempt?: BoolFieldUpdateOperationsInput | boolean
     publicProfileEnabled?: BoolFieldUpdateOperationsInput | boolean
     description?: NullableStringFieldUpdateOperationsInput | string | null
     websiteUrl?: NullableStringFieldUpdateOperationsInput | string | null
@@ -49411,6 +51283,7 @@ export namespace Prisma {
     gracePeriodUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    verifiedBy?: UserUpdateOneWithoutBrandsVerifiedNestedInput
     campaigns?: CampaignUpdateManyWithoutBrandNestedInput
     users?: UserUpdateManyWithoutBrandNestedInput
     codes?: CodeUpdateManyWithoutBrandNestedInput
@@ -49424,6 +51297,10 @@ export namespace Prisma {
     slug?: StringFieldUpdateOperationsInput | string
     verificationPolicy?: NullableJsonNullValueInput | InputJsonValue
     status?: EnumEntityStatusFieldUpdateOperationsInput | $Enums.EntityStatus
+    verificationCode?: NullableStringFieldUpdateOperationsInput | string | null
+    verificationStatus?: EnumBrandVerificationStatusFieldUpdateOperationsInput | $Enums.BrandVerificationStatus
+    verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    verifiedByUserId?: NullableStringFieldUpdateOperationsInput | string | null
     onboardingStatus?: EnumBrandOnboardingStatusFieldUpdateOperationsInput | $Enums.BrandOnboardingStatus
     legalName?: NullableStringFieldUpdateOperationsInput | string | null
     registrationNumber?: NullableStringFieldUpdateOperationsInput | string | null
@@ -49436,6 +51313,8 @@ export namespace Prisma {
     internalReviewNotes?: NullableStringFieldUpdateOperationsInput | string | null
     logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
     featuredOnHome?: BoolFieldUpdateOperationsInput | boolean
+    homeSortOrder?: IntFieldUpdateOperationsInput | number
+    founderExempt?: BoolFieldUpdateOperationsInput | boolean
     publicProfileEnabled?: BoolFieldUpdateOperationsInput | boolean
     description?: NullableStringFieldUpdateOperationsInput | string | null
     websiteUrl?: NullableStringFieldUpdateOperationsInput | string | null
@@ -50149,6 +52028,46 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type BrandCreateManyVerifiedByInput = {
+    id?: string
+    name: string
+    codePrefix: string
+    slug: string
+    verificationPolicy?: NullableJsonNullValueInput | InputJsonValue
+    status?: $Enums.EntityStatus
+    verificationCode?: string | null
+    verificationStatus?: $Enums.BrandVerificationStatus
+    verifiedAt?: Date | string | null
+    onboardingStatus?: $Enums.BrandOnboardingStatus
+    legalName?: string | null
+    registrationNumber?: string | null
+    vatNumber?: string | null
+    primaryContactEmail?: string | null
+    contactPersons?: NullableJsonNullValueInput | InputJsonValue
+    intendedProvinces?: BrandCreateintendedProvincesInput | string[]
+    campaignIntention?: string | null
+    productsInvolved?: string | null
+    internalReviewNotes?: string | null
+    logoUrl?: string | null
+    featuredOnHome?: boolean
+    homeSortOrder?: number
+    founderExempt?: boolean
+    publicProfileEnabled?: boolean
+    description?: string | null
+    websiteUrl?: string | null
+    brandColor?: string | null
+    subscriptionStatus?: $Enums.BrandSubscriptionStatus | null
+    subscriptionPlan?: $Enums.BrandSubscriptionPlan | null
+    subscriptionStartDate?: Date | string | null
+    subscriptionEndDate?: Date | string | null
+    activationFeePaid?: boolean
+    recurringAmountZar?: Decimal | DecimalJsLike | number | string | null
+    billingCycle?: $Enums.BillingCycle
+    gracePeriodUntil?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
   export type RefreshSessionCreateManyUserInput = {
     id?: string
     tokenHash: string
@@ -50193,6 +52112,136 @@ export namespace Prisma {
     expiresAt: Date | string
     usedAt?: Date | string | null
     createdAt?: Date | string
+  }
+
+  export type BrandUpdateWithoutVerifiedByInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    codePrefix?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    verificationPolicy?: NullableJsonNullValueInput | InputJsonValue
+    status?: EnumEntityStatusFieldUpdateOperationsInput | $Enums.EntityStatus
+    verificationCode?: NullableStringFieldUpdateOperationsInput | string | null
+    verificationStatus?: EnumBrandVerificationStatusFieldUpdateOperationsInput | $Enums.BrandVerificationStatus
+    verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    onboardingStatus?: EnumBrandOnboardingStatusFieldUpdateOperationsInput | $Enums.BrandOnboardingStatus
+    legalName?: NullableStringFieldUpdateOperationsInput | string | null
+    registrationNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    vatNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    primaryContactEmail?: NullableStringFieldUpdateOperationsInput | string | null
+    contactPersons?: NullableJsonNullValueInput | InputJsonValue
+    intendedProvinces?: BrandUpdateintendedProvincesInput | string[]
+    campaignIntention?: NullableStringFieldUpdateOperationsInput | string | null
+    productsInvolved?: NullableStringFieldUpdateOperationsInput | string | null
+    internalReviewNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    featuredOnHome?: BoolFieldUpdateOperationsInput | boolean
+    homeSortOrder?: IntFieldUpdateOperationsInput | number
+    founderExempt?: BoolFieldUpdateOperationsInput | boolean
+    publicProfileEnabled?: BoolFieldUpdateOperationsInput | boolean
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    websiteUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    brandColor?: NullableStringFieldUpdateOperationsInput | string | null
+    subscriptionStatus?: NullableEnumBrandSubscriptionStatusFieldUpdateOperationsInput | $Enums.BrandSubscriptionStatus | null
+    subscriptionPlan?: NullableEnumBrandSubscriptionPlanFieldUpdateOperationsInput | $Enums.BrandSubscriptionPlan | null
+    subscriptionStartDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    subscriptionEndDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    activationFeePaid?: BoolFieldUpdateOperationsInput | boolean
+    recurringAmountZar?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    billingCycle?: EnumBillingCycleFieldUpdateOperationsInput | $Enums.BillingCycle
+    gracePeriodUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    campaigns?: CampaignUpdateManyWithoutBrandNestedInput
+    users?: UserUpdateManyWithoutBrandNestedInput
+    esgSchedules?: EsgReportScheduleUpdateManyWithoutBrandNestedInput
+    codes?: CodeUpdateManyWithoutBrandNestedInput
+    agreements?: BrandAgreementUpdateManyWithoutBrandNestedInput
+  }
+
+  export type BrandUncheckedUpdateWithoutVerifiedByInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    codePrefix?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    verificationPolicy?: NullableJsonNullValueInput | InputJsonValue
+    status?: EnumEntityStatusFieldUpdateOperationsInput | $Enums.EntityStatus
+    verificationCode?: NullableStringFieldUpdateOperationsInput | string | null
+    verificationStatus?: EnumBrandVerificationStatusFieldUpdateOperationsInput | $Enums.BrandVerificationStatus
+    verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    onboardingStatus?: EnumBrandOnboardingStatusFieldUpdateOperationsInput | $Enums.BrandOnboardingStatus
+    legalName?: NullableStringFieldUpdateOperationsInput | string | null
+    registrationNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    vatNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    primaryContactEmail?: NullableStringFieldUpdateOperationsInput | string | null
+    contactPersons?: NullableJsonNullValueInput | InputJsonValue
+    intendedProvinces?: BrandUpdateintendedProvincesInput | string[]
+    campaignIntention?: NullableStringFieldUpdateOperationsInput | string | null
+    productsInvolved?: NullableStringFieldUpdateOperationsInput | string | null
+    internalReviewNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    featuredOnHome?: BoolFieldUpdateOperationsInput | boolean
+    homeSortOrder?: IntFieldUpdateOperationsInput | number
+    founderExempt?: BoolFieldUpdateOperationsInput | boolean
+    publicProfileEnabled?: BoolFieldUpdateOperationsInput | boolean
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    websiteUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    brandColor?: NullableStringFieldUpdateOperationsInput | string | null
+    subscriptionStatus?: NullableEnumBrandSubscriptionStatusFieldUpdateOperationsInput | $Enums.BrandSubscriptionStatus | null
+    subscriptionPlan?: NullableEnumBrandSubscriptionPlanFieldUpdateOperationsInput | $Enums.BrandSubscriptionPlan | null
+    subscriptionStartDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    subscriptionEndDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    activationFeePaid?: BoolFieldUpdateOperationsInput | boolean
+    recurringAmountZar?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    billingCycle?: EnumBillingCycleFieldUpdateOperationsInput | $Enums.BillingCycle
+    gracePeriodUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    campaigns?: CampaignUncheckedUpdateManyWithoutBrandNestedInput
+    users?: UserUncheckedUpdateManyWithoutBrandNestedInput
+    esgSchedules?: EsgReportScheduleUncheckedUpdateManyWithoutBrandNestedInput
+    codes?: CodeUncheckedUpdateManyWithoutBrandNestedInput
+    agreements?: BrandAgreementUncheckedUpdateManyWithoutBrandNestedInput
+  }
+
+  export type BrandUncheckedUpdateManyWithoutVerifiedByInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    codePrefix?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    verificationPolicy?: NullableJsonNullValueInput | InputJsonValue
+    status?: EnumEntityStatusFieldUpdateOperationsInput | $Enums.EntityStatus
+    verificationCode?: NullableStringFieldUpdateOperationsInput | string | null
+    verificationStatus?: EnumBrandVerificationStatusFieldUpdateOperationsInput | $Enums.BrandVerificationStatus
+    verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    onboardingStatus?: EnumBrandOnboardingStatusFieldUpdateOperationsInput | $Enums.BrandOnboardingStatus
+    legalName?: NullableStringFieldUpdateOperationsInput | string | null
+    registrationNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    vatNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    primaryContactEmail?: NullableStringFieldUpdateOperationsInput | string | null
+    contactPersons?: NullableJsonNullValueInput | InputJsonValue
+    intendedProvinces?: BrandUpdateintendedProvincesInput | string[]
+    campaignIntention?: NullableStringFieldUpdateOperationsInput | string | null
+    productsInvolved?: NullableStringFieldUpdateOperationsInput | string | null
+    internalReviewNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    featuredOnHome?: BoolFieldUpdateOperationsInput | boolean
+    homeSortOrder?: IntFieldUpdateOperationsInput | number
+    founderExempt?: BoolFieldUpdateOperationsInput | boolean
+    publicProfileEnabled?: BoolFieldUpdateOperationsInput | boolean
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    websiteUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    brandColor?: NullableStringFieldUpdateOperationsInput | string | null
+    subscriptionStatus?: NullableEnumBrandSubscriptionStatusFieldUpdateOperationsInput | $Enums.BrandSubscriptionStatus | null
+    subscriptionPlan?: NullableEnumBrandSubscriptionPlanFieldUpdateOperationsInput | $Enums.BrandSubscriptionPlan | null
+    subscriptionStartDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    subscriptionEndDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    activationFeePaid?: BoolFieldUpdateOperationsInput | boolean
+    recurringAmountZar?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    billingCycle?: EnumBillingCycleFieldUpdateOperationsInput | $Enums.BillingCycle
+    gracePeriodUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type RefreshSessionUpdateWithoutUserInput = {
@@ -50812,6 +52861,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     school?: SchoolUpdateOneWithoutAdminUserNestedInput
+    brandsVerified?: BrandUpdateManyWithoutVerifiedByNestedInput
     sessions?: RefreshSessionUpdateManyWithoutUserNestedInput
     queuePresets?: AdminQueuePresetUpdateManyWithoutUserNestedInput
     exportJobs?: AuditExportJobUpdateManyWithoutRequestedByNestedInput
@@ -50828,6 +52878,7 @@ export namespace Prisma {
     schoolId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    brandsVerified?: BrandUncheckedUpdateManyWithoutVerifiedByNestedInput
     sessions?: RefreshSessionUncheckedUpdateManyWithoutUserNestedInput
     queuePresets?: AdminQueuePresetUncheckedUpdateManyWithoutUserNestedInput
     exportJobs?: AuditExportJobUncheckedUpdateManyWithoutRequestedByNestedInput
@@ -51836,6 +53887,10 @@ export namespace Prisma {
      * @deprecated Use AuditExportJobDefaultArgs instead
      */
     export type AuditExportJobArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = AuditExportJobDefaultArgs<ExtArgs>
+    /**
+     * @deprecated Use WhatsAppConversationDefaultArgs instead
+     */
+    export type WhatsAppConversationArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = WhatsAppConversationDefaultArgs<ExtArgs>
     /**
      * @deprecated Use WhatsAppMessageDefaultArgs instead
      */

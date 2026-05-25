@@ -25,6 +25,15 @@ enum EntityStatus {
   SUSPENDED
 }
 
+/// Public trust / certificate layer (separate from operational EntityStatus).
+enum BrandVerificationStatus {
+  PENDING
+  VERIFIED
+  FOUNDER_VERIFIED
+  SUSPENDED
+  REJECTED
+}
+
 enum SchoolVerificationStatus {
   NOT_SUBMITTED
   SUBMITTED
@@ -188,6 +197,7 @@ model User {
   updatedAt           DateTime             @updatedAt
   school              School?              @relation(fields: [schoolId], references: [id], onDelete: SetNull)
   brand               Brand?               @relation(fields: [brandId], references: [id], onDelete: SetNull)
+  brandsVerified      Brand[]              @relation("BrandVerifiedBy")
   sessions            RefreshSession[]
   queuePresets        AdminQueuePreset[]
   exportJobs          AuditExportJob[]
@@ -272,7 +282,15 @@ model Brand {
   codePrefix            String                   @unique
   slug                  String                   @unique
   verificationPolicy    Json?
+  /// Operational lifecycle (admin approvals, participation gates).
   status                EntityStatus             @default(PENDING)
+  /// Public certificate code (PREFIX-YY-ID), e.g. R2K-26-84XQ19. Issued at registration; confirmed when trusted.
+  verificationCode      String?                  @unique
+  /// Public trust layer: pending → verified / founder_verified (QR, PDF certificate, /verify URL).
+  verificationStatus    BrandVerificationStatus  @default(PENDING)
+  verifiedAt            DateTime?
+  verifiedByUserId      String?
+  verifiedBy            User?                    @relation("BrandVerifiedBy", fields: [verifiedByUserId], references: [id], onDelete: SetNull)
   onboardingStatus      BrandOnboardingStatus    @default(PENDING_REVIEW)
   legalName             String?
   registrationNumber    String?
@@ -285,6 +303,10 @@ model Brand {
   internalReviewNotes   String?
   logoUrl               String?
   featuredOnHome        Boolean                  @default(false)
+  /// Lower values appear first on the homepage partner strip and partner directory.
+  homeSortOrder         Int                      @default(100)
+  /// Platform founder / launch partner — skips activation fee gates when true.
+  founderExempt         Boolean                  @default(false)
   publicProfileEnabled  Boolean                  @default(false)
   description           String?
   websiteUrl            String?
@@ -304,6 +326,11 @@ model Brand {
   esgSchedules          EsgReportSchedule[]
   codes                 Code[]
   agreements            BrandAgreement[]
+
+  @@index([verificationStatus])
+  @@index([status, verificationStatus])
+  @@index([homeSortOrder])
+  @@index([founderExempt])
 }
 
 model Campaign {
@@ -581,6 +608,17 @@ model AuditExportJob {
 
   @@index([requestedById, status, createdAt])
   @@index([status, nextRetryAt, createdAt])
+}
+
+/// Select-based WhatsApp submit flow (province → district → school → campaign → code).
+model WhatsAppConversation {
+  msisdn    String   @id
+  step      String
+  data      Json     @default("{}")
+  updatedAt DateTime @updatedAt
+  createdAt DateTime @default(now())
+
+  @@index([updatedAt])
 }
 
 model WhatsAppMessage {

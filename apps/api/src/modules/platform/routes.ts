@@ -13,6 +13,13 @@ import { getPlatformRankings } from "./publicRankings.js";
 import { getPlatformTrust } from "./publicTrust.js";
 import { getPlatformCredibility } from "./getPlatformCredibility.js";
 import { getPublicImpactDashboard } from "./getPublicImpactDashboard.js";
+import { getBrandByVerificationCode } from "./getBrandVerification.js";
+import {
+  buildBrandProfileQrBySlug,
+  buildCertificatePdfByCode,
+  buildCertificatePdfBySlug,
+  buildVerifyQrByCode
+} from "./brandCertificateHandlers.js";
 import {
   createProvinceNomination,
   createProvinceNominationSchema,
@@ -22,6 +29,8 @@ import {
 import { platformLiveStreamHandler } from "./liveStream.js";
 import { requireInternalApiKey } from "../../middleware/requireInternalApiKey.js";
 import { bootstrapSuperAdmin } from "../../bootstrap/bootstrapSuperAdmin.js";
+import { bootstrapFounderBrand } from "../../bootstrap/bootstrapFounderBrand.js";
+import { backfillBrandVerification } from "../../bootstrap/backfillBrandVerification.js";
 import { purgeDemoData } from "../../bootstrap/purgeDemoData.js";
 
 const querySchema = z.object({
@@ -47,6 +56,72 @@ platformRouter.get("/partners", async (_req, res) => {
 platformRouter.get("/partners/directory", async (_req, res) => {
   const partners = await listPublicPartners();
   res.json(partners);
+});
+
+/** PNG QR — scan to open public verification page. */
+platformRouter.get("/verify/:code/qr", async (req, res) => {
+  const png = await buildVerifyQrByCode(req.params.code);
+  if (!png) {
+    res.status(404).json({ message: "Verification code not found." });
+    return;
+  }
+  res.setHeader("Content-Type", "image/png");
+  res.setHeader("Cache-Control", "public, max-age=3600");
+  res.send(png);
+});
+
+/** PDF verification certificate (trusted brands only). */
+platformRouter.get("/verify/:code/certificate", async (req, res) => {
+  const pdf = await buildCertificatePdfByCode(req.params.code);
+  if (!pdf) {
+    res.status(404).json({ message: "Certificate not available for this code." });
+    return;
+  }
+  const code = req.params.code.replace(/[^A-Za-z0-9-]/g, "");
+  res.setHeader("Content-Type", "application/pdf");
+  res.setHeader(
+    "Content-Disposition",
+    `attachment; filename="brand2school-certificate-${code}.pdf"`
+  );
+  res.send(pdf);
+});
+
+/** PNG QR — scan to open public brand profile. */
+platformRouter.get("/brands/:slug/qr", async (req, res) => {
+  const png = await buildBrandProfileQrBySlug(req.params.slug);
+  if (!png) {
+    res.status(404).json({ message: "Brand profile not found." });
+    return;
+  }
+  res.setHeader("Content-Type", "image/png");
+  res.setHeader("Cache-Control", "public, max-age=3600");
+  res.send(png);
+});
+
+/** PDF certificate by brand slug (trusted + code issued). */
+platformRouter.get("/brands/:slug/certificate", async (req, res) => {
+  const pdf = await buildCertificatePdfBySlug(req.params.slug);
+  if (!pdf) {
+    res.status(404).json({ message: "Certificate not available for this brand." });
+    return;
+  }
+  const slug = req.params.slug.replace(/[^a-z0-9-]/g, "");
+  res.setHeader("Content-Type", "application/pdf");
+  res.setHeader(
+    "Content-Disposition",
+    `attachment; filename="brand2school-certificate-${slug}.pdf"`
+  );
+  res.send(pdf);
+});
+
+/** Public brand certificate lookup by verification code (e.g. R2K-26-84XQ19). */
+platformRouter.get("/verify/:code", async (req, res) => {
+  const profile = await getBrandByVerificationCode(req.params.code);
+  if (!profile) {
+    res.status(404).json({ message: "Verification code not found." });
+    return;
+  }
+  res.json(profile);
 });
 
 platformRouter.get("/partners/:slug", async (req, res) => {
@@ -167,6 +242,39 @@ platformRouter.post("/bootstrap-super-admin", requireInternalApiKey, async (_req
     res.json({ ok: true, message: "Super admin bootstrapped.", ...result });
   } catch (err) {
     const message = err instanceof Error ? err.message : "Bootstrap failed.";
+    res.status(500).json({ ok: false, message });
+  }
+});
+
+/** Align verification codes/status for all brands (requires INTERNAL_API_KEY). */
+platformRouter.post("/backfill-brand-verification", requireInternalApiKey, async (_req, res) => {
+  try {
+    const summary = await backfillBrandVerification(prisma);
+    res.json({ ok: true, message: "Brand verification backfill complete.", ...summary });
+  } catch (err) {
+    const message = err instanceof Error ? err.message : "Backfill failed.";
+    res.status(500).json({ ok: false, message });
+  }
+});
+
+/** Provision R2kay Liquid Freeze founder brand (requires INTERNAL_API_KEY). */
+platformRouter.post("/bootstrap-founder-brand", requireInternalApiKey, async (req, res) => {
+  try {
+    const body = (req.body ?? {}) as {
+      adminEmail?: string;
+      adminPassword?: string;
+      adminFullName?: string;
+      contactPhone?: string;
+    };
+    const result = await bootstrapFounderBrand(prisma, body);
+    res.json({
+      ok: true,
+      message: "Founder brand bootstrapped.",
+      publicProfileUrl: `/brand/${result.slug}`,
+      ...result
+    });
+  } catch (err) {
+    const message = err instanceof Error ? err.message : "Founder bootstrap failed.";
     res.status(500).json({ ok: false, message });
   }
 });

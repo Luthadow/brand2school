@@ -39,7 +39,7 @@ export function PartnerRankingsPanel({ rankings }: { rankings: PlatformRankings 
               <li key={row.brandSlug} className="lp-leaderboard-row">
                 <span className="lp-leaderboard-rank">#{row.rank}</span>
                 <div className="lp-leaderboard-info">
-                  <Link href={`/partners/${row.brandSlug}` as Route} style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
+                  <Link href={`/brand/${row.brandSlug}` as Route} style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
                     {row.logoUrl ? (
                       <Image src={row.logoUrl} alt="" width={72} height={32} className="lp-trust-logo-img" />
                     ) : null}

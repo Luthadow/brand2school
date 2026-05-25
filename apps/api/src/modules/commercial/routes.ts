@@ -3,6 +3,7 @@ import multer from "multer";
 import { z } from "zod";
 import { prisma } from "../../lib/prisma.js";
 import { deriveBrandPrefix } from "../../lib/codeIdentity.js";
+import { generateUniqueBrandVerificationCode } from "../../lib/brandVerificationCode.js";
 import { slugifyBrandCode } from "../../lib/slugify.js";
 import { requireAuth, requireRole } from "../../middleware/auth.js";
 import { agreementGeneratedPath, agreementSignedPath, resolveCommercialPublicUrl, saveCommercialPdf } from "../../lib/commercialStorage.js";
@@ -183,12 +184,16 @@ commercialPublicRouter.post("/brand-applications", async (req, res) => {
     subInit?.subscriptionPlan ??
     null;
 
+  const verificationCode = await generateUniqueBrandVerificationCode(prisma, codePrefix);
+
   const brand = await prisma.brand.create({
     data: {
       name: payload.data.companyName,
       legalName: payload.data.legalName ?? payload.data.companyName,
       codePrefix,
       slug,
+      verificationCode,
+      verificationStatus: "PENDING",
       registrationNumber: payload.data.registrationNumber,
       vatNumber: payload.data.vatNumber,
       primaryContactEmail: payload.data.primaryContactEmail,

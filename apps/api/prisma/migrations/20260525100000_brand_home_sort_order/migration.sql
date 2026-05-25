@@ -1,0 +1,2 @@
+-- AlterTable
+ALTER TABLE "Brand" ADD COLUMN "homeSortOrder" INTEGER NOT NULL DEFAULT 100;

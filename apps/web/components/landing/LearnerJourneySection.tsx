@@ -1,5 +1,8 @@
+import Link from "next/link";
+import type { Route } from "next";
 import {
   CheckCircle2,
+  Globe2,
   MessageCircle,
   PackageOpen,
   School,
@@ -22,9 +25,9 @@ const journeySteps = [
     text: "Find the code, QR, or participation number — no account or registration needed."
   },
   {
-    icon: Smartphone,
-    title: "Open WhatsApp",
-    text: "Message Brand2School. Select Submit Code. Works on any phone."
+    icon: Globe2,
+    title: "Submit online or WhatsApp",
+    text: "Use brand2school.co.za/submit in any browser, or message Brand2School on WhatsApp."
   },
   {
     icon: School,
@@ -43,8 +46,16 @@ const journeySteps = [
   }
 ];
 
-const whatsappExample =
-  "SUBMIT | Your School Name | Your District | campaign-slug | YOUR-PARTICIPATION-CODE";
+const whatsappExample = `Brand2School:
+1. Submit product code
+2. Check school progress
+…
+
+You: 1
+Brand2School: Select province — reply 1–9
+
+You: 3
+Brand2School: Select district…`;
 
 const whatsappReply = `✅ Code Verified
 
@@ -68,7 +79,7 @@ export function LearnerJourneySection() {
           <SectionHeader
             eyebrow="Community Participation"
             title="Communities Help Schools Progress"
-            subtitle="No learner accounts. No child data. Buy a product, submit a code on WhatsApp, and watch your school move toward verified infrastructure milestones."
+            subtitle="No learner accounts. No child data. Buy a product, submit a code on the website or WhatsApp, and watch your school move toward verified infrastructure milestones."
           />
         </FadeIn>
 
@@ -111,8 +122,9 @@ export function LearnerJourneySection() {
                 </div>
               </div>
               <p className="lp-wa-caption">
-                Example message format — your school and campaign names appear after verification. Each code is an immutable
-                participation event credited to the school and brand campaign trail.
+                Example WhatsApp format — or use the{" "}
+                <Link href={"/submit" as Route}>online submit form</Link> with the same fields. Each code is an immutable participation
+                event credited to the school and brand campaign trail.
               </p>
             </div>
 

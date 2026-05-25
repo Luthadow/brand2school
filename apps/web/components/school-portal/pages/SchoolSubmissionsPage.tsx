@@ -1,5 +1,7 @@
 "use client";
 
+import Link from "next/link";
+import type { Route } from "next";
 import { useSchoolPortal } from "../SchoolPortalContext";
 import { formatCount } from "../../../lib/formatCount";
 
@@ -13,6 +15,11 @@ export function SchoolSubmissionsPage(): JSX.Element {
         <p className="ds-eyebrow">Submissions</p>
         <h1>Community participation</h1>
         <p className="sp-muted">Verified submissions, trends, and top supporters.</p>
+        <p style={{ marginTop: "0.75rem" }}>
+          <Link href={"/submit" as Route} className="ds-btn ds-btn-primary ds-btn-sm">
+            Submit a product code (website)
+          </Link>
+        </p>
       </header>
       <div className="sp-stat-grid sp-stat-grid--2">
         <article className="sp-stat">

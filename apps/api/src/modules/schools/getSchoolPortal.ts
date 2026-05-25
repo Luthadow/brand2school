@@ -423,8 +423,8 @@ export async function getSchoolPortal(userId: string): Promise<SchoolPortal | nu
       phone: school.whatsappPhone,
       commands: [
         "MENU",
-        "SUBMIT | School Name | District | campaign-slug | CODE",
-        "PROGRESS | School Name | District",
+        "1 — Submit code (select province, district, school, campaign)",
+        "2 — Check progress (select school)",
         "HELP"
       ]
     },

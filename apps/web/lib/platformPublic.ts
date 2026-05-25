@@ -23,6 +23,15 @@ export type PublicPartnerSummary = {
 
 export type PublicBrandProfile = PublicPartnerSummary & {
   verifiedPartner: boolean;
+  verificationCode: string | null;
+  verificationStatus: string | null;
+  founderVerified: boolean;
+  isTrusted: boolean;
+  verifyUrl: string | null;
+  brandProfileUrl: string;
+  certificatePdfUrl: string | null;
+  verifyQrImageUrl: string | null;
+  brandQrImageUrl: string | null;
   provinces: Array<{ code: string; name: string; schools: number; submissions: number; intensity: number }>;
   campaigns: Array<{
     id: string;

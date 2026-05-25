@@ -24,7 +24,7 @@ export default async function PartnersDirectoryPage(): Promise<JSX.Element> {
           ) : (
             <div className="pp-directory-grid" style={{ marginTop: "2rem" }}>
               {partners.map((partner) => (
-                <Link key={partner.slug} href={`/partners/${partner.slug}` as Route} className="card pp-directory-card">
+                <Link key={partner.slug} href={`/brand/${partner.slug}` as Route} className="card pp-directory-card">
                   {partner.logoUrl ? (
                     <Image
                       src={partner.logoUrl}

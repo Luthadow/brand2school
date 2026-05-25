@@ -95,7 +95,7 @@ export function SchoolDashboard(): JSX.Element {
             <li>Application submitted — our team is reviewing your school details</li>
             <li>Share your school code <strong>{school.schoolCode}</strong> with your community when activated</li>
             <li>WhatsApp line linked: +{school.whatsappPhone}</li>
-            <li>Once approved, families can submit via WhatsApp using SUBMIT | School | District | campaign | CODE</li>
+            <li>Once approved, families reply 1 on WhatsApp and select province → district → school → campaign → code</li>
           </ul>
         </section>
       ) : null}
@@ -196,8 +196,8 @@ export function SchoolDashboard(): JSX.Element {
           <MessageCircle size={22} />
           <div>
             <code>MENU</code>
-            <code>SUBMIT | School Name | District | campaign-slug | PRODUCT_CODE</code>
-            <code>PROGRESS | School Name | District</code>
+            <code>1 — Submit code (select from lists)</code>
+            <code>2 — Check progress</code>
           </div>
         </div>
       </section>

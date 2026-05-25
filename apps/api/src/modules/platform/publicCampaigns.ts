@@ -201,6 +201,6 @@ function buildParticipationHint(campaign: {
   return [
     "Product codes work nationally — campaign eligibility is based on your school's province and district.",
     `This mission (${campaign.name}) scope: ${scope}.`,
-    "Submit on WhatsApp: school name | district | campaign slug | product code."
+    "Submit online at brand2school.co.za/submit or on WhatsApp (school name, district, campaign slug, product code)."
   ].join(" ");
 }

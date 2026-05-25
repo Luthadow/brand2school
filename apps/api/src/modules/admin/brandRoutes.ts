@@ -4,6 +4,7 @@ import { z } from "zod";
 import { prisma } from "../../lib/prisma.js";
 import { removeBrandLogoFile, resolveLogoPublicUrl, saveBrandLogo } from "../../lib/brandAssets.js";
 import { requireRole } from "../../middleware/auth.js";
+import { applyManualBrandVerificationPatch } from "../platform/syncBrandVerification.js";
 
 const upload = multer({
   storage: multer.memoryStorage(),
@@ -13,6 +14,9 @@ const upload = multer({
 const listQuerySchema = z.object({
   search: z.string().optional(),
   status: z.enum(["PENDING", "VERIFIED", "APPROVED", "ACTIVE", "SUSPENDED"]).optional(),
+  verificationStatus: z
+    .enum(["PENDING", "VERIFIED", "FOUNDER_VERIFIED", "SUSPENDED", "REJECTED"])
+    .optional(),
   featuredOnHome: z
     .enum(["true", "false"])
     .optional()
@@ -29,6 +33,11 @@ const patchBrandSchema = z.object({
     .optional()
     .nullable(),
   featuredOnHome: z.boolean().optional(),
+  homeSortOrder: z.number().int().min(0).max(9999).optional(),
+  founderExempt: z.boolean().optional(),
+  verificationStatus: z
+    .enum(["PENDING", "VERIFIED", "FOUNDER_VERIFIED", "SUSPENDED", "REJECTED"])
+    .optional(),
   publicProfileEnabled: z.boolean().optional(),
   description: z.string().max(2000).optional().nullable(),
   slug: z
@@ -47,6 +56,11 @@ function serializeBrand(brand: {
   status: string;
   logoUrl: string | null;
   featuredOnHome: boolean;
+  homeSortOrder: number;
+  founderExempt: boolean;
+  verificationCode: string | null;
+  verificationStatus: string;
+  verifiedAt: Date | null;
   publicProfileEnabled: boolean;
   description: string | null;
   websiteUrl: string | null;
@@ -62,11 +76,22 @@ function serializeBrand(brand: {
     status: brand.status,
     logoUrl: resolveLogoPublicUrl(brand.logoUrl),
     featuredOnHome: brand.featuredOnHome,
+    homeSortOrder: brand.homeSortOrder,
+    founderExempt: brand.founderExempt,
+    verificationCode: brand.verificationCode,
+    verificationStatus: brand.verificationStatus,
+    verifiedAt: brand.verifiedAt?.toISOString() ?? null,
+    verifyUrl: brand.verificationCode ? `/verify/${brand.verificationCode}` : null,
+    certificatePdfUrl:
+      brand.verificationCode &&
+      (brand.verificationStatus === "VERIFIED" || brand.verificationStatus === "FOUNDER_VERIFIED")
+        ? `/api/v1/platform/verify/${encodeURIComponent(brand.verificationCode)}/certificate`
+        : null,
     publicProfileEnabled: brand.publicProfileEnabled,
     description: brand.description,
     websiteUrl: brand.websiteUrl,
     brandColor: brand.brandColor,
-    publicProfileUrl: `/partners/${brand.slug}`,
+    publicProfileUrl: `/brand/${brand.slug}`,
     createdAt: brand.createdAt.toISOString(),
     updatedAt: brand.updatedAt.toISOString()
   };
@@ -85,6 +110,9 @@ adminBrandRouter.get("/brands", async (req, res) => {
   const pageSize = query.data.pageSize ?? 25;
   const where = {
     ...(query.data.status ? { status: query.data.status } : {}),
+    ...(query.data.verificationStatus
+      ? { verificationStatus: query.data.verificationStatus }
+      : {}),
     ...(query.data.featuredOnHome !== undefined ? { featuredOnHome: query.data.featuredOnHome } : {}),
     ...(query.data.search
       ? {
@@ -101,7 +129,7 @@ adminBrandRouter.get("/brands", async (req, res) => {
     prisma.brand.count({ where }),
     prisma.brand.findMany({
       where,
-      orderBy: { updatedAt: "desc" },
+      orderBy: [{ homeSortOrder: "asc" }, { updatedAt: "desc" }],
       skip: (page - 1) * pageSize,
       take: pageSize
     })
@@ -164,12 +192,22 @@ adminBrandRouter.patch("/brands/:id", requireRole(["SUPER_ADMIN"]), async (req, 
     }
   }
 
+  const verificationPatch =
+    payload.data.verificationStatus !== undefined
+      ? { verificationStatus: payload.data.verificationStatus }
+      : payload.data.founderExempt === true
+        ? { verificationStatus: "FOUNDER_VERIFIED" as const }
+        : {};
+
   const updated = await prisma.brand.update({
     where: { id: brand.id },
     data: {
       ...(payload.data.websiteUrl !== undefined ? { websiteUrl: payload.data.websiteUrl } : {}),
       ...(payload.data.brandColor !== undefined ? { brandColor: payload.data.brandColor } : {}),
       ...(payload.data.featuredOnHome !== undefined ? { featuredOnHome: payload.data.featuredOnHome } : {}),
+      ...(payload.data.homeSortOrder !== undefined ? { homeSortOrder: payload.data.homeSortOrder } : {}),
+      ...(payload.data.founderExempt !== undefined ? { founderExempt: payload.data.founderExempt } : {}),
+      ...verificationPatch,
       ...(payload.data.publicProfileEnabled !== undefined
         ? { publicProfileEnabled: payload.data.publicProfileEnabled }
         : {}),
@@ -178,7 +216,21 @@ adminBrandRouter.patch("/brands/:id", requireRole(["SUPER_ADMIN"]), async (req, 
     }
   });
 
-  res.json(serializeBrand(updated));
+  const actorId = req.user?.id;
+  await applyManualBrandVerificationPatch(
+    prisma,
+    brand.id,
+    {
+      ...(payload.data.verificationStatus !== undefined
+        ? { verificationStatus: payload.data.verificationStatus }
+        : {}),
+      ...(payload.data.founderExempt !== undefined ? { founderExempt: payload.data.founderExempt } : {})
+    },
+    actorId
+  );
+
+  const fresh = await prisma.brand.findUnique({ where: { id: brand.id } });
+  res.json(serializeBrand(fresh ?? updated));
 });
 
 adminBrandRouter.post(
