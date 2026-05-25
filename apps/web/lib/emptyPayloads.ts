@@ -68,7 +68,7 @@ export function emptyBrandAnalytics(): BrandAnalytics {
 
 export function emptyBrandPortal(analytics: BrandAnalytics = emptyBrandAnalytics()): BrandPortal {
   return {
-    brand: { id: "pending", name: "Your brand" },
+    brand: { id: "pending", name: "Your brand", logoUrl: null },
     overview: {
       totalSubmissions: 0,
       schoolsSupported: 0,
