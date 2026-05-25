@@ -18,6 +18,8 @@ import {
   scopeTypeLabel
 } from "../campaigns/campaignEligibility.js";
 import { buildParticipationEligibilityPayload } from "./services/buildEligibilityPayload.js";
+import { listParticipationBrands } from "./listParticipationBrands.js";
+import { resolveParticipationCampaign } from "./resolveParticipationCampaign.js";
 
 const schoolSelectionSchema = z
   .object({
@@ -29,20 +31,26 @@ const schoolSelectionSchema = z
     message: "Select a school from the list."
   });
 
-const participationSchema = schoolSelectionSchema.and(
-  z.object({
-    campaignSlug: z.string().min(2),
-    productCode: z.string().min(2),
-    whatsappMsisdn: z.string().min(8).optional(),
-    source: z.string().min(2).optional()
+const brandCampaignSchema = z
+  .object({
+    brandSlug: z.string().min(2).optional(),
+    campaignSlug: z.string().min(2).optional()
   })
+  .refine((d) => Boolean(d.brandSlug?.trim() || d.campaignSlug?.trim()), {
+    message: "Select a brand from the list."
+  });
+
+const participationSchema = schoolSelectionSchema.and(
+  brandCampaignSchema.and(
+    z.object({
+      productCode: z.string().min(2),
+      whatsappMsisdn: z.string().min(8).optional(),
+      source: z.string().min(2).optional()
+    })
+  )
 );
 
-const eligibilityCheckSchema = schoolSelectionSchema.and(
-  z.object({
-    campaignSlug: z.string().min(2)
-  })
-);
+const eligibilityCheckSchema = schoolSelectionSchema.and(brandCampaignSchema);
 
 const schoolOptionsQuerySchema = z.object({
   province: z.string().min(2).optional(),
@@ -50,6 +58,11 @@ const schoolOptionsQuerySchema = z.object({
 });
 
 export const participationRouter = Router();
+
+participationRouter.get("/brands", participationRateLimit, async (_req, res) => {
+  const brands = await listParticipationBrands();
+  res.json({ brands });
+});
 
 participationRouter.get("/school-options", participationRateLimit, async (req, res) => {
   const query = schoolOptionsQuerySchema.safeParse(req.query);
@@ -86,8 +99,17 @@ participationRouter.post("/eligibility-check", participationRateLimit, async (re
     return;
   }
 
+  const resolved = await resolveParticipationCampaign({
+    brandSlug: payload.data.brandSlug,
+    campaignSlug: payload.data.campaignSlug
+  });
+  if (!resolved.ok) {
+    res.status(400).json({ message: resolved.message, outcome: "BRAND_CAMPAIGN_REQUIRED" });
+    return;
+  }
+
   const campaign = await prisma.campaign.findUnique({
-    where: { slug: payload.data.campaignSlug.toLowerCase() }
+    where: { slug: resolved.campaignSlug }
   });
   if (!campaign) {
     res.status(404).json({ message: "Campaign not found.", outcome: "CAMPAIGN_NOT_FOUND" });
@@ -128,6 +150,18 @@ participationRouter.post("/submit", participationRateLimit, async (req, res) => 
     return;
   }
 
-  const result = await processParticipationSubmission(payload.data);
+  const resolved = await resolveParticipationCampaign({
+    brandSlug: payload.data.brandSlug,
+    campaignSlug: payload.data.campaignSlug
+  });
+  if (!resolved.ok) {
+    res.status(400).json({ message: resolved.message, outcome: "BRAND_CAMPAIGN_REQUIRED" });
+    return;
+  }
+
+  const result = await processParticipationSubmission({
+    ...payload.data,
+    campaignSlug: resolved.campaignSlug
+  });
   res.status(result.status).json(result.payload);
 });

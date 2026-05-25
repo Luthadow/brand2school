@@ -93,7 +93,7 @@ export default async function PublicCampaignPage({
             Use the form below or WhatsApp — same verification engine.
           </p>
           <ParticipationSubmitForm
-            campaigns={[{ slug: campaign.slug, name: campaign.name, brandName: campaign.brandName }]}
+            defaultBrandSlug={campaign.brandSlug}
             defaultCampaignSlug={campaign.slug}
           />
         </div>

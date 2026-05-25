@@ -3,8 +3,7 @@ import multer from "multer";
 import XLSX from "xlsx";
 import { z } from "zod";
 import { prisma } from "../../lib/prisma.js";
-import { computeChecksum } from "../../lib/participationCodes.js";
-import { deriveBrandPrefix, deriveCampaignCode, deriveBatchCode, parseStructuredCode } from "../../lib/codeIdentity.js";
+import { deriveBrandPrefix, deriveCampaignCode } from "../../lib/codeIdentity.js";
 import { slugifyBrandCode } from "../../lib/slugify.js";
 import { requireAuth, requireRole } from "../../middleware/auth.js";
 import { campaignsRateLimit } from "../../middleware/rateLimit.js";
@@ -18,7 +17,12 @@ import {
 } from "../commercial/campaignActivation.js";
 import { computeGracePeriodEndsAt } from "../commercial/campaignExpiry.js";
 import { setupFeeZarForScope } from "../commercial/setupFees.js";
-import { filterCodesForBrand } from "../commercial/codeOwnership.js";
+import { campaignForbiddenForBrandAdmin } from "./assertCampaignBrandAccess.js";
+import {
+  importCodeBatchFromFile,
+  validateCodeBatchUpload
+} from "../codes/importCodeBatchFromFile.js";
+import { formatStructuredCode } from "../../lib/codeIdentity.js";
 
 const createBrandSchema = z.object({
   name: z.string().min(2),
@@ -317,6 +321,19 @@ campaignsRouter.post(
       return;
     }
 
+    const campaignForAccess = await prisma.campaign.findUnique({
+      where: { id: req.params.campaignId },
+      select: { brandId: true }
+    });
+    if (!campaignForAccess) {
+      res.status(404).json({ message: "Campaign not found." });
+      return;
+    }
+    if (campaignForbiddenForBrandAdmin(req, campaignForAccess.brandId)) {
+      res.status(403).json({ message: "Cannot manage another brand's campaign." });
+      return;
+    }
+
     try {
       const result = await generateSecureCodeBatch({
         campaignId: req.params.campaignId,
@@ -335,12 +352,95 @@ campaignsRouter.post(
 );
 
 campaignsRouter.post(
+  "/:campaignId/code-batches/validate-file",
+  requireAuth,
+  requireRole(["SUPER_ADMIN", "ADMIN_STAFF", "BRAND_ADMIN"]),
+  upload.single("file"),
+  async (req, res) => {
+    const uploadedFile = (req as typeof req & { file?: { buffer: Buffer; originalname?: string } })
+      .file;
+    if (!uploadedFile) {
+      res.status(400).json({ message: "Missing file upload." });
+      return;
+    }
+
+    const campaign = await prisma.campaign.findUnique({
+      where: { id: req.params.campaignId },
+      select: { brandId: true }
+    });
+    if (!campaign) {
+      res.status(404).json({ message: "Campaign not found." });
+      return;
+    }
+    if (campaignForbiddenForBrandAdmin(req, campaign.brandId)) {
+      res.status(403).json({ message: "Cannot manage another brand's campaign." });
+      return;
+    }
+
+    try {
+      const validation = await validateCodeBatchUpload(
+        req.params.campaignId,
+        uploadedFile.buffer,
+        uploadedFile.originalname ?? "upload.xlsx"
+      );
+      res.json(validation);
+    } catch (err) {
+      res.status(400).json({ message: err instanceof Error ? err.message : "Validation failed." });
+    }
+  }
+);
+
+campaignsRouter.get(
+  "/:campaignId/code-batches/import-template",
+  requireAuth,
+  requireRole(["SUPER_ADMIN", "ADMIN_STAFF", "BRAND_ADMIN"]),
+  async (req, res) => {
+    const campaign = await prisma.campaign.findUnique({
+      where: { id: req.params.campaignId },
+      include: { brand: true }
+    });
+    if (!campaign) {
+      res.status(404).json({ message: "Campaign not found." });
+      return;
+    }
+    if (campaignForbiddenForBrandAdmin(req, campaign.brandId)) {
+      res.status(403).json({ message: "Cannot manage another brand's campaign." });
+      return;
+    }
+
+    const prefix = campaign.brand.codePrefix;
+    const campaignCode = (campaign.campaignCode ?? "CAM1").toUpperCase();
+    const example = formatStructuredCode(prefix, campaignCode, "B01", "SAMPLE1");
+
+    const sheet = XLSX.utils.aoa_to_sheet([
+      ["code"],
+      [example],
+      [formatStructuredCode(prefix, campaignCode, "B01", "SAMPLE2")]
+    ]);
+    const workbook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(workbook, sheet, "codes");
+    const buffer = XLSX.write(workbook, { type: "buffer", bookType: "xlsx" }) as Buffer;
+
+    res.setHeader(
+      "Content-Disposition",
+      `attachment; filename="${campaign.slug}-product-codes-template.xlsx"`
+    );
+    res.setHeader(
+      "Content-Type",
+      "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+    );
+    res.send(buffer);
+  }
+);
+
+campaignsRouter.post(
   "/:campaignId/code-batches/import",
   requireAuth,
   requireRole(["SUPER_ADMIN", "ADMIN_STAFF", "BRAND_ADMIN"]),
   upload.single("file"),
   async (req, res) => {
-    const uploadedFile = (req as typeof req & { file?: { buffer: Buffer } }).file;
+    const uploadedFile = (req as typeof req & { file?: { buffer: Buffer; originalname?: string } })
+      .file;
     if (!uploadedFile) {
       res.status(400).json({ message: "Missing file upload." });
       return;
@@ -354,97 +454,42 @@ campaignsRouter.post(
 
     const campaign = await prisma.campaign.findUnique({
       where: { id: req.params.campaignId },
-      include: { brand: true }
+      select: { brandId: true }
     });
     if (!campaign) {
       res.status(404).json({ message: "Campaign not found." });
       return;
     }
-
-    const workbook = XLSX.read(uploadedFile.buffer, { type: "buffer" });
-    const firstSheetName = workbook.SheetNames[0];
-    if (!firstSheetName) {
-      res.status(400).json({ message: "Uploaded file has no sheets." });
+    if (campaignForbiddenForBrandAdmin(req, campaign.brandId)) {
+      res.status(403).json({ message: "Cannot manage another brand's campaign." });
       return;
     }
 
-    const rows = XLSX.utils.sheet_to_json(workbook.Sheets[firstSheetName], { defval: "" }) as Array<
-      Record<string, unknown>
-    >;
-    if (rows.length === 0) {
-      res.status(400).json({ message: "No data rows found in file." });
-      return;
-    }
-
-    const normalizedCodes: string[] = rows
-      .map((row: Record<string, unknown>) => {
-        const raw = row.code ?? row.CODE ?? row.product_code ?? row.PRODUCT_CODE;
-        return String(raw || "").trim().toUpperCase();
-      })
-      .filter((value: string): value is string => value.length > 0);
-
-    if (normalizedCodes.length === 0) {
-      res.status(400).json({ message: "No valid code values found. Expected column name: code." });
-      return;
-    }
-
-    const uniqueCodes: string[] = [...new Set(normalizedCodes)];
-
-    const { valid, invalid } = filterCodesForBrand(uniqueCodes, campaign.brand.codePrefix);
-    if (invalid.length > 0) {
-      res.status(400).json({
-        message: `Some codes do not match brand prefix ${campaign.brand.codePrefix}.`,
-        invalidSample: invalid.slice(0, 25),
-        invalidCount: invalid.length
-      });
-      return;
-    }
-
-    const existing = await prisma.code.findMany({
-      where: { value: { in: valid } },
-      select: { value: true }
-    });
-    const existingSet = new Set(existing.map((item: { value: string }) => item.value));
-    const toInsert = valid.filter((value) => !existingSet.has(value));
-
-    const existingBatches = await prisma.codeBatch.count({ where: { campaignId: campaign.id } });
-    const batchCode = deriveBatchCode(existingBatches + 1).toUpperCase();
-
-    const batch = await prisma.codeBatch.create({
-      data: {
-        campaignId: campaign.id,
+    try {
+      const result = await importCodeBatchFromFile({
+        campaignId: req.params.campaignId,
+        buffer: uploadedFile.buffer,
+        filename: uploadedFile.originalname ?? "upload.xlsx",
         batchName: meta.data.batchName,
-        batchCode,
-        codeVersion: "V1",
         expiresAt: meta.data.expiresAt
-      }
-    });
-
-    if (toInsert.length > 0) {
-      await prisma.code.createMany({
-        data: toInsert.map((value) => {
-          const structured = parseStructuredCode(value);
-          return {
-            batchId: batch.id,
-            brandId: campaign.brandId,
-            campaignId: campaign.id,
-            value,
-            token: structured?.token ?? null,
-            checksum: structured?.checksum ?? computeChecksum(value),
-            codeVersion: "V1",
-            status: "UNUSED" as const
-          };
-        })
       });
+      res.status(201).json({
+        batchId: result.batchId,
+        batchCode: result.batchCode,
+        importedCount: result.importedCount,
+        skippedExistingCount: result.skippedExistingCount,
+        validation: result
+      });
+    } catch (err) {
+      const validation = (err as Error & { validation?: unknown }).validation;
+      if (validation) {
+        res.status(400).json({
+          message: err instanceof Error ? err.message : "Import failed.",
+          validation
+        });
+        return;
+      }
+      res.status(400).json({ message: err instanceof Error ? err.message : "Import failed." });
     }
-
-    await syncCampaignCommercialStatus(campaign.id);
-
-    res.status(201).json({
-      batchId: batch.id,
-      batchCode,
-      importedCount: toInsert.length,
-      skippedExistingCount: valid.length - toInsert.length
-    });
   }
 );

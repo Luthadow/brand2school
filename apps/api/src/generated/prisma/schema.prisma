@@ -219,7 +219,9 @@ model PasswordResetToken {
 model School {
   id                   String                @id @default(cuid())
   name                 String
+  /// Used by web/WhatsApp submit: province → district → school selects.
   province             String
+  /// Official municipality or local area label; matched with canonical SA district list.
   district             String
   principalName        String
   contactEmail         String?
@@ -241,6 +243,9 @@ model School {
   fundingContributions FundingContribution[]
   adminUser            User?
   verification         SchoolVerification?
+
+  @@index([province, district])
+  @@index([status, province])
 }
 
 model SchoolVerification {
@@ -446,9 +451,11 @@ model Product {
   @@unique([campaignId, slug])
 }
 
+/// Product code inventory per campaign — rows created via Excel/CSV/Word import or API generate.
 model CodeBatch {
   id          String    @id @default(cuid())
   campaignId  String
+  /// Human label from brand portal upload (e.g. "March 2026 bottle caps").
   batchName   String
   batchCode   String
   codeVersion String    @default("V1")

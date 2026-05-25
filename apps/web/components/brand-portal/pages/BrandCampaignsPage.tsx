@@ -5,6 +5,7 @@ import { BrandPageHeader } from "../BrandPageHeader";
 import { campaignStatusLabel } from "../../../lib/brandPortal";
 import { CONTACT, mailto } from "../../../lib/contact";
 import { formatCount } from "../../../lib/formatCount";
+import { CodeBatchUploadPanel } from "../CodeBatchUploadPanel";
 
 export function BrandCampaignsPage(): JSX.Element {
   const { campaigns } = useBrandPortal();
@@ -50,6 +51,10 @@ export function BrandCampaignsPage(): JSX.Element {
           </tbody>
         </table>
       </div>
+      <CodeBatchUploadPanel
+        campaigns={campaigns.map((c) => ({ id: c.id, name: c.name }))}
+      />
+
       <article className="bp-panel bp-panel--cta">
         <h2>Create a new campaign</h2>
         <p>

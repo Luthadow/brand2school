@@ -1,6 +1,8 @@
 # Brand partners (all phases)
 
-Full schema ↔ feature wiring: **[docs/schema-nervous-system.md](schema-nervous-system.md)**
+Full schema ↔ feature wiring (all migrations + participation): **[docs/schema-nervous-system.md](schema-nervous-system.md)**
+
+**Railway:** run `npm run railway:migrate` (or `db:migrate:deploy`) so migrations through `20260525150000` apply before bootstrap/backfill.
 
 ## Brand verification codes
 
@@ -28,6 +30,23 @@ Brand profile: `https://brand2school.co.za/brand/r2kay-liquid-freeze` (QR, certi
 Codes are issued on **enterprise registration** and confirmed when the brand is approved **ACTIVE** in admin.
 
 After deploy, run once: `npm run brand:backfill-verification` (requires `B2S_INTERNAL_API_KEY`) to align legacy rows.
+
+## Product / participation codes (campaign batches)
+
+Brands upload **lists of codes** tied to a campaign so learners can submit them on the web or WhatsApp flow.
+
+| Channel | How |
+|---------|-----|
+| Brand portal | **Campaigns → Upload product codes** — Excel (.xlsx/.xls), CSV, Word (.docx), or plain text |
+| API | `POST /api/v1/campaigns/:campaignId/code-batches/validate-file` (preview) |
+| API | `POST /api/v1/campaigns/:campaignId/code-batches/import` (multipart: `file`, `batchName`, optional `expiresAt`) |
+| Template | `GET /api/v1/campaigns/:campaignId/code-batches/import-template` |
+
+**File format:** one column named `code` in spreadsheets, or one code per line in Word/text. Structured codes use  
+`{BRAND}-{CAMPAIGN}-{BATCH}-{TOKEN}-{CHECK}` (must match the brand’s `codePrefix`).  
+Use **Check file** before **Import**; invalid or duplicate rows are reported before anything is saved.
+
+System-generated batches: `POST .../code-batches/generate` (up to 50k codes).
 
 ## Governance
 

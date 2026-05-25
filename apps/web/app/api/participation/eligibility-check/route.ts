@@ -15,6 +15,7 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
       schoolId: body.schoolId,
       schoolName: body.schoolName,
       district: body.district,
+      brandSlug: body.brandSlug,
       campaignSlug: body.campaignSlug
     })
   });

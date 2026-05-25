@@ -2,11 +2,20 @@
 
 import Link from "next/link";
 import type { Route } from "next";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { CheckCircle2, Globe2, MessageCircle } from "lucide-react";
 import { PUBLIC_PHONE, whatsappUrl } from "../../lib/contact";
 import { formatCount } from "../../lib/formatCount";
 
+export type BrandOption = {
+  slug: string;
+  name: string;
+  codePrefix: string;
+  logoUrl: string | null;
+  campaigns: Array<{ slug: string; name: string }>;
+};
+
+/** @deprecated Use brand select; kept for campaign detail embeds */
 export type CampaignOption = {
   slug: string;
   name: string;
@@ -14,6 +23,7 @@ export type CampaignOption = {
 };
 
 type ProvinceOption = { code: string; name: string };
+type DistrictOption = { name: string; schoolCount: number };
 type SchoolOption = { id: string; name: string; district: string; province: string };
 
 type EligibilityAlternative = {
@@ -47,23 +57,28 @@ type EligibilityPayload = {
 };
 
 export function ParticipationSubmitForm({
-  campaigns = [],
+  campaigns: legacyCampaigns = [],
   defaultCampaignSlug = "",
+  defaultBrandSlug = "",
   compact = false
 }: {
   campaigns?: CampaignOption[];
   defaultCampaignSlug?: string;
+  defaultBrandSlug?: string;
   compact?: boolean;
 }): JSX.Element {
+  const [brands, setBrands] = useState<BrandOption[]>([]);
   const [provinces, setProvinces] = useState<ProvinceOption[]>([]);
-  const [districts, setDistricts] = useState<string[]>([]);
+  const [districts, setDistricts] = useState<DistrictOption[]>([]);
   const [schools, setSchools] = useState<SchoolOption[]>([]);
   const [province, setProvince] = useState("");
   const [district, setDistrict] = useState("");
   const [schoolId, setSchoolId] = useState("");
+  const [brandSlug, setBrandSlug] = useState(defaultBrandSlug);
   const [campaignSlug, setCampaignSlug] = useState(defaultCampaignSlug);
   const [productCode, setProductCode] = useState("");
   const [contactPhone, setContactPhone] = useState("");
+  const [loadingBrands, setLoadingBrands] = useState(true);
   const [loadingProvinces, setLoadingProvinces] = useState(true);
   const [loadingDistricts, setLoadingDistricts] = useState(false);
   const [loadingSchools, setLoadingSchools] = useState(false);
@@ -74,11 +89,43 @@ export function ParticipationSubmitForm({
   const [eligibility, setEligibility] = useState<EligibilityPayload | null>(null);
   const [success, setSuccess] = useState<SubmitSuccess | null>(null);
 
-  const selectedSchool = schools.find((s) => s.id === schoolId);
+  const selectedBrand = useMemo(
+    () => brands.find((b) => b.slug === brandSlug) ?? null,
+    [brands, brandSlug]
+  );
+
+  const selectedDistrict = useMemo(
+    () => districts.find((d) => d.name === district) ?? null,
+    [districts, district]
+  );
+
+  const needsCampaignPick = (selectedBrand?.campaigns.length ?? 0) > 1;
 
   useEffect(() => {
-    setCampaignSlug(defaultCampaignSlug);
+    setBrandSlug(defaultBrandSlug);
+  }, [defaultBrandSlug]);
+
+  useEffect(() => {
+    if (defaultCampaignSlug) setCampaignSlug(defaultCampaignSlug);
   }, [defaultCampaignSlug]);
+
+  useEffect(() => {
+    if (defaultCampaignSlug && legacyCampaigns.length > 0 && !defaultBrandSlug) {
+      const match = legacyCampaigns.find((c) => c.slug === defaultCampaignSlug);
+      if (match) {
+        const byName = brands.find((b) => b.name === match.brandName);
+        if (byName) setBrandSlug(byName.slug);
+      }
+    }
+  }, [defaultCampaignSlug, defaultBrandSlug, legacyCampaigns, brands]);
+
+  useEffect(() => {
+    void fetch("/api/participation/brands")
+      .then((res) => (res.ok ? res.json() : { brands: [] }))
+      .then((data: { brands?: BrandOption[] }) => setBrands(data.brands ?? []))
+      .catch(() => setBrands([]))
+      .finally(() => setLoadingBrands(false));
+  }, []);
 
   useEffect(() => {
     void fetch("/api/participation/school-options")
@@ -96,8 +143,15 @@ export function ParticipationSubmitForm({
     setSchoolId("");
     try {
       const res = await fetch(`/api/participation/school-options?province=${encodeURIComponent(prov)}`);
-      const data = (await res.json().catch(() => ({}))) as { districts?: string[] };
-      setDistricts(data.districts ?? []);
+      const data = (await res.json().catch(() => ({}))) as {
+        districts?: DistrictOption[] | string[];
+      };
+      const raw = data.districts ?? [];
+      setDistricts(
+        raw.map((d) =>
+          typeof d === "string" ? { name: d, schoolCount: 0 } : { name: d.name, schoolCount: d.schoolCount ?? 0 }
+        )
+      );
     } finally {
       setLoadingDistricts(false);
     }
@@ -143,6 +197,28 @@ export function ParticipationSubmitForm({
     }
   }
 
+  function onBrandChange(value: string): void {
+    setBrandSlug(value);
+    const brand = brands.find((b) => b.slug === value);
+    if (brand?.campaigns.length === 1) {
+      setCampaignSlug(brand.campaigns[0].slug);
+    } else {
+      setCampaignSlug("");
+    }
+    setEligibility(null);
+    setEligibilityNote(null);
+    setError(null);
+  }
+
+  function brandCampaignPayload(): { brandSlug: string; campaignSlug?: string } | null {
+    if (!brandSlug) return null;
+    if (needsCampaignPick && !campaignSlug) return null;
+    return {
+      brandSlug,
+      ...(needsCampaignPick || campaignSlug ? { campaignSlug: campaignSlug || undefined } : {})
+    };
+  }
+
   function schoolPayload(): { schoolId: string } | null {
     if (!schoolId) return null;
     return { schoolId };
@@ -150,8 +226,9 @@ export function ParticipationSubmitForm({
 
   async function checkEligibility(): Promise<void> {
     const school = schoolPayload();
-    if (!school || !campaignSlug.trim()) {
-      setEligibilityNote("Select your province, district, school, and campaign first.");
+    const brand = brandCampaignPayload();
+    if (!school || !brand) {
+      setEligibilityNote("Select your province, district, school, and brand first.");
       return;
     }
     setChecking(true);
@@ -162,10 +239,7 @@ export function ParticipationSubmitForm({
       const res = await fetch("/api/participation/eligibility-check", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          ...school,
-          campaignSlug: campaignSlug.trim().toLowerCase()
-        })
+        body: JSON.stringify({ ...school, ...brand })
       });
       const data = (await res.json().catch(() => ({}))) as {
         message?: string;
@@ -177,7 +251,7 @@ export function ParticipationSubmitForm({
         setEligibility(data.eligibility ?? null);
         return;
       }
-      setEligibilityNote(data.message ?? (data.eligible ? "School is eligible for this campaign." : "Not eligible."));
+      setEligibilityNote(data.message ?? (data.eligible ? "School is eligible for this brand." : "Not eligible."));
       setEligibility(data.eligible ? null : (data.eligibility ?? null));
     } finally {
       setChecking(false);
@@ -187,8 +261,13 @@ export function ParticipationSubmitForm({
   async function submit(event: React.FormEvent): Promise<void> {
     event.preventDefault();
     const school = schoolPayload();
+    const brand = brandCampaignPayload();
     if (!school) {
       setError("Please select your school from the list.");
+      return;
+    }
+    if (!brand) {
+      setError(needsCampaignPick ? "Select a brand and campaign." : "Please select a brand from the list.");
       return;
     }
 
@@ -204,7 +283,7 @@ export function ParticipationSubmitForm({
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           ...school,
-          campaignSlug: campaignSlug.trim().toLowerCase(),
+          ...brand,
           productCode: productCode.trim(),
           contactPhone: contactPhone.trim() || undefined
         })
@@ -282,8 +361,8 @@ export function ParticipationSubmitForm({
   return (
     <form className={`reg-form b2s-submit-form${compact ? " b2s-submit-form--compact" : ""}`} onSubmit={(e) => void submit(e)}>
       <p className="b2s-submit-lead">
-        Select your school and campaign from the lists below, then enter the code from your product pack. Same
-        verification as WhatsApp — no personal account required.
+        Select your school and the brand on your product pack, then enter the code inside the pack. Same verification
+        as WhatsApp — no personal account required.
       </p>
 
       <div className="reg-grid">
@@ -316,11 +395,19 @@ export function ParticipationSubmitForm({
               {!province ? "Select province first" : loadingDistricts ? "Loading…" : "Select district"}
             </option>
             {districts.map((d) => (
-              <option key={d} value={d}>
-                {d}
+              <option key={d.name} value={d.name}>
+                {d.schoolCount > 0
+                  ? `${d.name} (${d.schoolCount} school${d.schoolCount === 1 ? "" : "s"})`
+                  : d.name}
               </option>
             ))}
           </select>
+          {province && !loadingDistricts && districts.every((d) => d.schoolCount === 0) ? (
+            <span className="reg-field-hint">
+              No schools registered in this province yet.{" "}
+              <Link href={"/schools/register" as Route}>Register your school</Link> first.
+            </span>
+          ) : null}
         </label>
 
         <label className="reg-field reg-field--full">
@@ -337,7 +424,13 @@ export function ParticipationSubmitForm({
             disabled={!district || loadingSchools}
           >
             <option value="">
-              {!district ? "Select district first" : loadingSchools ? "Loading…" : "Select your school"}
+              {!district
+                ? "Select district first"
+                : loadingSchools
+                  ? "Loading schools…"
+                  : schools.length > 0
+                    ? "Select your school"
+                    : "No schools in this district"}
             </option>
             {schools.map((s) => (
               <option key={s.id} value={s.id}>
@@ -345,34 +438,59 @@ export function ParticipationSubmitForm({
               </option>
             ))}
           </select>
+          {district && !loadingSchools && schools.length > 0 ? (
+            <span className="reg-field-hint">
+              {schools.length} registered school{schools.length === 1 ? "" : "s"} in{" "}
+              {selectedDistrict?.name ?? district}.
+            </span>
+          ) : null}
           {district && !loadingSchools && schools.length === 0 ? (
             <span className="reg-field-hint">
-              No active schools in this district yet.{" "}
-              <Link href={"/schools/register" as Route}>Register your school</Link> first.
+              No approved schools in {district} yet.{" "}
+              <Link href={"/schools/register" as Route}>Register your school</Link> and select the same district.
             </span>
           ) : null}
         </label>
 
         <label className="reg-field reg-field--full">
-          <span>Campaign</span>
-          {campaigns.length > 0 ? (
-            <select value={campaignSlug} onChange={(e) => setCampaignSlug(e.target.value)} required>
-              <option value="">Select active campaign</option>
-              {campaigns.map((c) => (
+          <span>Brand</span>
+          <select value={brandSlug} onChange={(e) => onBrandChange(e.target.value)} required disabled={loadingBrands}>
+            <option value="">
+              {loadingBrands ? "Loading brands…" : brands.length === 0 ? "No brands available yet" : "Select brand"}
+            </option>
+            {brands.map((b) => (
+              <option key={b.slug} value={b.slug}>
+                {b.name}
+              </option>
+            ))}
+          </select>
+          {selectedBrand ? (
+            <span className="reg-field-hint">Code prefix on pack: {selectedBrand.codePrefix}</span>
+          ) : null}
+        </label>
+
+        {needsCampaignPick ? (
+          <label className="reg-field reg-field--full">
+            <span>Campaign</span>
+            <select
+              value={campaignSlug}
+              onChange={(e) => {
+                setCampaignSlug(e.target.value);
+                setEligibility(null);
+                setEligibilityNote(null);
+                setError(null);
+              }}
+              required
+            >
+              <option value="">Select campaign for this brand</option>
+              {selectedBrand?.campaigns.map((c) => (
                 <option key={c.slug} value={c.slug}>
-                  {c.name} — {c.brandName}
+                  {c.name}
                 </option>
               ))}
             </select>
-          ) : (
-            <input
-              value={campaignSlug}
-              onChange={(e) => setCampaignSlug(e.target.value)}
-              placeholder="Campaign slug (from product pack)"
-              required
-            />
-          )}
-        </label>
+          </label>
+        ) : null}
 
         <label className="reg-field reg-field--full">
           <span>Product code</span>
@@ -416,7 +534,15 @@ export function ParticipationSubmitForm({
               <ul>
                 {eligibility.alternatives.map((alt) => (
                   <li key={alt.slug}>
-                    <button type="button" className="b2s-submit-alt-link" onClick={() => setCampaignSlug(alt.slug)}>
+                    <button
+                      type="button"
+                      className="b2s-submit-alt-link"
+                      onClick={() => {
+                        setCampaignSlug(alt.slug);
+                        const b = brands.find((x) => x.name === alt.brandName);
+                        if (b) setBrandSlug(b.slug);
+                      }}
+                    >
                       {alt.name} ({alt.brandName})
                     </button>
                   </li>
@@ -450,12 +576,16 @@ export function ParticipationSubmitForm({
         <button
           type="button"
           className="ds-btn ds-btn-secondary"
-          disabled={checking || !schoolId}
+          disabled={checking || !schoolId || !brandSlug}
           onClick={() => void checkEligibility()}
         >
           {checking ? "Checking…" : "Check eligibility"}
         </button>
-        <button type="submit" className="ds-btn ds-btn-primary reg-submit" disabled={loading || !schoolId}>
+        <button
+          type="submit"
+          className="ds-btn ds-btn-primary reg-submit"
+          disabled={loading || !schoolId || !brandSlug || (needsCampaignPick && !campaignSlug)}
+        >
           {loading ? "Verifying…" : "Submit code"}
         </button>
       </div>

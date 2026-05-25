@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import Link from "next/link";
 import { CheckCircle2, MessageCircle, School } from "lucide-react";
 import { csrfHeaders } from "../../lib/clientFetch";
@@ -31,10 +31,14 @@ const provinces = [
   "Western Cape"
 ];
 
+type DistrictOption = { name: string; schoolCount: number };
+
 export function SchoolRegisterForm(): JSX.Element {
   const [name, setName] = useState("");
   const [province, setProvince] = useState("Gauteng");
   const [district, setDistrict] = useState("");
+  const [districts, setDistricts] = useState<DistrictOption[]>([]);
+  const [loadingDistricts, setLoadingDistricts] = useState(false);
   const [principalName, setPrincipalName] = useState("");
   const [contactEmail, setContactEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -43,6 +47,29 @@ export function SchoolRegisterForm(): JSX.Element {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [result, setResult] = useState<RegisterResult | null>(null);
+
+  const loadDistricts = useCallback(async (prov: string) => {
+    setLoadingDistricts(true);
+    setDistrict("");
+    try {
+      const res = await fetch(`/api/participation/school-options?province=${encodeURIComponent(prov)}`);
+      const data = (await res.json().catch(() => ({}))) as {
+        districts?: DistrictOption[] | string[];
+      };
+      const raw = data.districts ?? [];
+      setDistricts(
+        raw.map((d) =>
+          typeof d === "string" ? { name: d, schoolCount: 0 } : { name: d.name, schoolCount: d.schoolCount ?? 0 }
+        )
+      );
+    } finally {
+      setLoadingDistricts(false);
+    }
+  }, []);
+
+  useEffect(() => {
+    void loadDistricts(province);
+  }, [province, loadDistricts]);
 
   const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -143,7 +170,14 @@ export function SchoolRegisterForm(): JSX.Element {
           </label>
           <label className="reg-field">
             <span>Province</span>
-            <select required value={province} onChange={(e) => setProvince(e.target.value)}>
+            <select
+              required
+              value={province}
+              onChange={(e) => {
+                setProvince(e.target.value);
+                void loadDistricts(e.target.value);
+              }}
+            >
               {provinces.map((p) => (
                 <option key={p} value={p}>
                   {p}
@@ -152,8 +186,20 @@ export function SchoolRegisterForm(): JSX.Element {
             </select>
           </label>
           <label className="reg-field">
-            <span>District / area</span>
-            <input required value={district} onChange={(e) => setDistrict(e.target.value)} placeholder="e.g. Cape Town" />
+            <span>District / municipality</span>
+            <select
+              required
+              value={district}
+              onChange={(e) => setDistrict(e.target.value)}
+              disabled={loadingDistricts}
+            >
+              <option value="">{loadingDistricts ? "Loading…" : "Select district"}</option>
+              {districts.map((d) => (
+                <option key={d.name} value={d.name}>
+                  {d.name}
+                </option>
+              ))}
+            </select>
           </label>
           <label className="reg-field">
             <span>Principal / contact name</span>

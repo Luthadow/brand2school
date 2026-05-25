@@ -181,7 +181,8 @@ async function handleProvinceStep(
     return "Reply with the number next to your province (e.g. 3), or MENU to cancel.";
   }
 
-  const districts = await listDistrictsForProvince(pick.key);
+  const districtOptions = await listDistrictsForProvince(pick.key);
+  const districts = districtOptions.map((d) => d.name);
   if (districts.length === 0) {
     return [
       `No registered schools in ${pick.key} yet.`,
@@ -217,7 +218,8 @@ async function handleDistrictStep(
 ): Promise<string> {
   const pick = resolveMenuPick(text, data.options);
   if (pick?.key === "__next__" && data.province) {
-    const districts = await listDistrictsForProvince(data.province);
+    const districtOptions = await listDistrictsForProvince(data.province);
+    const districts = districtOptions.map((d) => d.name);
     const paged = paginateOptions(districts, (data.listPage ?? 0) + 1, (d) => ({ key: d, label: d }));
     await saveWhatsAppSession(msisdn, step, { ...data, listPage: paged.page, options: paged.options });
     return formatNumberedMenu({
@@ -230,7 +232,8 @@ async function handleDistrictStep(
     });
   }
   if (pick?.key === "__prev__" && data.province) {
-    const districts = await listDistrictsForProvince(data.province);
+    const districtOptions = await listDistrictsForProvince(data.province);
+    const districts = districtOptions.map((d) => d.name);
     const paged = paginateOptions(districts, Math.max(0, (data.listPage ?? 0) - 1), (d) => ({
       key: d,
       label: d

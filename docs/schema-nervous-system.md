@@ -1,66 +1,145 @@
 # Database schema — nervous system map
 
-This document maps **Prisma models** to **runtime features** so schema, migrations, and API wiring stay aligned.
+This document maps **Prisma models and migrations** to **runtime features**. After any deploy, run migrations then optional backfill/bootstrap scripts.
 
-## Brand trust & public profile
-
-| Column | Type | Set by | Consumed by |
-|--------|------|--------|-------------|
-| `status` | `EntityStatus` | Admin approval `PATCH /approvals/brands/:id/status` | Participation gates, public profile gate (`ACTIVE`) |
-| `verificationCode` | `String?` unique | Enterprise register; `ensureBrandVerificationCode` when trusted | `/verify/:code`, QR, PDF certificate |
-| `verificationStatus` | `BrandVerificationStatus` | `applyBrandVerificationSideEffects` (approval); admin PATCH; founder bootstrap | Public verify page, certificate eligibility |
-| `verifiedAt` | `DateTime?` | Trust sync when `VERIFIED` / `FOUNDER_VERIFIED` | Verify page, PDF |
-| `verifiedByUserId` | `String?` → `User` | Approval / manual trust PATCH | Audit trail |
-| `founderExempt` | `Boolean` | Admin PATCH; founder bootstrap | Skips R10k activation fee (`campaignActivation`) |
-| `homeSortOrder` | `Int` | Admin PATCH; founder bootstrap (`0` = first) | Homepage + partner directory sort |
-| `publicProfileEnabled` | `Boolean` | Admin PATCH | `/brand/:slug`, `/partners/:slug` visibility |
-| `featuredOnHome` | `Boolean` | Admin PATCH | Homepage logo strip |
-
-### Trust sync (single source of truth)
-
-- `apps/api/src/modules/platform/syncBrandVerification.ts`
-  - `applyBrandVerificationSideEffects` — runs after **entity status** approval
-  - `applyManualBrandVerificationPatch` — runs after **admin brand PATCH** (`verificationStatus`, `founderExempt`)
-
-### Registration flow
-
-1. `POST /api/v1/commercial/register` → creates brand with `verificationCode` + `verificationStatus: PENDING`
-2. Admin approves → `ACTIVE` → trust layer → `VERIFIED` or `FOUNDER_VERIFIED` + `verifiedAt` + code confirmed
-3. Founder bootstrap → `FOUNDER_VERIFIED` + `founderExempt` + `homeSortOrder: 0` immediately
-
-## WhatsApp select flow
-
-| Model | Purpose |
-|-------|---------|
-| `WhatsAppConversation` | Session per `msisdn` (`step` + `data` JSON), ~45 min TTL via `updatedAt` index |
-| `Submission.source` | `"whatsapp"` or `"web"` |
-| `SubmissionAttempt.source` | Same |
-
-Handler: `apps/api/src/modules/whatsapp/handleConversation.ts`
-
-## Migrations (May 2026 rollout)
-
-| Migration | Adds |
-|-----------|------|
-| `20260525100000_brand_home_sort_order` | `homeSortOrder` |
-| `20260525110000_brand_founder_exempt` | `founderExempt` |
-| `20260525120000_whatsapp_conversation` | `WhatsAppConversation` |
-| `20260525130000_brand_verification_code` | `BrandVerificationStatus`, code + trust columns |
-| `20260525140000_brand_verification_wiring` | Indexes, FK `verifiedByUserId`, status backfill SQL |
-
-## Deploy checklist
+## Quick deploy
 
 ```bash
 npm run db:migrate:deploy -w @brand2school/api
-npm run brand:backfill-verification    # after deploy (INTERNAL_API_KEY)
+npm run brand:backfill-verification    # once — INTERNAL_API_KEY
 npm run railway:bootstrap-founder      # R2kay founder brand
 ```
 
-## Public asset endpoints (no DB — reads Brand)
+Validate locally: `npx prisma validate` (in `apps/api`).
 
-| Route | Output |
-|-------|--------|
-| `GET /api/v1/platform/verify/:code` | JSON trust profile |
-| `GET /api/v1/platform/verify/:code/qr` | PNG QR → verify URL |
-| `GET /api/v1/platform/verify/:code/certificate` | PDF certificate |
-| `GET /api/v1/platform/brands/:slug/qr` | PNG QR → `/brand/:slug` |
+---
+
+## Enums
+
+| Enum | Values | Used for |
+|------|--------|----------|
+| `EntityStatus` | PENDING, VERIFIED, APPROVED, ACTIVE, SUSPENDED | `User`, `School`, `Brand` operational lifecycle |
+| `BrandVerificationStatus` | PENDING, VERIFIED, FOUNDER_VERIFIED, SUSPENDED, REJECTED | Public trust / certificate layer on `Brand` |
+| `SchoolVerificationStatus` | NOT_SUBMITTED … REJECTED | `SchoolVerification` documents |
+
+---
+
+## Brand (`Brand`)
+
+| Column | Type | Set by | Consumed by |
+|--------|------|--------|-------------|
+| `status` | `EntityStatus` | Admin approval | Participation gates, public profile (`ACTIVE`) |
+| `verificationCode` | `String?` @unique | Register + trust sync | `/verify/:code`, QR, PDF |
+| `verificationStatus` | `BrandVerificationStatus` | Trust sync, admin PATCH, founder bootstrap | Verify page, certificates |
+| `verifiedAt` | `DateTime?` | Trust sync | Verify page, PDF |
+| `verifiedByUserId` | `String?` → `User` | Approval / admin PATCH | Audit |
+| `founderExempt` | `Boolean` | Admin / founder bootstrap | Skips R10k activation fee |
+| `homeSortOrder` | `Int` | Admin / founder (`0` = first) | Homepage, directory, brand select order |
+| `publicProfileEnabled` | `Boolean` | Admin | `/brand/:slug` visibility |
+| `featuredOnHome` | `Boolean` | Admin | Homepage logos |
+| `codePrefix` | `String` @unique | Registration | Product codes, verification code prefix |
+| `slug` | `String` @unique | Registration | `/brand/:slug`, participation brand select |
+
+**Trust sync:** `apps/api/src/modules/platform/syncBrandVerification.ts`
+
+**Indexes:** `verificationStatus`, `(status, verificationStatus)`, `homeSortOrder`, `founderExempt`
+
+---
+
+## School (`School`)
+
+| Column | Type | Used for |
+|--------|------|----------|
+| `province` | `String` | Submit flow: province select |
+| `district` | `String` | Submit flow: district → schools in district |
+| `name` | `String` | School dropdown label |
+| `status` | `EntityStatus` | Only ACTIVE / APPROVED / VERIFIED appear in submit lists |
+| `whatsappPhone` | `String` @unique | WhatsApp session, school status |
+| `schoolCode` | `String` @unique | School portal |
+
+**No extra tables** for participation — selects query `School` by `province` + `district`.
+
+**Indexes:** `(province, district)`, `(status, province)` — migration `20260525150000`
+
+**API:** `GET /api/v1/participation/school-options`, `GET /api/v1/participation/brands`
+
+---
+
+## WhatsApp select flow
+
+| Model | Columns | Purpose |
+|-------|---------|---------|
+| `WhatsAppConversation` | `msisdn`, `step`, `data` (JSON), `updatedAt` | Menu: province → district → school → brand/campaign → code |
+| `Submission` | `source` (`web` / `whatsapp`), `schoolId`, `campaignId`, `codeValue` | Verified participation record |
+| `SubmissionAttempt` | `source`, `outcome`, `whatsappMsisdn` | Audit / fraud |
+
+**Handler:** `apps/api/src/modules/whatsapp/handleConversation.ts`
+
+---
+
+## Campaign & codes (participation)
+
+| Model | Role |
+|-------|------|
+| `Campaign` | Linked to `Brand`; brand select resolves to active `Campaign.slug` |
+| `CodeBatch` | Groups imported or generated codes (`batchName`, `batchCode`, optional `expiresAt`) |
+| `Code` | Product codes (`value` @unique); verified on submit; linked to `brandId`, `campaignId` |
+| `Product` | Optional link when codes are generated per SKU |
+
+**Brand file upload (no new tables):** Excel/CSV/Word → `POST .../code-batches/validate-file` then `import` creates `CodeBatch` + `Code` rows. Prefix check uses `Brand.codePrefix`.
+
+**API:** `apps/api/src/modules/codes/importCodeBatchFromFile.ts`, `parseProductCodesFromUpload.ts`
+
+---
+
+## Migrations (May 2026 — apply in order)
+
+| Migration | Database change |
+|-----------|-----------------|
+| `20260525100000_brand_home_sort_order` | `Brand.homeSortOrder` |
+| `20260525110000_brand_founder_exempt` | `Brand.founderExempt` |
+| `20260525120000_whatsapp_conversation` | Table `WhatsAppConversation` |
+| `20260525130000_brand_verification_code` | Enum `BrandVerificationStatus`, `verificationCode`, `verificationStatus`, `verifiedAt`, `verifiedByUserId` |
+| `20260525140000_brand_verification_wiring` | FK `verifiedByUserId` → `User`, brand indexes, WhatsApp `updatedAt` index, trust status backfill SQL |
+| `20260525150000_school_participation_indexes` | `School` indexes for province/district lookups |
+
+Earlier migrations (20260501 init through commercial governance) cover schools, brands, campaigns, submissions, commercial workflow, etc.
+
+---
+
+## Feature → schema checklist
+
+| Feature | Schema support |
+|---------|----------------|
+| Founder brand (R2kay) | `founderExempt`, `homeSortOrder`, `verificationStatus`, `verificationCode` |
+| Public verify + QR + PDF | `verificationCode`, `verificationStatus`, `verifiedAt` |
+| `/brand/[slug]` profile | `slug`, `publicProfileEnabled`, `status` |
+| Web submit (province/district/school) | `School.province`, `School.district`, `School.status` |
+| Web submit (brand select) | `Brand`, `Campaign` (no new column) |
+| Brand code file upload | `CodeBatch`, `Code`, `Brand.codePrefix` (existing tables) |
+| WhatsApp numbered menus | `WhatsAppConversation` |
+| School registration | `School` + `User` (SCHOOL_ADMIN) |
+| Skip activation fee (founder) | `Brand.founderExempt` |
+
+---
+
+## Scripts (post-migrate)
+
+| Script | Purpose |
+|--------|---------|
+| `npm run brand:backfill-verification` | Codes + trust status for existing brands |
+| `npm run railway:bootstrap-founder` | R2kay Liquid Freeze founder row |
+| `npm run brand:set-home-order` | Reorder homepage brands |
+
+---
+
+## Public API (reads schema, no extra tables)
+
+| Route | Models read |
+|-------|-------------|
+| `GET /participation/school-options` | `School` |
+| `GET /participation/brands` | `Brand`, `Campaign` |
+| `POST /participation/submit` | `School`, `Campaign`, `Code`, `Submission` |
+| `POST /campaigns/:id/code-batches/import` | `CodeBatch`, `Code`, `Campaign`, `Brand` |
+| `GET /platform/verify/:code` | `Brand` |
+| `GET /platform/verify/:code/certificate` | `Brand` |

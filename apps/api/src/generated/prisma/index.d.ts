@@ -65,7 +65,7 @@ export type CampaignInvoice = $Result.DefaultSelection<Prisma.$CampaignInvoicePa
 export type Product = $Result.DefaultSelection<Prisma.$ProductPayload>
 /**
  * Model CodeBatch
- * 
+ * Product code inventory per campaign — rows created via Excel/CSV/Word import or API generate.
  */
 export type CodeBatch = $Result.DefaultSelection<Prisma.$CodeBatchPayload>
 /**
@@ -6408,7 +6408,13 @@ export namespace Prisma {
     scalars: $Extensions.GetPayloadResult<{
       id: string
       name: string
+      /**
+       * Used by web/WhatsApp submit: province → district → school selects.
+       */
       province: string
+      /**
+       * Official municipality or local area label; matched with canonical SA district list.
+       */
       district: string
       principalName: string
       contactEmail: string | null
@@ -15750,6 +15756,9 @@ export namespace Prisma {
     scalars: $Extensions.GetPayloadResult<{
       id: string
       campaignId: string
+      /**
+       * Human label from brand portal upload (e.g. "March 2026 bottle caps").
+       */
       batchName: string
       batchCode: string
       codeVersion: string

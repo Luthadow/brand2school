@@ -1,7 +1,17 @@
 import { prisma } from "../../lib/prisma.js";
+import {
+  districtMatchVariants,
+  listCanonicalDistrictsForProvince
+} from "../../lib/saDistricts.js";
 import { normalizeProvinceCode, provinceNameFromCode, SA_PROVINCES } from "../analytics/provinces.js";
 
 const ACTIVE_SCHOOL_STATUSES = ["ACTIVE", "APPROVED", "VERIFIED"] as const;
+
+export type ParticipationDistrictOption = {
+  name: string;
+  /** Schools registered in this province + district (ACTIVE / APPROVED / VERIFIED). */
+  schoolCount: number;
+};
 
 export function listParticipationProvinces(): Array<{ code: string; name: string }> {
   return SA_PROVINCES.map((p) => ({ code: p.code, name: p.name }));
@@ -19,19 +29,53 @@ function provinceWhere(province: string) {
   };
 }
 
-export async function listDistrictsForProvince(province: string): Promise<string[]> {
+function districtWhere(district: string) {
+  const variants = districtMatchVariants(district);
+  return {
+    OR: variants.map((variant) => ({
+      district: { equals: variant, mode: "insensitive" as const }
+    }))
+  };
+}
+
+const schoolStatusWhere = { status: { in: [...ACTIVE_SCHOOL_STATUSES] } };
+
+/** Official districts plus DB labels, each with count of registered schools in that province. */
+export async function listDistrictsForProvince(province: string): Promise<ParticipationDistrictOption[]> {
+  const canonical = listCanonicalDistrictsForProvince(province);
+
   const rows = await prisma.school.findMany({
     where: {
       ...provinceWhere(province),
-      status: { in: [...ACTIVE_SCHOOL_STATUSES] }
+      ...schoolStatusWhere
     },
     select: { district: true },
     distinct: ["district"],
     orderBy: { district: "asc" }
   });
-  return rows.map((r) => r.district).filter(Boolean);
+  const fromDb = rows.map((r) => r.district).filter(Boolean);
+
+  const names = [...new Set<string>([...canonical, ...fromDb])];
+  const options: ParticipationDistrictOption[] = [];
+
+  for (const name of names) {
+    const schoolCount = await prisma.school.count({
+      where: {
+        ...provinceWhere(province),
+        ...districtWhere(name),
+        ...schoolStatusWhere
+      }
+    });
+    options.push({ name, schoolCount });
+  }
+
+  return options.sort((a, b) => {
+    if (b.schoolCount !== a.schoolCount) return b.schoolCount - a.schoolCount;
+    return a.name.localeCompare(b.name, "en-ZA");
+  });
 }
 
+/** Schools registered under the selected province and district. */
 export async function listSchoolsForProvinceDistrict(
   province: string,
   district: string
@@ -39,8 +83,8 @@ export async function listSchoolsForProvinceDistrict(
   return prisma.school.findMany({
     where: {
       ...provinceWhere(province),
-      district: { equals: district.trim(), mode: "insensitive" },
-      status: { in: [...ACTIVE_SCHOOL_STATUSES] }
+      ...districtWhere(district),
+      ...schoolStatusWhere
     },
     select: { id: true, name: true, district: true, province: true },
     orderBy: { name: "asc" },
@@ -52,7 +96,7 @@ export async function getParticipationSchoolById(schoolId: string) {
   return prisma.school.findFirst({
     where: {
       id: schoolId,
-      status: { in: [...ACTIVE_SCHOOL_STATUSES] }
+      ...schoolStatusWhere
     }
   });
 }
