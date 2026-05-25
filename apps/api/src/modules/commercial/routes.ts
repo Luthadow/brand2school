@@ -47,8 +47,10 @@ import {
   processSubscriptionGovernance
 } from "./subscriptionGovernance.js";
 import { buildProcurementPackZip, procurementPackFilename } from "./procurementPack/buildProcurementPack.js";
+import fs from "node:fs/promises";
 import {
   BRAND_LOGO_MAX_BYTES,
+  brandLogoAbsolutePath,
   removeBrandLogoFile,
   resolveLogoPublicUrl,
   saveBrandLogo
@@ -320,6 +322,32 @@ commercialPublicRouter.post("/brand-applications", async (req, res) => {
 
 export const commercialBrandRouter = Router();
 commercialBrandRouter.use(requireAuth, requireRole(["BRAND_ADMIN", "SUPER_ADMIN", "ADMIN_STAFF"]));
+
+commercialBrandRouter.get("/logo/file", async (req, res) => {
+  const brandId = brandIdForCommercialRequest(req);
+  if (!brandId) {
+    res.status(400).json({ message: "Brand context required." });
+    return;
+  }
+
+  const brand = await prisma.brand.findUnique({
+    where: { id: brandId },
+    select: { logoUrl: true }
+  });
+  if (!brand?.logoUrl) {
+    res.status(404).json({ message: "No logo uploaded." });
+    return;
+  }
+
+  try {
+    const buffer = await fs.readFile(brandLogoAbsolutePath(brandId));
+    res.setHeader("Content-Type", "image/png");
+    res.setHeader("Cache-Control", "private, max-age=300");
+    res.send(buffer);
+  } catch {
+    res.status(404).json({ message: "Logo file not found on server. Try uploading again." });
+  }
+});
 
 commercialBrandRouter.post("/logo", logoUpload.single("logo"), async (req, res) => {
   const brandId = brandIdForCommercialRequest(req);

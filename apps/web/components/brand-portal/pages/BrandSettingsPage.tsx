@@ -21,7 +21,12 @@ export function BrandSettingsPage(): JSX.Element {
         <h2>
           <ImageIcon size={20} /> Brand logo
         </h2>
-        <BrandLogoUpload logoUrl={logoUrl} brandName={portal.brand.name} onUpdated={setLogoUrl} />
+        <BrandLogoUpload
+          brandId={portal.brand.id}
+          logoUrl={logoUrl}
+          brandName={portal.brand.name}
+          onUpdated={setLogoUrl}
+        />
       </article>
       <div className="bp-two-col">
         <article className="bp-panel">

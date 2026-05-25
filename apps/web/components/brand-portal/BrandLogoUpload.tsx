@@ -1,19 +1,22 @@
 "use client";
 
 import { useState } from "react";
-import Image from "next/image";
 import { brandCsrfHeaders } from "../../lib/brandClientFetch";
 
 type Props = {
+  brandId: string;
   logoUrl: string | null;
   brandName: string;
   onUpdated: (logoUrl: string | null) => void;
 };
 
-export function BrandLogoUpload({ logoUrl, brandName, onUpdated }: Props): JSX.Element {
+export function BrandLogoUpload({ brandId, logoUrl, brandName, onUpdated }: Props): JSX.Element {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [message, setMessage] = useState<string | null>(null);
+  const [previewRev, setPreviewRev] = useState(0);
+
+  const previewSrc = logoUrl ? `/api/brand/logo/file?rev=${previewRev}` : null;
 
   const upload = async (file: File): Promise<void> => {
     setLoading(true);
@@ -32,7 +35,8 @@ export function BrandLogoUpload({ logoUrl, brandName, onUpdated }: Props): JSX.E
         setError(data.message ?? "Upload failed.");
         return;
       }
-      onUpdated(data.logoUrl ?? null);
+      onUpdated(data.logoUrl ? "present" : null);
+      setPreviewRev(Date.now());
       setMessage(data.message ?? "Logo uploaded.");
     } finally {
       setLoading(false);
@@ -54,6 +58,7 @@ export function BrandLogoUpload({ logoUrl, brandName, onUpdated }: Props): JSX.E
         return;
       }
       onUpdated(null);
+      setPreviewRev(0);
       setMessage(data.message ?? "Logo removed.");
     } finally {
       setLoading(false);
@@ -63,8 +68,15 @@ export function BrandLogoUpload({ logoUrl, brandName, onUpdated }: Props): JSX.E
   return (
     <div>
       <div style={{ display: "flex", alignItems: "center", gap: "1rem", marginBottom: "0.75rem", minHeight: 72 }}>
-        {logoUrl ? (
-          <Image src={logoUrl} alt={`${brandName} logo`} width={140} height={56} unoptimized style={{ objectFit: "contain" }} />
+        {previewSrc ? (
+          // eslint-disable-next-line @next/next/no-img-element -- same-origin authenticated preview
+          <img
+            src={previewSrc}
+            alt={`${brandName} logo`}
+            width={140}
+            height={56}
+            style={{ objectFit: "contain", maxHeight: 56 }}
+          />
         ) : (
           <span className="bp-muted">No logo uploaded yet</span>
         )}

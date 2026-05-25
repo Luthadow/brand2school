@@ -31,7 +31,9 @@ const envSchema = z.object({
   NOTIFICATION_BATCH_SIZE: z.coerce.number().int().min(1).max(100).default(25),
   NOTIFICATION_POLL_MS: z.coerce.number().int().min(500).default(3000),
   /** Comma-separated extra admin inboxes for registration alerts (optional). */
-  ADMIN_NOTIFY_EMAILS: z.string().optional()
+  ADMIN_NOTIFY_EMAILS: z.string().optional(),
+  /** Public HTTPS base for brand logos and uploads (e.g. https://api.brand2school.co.za). */
+  API_PUBLIC_URL: z.string().url().optional()
 });
 
 const parsed = envSchema.safeParse(process.env);
@@ -68,6 +70,12 @@ export function productionReadinessChecks(): ProductionCheck[] {
       key: "INTERNAL_API_KEY",
       ok: Boolean(env.INTERNAL_API_KEY),
       detail: "Server-to-server analytics requires INTERNAL_API_KEY."
+    },
+    {
+      key: "API_PUBLIC_URL",
+      ok: Boolean(process.env.API_PUBLIC_URL?.trim()),
+      detail:
+        "Brand logos on the public site require API_PUBLIC_URL (e.g. https://api.brand2school.co.za)."
     }
   ];
 }
