@@ -9,7 +9,7 @@ const MIN_DIMENSION = 512;
 const apiRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "../..");
 export const brandUploadsDir = path.join(apiRoot, "uploads", "brands");
 
-type LogoUpload = {
+export type LogoUploadInput = {
   buffer: Buffer;
   mimetype: string;
   size: number;
@@ -28,7 +28,7 @@ export function brandLogoAbsolutePath(brandId: string): string {
   return path.join(brandUploadsDir, `${brandId}.png`);
 }
 
-export async function saveBrandLogo(brandId: string, file: LogoUpload): Promise<string> {
+export async function saveBrandLogo(brandId: string, file: LogoUploadInput): Promise<string> {
   if (file.mimetype !== "image/png") {
     throw new Error("Logo must be a PNG file.");
   }

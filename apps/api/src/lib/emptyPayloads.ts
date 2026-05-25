@@ -90,7 +90,7 @@ export function emptyBrandPortal(input?: {
   const analytics = input?.analytics ?? emptyBrandAnalytics();
   const brandName = input?.brandName ?? "Your brand";
   return {
-    brand: { id: input?.brandId ?? "pending", name: brandName, logoUrl: null },
+    brand: { id: input?.brandId ?? "pending", name: brandName, slug: "pending", logoUrl: null },
     overview: {
       totalSubmissions: 0,
       schoolsSupported: 0,

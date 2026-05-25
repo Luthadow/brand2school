@@ -47,14 +47,14 @@ import {
   processSubscriptionGovernance
 } from "./subscriptionGovernance.js";
 import { buildProcurementPackZip, procurementPackFilename } from "./procurementPack/buildProcurementPack.js";
-import fs from "node:fs/promises";
 import {
-  BRAND_LOGO_MAX_BYTES,
-  brandLogoAbsolutePath,
-  removeBrandLogoFile,
-  resolveLogoPublicUrl,
-  saveBrandLogo
-} from "../../lib/brandStorage.js";
+  clearBrandLogo,
+  persistBrandLogo,
+  readBrandLogoBuffer,
+  brandLogoWebPath,
+  hasBrandLogo
+} from "../../lib/brandLogo.js";
+import { BRAND_LOGO_MAX_BYTES } from "../../lib/brandStorage.js";
 import {
   buildPartnershipLabel,
   computeLicenseEndsAt,
@@ -332,21 +332,22 @@ commercialBrandRouter.get("/logo/file", async (req, res) => {
 
   const brand = await prisma.brand.findUnique({
     where: { id: brandId },
-    select: { logoUrl: true }
+    select: { logoUrl: true, slug: true }
   });
-  if (!brand?.logoUrl) {
+  if (!hasBrandLogo(brand?.logoUrl)) {
     res.status(404).json({ message: "No logo uploaded." });
     return;
   }
 
-  try {
-    const buffer = await fs.readFile(brandLogoAbsolutePath(brandId));
-    res.setHeader("Content-Type", "image/png");
-    res.setHeader("Cache-Control", "private, max-age=300");
-    res.send(buffer);
-  } catch {
-    res.status(404).json({ message: "Logo file not found on server. Try uploading again." });
+  const buffer = await readBrandLogoBuffer(brandId);
+  if (!buffer) {
+    res.status(404).json({ message: "Logo file not found. Re-upload in Settings." });
+    return;
   }
+
+  res.setHeader("Content-Type", "image/png");
+  res.setHeader("Cache-Control", "private, max-age=300");
+  res.send(buffer);
 });
 
 commercialBrandRouter.post("/logo", logoUpload.single("logo"), async (req, res) => {
@@ -369,13 +370,9 @@ commercialBrandRouter.post("/logo", logoUpload.single("logo"), async (req, res) 
   }
 
   try {
-    const storedPath = await saveBrandLogo(brand.id, file);
-    const updated = await prisma.brand.update({
-      where: { id: brand.id },
-      data: { logoUrl: storedPath }
-    });
+    await persistBrandLogo(brand.id, file);
     res.json({
-      logoUrl: resolveLogoPublicUrl(updated.logoUrl),
+      logoUrl: brandLogoWebPath(brand.slug),
       message: "Logo uploaded. It may appear on the homepage after admin enables featuring."
     });
   } catch (err) {
@@ -397,12 +394,8 @@ commercialBrandRouter.delete("/logo", async (req, res) => {
     return;
   }
 
-  await removeBrandLogoFile(brand.id, brand.logoUrl);
-  const updated = await prisma.brand.update({
-    where: { id: brand.id },
-    data: { logoUrl: null, featuredOnHome: false }
-  });
-  res.json({ logoUrl: resolveLogoPublicUrl(updated.logoUrl), message: "Logo removed." });
+  await clearBrandLogo(brand.id, brand.logoUrl);
+  res.json({ logoUrl: null, message: "Logo removed." });
 });
 
 commercialBrandRouter.get("/onboarding", async (req, res) => {

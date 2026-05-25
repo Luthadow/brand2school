@@ -216,6 +216,7 @@ exports.Prisma.BrandScalarFieldEnum = {
   productsInvolved: 'productsInvolved',
   internalReviewNotes: 'internalReviewNotes',
   logoUrl: 'logoUrl',
+  logoPng: 'logoPng',
   featuredOnHome: 'featuredOnHome',
   homeSortOrder: 'homeSortOrder',
   founderExempt: 'founderExempt',

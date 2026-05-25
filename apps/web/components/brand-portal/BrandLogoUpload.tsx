@@ -4,19 +4,21 @@ import { useState } from "react";
 import { brandCsrfHeaders } from "../../lib/brandClientFetch";
 
 type Props = {
-  brandId: string;
+  brandSlug: string;
   logoUrl: string | null;
   brandName: string;
   onUpdated: (logoUrl: string | null) => void;
 };
 
-export function BrandLogoUpload({ brandId, logoUrl, brandName, onUpdated }: Props): JSX.Element {
+export function BrandLogoUpload({ brandSlug, logoUrl, brandName, onUpdated }: Props): JSX.Element {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [message, setMessage] = useState<string | null>(null);
   const [previewRev, setPreviewRev] = useState(0);
 
-  const previewSrc = logoUrl ? `/api/brand/logo/file?rev=${previewRev}` : null;
+  const previewSrc = logoUrl
+    ? `/api/public/brand-logo/${encodeURIComponent(brandSlug)}?rev=${previewRev}`
+    : null;
 
   const upload = async (file: File): Promise<void> => {
     setLoading(true);
@@ -35,7 +37,7 @@ export function BrandLogoUpload({ brandId, logoUrl, brandName, onUpdated }: Prop
         setError(data.message ?? "Upload failed.");
         return;
       }
-      onUpdated(data.logoUrl ? "present" : null);
+      onUpdated(data.logoUrl ?? `/api/public/brand-logo/${brandSlug}`);
       setPreviewRev(Date.now());
       setMessage(data.message ?? "Logo uploaded.");
     } finally {
@@ -69,7 +71,7 @@ export function BrandLogoUpload({ brandId, logoUrl, brandName, onUpdated }: Prop
     <div>
       <div style={{ display: "flex", alignItems: "center", gap: "1rem", marginBottom: "0.75rem", minHeight: 72 }}>
         {previewSrc ? (
-          // eslint-disable-next-line @next/next/no-img-element -- same-origin authenticated preview
+          // eslint-disable-next-line @next/next/no-img-element -- same-origin public logo route
           <img
             src={previewSrc}
             alt={`${brandName} logo`}

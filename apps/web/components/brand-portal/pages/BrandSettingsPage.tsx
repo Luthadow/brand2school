@@ -22,7 +22,7 @@ export function BrandSettingsPage(): JSX.Element {
           <ImageIcon size={20} /> Brand logo
         </h2>
         <BrandLogoUpload
-          brandId={portal.brand.id}
+          brandSlug={portal.brand.slug}
           logoUrl={logoUrl}
           brandName={portal.brand.name}
           onUpdated={setLogoUrl}

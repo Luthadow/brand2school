@@ -18,6 +18,7 @@ May 2026 migrations (in order):
 4. `20260525130000_brand_verification_code`
 5. `20260525140000_brand_verification_wiring`
 6. `20260525150000_school_participation_indexes`
+7. `20260525160000_brand_logo_png` — `Brand.logoPng` (logos survive Railway redeploy)
 
 **Code file upload** (Excel/CSV/Word) uses existing `CodeBatch` and `Code` tables — no extra migration.
 

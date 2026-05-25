@@ -2,12 +2,9 @@ import { Router } from "express";
 import multer from "multer";
 import { z } from "zod";
 import { prisma } from "../../lib/prisma.js";
-import {
-  BRAND_LOGO_MAX_BYTES,
-  removeBrandLogoFile,
-  resolveLogoPublicUrl,
-  saveBrandLogo
-} from "../../lib/brandAssets.js";
+import { BRAND_LOGO_MAX_BYTES } from "../../lib/brandAssets.js";
+import { clearBrandLogo, persistBrandLogo } from "../../lib/brandLogo.js";
+import { resolveLogoPublicUrl } from "../../lib/brandStorage.js";
 import { requireRole } from "../../middleware/auth.js";
 import { applyManualBrandVerificationPatch } from "../platform/syncBrandVerification.js";
 
@@ -256,12 +253,9 @@ adminBrandRouter.post(
     }
 
     try {
-      const storedPath = await saveBrandLogo(brand.id, file);
-      const updated = await prisma.brand.update({
-        where: { id: brand.id },
-        data: { logoUrl: storedPath }
-      });
-      res.json(serializeBrand(updated));
+      await persistBrandLogo(brand.id, file);
+      const updated = await prisma.brand.findUnique({ where: { id: brand.id } });
+      res.json(serializeBrand(updated!));
     } catch (err) {
       const message = err instanceof Error ? err.message : "Logo upload failed.";
       res.status(400).json({ message });
@@ -276,14 +270,7 @@ adminBrandRouter.delete("/brands/:id/logo", requireRole(["SUPER_ADMIN"]), async 
     return;
   }
 
-  await removeBrandLogoFile(brand.id, brand.logoUrl);
-  const updated = await prisma.brand.update({
-    where: { id: brand.id },
-    data: {
-      logoUrl: null,
-      featuredOnHome: false
-    }
-  });
-
-  res.json(serializeBrand(updated));
+  await clearBrandLogo(brand.id, brand.logoUrl);
+  const updated = await prisma.brand.findUnique({ where: { id: brand.id } });
+  res.json(serializeBrand(updated!));
 });

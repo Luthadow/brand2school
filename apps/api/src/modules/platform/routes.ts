@@ -32,6 +32,7 @@ import { bootstrapSuperAdmin } from "../../bootstrap/bootstrapSuperAdmin.js";
 import { bootstrapFounderBrand } from "../../bootstrap/bootstrapFounderBrand.js";
 import { backfillBrandVerification } from "../../bootstrap/backfillBrandVerification.js";
 import { purgeDemoData } from "../../bootstrap/purgeDemoData.js";
+import { readBrandLogoBuffer } from "../../lib/brandLogo.js";
 
 const querySchema = z.object({
   role: z
@@ -44,6 +45,32 @@ export const platformRouter = Router();
 platformRouter.get("/live", analyticsRateLimit, async (_req, res) => {
   const live = await getPlatformLive();
   res.json(live);
+});
+
+/** Public brand logo PNG (stored in DB; survives Railway redeploy). */
+platformRouter.get("/brand-logo/:slug", async (req, res) => {
+  const brand = await prisma.brand.findFirst({
+    where: {
+      slug: req.params.slug,
+      status: "ACTIVE",
+      logoUrl: { not: null }
+    },
+    select: { id: true }
+  });
+  if (!brand) {
+    res.status(404).json({ message: "Logo not found." });
+    return;
+  }
+
+  const buffer = await readBrandLogoBuffer(brand.id);
+  if (!buffer) {
+    res.status(404).json({ message: "Logo file not found. Re-upload in brand Settings." });
+    return;
+  }
+
+  res.setHeader("Content-Type", "image/png");
+  res.setHeader("Cache-Control", "public, max-age=3600");
+  res.send(buffer);
 });
 
 /** Homepage featured logos (ACTIVE + featuredOnHome + logo). */

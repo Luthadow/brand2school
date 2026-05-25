@@ -1,5 +1,5 @@
 import { prisma } from "../../lib/prisma.js";
-import { resolveLogoPublicUrl } from "../../lib/brandStorage.js";
+import { brandLogoWebPath, hasBrandLogo } from "../../lib/brandLogo.js";
 import { normalizeProvinceCode, provinceNameFromCode, SA_PROVINCES } from "../analytics/provinces.js";
 
 const publicBrandWhere = {
@@ -84,12 +84,11 @@ export async function getPlatformPartners(): Promise<PlatformPartner[]> {
 
   return brands
     .map((b) => {
-      const logoUrl = resolveLogoPublicUrl(b.logoUrl);
-      if (!logoUrl) return null;
+      if (!hasBrandLogo(b.logoUrl)) return null;
       return {
         slug: b.slug,
         name: b.name,
-        logoUrl,
+        logoUrl: brandLogoWebPath(b.slug),
         websiteUrl: b.websiteUrl,
         brandColor: b.brandColor,
         featured: b.featuredOnHome
@@ -137,7 +136,7 @@ export async function listPublicPartners(): Promise<PublicPartnerSummary[]> {
     summaries.push({
       slug: brand.slug,
       name: brand.name,
-      logoUrl: resolveLogoPublicUrl(brand.logoUrl),
+      logoUrl: hasBrandLogo(brand.logoUrl) ? brandLogoWebPath(brand.slug) : null,
       websiteUrl: brand.websiteUrl,
       brandColor: brand.brandColor,
       featuredOnHome: brand.featuredOnHome,
@@ -293,7 +292,7 @@ export async function getPublicBrandBySlug(slug: string): Promise<PublicBrandPro
   return {
     slug: brand.slug,
     name: brand.name,
-    logoUrl: resolveLogoPublicUrl(brand.logoUrl),
+    logoUrl: hasBrandLogo(brand.logoUrl) ? brandLogoWebPath(brand.slug) : null,
     websiteUrl: brand.websiteUrl,
     brandColor: brand.brandColor,
     featuredOnHome: brand.featuredOnHome,

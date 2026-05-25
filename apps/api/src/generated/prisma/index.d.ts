@@ -9343,6 +9343,7 @@ export namespace Prisma {
     productsInvolved: string | null
     internalReviewNotes: string | null
     logoUrl: string | null
+    logoPng: Buffer | null
     featuredOnHome: boolean | null
     homeSortOrder: number | null
     founderExempt: boolean | null
@@ -9381,6 +9382,7 @@ export namespace Prisma {
     productsInvolved: string | null
     internalReviewNotes: string | null
     logoUrl: string | null
+    logoPng: Buffer | null
     featuredOnHome: boolean | null
     homeSortOrder: number | null
     founderExempt: boolean | null
@@ -9422,6 +9424,7 @@ export namespace Prisma {
     productsInvolved: number
     internalReviewNotes: number
     logoUrl: number
+    logoPng: number
     featuredOnHome: number
     homeSortOrder: number
     founderExempt: number
@@ -9472,6 +9475,7 @@ export namespace Prisma {
     productsInvolved?: true
     internalReviewNotes?: true
     logoUrl?: true
+    logoPng?: true
     featuredOnHome?: true
     homeSortOrder?: true
     founderExempt?: true
@@ -9510,6 +9514,7 @@ export namespace Prisma {
     productsInvolved?: true
     internalReviewNotes?: true
     logoUrl?: true
+    logoPng?: true
     featuredOnHome?: true
     homeSortOrder?: true
     founderExempt?: true
@@ -9551,6 +9556,7 @@ export namespace Prisma {
     productsInvolved?: true
     internalReviewNotes?: true
     logoUrl?: true
+    logoPng?: true
     featuredOnHome?: true
     homeSortOrder?: true
     founderExempt?: true
@@ -9679,6 +9685,7 @@ export namespace Prisma {
     productsInvolved: string | null
     internalReviewNotes: string | null
     logoUrl: string | null
+    logoPng: Buffer | null
     featuredOnHome: boolean
     homeSortOrder: number
     founderExempt: boolean
@@ -9739,6 +9746,7 @@ export namespace Prisma {
     productsInvolved?: boolean
     internalReviewNotes?: boolean
     logoUrl?: boolean
+    logoPng?: boolean
     featuredOnHome?: boolean
     homeSortOrder?: boolean
     founderExempt?: boolean
@@ -9787,6 +9795,7 @@ export namespace Prisma {
     productsInvolved?: boolean
     internalReviewNotes?: boolean
     logoUrl?: boolean
+    logoPng?: boolean
     featuredOnHome?: boolean
     homeSortOrder?: boolean
     founderExempt?: boolean
@@ -9829,6 +9838,7 @@ export namespace Prisma {
     productsInvolved?: boolean
     internalReviewNotes?: boolean
     logoUrl?: boolean
+    logoPng?: boolean
     featuredOnHome?: boolean
     homeSortOrder?: boolean
     founderExempt?: boolean
@@ -9902,6 +9912,10 @@ export namespace Prisma {
       productsInvolved: string | null
       internalReviewNotes: string | null
       logoUrl: string | null
+      /**
+       * PNG bytes — survives redeploy; served via /api/v1/platform/brand-logo/:slug
+       */
+      logoPng: Buffer | null
       featuredOnHome: boolean
       /**
        * Lower values appear first on the homepage partner strip and partner directory.
@@ -10345,6 +10359,7 @@ export namespace Prisma {
     readonly productsInvolved: FieldRef<"Brand", 'String'>
     readonly internalReviewNotes: FieldRef<"Brand", 'String'>
     readonly logoUrl: FieldRef<"Brand", 'String'>
+    readonly logoPng: FieldRef<"Brand", 'Bytes'>
     readonly featuredOnHome: FieldRef<"Brand", 'Boolean'>
     readonly homeSortOrder: FieldRef<"Brand", 'Int'>
     readonly founderExempt: FieldRef<"Brand", 'Boolean'>
@@ -33783,6 +33798,7 @@ export namespace Prisma {
     productsInvolved: 'productsInvolved',
     internalReviewNotes: 'internalReviewNotes',
     logoUrl: 'logoUrl',
+    logoPng: 'logoPng',
     featuredOnHome: 'featuredOnHome',
     homeSortOrder: 'homeSortOrder',
     founderExempt: 'founderExempt',
@@ -34385,6 +34401,20 @@ export namespace Prisma {
    * Reference to a field of type 'BrandOnboardingStatus[]'
    */
   export type ListEnumBrandOnboardingStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'BrandOnboardingStatus[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'Bytes'
+   */
+  export type BytesFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Bytes'>
+    
+
+
+  /**
+   * Reference to a field of type 'Bytes[]'
+   */
+  export type ListBytesFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Bytes[]'>
     
 
 
@@ -35159,6 +35189,7 @@ export namespace Prisma {
     productsInvolved?: StringNullableFilter<"Brand"> | string | null
     internalReviewNotes?: StringNullableFilter<"Brand"> | string | null
     logoUrl?: StringNullableFilter<"Brand"> | string | null
+    logoPng?: BytesNullableFilter<"Brand"> | Buffer | null
     featuredOnHome?: BoolFilter<"Brand"> | boolean
     homeSortOrder?: IntFilter<"Brand"> | number
     founderExempt?: BoolFilter<"Brand"> | boolean
@@ -35206,6 +35237,7 @@ export namespace Prisma {
     productsInvolved?: SortOrderInput | SortOrder
     internalReviewNotes?: SortOrderInput | SortOrder
     logoUrl?: SortOrderInput | SortOrder
+    logoPng?: SortOrderInput | SortOrder
     featuredOnHome?: SortOrder
     homeSortOrder?: SortOrder
     founderExempt?: SortOrder
@@ -35256,6 +35288,7 @@ export namespace Prisma {
     productsInvolved?: StringNullableFilter<"Brand"> | string | null
     internalReviewNotes?: StringNullableFilter<"Brand"> | string | null
     logoUrl?: StringNullableFilter<"Brand"> | string | null
+    logoPng?: BytesNullableFilter<"Brand"> | Buffer | null
     featuredOnHome?: BoolFilter<"Brand"> | boolean
     homeSortOrder?: IntFilter<"Brand"> | number
     founderExempt?: BoolFilter<"Brand"> | boolean
@@ -35303,6 +35336,7 @@ export namespace Prisma {
     productsInvolved?: SortOrderInput | SortOrder
     internalReviewNotes?: SortOrderInput | SortOrder
     logoUrl?: SortOrderInput | SortOrder
+    logoPng?: SortOrderInput | SortOrder
     featuredOnHome?: SortOrder
     homeSortOrder?: SortOrder
     founderExempt?: SortOrder
@@ -35352,6 +35386,7 @@ export namespace Prisma {
     productsInvolved?: StringNullableWithAggregatesFilter<"Brand"> | string | null
     internalReviewNotes?: StringNullableWithAggregatesFilter<"Brand"> | string | null
     logoUrl?: StringNullableWithAggregatesFilter<"Brand"> | string | null
+    logoPng?: BytesNullableWithAggregatesFilter<"Brand"> | Buffer | null
     featuredOnHome?: BoolWithAggregatesFilter<"Brand"> | boolean
     homeSortOrder?: IntWithAggregatesFilter<"Brand"> | number
     founderExempt?: BoolWithAggregatesFilter<"Brand"> | boolean
@@ -37994,6 +38029,7 @@ export namespace Prisma {
     productsInvolved?: string | null
     internalReviewNotes?: string | null
     logoUrl?: string | null
+    logoPng?: Buffer | null
     featuredOnHome?: boolean
     homeSortOrder?: number
     founderExempt?: boolean
@@ -38041,6 +38077,7 @@ export namespace Prisma {
     productsInvolved?: string | null
     internalReviewNotes?: string | null
     logoUrl?: string | null
+    logoPng?: Buffer | null
     featuredOnHome?: boolean
     homeSortOrder?: number
     founderExempt?: boolean
@@ -38086,6 +38123,7 @@ export namespace Prisma {
     productsInvolved?: NullableStringFieldUpdateOperationsInput | string | null
     internalReviewNotes?: NullableStringFieldUpdateOperationsInput | string | null
     logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    logoPng?: NullableBytesFieldUpdateOperationsInput | Buffer | null
     featuredOnHome?: BoolFieldUpdateOperationsInput | boolean
     homeSortOrder?: IntFieldUpdateOperationsInput | number
     founderExempt?: BoolFieldUpdateOperationsInput | boolean
@@ -38133,6 +38171,7 @@ export namespace Prisma {
     productsInvolved?: NullableStringFieldUpdateOperationsInput | string | null
     internalReviewNotes?: NullableStringFieldUpdateOperationsInput | string | null
     logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    logoPng?: NullableBytesFieldUpdateOperationsInput | Buffer | null
     featuredOnHome?: BoolFieldUpdateOperationsInput | boolean
     homeSortOrder?: IntFieldUpdateOperationsInput | number
     founderExempt?: BoolFieldUpdateOperationsInput | boolean
@@ -38179,6 +38218,7 @@ export namespace Prisma {
     productsInvolved?: string | null
     internalReviewNotes?: string | null
     logoUrl?: string | null
+    logoPng?: Buffer | null
     featuredOnHome?: boolean
     homeSortOrder?: number
     founderExempt?: boolean
@@ -38219,6 +38259,7 @@ export namespace Prisma {
     productsInvolved?: NullableStringFieldUpdateOperationsInput | string | null
     internalReviewNotes?: NullableStringFieldUpdateOperationsInput | string | null
     logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    logoPng?: NullableBytesFieldUpdateOperationsInput | Buffer | null
     featuredOnHome?: BoolFieldUpdateOperationsInput | boolean
     homeSortOrder?: IntFieldUpdateOperationsInput | number
     founderExempt?: BoolFieldUpdateOperationsInput | boolean
@@ -38260,6 +38301,7 @@ export namespace Prisma {
     productsInvolved?: NullableStringFieldUpdateOperationsInput | string | null
     internalReviewNotes?: NullableStringFieldUpdateOperationsInput | string | null
     logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    logoPng?: NullableBytesFieldUpdateOperationsInput | Buffer | null
     featuredOnHome?: BoolFieldUpdateOperationsInput | boolean
     homeSortOrder?: IntFieldUpdateOperationsInput | number
     founderExempt?: BoolFieldUpdateOperationsInput | boolean
@@ -41284,6 +41326,13 @@ export namespace Prisma {
     isEmpty?: boolean
   }
 
+  export type BytesNullableFilter<$PrismaModel = never> = {
+    equals?: Buffer | BytesFieldRefInput<$PrismaModel> | null
+    in?: Buffer[] | ListBytesFieldRefInput<$PrismaModel> | null
+    notIn?: Buffer[] | ListBytesFieldRefInput<$PrismaModel> | null
+    not?: NestedBytesNullableFilter<$PrismaModel> | Buffer | null
+  }
+
   export type BoolFilter<$PrismaModel = never> = {
     equals?: boolean | BooleanFieldRefInput<$PrismaModel>
     not?: NestedBoolFilter<$PrismaModel> | boolean
@@ -41393,6 +41442,7 @@ export namespace Prisma {
     productsInvolved?: SortOrder
     internalReviewNotes?: SortOrder
     logoUrl?: SortOrder
+    logoPng?: SortOrder
     featuredOnHome?: SortOrder
     homeSortOrder?: SortOrder
     founderExempt?: SortOrder
@@ -41436,6 +41486,7 @@ export namespace Prisma {
     productsInvolved?: SortOrder
     internalReviewNotes?: SortOrder
     logoUrl?: SortOrder
+    logoPng?: SortOrder
     featuredOnHome?: SortOrder
     homeSortOrder?: SortOrder
     founderExempt?: SortOrder
@@ -41474,6 +41525,7 @@ export namespace Prisma {
     productsInvolved?: SortOrder
     internalReviewNotes?: SortOrder
     logoUrl?: SortOrder
+    logoPng?: SortOrder
     featuredOnHome?: SortOrder
     homeSortOrder?: SortOrder
     founderExempt?: SortOrder
@@ -41516,6 +41568,16 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedEnumBrandOnboardingStatusFilter<$PrismaModel>
     _max?: NestedEnumBrandOnboardingStatusFilter<$PrismaModel>
+  }
+
+  export type BytesNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Buffer | BytesFieldRefInput<$PrismaModel> | null
+    in?: Buffer[] | ListBytesFieldRefInput<$PrismaModel> | null
+    notIn?: Buffer[] | ListBytesFieldRefInput<$PrismaModel> | null
+    not?: NestedBytesNullableWithAggregatesFilter<$PrismaModel> | Buffer | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedBytesNullableFilter<$PrismaModel>
+    _max?: NestedBytesNullableFilter<$PrismaModel>
   }
 
   export type BoolWithAggregatesFilter<$PrismaModel = never> = {
@@ -43749,6 +43811,10 @@ export namespace Prisma {
     push?: string | string[]
   }
 
+  export type NullableBytesFieldUpdateOperationsInput = {
+    set?: Buffer | null
+  }
+
   export type BoolFieldUpdateOperationsInput = {
     set?: boolean
   }
@@ -45218,6 +45284,13 @@ export namespace Prisma {
     not?: NestedEnumBrandOnboardingStatusFilter<$PrismaModel> | $Enums.BrandOnboardingStatus
   }
 
+  export type NestedBytesNullableFilter<$PrismaModel = never> = {
+    equals?: Buffer | BytesFieldRefInput<$PrismaModel> | null
+    in?: Buffer[] | ListBytesFieldRefInput<$PrismaModel> | null
+    notIn?: Buffer[] | ListBytesFieldRefInput<$PrismaModel> | null
+    not?: NestedBytesNullableFilter<$PrismaModel> | Buffer | null
+  }
+
   export type NestedBoolFilter<$PrismaModel = never> = {
     equals?: boolean | BooleanFieldRefInput<$PrismaModel>
     not?: NestedBoolFilter<$PrismaModel> | boolean
@@ -45273,6 +45346,16 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedEnumBrandOnboardingStatusFilter<$PrismaModel>
     _max?: NestedEnumBrandOnboardingStatusFilter<$PrismaModel>
+  }
+
+  export type NestedBytesNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Buffer | BytesFieldRefInput<$PrismaModel> | null
+    in?: Buffer[] | ListBytesFieldRefInput<$PrismaModel> | null
+    notIn?: Buffer[] | ListBytesFieldRefInput<$PrismaModel> | null
+    not?: NestedBytesNullableWithAggregatesFilter<$PrismaModel> | Buffer | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedBytesNullableFilter<$PrismaModel>
+    _max?: NestedBytesNullableFilter<$PrismaModel>
   }
 
   export type NestedBoolWithAggregatesFilter<$PrismaModel = never> = {
@@ -45684,6 +45767,7 @@ export namespace Prisma {
     productsInvolved?: string | null
     internalReviewNotes?: string | null
     logoUrl?: string | null
+    logoPng?: Buffer | null
     featuredOnHome?: boolean
     homeSortOrder?: number
     founderExempt?: boolean
@@ -45730,6 +45814,7 @@ export namespace Prisma {
     productsInvolved?: string | null
     internalReviewNotes?: string | null
     logoUrl?: string | null
+    logoPng?: Buffer | null
     featuredOnHome?: boolean
     homeSortOrder?: number
     founderExempt?: boolean
@@ -45779,6 +45864,7 @@ export namespace Prisma {
     productsInvolved?: string | null
     internalReviewNotes?: string | null
     logoUrl?: string | null
+    logoPng?: Buffer | null
     featuredOnHome?: boolean
     homeSortOrder?: number
     founderExempt?: boolean
@@ -45824,6 +45910,7 @@ export namespace Prisma {
     productsInvolved?: string | null
     internalReviewNotes?: string | null
     logoUrl?: string | null
+    logoPng?: Buffer | null
     featuredOnHome?: boolean
     homeSortOrder?: number
     founderExempt?: boolean
@@ -46085,6 +46172,7 @@ export namespace Prisma {
     productsInvolved?: NullableStringFieldUpdateOperationsInput | string | null
     internalReviewNotes?: NullableStringFieldUpdateOperationsInput | string | null
     logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    logoPng?: NullableBytesFieldUpdateOperationsInput | Buffer | null
     featuredOnHome?: BoolFieldUpdateOperationsInput | boolean
     homeSortOrder?: IntFieldUpdateOperationsInput | number
     founderExempt?: BoolFieldUpdateOperationsInput | boolean
@@ -46131,6 +46219,7 @@ export namespace Prisma {
     productsInvolved?: NullableStringFieldUpdateOperationsInput | string | null
     internalReviewNotes?: NullableStringFieldUpdateOperationsInput | string | null
     logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    logoPng?: NullableBytesFieldUpdateOperationsInput | Buffer | null
     featuredOnHome?: BoolFieldUpdateOperationsInput | boolean
     homeSortOrder?: IntFieldUpdateOperationsInput | number
     founderExempt?: BoolFieldUpdateOperationsInput | boolean
@@ -46195,6 +46284,7 @@ export namespace Prisma {
     productsInvolved?: StringNullableFilter<"Brand"> | string | null
     internalReviewNotes?: StringNullableFilter<"Brand"> | string | null
     logoUrl?: StringNullableFilter<"Brand"> | string | null
+    logoPng?: BytesNullableFilter<"Brand"> | Buffer | null
     featuredOnHome?: BoolFilter<"Brand"> | boolean
     homeSortOrder?: IntFilter<"Brand"> | number
     founderExempt?: BoolFilter<"Brand"> | boolean
@@ -47682,6 +47772,7 @@ export namespace Prisma {
     productsInvolved?: string | null
     internalReviewNotes?: string | null
     logoUrl?: string | null
+    logoPng?: Buffer | null
     featuredOnHome?: boolean
     homeSortOrder?: number
     founderExempt?: boolean
@@ -47728,6 +47819,7 @@ export namespace Prisma {
     productsInvolved?: string | null
     internalReviewNotes?: string | null
     logoUrl?: string | null
+    logoPng?: Buffer | null
     featuredOnHome?: boolean
     homeSortOrder?: number
     founderExempt?: boolean
@@ -48231,6 +48323,7 @@ export namespace Prisma {
     productsInvolved?: NullableStringFieldUpdateOperationsInput | string | null
     internalReviewNotes?: NullableStringFieldUpdateOperationsInput | string | null
     logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    logoPng?: NullableBytesFieldUpdateOperationsInput | Buffer | null
     featuredOnHome?: BoolFieldUpdateOperationsInput | boolean
     homeSortOrder?: IntFieldUpdateOperationsInput | number
     founderExempt?: BoolFieldUpdateOperationsInput | boolean
@@ -48277,6 +48370,7 @@ export namespace Prisma {
     productsInvolved?: NullableStringFieldUpdateOperationsInput | string | null
     internalReviewNotes?: NullableStringFieldUpdateOperationsInput | string | null
     logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    logoPng?: NullableBytesFieldUpdateOperationsInput | Buffer | null
     featuredOnHome?: BoolFieldUpdateOperationsInput | boolean
     homeSortOrder?: IntFieldUpdateOperationsInput | number
     founderExempt?: BoolFieldUpdateOperationsInput | boolean
@@ -48591,6 +48685,7 @@ export namespace Prisma {
     productsInvolved?: string | null
     internalReviewNotes?: string | null
     logoUrl?: string | null
+    logoPng?: Buffer | null
     featuredOnHome?: boolean
     homeSortOrder?: number
     founderExempt?: boolean
@@ -48637,6 +48732,7 @@ export namespace Prisma {
     productsInvolved?: string | null
     internalReviewNotes?: string | null
     logoUrl?: string | null
+    logoPng?: Buffer | null
     featuredOnHome?: boolean
     homeSortOrder?: number
     founderExempt?: boolean
@@ -48697,6 +48793,7 @@ export namespace Prisma {
     productsInvolved?: NullableStringFieldUpdateOperationsInput | string | null
     internalReviewNotes?: NullableStringFieldUpdateOperationsInput | string | null
     logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    logoPng?: NullableBytesFieldUpdateOperationsInput | Buffer | null
     featuredOnHome?: BoolFieldUpdateOperationsInput | boolean
     homeSortOrder?: IntFieldUpdateOperationsInput | number
     founderExempt?: BoolFieldUpdateOperationsInput | boolean
@@ -48743,6 +48840,7 @@ export namespace Prisma {
     productsInvolved?: NullableStringFieldUpdateOperationsInput | string | null
     internalReviewNotes?: NullableStringFieldUpdateOperationsInput | string | null
     logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    logoPng?: NullableBytesFieldUpdateOperationsInput | Buffer | null
     featuredOnHome?: BoolFieldUpdateOperationsInput | boolean
     homeSortOrder?: IntFieldUpdateOperationsInput | number
     founderExempt?: BoolFieldUpdateOperationsInput | boolean
@@ -49596,6 +49694,7 @@ export namespace Prisma {
     productsInvolved?: string | null
     internalReviewNotes?: string | null
     logoUrl?: string | null
+    logoPng?: Buffer | null
     featuredOnHome?: boolean
     homeSortOrder?: number
     founderExempt?: boolean
@@ -49642,6 +49741,7 @@ export namespace Prisma {
     productsInvolved?: string | null
     internalReviewNotes?: string | null
     logoUrl?: string | null
+    logoPng?: Buffer | null
     featuredOnHome?: boolean
     homeSortOrder?: number
     founderExempt?: boolean
@@ -49906,6 +50006,7 @@ export namespace Prisma {
     productsInvolved?: NullableStringFieldUpdateOperationsInput | string | null
     internalReviewNotes?: NullableStringFieldUpdateOperationsInput | string | null
     logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    logoPng?: NullableBytesFieldUpdateOperationsInput | Buffer | null
     featuredOnHome?: BoolFieldUpdateOperationsInput | boolean
     homeSortOrder?: IntFieldUpdateOperationsInput | number
     founderExempt?: BoolFieldUpdateOperationsInput | boolean
@@ -49952,6 +50053,7 @@ export namespace Prisma {
     productsInvolved?: NullableStringFieldUpdateOperationsInput | string | null
     internalReviewNotes?: NullableStringFieldUpdateOperationsInput | string | null
     logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    logoPng?: NullableBytesFieldUpdateOperationsInput | Buffer | null
     featuredOnHome?: BoolFieldUpdateOperationsInput | boolean
     homeSortOrder?: IntFieldUpdateOperationsInput | number
     founderExempt?: BoolFieldUpdateOperationsInput | boolean
@@ -51141,6 +51243,7 @@ export namespace Prisma {
     productsInvolved?: string | null
     internalReviewNotes?: string | null
     logoUrl?: string | null
+    logoPng?: Buffer | null
     featuredOnHome?: boolean
     homeSortOrder?: number
     founderExempt?: boolean
@@ -51187,6 +51290,7 @@ export namespace Prisma {
     productsInvolved?: string | null
     internalReviewNotes?: string | null
     logoUrl?: string | null
+    logoPng?: Buffer | null
     featuredOnHome?: boolean
     homeSortOrder?: number
     founderExempt?: boolean
@@ -51275,6 +51379,7 @@ export namespace Prisma {
     productsInvolved?: NullableStringFieldUpdateOperationsInput | string | null
     internalReviewNotes?: NullableStringFieldUpdateOperationsInput | string | null
     logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    logoPng?: NullableBytesFieldUpdateOperationsInput | Buffer | null
     featuredOnHome?: BoolFieldUpdateOperationsInput | boolean
     homeSortOrder?: IntFieldUpdateOperationsInput | number
     founderExempt?: BoolFieldUpdateOperationsInput | boolean
@@ -51321,6 +51426,7 @@ export namespace Prisma {
     productsInvolved?: NullableStringFieldUpdateOperationsInput | string | null
     internalReviewNotes?: NullableStringFieldUpdateOperationsInput | string | null
     logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    logoPng?: NullableBytesFieldUpdateOperationsInput | Buffer | null
     featuredOnHome?: BoolFieldUpdateOperationsInput | boolean
     homeSortOrder?: IntFieldUpdateOperationsInput | number
     founderExempt?: BoolFieldUpdateOperationsInput | boolean
@@ -52058,6 +52164,7 @@ export namespace Prisma {
     productsInvolved?: string | null
     internalReviewNotes?: string | null
     logoUrl?: string | null
+    logoPng?: Buffer | null
     featuredOnHome?: boolean
     homeSortOrder?: number
     founderExempt?: boolean
@@ -52144,6 +52251,7 @@ export namespace Prisma {
     productsInvolved?: NullableStringFieldUpdateOperationsInput | string | null
     internalReviewNotes?: NullableStringFieldUpdateOperationsInput | string | null
     logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    logoPng?: NullableBytesFieldUpdateOperationsInput | Buffer | null
     featuredOnHome?: BoolFieldUpdateOperationsInput | boolean
     homeSortOrder?: IntFieldUpdateOperationsInput | number
     founderExempt?: BoolFieldUpdateOperationsInput | boolean
@@ -52189,6 +52297,7 @@ export namespace Prisma {
     productsInvolved?: NullableStringFieldUpdateOperationsInput | string | null
     internalReviewNotes?: NullableStringFieldUpdateOperationsInput | string | null
     logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    logoPng?: NullableBytesFieldUpdateOperationsInput | Buffer | null
     featuredOnHome?: BoolFieldUpdateOperationsInput | boolean
     homeSortOrder?: IntFieldUpdateOperationsInput | number
     founderExempt?: BoolFieldUpdateOperationsInput | boolean
@@ -52234,6 +52343,7 @@ export namespace Prisma {
     productsInvolved?: NullableStringFieldUpdateOperationsInput | string | null
     internalReviewNotes?: NullableStringFieldUpdateOperationsInput | string | null
     logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    logoPng?: NullableBytesFieldUpdateOperationsInput | Buffer | null
     featuredOnHome?: BoolFieldUpdateOperationsInput | boolean
     homeSortOrder?: IntFieldUpdateOperationsInput | number
     founderExempt?: BoolFieldUpdateOperationsInput | boolean

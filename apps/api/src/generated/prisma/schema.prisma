@@ -307,6 +307,8 @@ model Brand {
   productsInvolved      String?
   internalReviewNotes   String?
   logoUrl               String?
+  /// PNG bytes — survives redeploy; served via /api/v1/platform/brand-logo/:slug
+  logoPng               Bytes?
   featuredOnHome        Boolean                  @default(false)
   /// Lower values appear first on the homepage partner strip and partner directory.
   homeSortOrder         Int                      @default(100)
