@@ -4,6 +4,7 @@ import type { Metadata, Viewport } from "next";
 import type { ReactNode } from "react";
 import { Inter, Montserrat } from "next/font/google";
 import { BrandedHeader } from "@brand2school/branding";
+import { ChatWidget } from "../components/chat/ChatWidget";
 
 const LOGO_SRC = "/brand2school.png";
 
@@ -68,6 +69,7 @@ export default function RootLayout({ children }: { children: ReactNode }): JSX.E
           ]}
         />
         {children}
+        <ChatWidget />
       </body>
     </html>
   );

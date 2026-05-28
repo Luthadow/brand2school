@@ -25,6 +25,7 @@ import {
   UtensilsCrossed,
   Wifi
 } from "lucide-react";
+import { homepageFaqItems } from "../lib/chatKnowledge";
 import { AudienceTabs } from "../components/landing/AudienceTabs";
 import { FaqAccordion } from "../components/landing/FaqAccordion";
 import { FadeIn } from "../components/landing/FadeIn";
@@ -213,29 +214,6 @@ const trustBadges = [
   { icon: Lock, label: "Fraud Prevention" },
   { icon: ShieldCheck, label: "Verified Schools" },
   { icon: BarChart3, label: "Public Dashboards" }
-];
-
-const faqItems = [
-  {
-    q: "Is Brand2School a donation platform?",
-    a: "No. Brand2School is educational commerce infrastructure. Brands, retailers, and communities participate through everyday purchases — not handouts. Every contribution is tied to verified transactions and measurable outcomes."
-  },
-  {
-    q: "How do you prevent fraud and fake schools?",
-    a: "Every school is verified before joining. Every code is validated against purchase records. Admin moderation, audit logs, and automated fraud detection run on every submission. Support is only released when milestones are confirmed."
-  },
-  {
-    q: "Is my data safe under POPIA?",
-    a: "Yes. Brand2School is built with POPIA compliance at its core. Personal data is encrypted, access is controlled, and we only collect what is necessary to verify participation and deliver impact."
-  },
-  {
-    q: "How does a school join?",
-    a: "Register at /schools/register with your school details and WhatsApp number. Principals get a portal login. Families submit product codes via WhatsApp using school name + district — no learner registration required."
-  },
-  {
-    q: "What do brands get in return?",
-    a: "Measurable ESG impact, live analytics, brand visibility in communities, campaign reporting, and alignment with national education outcomes — all backed by transparent, auditable data."
-  }
 ];
 
 const audienceTabs = [
@@ -625,7 +603,7 @@ export default async function HomePage(): Promise<JSX.Element> {
             />
           </FadeIn>
           <FadeIn delay={0.08}>
-            <FaqAccordion items={faqItems} />
+            <FaqAccordion items={[...homepageFaqItems]} />
           </FadeIn>
         </div>
       </section>
