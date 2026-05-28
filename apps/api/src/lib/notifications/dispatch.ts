@@ -21,6 +21,23 @@ function useSyncDelivery(): boolean {
   return env.NOTIFICATION_DELIVERY === "sync";
 }
 
+async function requireProcessedJob(jobId: string): Promise<void> {
+  const { processNotificationJobById } = await import("./process.js");
+  const sent = await processNotificationJobById(jobId);
+  if (sent) return;
+
+  const failed = await prisma.notificationJob.findUnique({
+    where: { id: jobId },
+    select: { lastError: true, template: true, recipient: true }
+  });
+  const detail = failed?.lastError ?? "Notification delivery failed";
+  throw new Error(
+    failed?.template
+      ? `${detail} (${failed.template} → ${failed.recipient})`
+      : detail
+  );
+}
+
 async function createQueuedEmail<T extends NotificationTemplate>(
   tx: Prisma.TransactionClient,
   input: QueueEmailInput<T>
@@ -61,8 +78,7 @@ export async function queueEmail<T extends NotificationTemplate>(
   const jobId = await prisma.$transaction((tx) => createQueuedEmail(tx, input));
 
   if (input.immediate || useSyncDelivery()) {
-    const { processNotificationJobById } = await import("./process.js");
-    await processNotificationJobById(jobId);
+    await requireProcessedJob(jobId);
   }
 
   return jobId;
@@ -89,9 +105,8 @@ export async function queueEmails<T extends NotificationTemplate>(
   }
 
   if (useSyncDelivery()) {
-    const { processNotificationJobById } = await import("./process.js");
     for (const jobId of jobIds) {
-      await processNotificationJobById(jobId);
+      await requireProcessedJob(jobId);
     }
   }
 
