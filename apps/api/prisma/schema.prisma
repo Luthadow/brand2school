@@ -42,6 +42,13 @@ enum SchoolVerificationStatus {
   REJECTED
 }
 
+enum OrganizationCategory {
+  SCHOOL
+  NGO_NPO
+  COMMUNITY
+  FAITH
+}
+
 enum CodeStatus {
   UNUSED
   PENDING
@@ -227,6 +234,7 @@ model School {
   contactEmail   String?
   whatsappPhone  String       @unique
   schoolCode     String       @unique
+  organizationCategory OrganizationCategory @default(SCHOOL)
   status         EntityStatus @default(PENDING)
   developmentTier      Int      @default(1)
   currentPhase         Int      @default(1)
@@ -253,6 +261,10 @@ model SchoolVerification {
   schoolId           String                   @unique
   school             School                   @relation(fields: [schoolId], references: [id], onDelete: Cascade)
   emisNumber         String?
+  registrationNumber String?
+  documentPaths      Json?
+  centreType         String?
+  documentDeferrals  Json?
   status             SchoolVerificationStatus @default(NOT_SUBMITTED)
   principalIdPath    String?
   schoolLetterPath   String?

@@ -153,6 +153,7 @@ exports.Prisma.SchoolScalarFieldEnum = {
   contactEmail: 'contactEmail',
   whatsappPhone: 'whatsappPhone',
   schoolCode: 'schoolCode',
+  organizationCategory: 'organizationCategory',
   status: 'status',
   developmentTier: 'developmentTier',
   currentPhase: 'currentPhase',
@@ -170,6 +171,10 @@ exports.Prisma.SchoolVerificationScalarFieldEnum = {
   id: 'id',
   schoolId: 'schoolId',
   emisNumber: 'emisNumber',
+  registrationNumber: 'registrationNumber',
+  documentPaths: 'documentPaths',
+  centreType: 'centreType',
+  documentDeferrals: 'documentDeferrals',
   status: 'status',
   principalIdPath: 'principalIdPath',
   schoolLetterPath: 'schoolLetterPath',
@@ -611,6 +616,13 @@ exports.EntityStatus = exports.$Enums.EntityStatus = {
   APPROVED: 'APPROVED',
   ACTIVE: 'ACTIVE',
   SUSPENDED: 'SUSPENDED'
+};
+
+exports.OrganizationCategory = exports.$Enums.OrganizationCategory = {
+  SCHOOL: 'SCHOOL',
+  NGO_NPO: 'NGO_NPO',
+  COMMUNITY: 'COMMUNITY',
+  FAITH: 'FAITH'
 };
 
 exports.SchoolVerificationStatus = exports.$Enums.SchoolVerificationStatus = {

@@ -61,7 +61,7 @@ export function SchoolPortalShell({
 
   async function logout(): Promise<void> {
     await fetch("/api/auth/logout", { method: "POST", headers: csrfHeaders() });
-    window.location.href = "/school/login";
+    window.location.href = "/organisations/login";
   }
 
   return (

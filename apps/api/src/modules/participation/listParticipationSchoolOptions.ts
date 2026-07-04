@@ -5,7 +5,7 @@ import {
 } from "../../lib/saDistricts.js";
 import { normalizeProvinceCode, provinceNameFromCode, SA_PROVINCES } from "../analytics/provinces.js";
 
-const ACTIVE_SCHOOL_STATUSES = ["ACTIVE", "APPROVED", "VERIFIED"] as const;
+const ACTIVE_SCHOOL_STATUSES = ["PENDING", "ACTIVE", "APPROVED", "VERIFIED"] as const;
 
 export type ParticipationDistrictOption = {
   name: string;

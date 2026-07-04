@@ -198,6 +198,42 @@ adminRouter.patch("/approvals/schools/:id/status", async (req, res) => {
   res.json(updated);
 });
 
+adminRouter.patch("/approvals/schools/:id/suspend", async (req, res) => {
+  if (req.user?.role !== "SUPER_ADMIN") {
+    res.status(403).json({ message: "SUPER_ADMIN role required for approvals." });
+    return;
+  }
+
+  const school = await prisma.school.findUnique({ where: { id: req.params.id } });
+  if (!school) {
+    res.status(404).json({ message: "School not found." });
+    return;
+  }
+
+  if (school.status === "SUSPENDED") {
+    res.status(409).json({ message: "School is already removed." });
+    return;
+  }
+
+  if (school.status === "ACTIVE") {
+    res.status(409).json({ message: "Active schools must be frozen through governance review before removal." });
+    return;
+  }
+
+  const updated = await prisma.school.update({
+    where: { id: school.id },
+    data: { status: "SUSPENDED" }
+  });
+
+  await writeAudit(req.user?.id, "APPROVAL_STATUS_CHANGE", "SCHOOL", updated.id, {
+    from: school.status,
+    to: "SUSPENDED",
+    action: "REMOVED"
+  });
+
+  res.json(updated);
+});
+
 adminRouter.patch("/approvals/brands/:id/status", async (req, res) => {
   if (req.user?.role !== "SUPER_ADMIN") {
     res.status(403).json({ message: "SUPER_ADMIN role required for approvals." });

@@ -17,10 +17,11 @@ import { analyticsRateLimit, registrationRateLimit } from "../../middleware/rate
 import { getOrCreateSchoolVerification } from "./schoolVerification/verificationGate.js";
 import { serializeSchoolVerification } from "./schoolVerification/serializeSchoolVerification.js";
 import { submitSchoolVerificationPacket } from "./schoolVerification/submitSchoolVerification.js";
+import { parseDocumentDeferrals } from "./schoolVerification/documentDeferrals.js";
 
 const verificationUpload = multer({
   storage: multer.memoryStorage(),
-  limits: { fileSize: 5 * 1024 * 1024, files: 3 }
+  limits: { fileSize: 5 * 1024 * 1024, files: 8 }
 });
 
 const createSchoolSchema = z.object({
@@ -142,18 +143,14 @@ schoolsRouter.get("/verification", requireAuth, requireRole(["SCHOOL_ADMIN"]), a
     return;
   }
   const verification = await getOrCreateSchoolVerification(school.id);
-  res.json({ verification: serializeSchoolVerification(verification) });
+  res.json({ verification: serializeSchoolVerification(verification, school.organizationCategory) });
 });
 
 schoolsRouter.post(
   "/verification/submit",
   requireAuth,
   requireRole(["SCHOOL_ADMIN"]),
-  verificationUpload.fields([
-    { name: "principalId", maxCount: 1 },
-    { name: "schoolLetter", maxCount: 1 },
-    { name: "emisEvidence", maxCount: 1 }
-  ]),
+  verificationUpload.any(),
   async (req, res) => {
     if (!req.user) {
       res.status(401).json({ message: "Unauthorized." });
@@ -161,29 +158,43 @@ schoolsRouter.post(
     }
     const school = await getSchoolForUser(req.user.id);
     if (!school) {
-      res.status(404).json({ message: "No school linked to this account." });
+      res.status(404).json({ message: "No organisation linked to this account." });
       return;
     }
 
-    const files = req.files as
-      | Record<string, Array<{ buffer: Buffer; mimetype: string }>>
-      | undefined;
-    const principalId = files?.principalId?.[0];
-    const schoolLetter = files?.schoolLetter?.[0];
-    const emisEvidence = files?.emisEvidence?.[0];
-    const emisNumber = typeof req.body?.emisNumber === "string" ? req.body.emisNumber : "";
+    const uploaded = (req.files as Array<{ fieldname: string; buffer: Buffer; mimetype: string }> | undefined) ?? [];
+    const files: Record<string, { buffer: Buffer; mimetype: string }> = {};
+    for (const file of uploaded) {
+      files[file.fieldname] = { buffer: file.buffer, mimetype: file.mimetype };
+    }
 
-    if (!principalId || !schoolLetter || !emisEvidence) {
-      res.status(400).json({ message: "principalId, schoolLetter, and emisEvidence files are required." });
-      return;
+    const registrationNumber =
+      typeof req.body?.registrationNumber === "string" ? req.body.registrationNumber : undefined;
+    const emisNumber = typeof req.body?.emisNumber === "string" ? req.body.emisNumber : undefined;
+    const centreType = typeof req.body?.centreType === "string" ? req.body.centreType : "";
+    const registrationDeferred =
+      req.body?.registrationDeferred === true ||
+      req.body?.registrationDeferred === "true" ||
+      req.body?.registrationDeferred === "1";
+
+    let documentDeferrals = parseDocumentDeferrals(undefined);
+    if (typeof req.body?.documentDeferrals === "string" && req.body.documentDeferrals.trim()) {
+      try {
+        documentDeferrals = parseDocumentDeferrals(JSON.parse(req.body.documentDeferrals));
+      } catch {
+        res.status(400).json({ message: "Invalid document deferrals payload." });
+        return;
+      }
     }
 
     const result = await submitSchoolVerificationPacket({
       schoolId: school.id,
+      centreType,
+      registrationNumber,
       emisNumber,
-      principalId: { buffer: principalId.buffer, mimetype: principalId.mimetype },
-      schoolLetter: { buffer: schoolLetter.buffer, mimetype: schoolLetter.mimetype },
-      emisEvidence: { buffer: emisEvidence.buffer, mimetype: emisEvidence.mimetype }
+      registrationDeferred,
+      documentDeferrals,
+      files
     });
 
     if (!result.ok) {

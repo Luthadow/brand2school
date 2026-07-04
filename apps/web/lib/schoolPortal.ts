@@ -12,13 +12,43 @@ export type SchoolPortal = {
     status: string;
     learnerCount: number;
     verificationStatus: string;
+    organizationCategory: string;
+  };
+  organization: {
+    id: string;
+    label: string;
+    portalEyebrow: string;
+    documentsTitle: string;
+    documentsIntro: string;
+    registrationNumber: {
+      key: string;
+      label: string;
+      placeholder: string;
+    } | null;
+    documents: Array<{ key: string; label: string; required: boolean }>;
+    centreTypes: Array<{ id: string; label: string }>;
   };
   verification: {
     status: string;
     emisNumber: string | null;
+    registrationNumber: string | null;
     submittedAt: string | null;
     rejectionReason: string | null;
     canSubmit: boolean;
+    canCompleteDocuments: boolean;
+    claimReady: boolean;
+    centreType: string | null;
+    centreTypeLabel: string | null;
+    registrationDeferred: boolean;
+    hasActiveDeferrals: boolean;
+    documents: Array<{
+      key: string;
+      label: string;
+      required: boolean;
+      url: string | null;
+      uploaded: boolean;
+      deferred: boolean;
+    }>;
   };
   overview: {
     verifiedSubmissions: number;

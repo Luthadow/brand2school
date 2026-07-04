@@ -3,59 +3,28 @@ import { prisma } from "../../lib/prisma.js";
 import { CONTACT } from "../../lib/contacts.js";
 import {
   buildBrandRegistrationInfoRequiredEmail,
-  buildSchoolRegistrationInfoRequiredEmail,
-  brandOnboardingUrlForRegistrant,
-  schoolDocumentsUrlForRegistrant
+  brandOnboardingUrlForRegistrant
 } from "../../lib/emails/registrationAdminEmails.js";
 import { sendBrandedMail } from "../../lib/mail.js";
 import { resolveBrandContact } from "../../lib/emails/brandContact.js";
+import { notifySchoolVerificationDocumentsRequired } from "../../lib/schoolVerificationDocumentNotify.js";
 
-const followupSchema = z.object({
+const brandFollowupSchema = z.object({
   message: z.string().trim().min(10).max(4000)
 });
 
 export async function requestSchoolRegistrationInfo(input: {
   schoolId: string;
   actorUserId: string;
-  body: unknown;
 }) {
-  const payload = followupSchema.safeParse(input.body);
-  if (!payload.success) {
-    return { ok: false as const, status: 400, message: "Validation failed.", issues: payload.error.flatten() };
+  const result = await notifySchoolVerificationDocumentsRequired(input.schoolId);
+
+  if (!result.ok) {
+    return { ok: false as const, status: result.status, message: result.message };
   }
 
-  const school = await prisma.school.findUnique({
-    where: { id: input.schoolId },
-    include: { adminUser: { select: { email: true } } }
-  });
-  if (!school) {
-    return { ok: false as const, status: 404, message: "School not found." };
-  }
-
-  const principalEmail = school.contactEmail ?? school.adminUser?.email;
-  if (!principalEmail) {
-    return { ok: false as const, status: 409, message: "School has no contact email on file." };
-  }
-
-  const actionUrl = schoolDocumentsUrlForRegistrant();
-  const mail = buildSchoolRegistrationInfoRequiredEmail({
-    recipientName: school.principalName,
-    entityName: school.name,
-    message: payload.data.message,
-    actionUrl
-  });
-
-  try {
-    await sendBrandedMail({
-      to: principalEmail,
-      subject: mail.subject,
-      text: mail.text,
-      html: mail.html,
-      replyTo: CONTACT.schools
-    });
-  } catch (err) {
-    console.error("[mail] school registration follow-up failed:", err);
-    return { ok: false as const, status: 503, message: "Could not send email to the school." };
+  if ("skipped" in result) {
+    return { ok: false as const, status: 409, message: result.skipped };
   }
 
   await prisma.auditLog.create({
@@ -63,12 +32,12 @@ export async function requestSchoolRegistrationInfo(input: {
       actorId: input.actorUserId,
       action: "SCHOOL_REGISTRATION_INFO_REQUESTED",
       targetType: "School",
-      targetId: school.id,
-      payload: { message: payload.data.message, emailed: principalEmail }
+      targetId: input.schoolId,
+      payload: { emailed: result.emailed, automated: true }
     }
   });
 
-  return { ok: true as const, status: 200, emailed: principalEmail };
+  return { ok: true as const, status: 200, emailed: result.emailed };
 }
 
 export async function requestBrandRegistrationInfo(input: {
@@ -76,7 +45,7 @@ export async function requestBrandRegistrationInfo(input: {
   actorUserId: string;
   body: unknown;
 }) {
-  const payload = followupSchema.safeParse(input.body);
+  const payload = brandFollowupSchema.safeParse(input.body);
   if (!payload.success) {
     return { ok: false as const, status: 400, message: "Validation failed.", issues: payload.error.flatten() };
   }

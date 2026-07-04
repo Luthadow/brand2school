@@ -5,6 +5,7 @@ import {
   buildSchoolVerificationRejectedPrincipalEmail,
   schoolDocumentsUrl
 } from "../../../lib/emails/schoolVerificationEmails.js";
+import { notifySchoolVerificationDocumentsRequired } from "../../../lib/schoolVerificationDocumentNotify.js";
 import {
   sendSchoolVerificationApprovedEmail,
   sendSchoolVerificationRejectedEmail
@@ -113,7 +114,11 @@ export async function reviewSchoolVerificationPacket(input: {
       text: mail.text,
       html: mail.html
     }).catch((err) => console.error("[mail] verification rejected notify failed:", err));
+
+    void notifySchoolVerificationDocumentsRequired(school.id).catch((err) =>
+      console.error("[mail] Auto verification documents email after reject failed:", err)
+    );
   }
 
-  return { ok: true as const, status: 200, verification: serializeSchoolVerification(updated) };
+  return { ok: true as const, status: 200, verification: serializeSchoolVerification(updated, school.organizationCategory) };
 }

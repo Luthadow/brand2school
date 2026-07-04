@@ -19,7 +19,7 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
 
   const role = loginData?.user?.role as string | undefined;
   if (role !== "SCHOOL_ADMIN") {
-    return NextResponse.json({ message: "Principal portal access requires a school account." }, { status: 403 });
+    return NextResponse.json({ message: "Organisation portal access requires a school or partner account." }, { status: 403 });
   }
 
   const csrfToken = createCsrfToken();

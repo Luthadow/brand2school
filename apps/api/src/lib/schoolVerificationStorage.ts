@@ -28,7 +28,7 @@ function extensionForMime(mimetype: string): string {
 
 export function schoolVerificationDocPath(
   schoolId: string,
-  docType: "principal-id" | "school-letter" | "emis-evidence",
+  docType: string,
   mimetype: string
 ): string {
   const ext = extensionForMime(mimetype);

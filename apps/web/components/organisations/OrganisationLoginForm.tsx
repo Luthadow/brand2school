@@ -5,9 +5,11 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { csrfHeaders } from "../../lib/clientFetch";
 import { CONTACT, mailto } from "../../lib/contact";
+import { getOrganizationCategory, type OrganizationCategoryId } from "../../lib/organizationCategories";
 
-export function SchoolLoginForm(): JSX.Element {
+export function OrganisationLoginForm({ categoryId }: { categoryId: OrganizationCategoryId }): JSX.Element {
   const router = useRouter();
+  const category = getOrganizationCategory(categoryId);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState<string | null>(null);
@@ -53,12 +55,13 @@ export function SchoolLoginForm(): JSX.Element {
         {loading ? "Signing in…" : "Sign In"}
       </button>
       <p className="reg-hint" style={{ textAlign: "center" }}>
-        No account? <Link href="/organisations/register">Register your school</Link>
+        No account?{" "}
+        <Link href={`/organisations/register?category=${category.id.toLowerCase().replace("_", "-")}`}>
+          Register your {category.label.toLowerCase()}
+        </Link>
       </p>
       <p className="reg-hint" style={{ textAlign: "center" }}>
-        School support: <a href={mailto(CONTACT.schools)}>{CONTACT.schools}</a>
-        {" · "}
-        Technical: <a href={mailto(CONTACT.support)}>{CONTACT.support}</a>
+        Support: <a href={mailto(CONTACT.schools)}>{CONTACT.schools}</a>
       </p>
     </form>
   );

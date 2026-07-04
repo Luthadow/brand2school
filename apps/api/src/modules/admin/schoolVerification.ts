@@ -19,7 +19,8 @@ adminSchoolVerificationRouter.get("/queue", async (_req, res) => {
           province: true,
           district: true,
           status: true,
-          principalName: true
+          principalName: true,
+          organizationCategory: true
         }
       }
     }
@@ -27,7 +28,7 @@ adminSchoolVerificationRouter.get("/queue", async (_req, res) => {
 
   res.json({
     items: rows.map((row) => ({
-      ...serializeSchoolVerification(row),
+      ...serializeSchoolVerification(row, row.school.organizationCategory),
       school: {
         id: row.school.id,
         name: row.school.name,
@@ -59,9 +60,12 @@ adminSchoolVerificationRouter.get("/:schoolId", async (req, res) => {
       status: school.status,
       principalName: school.principalName,
       contactEmail: school.contactEmail,
-      schoolCode: school.schoolCode
+      schoolCode: school.schoolCode,
+      organizationCategory: school.organizationCategory
     },
-    verification: school.verification ? serializeSchoolVerification(school.verification) : null
+    verification: school.verification
+      ? serializeSchoolVerification(school.verification, school.organizationCategory)
+      : null
   });
 });
 
@@ -95,8 +99,7 @@ adminSchoolVerificationRouter.post("/:schoolId/request-info", async (req, res) =
 
   const result = await requestSchoolRegistrationInfo({
     schoolId: req.params.schoolId,
-    actorUserId: req.user.id,
-    body: req.body
+    actorUserId: req.user.id
   });
 
   if (!result.ok) {

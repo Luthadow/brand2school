@@ -50,6 +50,7 @@ import {
   type BrandVerificationApprovedInput
 } from "./emails/brandLifecycleEmails.js";
 import { buildBrandedEmail, escapeHtml, paragraphs } from "./emailTemplate.js";
+import { buildSchoolWelcomeEmail } from "./emails/schoolWelcomeEmail.js";
 
 async function sendBrandLifecycleMail(input: {
   to: string;
@@ -89,65 +90,22 @@ export async function sendBrandedMail(input: {
 }
 
 export async function sendSchoolRegistrationEmail(input: SchoolConfirmationInput): Promise<{ subject: string }> {
-  const schoolName = escapeHtml(input.schoolName);
-  const subject = `Welcome to Brand2School — ${input.schoolName} is registered`;
-
-  const text = [
-    `Dear ${input.principalName},`,
-    "",
-    `Your school ${input.schoolName} is registered on Brand2School.`,
-    "Our team will review your application and activate participation shortly.",
-    "",
-    `School code: ${input.schoolCode}`,
-    `WhatsApp linked: +${input.whatsappPhone}`,
-    "",
-    "WhatsApp commands for your community:",
-    "MENU",
-    "SUBMIT | School Name | District | campaign-slug | PRODUCT_CODE",
-    "PROGRESS | School Name | District",
-    "STATUS",
-    "",
-    `Principal portal: ${input.loginUrl}`,
-    "",
-    `School support: ${CONTACT.schools}`,
-    "",
-    "— Brand2School"
-  ].join("\n");
-
-  const html = buildBrandedEmail({
-    preheader: `${input.schoolName} is registered on Brand2School`,
-    title: `Welcome to Brand2School`,
-    subtitle: `<strong>${schoolName}</strong> is registered. Our team will activate your participation shortly.`,
-    primaryCta: { label: "Open Principal Portal", href: input.loginUrl },
-    bodyHtml: paragraphs(
-      `Dear ${escapeHtml(input.principalName)},`,
-      `Your WhatsApp number is linked for community code submissions.`,
-      `<strong>School code:</strong> ${escapeHtml(input.schoolCode)}<br/><strong>WhatsApp:</strong> +${escapeHtml(input.whatsappPhone)}`
-    ),
-    sections: [
-      {
-        title: "WhatsApp commands",
-        bodyHtml: paragraphs(
-          "Share these with families — no learner accounts required:",
-          `<code style="background:#f5f7fa;padding:4px 8px;border-radius:4px;font-size:13px;">MENU</code>`,
-          `<code style="background:#f5f7fa;padding:4px 8px;border-radius:4px;font-size:13px;">SUBMIT | School | District | campaign-slug | CODE</code>`,
-          `<code style="background:#f5f7fa;padding:4px 8px;border-radius:4px;font-size:13px;">PROGRESS | School | District</code>`
-        ),
-        cta: { label: "School support", href: `mailto:${CONTACT.schools}`, variant: "outline" }
-      },
-      {
-        title: "Getting started",
-        bodyHtml: paragraphs(
-          "Once approved, track verified submissions and infrastructure progress in your principal dashboard."
-        ),
-        cta: { label: "View platform", href: env.WEB_APP_URL, variant: "outline" }
-      }
-    ],
-    footerNote: `Questions? Email ${CONTACT.schools}`
+  const documentsUrl = `${env.WEB_APP_URL.replace(/\/$/, "")}/school/dashboard/documents`;
+  const mail = buildSchoolWelcomeEmail({
+    principalName: input.principalName,
+    schoolName: input.schoolName,
+    loginUrl: input.loginUrl,
+    documentsUrl
   });
 
-  await sendBrandedMail({ to: input.to, subject, text, html });
-  return { subject };
+  await sendBrandedMail({
+    to: input.to,
+    subject: mail.subject,
+    text: mail.text,
+    html: mail.html,
+    replyTo: CONTACT.schools
+  });
+  return { subject: mail.subject };
 }
 
 type EsgReportEmailInput = {

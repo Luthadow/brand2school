@@ -181,6 +181,16 @@ export const EntityStatus: {
 export type EntityStatus = (typeof EntityStatus)[keyof typeof EntityStatus]
 
 
+export const OrganizationCategory: {
+  SCHOOL: 'SCHOOL',
+  NGO_NPO: 'NGO_NPO',
+  COMMUNITY: 'COMMUNITY',
+  FAITH: 'FAITH'
+};
+
+export type OrganizationCategory = (typeof OrganizationCategory)[keyof typeof OrganizationCategory]
+
+
 export const SchoolVerificationStatus: {
   NOT_SUBMITTED: 'NOT_SUBMITTED',
   SUBMITTED: 'SUBMITTED',
@@ -410,6 +420,10 @@ export const UserRole: typeof $Enums.UserRole
 export type EntityStatus = $Enums.EntityStatus
 
 export const EntityStatus: typeof $Enums.EntityStatus
+
+export type OrganizationCategory = $Enums.OrganizationCategory
+
+export const OrganizationCategory: typeof $Enums.OrganizationCategory
 
 export type SchoolVerificationStatus = $Enums.SchoolVerificationStatus
 
@@ -6059,6 +6073,7 @@ export namespace Prisma {
     contactEmail: string | null
     whatsappPhone: string | null
     schoolCode: string | null
+    organizationCategory: $Enums.OrganizationCategory | null
     status: $Enums.EntityStatus | null
     developmentTier: number | null
     currentPhase: number | null
@@ -6078,6 +6093,7 @@ export namespace Prisma {
     contactEmail: string | null
     whatsappPhone: string | null
     schoolCode: string | null
+    organizationCategory: $Enums.OrganizationCategory | null
     status: $Enums.EntityStatus | null
     developmentTier: number | null
     currentPhase: number | null
@@ -6097,6 +6113,7 @@ export namespace Prisma {
     contactEmail: number
     whatsappPhone: number
     schoolCode: number
+    organizationCategory: number
     status: number
     developmentTier: number
     currentPhase: number
@@ -6135,6 +6152,7 @@ export namespace Prisma {
     contactEmail?: true
     whatsappPhone?: true
     schoolCode?: true
+    organizationCategory?: true
     status?: true
     developmentTier?: true
     currentPhase?: true
@@ -6154,6 +6172,7 @@ export namespace Prisma {
     contactEmail?: true
     whatsappPhone?: true
     schoolCode?: true
+    organizationCategory?: true
     status?: true
     developmentTier?: true
     currentPhase?: true
@@ -6173,6 +6192,7 @@ export namespace Prisma {
     contactEmail?: true
     whatsappPhone?: true
     schoolCode?: true
+    organizationCategory?: true
     status?: true
     developmentTier?: true
     currentPhase?: true
@@ -6282,6 +6302,7 @@ export namespace Prisma {
     contactEmail: string | null
     whatsappPhone: string
     schoolCode: string
+    organizationCategory: $Enums.OrganizationCategory
     status: $Enums.EntityStatus
     developmentTier: number
     currentPhase: number
@@ -6323,6 +6344,7 @@ export namespace Prisma {
     contactEmail?: boolean
     whatsappPhone?: boolean
     schoolCode?: boolean
+    organizationCategory?: boolean
     status?: boolean
     developmentTier?: boolean
     currentPhase?: boolean
@@ -6351,6 +6373,7 @@ export namespace Prisma {
     contactEmail?: boolean
     whatsappPhone?: boolean
     schoolCode?: boolean
+    organizationCategory?: boolean
     status?: boolean
     developmentTier?: boolean
     currentPhase?: boolean
@@ -6373,6 +6396,7 @@ export namespace Prisma {
     contactEmail?: boolean
     whatsappPhone?: boolean
     schoolCode?: boolean
+    organizationCategory?: boolean
     status?: boolean
     developmentTier?: boolean
     currentPhase?: boolean
@@ -6420,6 +6444,7 @@ export namespace Prisma {
       contactEmail: string | null
       whatsappPhone: string
       schoolCode: string
+      organizationCategory: $Enums.OrganizationCategory
       status: $Enums.EntityStatus
       developmentTier: number
       currentPhase: number
@@ -6837,6 +6862,7 @@ export namespace Prisma {
     readonly contactEmail: FieldRef<"School", 'String'>
     readonly whatsappPhone: FieldRef<"School", 'String'>
     readonly schoolCode: FieldRef<"School", 'String'>
+    readonly organizationCategory: FieldRef<"School", 'OrganizationCategory'>
     readonly status: FieldRef<"School", 'EntityStatus'>
     readonly developmentTier: FieldRef<"School", 'Int'>
     readonly currentPhase: FieldRef<"School", 'Int'>
@@ -7280,6 +7306,8 @@ export namespace Prisma {
     id: string | null
     schoolId: string | null
     emisNumber: string | null
+    registrationNumber: string | null
+    centreType: string | null
     status: $Enums.SchoolVerificationStatus | null
     principalIdPath: string | null
     schoolLetterPath: string | null
@@ -7297,6 +7325,8 @@ export namespace Prisma {
     id: string | null
     schoolId: string | null
     emisNumber: string | null
+    registrationNumber: string | null
+    centreType: string | null
     status: $Enums.SchoolVerificationStatus | null
     principalIdPath: string | null
     schoolLetterPath: string | null
@@ -7314,6 +7344,10 @@ export namespace Prisma {
     id: number
     schoolId: number
     emisNumber: number
+    registrationNumber: number
+    documentPaths: number
+    centreType: number
+    documentDeferrals: number
     status: number
     principalIdPath: number
     schoolLetterPath: number
@@ -7333,6 +7367,8 @@ export namespace Prisma {
     id?: true
     schoolId?: true
     emisNumber?: true
+    registrationNumber?: true
+    centreType?: true
     status?: true
     principalIdPath?: true
     schoolLetterPath?: true
@@ -7350,6 +7386,8 @@ export namespace Prisma {
     id?: true
     schoolId?: true
     emisNumber?: true
+    registrationNumber?: true
+    centreType?: true
     status?: true
     principalIdPath?: true
     schoolLetterPath?: true
@@ -7367,6 +7405,10 @@ export namespace Prisma {
     id?: true
     schoolId?: true
     emisNumber?: true
+    registrationNumber?: true
+    documentPaths?: true
+    centreType?: true
+    documentDeferrals?: true
     status?: true
     principalIdPath?: true
     schoolLetterPath?: true
@@ -7457,6 +7499,10 @@ export namespace Prisma {
     id: string
     schoolId: string
     emisNumber: string | null
+    registrationNumber: string | null
+    documentPaths: JsonValue | null
+    centreType: string | null
+    documentDeferrals: JsonValue | null
     status: $Enums.SchoolVerificationStatus
     principalIdPath: string | null
     schoolLetterPath: string | null
@@ -7491,6 +7537,10 @@ export namespace Prisma {
     id?: boolean
     schoolId?: boolean
     emisNumber?: boolean
+    registrationNumber?: boolean
+    documentPaths?: boolean
+    centreType?: boolean
+    documentDeferrals?: boolean
     status?: boolean
     principalIdPath?: boolean
     schoolLetterPath?: boolean
@@ -7509,6 +7559,10 @@ export namespace Prisma {
     id?: boolean
     schoolId?: boolean
     emisNumber?: boolean
+    registrationNumber?: boolean
+    documentPaths?: boolean
+    centreType?: boolean
+    documentDeferrals?: boolean
     status?: boolean
     principalIdPath?: boolean
     schoolLetterPath?: boolean
@@ -7527,6 +7581,10 @@ export namespace Prisma {
     id?: boolean
     schoolId?: boolean
     emisNumber?: boolean
+    registrationNumber?: boolean
+    documentPaths?: boolean
+    centreType?: boolean
+    documentDeferrals?: boolean
     status?: boolean
     principalIdPath?: boolean
     schoolLetterPath?: boolean
@@ -7556,6 +7614,10 @@ export namespace Prisma {
       id: string
       schoolId: string
       emisNumber: string | null
+      registrationNumber: string | null
+      documentPaths: Prisma.JsonValue | null
+      centreType: string | null
+      documentDeferrals: Prisma.JsonValue | null
       status: $Enums.SchoolVerificationStatus
       principalIdPath: string | null
       schoolLetterPath: string | null
@@ -7964,6 +8026,10 @@ export namespace Prisma {
     readonly id: FieldRef<"SchoolVerification", 'String'>
     readonly schoolId: FieldRef<"SchoolVerification", 'String'>
     readonly emisNumber: FieldRef<"SchoolVerification", 'String'>
+    readonly registrationNumber: FieldRef<"SchoolVerification", 'String'>
+    readonly documentPaths: FieldRef<"SchoolVerification", 'Json'>
+    readonly centreType: FieldRef<"SchoolVerification", 'String'>
+    readonly documentDeferrals: FieldRef<"SchoolVerification", 'Json'>
     readonly status: FieldRef<"SchoolVerification", 'SchoolVerificationStatus'>
     readonly principalIdPath: FieldRef<"SchoolVerification", 'String'>
     readonly schoolLetterPath: FieldRef<"SchoolVerification", 'String'>
@@ -33726,6 +33792,7 @@ export namespace Prisma {
     contactEmail: 'contactEmail',
     whatsappPhone: 'whatsappPhone',
     schoolCode: 'schoolCode',
+    organizationCategory: 'organizationCategory',
     status: 'status',
     developmentTier: 'developmentTier',
     currentPhase: 'currentPhase',
@@ -33746,6 +33813,10 @@ export namespace Prisma {
     id: 'id',
     schoolId: 'schoolId',
     emisNumber: 'emisNumber',
+    registrationNumber: 'registrationNumber',
+    documentPaths: 'documentPaths',
+    centreType: 'centreType',
+    documentDeferrals: 'documentDeferrals',
     status: 'status',
     principalIdPath: 'principalIdPath',
     schoolLetterPath: 'schoolLetterPath',
@@ -34328,6 +34399,20 @@ export namespace Prisma {
 
 
   /**
+   * Reference to a field of type 'OrganizationCategory'
+   */
+  export type EnumOrganizationCategoryFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'OrganizationCategory'>
+    
+
+
+  /**
+   * Reference to a field of type 'OrganizationCategory[]'
+   */
+  export type ListEnumOrganizationCategoryFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'OrganizationCategory[]'>
+    
+
+
+  /**
    * Reference to a field of type 'Int'
    */
   export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int'>
@@ -34864,6 +34949,7 @@ export namespace Prisma {
     contactEmail?: StringNullableFilter<"School"> | string | null
     whatsappPhone?: StringFilter<"School"> | string
     schoolCode?: StringFilter<"School"> | string
+    organizationCategory?: EnumOrganizationCategoryFilter<"School"> | $Enums.OrganizationCategory
     status?: EnumEntityStatusFilter<"School"> | $Enums.EntityStatus
     developmentTier?: IntFilter<"School"> | number
     currentPhase?: IntFilter<"School"> | number
@@ -34891,6 +34977,7 @@ export namespace Prisma {
     contactEmail?: SortOrderInput | SortOrder
     whatsappPhone?: SortOrder
     schoolCode?: SortOrder
+    organizationCategory?: SortOrder
     status?: SortOrder
     developmentTier?: SortOrder
     currentPhase?: SortOrder
@@ -34921,6 +35008,7 @@ export namespace Prisma {
     district?: StringFilter<"School"> | string
     principalName?: StringFilter<"School"> | string
     contactEmail?: StringNullableFilter<"School"> | string | null
+    organizationCategory?: EnumOrganizationCategoryFilter<"School"> | $Enums.OrganizationCategory
     status?: EnumEntityStatusFilter<"School"> | $Enums.EntityStatus
     developmentTier?: IntFilter<"School"> | number
     currentPhase?: IntFilter<"School"> | number
@@ -34948,6 +35036,7 @@ export namespace Prisma {
     contactEmail?: SortOrderInput | SortOrder
     whatsappPhone?: SortOrder
     schoolCode?: SortOrder
+    organizationCategory?: SortOrder
     status?: SortOrder
     developmentTier?: SortOrder
     currentPhase?: SortOrder
@@ -34978,6 +35067,7 @@ export namespace Prisma {
     contactEmail?: StringNullableWithAggregatesFilter<"School"> | string | null
     whatsappPhone?: StringWithAggregatesFilter<"School"> | string
     schoolCode?: StringWithAggregatesFilter<"School"> | string
+    organizationCategory?: EnumOrganizationCategoryWithAggregatesFilter<"School"> | $Enums.OrganizationCategory
     status?: EnumEntityStatusWithAggregatesFilter<"School"> | $Enums.EntityStatus
     developmentTier?: IntWithAggregatesFilter<"School"> | number
     currentPhase?: IntWithAggregatesFilter<"School"> | number
@@ -34998,6 +35088,10 @@ export namespace Prisma {
     id?: StringFilter<"SchoolVerification"> | string
     schoolId?: StringFilter<"SchoolVerification"> | string
     emisNumber?: StringNullableFilter<"SchoolVerification"> | string | null
+    registrationNumber?: StringNullableFilter<"SchoolVerification"> | string | null
+    documentPaths?: JsonNullableFilter<"SchoolVerification">
+    centreType?: StringNullableFilter<"SchoolVerification"> | string | null
+    documentDeferrals?: JsonNullableFilter<"SchoolVerification">
     status?: EnumSchoolVerificationStatusFilter<"SchoolVerification"> | $Enums.SchoolVerificationStatus
     principalIdPath?: StringNullableFilter<"SchoolVerification"> | string | null
     schoolLetterPath?: StringNullableFilter<"SchoolVerification"> | string | null
@@ -35016,6 +35110,10 @@ export namespace Prisma {
     id?: SortOrder
     schoolId?: SortOrder
     emisNumber?: SortOrderInput | SortOrder
+    registrationNumber?: SortOrderInput | SortOrder
+    documentPaths?: SortOrderInput | SortOrder
+    centreType?: SortOrderInput | SortOrder
+    documentDeferrals?: SortOrderInput | SortOrder
     status?: SortOrder
     principalIdPath?: SortOrderInput | SortOrder
     schoolLetterPath?: SortOrderInput | SortOrder
@@ -35037,6 +35135,10 @@ export namespace Prisma {
     OR?: SchoolVerificationWhereInput[]
     NOT?: SchoolVerificationWhereInput | SchoolVerificationWhereInput[]
     emisNumber?: StringNullableFilter<"SchoolVerification"> | string | null
+    registrationNumber?: StringNullableFilter<"SchoolVerification"> | string | null
+    documentPaths?: JsonNullableFilter<"SchoolVerification">
+    centreType?: StringNullableFilter<"SchoolVerification"> | string | null
+    documentDeferrals?: JsonNullableFilter<"SchoolVerification">
     status?: EnumSchoolVerificationStatusFilter<"SchoolVerification"> | $Enums.SchoolVerificationStatus
     principalIdPath?: StringNullableFilter<"SchoolVerification"> | string | null
     schoolLetterPath?: StringNullableFilter<"SchoolVerification"> | string | null
@@ -35055,6 +35157,10 @@ export namespace Prisma {
     id?: SortOrder
     schoolId?: SortOrder
     emisNumber?: SortOrderInput | SortOrder
+    registrationNumber?: SortOrderInput | SortOrder
+    documentPaths?: SortOrderInput | SortOrder
+    centreType?: SortOrderInput | SortOrder
+    documentDeferrals?: SortOrderInput | SortOrder
     status?: SortOrder
     principalIdPath?: SortOrderInput | SortOrder
     schoolLetterPath?: SortOrderInput | SortOrder
@@ -35078,6 +35184,10 @@ export namespace Prisma {
     id?: StringWithAggregatesFilter<"SchoolVerification"> | string
     schoolId?: StringWithAggregatesFilter<"SchoolVerification"> | string
     emisNumber?: StringNullableWithAggregatesFilter<"SchoolVerification"> | string | null
+    registrationNumber?: StringNullableWithAggregatesFilter<"SchoolVerification"> | string | null
+    documentPaths?: JsonNullableWithAggregatesFilter<"SchoolVerification">
+    centreType?: StringNullableWithAggregatesFilter<"SchoolVerification"> | string | null
+    documentDeferrals?: JsonNullableWithAggregatesFilter<"SchoolVerification">
     status?: EnumSchoolVerificationStatusWithAggregatesFilter<"SchoolVerification"> | $Enums.SchoolVerificationStatus
     principalIdPath?: StringNullableWithAggregatesFilter<"SchoolVerification"> | string | null
     schoolLetterPath?: StringNullableWithAggregatesFilter<"SchoolVerification"> | string | null
@@ -37645,6 +37755,7 @@ export namespace Prisma {
     contactEmail?: string | null
     whatsappPhone: string
     schoolCode: string
+    organizationCategory?: $Enums.OrganizationCategory
     status?: $Enums.EntityStatus
     developmentTier?: number
     currentPhase?: number
@@ -37672,6 +37783,7 @@ export namespace Prisma {
     contactEmail?: string | null
     whatsappPhone: string
     schoolCode: string
+    organizationCategory?: $Enums.OrganizationCategory
     status?: $Enums.EntityStatus
     developmentTier?: number
     currentPhase?: number
@@ -37699,6 +37811,7 @@ export namespace Prisma {
     contactEmail?: NullableStringFieldUpdateOperationsInput | string | null
     whatsappPhone?: StringFieldUpdateOperationsInput | string
     schoolCode?: StringFieldUpdateOperationsInput | string
+    organizationCategory?: EnumOrganizationCategoryFieldUpdateOperationsInput | $Enums.OrganizationCategory
     status?: EnumEntityStatusFieldUpdateOperationsInput | $Enums.EntityStatus
     developmentTier?: IntFieldUpdateOperationsInput | number
     currentPhase?: IntFieldUpdateOperationsInput | number
@@ -37726,6 +37839,7 @@ export namespace Prisma {
     contactEmail?: NullableStringFieldUpdateOperationsInput | string | null
     whatsappPhone?: StringFieldUpdateOperationsInput | string
     schoolCode?: StringFieldUpdateOperationsInput | string
+    organizationCategory?: EnumOrganizationCategoryFieldUpdateOperationsInput | $Enums.OrganizationCategory
     status?: EnumEntityStatusFieldUpdateOperationsInput | $Enums.EntityStatus
     developmentTier?: IntFieldUpdateOperationsInput | number
     currentPhase?: IntFieldUpdateOperationsInput | number
@@ -37753,6 +37867,7 @@ export namespace Prisma {
     contactEmail?: string | null
     whatsappPhone: string
     schoolCode: string
+    organizationCategory?: $Enums.OrganizationCategory
     status?: $Enums.EntityStatus
     developmentTier?: number
     currentPhase?: number
@@ -37775,6 +37890,7 @@ export namespace Prisma {
     contactEmail?: NullableStringFieldUpdateOperationsInput | string | null
     whatsappPhone?: StringFieldUpdateOperationsInput | string
     schoolCode?: StringFieldUpdateOperationsInput | string
+    organizationCategory?: EnumOrganizationCategoryFieldUpdateOperationsInput | $Enums.OrganizationCategory
     status?: EnumEntityStatusFieldUpdateOperationsInput | $Enums.EntityStatus
     developmentTier?: IntFieldUpdateOperationsInput | number
     currentPhase?: IntFieldUpdateOperationsInput | number
@@ -37797,6 +37913,7 @@ export namespace Prisma {
     contactEmail?: NullableStringFieldUpdateOperationsInput | string | null
     whatsappPhone?: StringFieldUpdateOperationsInput | string
     schoolCode?: StringFieldUpdateOperationsInput | string
+    organizationCategory?: EnumOrganizationCategoryFieldUpdateOperationsInput | $Enums.OrganizationCategory
     status?: EnumEntityStatusFieldUpdateOperationsInput | $Enums.EntityStatus
     developmentTier?: IntFieldUpdateOperationsInput | number
     currentPhase?: IntFieldUpdateOperationsInput | number
@@ -37813,6 +37930,10 @@ export namespace Prisma {
   export type SchoolVerificationCreateInput = {
     id?: string
     emisNumber?: string | null
+    registrationNumber?: string | null
+    documentPaths?: NullableJsonNullValueInput | InputJsonValue
+    centreType?: string | null
+    documentDeferrals?: NullableJsonNullValueInput | InputJsonValue
     status?: $Enums.SchoolVerificationStatus
     principalIdPath?: string | null
     schoolLetterPath?: string | null
@@ -37831,6 +37952,10 @@ export namespace Prisma {
     id?: string
     schoolId: string
     emisNumber?: string | null
+    registrationNumber?: string | null
+    documentPaths?: NullableJsonNullValueInput | InputJsonValue
+    centreType?: string | null
+    documentDeferrals?: NullableJsonNullValueInput | InputJsonValue
     status?: $Enums.SchoolVerificationStatus
     principalIdPath?: string | null
     schoolLetterPath?: string | null
@@ -37847,6 +37972,10 @@ export namespace Prisma {
   export type SchoolVerificationUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     emisNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    registrationNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    documentPaths?: NullableJsonNullValueInput | InputJsonValue
+    centreType?: NullableStringFieldUpdateOperationsInput | string | null
+    documentDeferrals?: NullableJsonNullValueInput | InputJsonValue
     status?: EnumSchoolVerificationStatusFieldUpdateOperationsInput | $Enums.SchoolVerificationStatus
     principalIdPath?: NullableStringFieldUpdateOperationsInput | string | null
     schoolLetterPath?: NullableStringFieldUpdateOperationsInput | string | null
@@ -37865,6 +37994,10 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     schoolId?: StringFieldUpdateOperationsInput | string
     emisNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    registrationNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    documentPaths?: NullableJsonNullValueInput | InputJsonValue
+    centreType?: NullableStringFieldUpdateOperationsInput | string | null
+    documentDeferrals?: NullableJsonNullValueInput | InputJsonValue
     status?: EnumSchoolVerificationStatusFieldUpdateOperationsInput | $Enums.SchoolVerificationStatus
     principalIdPath?: NullableStringFieldUpdateOperationsInput | string | null
     schoolLetterPath?: NullableStringFieldUpdateOperationsInput | string | null
@@ -37882,6 +38015,10 @@ export namespace Prisma {
     id?: string
     schoolId: string
     emisNumber?: string | null
+    registrationNumber?: string | null
+    documentPaths?: NullableJsonNullValueInput | InputJsonValue
+    centreType?: string | null
+    documentDeferrals?: NullableJsonNullValueInput | InputJsonValue
     status?: $Enums.SchoolVerificationStatus
     principalIdPath?: string | null
     schoolLetterPath?: string | null
@@ -37898,6 +38035,10 @@ export namespace Prisma {
   export type SchoolVerificationUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
     emisNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    registrationNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    documentPaths?: NullableJsonNullValueInput | InputJsonValue
+    centreType?: NullableStringFieldUpdateOperationsInput | string | null
+    documentDeferrals?: NullableJsonNullValueInput | InputJsonValue
     status?: EnumSchoolVerificationStatusFieldUpdateOperationsInput | $Enums.SchoolVerificationStatus
     principalIdPath?: NullableStringFieldUpdateOperationsInput | string | null
     schoolLetterPath?: NullableStringFieldUpdateOperationsInput | string | null
@@ -37915,6 +38056,10 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     schoolId?: StringFieldUpdateOperationsInput | string
     emisNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    registrationNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    documentPaths?: NullableJsonNullValueInput | InputJsonValue
+    centreType?: NullableStringFieldUpdateOperationsInput | string | null
+    documentDeferrals?: NullableJsonNullValueInput | InputJsonValue
     status?: EnumSchoolVerificationStatusFieldUpdateOperationsInput | $Enums.SchoolVerificationStatus
     principalIdPath?: NullableStringFieldUpdateOperationsInput | string | null
     schoolLetterPath?: NullableStringFieldUpdateOperationsInput | string | null
@@ -40956,6 +41101,13 @@ export namespace Prisma {
     _max?: NestedDateTimeNullableFilter<$PrismaModel>
   }
 
+  export type EnumOrganizationCategoryFilter<$PrismaModel = never> = {
+    equals?: $Enums.OrganizationCategory | EnumOrganizationCategoryFieldRefInput<$PrismaModel>
+    in?: $Enums.OrganizationCategory[] | ListEnumOrganizationCategoryFieldRefInput<$PrismaModel>
+    notIn?: $Enums.OrganizationCategory[] | ListEnumOrganizationCategoryFieldRefInput<$PrismaModel>
+    not?: NestedEnumOrganizationCategoryFilter<$PrismaModel> | $Enums.OrganizationCategory
+  }
+
   export type IntFilter<$PrismaModel = never> = {
     equals?: number | IntFieldRefInput<$PrismaModel>
     in?: number[] | ListIntFieldRefInput<$PrismaModel>
@@ -41060,6 +41212,7 @@ export namespace Prisma {
     contactEmail?: SortOrder
     whatsappPhone?: SortOrder
     schoolCode?: SortOrder
+    organizationCategory?: SortOrder
     status?: SortOrder
     developmentTier?: SortOrder
     currentPhase?: SortOrder
@@ -41089,6 +41242,7 @@ export namespace Prisma {
     contactEmail?: SortOrder
     whatsappPhone?: SortOrder
     schoolCode?: SortOrder
+    organizationCategory?: SortOrder
     status?: SortOrder
     developmentTier?: SortOrder
     currentPhase?: SortOrder
@@ -41108,6 +41262,7 @@ export namespace Prisma {
     contactEmail?: SortOrder
     whatsappPhone?: SortOrder
     schoolCode?: SortOrder
+    organizationCategory?: SortOrder
     status?: SortOrder
     developmentTier?: SortOrder
     currentPhase?: SortOrder
@@ -41123,6 +41278,16 @@ export namespace Prisma {
     currentPhase?: SortOrder
     fundingBalanceZar?: SortOrder
     annualCycleYear?: SortOrder
+  }
+
+  export type EnumOrganizationCategoryWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.OrganizationCategory | EnumOrganizationCategoryFieldRefInput<$PrismaModel>
+    in?: $Enums.OrganizationCategory[] | ListEnumOrganizationCategoryFieldRefInput<$PrismaModel>
+    notIn?: $Enums.OrganizationCategory[] | ListEnumOrganizationCategoryFieldRefInput<$PrismaModel>
+    not?: NestedEnumOrganizationCategoryWithAggregatesFilter<$PrismaModel> | $Enums.OrganizationCategory
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumOrganizationCategoryFilter<$PrismaModel>
+    _max?: NestedEnumOrganizationCategoryFilter<$PrismaModel>
   }
 
   export type IntWithAggregatesFilter<$PrismaModel = never> = {
@@ -41214,6 +41379,10 @@ export namespace Prisma {
     id?: SortOrder
     schoolId?: SortOrder
     emisNumber?: SortOrder
+    registrationNumber?: SortOrder
+    documentPaths?: SortOrder
+    centreType?: SortOrder
+    documentDeferrals?: SortOrder
     status?: SortOrder
     principalIdPath?: SortOrder
     schoolLetterPath?: SortOrder
@@ -41231,6 +41400,8 @@ export namespace Prisma {
     id?: SortOrder
     schoolId?: SortOrder
     emisNumber?: SortOrder
+    registrationNumber?: SortOrder
+    centreType?: SortOrder
     status?: SortOrder
     principalIdPath?: SortOrder
     schoolLetterPath?: SortOrder
@@ -41248,6 +41419,8 @@ export namespace Prisma {
     id?: SortOrder
     schoolId?: SortOrder
     emisNumber?: SortOrder
+    registrationNumber?: SortOrder
+    centreType?: SortOrder
     status?: SortOrder
     principalIdPath?: SortOrder
     schoolLetterPath?: SortOrder
@@ -43496,6 +43669,10 @@ export namespace Prisma {
     connect?: SchoolVerificationWhereUniqueInput
   }
 
+  export type EnumOrganizationCategoryFieldUpdateOperationsInput = {
+    set?: $Enums.OrganizationCategory
+  }
+
   export type IntFieldUpdateOperationsInput = {
     set?: number
     increment?: number
@@ -45150,6 +45327,13 @@ export namespace Prisma {
     _max?: NestedDateTimeNullableFilter<$PrismaModel>
   }
 
+  export type NestedEnumOrganizationCategoryFilter<$PrismaModel = never> = {
+    equals?: $Enums.OrganizationCategory | EnumOrganizationCategoryFieldRefInput<$PrismaModel>
+    in?: $Enums.OrganizationCategory[] | ListEnumOrganizationCategoryFieldRefInput<$PrismaModel>
+    notIn?: $Enums.OrganizationCategory[] | ListEnumOrganizationCategoryFieldRefInput<$PrismaModel>
+    not?: NestedEnumOrganizationCategoryFilter<$PrismaModel> | $Enums.OrganizationCategory
+  }
+
   export type NestedDecimalFilter<$PrismaModel = never> = {
     equals?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
     in?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel>
@@ -45159,6 +45343,16 @@ export namespace Prisma {
     gt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
     gte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
     not?: NestedDecimalFilter<$PrismaModel> | Decimal | DecimalJsLike | number | string
+  }
+
+  export type NestedEnumOrganizationCategoryWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.OrganizationCategory | EnumOrganizationCategoryFieldRefInput<$PrismaModel>
+    in?: $Enums.OrganizationCategory[] | ListEnumOrganizationCategoryFieldRefInput<$PrismaModel>
+    notIn?: $Enums.OrganizationCategory[] | ListEnumOrganizationCategoryFieldRefInput<$PrismaModel>
+    not?: NestedEnumOrganizationCategoryWithAggregatesFilter<$PrismaModel> | $Enums.OrganizationCategory
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumOrganizationCategoryFilter<$PrismaModel>
+    _max?: NestedEnumOrganizationCategoryFilter<$PrismaModel>
   }
 
   export type NestedIntWithAggregatesFilter<$PrismaModel = never> = {
@@ -45698,6 +45892,7 @@ export namespace Prisma {
     contactEmail?: string | null
     whatsappPhone: string
     schoolCode: string
+    organizationCategory?: $Enums.OrganizationCategory
     status?: $Enums.EntityStatus
     developmentTier?: number
     currentPhase?: number
@@ -45724,6 +45919,7 @@ export namespace Prisma {
     contactEmail?: string | null
     whatsappPhone: string
     schoolCode: string
+    organizationCategory?: $Enums.OrganizationCategory
     status?: $Enums.EntityStatus
     developmentTier?: number
     currentPhase?: number
@@ -46097,6 +46293,7 @@ export namespace Prisma {
     contactEmail?: NullableStringFieldUpdateOperationsInput | string | null
     whatsappPhone?: StringFieldUpdateOperationsInput | string
     schoolCode?: StringFieldUpdateOperationsInput | string
+    organizationCategory?: EnumOrganizationCategoryFieldUpdateOperationsInput | $Enums.OrganizationCategory
     status?: EnumEntityStatusFieldUpdateOperationsInput | $Enums.EntityStatus
     developmentTier?: IntFieldUpdateOperationsInput | number
     currentPhase?: IntFieldUpdateOperationsInput | number
@@ -46123,6 +46320,7 @@ export namespace Prisma {
     contactEmail?: NullableStringFieldUpdateOperationsInput | string | null
     whatsappPhone?: StringFieldUpdateOperationsInput | string
     schoolCode?: StringFieldUpdateOperationsInput | string
+    organizationCategory?: EnumOrganizationCategoryFieldUpdateOperationsInput | $Enums.OrganizationCategory
     status?: EnumEntityStatusFieldUpdateOperationsInput | $Enums.EntityStatus
     developmentTier?: IntFieldUpdateOperationsInput | number
     currentPhase?: IntFieldUpdateOperationsInput | number
@@ -46666,6 +46864,10 @@ export namespace Prisma {
   export type SchoolVerificationCreateWithoutSchoolInput = {
     id?: string
     emisNumber?: string | null
+    registrationNumber?: string | null
+    documentPaths?: NullableJsonNullValueInput | InputJsonValue
+    centreType?: string | null
+    documentDeferrals?: NullableJsonNullValueInput | InputJsonValue
     status?: $Enums.SchoolVerificationStatus
     principalIdPath?: string | null
     schoolLetterPath?: string | null
@@ -46682,6 +46884,10 @@ export namespace Prisma {
   export type SchoolVerificationUncheckedCreateWithoutSchoolInput = {
     id?: string
     emisNumber?: string | null
+    registrationNumber?: string | null
+    documentPaths?: NullableJsonNullValueInput | InputJsonValue
+    centreType?: string | null
+    documentDeferrals?: NullableJsonNullValueInput | InputJsonValue
     status?: $Enums.SchoolVerificationStatus
     principalIdPath?: string | null
     schoolLetterPath?: string | null
@@ -46855,6 +47061,10 @@ export namespace Prisma {
   export type SchoolVerificationUpdateWithoutSchoolInput = {
     id?: StringFieldUpdateOperationsInput | string
     emisNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    registrationNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    documentPaths?: NullableJsonNullValueInput | InputJsonValue
+    centreType?: NullableStringFieldUpdateOperationsInput | string | null
+    documentDeferrals?: NullableJsonNullValueInput | InputJsonValue
     status?: EnumSchoolVerificationStatusFieldUpdateOperationsInput | $Enums.SchoolVerificationStatus
     principalIdPath?: NullableStringFieldUpdateOperationsInput | string | null
     schoolLetterPath?: NullableStringFieldUpdateOperationsInput | string | null
@@ -46871,6 +47081,10 @@ export namespace Prisma {
   export type SchoolVerificationUncheckedUpdateWithoutSchoolInput = {
     id?: StringFieldUpdateOperationsInput | string
     emisNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    registrationNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    documentPaths?: NullableJsonNullValueInput | InputJsonValue
+    centreType?: NullableStringFieldUpdateOperationsInput | string | null
+    documentDeferrals?: NullableJsonNullValueInput | InputJsonValue
     status?: EnumSchoolVerificationStatusFieldUpdateOperationsInput | $Enums.SchoolVerificationStatus
     principalIdPath?: NullableStringFieldUpdateOperationsInput | string | null
     schoolLetterPath?: NullableStringFieldUpdateOperationsInput | string | null
@@ -46893,6 +47107,7 @@ export namespace Prisma {
     contactEmail?: string | null
     whatsappPhone: string
     schoolCode: string
+    organizationCategory?: $Enums.OrganizationCategory
     status?: $Enums.EntityStatus
     developmentTier?: number
     currentPhase?: number
@@ -46919,6 +47134,7 @@ export namespace Prisma {
     contactEmail?: string | null
     whatsappPhone: string
     schoolCode: string
+    organizationCategory?: $Enums.OrganizationCategory
     status?: $Enums.EntityStatus
     developmentTier?: number
     currentPhase?: number
@@ -46961,6 +47177,7 @@ export namespace Prisma {
     contactEmail?: NullableStringFieldUpdateOperationsInput | string | null
     whatsappPhone?: StringFieldUpdateOperationsInput | string
     schoolCode?: StringFieldUpdateOperationsInput | string
+    organizationCategory?: EnumOrganizationCategoryFieldUpdateOperationsInput | $Enums.OrganizationCategory
     status?: EnumEntityStatusFieldUpdateOperationsInput | $Enums.EntityStatus
     developmentTier?: IntFieldUpdateOperationsInput | number
     currentPhase?: IntFieldUpdateOperationsInput | number
@@ -46987,6 +47204,7 @@ export namespace Prisma {
     contactEmail?: NullableStringFieldUpdateOperationsInput | string | null
     whatsappPhone?: StringFieldUpdateOperationsInput | string
     schoolCode?: StringFieldUpdateOperationsInput | string
+    organizationCategory?: EnumOrganizationCategoryFieldUpdateOperationsInput | $Enums.OrganizationCategory
     status?: EnumEntityStatusFieldUpdateOperationsInput | $Enums.EntityStatus
     developmentTier?: IntFieldUpdateOperationsInput | number
     currentPhase?: IntFieldUpdateOperationsInput | number
@@ -47013,6 +47231,7 @@ export namespace Prisma {
     contactEmail?: string | null
     whatsappPhone: string
     schoolCode: string
+    organizationCategory?: $Enums.OrganizationCategory
     status?: $Enums.EntityStatus
     developmentTier?: number
     currentPhase?: number
@@ -47039,6 +47258,7 @@ export namespace Prisma {
     contactEmail?: string | null
     whatsappPhone: string
     schoolCode: string
+    organizationCategory?: $Enums.OrganizationCategory
     status?: $Enums.EntityStatus
     developmentTier?: number
     currentPhase?: number
@@ -47129,6 +47349,7 @@ export namespace Prisma {
     contactEmail?: NullableStringFieldUpdateOperationsInput | string | null
     whatsappPhone?: StringFieldUpdateOperationsInput | string
     schoolCode?: StringFieldUpdateOperationsInput | string
+    organizationCategory?: EnumOrganizationCategoryFieldUpdateOperationsInput | $Enums.OrganizationCategory
     status?: EnumEntityStatusFieldUpdateOperationsInput | $Enums.EntityStatus
     developmentTier?: IntFieldUpdateOperationsInput | number
     currentPhase?: IntFieldUpdateOperationsInput | number
@@ -47155,6 +47376,7 @@ export namespace Prisma {
     contactEmail?: NullableStringFieldUpdateOperationsInput | string | null
     whatsappPhone?: StringFieldUpdateOperationsInput | string
     schoolCode?: StringFieldUpdateOperationsInput | string
+    organizationCategory?: EnumOrganizationCategoryFieldUpdateOperationsInput | $Enums.OrganizationCategory
     status?: EnumEntityStatusFieldUpdateOperationsInput | $Enums.EntityStatus
     developmentTier?: IntFieldUpdateOperationsInput | number
     currentPhase?: IntFieldUpdateOperationsInput | number
@@ -50277,6 +50499,7 @@ export namespace Prisma {
     contactEmail?: string | null
     whatsappPhone: string
     schoolCode: string
+    organizationCategory?: $Enums.OrganizationCategory
     status?: $Enums.EntityStatus
     developmentTier?: number
     currentPhase?: number
@@ -50303,6 +50526,7 @@ export namespace Prisma {
     contactEmail?: string | null
     whatsappPhone: string
     schoolCode: string
+    organizationCategory?: $Enums.OrganizationCategory
     status?: $Enums.EntityStatus
     developmentTier?: number
     currentPhase?: number
@@ -50579,6 +50803,7 @@ export namespace Prisma {
     contactEmail?: NullableStringFieldUpdateOperationsInput | string | null
     whatsappPhone?: StringFieldUpdateOperationsInput | string
     schoolCode?: StringFieldUpdateOperationsInput | string
+    organizationCategory?: EnumOrganizationCategoryFieldUpdateOperationsInput | $Enums.OrganizationCategory
     status?: EnumEntityStatusFieldUpdateOperationsInput | $Enums.EntityStatus
     developmentTier?: IntFieldUpdateOperationsInput | number
     currentPhase?: IntFieldUpdateOperationsInput | number
@@ -50605,6 +50830,7 @@ export namespace Prisma {
     contactEmail?: NullableStringFieldUpdateOperationsInput | string | null
     whatsappPhone?: StringFieldUpdateOperationsInput | string
     schoolCode?: StringFieldUpdateOperationsInput | string
+    organizationCategory?: EnumOrganizationCategoryFieldUpdateOperationsInput | $Enums.OrganizationCategory
     status?: EnumEntityStatusFieldUpdateOperationsInput | $Enums.EntityStatus
     developmentTier?: IntFieldUpdateOperationsInput | number
     currentPhase?: IntFieldUpdateOperationsInput | number
@@ -51488,6 +51714,7 @@ export namespace Prisma {
     contactEmail?: string | null
     whatsappPhone: string
     schoolCode: string
+    organizationCategory?: $Enums.OrganizationCategory
     status?: $Enums.EntityStatus
     developmentTier?: number
     currentPhase?: number
@@ -51514,6 +51741,7 @@ export namespace Prisma {
     contactEmail?: string | null
     whatsappPhone: string
     schoolCode: string
+    organizationCategory?: $Enums.OrganizationCategory
     status?: $Enums.EntityStatus
     developmentTier?: number
     currentPhase?: number
@@ -51706,6 +51934,7 @@ export namespace Prisma {
     contactEmail?: NullableStringFieldUpdateOperationsInput | string | null
     whatsappPhone?: StringFieldUpdateOperationsInput | string
     schoolCode?: StringFieldUpdateOperationsInput | string
+    organizationCategory?: EnumOrganizationCategoryFieldUpdateOperationsInput | $Enums.OrganizationCategory
     status?: EnumEntityStatusFieldUpdateOperationsInput | $Enums.EntityStatus
     developmentTier?: IntFieldUpdateOperationsInput | number
     currentPhase?: IntFieldUpdateOperationsInput | number
@@ -51732,6 +51961,7 @@ export namespace Prisma {
     contactEmail?: NullableStringFieldUpdateOperationsInput | string | null
     whatsappPhone?: StringFieldUpdateOperationsInput | string
     schoolCode?: StringFieldUpdateOperationsInput | string
+    organizationCategory?: EnumOrganizationCategoryFieldUpdateOperationsInput | $Enums.OrganizationCategory
     status?: EnumEntityStatusFieldUpdateOperationsInput | $Enums.EntityStatus
     developmentTier?: IntFieldUpdateOperationsInput | number
     currentPhase?: IntFieldUpdateOperationsInput | number

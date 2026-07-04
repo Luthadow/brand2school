@@ -82,6 +82,18 @@ export function ApprovalsClient(): JSX.Element {
     await loadData();
   };
 
+  const removeSchool = async (id: string): Promise<void> => {
+    const res = await csrfFetch(`/api/admin/approvals/schools/${id}/suspend`, { method: "PATCH" });
+    const json = (await res.json().catch(() => ({}))) as { message?: string };
+    if (!res.ok) {
+      setToast(json.message ?? "Could not remove school.");
+      return;
+    }
+    setToast("School removed from the approvals queue.");
+    setTimeout(() => setToast(null), 2200);
+    await loadData();
+  };
+
   const bulkApprove = async (entity: "users" | "schools" | "brands", ids: string[], status: string): Promise<void> => {
     if (ids.length === 0) return;
     const res = await csrfFetch("/api/admin/approvals/bulk", {
@@ -174,9 +186,9 @@ export function ApprovalsClient(): JSX.Element {
       <section className="card" style={{ marginBottom: "1rem" }}>
         <h2>Schools</h2>
         <p style={{ color: "#5a6d8a", fontSize: "0.9rem", marginTop: 0 }}>
-          To email a principal about missing EMIS documents or other pending information, open{" "}
-          <strong>Request info</strong> for that school (not &quot;Move Forward&quot; — that only changes approval status after
-          the packet is approved).
+          Principals receive a welcome email on registration with next steps. Use <strong>Verify</strong> to approve
+          or reject the EMIS packet, then <strong>Move Forward</strong> to advance entity status, or{" "}
+          <strong>Remove</strong> to suspend a school that should not proceed.
         </p>
         <div className="table-wrap"><table className="table"><thead><tr><th></th><th>Name</th><th>District</th><th>Status</th><th>EMIS packet</th><th>Review</th><th>Action</th></tr></thead><tbody>
           {data.pendingSchools.map((item) => {
@@ -203,8 +215,6 @@ export function ApprovalsClient(): JSX.Element {
               <td>
                 <Link href={`/dashboard/schools/${item.id}/verification`}>Verify</Link>
                 {" · "}
-                <Link href={`/dashboard/schools/${item.id}/verification#request-info`}>Request info</Link>
-                {" · "}
                 <Link href={`/dashboard/schools/${item.id}/infrastructure`}>Infra</Link>
               </td>
               <td>
@@ -214,6 +224,10 @@ export function ApprovalsClient(): JSX.Element {
                   onClick={() => void approve("schools", item.id, item.status)}
                 >
                   Move Forward
+                </button>
+                {" "}
+                <button type="button" onClick={() => void removeSchool(item.id)}>
+                  Remove
                 </button>
               </td>
             </tr>

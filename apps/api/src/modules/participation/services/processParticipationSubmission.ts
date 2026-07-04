@@ -136,7 +136,7 @@ export async function processParticipationSubmission(
     };
   }
 
-  if (!["ACTIVE", "APPROVED", "VERIFIED"].includes(school.status)) {
+  if (!["ACTIVE", "APPROVED", "VERIFIED", "PENDING"].includes(school.status)) {
     return {
       ok: false,
       status: 409,

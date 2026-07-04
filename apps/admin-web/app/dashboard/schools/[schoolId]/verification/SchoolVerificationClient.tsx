@@ -34,7 +34,6 @@ export function SchoolVerificationClient({ schoolId }: { schoolId: string }): JS
   const [error, setError] = useState<string | null>(null);
   const [notes, setNotes] = useState("");
   const [rejectionReason, setRejectionReason] = useState("");
-  const [infoRequest, setInfoRequest] = useState("");
   const [toast, setToast] = useState<string | null>(null);
 
   const load = useCallback(async () => {
@@ -71,24 +70,18 @@ export function SchoolVerificationClient({ schoolId }: { schoolId: string }): JS
     await load();
   }
 
-  async function requestInfo(): Promise<void> {
-    const message = infoRequest.trim();
-    if (message.length < 10) {
-      setToast("Enter at least 10 characters describing what the school must provide.");
-      return;
-    }
+  async function resendDocumentsEmail(): Promise<void> {
     const res = await csrfFetch(`/api/admin/schools/${schoolId}/verification/request-info`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ message })
+      body: JSON.stringify({})
     });
     const json = (await res.json().catch(() => ({}))) as { message?: string; emailed?: string };
     if (!res.ok) {
-      setToast(json.message ?? "Could not send request to the school.");
+      setToast(json.message ?? "Could not resend the automated documents email.");
       return;
     }
-    setToast(`Requirements emailed to ${json.emailed ?? "the principal"}.`);
-    setInfoRequest("");
+    setToast(`Automated documents email sent to ${json.emailed ?? "the principal"}.`);
     setTimeout(() => setToast(null), 3200);
   }
 
@@ -110,21 +103,15 @@ export function SchoolVerificationClient({ schoolId }: { schoolId: string }): JS
         {data.school.schoolCode}
       </p>
 
-      <section id="request-info" className="card" style={{ marginTop: "1rem" }}>
-        <h2 style={{ fontSize: "1.1rem", marginTop: 0 }}>Request documents or information</h2>
+      <section className="card" style={{ marginTop: "1rem" }}>
+        <h2 style={{ fontSize: "1.1rem", marginTop: 0 }}>Verification documents email</h2>
         <p style={{ color: "#4b5563", fontSize: "0.9rem" }}>
-          Email the principal with required EMIS documents or corrections. Use{" "}
-          <Link href="/dashboard/approvals">Approvals</Link> to advance entity status after verification.
+          Brand2School automatically emails a welcome message when a school registers. If verification is rejected,
+          the principal receives a follow-up listing outstanding documents. Schools can participate before documents
+          are approved, but must submit documents to claim infrastructure milestones.
         </p>
-        <textarea
-          value={infoRequest}
-          onChange={(e) => setInfoRequest(e.target.value)}
-          rows={4}
-          placeholder="e.g. Upload principal ID, official school letter, and EMIS registry screenshot via the school portal."
-          style={{ width: "100%", marginTop: "0.5rem" }}
-        />
-        <button type="button" style={{ marginTop: "0.5rem" }} onClick={() => void requestInfo()}>
-          Email requirements to principal
+        <button type="button" style={{ marginTop: "0.5rem" }} onClick={() => void resendDocumentsEmail()}>
+          Resend automated documents email
         </button>
       </section>
 

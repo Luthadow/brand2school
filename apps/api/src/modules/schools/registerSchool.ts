@@ -7,8 +7,11 @@ import { notifyAdminsNewSchoolRegistration } from "../../lib/registrationNotify.
 import { normalizePhone } from "../../lib/phones.js";
 import { env } from "../../config/env.js";
 
+import { isOrganizationCategoryId } from "../../lib/organizationCategories.js";
+
 export const schoolRegisterSchema = z
   .object({
+    organizationCategory: z.enum(["SCHOOL", "NGO_NPO", "COMMUNITY", "FAITH"]).default("SCHOOL"),
     name: z.string().min(3),
     province: z.string().min(2),
     district: z.string().min(2),
@@ -72,6 +75,9 @@ export async function registerSchool(input: Omit<SchoolRegisterInput, "confirmPa
         contactEmail: email,
         whatsappPhone,
         schoolCode,
+        organizationCategory: isOrganizationCategoryId(input.organizationCategory)
+          ? input.organizationCategory
+          : "SCHOOL",
         status: "PENDING",
         annualCycleYear: new Date().getFullYear(),
         annualCycleFocus: "Safety & Sanitation"
@@ -203,7 +209,7 @@ export async function findSchoolByNameAndDistrict(schoolName: string, district: 
     where: {
       district: { equals: normalizedDistrict, mode: "insensitive" },
       name: { contains: normalizedName, mode: "insensitive" },
-      status: { in: ["ACTIVE", "APPROVED", "VERIFIED"] }
+      status: { in: ["PENDING", "ACTIVE", "APPROVED", "VERIFIED"] }
     }
   });
 }

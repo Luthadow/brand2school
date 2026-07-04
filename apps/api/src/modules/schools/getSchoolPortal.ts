@@ -7,6 +7,9 @@ import { ANNUAL_CYCLES, buildSchoolDevelopmentProfile, type SchoolDevelopmentPro
 import { buildSchoolNeedsEngine, summarizeNeedsEngine } from "./schoolNeedsEngine.js";
 import { schoolRecordToStored } from "./syncSchoolInfrastructure.js";
 import { getOrCreateSchoolVerification } from "./schoolVerification/verificationGate.js";
+import { getOrganizationCategory } from "../../lib/organizationCategories.js";
+import { hasActiveDeferrals, parseDocumentDeferrals, REGISTRATION_DEFERRAL_KEY } from "./schoolVerification/documentDeferrals.js";
+import { serializeSchoolVerification } from "./schoolVerification/serializeSchoolVerification.js";
 
 export type SchoolNeedItem = {
   id: string;
@@ -78,13 +81,43 @@ export type SchoolPortal = {
     status: string;
     learnerCount: number;
     verificationStatus: string;
+    organizationCategory: string;
+  };
+  organization: {
+    id: string;
+    label: string;
+    portalEyebrow: string;
+    documentsTitle: string;
+    documentsIntro: string;
+    registrationNumber: {
+      key: string;
+      label: string;
+      placeholder: string;
+    } | null;
+    documents: Array<{ key: string; label: string; required: boolean }>;
+    centreTypes: Array<{ id: string; label: string }>;
   };
   verification: {
     status: string;
     emisNumber: string | null;
+    registrationNumber: string | null;
     submittedAt: string | null;
     rejectionReason: string | null;
     canSubmit: boolean;
+    canCompleteDocuments: boolean;
+    claimReady: boolean;
+    centreType: string | null;
+    centreTypeLabel: string | null;
+    registrationDeferred: boolean;
+    hasActiveDeferrals: boolean;
+    documents: Array<{
+      key: string;
+      label: string;
+      required: boolean;
+      url: string | null;
+      uploaded: boolean;
+      deferred: boolean;
+    }>;
   };
   overview: {
     verifiedSubmissions: number;
@@ -163,8 +196,23 @@ export async function getSchoolPortal(userId: string): Promise<SchoolPortal | nu
 
   const learnerCount = await prisma.learner.count({ where: { schoolId: school.id } });
   const verificationRow = await getOrCreateSchoolVerification(school.id);
+  const deferrals = parseDocumentDeferrals(verificationRow.documentDeferrals);
+  const deferralSnapshot = {
+    organizationCategory: school.organizationCategory,
+    emisNumber: verificationRow.emisNumber,
+    registrationNumber: verificationRow.registrationNumber,
+    principalIdPath: verificationRow.principalIdPath,
+    schoolLetterPath: verificationRow.schoolLetterPath,
+    emisEvidencePath: verificationRow.emisEvidencePath,
+    documentPaths: (verificationRow.documentPaths as Record<string, string> | null) ?? null,
+    registrationDeferred: deferrals[REGISTRATION_DEFERRAL_KEY]?.willSubmitBeforeClaim === true
+  };
+  const activeDeferrals = hasActiveDeferrals(deferralSnapshot, deferrals);
   const canSubmitVerification =
-    verificationRow.status === "NOT_SUBMITTED" || verificationRow.status === "REJECTED";
+    verificationRow.status === "NOT_SUBMITTED" ||
+    verificationRow.status === "REJECTED" ||
+    activeDeferrals;
+  const canCompleteDocuments = activeDeferrals;
 
   const [validSubmissions, flaggedSubmissions, rejectedCount] = await Promise.all([
     prisma.submission.count({ where: { schoolId: school.id, state: "VALID" } }),
@@ -378,11 +426,14 @@ export async function getSchoolPortal(userId: string): Promise<SchoolPortal | nu
       updatedAt: n.submittedAt
     }));
 
+  const category = getOrganizationCategory(school.organizationCategory);
+  const serializedVerification = serializeSchoolVerification(verificationRow, school.organizationCategory);
+
   return {
     school: {
       id: school.id,
       name: school.name,
-      emisNumber: verificationRow.emisNumber ?? "Pending",
+      emisNumber: verificationRow.emisNumber ?? verificationRow.registrationNumber ?? "Pending",
       schoolCode: school.schoolCode,
       province: school.province,
       district: school.district,
@@ -391,14 +442,46 @@ export async function getSchoolPortal(userId: string): Promise<SchoolPortal | nu
       whatsappPhone: school.whatsappPhone,
       status: school.status,
       learnerCount,
-      verificationStatus: verificationRow.status
+      verificationStatus: verificationRow.status,
+      organizationCategory: category.id
+    },
+    organization: {
+      id: category.id,
+      label: category.label,
+      portalEyebrow: category.portalEyebrow,
+      documentsTitle: category.documentsTitle,
+      documentsIntro: category.documentsIntro,
+      registrationNumber: category.registrationNumber
+        ? {
+            key: category.registrationNumber.key,
+            label: category.registrationNumber.label,
+            placeholder: category.registrationNumber.placeholder
+          }
+        : null,
+      documents: category.documents.map((doc) => ({
+        key: doc.key,
+        label: doc.label,
+        required: doc.required
+      })),
+      centreTypes: category.centreTypes.map((centre) => ({
+        id: centre.id,
+        label: centre.label
+      }))
     },
     verification: {
       status: verificationRow.status,
       emisNumber: verificationRow.emisNumber,
+      registrationNumber: verificationRow.registrationNumber,
       submittedAt: verificationRow.submittedAt?.toISOString() ?? null,
       rejectionReason: verificationRow.rejectionReason,
-      canSubmit: canSubmitVerification
+      canSubmit: canSubmitVerification,
+      canCompleteDocuments,
+      claimReady: serializedVerification.claimReady,
+      centreType: serializedVerification.centreType,
+      centreTypeLabel: serializedVerification.centreTypeLabel,
+      registrationDeferred: serializedVerification.registrationDeferred,
+      hasActiveDeferrals: serializedVerification.hasActiveDeferrals,
+      documents: serializedVerification.documents
     },
     overview: {
       verifiedSubmissions: validSubmissions,
