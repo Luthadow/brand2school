@@ -9,7 +9,7 @@ import { useSchoolPortal } from "./SchoolPortalContext";
 
 export function SchoolOverview(): JSX.Element {
   const portal = useSchoolPortal();
-  const { school, overview, targets, gamification, notifications, development } = portal;
+  const { school, overview, targets, gamification, notifications, development, verification } = portal;
 
   const stats = [
     { label: "Verified submissions", value: overview.verifiedSubmissions, icon: TrendingUp },
@@ -40,6 +40,17 @@ export function SchoolOverview(): JSX.Element {
           <strong>{gamification.label}</strong>
         </div>
       </header>
+
+      {verification.status === "NOT_SUBMITTED" || verification.status === "REJECTED" ? (
+        <section className="card" style={{ marginBottom: "1rem", borderColor: "#4da3ff" }}>
+          <h2 style={{ marginTop: 0, fontSize: "1rem" }}>Get started</h2>
+          <p className="sp-muted" style={{ margin: 0 }}>
+            You can explore the portal now. Select your centre type and upload documents (or defer items) in{" "}
+            <Link href="/school/dashboard/documents">Docs</Link> when ready — participation can begin before everything
+            is approved.
+          </p>
+        </section>
+      ) : null}
 
       {development.phaseTransition ? (
         <section className="sp-phase-banner">

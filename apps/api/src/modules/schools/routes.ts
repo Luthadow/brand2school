@@ -222,12 +222,17 @@ schoolsRouter.get("/portal", requireAuth, requireRole(["SCHOOL_ADMIN"]), async (
     res.status(401).json({ message: "Unauthorized." });
     return;
   }
-  const portal = await getSchoolPortal(req.user.id);
-  if (!portal) {
-    res.status(404).json({ message: "No school linked to this account." });
-    return;
+  try {
+    const portal = await getSchoolPortal(req.user.id);
+    if (!portal) {
+      res.status(404).json({ message: "No organisation linked to this account." });
+      return;
+    }
+    res.json(portal);
+  } catch (err) {
+    console.error("[schools/portal]", err);
+    res.status(500).json({ message: "Could not load organisation portal." });
   }
-  res.json(portal);
 });
 
 schoolsRouter.get("/me", requireAuth, requireRole(["SCHOOL_ADMIN"]), async (req, res) => {

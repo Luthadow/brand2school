@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useState } from "react";
 import { csrfHeaders } from "../../../lib/clientFetch";
 import { useSchoolPortal } from "../SchoolPortalContext";
@@ -287,7 +288,11 @@ export function SchoolDocumentsPage(): JSX.Element {
       ) : null}
 
       {!verification.canSubmit && verification.status !== "APPROVED" ? (
-        <p className="sp-muted">Your packet is locked while under review. Contact schools@brand2school.co.za if urgent.</p>
+        <p className="sp-muted">
+          Your document packet is locked while under review. You can still use the rest of the portal — open{" "}
+          <Link href="/school/dashboard">Home</Link> or another section from the menu. Contact schools@brand2school.co.za
+          if urgent.
+        </p>
       ) : null}
     </div>
   );

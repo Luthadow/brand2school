@@ -72,8 +72,11 @@ export const ORGANIZATION_CATEGORIES: Record<OrganizationCategoryId, Organizatio
       { id: "PRIMARY", label: "Primary school" },
       { id: "SECONDARY", label: "Secondary school" },
       { id: "COMBINED", label: "Combined school" },
-      { id: "ECD", label: "ECD / early childhood centre" },
-      { id: "SPECIAL", label: "Special needs school" },
+      { id: "ECD", label: "ECD centre" },
+      { id: "DAY_CARE", label: "Day care centre" },
+      { id: "ORPHANAGE", label: "Orphanage / child & youth care centre" },
+      { id: "SPECIAL", label: "Special school" },
+      { id: "DISABILITY", label: "Disability school" },
       { id: "OTHER", label: "Other education centre" }
     ],
     documents: [

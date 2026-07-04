@@ -9,6 +9,7 @@ import { useSchoolPortal } from "../SchoolPortalContext";
 
 export function SchoolNeedsPage(): JSX.Element {
   const { needs, verification } = useSchoolPortal();
+  const claimBlocked = verification.claimReady === false;
   const [submitting, setSubmitting] = useState(false);
   const [message, setMessage] = useState<string | null>(null);
   const [form, setForm] = useState({
@@ -87,7 +88,7 @@ export function SchoolNeedsPage(): JSX.Element {
         </section>
       ) : null}
 
-      {!verification.claimReady ? (
+      {!claimBlocked ? null : (
         <div className="card" style={{ marginBottom: "1.25rem", borderColor: "#f59e0b" }}>
           <p style={{ margin: 0, color: "#b45309" }}>
             Complete all verification documents before submitting infrastructure needs for milestone claims.{" "}
@@ -95,7 +96,7 @@ export function SchoolNeedsPage(): JSX.Element {
             {verification.hasActiveDeferrals ? " to upload deferred items." : "."}
           </p>
         </div>
-      ) : null}
+      )}
 
       <form className="sp-form" onSubmit={(e) => void submitNeed(e)}>
         <label>
@@ -173,7 +174,7 @@ export function SchoolNeedsPage(): JSX.Element {
             onChange={(e) => setForm({ ...form, estimatedCostZar: Number(e.target.value) })}
           />
         </label>
-        <button type="submit" className="ds-btn ds-btn-primary" disabled={submitting || !verification.claimReady}>
+        <button type="submit" className="ds-btn ds-btn-primary" disabled={submitting || claimBlocked}>
           {submitting ? "Submitting…" : "Submit need for review"}
         </button>
         {message ? <p className="sp-form-msg">{message}</p> : null}
