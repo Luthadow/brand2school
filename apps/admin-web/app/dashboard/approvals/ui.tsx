@@ -33,6 +33,8 @@ const ORG_CATEGORY_LABEL: Record<string, string> = {
   COMMUNITY: "Community",
   FAITH: "Faith"
 };
+
+const statusProgression = ["PENDING", "VERIFIED", "APPROVED", "ACTIVE"] as const;
 const nextStatus = (status: string): string | null => {
   const idx = statusProgression.indexOf(status as (typeof statusProgression)[number]);
   return idx >= 0 && idx < statusProgression.length - 1 ? statusProgression[idx + 1] : null;
