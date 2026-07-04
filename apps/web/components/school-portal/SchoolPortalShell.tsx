@@ -3,10 +3,12 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import type { Route } from "next";
+import { useEffect, useState } from "react";
 import {
   FileText,
   Home,
   LogOut,
+  Menu,
   MessageCircle,
   Send,
   Map,
@@ -14,7 +16,8 @@ import {
   TrendingUp,
   Upload,
   User,
-  Wrench
+  Wrench,
+  X
 } from "lucide-react";
 import { csrfHeaders } from "../../lib/clientFetch";
 import type { SchoolPortal } from "../../lib/schoolPortal";
@@ -32,6 +35,8 @@ const NAV: Array<{ href: Route; label: string; icon: typeof Home; short: string 
   { href: "/school/dashboard/profile", label: "Profile", icon: User, short: "You" }
 ];
 
+const BOTTOM_NAV = NAV.slice(0, 4);
+
 export function SchoolPortalShell({
   portal,
   children
@@ -41,6 +46,18 @@ export function SchoolPortalShell({
 }): JSX.Element {
   const pathname = usePathname();
   const unread = portal.notifications.filter((n) => !n.read).length;
+  const [menuOpen, setMenuOpen] = useState(false);
+
+  useEffect(() => {
+    document.body.style.overflow = menuOpen ? "hidden" : "";
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [menuOpen]);
+
+  useEffect(() => {
+    setMenuOpen(false);
+  }, [pathname]);
 
   async function logout(): Promise<void> {
     await fetch("/api/auth/logout", { method: "POST", headers: csrfHeaders() });
@@ -49,7 +66,28 @@ export function SchoolPortalShell({
 
   return (
     <div className="sp">
-      <aside className="sp-sidebar" aria-label="School navigation">
+      <header className="sp-mobile-bar">
+        <strong>{portal.school.name}</strong>
+        <button
+          type="button"
+          className="sp-menu-toggle"
+          aria-expanded={menuOpen}
+          aria-controls="sp-sidebar"
+          onClick={() => setMenuOpen((open) => !open)}
+        >
+          {menuOpen ? <X size={18} /> : <Menu size={18} />}
+          Menu
+        </button>
+      </header>
+
+      <button
+        type="button"
+        className={`sp-sidebar-backdrop${menuOpen ? " sp-sidebar-backdrop--visible" : ""}`}
+        aria-label="Close menu"
+        onClick={() => setMenuOpen(false)}
+      />
+
+      <aside id="sp-sidebar" className={`sp-sidebar${menuOpen ? " sp-sidebar--open" : ""}`} aria-label="School navigation">
         <div className="sp-brand">
           <strong>{portal.school.name}</strong>
           <span>{portal.gamification.label}</span>
@@ -65,9 +103,13 @@ export function SchoolPortalShell({
                 key={item.href}
                 href={item.href}
                 className={`sp-nav-link${active ? " sp-nav-link--active" : ""}`}
+                onClick={() => setMenuOpen(false)}
               >
                 <Icon size={18} />
                 {item.label}
+                {item.href.includes("messages") && unread > 0 ? (
+                  <span className="sp-nav-badge">{unread}</span>
+                ) : null}
               </Link>
             );
           })}
@@ -80,8 +122,10 @@ export function SchoolPortalShell({
       <main className="sp-main">{children}</main>
 
       <nav className="sp-bottom-nav" aria-label="Mobile navigation">
-        {NAV.slice(0, 5).map((item) => {
-          const active = pathname === item.href || pathname.startsWith(item.href);
+        {BOTTOM_NAV.map((item) => {
+          const active =
+            pathname === item.href ||
+            (item.href !== "/school/dashboard" && pathname.startsWith(item.href));
           const Icon = item.icon;
           return (
             <Link
@@ -91,12 +135,19 @@ export function SchoolPortalShell({
             >
               <Icon size={20} />
               <span>{item.short}</span>
-              {item.href.includes("messages") && unread > 0 ? (
-                <em className="sp-dot">{unread}</em>
-              ) : null}
             </Link>
           );
         })}
+        <button
+          type="button"
+          className={`sp-bottom-link${menuOpen ? " sp-bottom-link--active" : ""}`}
+          onClick={() => setMenuOpen(true)}
+          aria-label="Open full menu"
+        >
+          <Menu size={20} />
+          <span>More</span>
+          {unread > 0 ? <em className="sp-dot">{unread}</em> : null}
+        </button>
       </nav>
     </div>
   );

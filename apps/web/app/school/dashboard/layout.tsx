@@ -11,8 +11,10 @@ export default async function SchoolDashboardLayout({
   const portal = await requireSchoolPortal();
 
   return (
-    <SchoolPortalProvider portal={portal}>
-      <SchoolPortalShell portal={portal}>{children}</SchoolPortalShell>
-    </SchoolPortalProvider>
+    <div className="sp-root">
+      <SchoolPortalProvider portal={portal}>
+        <SchoolPortalShell portal={portal}>{children}</SchoolPortalShell>
+      </SchoolPortalProvider>
+    </div>
   );
 }
