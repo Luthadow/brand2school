@@ -2,10 +2,10 @@
 
 import { useEffect, useState } from "react";
 import { formatCount } from "../../lib/formatCount";
-import { emptyPlatformLive, type PlatformLivePayload } from "../../lib/platformLive";
+import { emptyPlatformLiveOffline, type PlatformLivePayload } from "../../lib/platformLive";
 
 export function ForBrandsLiveProof(): JSX.Element {
-  const [live, setLive] = useState<PlatformLivePayload>(emptyPlatformLive());
+  const [live, setLive] = useState<PlatformLivePayload>(emptyPlatformLiveOffline());
 
   useEffect(() => {
     void fetch("/api/platform/live", { cache: "no-store" })
@@ -16,6 +16,7 @@ export function ForBrandsLiveProof(): JSX.Element {
       .catch(() => null);
   }, []);
 
+  const offline = live.dataSource === "offline";
   const stats = [
     { label: "Verified participations", value: live.stats.validSubmissions },
     { label: "Schools registered", value: live.stats.schoolsRegistered ?? live.stats.activeSchools },
@@ -30,7 +31,7 @@ export function ForBrandsLiveProof(): JSX.Element {
         <div className="school-dash-metrics">
           {stats.map((stat) => (
             <article key={stat.label} className="school-dash-metric">
-              <strong>{formatCount(stat.value)}</strong>
+              <strong>{offline ? "—" : formatCount(stat.value)}</strong>
               <span>{stat.label}</span>
             </article>
           ))}

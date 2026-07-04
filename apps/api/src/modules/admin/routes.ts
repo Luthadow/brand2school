@@ -525,8 +525,9 @@ adminRouter.get("/queue", async (req, res) => {
         province: true,
         district: true,
         status: true,
+        organizationCategory: true,
         createdAt: true,
-        verification: { select: { status: true, emisNumber: true, submittedAt: true } }
+        verification: { select: { status: true, emisNumber: true, registrationNumber: true, submittedAt: true, centreType: true } }
       },
       orderBy: { createdAt: "asc" },
       skip,

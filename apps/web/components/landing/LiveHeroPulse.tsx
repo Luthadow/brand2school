@@ -8,6 +8,7 @@ import { usePlatformLive } from "./LivePlatformProvider";
 export function LiveHeroProofStrip(): JSX.Element {
   const { data, pulsing } = usePlatformLive();
   const { stats } = data;
+  const offline = data.dataSource === "offline";
 
   return (
     <motion.div
@@ -17,24 +18,24 @@ export function LiveHeroProofStrip(): JSX.Element {
     >
       <span>
         <motion.strong
-          key={stats.schoolsRegistered}
+          key={offline ? "offline-schools" : stats.schoolsRegistered}
           initial={{ scale: 1.08 }}
           animate={{ scale: 1 }}
           transition={{ duration: 0.35 }}
         >
-          {formatCount(stats.schoolsRegistered ?? stats.activeSchools)}
+          {offline ? "—" : formatCount(stats.schoolsRegistered ?? stats.activeSchools)}
         </motion.strong>{" "}
         schools registered
       </span>
       <span className="lp-hero-proof-dot" />
       <span>
         <motion.strong
-          key={stats.validSubmissions}
+          key={offline ? "offline-subs" : stats.validSubmissions}
           initial={{ scale: 1.08 }}
           animate={{ scale: 1 }}
           transition={{ duration: 0.35 }}
         >
-          {formatCount(stats.validSubmissions)}
+          {offline ? "—" : formatCount(stats.validSubmissions)}
         </motion.strong>{" "}
         verified participations
       </span>

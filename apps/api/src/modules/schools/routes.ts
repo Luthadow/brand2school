@@ -15,6 +15,7 @@ import { registerSchool, schoolRegisterSchema, getSchoolForUser } from "./regist
 import { getSchoolPortal } from "./getSchoolPortal.js";
 import { analyticsRateLimit, registrationRateLimit } from "../../middleware/rateLimit.js";
 import { getOrCreateSchoolVerification } from "./schoolVerification/verificationGate.js";
+import { assertDocumentsReadyForClaim } from "./schoolVerification/verificationClaimGate.js";
 import { serializeSchoolVerification } from "./schoolVerification/serializeSchoolVerification.js";
 import { submitSchoolVerificationPacket } from "./schoolVerification/submitSchoolVerification.js";
 import { parseDocumentDeferrals } from "./schoolVerification/documentDeferrals.js";
@@ -117,6 +118,16 @@ schoolsRouter.post("/needs", requireAuth, requireRole(["SCHOOL_ADMIN"]), async (
     res.status(404).json({ message: "No school linked to this account." });
     return;
   }
+
+  const claimGate = await assertDocumentsReadyForClaim(school.id);
+  if (!claimGate.ok) {
+    res.status(403).json({
+      message: claimGate.message,
+      outstandingDocuments: claimGate.outstanding
+    });
+    return;
+  }
+
   await prisma.auditLog.create({
     data: {
       actorId: req.user.id,

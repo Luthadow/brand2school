@@ -43,7 +43,7 @@ import { SectionHeader } from "../components/landing/SectionHeader";
 import { ContactForm } from "../components/contact/ContactForm";
 import { PUBLIC_CONTACT_LIST, PUBLIC_PHONE, mailto } from "../lib/contact";
 import { emptyPlatformCredibility, fetchPlatformCredibility } from "../lib/platformCredibility";
-import { emptyPlatformLive, fetchPlatformLive } from "../lib/platformLive";
+import { emptyPlatformLive, emptyPlatformLiveOffline, fetchPlatformLive } from "../lib/platformLive";
 import { fetchPlatformPartners } from "../lib/platformPartners";
 import { PartnerCtaStrip, TrustedPartnersSection } from "../components/landing/TrustedPartnersSection";
 
@@ -267,7 +267,7 @@ export default async function HomePage(): Promise<JSX.Element> {
   ]);
   const { withWebBrandLogoUrls } = await import("../lib/brandLogoSrc");
   const partners = withWebBrandLogoUrls(partnersRaw);
-  const live = liveInitial ?? emptyPlatformLive();
+  const live = liveInitial ?? emptyPlatformLiveOffline();
   const credibility = credibilityInitial ?? emptyPlatformCredibility();
 
   return (

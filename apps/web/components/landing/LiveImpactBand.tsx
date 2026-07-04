@@ -6,23 +6,37 @@ import { usePlatformLive } from "./LivePlatformProvider";
 export function LiveImpactBand(): JSX.Element {
   const { data } = usePlatformLive();
   const { stats } = data;
+  const offline = data.dataSource === "offline";
 
   return (
     <div className="lp-metrics-grid">
       <FadeIn>
         <ImpactCounter
-          value={stats.schoolsRegistered ?? stats.activeSchools}
-          label="Schools Registered"
+          value={offline ? 0 : stats.schoolsRegistered ?? stats.activeSchools}
+          label={offline ? "Schools Registered (API offline)" : "Schools Registered"}
+          unavailable={offline}
         />
       </FadeIn>
       <FadeIn delay={0.05}>
-        <ImpactCounter value={stats.validSubmissions} label="Verified Participations" />
+        <ImpactCounter
+          value={offline ? 0 : stats.validSubmissions}
+          label={offline ? "Verified Participations (API offline)" : "Verified Participations"}
+          unavailable={offline}
+        />
       </FadeIn>
       <FadeIn delay={0.1}>
-        <ImpactCounter value={stats.submissionsThisMonth} label="This Month" />
+        <ImpactCounter
+          value={offline ? 0 : stats.submissionsThisMonth}
+          label="This Month"
+          unavailable={offline}
+        />
       </FadeIn>
       <FadeIn delay={0.15}>
-        <ImpactCounter value={stats.provincesActive} label="Provinces Active" />
+        <ImpactCounter
+          value={offline ? 0 : stats.provincesActive}
+          label="Provinces Active"
+          unavailable={offline}
+        />
       </FadeIn>
     </div>
   );

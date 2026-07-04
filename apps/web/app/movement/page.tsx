@@ -12,7 +12,7 @@ import { PartnerRankingsPanel } from "../../components/partners/PartnerRankingsP
 import { ProvinceNominationForm } from "../../components/campaigns/ProvinceNominationForm";
 import { CampaignPerformancePanel } from "../../components/landing/CampaignPerformancePanel";
 import { emptyPlatformCredibility, fetchPlatformCredibility } from "../../lib/platformCredibility";
-import { emptyPlatformLive, fetchPlatformLive } from "../../lib/platformLive";
+import { emptyPlatformLiveOffline, fetchPlatformLive } from "../../lib/platformLive";
 import { fetchPlatformRankings } from "../../lib/platformPublic";
 
 export const metadata: Metadata = {
@@ -27,7 +27,7 @@ export default async function MovementPage(): Promise<JSX.Element> {
     fetchPlatformRankings(),
     fetchPlatformCredibility()
   ]);
-  const live = liveInitial ?? emptyPlatformLive();
+  const live = liveInitial ?? emptyPlatformLiveOffline();
   const credibility = credibilityInitial ?? emptyPlatformCredibility();
 
   return (

@@ -13,14 +13,26 @@ type QueueResponse = {
     province: string;
     district: string;
     status: string;
-    verification?: { status: string; emisNumber: string | null; submittedAt: string | null } | null;
+    organizationCategory?: string;
+    verification?: {
+      status: string;
+      emisNumber: string | null;
+      registrationNumber?: string | null;
+      submittedAt: string | null;
+      centreType?: string | null;
+    } | null;
   }>;
   pendingBrands: Array<{ id: string; name: string; status: string }>;
   pageMeta: { pendingUsers: { page: number; totalPages: number } };
 };
 type Preset = { id: string; name: string; module: string; filters: { search?: string } };
 
-const statusProgression = ["PENDING", "VERIFIED", "APPROVED", "ACTIVE"] as const;
+const ORG_CATEGORY_LABEL: Record<string, string> = {
+  SCHOOL: "School",
+  NGO_NPO: "NGO",
+  COMMUNITY: "Community",
+  FAITH: "Faith"
+};
 const nextStatus = (status: string): string | null => {
   const idx = statusProgression.indexOf(status as (typeof statusProgression)[number]);
   return idx >= 0 && idx < statusProgression.length - 1 ? statusProgression[idx + 1] : null;
@@ -184,16 +196,17 @@ export function ApprovalsClient(): JSX.Element {
       </section>
 
       <section className="card" style={{ marginBottom: "1rem" }}>
-        <h2>Schools</h2>
+        <h2>Organisations</h2>
         <p style={{ color: "#5a6d8a", fontSize: "0.9rem", marginTop: 0 }}>
-          Principals receive a welcome email on registration with next steps. Use <strong>Verify</strong> to approve
-          or reject the EMIS packet, then <strong>Move Forward</strong> to advance entity status, or{" "}
-          <strong>Remove</strong> to suspend a school that should not proceed.
+          Contacts receive a welcome email on registration with next steps. Use <strong>Verify</strong> to approve or
+          reject the documents packet, then <strong>Move Forward</strong> to advance entity status, or{" "}
+          <strong>Remove</strong> to suspend an organisation that should not proceed.
         </p>
-        <div className="table-wrap"><table className="table"><thead><tr><th></th><th>Name</th><th>District</th><th>Status</th><th>EMIS packet</th><th>Review</th><th>Action</th></tr></thead><tbody>
+        <div className="table-wrap"><table className="table"><thead><tr><th></th><th>Name</th><th>Type</th><th>District</th><th>Status</th><th>Docs packet</th><th>Review</th><th>Action</th></tr></thead><tbody>
           {data.pendingSchools.map((item) => {
             const packetApproved = item.verification?.status === "APPROVED";
             const canAdvance = Boolean(nextStatus(item.status)) && (item.status !== "PENDING" || packetApproved);
+            const regRef = item.verification?.emisNumber ?? item.verification?.registrationNumber;
             return (
             <tr key={item.id}>
               <td>
@@ -207,10 +220,13 @@ export function ApprovalsClient(): JSX.Element {
                   }
                 />
               </td>
-              <td>{item.name}</td><td>{item.district}</td><td>{item.status}</td>
+              <td>{item.name}</td>
+              <td>{ORG_CATEGORY_LABEL[item.organizationCategory ?? "SCHOOL"] ?? item.organizationCategory ?? "—"}</td>
+              <td>{item.district}</td>
+              <td>{item.status}</td>
               <td>
                 {item.verification?.status ?? "—"}
-                {item.verification?.emisNumber ? ` (${item.verification.emisNumber})` : ""}
+                {regRef ? ` (${regRef})` : ""}
               </td>
               <td>
                 <Link href={`/dashboard/schools/${item.id}/verification`}>Verify</Link>
@@ -220,7 +236,7 @@ export function ApprovalsClient(): JSX.Element {
               <td>
                 <button
                   disabled={!canAdvance}
-                  title={!packetApproved && item.status === "PENDING" ? "Approve EMIS packet first" : undefined}
+                  title={!packetApproved && item.status === "PENDING" ? "Approve verification packet first" : undefined}
                   onClick={() => void approve("schools", item.id, item.status)}
                 >
                   Move Forward

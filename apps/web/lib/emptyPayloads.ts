@@ -129,3 +129,13 @@ export function emptyPlatformLive(): PlatformLivePayload {
     campaigns: []
   };
 }
+
+/** Shown when the live API is unreachable (e.g. local dev without API running). */
+export function emptyPlatformLiveOffline(): PlatformLivePayload {
+  return {
+    ...emptyPlatformLive(),
+    dataSource: "offline",
+    pulse: ["Live stats unavailable — start the API to see registered schools and participations."],
+    feed: []
+  };
+}

@@ -43,7 +43,7 @@ export type LiveCampaignRow = {
 };
 
 export type PlatformLivePayload = {
-  dataSource: "live";
+  dataSource: "live" | "offline";
   updatedAt: string;
   stats: {
     schoolsRegistered: number;
@@ -95,4 +95,4 @@ export async function fetchPlatformLive(apiBase?: string): Promise<PlatformLiveP
   }
 }
 
-export { emptyPlatformLive } from "./emptyPayloads";
+export { emptyPlatformLive, emptyPlatformLiveOffline } from "./emptyPayloads";

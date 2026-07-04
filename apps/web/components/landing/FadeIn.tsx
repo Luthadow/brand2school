@@ -32,9 +32,10 @@ type CounterProps = {
   suffix?: string;
   prefix?: string;
   label: string;
+  unavailable?: boolean;
 };
 
-export function ImpactCounter({ value, suffix = "", prefix = "", label }: CounterProps): JSX.Element {
+export function ImpactCounter({ value, suffix = "", prefix = "", label, unavailable = false }: CounterProps): JSX.Element {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true });
   const [display, setDisplay] = useState(0);
@@ -55,7 +56,9 @@ export function ImpactCounter({ value, suffix = "", prefix = "", label }: Counte
     requestAnimationFrame(tick);
   }, [isInView, value]);
 
-  const formatted = prefix + (value >= 1000 ? formatCount(display) : String(display)) + suffix;
+  const formatted = unavailable
+    ? "—"
+    : prefix + (value >= 1000 ? formatCount(display) : String(display)) + suffix;
 
   return (
     <div ref={ref} className="lp-metric">

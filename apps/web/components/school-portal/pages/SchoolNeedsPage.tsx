@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useState } from "react";
 import { NEED_CATEGORIES } from "../../../lib/schoolPortal";
 import { csrfHeaders } from "../../../lib/clientFetch";
@@ -7,7 +8,7 @@ import { formatZar } from "../../../lib/schoolPortal";
 import { useSchoolPortal } from "../SchoolPortalContext";
 
 export function SchoolNeedsPage(): JSX.Element {
-  const { needs } = useSchoolPortal();
+  const { needs, verification } = useSchoolPortal();
   const [submitting, setSubmitting] = useState(false);
   const [message, setMessage] = useState<string | null>(null);
   const [form, setForm] = useState({
@@ -86,6 +87,16 @@ export function SchoolNeedsPage(): JSX.Element {
         </section>
       ) : null}
 
+      {!verification.claimReady ? (
+        <div className="card" style={{ marginBottom: "1.25rem", borderColor: "#f59e0b" }}>
+          <p style={{ margin: 0, color: "#b45309" }}>
+            Complete all verification documents before submitting infrastructure needs for milestone claims.{" "}
+            <Link href="/school/dashboard/documents">Open Docs</Link>
+            {verification.hasActiveDeferrals ? " to upload deferred items." : "."}
+          </p>
+        </div>
+      ) : null}
+
       <form className="sp-form" onSubmit={(e) => void submitNeed(e)}>
         <label>
           Title
@@ -162,7 +173,7 @@ export function SchoolNeedsPage(): JSX.Element {
             onChange={(e) => setForm({ ...form, estimatedCostZar: Number(e.target.value) })}
           />
         </label>
-        <button type="submit" className="ds-btn ds-btn-primary" disabled={submitting}>
+        <button type="submit" className="ds-btn ds-btn-primary" disabled={submitting || !verification.claimReady}>
           {submitting ? "Submitting…" : "Submit need for review"}
         </button>
         {message ? <p className="sp-form-msg">{message}</p> : null}
