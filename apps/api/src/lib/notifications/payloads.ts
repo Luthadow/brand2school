@@ -6,7 +6,9 @@ export const schoolRegistrationPayloadSchema = z.object({
   schoolName: z.string(),
   schoolCode: z.string(),
   whatsappPhone: z.string(),
-  loginUrl: z.string().url()
+  loginUrl: z.string().url(),
+  organizationCategory: z.string().optional(),
+  documentsUrl: z.string().url().optional()
 });
 
 export const schoolApprovedPayloadSchema = z.object({

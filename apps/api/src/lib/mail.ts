@@ -69,6 +69,8 @@ type SchoolConfirmationInput = {
   schoolCode: string;
   whatsappPhone: string;
   loginUrl: string;
+  organizationCategory?: string;
+  documentsUrl?: string;
 };
 
 export async function sendBrandedMail(input: {
@@ -90,12 +92,14 @@ export async function sendBrandedMail(input: {
 }
 
 export async function sendSchoolRegistrationEmail(input: SchoolConfirmationInput): Promise<{ subject: string }> {
-  const documentsUrl = `${env.WEB_APP_URL.replace(/\/$/, "")}/school/dashboard/documents`;
+  const documentsUrl =
+    input.documentsUrl ?? `${env.WEB_APP_URL.replace(/\/$/, "")}/school/dashboard/documents`;
   const mail = buildSchoolWelcomeEmail({
     principalName: input.principalName,
     schoolName: input.schoolName,
     loginUrl: input.loginUrl,
-    documentsUrl
+    documentsUrl,
+    organizationCategory: input.organizationCategory
   });
 
   await sendBrandedMail({

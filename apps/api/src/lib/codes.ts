@@ -7,10 +7,21 @@ export function generateLearnerCode(fullName: string, grade: string): string {
   return `${first}-${second}-${suffix}`;
 }
 
-export function generateSchoolCode(name: string, province: string): string {
+export function generateSchoolCode(
+  name: string,
+  province: string,
+  organizationCategory: string = "SCHOOL"
+): string {
+  const categoryPrefix: Record<string, string> = {
+    SCHOOL: "SCH",
+    NGO_NPO: "NGO",
+    COMMUNITY: "COM",
+    FAITH: "FTH"
+  };
+  const typePrefix = categoryPrefix[organizationCategory] ?? "ORG";
   const parts = name.replace(/[^a-zA-Z ]/g, "").trim().split(/\s+/);
-  const prefix = (parts[0] || "SCH").slice(0, 3).toUpperCase();
+  const prefix = (parts[0] || typePrefix).slice(0, 3).toUpperCase();
   const region = province.replace(/[^a-zA-Z]/g, "").slice(0, 2).toUpperCase() || "ZA";
   const suffix = Math.floor(100 + Math.random() * 900);
-  return `SCH-${region}-${prefix}-${suffix}`;
+  return `${typePrefix}-${region}-${prefix}-${suffix}`;
 }

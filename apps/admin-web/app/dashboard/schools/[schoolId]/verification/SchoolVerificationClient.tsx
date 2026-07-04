@@ -144,7 +144,7 @@ export function SchoolVerificationClient({ schoolId }: { schoolId: string }): JS
 
       {!v ? (
         <p className="card" style={{ marginTop: "1rem" }}>
-          No verification packet submitted yet.
+          No verification record yet — refresh the page or contact support.
         </p>
       ) : (
         <section className="card" style={{ marginTop: "1rem" }}>
@@ -152,6 +152,12 @@ export function SchoolVerificationClient({ schoolId }: { schoolId: string }): JS
             <strong>Packet status:</strong> {v.status}
             {v.centreTypeLabel ? ` · Centre: ${v.centreTypeLabel}` : null}
           </p>
+          {v.status === "NOT_SUBMITTED" ? (
+            <p style={{ color: "#b45309" }}>
+              No documents submitted yet. You can still <strong>Approve provisionally</strong> to record admin sign-off
+              and move the organisation from PENDING to VERIFIED automatically.
+            </p>
+          ) : null}
           {regValue ? (
             <p>
               {v.registrationNumberLabel ?? "Registration"}: {regValue}
@@ -205,7 +211,7 @@ export function SchoolVerificationClient({ schoolId }: { schoolId: string }): JS
               Mark under review
             </button>
             <button type="button" onClick={() => void review("APPROVE")}>
-              Approve packet
+              {v.status === "NOT_SUBMITTED" ? "Approve provisionally" : "Approve packet"}
             </button>
             <button type="button" onClick={() => void review("REJECT")}>
               Reject packet

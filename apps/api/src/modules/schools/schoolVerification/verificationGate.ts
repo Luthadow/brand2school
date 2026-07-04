@@ -1,7 +1,8 @@
 import { prisma } from "../../../lib/prisma.js";
 import type { EntityStatus } from "../../../generated/prisma/index.js";
 
-const GATED_STATUSES: EntityStatus[] = ["VERIFIED", "APPROVED", "ACTIVE"];
+/** Full approval (APPROVED/ACTIVE) requires a reviewed verification packet. */
+const GATED_STATUSES: EntityStatus[] = ["APPROVED", "ACTIVE"];
 
 export function schoolStatusRequiresVerificationApproval(target: EntityStatus): boolean {
   return GATED_STATUSES.includes(target);
@@ -23,7 +24,7 @@ export async function assertSchoolVerificationApproved(
     return {
       ok: false,
       message:
-        "School EMIS verification packet must be approved before advancing entity status. Review documents on the verification screen.",
+        "Verification documents must be approved before advancing to APPROVED or ACTIVE. Review the packet on the verification screen (admin can approve provisionally if documents are not yet submitted).",
       verificationStatus: verification?.status ?? "NOT_SUBMITTED"
     };
   }

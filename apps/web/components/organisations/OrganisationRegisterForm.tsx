@@ -2,10 +2,11 @@
 
 import { useCallback, useEffect, useState } from "react";
 import Link from "next/link";
+import type { Route } from "next";
 import { Building2, CheckCircle2, MessageCircle, School } from "lucide-react";
 import { csrfHeaders } from "../../lib/clientFetch";
 import { CONTACT, mailto } from "../../lib/contact";
-import { getOrganizationCategory, type OrganizationCategoryId } from "../../lib/organizationCategories";
+import { categoryToSearchParam, getOrganizationCategory, type OrganizationCategoryId } from "../../lib/organizationCategories";
 
 type RegisterResult = {
   message: string;
@@ -147,7 +148,13 @@ export function OrganisationRegisterForm({ categoryId }: { categoryId: Organizat
         </div>
 
         <div className="reg-hero-actions" style={{ display: "flex", gap: "0.75rem", flexWrap: "wrap", justifyContent: "center" }}>
-          <Link href="/organisations/login" className="ds-btn ds-btn-primary">
+          <Link
+            href={
+              (result.portal?.loginUrl ??
+                `/organisations/login?category=${categoryToSearchParam(categoryId)}`) as Route
+            }
+            className="ds-btn ds-btn-primary"
+          >
             Open dashboard
           </Link>
           <Link href="/" className="ds-btn ds-btn-secondary">
@@ -246,7 +253,8 @@ export function OrganisationRegisterForm({ categoryId }: { categoryId: Organizat
         {loading ? "Registering…" : `Register ${category.label}`}
       </button>
       <p className="reg-hint" style={{ textAlign: "center" }}>
-        Already registered? <Link href="/organisations/login">Sign in</Link>
+        Already registered?{" "}
+        <Link href={`/organisations/login?category=${categoryToSearchParam(categoryId)}` as Route}>Sign in</Link>
       </p>
     </form>
   );

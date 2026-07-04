@@ -7,7 +7,7 @@ import { notifyAdminsNewSchoolRegistration } from "../../lib/registrationNotify.
 import { normalizePhone } from "../../lib/phones.js";
 import { env } from "../../config/env.js";
 
-import { isOrganizationCategoryId } from "../../lib/organizationCategories.js";
+import { isOrganizationCategoryId, getOrganizationCategory } from "../../lib/organizationCategories.js";
 
 export const schoolRegisterSchema = z
   .object({
@@ -28,9 +28,13 @@ export const schoolRegisterSchema = z
 
 export type SchoolRegisterInput = z.infer<typeof schoolRegisterSchema>;
 
-async function uniqueSchoolCode(name: string, province: string): Promise<string> {
+async function uniqueSchoolCode(
+  name: string,
+  province: string,
+  organizationCategory: string
+): Promise<string> {
   for (let i = 0; i < 8; i += 1) {
-    const schoolCode = generateSchoolCode(name, province);
+    const schoolCode = generateSchoolCode(name, province, organizationCategory);
     const exists = await prisma.school.findUnique({ where: { schoolCode } });
     if (!exists) return schoolCode;
   }
@@ -62,7 +66,12 @@ export async function registerSchool(input: Omit<SchoolRegisterInput, "confirmPa
     };
   }
 
-  const schoolCode = await uniqueSchoolCode(input.name, input.province);
+  const organizationCategory = isOrganizationCategoryId(input.organizationCategory)
+    ? input.organizationCategory
+    : "SCHOOL";
+  const category = getOrganizationCategory(organizationCategory);
+
+  const schoolCode = await uniqueSchoolCode(input.name, input.province, organizationCategory);
   const passwordHash = await bcrypt.hash(input.password, 10);
 
   const { school, user } = await prisma.$transaction(async (tx) => {
@@ -75,9 +84,7 @@ export async function registerSchool(input: Omit<SchoolRegisterInput, "confirmPa
         contactEmail: email,
         whatsappPhone,
         schoolCode,
-        organizationCategory: isOrganizationCategoryId(input.organizationCategory)
-          ? input.organizationCategory
-          : "SCHOOL",
+        organizationCategory,
         status: "PENDING",
         annualCycleYear: new Date().getFullYear(),
         annualCycleFocus: "Safety & Sanitation"
@@ -115,7 +122,9 @@ export async function registerSchool(input: Omit<SchoolRegisterInput, "confirmPa
     return { school: createdSchool, user: createdUser };
   });
 
-  const loginUrl = `${env.WEB_APP_URL}/school/login`;
+  const categorySlug = organizationCategory.toLowerCase().replace(/_/g, "-");
+  const loginUrl = `${env.WEB_APP_URL}/organisations/login?category=${categorySlug}`;
+  const documentsUrl = `${env.WEB_APP_URL.replace(/\/$/, "")}/school/dashboard/documents`;
 
   let emailSent = false;
   try {
@@ -131,7 +140,9 @@ export async function registerSchool(input: Omit<SchoolRegisterInput, "confirmPa
         schoolName: school.name,
         schoolCode: school.schoolCode,
         whatsappPhone,
-        loginUrl
+        loginUrl,
+        organizationCategory,
+        documentsUrl
       }
     });
     const job = await prisma.notificationJob.findUnique({
@@ -164,9 +175,10 @@ export async function registerSchool(input: Omit<SchoolRegisterInput, "confirmPa
     status: 201,
     payload: {
       message: emailSent
-        ? `School registered successfully. A confirmation email was sent to ${email}. WhatsApp is linked to your number.`
-        : "School registered successfully. We could not send the confirmation email — save your school code below. Check spam, or contact schools@brand2school.co.za for help.",
+        ? `${category.label} registered successfully. A welcome email was sent to ${email}. WhatsApp is linked to your number.`
+        : `${category.label} registered successfully. We could not send the welcome email — save your reference code below. Check spam, or contact schools@brand2school.co.za for help.`,
       emailSent,
+      organizationCategory,
       principal: { id: user.id, email: user.email },
       school: {
         id: school.id,
@@ -178,8 +190,14 @@ export async function registerSchool(input: Omit<SchoolRegisterInput, "confirmPa
       },
       whatsapp: {
         menuCommand: "MENU",
-        submitCommand: "Reply 1 → select province → district → school → campaign → product code",
-        progressCommand: "Reply 2 → select province → district → school",
+        submitCommand:
+          organizationCategory === "SCHOOL"
+            ? "Reply 1 → select province → district → school → campaign → product code"
+            : "Reply 1 → select province → district → organisation → campaign → product code",
+        progressCommand:
+          organizationCategory === "SCHOOL"
+            ? "Reply 2 → select province → district → school"
+            : "Reply 2 → select province → district → organisation",
         linkedPhone: whatsappPhone
       },
       portal: { loginUrl }

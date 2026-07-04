@@ -36,12 +36,17 @@ export async function reviewSchoolVerificationPacket(input: {
     where: { id: input.schoolId },
     include: { verification: true, adminUser: { select: { email: true } } }
   });
-  if (!school || !school.verification) {
-    return { ok: false as const, status: 404, message: "School verification packet not found." };
+  if (!school) {
+    return { ok: false as const, status: 404, message: "School not found." };
   }
 
-  const v = school.verification;
-  if (v.status === "NOT_SUBMITTED") {
+  const v =
+    school.verification ??
+    (await prisma.schoolVerification.create({
+      data: { schoolId: school.id, status: "NOT_SUBMITTED" }
+    }));
+
+  if (v.status === "NOT_SUBMITTED" && payload.data.action !== "APPROVE") {
     return { ok: false as const, status: 409, message: "School has not submitted a verification packet yet." };
   }
 
@@ -58,9 +63,26 @@ export async function reviewSchoolVerificationPacket(input: {
       reviewedAt: now,
       reviewedByUserId: input.reviewerUserId,
       reviewerNotes: payload.data.reviewerNotes?.trim() || null,
-      rejectionReason: payload.data.action === "REJECT" ? payload.data.rejectionReason?.trim() ?? null : null
+      rejectionReason: payload.data.action === "REJECT" ? payload.data.rejectionReason?.trim() ?? null : null,
+      ...(payload.data.action === "APPROVE" && v.status === "NOT_SUBMITTED" ? { submittedAt: now } : {})
     }
   });
+
+  if (payload.data.action === "APPROVE" && school.status === "PENDING") {
+    await prisma.school.update({
+      where: { id: school.id },
+      data: { status: "VERIFIED" }
+    });
+    await prisma.auditLog.create({
+      data: {
+        actorId: input.reviewerUserId,
+        action: "APPROVAL_STATUS_CHANGE",
+        targetType: "SCHOOL",
+        targetId: school.id,
+        payload: { from: "PENDING", to: "VERIFIED", trigger: "VERIFICATION_PACKET_APPROVED" }
+      }
+    });
+  }
 
   await prisma.auditLog.create({
     data: {

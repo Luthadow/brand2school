@@ -87,11 +87,12 @@ export function ApprovalsClient(): JSX.Element {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ status: next })
     });
+    const json = (await res.json().catch(() => ({}))) as { message?: string; verificationStatus?: string };
     if (!res.ok) {
-      setToast("Action failed.");
+      setToast(json.message ?? "Action failed.");
       return;
     }
-    setToast("Approval status updated.");
+    setToast(`Status updated to ${next}.`);
     setTimeout(() => setToast(null), 2200);
     await loadData();
   };
@@ -200,14 +201,18 @@ export function ApprovalsClient(): JSX.Element {
       <section className="card" style={{ marginBottom: "1rem" }}>
         <h2>Organisations</h2>
         <p style={{ color: "#5a6d8a", fontSize: "0.9rem", marginTop: 0 }}>
-          Contacts receive a welcome email on registration with next steps. Use <strong>Verify</strong> to approve or
-          reject the documents packet, then <strong>Move Forward</strong> to advance entity status, or{" "}
-          <strong>Remove</strong> to suspend an organisation that should not proceed.
+          Use <strong>Move Forward</strong> to advance entity status (PENDING → VERIFIED → APPROVED → ACTIVE). Moving to
+          APPROVED or ACTIVE requires the verification packet to be approved on the Verify screen — admins can approve
+          provisionally even when no documents have been submitted yet. Use <strong>Remove</strong> to suspend an
+          organisation that should not proceed.
         </p>
         <div className="table-wrap"><table className="table"><thead><tr><th></th><th>Name</th><th>Type</th><th>District</th><th>Status</th><th>Docs packet</th><th>Review</th><th>Action</th></tr></thead><tbody>
           {data.pendingSchools.map((item) => {
             const packetApproved = item.verification?.status === "APPROVED";
-            const canAdvance = Boolean(nextStatus(item.status)) && (item.status !== "PENDING" || packetApproved);
+            const next = nextStatus(item.status);
+            const needsDocsForNext =
+              next === "APPROVED" || next === "ACTIVE" ? !packetApproved : false;
+            const canAdvance = Boolean(next) && !needsDocsForNext;
             const regRef = item.verification?.emisNumber ?? item.verification?.registrationNumber;
             return (
             <tr key={item.id}>
@@ -238,10 +243,16 @@ export function ApprovalsClient(): JSX.Element {
               <td>
                 <button
                   disabled={!canAdvance}
-                  title={!packetApproved && item.status === "PENDING" ? "Approve verification packet first" : undefined}
+                  title={
+                    needsDocsForNext
+                      ? "Approve verification packet first (Verify screen — provisional approval allowed)"
+                      : next
+                        ? `Move to ${next}`
+                        : undefined
+                  }
                   onClick={() => void approve("schools", item.id, item.status)}
                 >
-                  Move Forward
+                  {next ? `Move to ${next}` : "At final step"}
                 </button>
                 {" "}
                 <button type="button" onClick={() => void removeSchool(item.id)}>
