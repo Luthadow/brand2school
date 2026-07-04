@@ -2763,7 +2763,6 @@ button:disabled {
   border-color: var(--brand-blue);
   color: #fff;
 }
-}
 
 .reg-form {
   display: grid;
