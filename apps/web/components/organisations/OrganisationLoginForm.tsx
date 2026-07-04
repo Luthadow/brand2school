@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { csrfHeaders } from "../../lib/clientFetch";
 import { CONTACT, mailto } from "../../lib/contact";
-import { getOrganizationCategory, type OrganizationCategoryId } from "../../lib/organizationCategories";
+import { categoryToSearchParam, getOrganizationCategory, type OrganizationCategoryId } from "../../lib/organizationCategories";
 
 export function OrganisationLoginForm({ categoryId }: { categoryId: OrganizationCategoryId }): JSX.Element {
   const router = useRouter();
@@ -56,7 +56,7 @@ export function OrganisationLoginForm({ categoryId }: { categoryId: Organization
       </button>
       <p className="reg-hint" style={{ textAlign: "center" }}>
         No account?{" "}
-        <Link href={`/organisations/register?category=${category.id.toLowerCase().replace("_", "-")}`}>
+        <Link href={`/organisations/register?category=${categoryToSearchParam(category.id)}`}>
           Register your {category.label.toLowerCase()}
         </Link>
       </p>

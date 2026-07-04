@@ -296,3 +296,11 @@ export function getCentreTypeLabel(organizationCategory: string, centreType: str
   const category = getOrganizationCategory(organizationCategory);
   return category.centreTypes.find((centre) => centre.id === centreType)?.label ?? null;
 }
+
+export function parseCategorySearchParam(value: string | null | undefined): OrganizationCategoryId {
+  return organizationCategoryFromParam(value?.replace(/-/g, "_"));
+}
+
+export function categoryToSearchParam(id: OrganizationCategoryId): string {
+  return id.toLowerCase().replace(/_/g, "-");
+}

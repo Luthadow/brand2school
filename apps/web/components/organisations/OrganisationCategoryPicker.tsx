@@ -4,27 +4,22 @@ import Link from "next/link";
 import type { Route } from "next";
 import {
   ORGANIZATION_CATEGORY_LIST,
-  organizationCategoryFromParam,
+  categoryToSearchParam,
   type OrganizationCategoryId
 } from "../../lib/organizationCategories";
 
 export function OrganisationCategoryPicker({
   active,
-  basePath,
-  mode
+  basePath
 }: {
   active: OrganizationCategoryId;
   basePath: "/organisations/login" | "/organisations/register";
-  mode: "login" | "register";
 }): JSX.Element {
   return (
     <div className="org-category-picker" role="tablist" aria-label="Organisation type">
       {ORGANIZATION_CATEGORY_LIST.map((category) => {
         const selected = category.id === active;
-        const href =
-          mode === "register"
-            ? (`${basePath}?category=${category.id.toLowerCase().replace("_", "-")}` as Route)
-            : basePath;
+        const href = `${basePath}?category=${categoryToSearchParam(category.id)}` as Route;
         return (
           <Link
             key={category.id}
@@ -39,8 +34,4 @@ export function OrganisationCategoryPicker({
       })}
     </div>
   );
-}
-
-export function parseCategorySearchParam(value: string | null | undefined): OrganizationCategoryId {
-  return organizationCategoryFromParam(value?.replace("-", "_"));
 }

@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { OrganisationCategoryPicker, parseCategorySearchParam } from "../../../components/organisations/OrganisationCategoryPicker";
+import { OrganisationCategoryPicker } from "../../../components/organisations/OrganisationCategoryPicker";
 import { OrganisationLoginForm } from "../../../components/organisations/OrganisationLoginForm";
-import { getOrganizationCategory } from "../../../lib/organizationCategories";
+import { getOrganizationCategory, parseCategorySearchParam } from "../../../lib/organizationCategories";
 
 export const metadata: Metadata = {
   title: "Organisation Login — Brand2School",
@@ -26,7 +26,7 @@ export default function OrganisationLoginPage({
         <p className="ds-eyebrow">{category.portalEyebrow}</p>
         <h1 className="reg-title">{category.loginTitle}</h1>
         <p className="reg-intro">{category.loginIntro}</p>
-        <OrganisationCategoryPicker active={categoryId} basePath="/organisations/register" mode="register" />
+        <OrganisationCategoryPicker active={categoryId} basePath="/organisations/login" />
         <p className="reg-hint" style={{ marginBottom: "1rem" }}>
           Registering a new organisation? Choose your type above. Existing accounts sign in below.
         </p>
