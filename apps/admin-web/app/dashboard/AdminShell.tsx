@@ -12,7 +12,7 @@ type NavLink = {
   href: Route;
   label: string;
   icon: string;
-  report?: "overview" | "analytics" | "commercial" | "brands";
+  report?: "overview" | "analytics" | "commercial" | "brands" | "verified";
 };
 
 const overviewLink: NavLink = { href: "/dashboard", label: "Overview", icon: "◉", report: "overview" };
@@ -20,6 +20,7 @@ const overviewLink: NavLink = { href: "/dashboard", label: "Overview", icon: "�
 const superAdminLinks: NavLink[] = [
   { href: "/dashboard/analytics", label: "Analytics", icon: "▣", report: "analytics" },
   { href: "/dashboard/approvals", label: "Approvals", icon: "✓" },
+  { href: "/dashboard/verified", label: "Verified", icon: "✔", report: "verified" },
   { href: "/dashboard/commercial", label: "Commercial", icon: "◎", report: "commercial" },
   { href: "/dashboard/brands", label: "Brands", icon: "◇", report: "brands" },
   { href: "/dashboard/campaigns", label: "Campaigns", icon: "◆" },
@@ -49,7 +50,7 @@ function NavRow({
   label: string;
   icon: string;
   active: boolean;
-  report?: "overview" | "analytics" | "commercial" | "brands";
+  report?: "overview" | "analytics" | "commercial" | "brands" | "verified";
 }): JSX.Element {
   return (
     <div className={`admin-sidebar__row${active ? " admin-sidebar__row--active" : ""}`}>

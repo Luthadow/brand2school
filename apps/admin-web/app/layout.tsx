@@ -31,6 +31,7 @@ export default function RootLayout({ children }: { children: ReactNode }): JSX.E
           navItems={[
             { href: "/dashboard", label: "Dashboard" },
             { href: "/dashboard/approvals", label: "Approvals" },
+            { href: "/dashboard/verified", label: "Verified" },
             { href: "/dashboard/moderation", label: "Moderation" },
             { href: "/dashboard/audit", label: "Audit" }
           ]}

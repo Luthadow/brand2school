@@ -20,6 +20,7 @@ import { commercialAdminRouter } from "../commercial/routes.js";
 import { getPlatformExecutiveAnalytics } from "../analytics/getPlatformExecutiveAnalytics.js";
 import { getAdminPlatformSnapshot } from "./platformSnapshot.js";
 import { buildAdminReportPdf, adminReportContentDisposition, type AdminReportModule } from "./adminReportPdfs.js";
+import { listVerifiedSchools } from "./verifiedSchools.js";
 import { listProvinceNominations } from "../platform/provinceNominations.js";
 import { applyBrandVerificationSideEffects } from "../platform/syncBrandVerification.js";
 
@@ -481,7 +482,7 @@ adminRouter.get("/queue", async (req, res) => {
     }),
     prisma.school.count({
       where: {
-        status: { in: ["PENDING", "VERIFIED", "APPROVED"] },
+        status: { in: ["PENDING"] },
         ...(search ? { OR: [{ name: { contains: search, mode: "insensitive" } }, { district: { contains: search, mode: "insensitive" } }] } : {})
       }
     }),
@@ -517,7 +518,7 @@ adminRouter.get("/queue", async (req, res) => {
     }),
     prisma.school.findMany({
       where: {
-        status: { in: ["PENDING", "VERIFIED", "APPROVED"] },
+        status: { in: ["PENDING"] },
         ...(search ? { OR: [{ name: { contains: search, mode: "insensitive" } }, { district: { contains: search, mode: "insensitive" } }] } : {})
       },
       select: {
@@ -579,6 +580,21 @@ adminRouter.get("/queue", async (req, res) => {
       openFraudFlags: toPageMeta(page, pageSize, fraudFlagsTotal)
     }
   });
+});
+
+adminRouter.get("/verified-schools", async (req, res) => {
+  const query = queueQuerySchema.safeParse(req.query);
+  if (!query.success) {
+    res.status(400).json({ message: "Invalid query parameters." });
+    return;
+  }
+
+  const result = await listVerifiedSchools({
+    page: query.data.page,
+    pageSize: query.data.pageSize,
+    search: query.data.search
+  });
+  res.json(result);
 });
 
 adminRouter.get("/audit-logs", async (req, res) => {
@@ -869,7 +885,7 @@ adminRouter.get("/analytics/executive", async (req, res) => {
   res.json(analytics);
 });
 
-const adminReportModules = new Set<AdminReportModule>(["overview", "analytics", "commercial", "brands"]);
+const adminReportModules = new Set<AdminReportModule>(["overview", "analytics", "commercial", "brands", "verified"]);
 
 adminRouter.get("/reports/:module/pdf", async (req, res) => {
   const module = req.params.module as AdminReportModule;

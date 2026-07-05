@@ -22,8 +22,9 @@ import { getAdminPlatformSnapshot } from "./platformSnapshot.js";
 import { getPlatformExecutiveAnalytics } from "../analytics/getPlatformExecutiveAnalytics.js";
 import { getCommercialWorkflowBoard } from "../commercial/getCommercialWorkflow.js";
 import { WORKFLOW_STAGE_LABELS } from "../commercial/commercialWorkflow.js";
+import { fetchAllVerifiedSchoolsForReport } from "./verifiedSchools.js";
 
-export type AdminReportModule = "overview" | "analytics" | "commercial" | "brands";
+export type AdminReportModule = "overview" | "analytics" | "commercial" | "brands" | "verified";
 
 const BRAND_BLUE = "#003B8E";
 
@@ -114,6 +115,8 @@ export async function buildAdminReportPdf(module: AdminReportModule): Promise<Bu
       return buildCommercialReportPdf();
     case "brands":
       return buildBrandsReportPdf();
+    case "verified":
+      return buildVerifiedSchoolsReportPdf();
     default:
       throw new Error("Unknown report module.");
   }
@@ -421,5 +424,44 @@ async function buildBrandsReportPdf(): Promise<Buffer> {
     }
 
     drawFooter(doc, `${LETTERHEAD.productLine} · Confidential brand registry report`);
+  });
+}
+
+async function buildVerifiedSchoolsReportPdf(): Promise<Buffer> {
+  const schools = await fetchAllVerifiedSchoolsForReport();
+  const generated = formatGeneratedAt(new Date().toISOString());
+  const approvedCount = schools.filter((s) => s.status === "APPROVED" || s.status === "ACTIVE").length;
+
+  return createPdfBuffer((doc) => {
+    drawReportBanner(doc, "Verified Organisations Report");
+    drawTitle(
+      doc,
+      "Verified & approved organisations",
+      `Generated ${generated} · ${schools.length} organisation(s) · ${approvedCount} fully approved`
+    );
+
+    drawSection(
+      doc,
+      "Summary",
+      "Schools and organisations that have passed initial verification or been approved for participation."
+    );
+
+    drawTableHeader(doc, [
+      { label: "School name", width: 120 },
+      { label: "Address", width: 110 },
+      { label: "Principal", width: 90 },
+      { label: "Email", width: 130 }
+    ]);
+    const widths = [120, 110, 90, 130];
+
+    for (const school of schools) {
+      drawTableRow(
+        doc,
+        [school.name.slice(0, 28), school.address.slice(0, 26), school.principalName.slice(0, 22), school.email.slice(0, 32)],
+        widths
+      );
+    }
+
+    drawFooter(doc, `${LETTERHEAD.productLine} · Confidential verified organisations report`);
   });
 }

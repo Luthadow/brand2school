@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { proxyAdminPdfRequest } from "../../../../../../lib/admin-proxy";
 
-const allowed = new Set(["overview", "analytics", "commercial", "brands"]);
+const allowed = new Set(["overview", "analytics", "commercial", "brands", "verified"]);
 
 export async function GET(
   req: NextRequest,

@@ -23,7 +23,11 @@ type QueueResponse = {
     } | null;
   }>;
   pendingBrands: Array<{ id: string; name: string; status: string }>;
-  pageMeta: { pendingUsers: { page: number; totalPages: number } };
+  pageMeta: {
+    pendingUsers: { page: number; totalPages: number };
+    pendingSchools: { page: number; totalPages: number };
+    pendingBrands: { page: number; totalPages: number };
+  };
 };
 type Preset = { id: string; name: string; module: string; filters: { search?: string } };
 
@@ -199,12 +203,12 @@ export function ApprovalsClient(): JSX.Element {
       </section>
 
       <section className="card" style={{ marginBottom: "1rem" }}>
-        <h2>Organisations</h2>
+        <h2>Organisations awaiting approval</h2>
         <p style={{ color: "#5a6d8a", fontSize: "0.9rem", marginTop: 0 }}>
-          Use <strong>Move Forward</strong> to advance entity status (PENDING → VERIFIED → APPROVED → ACTIVE). Moving to
-          APPROVED or ACTIVE requires the verification packet to be approved on the Verify screen — admins can approve
-          provisionally even when no documents have been submitted yet. Use <strong>Remove</strong> to suspend an
-          organisation that should not proceed.
+          Pending registrations only. Verified and approved organisations appear on the{" "}
+          <Link href="/dashboard/verified">Verified</Link> page. Use <strong>Move Forward</strong> to advance status
+          (PENDING → VERIFIED → APPROVED → ACTIVE). Moving to APPROVED or ACTIVE requires the verification packet to be
+          approved on the Verify screen.
         </p>
         <div className="table-wrap"><table className="table"><thead><tr><th></th><th>Name</th><th>Type</th><th>District</th><th>Status</th><th>Docs packet</th><th>Review</th><th>Action</th></tr></thead><tbody>
           {data.pendingSchools.map((item) => {
@@ -266,6 +270,21 @@ export function ApprovalsClient(): JSX.Element {
         <button style={{ marginTop: "0.5rem" }} onClick={() => void bulkApprove("schools", selectedSchools, "VERIFIED")}>
           Bulk move selected schools to VERIFIED
         </button>
+        <div style={{ marginTop: "0.75rem", display: "flex", gap: "0.5rem", alignItems: "center" }}>
+          <button type="button" disabled={page <= 1} onClick={() => setPage((v) => v - 1)}>
+            Prev
+          </button>
+          <span>
+            Page {page} of {data.pageMeta.pendingSchools.totalPages}
+          </span>
+          <button
+            type="button"
+            disabled={page >= data.pageMeta.pendingSchools.totalPages}
+            onClick={() => setPage((v) => v + 1)}
+          >
+            Next
+          </button>
+        </div>
       </section>
 
       <section className="card">
@@ -294,11 +313,6 @@ export function ApprovalsClient(): JSX.Element {
         <button style={{ marginTop: "0.5rem" }} onClick={() => void bulkApprove("brands", selectedBrands, "VERIFIED")}>
           Bulk move selected brands to VERIFIED
         </button>
-        <div style={{ marginTop: "0.75rem", display: "flex", gap: "0.5rem" }}>
-          <button disabled={page <= 1} onClick={() => setPage((v) => v - 1)}>Prev</button>
-          <span>Page {page}</span>
-          <button disabled={page >= data.pageMeta.pendingUsers.totalPages} onClick={() => setPage((v) => v + 1)}>Next</button>
-        </div>
       </section>
       {toast ? <div className="toast success">{toast}</div> : null}
     </>
