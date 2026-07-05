@@ -9,6 +9,15 @@ import {
   drawSection,
   drawTitle
 } from "../../lib/pdf/pdfKitHelpers.js";
+import {
+  advanceAfterChart,
+  chartBox,
+  CHART_COLORS,
+  drawHorizontalBarChart,
+  drawLineChart,
+  drawStackedBarChart,
+  drawVerticalBarChart
+} from "../../lib/pdf/reportLayout.js";
 import { getAdminPlatformSnapshot } from "./platformSnapshot.js";
 import { getPlatformExecutiveAnalytics } from "../analytics/getPlatformExecutiveAnalytics.js";
 import { getCommercialWorkflowBoard } from "../commercial/getCommercialWorkflow.js";
@@ -136,11 +145,32 @@ async function buildOverviewReportPdf(): Promise<Buffer> {
       { label: "Verified submissions", value: String(snapshot.verifiedSubmissions) }
     ]);
 
-    drawSection(doc, "Registration trend (weekly)", "Last 12 weeks with at least one registration.");
-    drawBulletList(
+    drawSection(doc, "Registration trend (weekly)", "New organisation registrations over recent weeks.");
+    ensureSpace(doc, 170);
+    const trendData = snapshot.schoolRegistrationTrend.map((row) => ({
+      label: row.period.slice(5),
+      value: row.count
+    }));
+    const trendBottom = drawVerticalBarChart(doc, chartBox(doc, 155), trendData, {
+      title: "Weekly registrations",
+      valueSuffix: ""
+    });
+    advanceAfterChart(doc, trendBottom);
+
+    drawSection(doc, "Approval pipeline mix", "Organisations and brands awaiting governance action.");
+    ensureSpace(doc, 120);
+    const pipelineBottom = drawStackedBarChart(
       doc,
-      snapshot.schoolRegistrationTrend.map((row) => `${row.period}: ${row.count} registration(s)`)
+      chartBox(doc, 100),
+      [
+        { label: "Pending orgs", value: snapshot.schoolsPendingApproval, color: CHART_COLORS[5] },
+        { label: "In pipeline", value: snapshot.schoolsInApprovalPipeline, color: CHART_COLORS[0] },
+        { label: "Active orgs", value: snapshot.schoolsActive, color: CHART_COLORS[1] },
+        { label: "Pending brands", value: snapshot.pendingBrands, color: CHART_COLORS[2] }
+      ],
+      { title: "Governance queue" }
     );
+    advanceAfterChart(doc, pipelineBottom);
 
     drawFooter(doc, `${LETTERHEAD.productLine} · Confidential governance report`);
   });
@@ -164,7 +194,40 @@ async function buildAnalyticsReportPdf(): Promise<Buffer> {
     );
 
     drawSection(doc, "Transformation funnel", "Participation journey from registration to infrastructure milestones.");
-    drawBulletList(doc, data.funnel.map((stage) => `${stage.stage}: ${stage.count.toLocaleString("en-ZA")}`));
+    ensureSpace(doc, 170);
+    const funnelBottom = drawVerticalBarChart(
+      doc,
+      chartBox(doc, 155),
+      data.funnel.map((stage, i) => ({
+        label: stage.stage.slice(0, 10),
+        value: stage.count,
+        color: CHART_COLORS[i % CHART_COLORS.length]
+      })),
+      { title: "Funnel stages" }
+    );
+    advanceAfterChart(doc, funnelBottom);
+
+    drawSection(doc, "Submission trend (weekly)", "Verified vs total submissions nationally.");
+    ensureSpace(doc, 180);
+    const weekly = data.submissionTrend.weekly;
+    const lineBottom = drawLineChart(
+      doc,
+      chartBox(doc, 165),
+      [
+        {
+          name: "Total",
+          color: CHART_COLORS[0],
+          points: weekly.map((p) => ({ label: p.period.slice(5), value: p.total }))
+        },
+        {
+          name: "Verified",
+          color: CHART_COLORS[1],
+          points: weekly.map((p) => ({ label: p.period.slice(5), value: p.verified }))
+        }
+      ],
+      { title: "Weekly submissions" }
+    );
+    advanceAfterChart(doc, lineBottom);
 
     drawSection(doc, "Top brand rankings", "By valid submissions and schools reached.");
     drawTableHeader(doc, [
@@ -190,6 +253,19 @@ async function buildAnalyticsReportPdf(): Promise<Buffer> {
     }
 
     drawSection(doc, "Provincial activity", "Valid submissions and registered schools by province.");
+    ensureSpace(doc, 200);
+    const provChartBottom = drawHorizontalBarChart(
+      doc,
+      chartBox(doc, Math.min(220, 40 + data.provinces.slice(0, 9).length * 16)),
+      data.provinces.slice(0, 9).map((row, i) => ({
+        label: row.name,
+        value: row.submissions,
+        color: CHART_COLORS[i % CHART_COLORS.length]
+      })),
+      { title: "Submissions by province" }
+    );
+    advanceAfterChart(doc, provChartBottom);
+
     drawTableHeader(doc, [
       { label: "Province", width: 120 },
       { label: "Submissions", width: 72 },
@@ -227,6 +303,20 @@ async function buildCommercialReportPdf(): Promise<Buffer> {
     drawTitle(doc, "Commercial workflow", `Generated ${generated}`);
 
     drawSection(doc, "Pipeline summary", "Brand and campaign counts by workflow stage.");
+    ensureSpace(doc, 200);
+    const pipelineEntries = Object.entries(board.pipeline).filter(([, count]) => count > 0);
+    const pipelineChartBottom = drawVerticalBarChart(
+      doc,
+      chartBox(doc, 165),
+      pipelineEntries.map(([stage, count], i) => ({
+        label: (WORKFLOW_STAGE_LABELS[stage as keyof typeof WORKFLOW_STAGE_LABELS] ?? stage).slice(0, 9),
+        value: count,
+        color: CHART_COLORS[i % CHART_COLORS.length]
+      })),
+      { title: "Commercial pipeline" }
+    );
+    advanceAfterChart(doc, pipelineChartBottom);
+
     drawKeyValues(
       doc,
       Object.entries(board.pipeline).map(([stage, count]) => ({
@@ -293,6 +383,20 @@ async function buildBrandsReportPdf(): Promise<Buffer> {
       "Summary",
       `Active: ${brands.filter((b) => b.status === "ACTIVE").length} · Pending pipeline: ${brands.filter((b) => ["PENDING", "VERIFIED", "APPROVED"].includes(b.status)).length} · Featured on home: ${brands.filter((b) => b.featuredOnHome).length}`
     );
+
+    ensureSpace(doc, 130);
+    const statusCounts = ["ACTIVE", "PENDING", "VERIFIED", "APPROVED", "SUSPENDED"].map((status) => ({
+      label: status,
+      value: brands.filter((b) => b.status === status).length,
+      color: status === "ACTIVE" ? CHART_COLORS[1] : CHART_COLORS[0]
+    }));
+    const statusBottom = drawVerticalBarChart(
+      doc,
+      chartBox(doc, 130),
+      statusCounts.filter((s) => s.value > 0),
+      { title: "Brands by status" }
+    );
+    advanceAfterChart(doc, statusBottom);
 
     drawTableHeader(doc, [
       { label: "Brand", width: 100 },

@@ -102,3 +102,16 @@ export function formatZarReport(amount: number): string {
 }
 
 export { LETTERHEAD };
+
+export {
+  advanceAfterChart,
+  chartBox,
+  CHART_COLORS,
+  drawHorizontalBarChart,
+  drawLineChart,
+  drawStackedBarChart,
+  drawStatusBreakdownChart,
+  drawVerticalBarChart,
+  type ChartPoint,
+  type LineSeries
+} from "./pdfCharts.js";

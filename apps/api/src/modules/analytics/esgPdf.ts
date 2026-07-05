@@ -5,6 +5,12 @@ import PDFDocument from "pdfkit";
 import { LETTERHEAD } from "../../lib/company.js";
 import type { BrandAnalytics } from "./getBrandAnalytics.js";
 import { formatReportPeriod, provinceNameFromCode } from "./getBrandAnalytics.js";
+import {
+  chartBox,
+  CHART_COLORS,
+  drawHorizontalBarChart,
+  drawLineChart
+} from "../../lib/pdf/reportLayout.js";
 
 const BRAND_BLUE = "#003B8E";
 const BRAND_GREEN = "#6CC24A";
@@ -237,6 +243,56 @@ export function buildEsgPdf(analytics: BrandAnalytics, campaignName?: string): P
     drawHeader(doc, title);
 
     let y = drawSummary(doc, analytics, 178);
+
+    const weekly = analytics.submissionTrend?.weekly ?? [];
+    if (weekly.length > 0) {
+      if (y > doc.page.height - 200) {
+        doc.addPage();
+        drawFooter(doc);
+        y = 48;
+      }
+      doc.y = y;
+      const trendBottom = drawLineChart(
+        doc,
+        chartBox(doc, 165),
+        [
+          {
+            name: "Total",
+            color: CHART_COLORS[0],
+            points: weekly.map((p) => ({ label: p.period.slice(5), value: p.total }))
+          },
+          {
+            name: "Verified",
+            color: CHART_COLORS[1],
+            points: weekly.map((p) => ({ label: p.period.slice(5), value: p.verified }))
+          }
+        ],
+        { title: "Weekly submission trend" }
+      );
+      y = trendBottom + 16;
+    }
+
+    const activeProvinces = analytics.provinces.filter((p) => p.submissions > 0).slice(0, 9);
+    if (activeProvinces.length > 0) {
+      if (y > doc.page.height - 200) {
+        doc.addPage();
+        drawFooter(doc);
+        y = 48;
+      }
+      doc.y = y;
+      const provBottom = drawHorizontalBarChart(
+        doc,
+        chartBox(doc, Math.min(200, 40 + activeProvinces.length * 16)),
+        activeProvinces.map((p, i) => ({
+          label: provinceNameFromCode(p.code),
+          value: p.submissions,
+          color: CHART_COLORS[i % CHART_COLORS.length]
+        })),
+        { title: "Provincial submissions" }
+      );
+      y = provBottom + 16;
+    }
+
     y = drawProvinceTable(doc, analytics, y);
     y = drawCampaignTable(doc, analytics, y);
     drawCompliance(doc, analytics, y);

@@ -14,7 +14,14 @@ import {
   formatReportGeneratedAt,
   formatZarReport,
   LETTERHEAD,
-  reportContentDisposition
+  reportContentDisposition,
+  advanceAfterChart,
+  chartBox,
+  CHART_COLORS,
+  drawHorizontalBarChart,
+  drawLineChart,
+  drawVerticalBarChart,
+  ensureReportSpace
 } from "../../lib/pdf/reportLayout.js";
 import { buildEsgPdf } from "./esgPdf.js";
 import { getBrandAnalytics } from "./getBrandAnalytics.js";
@@ -111,6 +118,20 @@ function buildOverviewPdf(portal: BrandPortal): Promise<Buffer> {
       { label: "Monthly growth", value: `${portal.overview.monthlyGrowthPercent}%` }
     ]);
 
+    ensureReportSpace(doc, 170);
+    const impactBottom = drawVerticalBarChart(
+      doc,
+      chartBox(doc, 155),
+      [
+        { label: "Submissions", value: portal.overview.totalSubmissions, color: CHART_COLORS[0] },
+        { label: "Verified", value: portal.overview.verifiedSubmissions, color: CHART_COLORS[1] },
+        { label: "Schools", value: portal.overview.schoolsSupported, color: CHART_COLORS[2] },
+        { label: "Provinces", value: portal.overview.provincesReached, color: CHART_COLORS[3] }
+      ],
+      { title: "Impact overview" }
+    );
+    advanceAfterChart(doc, impactBottom);
+
     drawReportFooter(doc, `${LETTERHEAD.productLine} · Brand partner report`);
   });
 }
@@ -120,6 +141,21 @@ function buildCampaignsPdf(portal: BrandPortal): Promise<Buffer> {
   return createPdfBuffer((doc) => {
     drawReportBanner(doc, "Brand Partner Portal — Campaigns Report");
     drawReportTitleBlock(doc, "Campaign portfolio", `${brandSubtitle(portal)} · Generated ${generated}`);
+
+    if (portal.campaigns.length > 0) {
+      ensureReportSpace(doc, 175);
+      const campBottom = drawVerticalBarChart(
+        doc,
+        chartBox(doc, 160),
+        portal.campaigns.slice(0, 8).map((c, i) => ({
+          label: c.name.slice(0, 8),
+          value: c.validSubmissions,
+          color: CHART_COLORS[i % CHART_COLORS.length]
+        })),
+        { title: "Valid submissions by campaign" }
+      );
+      advanceAfterChart(doc, campBottom);
+    }
 
     drawReportTableHeader(doc, [
       { label: "Campaign", width: 110 },
@@ -171,6 +207,29 @@ function buildSubmissionsPdf(portal: BrandPortal): Promise<Buffer> {
     drawReportBanner(doc, "Brand Partner Portal — Submissions Report");
     drawReportTitleBlock(doc, "Impact pipeline", `${brandSubtitle(portal)} · Generated ${generated}`);
 
+    const weekly = portal.analytics.submissionTrend?.weekly ?? [];
+    if (weekly.length > 0) {
+      ensureReportSpace(doc, 175);
+      const trendBottom = drawLineChart(
+        doc,
+        chartBox(doc, 160),
+        [
+          {
+            name: "Total",
+            color: CHART_COLORS[0],
+            points: weekly.map((p) => ({ label: p.period.slice(5), value: p.total }))
+          },
+          {
+            name: "Verified",
+            color: CHART_COLORS[1],
+            points: weekly.map((p) => ({ label: p.period.slice(5), value: p.verified }))
+          }
+        ],
+        { title: "Weekly submission trend" }
+      );
+      advanceAfterChart(doc, trendBottom);
+    }
+
     drawReportTableHeader(doc, [
       { label: "School", width: 90 },
       { label: "Campaign", width: 90 },
@@ -196,6 +255,24 @@ function buildMapPdf(portal: BrandPortal): Promise<Buffer> {
   return createPdfBuffer((doc) => {
     drawReportBanner(doc, "Brand Partner Portal — Impact Map Report");
     drawReportTitleBlock(doc, "Provincial impact", `${brandSubtitle(portal)} · Generated ${generated}`);
+
+    if (provinces.length > 0) {
+      ensureReportSpace(doc, 200);
+      const mapBottom = drawHorizontalBarChart(
+        doc,
+        chartBox(doc, Math.min(220, 40 + provinces.filter((p) => p.submissions > 0).length * 16)),
+        provinces
+          .filter((p) => p.submissions > 0)
+          .slice(0, 9)
+          .map((p, i) => ({
+            label: p.name,
+            value: p.submissions,
+            color: CHART_COLORS[i % CHART_COLORS.length]
+          })),
+        { title: "Submissions by province" }
+      );
+      advanceAfterChart(doc, mapBottom);
+    }
 
     drawReportTableHeader(doc, [
       { label: "Province", width: 120 },
@@ -229,6 +306,19 @@ function buildFinancialsPdf(portal: BrandPortal): Promise<Buffer> {
       },
       { label: "Transformation pool used", value: formatZarReport(f.transformationPoolUsedZar ?? 0) }
     ]);
+
+    ensureReportSpace(doc, 90);
+    const fundsBottom = drawVerticalBarChart(
+      doc,
+      chartBox(doc, 130),
+      [
+        { label: "Allocated", value: Math.round(f.fundsAllocatedZar / 1000), color: CHART_COLORS[0] },
+        { label: "Used", value: Math.round(f.fundsUsedZar / 1000), color: CHART_COLORS[1] },
+        { label: "Remaining", value: Math.round(f.remainingTargetZar / 1000), color: CHART_COLORS[2] }
+      ],
+      { title: "Funds (R thousands)" }
+    );
+    advanceAfterChart(doc, fundsBottom);
 
     drawSection(doc, "Projects", "Budget utilisation by project.");
     drawReportTableHeader(doc, [

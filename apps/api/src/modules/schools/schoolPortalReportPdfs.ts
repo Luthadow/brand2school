@@ -14,7 +14,14 @@ import {
   formatReportGeneratedAt,
   formatZarReport,
   LETTERHEAD,
-  reportContentDisposition
+  reportContentDisposition,
+  advanceAfterChart,
+  chartBox,
+  CHART_COLORS,
+  drawHorizontalBarChart,
+  drawLineChart,
+  drawVerticalBarChart,
+  ensureReportSpace
 } from "../../lib/pdf/reportLayout.js";
 import { getSchoolPortal, type SchoolPortal } from "./getSchoolPortal.js";
 
@@ -103,6 +110,20 @@ function buildOverviewPdf(portal: SchoolPortal): Promise<Buffer> {
       { label: "Gamification level", value: portal.gamification.label }
     ]);
 
+    ensureReportSpace(doc, 170);
+    const kpiBottom = drawVerticalBarChart(
+      doc,
+      chartBox(doc, 150),
+      [
+        { label: "Verified", value: portal.overview.verifiedSubmissions, color: CHART_COLORS[1] },
+        { label: "Campaigns", value: portal.overview.activeCampaigns, color: CHART_COLORS[0] },
+        { label: "Projects", value: portal.overview.projectsInProgress, color: CHART_COLORS[2] },
+        { label: "Needs", value: portal.overview.activeNeeds, color: CHART_COLORS[3] }
+      ],
+      { title: "Participation snapshot" }
+    );
+    advanceAfterChart(doc, kpiBottom);
+
     drawReportFooter(doc, `${LETTERHEAD.productLine} · ${portal.organization.label} portal report`);
   });
 }
@@ -145,6 +166,21 @@ function buildNeedsPdf(portal: SchoolPortal): Promise<Buffer> {
       { label: "Needs tracked", value: String(portal.needs.length) }
     ]);
 
+    if (portal.needs.length > 0) {
+      ensureReportSpace(doc, Math.min(280, 60 + portal.needs.length * 16));
+      const needsChartBottom = drawHorizontalBarChart(
+        doc,
+        chartBox(doc, Math.min(240, 50 + portal.needs.slice(0, 12).length * 16)),
+        portal.needs.slice(0, 12).map((need, i) => ({
+          label: need.title,
+          value: need.progressPercent,
+          color: CHART_COLORS[i % CHART_COLORS.length]
+        })),
+        { title: "Infrastructure progress by category", showPercent: true, maxValue: 100 }
+      );
+      advanceAfterChart(doc, needsChartBottom);
+    }
+
     drawReportTableHeader(doc, [
       { label: "Category", width: 120 },
       { label: "Status", width: 90 },
@@ -164,6 +200,21 @@ function buildTargetsPdf(portal: SchoolPortal): Promise<Buffer> {
   return createPdfBuffer((doc) => {
     drawReportBanner(doc, "Organisation Portal — Targets Report");
     drawReportTitleBlock(doc, "Campaign targets", `${orgSubtitle(portal)} · Generated ${generated}`);
+
+    if (portal.targets.length > 0) {
+      ensureReportSpace(doc, Math.min(220, 50 + portal.targets.length * 16));
+      const targetsBottom = drawHorizontalBarChart(
+        doc,
+        chartBox(doc, Math.min(200, 40 + portal.targets.length * 16)),
+        portal.targets.map((t, i) => ({
+          label: t.name,
+          value: t.percentToTarget,
+          color: CHART_COLORS[i % CHART_COLORS.length]
+        })),
+        { title: "Progress to target (%)", showPercent: true, maxValue: 100 }
+      );
+      advanceAfterChart(doc, targetsBottom);
+    }
 
     drawReportTableHeader(doc, [
       { label: "Campaign", width: 100 },
@@ -195,11 +246,22 @@ function buildSubmissionsPdf(portal: SchoolPortal): Promise<Buffer> {
     drawReportBanner(doc, "Organisation Portal — Submissions Report");
     drawReportTitleBlock(doc, "Community submissions", `${orgSubtitle(portal)} · Generated ${generated}`);
 
-    drawSection(doc, "Submission trend", "Recent verified participation.");
-    drawBulletList(
-      doc,
-      portal.submissionsTrend.map((row) => `${row.label}: ${row.count} submission(s)`)
-    );
+    if (portal.submissionsTrend.length > 0) {
+      ensureReportSpace(doc, 175);
+      const trendBottom = drawLineChart(
+        doc,
+        chartBox(doc, 160),
+        [
+          {
+            name: "Submissions",
+            color: CHART_COLORS[0],
+            points: portal.submissionsTrend.map((row) => ({ label: row.label, value: row.count }))
+          }
+        ],
+        { title: "Submission trend" }
+      );
+      advanceAfterChart(doc, trendBottom);
+    }
 
     drawSection(doc, "Supporters", "Brands and partners driving submissions.");
     drawReportTableHeader(doc, [
