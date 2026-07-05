@@ -110,6 +110,34 @@ export type PlatformTrust = {
   protections: string[];
 };
 
+export type PublicSchoolSearchHit = {
+  type: "school";
+  name: string;
+  province: string;
+  district: string;
+  address: string;
+  organizationCategory: string;
+  organizationLabel: string;
+  status: string;
+  statusLabel: string;
+  registered: true;
+};
+
+export type PublicBrandSearchHit = {
+  type: "brand";
+  name: string;
+  slug: string;
+  logoUrl: string | null;
+  description: string | null;
+  profileUrl: string;
+};
+
+export type PublicSearchResponse = {
+  query: string;
+  schools: PublicSchoolSearchHit[];
+  brands: PublicBrandSearchHit[];
+};
+
 const TIMEOUT_MS = 3000;
 
 function apiBase(): string {
@@ -149,3 +177,20 @@ export const fetchPlatformRankings = (): Promise<PlatformRankings | null> =>
 
 export const fetchPlatformTrust = (): Promise<PlatformTrust | null> =>
   fetchJson<PlatformTrust>("/api/v1/platform/trust");
+
+export async function fetchPublicSearch(
+  q: string,
+  type: "all" | "school" | "brand" = "all"
+): Promise<PublicSearchResponse | null> {
+  const params = new URLSearchParams({ q, type });
+  try {
+    const res = await fetch(`/api/platform/search?${params.toString()}`, {
+      cache: "no-store",
+      signal: AbortSignal.timeout(TIMEOUT_MS)
+    });
+    if (!res.ok) return null;
+    return (await res.json()) as PublicSearchResponse;
+  } catch {
+    return null;
+  }
+}

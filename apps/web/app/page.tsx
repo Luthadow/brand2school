@@ -46,6 +46,7 @@ import { emptyPlatformCredibility, fetchPlatformCredibility } from "../lib/platf
 import { emptyPlatformLive, emptyPlatformLiveOffline, fetchPlatformLive } from "../lib/platformLive";
 import { fetchPlatformPartners } from "../lib/platformPartners";
 import { PartnerCtaStrip, TrustedPartnersSection } from "../components/landing/TrustedPartnersSection";
+import { PublicLookupSearch } from "../components/lookup/PublicLookupSearch";
 
 const howSteps = [
   {
@@ -321,6 +322,18 @@ export default async function HomePage(): Promise<JSX.Element> {
               <LiveHeroMonthCard />
             </div>
           </FadeIn>
+        </div>
+      </section>
+
+      <section id="find-school" className="lp-lookup-band">
+        <div className="lp-container">
+          <p className="ds-eyebrow">Registry lookup</p>
+          <h2 className="ds-section-title ds-section-title--left">Is your school registered?</h2>
+          <p className="lp-problem-text" style={{ marginBottom: "1rem" }}>
+            Search schools, NGOs, and brand partners on Brand2School — or{" "}
+            <Link href="/lookup">open the full lookup page</Link>.
+          </p>
+          <PublicLookupSearch compact />
         </div>
       </section>
 

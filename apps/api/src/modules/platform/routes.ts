@@ -1,7 +1,7 @@
 import { Router } from "express";
 import { z } from "zod";
 import { prisma } from "../../lib/prisma.js";
-import { analyticsRateLimit } from "../../middleware/rateLimit.js";
+import { analyticsRateLimit, participationRateLimit } from "../../middleware/rateLimit.js";
 import { getPlatformLive } from "./getPlatformLive.js";
 import {
   getPlatformPartners,
@@ -34,6 +34,7 @@ import { backfillBrandVerification } from "../../bootstrap/backfillBrandVerifica
 import { purgeDemoData } from "../../bootstrap/purgeDemoData.js";
 import { readBrandLogoBuffer } from "../../lib/brandLogo.js";
 import { runMailVerifyAndOptionalSend } from "../../lib/healthEmail.js";
+import { publicSearchQuerySchema, searchPlatformPublic } from "./publicSearch.js";
 
 const querySchema = z.object({
   role: z
@@ -78,6 +79,18 @@ platformRouter.get("/brand-logo/:slug", async (req, res) => {
 platformRouter.get("/partners", async (_req, res) => {
   const partners = await getPlatformPartners();
   res.json(partners);
+});
+
+/** Public search — schools and brand partners registered on the platform. */
+platformRouter.get("/search", participationRateLimit, async (req, res) => {
+  const parsed = publicSearchQuerySchema.safeParse(req.query);
+  if (!parsed.success) {
+    res.status(400).json({ message: "Enter at least 2 characters to search." });
+    return;
+  }
+
+  const result = await searchPlatformPublic(parsed.data);
+  res.json(result);
 });
 
 /** Directory of public partner profiles. */

@@ -51,6 +51,7 @@ export default function RootLayout({ children }: { children: ReactNode }): JSX.E
             { href: "/", label: "Home" },
             { href: "/#how-it-works", label: "How It Works" },
             { href: "/partners", label: "Partners" },
+            { href: "/lookup", label: "Find School" },
             { href: "/for-brands", label: "For Brands" },
             { href: "/trust", label: "Trust" },
             { href: "/impact", label: "Impact" },
