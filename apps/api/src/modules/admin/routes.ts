@@ -21,6 +21,10 @@ import { getPlatformExecutiveAnalytics } from "../analytics/getPlatformExecutive
 import { getAdminPlatformSnapshot } from "./platformSnapshot.js";
 import { buildAdminReportPdf, adminReportContentDisposition, type AdminReportModule } from "./adminReportPdfs.js";
 import { listVerifiedSchools } from "./verifiedSchools.js";
+import {
+  sendVerifiedSchoolProgressEmail,
+  sendVerifiedSchoolWelcomeEmail
+} from "./verifiedSchoolEmails.js";
 import { listProvinceNominations } from "../platform/provinceNominations.js";
 import { applyBrandVerificationSideEffects } from "../platform/syncBrandVerification.js";
 
@@ -595,6 +599,47 @@ adminRouter.get("/verified-schools", async (req, res) => {
     search: query.data.search
   });
   res.json(result);
+});
+
+adminRouter.post("/verified-schools/:schoolId/emails/welcome", async (req, res) => {
+  if (!req.user?.id) {
+    res.status(401).json({ message: "Unauthorized." });
+    return;
+  }
+
+  const result = await sendVerifiedSchoolWelcomeEmail({
+    schoolId: req.params.schoolId,
+    actorUserId: req.user.id
+  });
+
+  if (!result.ok) {
+    res.status(result.status).json({ message: result.message });
+    return;
+  }
+
+  res.json({ message: result.message, emailed: result.emailed });
+});
+
+adminRouter.post("/verified-schools/:schoolId/emails/progress", async (req, res) => {
+  if (!req.user?.id) {
+    res.status(401).json({ message: "Unauthorized." });
+    return;
+  }
+
+  const result = await sendVerifiedSchoolProgressEmail({
+    schoolId: req.params.schoolId,
+    actorUserId: req.user.id,
+    body: req.body
+  });
+
+  if (!result.ok) {
+    res.status(result.status).json(
+      "issues" in result ? { message: result.message, issues: result.issues } : { message: result.message }
+    );
+    return;
+  }
+
+  res.json({ message: result.message, emailed: result.emailed });
 });
 
 adminRouter.get("/audit-logs", async (req, res) => {

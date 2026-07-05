@@ -729,3 +729,60 @@ body:has(.admin-app) {
     max-width: 100%;
   }
 }
+
+.verified-email-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  min-width: 5.5rem;
+}
+
+.verified-email-actions__btn {
+  border: 1px solid rgba(0, 59, 142, 0.2);
+  border-radius: 6px;
+  padding: 0.3rem 0.55rem;
+  font-size: 0.78rem;
+  font-weight: 600;
+  cursor: pointer;
+  background: #fff;
+  color: #003b8e;
+}
+
+.verified-email-actions__btn--welcome {
+  background: rgba(108, 194, 74, 0.12);
+  border-color: rgba(108, 194, 74, 0.35);
+  color: #166534;
+}
+
+.verified-email-actions__btn--update {
+  background: rgba(0, 59, 142, 0.08);
+}
+
+.verified-email-actions__btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.verified-email-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+}
+
+.verified-email-modal__backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.45);
+}
+
+.verified-email-modal__panel {
+  position: relative;
+  z-index: 1;
+  width: min(100%, 36rem);
+  max-height: 90vh;
+  overflow: auto;
+}
