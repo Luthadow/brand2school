@@ -13,6 +13,7 @@ import {
   advanceAfterChart,
   chartBox,
   CHART_COLORS,
+  createModernTable,
   drawHorizontalBarChart,
   drawLineChart,
   drawStackedBarChart,
@@ -445,21 +446,17 @@ async function buildVerifiedSchoolsReportPdf(): Promise<Buffer> {
       "Summary",
       "Schools and organisations that have passed initial verification or been approved for participation."
     );
+    doc.moveDown(0.75);
 
-    drawTableHeader(doc, [
-      { label: "School name", width: 120 },
-      { label: "Address", width: 110 },
-      { label: "Principal", width: 90 },
-      { label: "Email", width: 130 }
+    const table = createModernTable(doc, [
+      { label: "School name", ratio: 3 },
+      { label: "Address", ratio: 3 },
+      { label: "Principal", ratio: 2.5 },
+      { label: "Email address", ratio: 3 }
     ]);
-    const widths = [120, 110, 90, 130];
 
     for (const school of schools) {
-      drawTableRow(
-        doc,
-        [school.name.slice(0, 28), school.address.slice(0, 26), school.principalName.slice(0, 22), school.email.slice(0, 32)],
-        widths
-      );
+      table.addRow([school.name, school.address, school.principalName, school.email]);
     }
 
     drawFooter(doc, `${LETTERHEAD.productLine} · Confidential verified organisations report`);

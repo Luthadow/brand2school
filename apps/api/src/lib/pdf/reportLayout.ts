@@ -84,6 +84,116 @@ export function drawReportTableRow(
   doc.y = y + 14;
 }
 
+const MODERN_TABLE_MARGIN = 48;
+const MODERN_TABLE_PAD_X = 8;
+const MODERN_TABLE_PAD_Y = 10;
+const MODERN_TABLE_HEADER_H = 30;
+
+function modernTableContentWidth(doc: InstanceType<typeof PDFDocument>): number {
+  return doc.page.width - MODERN_TABLE_MARGIN * 2;
+}
+
+function drawModernTableHeaderRow(
+  doc: InstanceType<typeof PDFDocument>,
+  columns: Array<{ label: string; width: number }>
+): void {
+  ensureReportSpace(doc, MODERN_TABLE_HEADER_H + 12);
+  const x = MODERN_TABLE_MARGIN;
+  const y = doc.y;
+  const totalWidth = columns.reduce((sum, col) => sum + col.width, 0);
+
+  doc.rect(x, y, totalWidth, MODERN_TABLE_HEADER_H).fill(REPORT_BRAND_BLUE);
+  doc.fontSize(8.5).fillColor("#FFFFFF");
+
+  let cx = x;
+  for (const col of columns) {
+    doc.text(col.label, cx + MODERN_TABLE_PAD_X, y + 10, {
+      width: col.width - MODERN_TABLE_PAD_X * 2,
+      align: "left"
+    });
+    cx += col.width;
+  }
+
+  doc.y = y + MODERN_TABLE_HEADER_H + 6;
+}
+
+/** Spaced table with wrapping rows, zebra striping, and repeated headers on page breaks. */
+export function createModernTable(
+  doc: InstanceType<typeof PDFDocument>,
+  columnDefs: Array<{ label: string; ratio: number }>
+): { addRow: (cells: string[]) => void } {
+  const contentWidth = modernTableContentWidth(doc);
+  const ratioSum = columnDefs.reduce((sum, col) => sum + col.ratio, 0);
+  const columns = columnDefs.map((col) => ({
+    label: col.label,
+    width: Math.floor((contentWidth * col.ratio) / ratioSum)
+  }));
+  const widthUsed = columns.reduce((sum, col) => sum + col.width, 0);
+  columns[columns.length - 1]!.width += contentWidth - widthUsed;
+
+  let rowIndex = 0;
+
+  const drawHeader = (): void => {
+    drawModernTableHeaderRow(doc, columns);
+  };
+
+  drawHeader();
+
+  const addRow = (cells: string[]): void => {
+    const widths = columns.map((col) => col.width);
+    const texts = widths.map((_, i) => cells[i]?.trim() || "—");
+
+    doc.fontSize(9).fillColor("#475569");
+    let contentHeight = 14;
+    for (let i = 0; i < texts.length; i++) {
+      contentHeight = Math.max(
+        contentHeight,
+        doc.heightOfString(texts[i]!, { width: widths[i]! - MODERN_TABLE_PAD_X * 2 })
+      );
+    }
+    const rowHeight = contentHeight + MODERN_TABLE_PAD_Y * 2;
+
+    const yBefore = doc.y;
+    ensureReportSpace(doc, rowHeight + 8);
+    if (doc.y < yBefore) {
+      drawHeader();
+    }
+
+    const x = MODERN_TABLE_MARGIN;
+    const y = doc.y;
+    const totalWidth = contentWidth;
+
+    if (rowIndex % 2 === 0) {
+      doc.rect(x, y, totalWidth, rowHeight).fill("#F8FAFC");
+    }
+
+    doc
+      .strokeColor("#E2E8F0")
+      .lineWidth(0.5)
+      .moveTo(x, y + rowHeight)
+      .lineTo(x + totalWidth, y + rowHeight)
+      .stroke();
+
+    let cx = x;
+    for (let i = 0; i < texts.length; i++) {
+      doc
+        .fillColor(i === 0 ? "#0F172A" : "#475569")
+        .fontSize(9)
+        .text(texts[i]!, cx + MODERN_TABLE_PAD_X, y + MODERN_TABLE_PAD_Y, {
+          width: widths[i]! - MODERN_TABLE_PAD_X * 2,
+          align: "left",
+          lineGap: 2
+        });
+      cx += widths[i]!;
+    }
+
+    doc.y = y + rowHeight + 4;
+    rowIndex += 1;
+  };
+
+  return { addRow };
+}
+
 export function drawReportTitleBlock(
   doc: InstanceType<typeof PDFDocument>,
   title: string,
