@@ -13,7 +13,7 @@ export function BrandReportsPage(): JSX.Element {
   async function exportPdf(): Promise<void> {
     setExporting(true);
     try {
-      const res = await fetch("/api/analytics/brand/esg-report");
+      const res = await fetch("/api/analytics/brand/reports/reports/pdf");
       if (!res.ok) return;
       const blob = await res.blob();
       const url = URL.createObjectURL(blob);

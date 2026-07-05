@@ -19,6 +19,7 @@ import {
 import { commercialAdminRouter } from "../commercial/routes.js";
 import { getPlatformExecutiveAnalytics } from "../analytics/getPlatformExecutiveAnalytics.js";
 import { getAdminPlatformSnapshot } from "./platformSnapshot.js";
+import { buildAdminReportPdf, adminReportContentDisposition, type AdminReportModule } from "./adminReportPdfs.js";
 import { listProvinceNominations } from "../platform/provinceNominations.js";
 import { applyBrandVerificationSideEffects } from "../platform/syncBrandVerification.js";
 
@@ -866,6 +867,31 @@ adminRouter.get("/analytics/executive", async (req, res) => {
 
   const analytics = await getPlatformExecutiveAnalytics();
   res.json(analytics);
+});
+
+const adminReportModules = new Set<AdminReportModule>(["overview", "analytics", "commercial", "brands"]);
+
+adminRouter.get("/reports/:module/pdf", async (req, res) => {
+  const module = req.params.module as AdminReportModule;
+  if (!adminReportModules.has(module)) {
+    res.status(404).json({ message: "Report not found." });
+    return;
+  }
+
+  if (module !== "overview" && req.user?.role !== "SUPER_ADMIN") {
+    res.status(403).json({ message: "SUPER_ADMIN role required for this report." });
+    return;
+  }
+
+  try {
+    const pdf = await buildAdminReportPdf(module);
+    res.setHeader("Content-Type", "application/pdf");
+    res.setHeader("Content-Disposition", adminReportContentDisposition(module));
+    res.send(pdf);
+  } catch (err) {
+    console.error("[admin] PDF report failed:", module, err);
+    res.status(500).json({ message: "Could not generate PDF report." });
+  }
 });
 
 adminRouter.get("/province-nominations", async (req, res) => {

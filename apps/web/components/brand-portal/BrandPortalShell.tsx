@@ -27,22 +27,79 @@ import { brandCsrfHeaders } from "../../lib/brandClientFetch";
 import type { BrandPortal } from "../../lib/brandPortal";
 import { formatZar } from "../../lib/brandPortal";
 
-const NAV: Array<{ href: Route; label: string; icon: typeof LayoutDashboard; short: string }> = [
-  { href: "/brand/dashboard", label: "Overview", icon: LayoutDashboard, short: "Home" },
-  { href: "/brand/dashboard/campaigns", label: "Campaigns", icon: Megaphone, short: "Campaigns" },
-  { href: "/brand/dashboard/schools", label: "School Needs", icon: School, short: "Schools" },
-  { href: "/brand/dashboard/submissions", label: "Submissions", icon: Shield, short: "Codes" },
-  { href: "/brand/dashboard/analytics", label: "Analytics", icon: BarChart3, short: "Analytics" },
-  { href: "/brand/dashboard/map", label: "Impact Map", icon: Map, short: "Map" },
-  { href: "/brand/dashboard/reports", label: "Reports & ESG", icon: FileText, short: "Reports" },
-  { href: "/brand/dashboard/commercial", label: "Agreement", icon: FileSignature, short: "Deal" },
-  { href: "/brand/dashboard/financials", label: "Financials", icon: CircleDollarSign, short: "Funds" },
-  { href: "/brand/dashboard/media", label: "Media & Stories", icon: Film, short: "Media" },
+const NAV: Array<{
+  href: Route;
+  label: string;
+  icon: typeof LayoutDashboard;
+  short: string;
+  report?: BrandReportSlug;
+}> = [
+  { href: "/brand/dashboard", label: "Overview", icon: LayoutDashboard, short: "Home", report: "overview" },
+  { href: "/brand/dashboard/campaigns", label: "Campaigns", icon: Megaphone, short: "Campaigns", report: "campaigns" },
+  { href: "/brand/dashboard/schools", label: "School Needs", icon: School, short: "Schools", report: "schools" },
+  { href: "/brand/dashboard/submissions", label: "Submissions", icon: Shield, short: "Codes", report: "submissions" },
+  { href: "/brand/dashboard/analytics", label: "Analytics", icon: BarChart3, short: "Analytics", report: "analytics" },
+  { href: "/brand/dashboard/map", label: "Impact Map", icon: Map, short: "Map", report: "map" },
+  { href: "/brand/dashboard/reports", label: "Reports & ESG", icon: FileText, short: "Reports", report: "reports" },
+  { href: "/brand/dashboard/commercial", label: "Agreement", icon: FileSignature, short: "Deal", report: "commercial" },
+  { href: "/brand/dashboard/financials", label: "Financials", icon: CircleDollarSign, short: "Funds", report: "financials" },
+  { href: "/brand/dashboard/media", label: "Media & Stories", icon: Film, short: "Media", report: "media" },
   { href: "/brand/dashboard/notifications", label: "Notifications", icon: Bell, short: "Alerts" },
   { href: "/brand/dashboard/settings", label: "Settings", icon: Settings, short: "Settings" }
 ];
 
+type BrandReportSlug =
+  | "overview"
+  | "campaigns"
+  | "schools"
+  | "submissions"
+  | "analytics"
+  | "map"
+  | "reports"
+  | "commercial"
+  | "financials"
+  | "media";
+
 const BOTTOM_NAV = NAV.slice(0, 4);
+
+function NavRow({
+  href,
+  label,
+  icon: Icon,
+  active,
+  unread,
+  report,
+  onNavigate
+}: {
+  href: Route;
+  label: string;
+  icon: typeof LayoutDashboard;
+  active: boolean;
+  unread?: number;
+  report?: BrandReportSlug;
+  onNavigate?: () => void;
+}): JSX.Element {
+  return (
+    <div className={`bp-nav-row${active ? " bp-nav-row--active" : ""}`}>
+      <Link href={href} className={`bp-nav-link${active ? " bp-nav-link--active" : ""}`} onClick={onNavigate}>
+        <Icon size={18} />
+        {label}
+        {unread ? <span className="bp-badge">{unread}</span> : null}
+      </Link>
+      {report ? (
+        <a
+          href={`/api/analytics/brand/reports/${report}/pdf`}
+          className="bp-nav-pdf"
+          title={`Download ${label} PDF report`}
+          aria-label={`Download ${label} PDF report`}
+          onClick={(e) => e.stopPropagation()}
+        >
+          PDF
+        </a>
+      ) : null}
+    </div>
+  );
+}
 
 export function BrandPortalShell({
   portal,
@@ -107,20 +164,17 @@ export function BrandPortalShell({
             const active =
               pathname === item.href ||
               (item.href !== "/brand/dashboard" && pathname.startsWith(item.href));
-            const Icon = item.icon;
             return (
-              <Link
+              <NavRow
                 key={item.href}
                 href={item.href}
-                className={`bp-nav-link${active ? " bp-nav-link--active" : ""}`}
-                onClick={() => setMenuOpen(false)}
-              >
-                <Icon size={18} />
-                {item.label}
-                {item.href.includes("notifications") && unread > 0 ? (
-                  <span className="bp-badge">{unread}</span>
-                ) : null}
-              </Link>
+                label={item.label}
+                icon={item.icon}
+                active={active}
+                report={item.report}
+                unread={item.href.includes("notifications") ? unread : undefined}
+                onNavigate={() => setMenuOpen(false)}
+              />
             );
           })}
         </nav>

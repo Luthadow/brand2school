@@ -3,6 +3,11 @@ import { z } from "zod";
 import { requireAnalyticsAccess } from "../../middleware/analyticsAccess.js";
 import { analyticsRateLimit } from "../../middleware/rateLimit.js";
 import { buildEsgPdf } from "./esgPdf.js";
+import {
+  brandReportContentDisposition,
+  buildBrandPortalReportPdf,
+  isBrandReportModule
+} from "./brandPortalReportPdfs.js";
 import { getBrandAnalytics } from "./getBrandAnalytics.js";
 import { getBrandPortal } from "./getBrandPortal.js";
 import { getBrandTrustMetrics } from "./getBrandTrustMetrics.js";
@@ -70,4 +75,33 @@ analyticsRouter.get("/brand/esg-report", async (req, res) => {
   res.setHeader("Content-Type", "application/pdf");
   res.setHeader("Content-Disposition", `attachment; filename="${filename}"`);
   res.send(pdf);
+});
+
+analyticsRouter.get("/brand/reports/:module/pdf", async (req, res) => {
+  const query = querySchema.safeParse(req.query);
+  if (!query.success) {
+    res.status(400).json({ message: "Invalid query parameters." });
+    return;
+  }
+
+  const module = req.params.module;
+  if (!isBrandReportModule(module)) {
+    res.status(404).json({ message: "Report not found." });
+    return;
+  }
+
+  if (!req.brandId) {
+    res.status(403).json({ message: "Brand access required." });
+    return;
+  }
+
+  try {
+    const pdf = await buildBrandPortalReportPdf(req.brandId, module, query.data.campaignId);
+    res.setHeader("Content-Type", "application/pdf");
+    res.setHeader("Content-Disposition", brandReportContentDisposition(module));
+    res.send(pdf);
+  } catch (err) {
+    console.error("[analytics/brand/reports]", module, err);
+    res.status(500).json({ message: "Could not generate PDF report." });
+  }
 });

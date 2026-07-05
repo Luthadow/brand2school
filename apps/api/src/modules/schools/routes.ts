@@ -13,6 +13,11 @@ import { getNationalSchoolScores } from "./nationalSchoolScores.js";
 
 import { registerSchool, schoolRegisterSchema, getSchoolForUser } from "./registerSchool.js";
 import { getSchoolPortal } from "./getSchoolPortal.js";
+import {
+  buildSchoolPortalReportPdf,
+  isSchoolReportModule,
+  schoolReportContentDisposition
+} from "./schoolPortalReportPdfs.js";
 import { analyticsRateLimit, registrationRateLimit } from "../../middleware/rateLimit.js";
 import { getOrCreateSchoolVerification } from "./schoolVerification/verificationGate.js";
 import { assertDocumentsReadyForClaim } from "./schoolVerification/verificationClaimGate.js";
@@ -232,6 +237,31 @@ schoolsRouter.get("/portal", requireAuth, requireRole(["SCHOOL_ADMIN"]), async (
   } catch (err) {
     console.error("[schools/portal]", err);
     res.status(500).json({ message: "Could not load organisation portal." });
+  }
+});
+
+schoolsRouter.get("/portal/reports/:module/pdf", requireAuth, requireRole(["SCHOOL_ADMIN"]), async (req, res) => {
+  if (!req.user) {
+    res.status(401).json({ message: "Unauthorized." });
+    return;
+  }
+  const module = req.params.module;
+  if (!isSchoolReportModule(module)) {
+    res.status(404).json({ message: "Report not found." });
+    return;
+  }
+  try {
+    const pdf = await buildSchoolPortalReportPdf(req.user.id, module);
+    if (!pdf) {
+      res.status(404).json({ message: "No organisation linked to this account." });
+      return;
+    }
+    res.setHeader("Content-Type", "application/pdf");
+    res.setHeader("Content-Disposition", schoolReportContentDisposition(module));
+    res.send(pdf);
+  } catch (err) {
+    console.error("[schools/portal/reports]", module, err);
+    res.status(500).json({ message: "Could not generate PDF report." });
   }
 });
 

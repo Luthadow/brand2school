@@ -26,3 +26,29 @@ export async function proxyAdminRequest(
   const data = await response.json().catch(() => ({ message: "Upstream request failed." }));
   return NextResponse.json(data, { status: response.status });
 }
+
+export async function proxyAdminPdfRequest(req: NextRequest, urlPath: string): Promise<NextResponse> {
+  const { accessToken } = readSessionCookies();
+  if (!accessToken) return NextResponse.json({ message: "Unauthorized." }, { status: 401 });
+
+  const response = await fetch(`${apiBaseUrl()}${urlPath}`, {
+    method: "GET",
+    headers: { Authorization: `Bearer ${accessToken}` },
+    cache: "no-store"
+  });
+
+  if (!response.ok) {
+    const data = await response.json().catch(() => ({ message: "Failed to generate PDF report." }));
+    return NextResponse.json(data, { status: response.status });
+  }
+
+  const buffer = await response.arrayBuffer();
+  const disposition = response.headers.get("content-disposition") ?? 'attachment; filename="brand2school-admin-report.pdf"';
+  return new NextResponse(buffer, {
+    status: 200,
+    headers: {
+      "Content-Type": "application/pdf",
+      "Content-Disposition": disposition
+    }
+  });
+}

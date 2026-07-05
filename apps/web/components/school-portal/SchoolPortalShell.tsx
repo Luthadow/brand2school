@@ -22,20 +22,76 @@ import {
 import { csrfHeaders } from "../../lib/clientFetch";
 import type { SchoolPortal } from "../../lib/schoolPortal";
 
-const NAV: Array<{ href: Route; label: string; icon: typeof Home; short: string }> = [
-  { href: "/school/dashboard", label: "Home", icon: Home, short: "Home" },
-  { href: "/school/dashboard/roadmap", label: "Roadmap", icon: Map, short: "Plan" },
-  { href: "/school/dashboard/needs", label: "Needs", icon: Send, short: "Needs" },
-  { href: "/school/dashboard/targets", label: "Targets", icon: Target, short: "Goals" },
-  { href: "/school/dashboard/submissions", label: "Submissions", icon: TrendingUp, short: "Stats" },
-  { href: "/school/dashboard/projects", label: "Projects", icon: Wrench, short: "Build" },
-  { href: "/school/dashboard/messages", label: "Messages", icon: MessageCircle, short: "Chat" },
+const NAV: Array<{
+  href: Route;
+  label: string;
+  icon: typeof Home;
+  short: string;
+  report?: SchoolReportSlug;
+}> = [
+  { href: "/school/dashboard", label: "Home", icon: Home, short: "Home", report: "overview" },
+  { href: "/school/dashboard/roadmap", label: "Roadmap", icon: Map, short: "Plan", report: "roadmap" },
+  { href: "/school/dashboard/needs", label: "Needs", icon: Send, short: "Needs", report: "needs" },
+  { href: "/school/dashboard/targets", label: "Targets", icon: Target, short: "Goals", report: "targets" },
+  { href: "/school/dashboard/submissions", label: "Submissions", icon: TrendingUp, short: "Stats", report: "submissions" },
+  { href: "/school/dashboard/projects", label: "Projects", icon: Wrench, short: "Build", report: "projects" },
+  { href: "/school/dashboard/messages", label: "Messages", icon: MessageCircle, short: "Chat", report: "messages" },
   { href: "/school/dashboard/media", label: "Media", icon: Upload, short: "Media" },
-  { href: "/school/dashboard/documents", label: "Docs", icon: FileText, short: "Docs" },
-  { href: "/school/dashboard/profile", label: "Profile", icon: User, short: "You" }
+  { href: "/school/dashboard/documents", label: "Docs", icon: FileText, short: "Docs", report: "documents" },
+  { href: "/school/dashboard/profile", label: "Profile", icon: User, short: "You", report: "profile" }
 ];
 
+type SchoolReportSlug =
+  | "overview"
+  | "roadmap"
+  | "needs"
+  | "targets"
+  | "submissions"
+  | "projects"
+  | "messages"
+  | "documents"
+  | "profile";
+
 const BOTTOM_NAV = NAV.slice(0, 4);
+
+function NavRow({
+  href,
+  label,
+  icon: Icon,
+  active,
+  unread,
+  report,
+  onNavigate
+}: {
+  href: Route;
+  label: string;
+  icon: typeof Home;
+  active: boolean;
+  unread?: number;
+  report?: SchoolReportSlug;
+  onNavigate?: () => void;
+}): JSX.Element {
+  return (
+    <div className={`sp-nav-row${active ? " sp-nav-row--active" : ""}`}>
+      <Link href={href} className={`sp-nav-link${active ? " sp-nav-link--active" : ""}`} onClick={onNavigate}>
+        <Icon size={18} />
+        {label}
+        {unread ? <span className="sp-nav-badge">{unread}</span> : null}
+      </Link>
+      {report ? (
+        <a
+          href={`/api/school/reports/${report}/pdf`}
+          className="sp-nav-pdf"
+          title={`Download ${label} PDF report`}
+          aria-label={`Download ${label} PDF report`}
+          onClick={(e) => e.stopPropagation()}
+        >
+          PDF
+        </a>
+      ) : null}
+    </div>
+  );
+}
 
 export function SchoolPortalShell({
   portal,
@@ -97,20 +153,17 @@ export function SchoolPortalShell({
             const active =
               pathname === item.href ||
               (item.href !== "/school/dashboard" && pathname.startsWith(item.href));
-            const Icon = item.icon;
             return (
-              <Link
+              <NavRow
                 key={item.href}
                 href={item.href}
-                className={`sp-nav-link${active ? " sp-nav-link--active" : ""}`}
-                onClick={() => setMenuOpen(false)}
-              >
-                <Icon size={18} />
-                {item.label}
-                {item.href.includes("messages") && unread > 0 ? (
-                  <span className="sp-nav-badge">{unread}</span>
-                ) : null}
-              </Link>
+                label={item.label}
+                icon={item.icon}
+                active={active}
+                report={item.report}
+                unread={item.href.includes("messages") ? unread : undefined}
+                onNavigate={() => setMenuOpen(false)}
+              />
             );
           })}
         </nav>
