@@ -144,7 +144,8 @@ export async function getPlatformLive(): Promise<PlatformLivePayload> {
 
     const [
       schoolsRegistered,
-      registeredSchools,
+      registeredSchoolsByProvince,
+      recentRegisteredSchools,
       schoolsParticipating,
       validSubmissions,
       submissionsThisMonth,
@@ -156,6 +157,11 @@ export async function getPlatformLive(): Promise<PlatformLivePayload> {
       campaignsRaw
     ] = await Promise.all([
       prisma.school.count({ where: registeredSchoolWhere }),
+      prisma.school.groupBy({
+        by: ["province"],
+        where: registeredSchoolWhere,
+        _count: { id: true }
+      }),
       prisma.school.findMany({
         where: registeredSchoolWhere,
         select: { id: true, name: true, province: true, district: true, createdAt: true },
@@ -209,31 +215,30 @@ export async function getPlatformLive(): Promise<PlatformLivePayload> {
       return emptyPlatformLive();
     }
 
-    const provinceMap = new Map<string, { schools: Set<string>; submissions: number }>();
+    const provinceMap = new Map<string, { registeredSchools: number; submissions: number }>();
     for (const p of SA_PROVINCES) {
-      provinceMap.set(p.code, { schools: new Set(), submissions: 0 });
+      provinceMap.set(p.code, { registeredSchools: 0, submissions: 0 });
     }
-    for (const school of registeredSchools) {
-      const code = normalizeProvinceCode(school.province);
-      const bucket = provinceMap.get(code) ?? { schools: new Set(), submissions: 0 };
-      bucket.schools.add(school.id);
+    for (const row of registeredSchoolsByProvince) {
+      const code = normalizeProvinceCode(row.province);
+      const bucket = provinceMap.get(code) ?? { registeredSchools: 0, submissions: 0 };
+      bucket.registeredSchools += row._count.id;
       provinceMap.set(code, bucket);
     }
     for (const row of allValid) {
       const code = normalizeProvinceCode(row.school.province);
-      const bucket = provinceMap.get(code) ?? { schools: new Set(), submissions: 0 };
-      bucket.schools.add(row.schoolId);
+      const bucket = provinceMap.get(code) ?? { registeredSchools: 0, submissions: 0 };
       bucket.submissions += 1;
       provinceMap.set(code, bucket);
     }
 
     const maxSubmissions = Math.max(...[...provinceMap.values()].map((v) => v.submissions), 1);
     const provinces: LiveProvinceRow[] = SA_PROVINCES.map((p) => {
-      const stats = provinceMap.get(p.code) ?? { schools: new Set(), submissions: 0 };
+      const stats = provinceMap.get(p.code) ?? { registeredSchools: 0, submissions: 0 };
       return {
         code: p.code,
         name: p.name,
-        schools: stats.schools.size,
+        schools: stats.registeredSchools,
         submissions: stats.submissions,
         pct: stats.submissions === 0 ? 0 : Math.round((stats.submissions / maxSubmissions) * 100)
       };
@@ -242,7 +247,7 @@ export async function getPlatformLive(): Promise<PlatformLivePayload> {
       .sort((a, b) => b.submissions - a.submissions || b.schools - a.schools);
 
     const provincesActive = [...provinceMap.values()].filter(
-      (v) => v.submissions > 0 || v.schools.size > 0
+      (v) => v.submissions > 0 || v.registeredSchools > 0
     ).length;
 
     const submissionFeed: LiveFeedItem[] = recent.map((row) => {
@@ -261,7 +266,7 @@ export async function getPlatformLive(): Promise<PlatformLivePayload> {
       };
     });
 
-    const registrationFeed: LiveFeedItem[] = registeredSchools.slice(0, 8).map((school) => {
+    const registrationFeed: LiveFeedItem[] = recentRegisteredSchools.slice(0, 8).map((school) => {
       const createdAt = school.createdAt;
       const province = provinceNameFromCode(normalizeProvinceCode(school.province));
       const ago = formatAgo(createdAt);
@@ -318,7 +323,7 @@ export async function getPlatformLive(): Promise<PlatformLivePayload> {
 
     const pulse = buildPulseMessages({
       recentHour,
-      recentRegistrations: registeredSchools,
+      recentRegistrations: recentRegisteredSchools,
       campaigns,
       provinces,
       submissionsThisMonth,
