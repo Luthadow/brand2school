@@ -8,6 +8,7 @@ import {
   type InfrastructureItemPatch
 } from "../schools/syncSchoolInfrastructure.js";
 import { PHASE_COMPLETION_THRESHOLD } from "../schools/infrastructureProgress.js";
+import { getAdminSchoolProfile } from "./schoolProfile.js";
 
 const itemPatchSchema = z.object({
   key: z.string().min(2),
@@ -26,6 +27,15 @@ const patchInfrastructureSchema = z.object({
 });
 
 export const adminSchoolInfrastructureRouter = Router();
+
+adminSchoolInfrastructureRouter.get("/:schoolId", async (req, res) => {
+  const profile = await getAdminSchoolProfile(req.params.schoolId);
+  if (!profile) {
+    res.status(404).json({ message: "School not found." });
+    return;
+  }
+  res.json(profile);
+});
 
 adminSchoolInfrastructureRouter.get("/:schoolId/infrastructure", async (req, res) => {
   const school = await prisma.school.findUnique({ where: { id: req.params.schoolId } });

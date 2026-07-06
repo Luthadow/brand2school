@@ -116,7 +116,9 @@ export function SchoolInfrastructureClient({ schoolId }: { schoolId: string }): 
   return (
     <div>
       <p style={{ marginBottom: "0.75rem" }}>
-        <Link href="/dashboard/approvals">← Approvals</Link>
+        <Link href={`/dashboard/schools/${schoolId}`}>← School profile</Link>
+        {" · "}
+        <Link href="/dashboard/verified">Verified</Link>
       </p>
       <h1 style={{ marginBottom: "0.25rem" }}>{data.school.name}</h1>
       <p style={{ color: "#475569", marginBottom: "1rem" }}>

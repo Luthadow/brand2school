@@ -163,6 +163,13 @@ export function SchoolDocumentsPage(): JSX.Element {
         </p>
       ) : null}
 
+      {verification.status === "APPROVED" && !verification.claimReady && verification.canSubmit ? (
+        <p className="sp-muted" style={{ marginBottom: "1.25rem" }}>
+          Your organisation is approved to participate. Upload outstanding documents below when you have them —
+          full documentation is required before claiming infrastructure milestones.
+        </p>
+      ) : null}
+
       {verification.documents.some((d) => d.uploaded || d.deferred) ? (
         <div className="card" style={{ marginBottom: "1.25rem" }}>
           <h2 style={{ marginTop: 0, fontSize: "1rem" }}>Document checklist</h2>

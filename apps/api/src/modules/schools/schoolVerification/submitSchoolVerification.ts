@@ -14,6 +14,7 @@ import {
 import { getOrCreateSchoolVerification } from "./verificationGate.js";
 import { serializeSchoolVerification } from "./serializeSchoolVerification.js";
 import {
+  documentsReadyForClaim,
   parseDocumentDeferrals,
   pruneDeferralsForUploadedFiles,
   validateSubmissionCoverage,
@@ -120,16 +121,34 @@ export async function submitSchoolVerificationPacket(input: {
   }
 
   const isDeferredUpload =
-    existing?.status === "SUBMITTED" || existing?.status === "APPROVED" || existing?.status === "REJECTED";
+    existing?.status === "SUBMITTED" ||
+    existing?.status === "APPROVED" ||
+    existing?.status === "REJECTED" ||
+    existing?.status === "UNDER_REVIEW";
 
-  if (existing?.status === "APPROVED" && Object.keys(input.files).length === 0 && Object.keys(existingDeferrals).length === 0) {
-    return { ok: false as const, status: 409, message: "Verification is already approved." };
-  }
-  if (existing?.status === "UNDER_REVIEW" && Object.keys(existingDeferrals).length === 0) {
-    return { ok: false as const, status: 409, message: "Your verification packet is under review." };
-  }
-  if (existing?.status === "SUBMITTED" && Object.keys(existingDeferrals).length === 0) {
-    return { ok: false as const, status: 409, message: "Your verification packet is already submitted." };
+  const existingSnapshot = {
+    organizationCategory: school.organizationCategory,
+    emisNumber: existing?.emisNumber ?? null,
+    registrationNumber: existing?.registrationNumber ?? null,
+    principalIdPath: existing?.principalIdPath ?? null,
+    schoolLetterPath: existing?.schoolLetterPath ?? null,
+    emisEvidencePath: existing?.emisEvidencePath ?? null,
+    documentPaths: parseDocumentPaths(existing?.documentPaths),
+    registrationDeferred: Boolean(existingDeferrals[REGISTRATION_DEFERRAL_KEY])
+  };
+  const claimReady = documentsReadyForClaim(existingSnapshot);
+  const uploadingFiles = Object.keys(input.files).length > 0;
+
+  if (!uploadingFiles) {
+    if (existing?.status === "APPROVED" && claimReady && Object.keys(existingDeferrals).length === 0) {
+      return { ok: false as const, status: 409, message: "Verification is already approved." };
+    }
+    if (existing?.status === "UNDER_REVIEW" && claimReady && Object.keys(existingDeferrals).length === 0) {
+      return { ok: false as const, status: 409, message: "Your verification packet is under review." };
+    }
+    if (existing?.status === "SUBMITTED" && claimReady && Object.keys(existingDeferrals).length === 0) {
+      return { ok: false as const, status: 409, message: "Your verification packet is already submitted." };
+    }
   }
 
   const documentPaths: Record<string, string> = {
@@ -201,7 +220,7 @@ export async function submitSchoolVerificationPacket(input: {
   const nextStatus =
     existing?.status === "APPROVED"
       ? "APPROVED"
-      : existing?.status === "SUBMITTED" && Object.keys(input.files).length > 0
+      : existing?.status === "UNDER_REVIEW" && uploadingFiles
         ? "SUBMITTED"
         : "SUBMITTED";
 

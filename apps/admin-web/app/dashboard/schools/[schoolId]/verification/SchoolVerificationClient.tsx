@@ -122,7 +122,9 @@ export function SchoolVerificationClient({ schoolId }: { schoolId: string }): JS
   return (
     <>
       <p>
-        <Link href="/dashboard/approvals">← Approvals</Link>
+        <Link href={`/dashboard/schools/${schoolId}`}>← School profile</Link>
+        {" · "}
+        <Link href="/dashboard/verified">Verified</Link>
       </p>
       <h1>Verification — {data.school.name}</h1>
       <p>
@@ -217,6 +219,8 @@ export function SchoolVerificationClient({ schoolId }: { schoolId: string }): JS
               Reject packet
             </button>
             <Link href={`/dashboard/schools/${schoolId}/infrastructure`}>Edit infrastructure</Link>
+            {" · "}
+            <Link href={`/dashboard/schools/${schoolId}`}>Profile</Link>
           </div>
         </section>
       )}

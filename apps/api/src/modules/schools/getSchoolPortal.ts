@@ -8,7 +8,12 @@ import { buildSchoolNeedsEngine, summarizeNeedsEngine } from "./schoolNeedsEngin
 import { schoolRecordToStored } from "./syncSchoolInfrastructure.js";
 import { getOrCreateSchoolVerification } from "./schoolVerification/verificationGate.js";
 import { getOrganizationCategory } from "../../lib/organizationCategories.js";
-import { hasActiveDeferrals, parseDocumentDeferrals, REGISTRATION_DEFERRAL_KEY } from "./schoolVerification/documentDeferrals.js";
+import {
+  documentsReadyForClaim,
+  hasActiveDeferrals,
+  parseDocumentDeferrals,
+  REGISTRATION_DEFERRAL_KEY
+} from "./schoolVerification/documentDeferrals.js";
 import { serializeSchoolVerification } from "./schoolVerification/serializeSchoolVerification.js";
 
 export type SchoolNeedItem = {
@@ -208,11 +213,14 @@ export async function getSchoolPortal(userId: string): Promise<SchoolPortal | nu
     registrationDeferred: deferrals[REGISTRATION_DEFERRAL_KEY]?.willSubmitBeforeClaim === true
   };
   const activeDeferrals = hasActiveDeferrals(deferralSnapshot, deferrals);
+  const claimReady = documentsReadyForClaim(deferralSnapshot);
   const canSubmitVerification =
     verificationRow.status === "NOT_SUBMITTED" ||
     verificationRow.status === "REJECTED" ||
-    activeDeferrals;
-  const canCompleteDocuments = activeDeferrals;
+    activeDeferrals ||
+    !claimReady;
+  const canCompleteDocuments =
+    activeDeferrals || (verificationRow.status !== "NOT_SUBMITTED" && !claimReady);
 
   const [validSubmissions, flaggedSubmissions, rejectedCount] = await Promise.all([
     prisma.submission.count({ where: { schoolId: school.id, state: "VALID" } }),

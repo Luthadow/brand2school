@@ -190,7 +190,9 @@ export function VerifiedClient(): JSX.Element {
                   const emailDisabled = item.email === "—";
                   return (
                     <tr key={item.id}>
-                      <td>{item.name}</td>
+                      <td>
+                        <Link href={`/dashboard/schools/${item.id}`}>{item.name}</Link>
+                      </td>
                       <td>{item.address}</td>
                       <td>{item.principalName}</td>
                       <td>{item.email}</td>
@@ -220,6 +222,8 @@ export function VerifiedClient(): JSX.Element {
                       </td>
                       <td>
                         <Link href={`/dashboard/schools/${item.id}/verification`}>Verify</Link>
+                        {" · "}
+                        <Link href={`/dashboard/schools/${item.id}`}>Profile</Link>
                         {" · "}
                         <Link href={`/dashboard/schools/${item.id}/infrastructure`}>Infra</Link>
                         {next ? (
