@@ -4,6 +4,11 @@ import { prisma } from "../prisma.js";
 import { logger } from "../logger.js";
 import { deliverNotificationTemplate } from "./deliver.js";
 import { finalizeEsgScheduleNotification } from "./esgDeliveryHook.js";
+import {
+  findDuplicateSentSiblingJob,
+  markNotificationJobSent,
+  recoverStaleNotificationJobs
+} from "./idempotency.js";
 import type { NotificationPayloadMap } from "./payloads.js";
 
 const BATCH_SIZE = () => env.NOTIFICATION_BATCH_SIZE;
@@ -20,21 +25,50 @@ export async function processNotificationJobById(jobId: string): Promise<boolean
   return processLockedJob(job);
 }
 
+async function skipIfAlreadyDelivered(job: NotificationJob): Promise<boolean> {
+  const log = await prisma.notificationLog.findUnique({
+    where: { id: job.logId },
+    select: { sentAt: true }
+  });
+  if (log?.sentAt) {
+    await markNotificationJobSent(job.id, job.logId, "Recovered previously sent notification");
+    logger.info(
+      { jobId: job.id, template: job.template, entityId: job.entityId },
+      "Skipped notification retry — email was already delivered"
+    );
+    return true;
+  }
+
+  const duplicate = await findDuplicateSentSiblingJob(job);
+  if (!duplicate) return false;
+
+  await markNotificationJobSent(job.id, job.logId, "Skipped duplicate welcome email");
+  logger.info(
+    { jobId: job.id, duplicateJobId: duplicate.id, template: job.template, entityId: job.entityId },
+    "Skipped duplicate notification delivery"
+  );
+  return true;
+}
+
 async function processLockedJob(job: NotificationJob): Promise<boolean> {
   const now = new Date();
 
-  await prisma.$transaction([
-    prisma.notificationJob.update({
-      where: { id: job.id },
-      data: { status: "PROCESSING", lockedAt: now, attempts: { increment: 1 } }
-    }),
-    prisma.notificationLog.update({
-      where: { id: job.logId },
-      data: { status: "PROCESSING" }
-    })
-  ]);
+  const claimed = await prisma.notificationJob.updateMany({
+    where: { id: job.id, status: "QUEUED" },
+    data: { status: "PROCESSING", lockedAt: now, attempts: { increment: 1 } }
+  });
+  if (claimed.count === 0) return false;
+
+  await prisma.notificationLog.update({
+    where: { id: job.logId },
+    data: { status: "PROCESSING" }
+  });
 
   const refreshed = await prisma.notificationJob.findUniqueOrThrow({ where: { id: job.id } });
+
+  if (await skipIfAlreadyDelivered(refreshed)) {
+    return true;
+  }
 
   try {
     const result = await deliverNotificationTemplate(
@@ -43,28 +77,13 @@ async function processLockedJob(job: NotificationJob): Promise<boolean> {
       refreshed.payload as NotificationPayloadMap[NotificationTemplate]
     );
 
-    await prisma.$transaction([
-      prisma.notificationJob.update({
-        where: { id: job.id },
-        data: {
-          status: "SENT",
-          processedAt: new Date(),
-          lockedAt: null,
-          lastError: null
-        }
-      }),
-      prisma.notificationLog.update({
-        where: { id: job.logId },
-        data: {
-          status: "SENT",
-          subject: result.subject,
-          sentAt: new Date(),
-          errorMessage: null
-        }
-      })
-    ]);
+    await markNotificationJobSent(job.id, job.logId, result.subject);
 
-    await finalizeEsgScheduleNotification(refreshed, true);
+    try {
+      await finalizeEsgScheduleNotification(refreshed, true);
+    } catch (hookError) {
+      logger.error({ jobId: job.id, err: hookError }, "Post-send notification hook failed");
+    }
 
     return true;
   } catch (error) {
@@ -93,7 +112,11 @@ async function processLockedJob(job: NotificationJob): Promise<boolean> {
     ]);
 
     if (shouldFail && refreshed.template === "ESG_REPORT") {
-      await finalizeEsgScheduleNotification(refreshed, false, message);
+      try {
+        await finalizeEsgScheduleNotification(refreshed, false, message);
+      } catch (hookError) {
+        logger.error({ jobId: job.id, err: hookError }, "Post-failure ESG hook failed");
+      }
     }
 
     logger.error({ jobId: job.id, template: job.template, err: error }, "Notification job failed");
@@ -102,6 +125,11 @@ async function processLockedJob(job: NotificationJob): Promise<boolean> {
 }
 
 export async function processDueNotificationJobs(limit = BATCH_SIZE()): Promise<number> {
+  const recovered = await recoverStaleNotificationJobs();
+  if (recovered > 0) {
+    logger.warn({ recovered }, "Recovered stale notification jobs stuck in PROCESSING");
+  }
+
   const now = new Date();
   const due = await prisma.notificationJob.findMany({
     where: {

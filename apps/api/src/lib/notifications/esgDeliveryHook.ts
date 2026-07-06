@@ -8,6 +8,8 @@ export async function finalizeEsgScheduleNotification(
   success: boolean,
   errorMessage?: string
 ): Promise<void> {
+  if (job.template !== "ESG_REPORT") return;
+
   const payload = parseNotificationPayload("ESG_REPORT", job.payload);
   if (!payload.scheduleId) return;
 

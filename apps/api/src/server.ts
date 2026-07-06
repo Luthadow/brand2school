@@ -4,7 +4,6 @@ import { ensureFounderBrandIfMissing } from "./bootstrap/ensureFounderBrand.js";
 import { ensureSuperAdminIfMissing } from "./bootstrap/ensureSuperAdmin.js";
 import { runPendingMigrations } from "./bootstrap/runMigrations.js";
 import { logger } from "./lib/logger.js";
-import { processDueNotificationJobs } from "./lib/notifications/process.js";
 import { verifyMailOnStartup } from "./lib/smtpStartup.js";
 
 const port = Number(env.PORT);
@@ -28,14 +27,4 @@ app.listen(port, "0.0.0.0", () => {
   void ensureSuperAdminIfMissing();
   void ensureFounderBrandIfMissing();
   void verifyMailOnStartup();
-
-  if (env.SMTP_HOST && env.SMTP_USER && env.SMTP_PASS) {
-    void processDueNotificationJobs(50)
-      .then((processed) => {
-        if (processed > 0) {
-          logger.info({ processed }, "Processed queued notification emails on API startup");
-        }
-      })
-      .catch((err) => logger.error({ err }, "Failed to process queued notifications on startup"));
-  }
 });

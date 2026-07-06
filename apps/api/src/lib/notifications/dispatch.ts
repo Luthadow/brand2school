@@ -2,6 +2,7 @@ import type { Prisma } from "../../generated/prisma/index.js";
 import type { NotificationTemplate } from "../../generated/prisma/index.js";
 import { env } from "../../config/env.js";
 import { prisma } from "../prisma.js";
+import { findSentNotificationDuplicate } from "./idempotency.js";
 import type { NotificationPayloadMap } from "./payloads.js";
 
 export type QueueEmailInput<T extends NotificationTemplate = NotificationTemplate> = {
@@ -75,6 +76,9 @@ async function createQueuedEmail<T extends NotificationTemplate>(
 export async function queueEmail<T extends NotificationTemplate>(
   input: QueueEmailInput<T>
 ): Promise<string> {
+  const duplicateId = await findSentNotificationDuplicate(input);
+  if (duplicateId) return duplicateId;
+
   const jobId = await prisma.$transaction((tx) => createQueuedEmail(tx, input));
 
   if (input.immediate || useSyncDelivery()) {
