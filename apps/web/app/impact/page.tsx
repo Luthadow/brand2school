@@ -3,6 +3,7 @@ import Link from "next/link";
 import { FadeIn } from "../../components/landing/FadeIn";
 import { SectionHeader } from "../../components/landing/SectionHeader";
 import { PublicImpactPanels } from "../../components/impact/PublicImpactPanels";
+import { WhoWeServiceSection } from "../../components/landing/WhoWeServiceSection";
 import { emptyPublicImpactDashboard, fetchPublicImpactDashboard } from "../../lib/platformImpact";
 
 export const metadata: Metadata = {
@@ -51,6 +52,7 @@ export default async function ImpactPage(): Promise<JSX.Element> {
               subtitle={`${impact.liveCampaigns} live transformation campaigns · updated from platform audit data`}
             />
           </FadeIn>
+          <WhoWeServiceSection variant="panel" />
           <PublicImpactPanels data={impact} />
         </div>
       </section>

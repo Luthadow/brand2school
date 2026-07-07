@@ -48,6 +48,8 @@ export function VerifiedClient(): JSX.Element {
   const [progressSubject, setProgressSubject] = useState("");
   const [progressMessage, setProgressMessage] = useState(DEFAULT_PROGRESS_MESSAGE);
   const [sendingProgress, setSendingProgress] = useState(false);
+  const [removeTarget, setRemoveTarget] = useState<VerifiedSchool | null>(null);
+  const [removing, setRemoving] = useState(false);
 
   const loadData = async (): Promise<void> => {
     const query = new URLSearchParams({ page: String(page), pageSize: "25", search }).toString();
@@ -128,6 +130,21 @@ export function VerifiedClient(): JSX.Element {
     }
     setProgressSchool(null);
     showToast(json.message ?? "Progress update sent.");
+  };
+
+  const confirmRemove = async (): Promise<void> => {
+    if (!removeTarget) return;
+    setRemoving(true);
+    const res = await csrfFetch(`/api/admin/verified-schools/${removeTarget.id}`, { method: "DELETE" });
+    const json = (await res.json().catch(() => ({}))) as { message?: string };
+    setRemoving(false);
+    if (!res.ok) {
+      showToast(json.message ?? "Could not remove organisation.");
+      return;
+    }
+    setRemoveTarget(null);
+    showToast(json.message ?? "Organisation removed.");
+    await loadData();
   };
 
   if (loading || !session) return <p>Loading...</p>;
@@ -234,6 +251,14 @@ export function VerifiedClient(): JSX.Element {
                             </button>
                           </>
                         ) : null}
+                        {" · "}
+                        <button
+                          type="button"
+                          className="verified-remove-btn"
+                          onClick={() => setRemoveTarget(item)}
+                        >
+                          Remove
+                        </button>
                       </td>
                     </tr>
                   );
@@ -291,6 +316,33 @@ export function VerifiedClient(): JSX.Element {
                 {sendingProgress ? "Sending…" : "Send email"}
               </button>
               <button type="button" onClick={() => setProgressSchool(null)}>
+                Cancel
+              </button>
+            </div>
+          </div>
+        </div>
+      ) : null}
+
+      {removeTarget ? (
+        <div className="verified-email-modal" role="dialog" aria-modal="true" aria-labelledby="verified-remove-modal-title">
+          <div className="verified-email-modal__backdrop" onClick={() => !removing && setRemoveTarget(null)} />
+          <div className="verified-email-modal__panel card">
+            <h2 id="verified-remove-modal-title" style={{ marginTop: 0 }}>
+              Remove organisation
+            </h2>
+            <p style={{ color: "#5a6d8a", marginTop: 0 }}>
+              Permanently remove <strong>{removeTarget.name}</strong> from the platform. Their login account,
+              verification record, and portal data will be deleted. They must complete registration again to
+              rejoin.
+            </p>
+            <p style={{ fontSize: "0.9rem", color: "#b45309", marginBottom: "1rem" }}>
+              This cannot be undone.
+            </p>
+            <div style={{ display: "flex", gap: "0.5rem", flexWrap: "wrap" }}>
+              <button type="button" className="verified-remove-btn" disabled={removing} onClick={() => void confirmRemove()}>
+                {removing ? "Removing…" : "Yes, remove organisation"}
+              </button>
+              <button type="button" disabled={removing} onClick={() => setRemoveTarget(null)}>
                 Cancel
               </button>
             </div>

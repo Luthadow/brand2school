@@ -763,6 +763,16 @@ body:has(.admin-app) {
   cursor: not-allowed;
 }
 
+.verified-remove-btn {
+  color: #b91c1c;
+  border-color: rgba(185, 28, 28, 0.35);
+  background: rgba(185, 28, 28, 0.06);
+}
+
+.verified-remove-btn:hover:not(:disabled) {
+  background: rgba(185, 28, 28, 0.12);
+}
+
 .verified-email-modal {
   position: fixed;
   inset: 0;

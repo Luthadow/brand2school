@@ -46,6 +46,7 @@ import { emptyPlatformCredibility, fetchPlatformCredibility } from "../lib/platf
 import { emptyPlatformLive, emptyPlatformLiveOffline, fetchPlatformLive } from "../lib/platformLive";
 import { fetchPlatformPartners } from "../lib/platformPartners";
 import { PartnerCtaStrip, TrustedPartnersSection } from "../components/landing/TrustedPartnersSection";
+import { WhoWeServiceSection } from "../components/landing/WhoWeServiceSection";
 import { PublicLookupSearch } from "../components/lookup/PublicLookupSearch";
 
 const howSteps = [
@@ -512,6 +513,8 @@ export default async function HomePage(): Promise<JSX.Element> {
         </div>
       </section>
 
+      <WhoWeServiceSection />
+
       {/* TESTIMONIALS — SA identity */}
       <section id="for-schools" className="lp-section">
         <div className="lp-container">
@@ -599,7 +602,7 @@ export default async function HomePage(): Promise<JSX.Element> {
                   We built the backend like an enterprise platform because South African families
                   deserve the same rigour government and investors demand.
                 </p>
-                <Link href="/dashboard" className="ds-btn ds-btn-green">
+                <Link href="/impact" className="ds-btn ds-btn-green">
                   View Live Impact Dashboard
                 </Link>
               </div>
@@ -643,7 +646,7 @@ export default async function HomePage(): Promise<JSX.Element> {
             <Link href="#contact" className="ds-btn ds-btn-primary ds-btn-lg">
               Become a Partner
             </Link>
-            <Link href="/dashboard" className="ds-btn ds-btn-secondary ds-btn-lg">
+            <Link href="/impact" className="ds-btn ds-btn-secondary ds-btn-lg">
               See Live Impact
             </Link>
           </div>
@@ -679,7 +682,7 @@ export default async function HomePage(): Promise<JSX.Element> {
               <li><Link href="/for-brands">For Brands</Link></li>
               <li><Link href="#for-schools">For Schools</Link></li>
               <li><Link href="#campaigns">Live Campaigns</Link></li>
-              <li><Link href="/dashboard">Impact Dashboard</Link></li>
+              <li><Link href="/impact">Impact Dashboard</Link></li>
             </ul>
           </div>
           <div>

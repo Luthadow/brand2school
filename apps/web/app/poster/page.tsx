@@ -1,15 +1,9 @@
 import Image from "next/image";
 import Link from "next/link";
 import brandLogo from "../../../../brand2school.png";
+import { WhoWeServiceSection } from "../../components/landing/WhoWeServiceSection";
 import { formatCount } from "../../lib/formatCount";
 import { fetchPosterMetrics } from "../../lib/posterMetrics";
-
-const supporterGroups = [
-  { icon: "🧒", title: "Early Childhood Centres" },
-  { icon: "📘", title: "Primary Schools" },
-  { icon: "🎓", title: "Secondary Schools" },
-  { icon: "♿", title: "Special Needs Institutions" }
-];
 
 export default async function PosterModePage(): Promise<JSX.Element> {
   const { metrics, updatedAt, apiReachable } = await fetchPosterMetrics();
@@ -50,15 +44,11 @@ export default async function PosterModePage(): Promise<JSX.Element> {
               </div>
             </article>
             <article className="card panel-dark">
-              <h2 className="section-title">Who We Support</h2>
-              <div className="grid-2 poster-tiles">
-                {supporterGroups.map((group) => (
-                  <div className="card mosaic-tile" key={group.title}>
-                    <div style={{ fontSize: "1.8rem" }}>{group.icon}</div>
-                    <strong>{group.title}</strong>
-                  </div>
-                ))}
-              </div>
+              <h2 className="section-title">Who We Service</h2>
+              <p style={{ color: "rgba(255,255,255,0.82)", marginTop: 0, marginBottom: "0.75rem", fontSize: "0.92rem" }}>
+                Verified schools, NGOs, community organisations, and faith-based partners on one platform.
+              </p>
+              <WhoWeServiceSection variant="panel" showRegisterLinks={false} />
             </article>
           </section>
 
@@ -85,8 +75,8 @@ export default async function PosterModePage(): Promise<JSX.Element> {
         <Link className="cta-link" href="/">
           Back to Main Site
         </Link>
-        <Link className="cta-link" href="/dashboard">
-          Open Dashboard
+        <Link className="cta-link" href="/impact">
+          Open impact dashboard
         </Link>
       </div>
     </main>

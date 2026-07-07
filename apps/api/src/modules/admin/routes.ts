@@ -25,6 +25,7 @@ import {
   sendVerifiedSchoolProgressEmail,
   sendVerifiedSchoolWelcomeEmail
 } from "./verifiedSchoolEmails.js";
+import { removeVerifiedSchool } from "./removeVerifiedSchool.js";
 import { listProvinceNominations } from "../platform/provinceNominations.js";
 import { applyBrandVerificationSideEffects } from "../platform/syncBrandVerification.js";
 
@@ -640,6 +641,23 @@ adminRouter.post("/verified-schools/:schoolId/emails/progress", async (req, res)
   }
 
   res.json({ message: result.message, emailed: result.emailed });
+});
+
+adminRouter.delete("/verified-schools/:schoolId", async (req, res) => {
+  if (req.user?.role !== "SUPER_ADMIN") {
+    res.status(403).json({ message: "SUPER_ADMIN role required to remove organisations." });
+    return;
+  }
+
+  const result = await removeVerifiedSchool(req.params.schoolId);
+  if (!result.ok) {
+    res.status(result.status).json({ message: result.message });
+    return;
+  }
+
+  await writeAudit(req.user.id, "VERIFIED_SCHOOL_REMOVED", "SCHOOL", result.removed.schoolId, result.removed);
+
+  res.json({ message: result.message, removed: result.removed });
 });
 
 adminRouter.get("/audit-logs", async (req, res) => {

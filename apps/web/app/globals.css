@@ -9959,6 +9959,103 @@ body:has(.sp-root) .chat-widget {
   width: 100%;
 }
 
+/* Who we service — organisation types */
+.lp-who-we-service-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 1rem;
+  margin-top: 1.25rem;
+}
+
+.lp-who-we-service-card {
+  background: #fff;
+  border: 1px solid #d7e6ff;
+  border-radius: 14px;
+  padding: 1.15rem 1.2rem;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  box-shadow: var(--ds-shadow-sm);
+}
+
+.lp-who-we-service-card h3 {
+  margin: 0;
+  font-size: 1.05rem;
+}
+
+.lp-who-we-service-card p {
+  margin: 0;
+  font-size: 0.92rem;
+  line-height: 1.5;
+  color: var(--text-muted);
+}
+
+.lp-who-we-service-card__icon {
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 59, 142, 0.08);
+  color: var(--brand-navy);
+}
+
+.lp-who-we-service-types {
+  margin: 0.25rem 0 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+}
+
+.lp-who-we-service-types li {
+  font-size: 0.78rem;
+  padding: 0.2rem 0.5rem;
+  border-radius: 999px;
+  background: rgba(0, 59, 142, 0.06);
+  color: #334155;
+}
+
+.lp-who-we-service-link {
+  margin-top: auto;
+  padding-top: 0.5rem;
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--brand-navy);
+  text-decoration: none;
+}
+
+.lp-who-we-service-link:hover {
+  text-decoration: underline;
+}
+
+.lp-who-we-service-foot {
+  margin: 1rem 0 0;
+  font-size: 0.9rem;
+  color: var(--text-muted);
+}
+
+.lp-who-we-service--panel {
+  margin-top: 0;
+}
+
+.panel-dark .lp-who-we-service-foot,
+.panel-dark .lp-who-we-service-foot a {
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.panel-dark .impact-section-title,
+.panel-dark .impact-section-sub {
+  color: #fff;
+}
+
+.panel-dark .impact-section-sub {
+  opacity: 0.85;
+}
+
 /* Public impact dashboard */
 .impact-page .impact-hero {
   padding-bottom: 2rem;
