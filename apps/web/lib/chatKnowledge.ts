@@ -85,7 +85,7 @@ export const CHAT_KNOWLEDGE: ChatKnowledgeItem[] = [
     id: "what-is-b2s",
     question: "What is Brand2School?",
     answer:
-      "Brand2School is a school infrastructure impact network. Brands, retailers, and communities participate through everyday purchases — verified product codes fund measurable school transformation, not handouts.",
+      "Brand2School connects brands, retailers, schools and communities through verified participation campaigns. Turn everyday purchases into measurable community impact — increasing customer engagement while delivering measurable educational outcomes, not handouts.",
     keywords: ["what is", "brand2school", "about", "platform", "purpose", "mission", "who are you"]
   },
   {

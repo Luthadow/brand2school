@@ -283,17 +283,20 @@ export default async function HomePage(): Promise<JSX.Element> {
           <FadeIn className="lp-hero-copy">
             <p className="ds-eyebrow ds-eyebrow--pulse">
               <Globe2 size={14} />
-              A School Infrastructure Impact Network
+              Customer engagement with verified impact
             </p>
             <h1 className="lp-hero-title">
-              Help Fund Complete
+              Brands Have the Power to Build
               <br />
-              <span className="lp-hero-title-accent">School Ecosystems.</span>
+              <span className="lp-hero-title-accent">Stronger Schools.</span>
             </h1>
             <p className="lp-hero-sub lp-hero-sub--emotional">
-              Not small sponsorships. Not random donations. A national participation engine —
-              rebuilding educational environments through commercial participation, one verified
-              campaign at a time.
+              Turn everyday purchases into measurable community impact.
+            </p>
+            <p className="lp-hero-sub">
+              Brand2School connects brands, retailers, schools and communities through verified
+              participation campaigns that increase customer engagement while delivering measurable
+              educational impact.
             </p>
             <LiveHeroProofStrip />
             <div className="lp-hero-actions">
@@ -309,7 +312,7 @@ export default async function HomePage(): Promise<JSX.Element> {
             <div className="lp-hero-image-wrap lp-hero-image-wrap--poster">
               <Image
                 src="/images/landing-hero-infographic.jpg"
-                alt="Brand2School: participation, verified schools, transparent impact, and national-scale education support"
+                alt="Brand2School: brands turn everyday purchases into verified participation and measurable school impact"
                 fill
                 sizes="(max-width: 900px) 100vw, 52vw"
                 priority

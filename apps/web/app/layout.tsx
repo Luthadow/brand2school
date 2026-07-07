@@ -29,9 +29,9 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
-  title: "Brand2School — Brands Have Power. Let's Use It For Our Schools.",
+  title: "Brand2School — Brands Have the Power to Build Stronger Schools",
   description:
-    "A school infrastructure impact network — help fund complete school ecosystems through brand participation, verified campaigns, and national transformation missions.",
+    "Turn everyday purchases into measurable community impact. Brand2School connects brands, retailers, schools and communities through verified participation campaigns that increase customer engagement while delivering measurable educational impact.",
   icons: {
     icon: LOGO_SRC,
     apple: LOGO_SRC
