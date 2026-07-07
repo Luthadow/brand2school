@@ -1,5 +1,7 @@
 "use client";
 
+import Link from "next/link";
+import type { Route } from "next";
 import { useBrandPortal } from "../BrandPortalContext";
 import { BrandPageHeader } from "../BrandPageHeader";
 import { formatZar } from "../../../lib/brandPortal";
@@ -19,6 +21,11 @@ export function BrandFinancialsPage(): JSX.Element {
         eyebrow="Financial Transparency"
         title="Platform operations & transformation funding"
         description={`${PREMIUM_POSITIONING.subscriptionPositioning} Operational subscriptions and transformation pools are tracked separately.`}
+        actions={
+          <Link href={"/brand/dashboard/roi" as Route} className="bp-inv-btn bp-inv-btn--primary">
+            View ROI dashboard
+          </Link>
+        }
       />
 
       <div className="bp-stat-grid">

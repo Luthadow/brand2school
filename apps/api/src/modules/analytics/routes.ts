@@ -10,6 +10,9 @@ import {
 } from "./brandPortalReportPdfs.js";
 import { getBrandAnalytics } from "./getBrandAnalytics.js";
 import { getBrandPortal } from "./getBrandPortal.js";
+import { getBrandCodeInventoryDashboard } from "./getBrandCodeInventory.js";
+import { getBrandRoiDashboard } from "./getBrandRoiDashboard.js";
+import { getBrandSchoolMarketplace } from "./getBrandSchoolMarketplace.js";
 import { getBrandTrustMetrics } from "./getBrandTrustMetrics.js";
 
 const querySchema = z.object({
@@ -41,6 +44,36 @@ analyticsRouter.get("/brand", async (req, res) => {
 
   const analytics = await getBrandAnalytics(query.data.campaignId, req.brandId);
   res.json(analytics);
+});
+
+analyticsRouter.get("/brand/code-inventory", async (req, res) => {
+  const query = querySchema.safeParse(req.query);
+  if (!query.success) {
+    res.status(400).json({ message: "Invalid query parameters." });
+    return;
+  }
+
+  const inventory = await getBrandCodeInventoryDashboard(query.data.campaignId, req.brandId);
+  res.json(inventory);
+});
+
+analyticsRouter.get("/brand/marketplace", async (req, res) => {
+  const province = typeof req.query.province === "string" ? req.query.province : undefined;
+  const quintile = req.query.quintile ? Number(req.query.quintile) : undefined;
+  const q = typeof req.query.q === "string" ? req.query.q : undefined;
+  const marketplace = await getBrandSchoolMarketplace(req.brandId, { province, quintile, q });
+  res.json(marketplace);
+});
+
+analyticsRouter.get("/brand/roi", async (req, res) => {
+  const query = querySchema.safeParse(req.query);
+  if (!query.success) {
+    res.status(400).json({ message: "Invalid query parameters." });
+    return;
+  }
+
+  const roi = await getBrandRoiDashboard(query.data.campaignId, req.brandId);
+  res.json(roi);
 });
 
 analyticsRouter.get("/brand/trust", async (req, res) => {

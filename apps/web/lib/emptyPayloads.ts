@@ -69,6 +69,22 @@ export function emptyBrandAnalytics(): BrandAnalytics {
 export function emptyBrandPortal(analytics: BrandAnalytics = emptyBrandAnalytics()): BrandPortal {
   return {
     brand: { id: "pending", name: "Your brand", slug: "pending", logoUrl: null },
+    codeInventory: {
+      totalCodes: 0,
+      unused: 0,
+      pending: 0,
+      used: 0,
+      duplicate: 0,
+      invalid: 0,
+      flagged: 0,
+      expired: 0,
+      invalidated: 0,
+      blocked: 0,
+      utilizationPercent: 0,
+      batchesCount: 0,
+      attemptDuplicates: 0,
+      attemptFraudBlocked: 0
+    },
     overview: {
       totalSubmissions: 0,
       schoolsSupported: 0,
@@ -84,6 +100,7 @@ export function emptyBrandPortal(analytics: BrandAnalytics = emptyBrandAnalytics
     analytics,
     campaigns: [],
     schoolNeeds: [],
+    marketplace: { summary: { totalSchools: 0, withOpenNeeds: 0, partnerSchools: 0 }, schools: [] },
     impactPipeline: [],
     financials: {
       fundsAllocatedZar: 0,

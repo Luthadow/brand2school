@@ -223,6 +223,98 @@ model PasswordResetToken {
   @@index([userId])
 }
 
+enum SchoolNeedStatus {
+  SUBMITTED
+  UNDER_REVIEW
+  APPROVED
+  FUNDED
+  DECLINED
+}
+
+enum SchoolEventStatus {
+  DRAFT
+  SCHEDULED
+  COMPLETED
+  CANCELLED
+}
+
+enum SchoolVolunteerStatus {
+  ACTIVE
+  INACTIVE
+  PENDING
+}
+
+enum SchoolAlumniRole {
+  ALUMNI
+  BUSINESS_OWNER
+  PROFESSIONAL
+  SPONSOR
+  MENTOR
+  DONOR
+  EMPLOYER
+}
+
+enum SchoolAlumniStatus {
+  ACTIVE
+  INACTIVE
+}
+
+enum SchoolEnterpriseProjectType {
+  PRODUCT
+  PITCH
+  STARTUP_CLUB
+  MINI_COMPANY
+  CHALLENGE_ENTRY
+}
+
+enum SchoolEnterpriseProjectStatus {
+  IDEA
+  ACTIVE
+  COMPETING
+  AWARDED
+  ARCHIVED
+}
+
+enum SchoolInnovationChallengeStatus {
+  DRAFT
+  OPEN
+  CLOSED
+  COMPLETED
+}
+
+enum SchoolCrmContactType {
+  BRAND
+  PARENT
+  SGB
+  DONOR
+  SUPPORT
+  PARTNER
+  OTHER
+}
+
+enum SchoolCrmActivityType {
+  MEETING
+  CALL
+  EMAIL
+  SUPPORT
+  NOTE
+  DOCUMENT
+  CAMPAIGN
+  RENEWAL
+}
+
+enum SchoolCrmTaskStatus {
+  OPEN
+  DONE
+  CANCELLED
+}
+
+enum SchoolCrmTaskPriority {
+  LOW
+  MEDIUM
+  HIGH
+}
+
 model School {
   id             String       @id @default(cuid())
   name           String
@@ -244,16 +336,225 @@ model School {
   fundingBalanceZar    Decimal  @default(0) @db.Decimal(14, 2)
   annualCycleYear      Int?
   annualCycleFocus     String?
+  logoUrl          String?
+  logoPng          Bytes?
+  websiteUrl       String?
+  publicPhone      String?
+  quintile         Int?
+  teacherCount     Int?
+  gpsLat           Float?
+  gpsLng           Float?
+  publicProfile    Json?
   createdAt      DateTime     @default(now())
   updatedAt      DateTime     @updatedAt
   learners       Learner[]
   submissions    Submission[]
   fundingContributions FundingContribution[]
+  submittedNeeds SchoolSubmittedNeed[]
+  volunteers     SchoolVolunteer[]
+  events         SchoolEvent[]
+  alumni         SchoolAlumni[]
+  enterpriseProjects SchoolEnterpriseProject[]
+  innovationChallenges SchoolInnovationChallenge[]
+  crmContacts        SchoolCrmContact[]
+  crmActivities      SchoolCrmActivity[]
+  crmTasks           SchoolCrmTask[]
   adminUser      User?
   verification   SchoolVerification?
 
   @@index([province, district])
   @@index([status, province])
+}
+
+model SchoolSubmittedNeed {
+  id               String           @id @default(cuid())
+  schoolId         String
+  title            String
+  category         String
+  subcategory      String
+  urgency          String
+  description      String
+  learnerImpact    Int
+  estimatedCostZar Int
+  progressPercent  Int              @default(0)
+  sponsorStatus    String           @default("Pending")
+  photoCount       Int              @default(0)
+  quoteCount       Int              @default(0)
+  status           SchoolNeedStatus @default(SUBMITTED)
+  createdAt        DateTime         @default(now())
+  updatedAt        DateTime         @updatedAt
+  school           School           @relation(fields: [schoolId], references: [id], onDelete: Cascade)
+
+  @@index([schoolId, status])
+  @@index([schoolId, createdAt])
+}
+
+model SchoolVolunteer {
+  id          String               @id @default(cuid())
+  schoolId    String
+  fullName    String
+  role        String
+  phone       String?
+  email       String?
+  skills      String?
+  hoursLogged Int                  @default(0)
+  status      SchoolVolunteerStatus @default(ACTIVE)
+  notes       String?
+  createdAt   DateTime             @default(now())
+  updatedAt   DateTime             @updatedAt
+  school      School               @relation(fields: [schoolId], references: [id], onDelete: Cascade)
+  assignments SchoolEventVolunteer[]
+
+  @@index([schoolId, status])
+}
+
+model SchoolEvent {
+  id             String            @id @default(cuid())
+  schoolId       String
+  title          String
+  description    String?
+  eventType      String
+  location       String?
+  startsAt       DateTime
+  endsAt         DateTime?
+  volunteerSlots Int               @default(0)
+  status         SchoolEventStatus @default(SCHEDULED)
+  createdAt      DateTime          @default(now())
+  updatedAt      DateTime          @updatedAt
+  school         School            @relation(fields: [schoolId], references: [id], onDelete: Cascade)
+  assignments    SchoolEventVolunteer[]
+
+  @@index([schoolId, status, startsAt])
+}
+
+model SchoolEventVolunteer {
+  id          String          @id @default(cuid())
+  eventId     String
+  volunteerId String
+  role        String?
+  createdAt   DateTime        @default(now())
+  event       SchoolEvent     @relation(fields: [eventId], references: [id], onDelete: Cascade)
+  volunteer   SchoolVolunteer @relation(fields: [volunteerId], references: [id], onDelete: Cascade)
+
+  @@unique([eventId, volunteerId])
+  @@index([volunteerId])
+}
+
+model SchoolAlumni {
+  id             String            @id @default(cuid())
+  schoolId       String
+  fullName       String
+  graduationYear Int?
+  profession     String?
+  company        String?
+  email          String?
+  phone          String?
+  linkedInUrl    String?
+  role           SchoolAlumniRole    @default(ALUMNI)
+  offering       String?
+  status         SchoolAlumniStatus  @default(ACTIVE)
+  createdAt      DateTime            @default(now())
+  updatedAt      DateTime            @updatedAt
+  school         School              @relation(fields: [schoolId], references: [id], onDelete: Cascade)
+
+  @@index([schoolId, status])
+  @@index([schoolId, role])
+}
+
+model SchoolInnovationChallenge {
+  id               String                        @id @default(cuid())
+  schoolId         String
+  title            String
+  description      String?
+  challengeType    String
+  startsAt         DateTime
+  endsAt           DateTime?
+  prizeDescription String?
+  status           SchoolInnovationChallengeStatus @default(OPEN)
+  maxEntries       Int                           @default(0)
+  createdAt        DateTime                      @default(now())
+  updatedAt        DateTime                      @updatedAt
+  school           School                        @relation(fields: [schoolId], references: [id], onDelete: Cascade)
+  projects         SchoolEnterpriseProject[]
+
+  @@index([schoolId, status, startsAt])
+}
+
+model SchoolEnterpriseProject {
+  id             String                      @id @default(cuid())
+  schoolId       String
+  challengeId    String?
+  title          String
+  description    String?
+  projectType    SchoolEnterpriseProjectType
+  studentLead    String
+  gradeLevel     String?
+  category       String?
+  status         SchoolEnterpriseProjectStatus @default(IDEA)
+  revenueZar     Int                         @default(0)
+  seekingSponsor Boolean                     @default(false)
+  createdAt      DateTime                    @default(now())
+  updatedAt      DateTime                    @updatedAt
+  school         School                      @relation(fields: [schoolId], references: [id], onDelete: Cascade)
+  challenge      SchoolInnovationChallenge?  @relation(fields: [challengeId], references: [id], onDelete: SetNull)
+
+  @@index([schoolId, status])
+  @@index([schoolId, projectType])
+  @@index([challengeId])
+}
+
+model SchoolCrmContact {
+  id          String              @id @default(cuid())
+  schoolId    String
+  fullName    String
+  organization String?
+  email       String?
+  phone       String?
+  contactType SchoolCrmContactType @default(OTHER)
+  notes       String?
+  createdAt   DateTime            @default(now())
+  updatedAt   DateTime            @updatedAt
+  school      School              @relation(fields: [schoolId], references: [id], onDelete: Cascade)
+  activities  SchoolCrmActivity[]
+  tasks       SchoolCrmTask[]
+
+  @@index([schoolId, contactType])
+}
+
+model SchoolCrmActivity {
+  id           String               @id @default(cuid())
+  schoolId     String
+  contactId    String?
+  activityType SchoolCrmActivityType
+  title        String
+  summary      String?
+  occurredAt   DateTime
+  createdAt    DateTime             @default(now())
+  updatedAt    DateTime             @updatedAt
+  school       School               @relation(fields: [schoolId], references: [id], onDelete: Cascade)
+  contact      SchoolCrmContact?    @relation(fields: [contactId], references: [id], onDelete: SetNull)
+
+  @@index([schoolId, occurredAt])
+  @@index([schoolId, activityType])
+  @@index([contactId])
+}
+
+model SchoolCrmTask {
+  id          String               @id @default(cuid())
+  schoolId    String
+  contactId   String?
+  title       String
+  description String?
+  dueAt       DateTime?
+  status      SchoolCrmTaskStatus  @default(OPEN)
+  priority    SchoolCrmTaskPriority @default(MEDIUM)
+  createdAt   DateTime             @default(now())
+  updatedAt   DateTime             @updatedAt
+  school      School               @relation(fields: [schoolId], references: [id], onDelete: Cascade)
+  contact     SchoolCrmContact?    @relation(fields: [contactId], references: [id], onDelete: SetNull)
+
+  @@index([schoolId, status, dueAt])
+  @@index([contactId])
 }
 
 model SchoolVerification {

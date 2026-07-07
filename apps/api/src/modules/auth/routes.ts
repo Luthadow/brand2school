@@ -163,6 +163,13 @@ authRouter.post("/login", authRateLimit, async (req, res) => {
     }
   });
 
+  const school = user.schoolId
+    ? await prisma.school.findUnique({
+        where: { id: user.schoolId },
+        select: { organizationCategory: true, schoolCode: true }
+      })
+    : null;
+
   res.json({
     user: {
       id: user.id,
@@ -170,7 +177,9 @@ authRouter.post("/login", authRateLimit, async (req, res) => {
       email: user.email,
       role: user.role,
       status: user.status,
-      brandId: user.brandId
+      brandId: user.brandId,
+      organizationCategory: school?.organizationCategory ?? null,
+      organisationCode: school?.schoolCode ?? null
     },
     accessToken,
     refreshToken

@@ -2,6 +2,8 @@ import { emptyBrandPortal } from "../../lib/emptyPayloads.js";
 import { hasBrandLogo } from "../../lib/brandLogo.js";
 import { prisma } from "../../lib/prisma.js";
 import { getBrandAnalytics, type BrandAnalytics } from "./getBrandAnalytics.js";
+import { getBrandCodeInventory, type BrandCodeInventory } from "./getBrandCodeInventory.js";
+import { getBrandSchoolMarketplace, type BrandSchoolMarketplace } from "./getBrandSchoolMarketplace.js";
 import { normalizeProvinceCode, SA_PROVINCES } from "./provinces.js";
 
 export type PortalCampaign = {
@@ -87,6 +89,7 @@ export type BrandNotification = {
 
 export type BrandPortal = {
   brand: { id: string; name: string; slug: string; logoUrl: string | null };
+  codeInventory: BrandCodeInventory;
   overview: {
     totalSubmissions: number;
     schoolsSupported: number;
@@ -102,6 +105,7 @@ export type BrandPortal = {
   analytics: BrandAnalytics;
   campaigns: PortalCampaign[];
   schoolNeeds: SchoolNeed[];
+  marketplace: BrandSchoolMarketplace;
   impactPipeline: ImpactPipelineItem[];
   financials: FinancialSummary;
   media: MediaStory[];
@@ -127,7 +131,10 @@ function stageFromSubmission(row: {
 }
 
 export async function getBrandPortal(campaignId?: string, brandId?: string): Promise<BrandPortal> {
-  const analytics = await getBrandAnalytics(campaignId, brandId);
+  const [analytics, codeInventory] = await Promise.all([
+    getBrandAnalytics(campaignId, brandId),
+    getBrandCodeInventory(campaignId, brandId)
+  ]);
 
   try {
     const brand = brandId
@@ -310,6 +317,20 @@ export async function getBrandPortal(campaignId?: string, brandId?: string): Pro
       read: false
     });
 
+    const marketplace = await getBrandSchoolMarketplace(brandId);
+    const schoolNeedsFromMarketplace: SchoolNeed[] = marketplace.schools.map((s) => ({
+      id: s.id,
+      name: s.name,
+      province: s.province,
+      district: s.district,
+      learnerCount: s.learnerCount,
+      priorityNeed: s.priorityNeed,
+      estimatedCostZar: s.estimatedCostZar,
+      progressPercent: s.progressPercent,
+      verificationStatus: s.verificationStatus,
+      imageCategory: s.imageCategory
+    }));
+
     return {
       brand: brand
         ? {
@@ -326,6 +347,7 @@ export async function getBrandPortal(campaignId?: string, brandId?: string): Pro
             slug: "pending",
             logoUrl: null
           },
+      codeInventory,
       overview: {
         totalSubmissions: analytics.summary.totalSubmissions,
         schoolsSupported: analytics.summary.schoolsReached,
@@ -340,7 +362,8 @@ export async function getBrandPortal(campaignId?: string, brandId?: string): Pro
       },
       analytics,
       campaigns,
-      schoolNeeds,
+      schoolNeeds: schoolNeedsFromMarketplace.length > 0 ? schoolNeedsFromMarketplace : schoolNeeds,
+      marketplace,
       impactPipeline,
       financials: {
         fundsAllocatedZar,

@@ -17,6 +17,7 @@ import { platformRouter } from "./modules/platform/routes.js";
 import { analyticsRouter } from "./modules/analytics/routes.js";
 import { contactRouter } from "./modules/contact/routes.js";
 import { commercialBrandRouter, commercialPublicRouter } from "./modules/commercial/routes.js";
+import { communityRouter } from "./modules/community/routes.js";
 import { commercialUploadsDir } from "./lib/commercialStorage.js";
 import { schoolVerificationUploadsDir } from "./lib/schoolVerificationStorage.js";
 import { readinessCheck } from "./bootstrap/readiness.js";
@@ -82,6 +83,7 @@ app.use(
 
 app.use("/api/v1/auth", authRouter);
 app.use("/api/v1/schools", schoolsRouter);
+app.use("/api/v1/community", communityRouter);
 app.use("/api/v1/learners", learnersRouter);
 app.use("/api/v1/campaigns", campaignsRouter);
 app.use("/api/v1/participation", participationRouter);

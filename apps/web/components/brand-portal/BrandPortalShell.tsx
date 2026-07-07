@@ -8,6 +8,7 @@ import {
   BarChart3,
   Bell,
   Building2,
+  Boxes,
   CircleDollarSign,
   FileText,
   FileSignature,
@@ -17,6 +18,7 @@ import {
   Map,
   Megaphone,
   Menu,
+  PieChart,
   School,
   Settings,
   Shield,
@@ -34,11 +36,13 @@ const NAV: Array<{
   short: string;
   report?: BrandReportSlug;
 }> = [
-  { href: "/brand/dashboard", label: "Overview", icon: LayoutDashboard, short: "Home", report: "overview" },
+  { href: "/brand/dashboard", label: "Command Centre", icon: LayoutDashboard, short: "Home", report: "overview" },
   { href: "/brand/dashboard/campaigns", label: "Campaigns", icon: Megaphone, short: "Campaigns", report: "campaigns" },
-  { href: "/brand/dashboard/schools", label: "School Needs", icon: School, short: "Schools", report: "schools" },
-  { href: "/brand/dashboard/submissions", label: "Submissions", icon: Shield, short: "Codes", report: "submissions" },
+    { href: "/brand/dashboard/inventory" as Route, label: "Code Inventory", icon: Boxes, short: "Codes" },
+  { href: "/brand/dashboard/schools", label: "Marketplace", icon: School, short: "Schools", report: "schools" },
+  { href: "/brand/dashboard/submissions", label: "Submissions", icon: Shield, short: "Subs", report: "submissions" },
   { href: "/brand/dashboard/analytics", label: "Analytics", icon: BarChart3, short: "Analytics", report: "analytics" },
+  { href: "/brand/dashboard/roi" as Route, label: "ROI", icon: PieChart, short: "ROI" },
   { href: "/brand/dashboard/map", label: "Impact Map", icon: Map, short: "Map", report: "map" },
   { href: "/brand/dashboard/reports", label: "Reports & ESG", icon: FileText, short: "Reports", report: "reports" },
   { href: "/brand/dashboard/commercial", label: "Agreement", icon: FileSignature, short: "Deal", report: "commercial" },
@@ -60,7 +64,7 @@ type BrandReportSlug =
   | "financials"
   | "media";
 
-const BOTTOM_NAV = NAV.slice(0, 4);
+const BOTTOM_NAV = NAV.slice(0, 5);
 
 function NavRow({
   href,

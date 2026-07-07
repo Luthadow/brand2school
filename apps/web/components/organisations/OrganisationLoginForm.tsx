@@ -2,8 +2,10 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import type { Route } from "next";
 import Link from "next/link";
 import { csrfHeaders } from "../../lib/clientFetch";
+import { communityDashboardPath } from "../../lib/communityOrganizations";
 import { CONTACT, mailto } from "../../lib/contact";
 import { categoryToSearchParam, getOrganizationCategory, type OrganizationCategoryId } from "../../lib/organizationCategories";
 
@@ -33,7 +35,7 @@ export function OrganisationLoginForm({ categoryId }: { categoryId: Organization
       return;
     }
 
-    router.push("/school/dashboard");
+    router.push(communityDashboardPath(categoryId) as Route);
     router.refresh();
   };
 

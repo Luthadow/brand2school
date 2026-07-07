@@ -113,6 +113,7 @@ export type PlatformTrust = {
 export type PublicSchoolSearchHit = {
   type: "school";
   name: string;
+  schoolCode: string;
   province: string;
   district: string;
   address: string;
@@ -120,7 +121,98 @@ export type PublicSchoolSearchHit = {
   organizationLabel: string;
   status: string;
   statusLabel: string;
+  profileUrl: string;
   registered: true;
+};
+
+export type PublicSchoolSummary = {
+  schoolCode: string;
+  name: string;
+  province: string;
+  district: string;
+  logoUrl: string | null;
+  quintile: number | null;
+  learnerCount: number;
+  teacherCount: number | null;
+  profileUrl: string;
+  verificationApproved: boolean;
+  profileCompletionPercent: number;
+  verifiedSubmissions: number;
+  nationalRank: number | null;
+  priorityNeedTitle: string | null;
+  priorityNeedCostZar: number | null;
+  openNeedsCount: number;
+  badgeCount: number;
+  featuredBadges: string[];
+};
+
+export type PublicSchoolProfile = PublicSchoolSummary & {
+  mission: string;
+  vision: string;
+  history: string;
+  achievements: string[];
+  websiteUrl: string | null;
+  schoolColours: string[];
+  socialMedia: {
+    facebook?: string;
+    instagram?: string;
+    twitter?: string;
+    linkedin?: string;
+  };
+  badges: Array<{
+    id: string;
+    label: string;
+    description: string;
+    tier: string;
+    category: string;
+    earned: boolean;
+    earnedAt: string | null;
+    progressPercent: number;
+  }>;
+  openNeeds: Array<{
+    id: string;
+    title: string;
+    category: string;
+    urgency: string;
+    estimatedCostZar: number;
+    progressPercent: number;
+    sponsorStatus: string;
+    learnerImpact: number;
+    source: string;
+  }>;
+  participation: {
+    verifiedSubmissions: number;
+    thisMonth: number;
+    learnerCount: number;
+  };
+  activeCampaigns: Array<{
+    name: string;
+    brandName: string;
+    percentToTarget: number;
+  }>;
+  upcomingEvents: Array<{
+    id: string;
+    title: string;
+    eventTypeLabel: string;
+    location: string | null;
+    startsAt: string;
+  }>;
+  alumniHighlights: Array<{
+    id: string;
+    fullName: string;
+    roleLabel: string;
+    profession: string | null;
+    company: string | null;
+    graduationYear: number | null;
+  }>;
+  enterpriseHighlights: Array<{
+    id: string;
+    title: string;
+    projectTypeLabel: string;
+    studentLead: string;
+    status: string;
+    seekingSponsor: boolean;
+  }>;
 };
 
 export type PublicBrandSearchHit = {
@@ -177,6 +269,43 @@ export const fetchPlatformRankings = (): Promise<PlatformRankings | null> =>
 
 export const fetchPlatformTrust = (): Promise<PlatformTrust | null> =>
   fetchJson<PlatformTrust>("/api/v1/platform/trust");
+
+export const fetchPublicSchools = (params?: {
+  province?: string;
+  quintile?: number;
+  q?: string;
+  limit?: number;
+}): Promise<PublicSchoolSummary[]> =>
+  fetchJson<{ schools: PublicSchoolSummary[] }>(
+    `/api/v1/platform/schools${params?.province || params?.quintile || params?.q || params?.limit ? `?${new URLSearchParams({
+      ...(params.province ? { province: params.province } : {}),
+      ...(params.quintile ? { quintile: String(params.quintile) } : {}),
+      ...(params.q ? { q: params.q } : {}),
+      ...(params.limit ? { limit: String(params.limit) } : {})
+    }).toString()}` : ""}`
+  ).then((r) => r?.schools ?? []);
+
+export type PublicCommunityStats = {
+  schoolCode: string;
+  schoolName: string;
+  engagementScore: number;
+  totalParticipation: number;
+  learnerSharePercent: number;
+  topSupporters: Array<{ name: string; type: string; submissions: number }>;
+  weekdayActivity: Array<{ day: string; count: number }>;
+};
+
+export const fetchPublicSchoolCommunity = (
+  schoolCode: string
+): Promise<PublicCommunityStats | null> =>
+  fetchJson<{ community: PublicCommunityStats }>(
+    `/api/v1/platform/schools/${encodeURIComponent(schoolCode)}/community`
+  ).then((r) => r?.community ?? null);
+
+export const fetchPublicSchool = (schoolCode: string): Promise<PublicSchoolProfile | null> =>
+  fetchJson<{ profile: PublicSchoolProfile }>(
+    `/api/v1/platform/schools/${encodeURIComponent(schoolCode)}`
+  ).then((r) => r?.profile ?? null);
 
 export async function fetchPublicSearch(
   q: string,

@@ -17,7 +17,7 @@ const DEFERRAL_HINT =
   "I will submit this before claiming infrastructure milestones";
 
 export function SchoolDocumentsPage(): JSX.Element {
-  const { school, organization, verification, refresh } = useSchoolPortal();
+  const { school, organization, verification, documentVault, refresh } = useSchoolPortal();
   const [registrationNumber, setRegistrationNumber] = useState(
     verification.emisNumber ?? verification.registrationNumber ?? ""
   );
@@ -130,6 +130,54 @@ export function SchoolDocumentsPage(): JSX.Element {
         <h1>{organization.documentsTitle}</h1>
         <p className="sp-muted">{organization.documentsIntro}</p>
       </header>
+
+      {(documentVault.expiringSoon > 0 || documentVault.expired > 0) ? (
+        <div className="sp-vault-alert">
+          <strong>
+            {documentVault.expired > 0
+              ? `${documentVault.expired} document(s) may need renewal`
+              : `${documentVault.expiringSoon} document(s) expiring within 90 days`}
+          </strong>
+          <p>Upload refreshed copies before expiry to keep your verification and claim eligibility current.</p>
+        </div>
+      ) : null}
+
+      <section className="sp-vault-panel card">
+        <h2>Document vault</h2>
+        <p className="sp-muted">
+          Uploaded documents are valid for 12 months from submission. Deferred items must be uploaded before claiming
+          milestones.
+        </p>
+        <div className="sp-vault-grid">
+          {documentVault.entries.map((entry) => (
+            <article
+              key={entry.key}
+              className={`sp-vault-entry sp-vault-entry--${entry.status} sp-vault-entry--${entry.reminderLevel}`}
+            >
+              <div className="sp-vault-entry-head">
+                <strong>{entry.label}</strong>
+                <span className="sp-vault-status">{entry.status}</span>
+              </div>
+              {entry.uploadedAt ? (
+                <p className="sp-muted">Uploaded {new Date(entry.uploadedAt).toLocaleDateString("en-ZA")}</p>
+              ) : null}
+              {entry.expiresAt ? (
+                <p className="sp-vault-expiry">
+                  {entry.daysUntilExpiry != null && entry.daysUntilExpiry <= 0
+                    ? "May need renewal"
+                    : entry.daysUntilExpiry != null && entry.daysUntilExpiry <= 90
+                      ? `Expires in ${entry.daysUntilExpiry} days`
+                      : `Valid until ${new Date(entry.expiresAt).toLocaleDateString("en-ZA")}`}
+                </p>
+              ) : entry.status === "deferred" ? (
+                <p className="sp-vault-expiry sp-vault-expiry--warn">Submit before claiming</p>
+              ) : (
+                <p className="sp-vault-expiry sp-vault-expiry--missing">Not yet uploaded</p>
+              )}
+            </article>
+          ))}
+        </div>
+      </section>
 
       <div className="sp-verification-status card" style={{ marginBottom: "1.25rem" }}>
         <strong>Status: {STATUS_LABEL[verification.status] ?? verification.status}</strong>

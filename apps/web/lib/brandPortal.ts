@@ -26,6 +26,33 @@ export type SchoolNeed = {
   progressPercent: number;
   verificationStatus: string;
   imageCategory: string;
+  schoolCode?: string;
+  profileUrl?: string;
+  quintile?: number | null;
+  verifiedSubmissions?: number;
+  nationalRank?: number | null;
+  openNeedsCount?: number;
+  featuredBadges?: string[];
+  partnerSchool?: boolean;
+  needs?: Array<{
+    id: string;
+    title: string;
+    category: string;
+    urgency: string;
+    estimatedCostZar: number;
+    progressPercent: number;
+    sponsorStatus: string;
+    source: string;
+  }>;
+};
+
+export type BrandMarketplace = {
+  summary: {
+    totalSchools: number;
+    withOpenNeeds: number;
+    partnerSchools: number;
+  };
+  schools: SchoolNeed[];
 };
 
 export type ImpactPipelineItem = {
@@ -45,8 +72,13 @@ export type ImpactPipelineItem = {
   updatedAt: string;
 };
 
+import type { BrandCodeInventory } from "./brandCodeInventory";
+
+export type { BrandCodeInventory };
+
 export type BrandPortal = {
   brand: { id: string; name: string; slug: string; logoUrl: string | null };
+  codeInventory: BrandCodeInventory;
   overview: {
     totalSubmissions: number;
     schoolsSupported: number;
@@ -62,6 +94,7 @@ export type BrandPortal = {
   analytics: BrandAnalytics;
   campaigns: PortalCampaign[];
   schoolNeeds: SchoolNeed[];
+  marketplace: BrandMarketplace;
   impactPipeline: ImpactPipelineItem[];
   financials: {
     fundsAllocatedZar: number;

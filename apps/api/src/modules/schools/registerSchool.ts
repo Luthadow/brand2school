@@ -8,6 +8,7 @@ import { normalizePhone } from "../../lib/phones.js";
 import { env } from "../../config/env.js";
 
 import { isOrganizationCategoryId, getOrganizationCategory } from "../../lib/organizationCategories.js";
+import { isCommunityOrganization } from "../../lib/communityOrganizations.js";
 
 export const schoolRegisterSchema = z
   .object({
@@ -124,7 +125,10 @@ export async function registerSchool(input: Omit<SchoolRegisterInput, "confirmPa
 
   const categorySlug = organizationCategory.toLowerCase().replace(/_/g, "-");
   const loginUrl = `${env.WEB_APP_URL}/organisations/login?category=${categorySlug}`;
-  const documentsUrl = `${env.WEB_APP_URL.replace(/\/$/, "")}/school/dashboard/documents`;
+  const documentsPath = isCommunityOrganization(organizationCategory)
+    ? "/community/dashboard/documents"
+    : "/school/dashboard/documents";
+  const documentsUrl = `${env.WEB_APP_URL.replace(/\/$/, "")}${documentsPath}`;
 
   let emailSent = false;
   try {

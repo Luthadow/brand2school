@@ -163,6 +163,159 @@ exports.Prisma.SchoolScalarFieldEnum = {
   fundingBalanceZar: 'fundingBalanceZar',
   annualCycleYear: 'annualCycleYear',
   annualCycleFocus: 'annualCycleFocus',
+  logoUrl: 'logoUrl',
+  logoPng: 'logoPng',
+  websiteUrl: 'websiteUrl',
+  publicPhone: 'publicPhone',
+  quintile: 'quintile',
+  teacherCount: 'teacherCount',
+  gpsLat: 'gpsLat',
+  gpsLng: 'gpsLng',
+  publicProfile: 'publicProfile',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.SchoolSubmittedNeedScalarFieldEnum = {
+  id: 'id',
+  schoolId: 'schoolId',
+  title: 'title',
+  category: 'category',
+  subcategory: 'subcategory',
+  urgency: 'urgency',
+  description: 'description',
+  learnerImpact: 'learnerImpact',
+  estimatedCostZar: 'estimatedCostZar',
+  progressPercent: 'progressPercent',
+  sponsorStatus: 'sponsorStatus',
+  photoCount: 'photoCount',
+  quoteCount: 'quoteCount',
+  status: 'status',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.SchoolVolunteerScalarFieldEnum = {
+  id: 'id',
+  schoolId: 'schoolId',
+  fullName: 'fullName',
+  role: 'role',
+  phone: 'phone',
+  email: 'email',
+  skills: 'skills',
+  hoursLogged: 'hoursLogged',
+  status: 'status',
+  notes: 'notes',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.SchoolEventScalarFieldEnum = {
+  id: 'id',
+  schoolId: 'schoolId',
+  title: 'title',
+  description: 'description',
+  eventType: 'eventType',
+  location: 'location',
+  startsAt: 'startsAt',
+  endsAt: 'endsAt',
+  volunteerSlots: 'volunteerSlots',
+  status: 'status',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.SchoolEventVolunteerScalarFieldEnum = {
+  id: 'id',
+  eventId: 'eventId',
+  volunteerId: 'volunteerId',
+  role: 'role',
+  createdAt: 'createdAt'
+};
+
+exports.Prisma.SchoolAlumniScalarFieldEnum = {
+  id: 'id',
+  schoolId: 'schoolId',
+  fullName: 'fullName',
+  graduationYear: 'graduationYear',
+  profession: 'profession',
+  company: 'company',
+  email: 'email',
+  phone: 'phone',
+  linkedInUrl: 'linkedInUrl',
+  role: 'role',
+  offering: 'offering',
+  status: 'status',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.SchoolInnovationChallengeScalarFieldEnum = {
+  id: 'id',
+  schoolId: 'schoolId',
+  title: 'title',
+  description: 'description',
+  challengeType: 'challengeType',
+  startsAt: 'startsAt',
+  endsAt: 'endsAt',
+  prizeDescription: 'prizeDescription',
+  status: 'status',
+  maxEntries: 'maxEntries',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.SchoolEnterpriseProjectScalarFieldEnum = {
+  id: 'id',
+  schoolId: 'schoolId',
+  challengeId: 'challengeId',
+  title: 'title',
+  description: 'description',
+  projectType: 'projectType',
+  studentLead: 'studentLead',
+  gradeLevel: 'gradeLevel',
+  category: 'category',
+  status: 'status',
+  revenueZar: 'revenueZar',
+  seekingSponsor: 'seekingSponsor',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.SchoolCrmContactScalarFieldEnum = {
+  id: 'id',
+  schoolId: 'schoolId',
+  fullName: 'fullName',
+  organization: 'organization',
+  email: 'email',
+  phone: 'phone',
+  contactType: 'contactType',
+  notes: 'notes',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.SchoolCrmActivityScalarFieldEnum = {
+  id: 'id',
+  schoolId: 'schoolId',
+  contactId: 'contactId',
+  activityType: 'activityType',
+  title: 'title',
+  summary: 'summary',
+  occurredAt: 'occurredAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.SchoolCrmTaskScalarFieldEnum = {
+  id: 'id',
+  schoolId: 'schoolId',
+  contactId: 'contactId',
+  title: 'title',
+  description: 'description',
+  dueAt: 'dueAt',
+  status: 'status',
+  priority: 'priority',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };
@@ -625,6 +778,98 @@ exports.OrganizationCategory = exports.$Enums.OrganizationCategory = {
   FAITH: 'FAITH'
 };
 
+exports.SchoolNeedStatus = exports.$Enums.SchoolNeedStatus = {
+  SUBMITTED: 'SUBMITTED',
+  UNDER_REVIEW: 'UNDER_REVIEW',
+  APPROVED: 'APPROVED',
+  FUNDED: 'FUNDED',
+  DECLINED: 'DECLINED'
+};
+
+exports.SchoolVolunteerStatus = exports.$Enums.SchoolVolunteerStatus = {
+  ACTIVE: 'ACTIVE',
+  INACTIVE: 'INACTIVE',
+  PENDING: 'PENDING'
+};
+
+exports.SchoolEventStatus = exports.$Enums.SchoolEventStatus = {
+  DRAFT: 'DRAFT',
+  SCHEDULED: 'SCHEDULED',
+  COMPLETED: 'COMPLETED',
+  CANCELLED: 'CANCELLED'
+};
+
+exports.SchoolAlumniRole = exports.$Enums.SchoolAlumniRole = {
+  ALUMNI: 'ALUMNI',
+  BUSINESS_OWNER: 'BUSINESS_OWNER',
+  PROFESSIONAL: 'PROFESSIONAL',
+  SPONSOR: 'SPONSOR',
+  MENTOR: 'MENTOR',
+  DONOR: 'DONOR',
+  EMPLOYER: 'EMPLOYER'
+};
+
+exports.SchoolAlumniStatus = exports.$Enums.SchoolAlumniStatus = {
+  ACTIVE: 'ACTIVE',
+  INACTIVE: 'INACTIVE'
+};
+
+exports.SchoolInnovationChallengeStatus = exports.$Enums.SchoolInnovationChallengeStatus = {
+  DRAFT: 'DRAFT',
+  OPEN: 'OPEN',
+  CLOSED: 'CLOSED',
+  COMPLETED: 'COMPLETED'
+};
+
+exports.SchoolEnterpriseProjectType = exports.$Enums.SchoolEnterpriseProjectType = {
+  PRODUCT: 'PRODUCT',
+  PITCH: 'PITCH',
+  STARTUP_CLUB: 'STARTUP_CLUB',
+  MINI_COMPANY: 'MINI_COMPANY',
+  CHALLENGE_ENTRY: 'CHALLENGE_ENTRY'
+};
+
+exports.SchoolEnterpriseProjectStatus = exports.$Enums.SchoolEnterpriseProjectStatus = {
+  IDEA: 'IDEA',
+  ACTIVE: 'ACTIVE',
+  COMPETING: 'COMPETING',
+  AWARDED: 'AWARDED',
+  ARCHIVED: 'ARCHIVED'
+};
+
+exports.SchoolCrmContactType = exports.$Enums.SchoolCrmContactType = {
+  BRAND: 'BRAND',
+  PARENT: 'PARENT',
+  SGB: 'SGB',
+  DONOR: 'DONOR',
+  SUPPORT: 'SUPPORT',
+  PARTNER: 'PARTNER',
+  OTHER: 'OTHER'
+};
+
+exports.SchoolCrmActivityType = exports.$Enums.SchoolCrmActivityType = {
+  MEETING: 'MEETING',
+  CALL: 'CALL',
+  EMAIL: 'EMAIL',
+  SUPPORT: 'SUPPORT',
+  NOTE: 'NOTE',
+  DOCUMENT: 'DOCUMENT',
+  CAMPAIGN: 'CAMPAIGN',
+  RENEWAL: 'RENEWAL'
+};
+
+exports.SchoolCrmTaskStatus = exports.$Enums.SchoolCrmTaskStatus = {
+  OPEN: 'OPEN',
+  DONE: 'DONE',
+  CANCELLED: 'CANCELLED'
+};
+
+exports.SchoolCrmTaskPriority = exports.$Enums.SchoolCrmTaskPriority = {
+  LOW: 'LOW',
+  MEDIUM: 'MEDIUM',
+  HIGH: 'HIGH'
+};
+
 exports.SchoolVerificationStatus = exports.$Enums.SchoolVerificationStatus = {
   NOT_SUBMITTED: 'NOT_SUBMITTED',
   SUBMITTED: 'SUBMITTED',
@@ -787,6 +1032,16 @@ exports.Prisma.ModelName = {
   User: 'User',
   PasswordResetToken: 'PasswordResetToken',
   School: 'School',
+  SchoolSubmittedNeed: 'SchoolSubmittedNeed',
+  SchoolVolunteer: 'SchoolVolunteer',
+  SchoolEvent: 'SchoolEvent',
+  SchoolEventVolunteer: 'SchoolEventVolunteer',
+  SchoolAlumni: 'SchoolAlumni',
+  SchoolInnovationChallenge: 'SchoolInnovationChallenge',
+  SchoolEnterpriseProject: 'SchoolEnterpriseProject',
+  SchoolCrmContact: 'SchoolCrmContact',
+  SchoolCrmActivity: 'SchoolCrmActivity',
+  SchoolCrmTask: 'SchoolCrmTask',
   SchoolVerification: 'SchoolVerification',
   Learner: 'Learner',
   Brand: 'Brand',

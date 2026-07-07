@@ -33,8 +33,11 @@ import { bootstrapFounderBrand } from "../../bootstrap/bootstrapFounderBrand.js"
 import { backfillBrandVerification } from "../../bootstrap/backfillBrandVerification.js";
 import { purgeDemoData } from "../../bootstrap/purgeDemoData.js";
 import { readBrandLogoBuffer } from "../../lib/brandLogo.js";
+import { readSchoolLogoBuffer } from "../../lib/schoolLogo.js";
 import { runMailVerifyAndOptionalSend } from "../../lib/healthEmail.js";
 import { publicSearchQuerySchema, searchPlatformPublic } from "./publicSearch.js";
+import { getPublicSchoolByCode, listPublicSchools } from "./publicSchools.js";
+import { getPublicSchoolCommunityStats } from "../schools/schoolCommunityHub.js";
 
 const querySchema = z.object({
   role: z
@@ -75,6 +78,31 @@ platformRouter.get("/brand-logo/:slug", async (req, res) => {
   res.send(buffer);
 });
 
+/** Public school logo (stored in DB; keyed by school code). */
+platformRouter.get("/school-logo/:schoolCode", async (req, res) => {
+  const school = await prisma.school.findFirst({
+    where: {
+      schoolCode: req.params.schoolCode,
+      logoUrl: { not: null }
+    },
+    select: { id: true }
+  });
+  if (!school) {
+    res.status(404).json({ message: "Logo not found." });
+    return;
+  }
+
+  const buffer = await readSchoolLogoBuffer(school.id);
+  if (!buffer) {
+    res.status(404).json({ message: "Logo file not found. Re-upload in school Profile." });
+    return;
+  }
+
+  res.setHeader("Content-Type", "image/png");
+  res.setHeader("Cache-Control", "public, max-age=3600");
+  res.send(buffer);
+});
+
 /** Homepage featured logos (ACTIVE + featuredOnHome + logo). */
 platformRouter.get("/partners", async (_req, res) => {
   const partners = await getPlatformPartners();
@@ -91,6 +119,36 @@ platformRouter.get("/search", participationRateLimit, async (req, res) => {
 
   const result = await searchPlatformPublic(parsed.data);
   res.json(result);
+});
+
+/** Public school marketplace directory. */
+platformRouter.get("/schools", participationRateLimit, async (req, res) => {
+  const province = typeof req.query.province === "string" ? req.query.province : undefined;
+  const quintile = req.query.quintile ? Number(req.query.quintile) : undefined;
+  const q = typeof req.query.q === "string" ? req.query.q : undefined;
+  const limit = req.query.limit ? Number(req.query.limit) : undefined;
+  const schools = await listPublicSchools({ province, quintile, q, limit });
+  res.json({ schools, updatedAt: new Date().toISOString() });
+});
+
+/** Public school profile by school code. */
+platformRouter.get("/schools/:schoolCode", participationRateLimit, async (req, res) => {
+  const profile = await getPublicSchoolByCode(req.params.schoolCode);
+  if (!profile) {
+    res.status(404).json({ message: "School profile not found or not yet public." });
+    return;
+  }
+  res.json({ profile });
+});
+
+/** Public community participation stats for a school. */
+platformRouter.get("/schools/:schoolCode/community", participationRateLimit, async (req, res) => {
+  const stats = await getPublicSchoolCommunityStats(req.params.schoolCode);
+  if (!stats) {
+    res.status(404).json({ message: "Community stats not available." });
+    return;
+  }
+  res.json({ community: stats });
 });
 
 /** Directory of public partner profiles. */

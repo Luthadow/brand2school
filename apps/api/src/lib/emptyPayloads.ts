@@ -1,5 +1,6 @@
 import type { BrandAnalytics } from "../modules/analytics/getBrandAnalytics.js";
 import type { InfrastructureProgressMetric } from "../modules/analytics/infrastructureMetrics.js";
+import type { BrandCodeInventory } from "../modules/analytics/getBrandCodeInventory.js";
 import type { BrandPortal } from "../modules/analytics/getBrandPortal.js";
 import type { BrandTrustMetrics } from "../modules/analytics/getBrandTrustMetrics.js";
 import type { PlatformLivePayload } from "../modules/platform/getPlatformLive.js";
@@ -82,6 +83,25 @@ export function emptyBrandAnalytics(): BrandAnalytics {
   };
 }
 
+export function emptyBrandCodeInventory(): BrandCodeInventory {
+  return {
+    totalCodes: 0,
+    unused: 0,
+    pending: 0,
+    used: 0,
+    duplicate: 0,
+    invalid: 0,
+    flagged: 0,
+    expired: 0,
+    invalidated: 0,
+    blocked: 0,
+    utilizationPercent: 0,
+    batchesCount: 0,
+    attemptDuplicates: 0,
+    attemptFraudBlocked: 0
+  };
+}
+
 export function emptyBrandPortal(input?: {
   brandId?: string;
   brandName?: string;
@@ -91,6 +111,7 @@ export function emptyBrandPortal(input?: {
   const brandName = input?.brandName ?? "Your brand";
   return {
     brand: { id: input?.brandId ?? "pending", name: brandName, slug: "pending", logoUrl: null },
+    codeInventory: emptyBrandCodeInventory(),
     overview: {
       totalSubmissions: 0,
       schoolsSupported: 0,
@@ -106,6 +127,7 @@ export function emptyBrandPortal(input?: {
     analytics,
     campaigns: [],
     schoolNeeds: [],
+    marketplace: { summary: { totalSchools: 0, withOpenNeeds: 0, partnerSchools: 0 }, schools: [] },
     impactPipeline: [],
     financials: {
       fundsAllocatedZar: 0,

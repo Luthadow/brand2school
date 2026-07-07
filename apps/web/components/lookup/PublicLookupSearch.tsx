@@ -130,9 +130,15 @@ export function PublicLookupSearch({
                   </h3>
                   <ul className="lookup-list">
                     {results.schools.map((school) => (
-                      <li key={`${school.name}-${school.address}`} className="lookup-card">
+                      <li key={`${school.schoolCode}-${school.name}`} className="lookup-card">
                         <div className="lookup-card__main">
-                          <p className="lookup-card__name">{school.name}</p>
+                          <p className="lookup-card__name">
+                            {school.profileUrl ? (
+                              <Link href={school.profileUrl as Route}>{school.name}</Link>
+                            ) : (
+                              school.name
+                            )}
+                          </p>
                           <p className="lookup-card__meta">{school.address}</p>
                           <p className="lookup-card__meta">{school.organizationLabel}</p>
                         </div>

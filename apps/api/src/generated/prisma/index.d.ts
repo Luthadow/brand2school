@@ -29,6 +29,56 @@ export type PasswordResetToken = $Result.DefaultSelection<Prisma.$PasswordResetT
  */
 export type School = $Result.DefaultSelection<Prisma.$SchoolPayload>
 /**
+ * Model SchoolSubmittedNeed
+ * 
+ */
+export type SchoolSubmittedNeed = $Result.DefaultSelection<Prisma.$SchoolSubmittedNeedPayload>
+/**
+ * Model SchoolVolunteer
+ * 
+ */
+export type SchoolVolunteer = $Result.DefaultSelection<Prisma.$SchoolVolunteerPayload>
+/**
+ * Model SchoolEvent
+ * 
+ */
+export type SchoolEvent = $Result.DefaultSelection<Prisma.$SchoolEventPayload>
+/**
+ * Model SchoolEventVolunteer
+ * 
+ */
+export type SchoolEventVolunteer = $Result.DefaultSelection<Prisma.$SchoolEventVolunteerPayload>
+/**
+ * Model SchoolAlumni
+ * 
+ */
+export type SchoolAlumni = $Result.DefaultSelection<Prisma.$SchoolAlumniPayload>
+/**
+ * Model SchoolInnovationChallenge
+ * 
+ */
+export type SchoolInnovationChallenge = $Result.DefaultSelection<Prisma.$SchoolInnovationChallengePayload>
+/**
+ * Model SchoolEnterpriseProject
+ * 
+ */
+export type SchoolEnterpriseProject = $Result.DefaultSelection<Prisma.$SchoolEnterpriseProjectPayload>
+/**
+ * Model SchoolCrmContact
+ * 
+ */
+export type SchoolCrmContact = $Result.DefaultSelection<Prisma.$SchoolCrmContactPayload>
+/**
+ * Model SchoolCrmActivity
+ * 
+ */
+export type SchoolCrmActivity = $Result.DefaultSelection<Prisma.$SchoolCrmActivityPayload>
+/**
+ * Model SchoolCrmTask
+ * 
+ */
+export type SchoolCrmTask = $Result.DefaultSelection<Prisma.$SchoolCrmTaskPayload>
+/**
  * Model SchoolVerification
  * 
  */
@@ -189,6 +239,134 @@ export const OrganizationCategory: {
 };
 
 export type OrganizationCategory = (typeof OrganizationCategory)[keyof typeof OrganizationCategory]
+
+
+export const SchoolNeedStatus: {
+  SUBMITTED: 'SUBMITTED',
+  UNDER_REVIEW: 'UNDER_REVIEW',
+  APPROVED: 'APPROVED',
+  FUNDED: 'FUNDED',
+  DECLINED: 'DECLINED'
+};
+
+export type SchoolNeedStatus = (typeof SchoolNeedStatus)[keyof typeof SchoolNeedStatus]
+
+
+export const SchoolVolunteerStatus: {
+  ACTIVE: 'ACTIVE',
+  INACTIVE: 'INACTIVE',
+  PENDING: 'PENDING'
+};
+
+export type SchoolVolunteerStatus = (typeof SchoolVolunteerStatus)[keyof typeof SchoolVolunteerStatus]
+
+
+export const SchoolEventStatus: {
+  DRAFT: 'DRAFT',
+  SCHEDULED: 'SCHEDULED',
+  COMPLETED: 'COMPLETED',
+  CANCELLED: 'CANCELLED'
+};
+
+export type SchoolEventStatus = (typeof SchoolEventStatus)[keyof typeof SchoolEventStatus]
+
+
+export const SchoolAlumniRole: {
+  ALUMNI: 'ALUMNI',
+  BUSINESS_OWNER: 'BUSINESS_OWNER',
+  PROFESSIONAL: 'PROFESSIONAL',
+  SPONSOR: 'SPONSOR',
+  MENTOR: 'MENTOR',
+  DONOR: 'DONOR',
+  EMPLOYER: 'EMPLOYER'
+};
+
+export type SchoolAlumniRole = (typeof SchoolAlumniRole)[keyof typeof SchoolAlumniRole]
+
+
+export const SchoolAlumniStatus: {
+  ACTIVE: 'ACTIVE',
+  INACTIVE: 'INACTIVE'
+};
+
+export type SchoolAlumniStatus = (typeof SchoolAlumniStatus)[keyof typeof SchoolAlumniStatus]
+
+
+export const SchoolInnovationChallengeStatus: {
+  DRAFT: 'DRAFT',
+  OPEN: 'OPEN',
+  CLOSED: 'CLOSED',
+  COMPLETED: 'COMPLETED'
+};
+
+export type SchoolInnovationChallengeStatus = (typeof SchoolInnovationChallengeStatus)[keyof typeof SchoolInnovationChallengeStatus]
+
+
+export const SchoolEnterpriseProjectType: {
+  PRODUCT: 'PRODUCT',
+  PITCH: 'PITCH',
+  STARTUP_CLUB: 'STARTUP_CLUB',
+  MINI_COMPANY: 'MINI_COMPANY',
+  CHALLENGE_ENTRY: 'CHALLENGE_ENTRY'
+};
+
+export type SchoolEnterpriseProjectType = (typeof SchoolEnterpriseProjectType)[keyof typeof SchoolEnterpriseProjectType]
+
+
+export const SchoolEnterpriseProjectStatus: {
+  IDEA: 'IDEA',
+  ACTIVE: 'ACTIVE',
+  COMPETING: 'COMPETING',
+  AWARDED: 'AWARDED',
+  ARCHIVED: 'ARCHIVED'
+};
+
+export type SchoolEnterpriseProjectStatus = (typeof SchoolEnterpriseProjectStatus)[keyof typeof SchoolEnterpriseProjectStatus]
+
+
+export const SchoolCrmContactType: {
+  BRAND: 'BRAND',
+  PARENT: 'PARENT',
+  SGB: 'SGB',
+  DONOR: 'DONOR',
+  SUPPORT: 'SUPPORT',
+  PARTNER: 'PARTNER',
+  OTHER: 'OTHER'
+};
+
+export type SchoolCrmContactType = (typeof SchoolCrmContactType)[keyof typeof SchoolCrmContactType]
+
+
+export const SchoolCrmActivityType: {
+  MEETING: 'MEETING',
+  CALL: 'CALL',
+  EMAIL: 'EMAIL',
+  SUPPORT: 'SUPPORT',
+  NOTE: 'NOTE',
+  DOCUMENT: 'DOCUMENT',
+  CAMPAIGN: 'CAMPAIGN',
+  RENEWAL: 'RENEWAL'
+};
+
+export type SchoolCrmActivityType = (typeof SchoolCrmActivityType)[keyof typeof SchoolCrmActivityType]
+
+
+export const SchoolCrmTaskStatus: {
+  OPEN: 'OPEN',
+  DONE: 'DONE',
+  CANCELLED: 'CANCELLED'
+};
+
+export type SchoolCrmTaskStatus = (typeof SchoolCrmTaskStatus)[keyof typeof SchoolCrmTaskStatus]
+
+
+export const SchoolCrmTaskPriority: {
+  LOW: 'LOW',
+  MEDIUM: 'MEDIUM',
+  HIGH: 'HIGH'
+};
+
+export type SchoolCrmTaskPriority = (typeof SchoolCrmTaskPriority)[keyof typeof SchoolCrmTaskPriority]
 
 
 export const SchoolVerificationStatus: {
@@ -424,6 +602,54 @@ export const EntityStatus: typeof $Enums.EntityStatus
 export type OrganizationCategory = $Enums.OrganizationCategory
 
 export const OrganizationCategory: typeof $Enums.OrganizationCategory
+
+export type SchoolNeedStatus = $Enums.SchoolNeedStatus
+
+export const SchoolNeedStatus: typeof $Enums.SchoolNeedStatus
+
+export type SchoolVolunteerStatus = $Enums.SchoolVolunteerStatus
+
+export const SchoolVolunteerStatus: typeof $Enums.SchoolVolunteerStatus
+
+export type SchoolEventStatus = $Enums.SchoolEventStatus
+
+export const SchoolEventStatus: typeof $Enums.SchoolEventStatus
+
+export type SchoolAlumniRole = $Enums.SchoolAlumniRole
+
+export const SchoolAlumniRole: typeof $Enums.SchoolAlumniRole
+
+export type SchoolAlumniStatus = $Enums.SchoolAlumniStatus
+
+export const SchoolAlumniStatus: typeof $Enums.SchoolAlumniStatus
+
+export type SchoolInnovationChallengeStatus = $Enums.SchoolInnovationChallengeStatus
+
+export const SchoolInnovationChallengeStatus: typeof $Enums.SchoolInnovationChallengeStatus
+
+export type SchoolEnterpriseProjectType = $Enums.SchoolEnterpriseProjectType
+
+export const SchoolEnterpriseProjectType: typeof $Enums.SchoolEnterpriseProjectType
+
+export type SchoolEnterpriseProjectStatus = $Enums.SchoolEnterpriseProjectStatus
+
+export const SchoolEnterpriseProjectStatus: typeof $Enums.SchoolEnterpriseProjectStatus
+
+export type SchoolCrmContactType = $Enums.SchoolCrmContactType
+
+export const SchoolCrmContactType: typeof $Enums.SchoolCrmContactType
+
+export type SchoolCrmActivityType = $Enums.SchoolCrmActivityType
+
+export const SchoolCrmActivityType: typeof $Enums.SchoolCrmActivityType
+
+export type SchoolCrmTaskStatus = $Enums.SchoolCrmTaskStatus
+
+export const SchoolCrmTaskStatus: typeof $Enums.SchoolCrmTaskStatus
+
+export type SchoolCrmTaskPriority = $Enums.SchoolCrmTaskPriority
+
+export const SchoolCrmTaskPriority: typeof $Enums.SchoolCrmTaskPriority
 
 export type SchoolVerificationStatus = $Enums.SchoolVerificationStatus
 
@@ -661,6 +887,106 @@ export class PrismaClient<
     * ```
     */
   get school(): Prisma.SchoolDelegate<ExtArgs>;
+
+  /**
+   * `prisma.schoolSubmittedNeed`: Exposes CRUD operations for the **SchoolSubmittedNeed** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more SchoolSubmittedNeeds
+    * const schoolSubmittedNeeds = await prisma.schoolSubmittedNeed.findMany()
+    * ```
+    */
+  get schoolSubmittedNeed(): Prisma.SchoolSubmittedNeedDelegate<ExtArgs>;
+
+  /**
+   * `prisma.schoolVolunteer`: Exposes CRUD operations for the **SchoolVolunteer** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more SchoolVolunteers
+    * const schoolVolunteers = await prisma.schoolVolunteer.findMany()
+    * ```
+    */
+  get schoolVolunteer(): Prisma.SchoolVolunteerDelegate<ExtArgs>;
+
+  /**
+   * `prisma.schoolEvent`: Exposes CRUD operations for the **SchoolEvent** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more SchoolEvents
+    * const schoolEvents = await prisma.schoolEvent.findMany()
+    * ```
+    */
+  get schoolEvent(): Prisma.SchoolEventDelegate<ExtArgs>;
+
+  /**
+   * `prisma.schoolEventVolunteer`: Exposes CRUD operations for the **SchoolEventVolunteer** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more SchoolEventVolunteers
+    * const schoolEventVolunteers = await prisma.schoolEventVolunteer.findMany()
+    * ```
+    */
+  get schoolEventVolunteer(): Prisma.SchoolEventVolunteerDelegate<ExtArgs>;
+
+  /**
+   * `prisma.schoolAlumni`: Exposes CRUD operations for the **SchoolAlumni** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more SchoolAlumni
+    * const schoolAlumni = await prisma.schoolAlumni.findMany()
+    * ```
+    */
+  get schoolAlumni(): Prisma.SchoolAlumniDelegate<ExtArgs>;
+
+  /**
+   * `prisma.schoolInnovationChallenge`: Exposes CRUD operations for the **SchoolInnovationChallenge** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more SchoolInnovationChallenges
+    * const schoolInnovationChallenges = await prisma.schoolInnovationChallenge.findMany()
+    * ```
+    */
+  get schoolInnovationChallenge(): Prisma.SchoolInnovationChallengeDelegate<ExtArgs>;
+
+  /**
+   * `prisma.schoolEnterpriseProject`: Exposes CRUD operations for the **SchoolEnterpriseProject** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more SchoolEnterpriseProjects
+    * const schoolEnterpriseProjects = await prisma.schoolEnterpriseProject.findMany()
+    * ```
+    */
+  get schoolEnterpriseProject(): Prisma.SchoolEnterpriseProjectDelegate<ExtArgs>;
+
+  /**
+   * `prisma.schoolCrmContact`: Exposes CRUD operations for the **SchoolCrmContact** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more SchoolCrmContacts
+    * const schoolCrmContacts = await prisma.schoolCrmContact.findMany()
+    * ```
+    */
+  get schoolCrmContact(): Prisma.SchoolCrmContactDelegate<ExtArgs>;
+
+  /**
+   * `prisma.schoolCrmActivity`: Exposes CRUD operations for the **SchoolCrmActivity** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more SchoolCrmActivities
+    * const schoolCrmActivities = await prisma.schoolCrmActivity.findMany()
+    * ```
+    */
+  get schoolCrmActivity(): Prisma.SchoolCrmActivityDelegate<ExtArgs>;
+
+  /**
+   * `prisma.schoolCrmTask`: Exposes CRUD operations for the **SchoolCrmTask** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more SchoolCrmTasks
+    * const schoolCrmTasks = await prisma.schoolCrmTask.findMany()
+    * ```
+    */
+  get schoolCrmTask(): Prisma.SchoolCrmTaskDelegate<ExtArgs>;
 
   /**
    * `prisma.schoolVerification`: Exposes CRUD operations for the **SchoolVerification** model.
@@ -1355,6 +1681,16 @@ export namespace Prisma {
     User: 'User',
     PasswordResetToken: 'PasswordResetToken',
     School: 'School',
+    SchoolSubmittedNeed: 'SchoolSubmittedNeed',
+    SchoolVolunteer: 'SchoolVolunteer',
+    SchoolEvent: 'SchoolEvent',
+    SchoolEventVolunteer: 'SchoolEventVolunteer',
+    SchoolAlumni: 'SchoolAlumni',
+    SchoolInnovationChallenge: 'SchoolInnovationChallenge',
+    SchoolEnterpriseProject: 'SchoolEnterpriseProject',
+    SchoolCrmContact: 'SchoolCrmContact',
+    SchoolCrmActivity: 'SchoolCrmActivity',
+    SchoolCrmTask: 'SchoolCrmTask',
     SchoolVerification: 'SchoolVerification',
     Learner: 'Learner',
     Brand: 'Brand',
@@ -1395,7 +1731,7 @@ export namespace Prisma {
 
   export type TypeMap<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> = {
     meta: {
-      modelProps: "user" | "passwordResetToken" | "school" | "schoolVerification" | "learner" | "brand" | "campaign" | "brandAgreement" | "campaignInvoice" | "product" | "codeBatch" | "code" | "submissionAttempt" | "submission" | "auditLog" | "refreshSession" | "fraudFlag" | "adminQueuePreset" | "auditExportJob" | "whatsAppConversation" | "whatsAppMessage" | "webhookDedup" | "esgReportSchedule" | "fundingContribution" | "esgReportDelivery" | "notificationLog" | "notificationJob" | "provinceNomination"
+      modelProps: "user" | "passwordResetToken" | "school" | "schoolSubmittedNeed" | "schoolVolunteer" | "schoolEvent" | "schoolEventVolunteer" | "schoolAlumni" | "schoolInnovationChallenge" | "schoolEnterpriseProject" | "schoolCrmContact" | "schoolCrmActivity" | "schoolCrmTask" | "schoolVerification" | "learner" | "brand" | "campaign" | "brandAgreement" | "campaignInvoice" | "product" | "codeBatch" | "code" | "submissionAttempt" | "submission" | "auditLog" | "refreshSession" | "fraudFlag" | "adminQueuePreset" | "auditExportJob" | "whatsAppConversation" | "whatsAppMessage" | "webhookDedup" | "esgReportSchedule" | "fundingContribution" | "esgReportDelivery" | "notificationLog" | "notificationJob" | "provinceNomination"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -1606,6 +1942,706 @@ export namespace Prisma {
           count: {
             args: Prisma.SchoolCountArgs<ExtArgs>
             result: $Utils.Optional<SchoolCountAggregateOutputType> | number
+          }
+        }
+      }
+      SchoolSubmittedNeed: {
+        payload: Prisma.$SchoolSubmittedNeedPayload<ExtArgs>
+        fields: Prisma.SchoolSubmittedNeedFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.SchoolSubmittedNeedFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SchoolSubmittedNeedPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.SchoolSubmittedNeedFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SchoolSubmittedNeedPayload>
+          }
+          findFirst: {
+            args: Prisma.SchoolSubmittedNeedFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SchoolSubmittedNeedPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.SchoolSubmittedNeedFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SchoolSubmittedNeedPayload>
+          }
+          findMany: {
+            args: Prisma.SchoolSubmittedNeedFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SchoolSubmittedNeedPayload>[]
+          }
+          create: {
+            args: Prisma.SchoolSubmittedNeedCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SchoolSubmittedNeedPayload>
+          }
+          createMany: {
+            args: Prisma.SchoolSubmittedNeedCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.SchoolSubmittedNeedCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SchoolSubmittedNeedPayload>[]
+          }
+          delete: {
+            args: Prisma.SchoolSubmittedNeedDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SchoolSubmittedNeedPayload>
+          }
+          update: {
+            args: Prisma.SchoolSubmittedNeedUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SchoolSubmittedNeedPayload>
+          }
+          deleteMany: {
+            args: Prisma.SchoolSubmittedNeedDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.SchoolSubmittedNeedUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          upsert: {
+            args: Prisma.SchoolSubmittedNeedUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SchoolSubmittedNeedPayload>
+          }
+          aggregate: {
+            args: Prisma.SchoolSubmittedNeedAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateSchoolSubmittedNeed>
+          }
+          groupBy: {
+            args: Prisma.SchoolSubmittedNeedGroupByArgs<ExtArgs>
+            result: $Utils.Optional<SchoolSubmittedNeedGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.SchoolSubmittedNeedCountArgs<ExtArgs>
+            result: $Utils.Optional<SchoolSubmittedNeedCountAggregateOutputType> | number
+          }
+        }
+      }
+      SchoolVolunteer: {
+        payload: Prisma.$SchoolVolunteerPayload<ExtArgs>
+        fields: Prisma.SchoolVolunteerFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.SchoolVolunteerFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SchoolVolunteerPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.SchoolVolunteerFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SchoolVolunteerPayload>
+          }
+          findFirst: {
+            args: Prisma.SchoolVolunteerFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SchoolVolunteerPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.SchoolVolunteerFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SchoolVolunteerPayload>
+          }
+          findMany: {
+            args: Prisma.SchoolVolunteerFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SchoolVolunteerPayload>[]
+          }
+          create: {
+            args: Prisma.SchoolVolunteerCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SchoolVolunteerPayload>
+          }
+          createMany: {
+            args: Prisma.SchoolVolunteerCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.SchoolVolunteerCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SchoolVolunteerPayload>[]
+          }
+          delete: {
+            args: Prisma.SchoolVolunteerDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SchoolVolunteerPayload>
+          }
+          update: {
+            args: Prisma.SchoolVolunteerUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SchoolVolunteerPayload>
+          }
+          deleteMany: {
+            args: Prisma.SchoolVolunteerDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.SchoolVolunteerUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          upsert: {
+            args: Prisma.SchoolVolunteerUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SchoolVolunteerPayload>
+          }
+          aggregate: {
+            args: Prisma.SchoolVolunteerAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateSchoolVolunteer>
+          }
+          groupBy: {
+            args: Prisma.SchoolVolunteerGroupByArgs<ExtArgs>
+            result: $Utils.Optional<SchoolVolunteerGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.SchoolVolunteerCountArgs<ExtArgs>
+            result: $Utils.Optional<SchoolVolunteerCountAggregateOutputType> | number
+          }
+        }
+      }
+      SchoolEvent: {
+        payload: Prisma.$SchoolEventPayload<ExtArgs>
+        fields: Prisma.SchoolEventFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.SchoolEventFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SchoolEventPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.SchoolEventFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SchoolEventPayload>
+          }
+          findFirst: {
+            args: Prisma.SchoolEventFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SchoolEventPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.SchoolEventFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SchoolEventPayload>
+          }
+          findMany: {
+            args: Prisma.SchoolEventFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SchoolEventPayload>[]
+          }
+          create: {
+            args: Prisma.SchoolEventCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SchoolEventPayload>
+          }
+          createMany: {
+            args: Prisma.SchoolEventCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.SchoolEventCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SchoolEventPayload>[]
+          }
+          delete: {
+            args: Prisma.SchoolEventDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SchoolEventPayload>
+          }
+          update: {
+            args: Prisma.SchoolEventUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SchoolEventPayload>
+          }
+          deleteMany: {
+            args: Prisma.SchoolEventDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.SchoolEventUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          upsert: {
+            args: Prisma.SchoolEventUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SchoolEventPayload>
+          }
+          aggregate: {
+            args: Prisma.SchoolEventAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateSchoolEvent>
+          }
+          groupBy: {
+            args: Prisma.SchoolEventGroupByArgs<ExtArgs>
+            result: $Utils.Optional<SchoolEventGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.SchoolEventCountArgs<ExtArgs>
+            result: $Utils.Optional<SchoolEventCountAggregateOutputType> | number
+          }
+        }
+      }
+      SchoolEventVolunteer: {
+        payload: Prisma.$SchoolEventVolunteerPayload<ExtArgs>
+        fields: Prisma.SchoolEventVolunteerFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.SchoolEventVolunteerFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SchoolEventVolunteerPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.SchoolEventVolunteerFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SchoolEventVolunteerPayload>
+          }
+          findFirst: {
+            args: Prisma.SchoolEventVolunteerFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SchoolEventVolunteerPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.SchoolEventVolunteerFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SchoolEventVolunteerPayload>
+          }
+          findMany: {
+            args: Prisma.SchoolEventVolunteerFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SchoolEventVolunteerPayload>[]
+          }
+          create: {
+            args: Prisma.SchoolEventVolunteerCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SchoolEventVolunteerPayload>
+          }
+          createMany: {
+            args: Prisma.SchoolEventVolunteerCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.SchoolEventVolunteerCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SchoolEventVolunteerPayload>[]
+          }
+          delete: {
+            args: Prisma.SchoolEventVolunteerDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SchoolEventVolunteerPayload>
+          }
+          update: {
+            args: Prisma.SchoolEventVolunteerUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SchoolEventVolunteerPayload>
+          }
+          deleteMany: {
+            args: Prisma.SchoolEventVolunteerDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.SchoolEventVolunteerUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          upsert: {
+            args: Prisma.SchoolEventVolunteerUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SchoolEventVolunteerPayload>
+          }
+          aggregate: {
+            args: Prisma.SchoolEventVolunteerAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateSchoolEventVolunteer>
+          }
+          groupBy: {
+            args: Prisma.SchoolEventVolunteerGroupByArgs<ExtArgs>
+            result: $Utils.Optional<SchoolEventVolunteerGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.SchoolEventVolunteerCountArgs<ExtArgs>
+            result: $Utils.Optional<SchoolEventVolunteerCountAggregateOutputType> | number
+          }
+        }
+      }
+      SchoolAlumni: {
+        payload: Prisma.$SchoolAlumniPayload<ExtArgs>
+        fields: Prisma.SchoolAlumniFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.SchoolAlumniFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SchoolAlumniPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.SchoolAlumniFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SchoolAlumniPayload>
+          }
+          findFirst: {
+            args: Prisma.SchoolAlumniFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SchoolAlumniPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.SchoolAlumniFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SchoolAlumniPayload>
+          }
+          findMany: {
+            args: Prisma.SchoolAlumniFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SchoolAlumniPayload>[]
+          }
+          create: {
+            args: Prisma.SchoolAlumniCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SchoolAlumniPayload>
+          }
+          createMany: {
+            args: Prisma.SchoolAlumniCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.SchoolAlumniCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SchoolAlumniPayload>[]
+          }
+          delete: {
+            args: Prisma.SchoolAlumniDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SchoolAlumniPayload>
+          }
+          update: {
+            args: Prisma.SchoolAlumniUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SchoolAlumniPayload>
+          }
+          deleteMany: {
+            args: Prisma.SchoolAlumniDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.SchoolAlumniUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          upsert: {
+            args: Prisma.SchoolAlumniUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SchoolAlumniPayload>
+          }
+          aggregate: {
+            args: Prisma.SchoolAlumniAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateSchoolAlumni>
+          }
+          groupBy: {
+            args: Prisma.SchoolAlumniGroupByArgs<ExtArgs>
+            result: $Utils.Optional<SchoolAlumniGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.SchoolAlumniCountArgs<ExtArgs>
+            result: $Utils.Optional<SchoolAlumniCountAggregateOutputType> | number
+          }
+        }
+      }
+      SchoolInnovationChallenge: {
+        payload: Prisma.$SchoolInnovationChallengePayload<ExtArgs>
+        fields: Prisma.SchoolInnovationChallengeFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.SchoolInnovationChallengeFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SchoolInnovationChallengePayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.SchoolInnovationChallengeFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SchoolInnovationChallengePayload>
+          }
+          findFirst: {
+            args: Prisma.SchoolInnovationChallengeFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SchoolInnovationChallengePayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.SchoolInnovationChallengeFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SchoolInnovationChallengePayload>
+          }
+          findMany: {
+            args: Prisma.SchoolInnovationChallengeFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SchoolInnovationChallengePayload>[]
+          }
+          create: {
+            args: Prisma.SchoolInnovationChallengeCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SchoolInnovationChallengePayload>
+          }
+          createMany: {
+            args: Prisma.SchoolInnovationChallengeCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.SchoolInnovationChallengeCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SchoolInnovationChallengePayload>[]
+          }
+          delete: {
+            args: Prisma.SchoolInnovationChallengeDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SchoolInnovationChallengePayload>
+          }
+          update: {
+            args: Prisma.SchoolInnovationChallengeUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SchoolInnovationChallengePayload>
+          }
+          deleteMany: {
+            args: Prisma.SchoolInnovationChallengeDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.SchoolInnovationChallengeUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          upsert: {
+            args: Prisma.SchoolInnovationChallengeUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SchoolInnovationChallengePayload>
+          }
+          aggregate: {
+            args: Prisma.SchoolInnovationChallengeAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateSchoolInnovationChallenge>
+          }
+          groupBy: {
+            args: Prisma.SchoolInnovationChallengeGroupByArgs<ExtArgs>
+            result: $Utils.Optional<SchoolInnovationChallengeGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.SchoolInnovationChallengeCountArgs<ExtArgs>
+            result: $Utils.Optional<SchoolInnovationChallengeCountAggregateOutputType> | number
+          }
+        }
+      }
+      SchoolEnterpriseProject: {
+        payload: Prisma.$SchoolEnterpriseProjectPayload<ExtArgs>
+        fields: Prisma.SchoolEnterpriseProjectFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.SchoolEnterpriseProjectFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SchoolEnterpriseProjectPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.SchoolEnterpriseProjectFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SchoolEnterpriseProjectPayload>
+          }
+          findFirst: {
+            args: Prisma.SchoolEnterpriseProjectFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SchoolEnterpriseProjectPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.SchoolEnterpriseProjectFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SchoolEnterpriseProjectPayload>
+          }
+          findMany: {
+            args: Prisma.SchoolEnterpriseProjectFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SchoolEnterpriseProjectPayload>[]
+          }
+          create: {
+            args: Prisma.SchoolEnterpriseProjectCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SchoolEnterpriseProjectPayload>
+          }
+          createMany: {
+            args: Prisma.SchoolEnterpriseProjectCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.SchoolEnterpriseProjectCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SchoolEnterpriseProjectPayload>[]
+          }
+          delete: {
+            args: Prisma.SchoolEnterpriseProjectDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SchoolEnterpriseProjectPayload>
+          }
+          update: {
+            args: Prisma.SchoolEnterpriseProjectUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SchoolEnterpriseProjectPayload>
+          }
+          deleteMany: {
+            args: Prisma.SchoolEnterpriseProjectDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.SchoolEnterpriseProjectUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          upsert: {
+            args: Prisma.SchoolEnterpriseProjectUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SchoolEnterpriseProjectPayload>
+          }
+          aggregate: {
+            args: Prisma.SchoolEnterpriseProjectAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateSchoolEnterpriseProject>
+          }
+          groupBy: {
+            args: Prisma.SchoolEnterpriseProjectGroupByArgs<ExtArgs>
+            result: $Utils.Optional<SchoolEnterpriseProjectGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.SchoolEnterpriseProjectCountArgs<ExtArgs>
+            result: $Utils.Optional<SchoolEnterpriseProjectCountAggregateOutputType> | number
+          }
+        }
+      }
+      SchoolCrmContact: {
+        payload: Prisma.$SchoolCrmContactPayload<ExtArgs>
+        fields: Prisma.SchoolCrmContactFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.SchoolCrmContactFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SchoolCrmContactPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.SchoolCrmContactFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SchoolCrmContactPayload>
+          }
+          findFirst: {
+            args: Prisma.SchoolCrmContactFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SchoolCrmContactPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.SchoolCrmContactFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SchoolCrmContactPayload>
+          }
+          findMany: {
+            args: Prisma.SchoolCrmContactFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SchoolCrmContactPayload>[]
+          }
+          create: {
+            args: Prisma.SchoolCrmContactCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SchoolCrmContactPayload>
+          }
+          createMany: {
+            args: Prisma.SchoolCrmContactCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.SchoolCrmContactCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SchoolCrmContactPayload>[]
+          }
+          delete: {
+            args: Prisma.SchoolCrmContactDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SchoolCrmContactPayload>
+          }
+          update: {
+            args: Prisma.SchoolCrmContactUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SchoolCrmContactPayload>
+          }
+          deleteMany: {
+            args: Prisma.SchoolCrmContactDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.SchoolCrmContactUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          upsert: {
+            args: Prisma.SchoolCrmContactUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SchoolCrmContactPayload>
+          }
+          aggregate: {
+            args: Prisma.SchoolCrmContactAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateSchoolCrmContact>
+          }
+          groupBy: {
+            args: Prisma.SchoolCrmContactGroupByArgs<ExtArgs>
+            result: $Utils.Optional<SchoolCrmContactGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.SchoolCrmContactCountArgs<ExtArgs>
+            result: $Utils.Optional<SchoolCrmContactCountAggregateOutputType> | number
+          }
+        }
+      }
+      SchoolCrmActivity: {
+        payload: Prisma.$SchoolCrmActivityPayload<ExtArgs>
+        fields: Prisma.SchoolCrmActivityFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.SchoolCrmActivityFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SchoolCrmActivityPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.SchoolCrmActivityFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SchoolCrmActivityPayload>
+          }
+          findFirst: {
+            args: Prisma.SchoolCrmActivityFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SchoolCrmActivityPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.SchoolCrmActivityFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SchoolCrmActivityPayload>
+          }
+          findMany: {
+            args: Prisma.SchoolCrmActivityFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SchoolCrmActivityPayload>[]
+          }
+          create: {
+            args: Prisma.SchoolCrmActivityCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SchoolCrmActivityPayload>
+          }
+          createMany: {
+            args: Prisma.SchoolCrmActivityCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.SchoolCrmActivityCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SchoolCrmActivityPayload>[]
+          }
+          delete: {
+            args: Prisma.SchoolCrmActivityDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SchoolCrmActivityPayload>
+          }
+          update: {
+            args: Prisma.SchoolCrmActivityUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SchoolCrmActivityPayload>
+          }
+          deleteMany: {
+            args: Prisma.SchoolCrmActivityDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.SchoolCrmActivityUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          upsert: {
+            args: Prisma.SchoolCrmActivityUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SchoolCrmActivityPayload>
+          }
+          aggregate: {
+            args: Prisma.SchoolCrmActivityAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateSchoolCrmActivity>
+          }
+          groupBy: {
+            args: Prisma.SchoolCrmActivityGroupByArgs<ExtArgs>
+            result: $Utils.Optional<SchoolCrmActivityGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.SchoolCrmActivityCountArgs<ExtArgs>
+            result: $Utils.Optional<SchoolCrmActivityCountAggregateOutputType> | number
+          }
+        }
+      }
+      SchoolCrmTask: {
+        payload: Prisma.$SchoolCrmTaskPayload<ExtArgs>
+        fields: Prisma.SchoolCrmTaskFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.SchoolCrmTaskFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SchoolCrmTaskPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.SchoolCrmTaskFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SchoolCrmTaskPayload>
+          }
+          findFirst: {
+            args: Prisma.SchoolCrmTaskFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SchoolCrmTaskPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.SchoolCrmTaskFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SchoolCrmTaskPayload>
+          }
+          findMany: {
+            args: Prisma.SchoolCrmTaskFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SchoolCrmTaskPayload>[]
+          }
+          create: {
+            args: Prisma.SchoolCrmTaskCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SchoolCrmTaskPayload>
+          }
+          createMany: {
+            args: Prisma.SchoolCrmTaskCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.SchoolCrmTaskCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SchoolCrmTaskPayload>[]
+          }
+          delete: {
+            args: Prisma.SchoolCrmTaskDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SchoolCrmTaskPayload>
+          }
+          update: {
+            args: Prisma.SchoolCrmTaskUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SchoolCrmTaskPayload>
+          }
+          deleteMany: {
+            args: Prisma.SchoolCrmTaskDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.SchoolCrmTaskUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          upsert: {
+            args: Prisma.SchoolCrmTaskUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SchoolCrmTaskPayload>
+          }
+          aggregate: {
+            args: Prisma.SchoolCrmTaskAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateSchoolCrmTask>
+          }
+          groupBy: {
+            args: Prisma.SchoolCrmTaskGroupByArgs<ExtArgs>
+            result: $Utils.Optional<SchoolCrmTaskGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.SchoolCrmTaskCountArgs<ExtArgs>
+            result: $Utils.Optional<SchoolCrmTaskCountAggregateOutputType> | number
           }
         }
       }
@@ -3590,12 +4626,30 @@ export namespace Prisma {
     learners: number
     submissions: number
     fundingContributions: number
+    submittedNeeds: number
+    volunteers: number
+    events: number
+    alumni: number
+    enterpriseProjects: number
+    innovationChallenges: number
+    crmContacts: number
+    crmActivities: number
+    crmTasks: number
   }
 
   export type SchoolCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     learners?: boolean | SchoolCountOutputTypeCountLearnersArgs
     submissions?: boolean | SchoolCountOutputTypeCountSubmissionsArgs
     fundingContributions?: boolean | SchoolCountOutputTypeCountFundingContributionsArgs
+    submittedNeeds?: boolean | SchoolCountOutputTypeCountSubmittedNeedsArgs
+    volunteers?: boolean | SchoolCountOutputTypeCountVolunteersArgs
+    events?: boolean | SchoolCountOutputTypeCountEventsArgs
+    alumni?: boolean | SchoolCountOutputTypeCountAlumniArgs
+    enterpriseProjects?: boolean | SchoolCountOutputTypeCountEnterpriseProjectsArgs
+    innovationChallenges?: boolean | SchoolCountOutputTypeCountInnovationChallengesArgs
+    crmContacts?: boolean | SchoolCountOutputTypeCountCrmContactsArgs
+    crmActivities?: boolean | SchoolCountOutputTypeCountCrmActivitiesArgs
+    crmTasks?: boolean | SchoolCountOutputTypeCountCrmTasksArgs
   }
 
   // Custom InputTypes
@@ -3628,6 +4682,202 @@ export namespace Prisma {
    */
   export type SchoolCountOutputTypeCountFundingContributionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: FundingContributionWhereInput
+  }
+
+  /**
+   * SchoolCountOutputType without action
+   */
+  export type SchoolCountOutputTypeCountSubmittedNeedsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: SchoolSubmittedNeedWhereInput
+  }
+
+  /**
+   * SchoolCountOutputType without action
+   */
+  export type SchoolCountOutputTypeCountVolunteersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: SchoolVolunteerWhereInput
+  }
+
+  /**
+   * SchoolCountOutputType without action
+   */
+  export type SchoolCountOutputTypeCountEventsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: SchoolEventWhereInput
+  }
+
+  /**
+   * SchoolCountOutputType without action
+   */
+  export type SchoolCountOutputTypeCountAlumniArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: SchoolAlumniWhereInput
+  }
+
+  /**
+   * SchoolCountOutputType without action
+   */
+  export type SchoolCountOutputTypeCountEnterpriseProjectsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: SchoolEnterpriseProjectWhereInput
+  }
+
+  /**
+   * SchoolCountOutputType without action
+   */
+  export type SchoolCountOutputTypeCountInnovationChallengesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: SchoolInnovationChallengeWhereInput
+  }
+
+  /**
+   * SchoolCountOutputType without action
+   */
+  export type SchoolCountOutputTypeCountCrmContactsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: SchoolCrmContactWhereInput
+  }
+
+  /**
+   * SchoolCountOutputType without action
+   */
+  export type SchoolCountOutputTypeCountCrmActivitiesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: SchoolCrmActivityWhereInput
+  }
+
+  /**
+   * SchoolCountOutputType without action
+   */
+  export type SchoolCountOutputTypeCountCrmTasksArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: SchoolCrmTaskWhereInput
+  }
+
+
+  /**
+   * Count Type SchoolVolunteerCountOutputType
+   */
+
+  export type SchoolVolunteerCountOutputType = {
+    assignments: number
+  }
+
+  export type SchoolVolunteerCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    assignments?: boolean | SchoolVolunteerCountOutputTypeCountAssignmentsArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * SchoolVolunteerCountOutputType without action
+   */
+  export type SchoolVolunteerCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SchoolVolunteerCountOutputType
+     */
+    select?: SchoolVolunteerCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * SchoolVolunteerCountOutputType without action
+   */
+  export type SchoolVolunteerCountOutputTypeCountAssignmentsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: SchoolEventVolunteerWhereInput
+  }
+
+
+  /**
+   * Count Type SchoolEventCountOutputType
+   */
+
+  export type SchoolEventCountOutputType = {
+    assignments: number
+  }
+
+  export type SchoolEventCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    assignments?: boolean | SchoolEventCountOutputTypeCountAssignmentsArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * SchoolEventCountOutputType without action
+   */
+  export type SchoolEventCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SchoolEventCountOutputType
+     */
+    select?: SchoolEventCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * SchoolEventCountOutputType without action
+   */
+  export type SchoolEventCountOutputTypeCountAssignmentsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: SchoolEventVolunteerWhereInput
+  }
+
+
+  /**
+   * Count Type SchoolInnovationChallengeCountOutputType
+   */
+
+  export type SchoolInnovationChallengeCountOutputType = {
+    projects: number
+  }
+
+  export type SchoolInnovationChallengeCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    projects?: boolean | SchoolInnovationChallengeCountOutputTypeCountProjectsArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * SchoolInnovationChallengeCountOutputType without action
+   */
+  export type SchoolInnovationChallengeCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SchoolInnovationChallengeCountOutputType
+     */
+    select?: SchoolInnovationChallengeCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * SchoolInnovationChallengeCountOutputType without action
+   */
+  export type SchoolInnovationChallengeCountOutputTypeCountProjectsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: SchoolEnterpriseProjectWhereInput
+  }
+
+
+  /**
+   * Count Type SchoolCrmContactCountOutputType
+   */
+
+  export type SchoolCrmContactCountOutputType = {
+    activities: number
+    tasks: number
+  }
+
+  export type SchoolCrmContactCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    activities?: boolean | SchoolCrmContactCountOutputTypeCountActivitiesArgs
+    tasks?: boolean | SchoolCrmContactCountOutputTypeCountTasksArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * SchoolCrmContactCountOutputType without action
+   */
+  export type SchoolCrmContactCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SchoolCrmContactCountOutputType
+     */
+    select?: SchoolCrmContactCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * SchoolCrmContactCountOutputType without action
+   */
+  export type SchoolCrmContactCountOutputTypeCountActivitiesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: SchoolCrmActivityWhereInput
+  }
+
+  /**
+   * SchoolCrmContactCountOutputType without action
+   */
+  export type SchoolCrmContactCountOutputTypeCountTasksArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: SchoolCrmTaskWhereInput
   }
 
 
@@ -6055,6 +7305,10 @@ export namespace Prisma {
     currentPhase: number | null
     fundingBalanceZar: Decimal | null
     annualCycleYear: number | null
+    quintile: number | null
+    teacherCount: number | null
+    gpsLat: number | null
+    gpsLng: number | null
   }
 
   export type SchoolSumAggregateOutputType = {
@@ -6062,6 +7316,10 @@ export namespace Prisma {
     currentPhase: number | null
     fundingBalanceZar: Decimal | null
     annualCycleYear: number | null
+    quintile: number | null
+    teacherCount: number | null
+    gpsLat: number | null
+    gpsLng: number | null
   }
 
   export type SchoolMinAggregateOutputType = {
@@ -6080,6 +7338,14 @@ export namespace Prisma {
     fundingBalanceZar: Decimal | null
     annualCycleYear: number | null
     annualCycleFocus: string | null
+    logoUrl: string | null
+    logoPng: Buffer | null
+    websiteUrl: string | null
+    publicPhone: string | null
+    quintile: number | null
+    teacherCount: number | null
+    gpsLat: number | null
+    gpsLng: number | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -6100,6 +7366,14 @@ export namespace Prisma {
     fundingBalanceZar: Decimal | null
     annualCycleYear: number | null
     annualCycleFocus: string | null
+    logoUrl: string | null
+    logoPng: Buffer | null
+    websiteUrl: string | null
+    publicPhone: string | null
+    quintile: number | null
+    teacherCount: number | null
+    gpsLat: number | null
+    gpsLng: number | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -6123,6 +7397,15 @@ export namespace Prisma {
     fundingBalanceZar: number
     annualCycleYear: number
     annualCycleFocus: number
+    logoUrl: number
+    logoPng: number
+    websiteUrl: number
+    publicPhone: number
+    quintile: number
+    teacherCount: number
+    gpsLat: number
+    gpsLng: number
+    publicProfile: number
     createdAt: number
     updatedAt: number
     _all: number
@@ -6134,6 +7417,10 @@ export namespace Prisma {
     currentPhase?: true
     fundingBalanceZar?: true
     annualCycleYear?: true
+    quintile?: true
+    teacherCount?: true
+    gpsLat?: true
+    gpsLng?: true
   }
 
   export type SchoolSumAggregateInputType = {
@@ -6141,6 +7428,10 @@ export namespace Prisma {
     currentPhase?: true
     fundingBalanceZar?: true
     annualCycleYear?: true
+    quintile?: true
+    teacherCount?: true
+    gpsLat?: true
+    gpsLng?: true
   }
 
   export type SchoolMinAggregateInputType = {
@@ -6159,6 +7450,14 @@ export namespace Prisma {
     fundingBalanceZar?: true
     annualCycleYear?: true
     annualCycleFocus?: true
+    logoUrl?: true
+    logoPng?: true
+    websiteUrl?: true
+    publicPhone?: true
+    quintile?: true
+    teacherCount?: true
+    gpsLat?: true
+    gpsLng?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -6179,6 +7478,14 @@ export namespace Prisma {
     fundingBalanceZar?: true
     annualCycleYear?: true
     annualCycleFocus?: true
+    logoUrl?: true
+    logoPng?: true
+    websiteUrl?: true
+    publicPhone?: true
+    quintile?: true
+    teacherCount?: true
+    gpsLat?: true
+    gpsLng?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -6202,6 +7509,15 @@ export namespace Prisma {
     fundingBalanceZar?: true
     annualCycleYear?: true
     annualCycleFocus?: true
+    logoUrl?: true
+    logoPng?: true
+    websiteUrl?: true
+    publicPhone?: true
+    quintile?: true
+    teacherCount?: true
+    gpsLat?: true
+    gpsLng?: true
+    publicProfile?: true
     createdAt?: true
     updatedAt?: true
     _all?: true
@@ -6312,6 +7628,15 @@ export namespace Prisma {
     fundingBalanceZar: Decimal
     annualCycleYear: number | null
     annualCycleFocus: string | null
+    logoUrl: string | null
+    logoPng: Buffer | null
+    websiteUrl: string | null
+    publicPhone: string | null
+    quintile: number | null
+    teacherCount: number | null
+    gpsLat: number | null
+    gpsLng: number | null
+    publicProfile: JsonValue | null
     createdAt: Date
     updatedAt: Date
     _count: SchoolCountAggregateOutputType | null
@@ -6354,11 +7679,29 @@ export namespace Prisma {
     fundingBalanceZar?: boolean
     annualCycleYear?: boolean
     annualCycleFocus?: boolean
+    logoUrl?: boolean
+    logoPng?: boolean
+    websiteUrl?: boolean
+    publicPhone?: boolean
+    quintile?: boolean
+    teacherCount?: boolean
+    gpsLat?: boolean
+    gpsLng?: boolean
+    publicProfile?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     learners?: boolean | School$learnersArgs<ExtArgs>
     submissions?: boolean | School$submissionsArgs<ExtArgs>
     fundingContributions?: boolean | School$fundingContributionsArgs<ExtArgs>
+    submittedNeeds?: boolean | School$submittedNeedsArgs<ExtArgs>
+    volunteers?: boolean | School$volunteersArgs<ExtArgs>
+    events?: boolean | School$eventsArgs<ExtArgs>
+    alumni?: boolean | School$alumniArgs<ExtArgs>
+    enterpriseProjects?: boolean | School$enterpriseProjectsArgs<ExtArgs>
+    innovationChallenges?: boolean | School$innovationChallengesArgs<ExtArgs>
+    crmContacts?: boolean | School$crmContactsArgs<ExtArgs>
+    crmActivities?: boolean | School$crmActivitiesArgs<ExtArgs>
+    crmTasks?: boolean | School$crmTasksArgs<ExtArgs>
     adminUser?: boolean | School$adminUserArgs<ExtArgs>
     verification?: boolean | School$verificationArgs<ExtArgs>
     _count?: boolean | SchoolCountOutputTypeDefaultArgs<ExtArgs>
@@ -6383,6 +7726,15 @@ export namespace Prisma {
     fundingBalanceZar?: boolean
     annualCycleYear?: boolean
     annualCycleFocus?: boolean
+    logoUrl?: boolean
+    logoPng?: boolean
+    websiteUrl?: boolean
+    publicPhone?: boolean
+    quintile?: boolean
+    teacherCount?: boolean
+    gpsLat?: boolean
+    gpsLng?: boolean
+    publicProfile?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }, ExtArgs["result"]["school"]>
@@ -6406,6 +7758,15 @@ export namespace Prisma {
     fundingBalanceZar?: boolean
     annualCycleYear?: boolean
     annualCycleFocus?: boolean
+    logoUrl?: boolean
+    logoPng?: boolean
+    websiteUrl?: boolean
+    publicPhone?: boolean
+    quintile?: boolean
+    teacherCount?: boolean
+    gpsLat?: boolean
+    gpsLng?: boolean
+    publicProfile?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
@@ -6414,6 +7775,15 @@ export namespace Prisma {
     learners?: boolean | School$learnersArgs<ExtArgs>
     submissions?: boolean | School$submissionsArgs<ExtArgs>
     fundingContributions?: boolean | School$fundingContributionsArgs<ExtArgs>
+    submittedNeeds?: boolean | School$submittedNeedsArgs<ExtArgs>
+    volunteers?: boolean | School$volunteersArgs<ExtArgs>
+    events?: boolean | School$eventsArgs<ExtArgs>
+    alumni?: boolean | School$alumniArgs<ExtArgs>
+    enterpriseProjects?: boolean | School$enterpriseProjectsArgs<ExtArgs>
+    innovationChallenges?: boolean | School$innovationChallengesArgs<ExtArgs>
+    crmContacts?: boolean | School$crmContactsArgs<ExtArgs>
+    crmActivities?: boolean | School$crmActivitiesArgs<ExtArgs>
+    crmTasks?: boolean | School$crmTasksArgs<ExtArgs>
     adminUser?: boolean | School$adminUserArgs<ExtArgs>
     verification?: boolean | School$verificationArgs<ExtArgs>
     _count?: boolean | SchoolCountOutputTypeDefaultArgs<ExtArgs>
@@ -6426,6 +7796,15 @@ export namespace Prisma {
       learners: Prisma.$LearnerPayload<ExtArgs>[]
       submissions: Prisma.$SubmissionPayload<ExtArgs>[]
       fundingContributions: Prisma.$FundingContributionPayload<ExtArgs>[]
+      submittedNeeds: Prisma.$SchoolSubmittedNeedPayload<ExtArgs>[]
+      volunteers: Prisma.$SchoolVolunteerPayload<ExtArgs>[]
+      events: Prisma.$SchoolEventPayload<ExtArgs>[]
+      alumni: Prisma.$SchoolAlumniPayload<ExtArgs>[]
+      enterpriseProjects: Prisma.$SchoolEnterpriseProjectPayload<ExtArgs>[]
+      innovationChallenges: Prisma.$SchoolInnovationChallengePayload<ExtArgs>[]
+      crmContacts: Prisma.$SchoolCrmContactPayload<ExtArgs>[]
+      crmActivities: Prisma.$SchoolCrmActivityPayload<ExtArgs>[]
+      crmTasks: Prisma.$SchoolCrmTaskPayload<ExtArgs>[]
       adminUser: Prisma.$UserPayload<ExtArgs> | null
       verification: Prisma.$SchoolVerificationPayload<ExtArgs> | null
     }
@@ -6454,6 +7833,15 @@ export namespace Prisma {
       fundingBalanceZar: Prisma.Decimal
       annualCycleYear: number | null
       annualCycleFocus: string | null
+      logoUrl: string | null
+      logoPng: Buffer | null
+      websiteUrl: string | null
+      publicPhone: string | null
+      quintile: number | null
+      teacherCount: number | null
+      gpsLat: number | null
+      gpsLng: number | null
+      publicProfile: Prisma.JsonValue | null
       createdAt: Date
       updatedAt: Date
     }, ExtArgs["result"]["school"]>
@@ -6823,6 +8211,15 @@ export namespace Prisma {
     learners<T extends School$learnersArgs<ExtArgs> = {}>(args?: Subset<T, School$learnersArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$LearnerPayload<ExtArgs>, T, "findMany"> | Null>
     submissions<T extends School$submissionsArgs<ExtArgs> = {}>(args?: Subset<T, School$submissionsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SubmissionPayload<ExtArgs>, T, "findMany"> | Null>
     fundingContributions<T extends School$fundingContributionsArgs<ExtArgs> = {}>(args?: Subset<T, School$fundingContributionsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$FundingContributionPayload<ExtArgs>, T, "findMany"> | Null>
+    submittedNeeds<T extends School$submittedNeedsArgs<ExtArgs> = {}>(args?: Subset<T, School$submittedNeedsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SchoolSubmittedNeedPayload<ExtArgs>, T, "findMany"> | Null>
+    volunteers<T extends School$volunteersArgs<ExtArgs> = {}>(args?: Subset<T, School$volunteersArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SchoolVolunteerPayload<ExtArgs>, T, "findMany"> | Null>
+    events<T extends School$eventsArgs<ExtArgs> = {}>(args?: Subset<T, School$eventsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SchoolEventPayload<ExtArgs>, T, "findMany"> | Null>
+    alumni<T extends School$alumniArgs<ExtArgs> = {}>(args?: Subset<T, School$alumniArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SchoolAlumniPayload<ExtArgs>, T, "findMany"> | Null>
+    enterpriseProjects<T extends School$enterpriseProjectsArgs<ExtArgs> = {}>(args?: Subset<T, School$enterpriseProjectsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SchoolEnterpriseProjectPayload<ExtArgs>, T, "findMany"> | Null>
+    innovationChallenges<T extends School$innovationChallengesArgs<ExtArgs> = {}>(args?: Subset<T, School$innovationChallengesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SchoolInnovationChallengePayload<ExtArgs>, T, "findMany"> | Null>
+    crmContacts<T extends School$crmContactsArgs<ExtArgs> = {}>(args?: Subset<T, School$crmContactsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SchoolCrmContactPayload<ExtArgs>, T, "findMany"> | Null>
+    crmActivities<T extends School$crmActivitiesArgs<ExtArgs> = {}>(args?: Subset<T, School$crmActivitiesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SchoolCrmActivityPayload<ExtArgs>, T, "findMany"> | Null>
+    crmTasks<T extends School$crmTasksArgs<ExtArgs> = {}>(args?: Subset<T, School$crmTasksArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SchoolCrmTaskPayload<ExtArgs>, T, "findMany"> | Null>
     adminUser<T extends School$adminUserArgs<ExtArgs> = {}>(args?: Subset<T, School$adminUserArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow"> | null, null, ExtArgs>
     verification<T extends School$verificationArgs<ExtArgs> = {}>(args?: Subset<T, School$verificationArgs<ExtArgs>>): Prisma__SchoolVerificationClient<$Result.GetResult<Prisma.$SchoolVerificationPayload<ExtArgs>, T, "findUniqueOrThrow"> | null, null, ExtArgs>
     /**
@@ -6872,6 +8269,15 @@ export namespace Prisma {
     readonly fundingBalanceZar: FieldRef<"School", 'Decimal'>
     readonly annualCycleYear: FieldRef<"School", 'Int'>
     readonly annualCycleFocus: FieldRef<"School", 'String'>
+    readonly logoUrl: FieldRef<"School", 'String'>
+    readonly logoPng: FieldRef<"School", 'Bytes'>
+    readonly websiteUrl: FieldRef<"School", 'String'>
+    readonly publicPhone: FieldRef<"School", 'String'>
+    readonly quintile: FieldRef<"School", 'Int'>
+    readonly teacherCount: FieldRef<"School", 'Int'>
+    readonly gpsLat: FieldRef<"School", 'Float'>
+    readonly gpsLng: FieldRef<"School", 'Float'>
+    readonly publicProfile: FieldRef<"School", 'Json'>
     readonly createdAt: FieldRef<"School", 'DateTime'>
     readonly updatedAt: FieldRef<"School", 'DateTime'>
   }
@@ -7248,6 +8654,186 @@ export namespace Prisma {
   }
 
   /**
+   * School.submittedNeeds
+   */
+  export type School$submittedNeedsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SchoolSubmittedNeed
+     */
+    select?: SchoolSubmittedNeedSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SchoolSubmittedNeedInclude<ExtArgs> | null
+    where?: SchoolSubmittedNeedWhereInput
+    orderBy?: SchoolSubmittedNeedOrderByWithRelationInput | SchoolSubmittedNeedOrderByWithRelationInput[]
+    cursor?: SchoolSubmittedNeedWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: SchoolSubmittedNeedScalarFieldEnum | SchoolSubmittedNeedScalarFieldEnum[]
+  }
+
+  /**
+   * School.volunteers
+   */
+  export type School$volunteersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SchoolVolunteer
+     */
+    select?: SchoolVolunteerSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SchoolVolunteerInclude<ExtArgs> | null
+    where?: SchoolVolunteerWhereInput
+    orderBy?: SchoolVolunteerOrderByWithRelationInput | SchoolVolunteerOrderByWithRelationInput[]
+    cursor?: SchoolVolunteerWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: SchoolVolunteerScalarFieldEnum | SchoolVolunteerScalarFieldEnum[]
+  }
+
+  /**
+   * School.events
+   */
+  export type School$eventsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SchoolEvent
+     */
+    select?: SchoolEventSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SchoolEventInclude<ExtArgs> | null
+    where?: SchoolEventWhereInput
+    orderBy?: SchoolEventOrderByWithRelationInput | SchoolEventOrderByWithRelationInput[]
+    cursor?: SchoolEventWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: SchoolEventScalarFieldEnum | SchoolEventScalarFieldEnum[]
+  }
+
+  /**
+   * School.alumni
+   */
+  export type School$alumniArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SchoolAlumni
+     */
+    select?: SchoolAlumniSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SchoolAlumniInclude<ExtArgs> | null
+    where?: SchoolAlumniWhereInput
+    orderBy?: SchoolAlumniOrderByWithRelationInput | SchoolAlumniOrderByWithRelationInput[]
+    cursor?: SchoolAlumniWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: SchoolAlumniScalarFieldEnum | SchoolAlumniScalarFieldEnum[]
+  }
+
+  /**
+   * School.enterpriseProjects
+   */
+  export type School$enterpriseProjectsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SchoolEnterpriseProject
+     */
+    select?: SchoolEnterpriseProjectSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SchoolEnterpriseProjectInclude<ExtArgs> | null
+    where?: SchoolEnterpriseProjectWhereInput
+    orderBy?: SchoolEnterpriseProjectOrderByWithRelationInput | SchoolEnterpriseProjectOrderByWithRelationInput[]
+    cursor?: SchoolEnterpriseProjectWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: SchoolEnterpriseProjectScalarFieldEnum | SchoolEnterpriseProjectScalarFieldEnum[]
+  }
+
+  /**
+   * School.innovationChallenges
+   */
+  export type School$innovationChallengesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SchoolInnovationChallenge
+     */
+    select?: SchoolInnovationChallengeSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SchoolInnovationChallengeInclude<ExtArgs> | null
+    where?: SchoolInnovationChallengeWhereInput
+    orderBy?: SchoolInnovationChallengeOrderByWithRelationInput | SchoolInnovationChallengeOrderByWithRelationInput[]
+    cursor?: SchoolInnovationChallengeWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: SchoolInnovationChallengeScalarFieldEnum | SchoolInnovationChallengeScalarFieldEnum[]
+  }
+
+  /**
+   * School.crmContacts
+   */
+  export type School$crmContactsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SchoolCrmContact
+     */
+    select?: SchoolCrmContactSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SchoolCrmContactInclude<ExtArgs> | null
+    where?: SchoolCrmContactWhereInput
+    orderBy?: SchoolCrmContactOrderByWithRelationInput | SchoolCrmContactOrderByWithRelationInput[]
+    cursor?: SchoolCrmContactWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: SchoolCrmContactScalarFieldEnum | SchoolCrmContactScalarFieldEnum[]
+  }
+
+  /**
+   * School.crmActivities
+   */
+  export type School$crmActivitiesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SchoolCrmActivity
+     */
+    select?: SchoolCrmActivitySelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SchoolCrmActivityInclude<ExtArgs> | null
+    where?: SchoolCrmActivityWhereInput
+    orderBy?: SchoolCrmActivityOrderByWithRelationInput | SchoolCrmActivityOrderByWithRelationInput[]
+    cursor?: SchoolCrmActivityWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: SchoolCrmActivityScalarFieldEnum | SchoolCrmActivityScalarFieldEnum[]
+  }
+
+  /**
+   * School.crmTasks
+   */
+  export type School$crmTasksArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SchoolCrmTask
+     */
+    select?: SchoolCrmTaskSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SchoolCrmTaskInclude<ExtArgs> | null
+    where?: SchoolCrmTaskWhereInput
+    orderBy?: SchoolCrmTaskOrderByWithRelationInput | SchoolCrmTaskOrderByWithRelationInput[]
+    cursor?: SchoolCrmTaskWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: SchoolCrmTaskScalarFieldEnum | SchoolCrmTaskScalarFieldEnum[]
+  }
+
+  /**
    * School.adminUser
    */
   export type School$adminUserArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -7289,6 +8875,10521 @@ export namespace Prisma {
      * Choose, which related nodes to fetch as well
      */
     include?: SchoolInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model SchoolSubmittedNeed
+   */
+
+  export type AggregateSchoolSubmittedNeed = {
+    _count: SchoolSubmittedNeedCountAggregateOutputType | null
+    _avg: SchoolSubmittedNeedAvgAggregateOutputType | null
+    _sum: SchoolSubmittedNeedSumAggregateOutputType | null
+    _min: SchoolSubmittedNeedMinAggregateOutputType | null
+    _max: SchoolSubmittedNeedMaxAggregateOutputType | null
+  }
+
+  export type SchoolSubmittedNeedAvgAggregateOutputType = {
+    learnerImpact: number | null
+    estimatedCostZar: number | null
+    progressPercent: number | null
+    photoCount: number | null
+    quoteCount: number | null
+  }
+
+  export type SchoolSubmittedNeedSumAggregateOutputType = {
+    learnerImpact: number | null
+    estimatedCostZar: number | null
+    progressPercent: number | null
+    photoCount: number | null
+    quoteCount: number | null
+  }
+
+  export type SchoolSubmittedNeedMinAggregateOutputType = {
+    id: string | null
+    schoolId: string | null
+    title: string | null
+    category: string | null
+    subcategory: string | null
+    urgency: string | null
+    description: string | null
+    learnerImpact: number | null
+    estimatedCostZar: number | null
+    progressPercent: number | null
+    sponsorStatus: string | null
+    photoCount: number | null
+    quoteCount: number | null
+    status: $Enums.SchoolNeedStatus | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type SchoolSubmittedNeedMaxAggregateOutputType = {
+    id: string | null
+    schoolId: string | null
+    title: string | null
+    category: string | null
+    subcategory: string | null
+    urgency: string | null
+    description: string | null
+    learnerImpact: number | null
+    estimatedCostZar: number | null
+    progressPercent: number | null
+    sponsorStatus: string | null
+    photoCount: number | null
+    quoteCount: number | null
+    status: $Enums.SchoolNeedStatus | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type SchoolSubmittedNeedCountAggregateOutputType = {
+    id: number
+    schoolId: number
+    title: number
+    category: number
+    subcategory: number
+    urgency: number
+    description: number
+    learnerImpact: number
+    estimatedCostZar: number
+    progressPercent: number
+    sponsorStatus: number
+    photoCount: number
+    quoteCount: number
+    status: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type SchoolSubmittedNeedAvgAggregateInputType = {
+    learnerImpact?: true
+    estimatedCostZar?: true
+    progressPercent?: true
+    photoCount?: true
+    quoteCount?: true
+  }
+
+  export type SchoolSubmittedNeedSumAggregateInputType = {
+    learnerImpact?: true
+    estimatedCostZar?: true
+    progressPercent?: true
+    photoCount?: true
+    quoteCount?: true
+  }
+
+  export type SchoolSubmittedNeedMinAggregateInputType = {
+    id?: true
+    schoolId?: true
+    title?: true
+    category?: true
+    subcategory?: true
+    urgency?: true
+    description?: true
+    learnerImpact?: true
+    estimatedCostZar?: true
+    progressPercent?: true
+    sponsorStatus?: true
+    photoCount?: true
+    quoteCount?: true
+    status?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type SchoolSubmittedNeedMaxAggregateInputType = {
+    id?: true
+    schoolId?: true
+    title?: true
+    category?: true
+    subcategory?: true
+    urgency?: true
+    description?: true
+    learnerImpact?: true
+    estimatedCostZar?: true
+    progressPercent?: true
+    sponsorStatus?: true
+    photoCount?: true
+    quoteCount?: true
+    status?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type SchoolSubmittedNeedCountAggregateInputType = {
+    id?: true
+    schoolId?: true
+    title?: true
+    category?: true
+    subcategory?: true
+    urgency?: true
+    description?: true
+    learnerImpact?: true
+    estimatedCostZar?: true
+    progressPercent?: true
+    sponsorStatus?: true
+    photoCount?: true
+    quoteCount?: true
+    status?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type SchoolSubmittedNeedAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which SchoolSubmittedNeed to aggregate.
+     */
+    where?: SchoolSubmittedNeedWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of SchoolSubmittedNeeds to fetch.
+     */
+    orderBy?: SchoolSubmittedNeedOrderByWithRelationInput | SchoolSubmittedNeedOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: SchoolSubmittedNeedWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` SchoolSubmittedNeeds from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` SchoolSubmittedNeeds.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned SchoolSubmittedNeeds
+    **/
+    _count?: true | SchoolSubmittedNeedCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: SchoolSubmittedNeedAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: SchoolSubmittedNeedSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: SchoolSubmittedNeedMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: SchoolSubmittedNeedMaxAggregateInputType
+  }
+
+  export type GetSchoolSubmittedNeedAggregateType<T extends SchoolSubmittedNeedAggregateArgs> = {
+        [P in keyof T & keyof AggregateSchoolSubmittedNeed]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateSchoolSubmittedNeed[P]>
+      : GetScalarType<T[P], AggregateSchoolSubmittedNeed[P]>
+  }
+
+
+
+
+  export type SchoolSubmittedNeedGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: SchoolSubmittedNeedWhereInput
+    orderBy?: SchoolSubmittedNeedOrderByWithAggregationInput | SchoolSubmittedNeedOrderByWithAggregationInput[]
+    by: SchoolSubmittedNeedScalarFieldEnum[] | SchoolSubmittedNeedScalarFieldEnum
+    having?: SchoolSubmittedNeedScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: SchoolSubmittedNeedCountAggregateInputType | true
+    _avg?: SchoolSubmittedNeedAvgAggregateInputType
+    _sum?: SchoolSubmittedNeedSumAggregateInputType
+    _min?: SchoolSubmittedNeedMinAggregateInputType
+    _max?: SchoolSubmittedNeedMaxAggregateInputType
+  }
+
+  export type SchoolSubmittedNeedGroupByOutputType = {
+    id: string
+    schoolId: string
+    title: string
+    category: string
+    subcategory: string
+    urgency: string
+    description: string
+    learnerImpact: number
+    estimatedCostZar: number
+    progressPercent: number
+    sponsorStatus: string
+    photoCount: number
+    quoteCount: number
+    status: $Enums.SchoolNeedStatus
+    createdAt: Date
+    updatedAt: Date
+    _count: SchoolSubmittedNeedCountAggregateOutputType | null
+    _avg: SchoolSubmittedNeedAvgAggregateOutputType | null
+    _sum: SchoolSubmittedNeedSumAggregateOutputType | null
+    _min: SchoolSubmittedNeedMinAggregateOutputType | null
+    _max: SchoolSubmittedNeedMaxAggregateOutputType | null
+  }
+
+  type GetSchoolSubmittedNeedGroupByPayload<T extends SchoolSubmittedNeedGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<SchoolSubmittedNeedGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof SchoolSubmittedNeedGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], SchoolSubmittedNeedGroupByOutputType[P]>
+            : GetScalarType<T[P], SchoolSubmittedNeedGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type SchoolSubmittedNeedSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    schoolId?: boolean
+    title?: boolean
+    category?: boolean
+    subcategory?: boolean
+    urgency?: boolean
+    description?: boolean
+    learnerImpact?: boolean
+    estimatedCostZar?: boolean
+    progressPercent?: boolean
+    sponsorStatus?: boolean
+    photoCount?: boolean
+    quoteCount?: boolean
+    status?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    school?: boolean | SchoolDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["schoolSubmittedNeed"]>
+
+  export type SchoolSubmittedNeedSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    schoolId?: boolean
+    title?: boolean
+    category?: boolean
+    subcategory?: boolean
+    urgency?: boolean
+    description?: boolean
+    learnerImpact?: boolean
+    estimatedCostZar?: boolean
+    progressPercent?: boolean
+    sponsorStatus?: boolean
+    photoCount?: boolean
+    quoteCount?: boolean
+    status?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    school?: boolean | SchoolDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["schoolSubmittedNeed"]>
+
+  export type SchoolSubmittedNeedSelectScalar = {
+    id?: boolean
+    schoolId?: boolean
+    title?: boolean
+    category?: boolean
+    subcategory?: boolean
+    urgency?: boolean
+    description?: boolean
+    learnerImpact?: boolean
+    estimatedCostZar?: boolean
+    progressPercent?: boolean
+    sponsorStatus?: boolean
+    photoCount?: boolean
+    quoteCount?: boolean
+    status?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type SchoolSubmittedNeedInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    school?: boolean | SchoolDefaultArgs<ExtArgs>
+  }
+  export type SchoolSubmittedNeedIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    school?: boolean | SchoolDefaultArgs<ExtArgs>
+  }
+
+  export type $SchoolSubmittedNeedPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "SchoolSubmittedNeed"
+    objects: {
+      school: Prisma.$SchoolPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      schoolId: string
+      title: string
+      category: string
+      subcategory: string
+      urgency: string
+      description: string
+      learnerImpact: number
+      estimatedCostZar: number
+      progressPercent: number
+      sponsorStatus: string
+      photoCount: number
+      quoteCount: number
+      status: $Enums.SchoolNeedStatus
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["schoolSubmittedNeed"]>
+    composites: {}
+  }
+
+  type SchoolSubmittedNeedGetPayload<S extends boolean | null | undefined | SchoolSubmittedNeedDefaultArgs> = $Result.GetResult<Prisma.$SchoolSubmittedNeedPayload, S>
+
+  type SchoolSubmittedNeedCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = 
+    Omit<SchoolSubmittedNeedFindManyArgs, 'select' | 'include' | 'distinct'> & {
+      select?: SchoolSubmittedNeedCountAggregateInputType | true
+    }
+
+  export interface SchoolSubmittedNeedDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['SchoolSubmittedNeed'], meta: { name: 'SchoolSubmittedNeed' } }
+    /**
+     * Find zero or one SchoolSubmittedNeed that matches the filter.
+     * @param {SchoolSubmittedNeedFindUniqueArgs} args - Arguments to find a SchoolSubmittedNeed
+     * @example
+     * // Get one SchoolSubmittedNeed
+     * const schoolSubmittedNeed = await prisma.schoolSubmittedNeed.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends SchoolSubmittedNeedFindUniqueArgs>(args: SelectSubset<T, SchoolSubmittedNeedFindUniqueArgs<ExtArgs>>): Prisma__SchoolSubmittedNeedClient<$Result.GetResult<Prisma.$SchoolSubmittedNeedPayload<ExtArgs>, T, "findUnique"> | null, null, ExtArgs>
+
+    /**
+     * Find one SchoolSubmittedNeed that matches the filter or throw an error with `error.code='P2025'` 
+     * if no matches were found.
+     * @param {SchoolSubmittedNeedFindUniqueOrThrowArgs} args - Arguments to find a SchoolSubmittedNeed
+     * @example
+     * // Get one SchoolSubmittedNeed
+     * const schoolSubmittedNeed = await prisma.schoolSubmittedNeed.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends SchoolSubmittedNeedFindUniqueOrThrowArgs>(args: SelectSubset<T, SchoolSubmittedNeedFindUniqueOrThrowArgs<ExtArgs>>): Prisma__SchoolSubmittedNeedClient<$Result.GetResult<Prisma.$SchoolSubmittedNeedPayload<ExtArgs>, T, "findUniqueOrThrow">, never, ExtArgs>
+
+    /**
+     * Find the first SchoolSubmittedNeed that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SchoolSubmittedNeedFindFirstArgs} args - Arguments to find a SchoolSubmittedNeed
+     * @example
+     * // Get one SchoolSubmittedNeed
+     * const schoolSubmittedNeed = await prisma.schoolSubmittedNeed.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends SchoolSubmittedNeedFindFirstArgs>(args?: SelectSubset<T, SchoolSubmittedNeedFindFirstArgs<ExtArgs>>): Prisma__SchoolSubmittedNeedClient<$Result.GetResult<Prisma.$SchoolSubmittedNeedPayload<ExtArgs>, T, "findFirst"> | null, null, ExtArgs>
+
+    /**
+     * Find the first SchoolSubmittedNeed that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SchoolSubmittedNeedFindFirstOrThrowArgs} args - Arguments to find a SchoolSubmittedNeed
+     * @example
+     * // Get one SchoolSubmittedNeed
+     * const schoolSubmittedNeed = await prisma.schoolSubmittedNeed.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends SchoolSubmittedNeedFindFirstOrThrowArgs>(args?: SelectSubset<T, SchoolSubmittedNeedFindFirstOrThrowArgs<ExtArgs>>): Prisma__SchoolSubmittedNeedClient<$Result.GetResult<Prisma.$SchoolSubmittedNeedPayload<ExtArgs>, T, "findFirstOrThrow">, never, ExtArgs>
+
+    /**
+     * Find zero or more SchoolSubmittedNeeds that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SchoolSubmittedNeedFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all SchoolSubmittedNeeds
+     * const schoolSubmittedNeeds = await prisma.schoolSubmittedNeed.findMany()
+     * 
+     * // Get first 10 SchoolSubmittedNeeds
+     * const schoolSubmittedNeeds = await prisma.schoolSubmittedNeed.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const schoolSubmittedNeedWithIdOnly = await prisma.schoolSubmittedNeed.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends SchoolSubmittedNeedFindManyArgs>(args?: SelectSubset<T, SchoolSubmittedNeedFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SchoolSubmittedNeedPayload<ExtArgs>, T, "findMany">>
+
+    /**
+     * Create a SchoolSubmittedNeed.
+     * @param {SchoolSubmittedNeedCreateArgs} args - Arguments to create a SchoolSubmittedNeed.
+     * @example
+     * // Create one SchoolSubmittedNeed
+     * const SchoolSubmittedNeed = await prisma.schoolSubmittedNeed.create({
+     *   data: {
+     *     // ... data to create a SchoolSubmittedNeed
+     *   }
+     * })
+     * 
+     */
+    create<T extends SchoolSubmittedNeedCreateArgs>(args: SelectSubset<T, SchoolSubmittedNeedCreateArgs<ExtArgs>>): Prisma__SchoolSubmittedNeedClient<$Result.GetResult<Prisma.$SchoolSubmittedNeedPayload<ExtArgs>, T, "create">, never, ExtArgs>
+
+    /**
+     * Create many SchoolSubmittedNeeds.
+     * @param {SchoolSubmittedNeedCreateManyArgs} args - Arguments to create many SchoolSubmittedNeeds.
+     * @example
+     * // Create many SchoolSubmittedNeeds
+     * const schoolSubmittedNeed = await prisma.schoolSubmittedNeed.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends SchoolSubmittedNeedCreateManyArgs>(args?: SelectSubset<T, SchoolSubmittedNeedCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many SchoolSubmittedNeeds and returns the data saved in the database.
+     * @param {SchoolSubmittedNeedCreateManyAndReturnArgs} args - Arguments to create many SchoolSubmittedNeeds.
+     * @example
+     * // Create many SchoolSubmittedNeeds
+     * const schoolSubmittedNeed = await prisma.schoolSubmittedNeed.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many SchoolSubmittedNeeds and only return the `id`
+     * const schoolSubmittedNeedWithIdOnly = await prisma.schoolSubmittedNeed.createManyAndReturn({ 
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends SchoolSubmittedNeedCreateManyAndReturnArgs>(args?: SelectSubset<T, SchoolSubmittedNeedCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SchoolSubmittedNeedPayload<ExtArgs>, T, "createManyAndReturn">>
+
+    /**
+     * Delete a SchoolSubmittedNeed.
+     * @param {SchoolSubmittedNeedDeleteArgs} args - Arguments to delete one SchoolSubmittedNeed.
+     * @example
+     * // Delete one SchoolSubmittedNeed
+     * const SchoolSubmittedNeed = await prisma.schoolSubmittedNeed.delete({
+     *   where: {
+     *     // ... filter to delete one SchoolSubmittedNeed
+     *   }
+     * })
+     * 
+     */
+    delete<T extends SchoolSubmittedNeedDeleteArgs>(args: SelectSubset<T, SchoolSubmittedNeedDeleteArgs<ExtArgs>>): Prisma__SchoolSubmittedNeedClient<$Result.GetResult<Prisma.$SchoolSubmittedNeedPayload<ExtArgs>, T, "delete">, never, ExtArgs>
+
+    /**
+     * Update one SchoolSubmittedNeed.
+     * @param {SchoolSubmittedNeedUpdateArgs} args - Arguments to update one SchoolSubmittedNeed.
+     * @example
+     * // Update one SchoolSubmittedNeed
+     * const schoolSubmittedNeed = await prisma.schoolSubmittedNeed.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends SchoolSubmittedNeedUpdateArgs>(args: SelectSubset<T, SchoolSubmittedNeedUpdateArgs<ExtArgs>>): Prisma__SchoolSubmittedNeedClient<$Result.GetResult<Prisma.$SchoolSubmittedNeedPayload<ExtArgs>, T, "update">, never, ExtArgs>
+
+    /**
+     * Delete zero or more SchoolSubmittedNeeds.
+     * @param {SchoolSubmittedNeedDeleteManyArgs} args - Arguments to filter SchoolSubmittedNeeds to delete.
+     * @example
+     * // Delete a few SchoolSubmittedNeeds
+     * const { count } = await prisma.schoolSubmittedNeed.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends SchoolSubmittedNeedDeleteManyArgs>(args?: SelectSubset<T, SchoolSubmittedNeedDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more SchoolSubmittedNeeds.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SchoolSubmittedNeedUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many SchoolSubmittedNeeds
+     * const schoolSubmittedNeed = await prisma.schoolSubmittedNeed.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends SchoolSubmittedNeedUpdateManyArgs>(args: SelectSubset<T, SchoolSubmittedNeedUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one SchoolSubmittedNeed.
+     * @param {SchoolSubmittedNeedUpsertArgs} args - Arguments to update or create a SchoolSubmittedNeed.
+     * @example
+     * // Update or create a SchoolSubmittedNeed
+     * const schoolSubmittedNeed = await prisma.schoolSubmittedNeed.upsert({
+     *   create: {
+     *     // ... data to create a SchoolSubmittedNeed
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the SchoolSubmittedNeed we want to update
+     *   }
+     * })
+     */
+    upsert<T extends SchoolSubmittedNeedUpsertArgs>(args: SelectSubset<T, SchoolSubmittedNeedUpsertArgs<ExtArgs>>): Prisma__SchoolSubmittedNeedClient<$Result.GetResult<Prisma.$SchoolSubmittedNeedPayload<ExtArgs>, T, "upsert">, never, ExtArgs>
+
+
+    /**
+     * Count the number of SchoolSubmittedNeeds.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SchoolSubmittedNeedCountArgs} args - Arguments to filter SchoolSubmittedNeeds to count.
+     * @example
+     * // Count the number of SchoolSubmittedNeeds
+     * const count = await prisma.schoolSubmittedNeed.count({
+     *   where: {
+     *     // ... the filter for the SchoolSubmittedNeeds we want to count
+     *   }
+     * })
+    **/
+    count<T extends SchoolSubmittedNeedCountArgs>(
+      args?: Subset<T, SchoolSubmittedNeedCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], SchoolSubmittedNeedCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a SchoolSubmittedNeed.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SchoolSubmittedNeedAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends SchoolSubmittedNeedAggregateArgs>(args: Subset<T, SchoolSubmittedNeedAggregateArgs>): Prisma.PrismaPromise<GetSchoolSubmittedNeedAggregateType<T>>
+
+    /**
+     * Group by SchoolSubmittedNeed.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SchoolSubmittedNeedGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends SchoolSubmittedNeedGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: SchoolSubmittedNeedGroupByArgs['orderBy'] }
+        : { orderBy?: SchoolSubmittedNeedGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, SchoolSubmittedNeedGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetSchoolSubmittedNeedGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the SchoolSubmittedNeed model
+   */
+  readonly fields: SchoolSubmittedNeedFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for SchoolSubmittedNeed.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__SchoolSubmittedNeedClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    school<T extends SchoolDefaultArgs<ExtArgs> = {}>(args?: Subset<T, SchoolDefaultArgs<ExtArgs>>): Prisma__SchoolClient<$Result.GetResult<Prisma.$SchoolPayload<ExtArgs>, T, "findUniqueOrThrow"> | Null, Null, ExtArgs>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the SchoolSubmittedNeed model
+   */ 
+  interface SchoolSubmittedNeedFieldRefs {
+    readonly id: FieldRef<"SchoolSubmittedNeed", 'String'>
+    readonly schoolId: FieldRef<"SchoolSubmittedNeed", 'String'>
+    readonly title: FieldRef<"SchoolSubmittedNeed", 'String'>
+    readonly category: FieldRef<"SchoolSubmittedNeed", 'String'>
+    readonly subcategory: FieldRef<"SchoolSubmittedNeed", 'String'>
+    readonly urgency: FieldRef<"SchoolSubmittedNeed", 'String'>
+    readonly description: FieldRef<"SchoolSubmittedNeed", 'String'>
+    readonly learnerImpact: FieldRef<"SchoolSubmittedNeed", 'Int'>
+    readonly estimatedCostZar: FieldRef<"SchoolSubmittedNeed", 'Int'>
+    readonly progressPercent: FieldRef<"SchoolSubmittedNeed", 'Int'>
+    readonly sponsorStatus: FieldRef<"SchoolSubmittedNeed", 'String'>
+    readonly photoCount: FieldRef<"SchoolSubmittedNeed", 'Int'>
+    readonly quoteCount: FieldRef<"SchoolSubmittedNeed", 'Int'>
+    readonly status: FieldRef<"SchoolSubmittedNeed", 'SchoolNeedStatus'>
+    readonly createdAt: FieldRef<"SchoolSubmittedNeed", 'DateTime'>
+    readonly updatedAt: FieldRef<"SchoolSubmittedNeed", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * SchoolSubmittedNeed findUnique
+   */
+  export type SchoolSubmittedNeedFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SchoolSubmittedNeed
+     */
+    select?: SchoolSubmittedNeedSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SchoolSubmittedNeedInclude<ExtArgs> | null
+    /**
+     * Filter, which SchoolSubmittedNeed to fetch.
+     */
+    where: SchoolSubmittedNeedWhereUniqueInput
+  }
+
+  /**
+   * SchoolSubmittedNeed findUniqueOrThrow
+   */
+  export type SchoolSubmittedNeedFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SchoolSubmittedNeed
+     */
+    select?: SchoolSubmittedNeedSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SchoolSubmittedNeedInclude<ExtArgs> | null
+    /**
+     * Filter, which SchoolSubmittedNeed to fetch.
+     */
+    where: SchoolSubmittedNeedWhereUniqueInput
+  }
+
+  /**
+   * SchoolSubmittedNeed findFirst
+   */
+  export type SchoolSubmittedNeedFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SchoolSubmittedNeed
+     */
+    select?: SchoolSubmittedNeedSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SchoolSubmittedNeedInclude<ExtArgs> | null
+    /**
+     * Filter, which SchoolSubmittedNeed to fetch.
+     */
+    where?: SchoolSubmittedNeedWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of SchoolSubmittedNeeds to fetch.
+     */
+    orderBy?: SchoolSubmittedNeedOrderByWithRelationInput | SchoolSubmittedNeedOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for SchoolSubmittedNeeds.
+     */
+    cursor?: SchoolSubmittedNeedWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` SchoolSubmittedNeeds from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` SchoolSubmittedNeeds.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of SchoolSubmittedNeeds.
+     */
+    distinct?: SchoolSubmittedNeedScalarFieldEnum | SchoolSubmittedNeedScalarFieldEnum[]
+  }
+
+  /**
+   * SchoolSubmittedNeed findFirstOrThrow
+   */
+  export type SchoolSubmittedNeedFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SchoolSubmittedNeed
+     */
+    select?: SchoolSubmittedNeedSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SchoolSubmittedNeedInclude<ExtArgs> | null
+    /**
+     * Filter, which SchoolSubmittedNeed to fetch.
+     */
+    where?: SchoolSubmittedNeedWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of SchoolSubmittedNeeds to fetch.
+     */
+    orderBy?: SchoolSubmittedNeedOrderByWithRelationInput | SchoolSubmittedNeedOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for SchoolSubmittedNeeds.
+     */
+    cursor?: SchoolSubmittedNeedWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` SchoolSubmittedNeeds from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` SchoolSubmittedNeeds.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of SchoolSubmittedNeeds.
+     */
+    distinct?: SchoolSubmittedNeedScalarFieldEnum | SchoolSubmittedNeedScalarFieldEnum[]
+  }
+
+  /**
+   * SchoolSubmittedNeed findMany
+   */
+  export type SchoolSubmittedNeedFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SchoolSubmittedNeed
+     */
+    select?: SchoolSubmittedNeedSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SchoolSubmittedNeedInclude<ExtArgs> | null
+    /**
+     * Filter, which SchoolSubmittedNeeds to fetch.
+     */
+    where?: SchoolSubmittedNeedWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of SchoolSubmittedNeeds to fetch.
+     */
+    orderBy?: SchoolSubmittedNeedOrderByWithRelationInput | SchoolSubmittedNeedOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing SchoolSubmittedNeeds.
+     */
+    cursor?: SchoolSubmittedNeedWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` SchoolSubmittedNeeds from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` SchoolSubmittedNeeds.
+     */
+    skip?: number
+    distinct?: SchoolSubmittedNeedScalarFieldEnum | SchoolSubmittedNeedScalarFieldEnum[]
+  }
+
+  /**
+   * SchoolSubmittedNeed create
+   */
+  export type SchoolSubmittedNeedCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SchoolSubmittedNeed
+     */
+    select?: SchoolSubmittedNeedSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SchoolSubmittedNeedInclude<ExtArgs> | null
+    /**
+     * The data needed to create a SchoolSubmittedNeed.
+     */
+    data: XOR<SchoolSubmittedNeedCreateInput, SchoolSubmittedNeedUncheckedCreateInput>
+  }
+
+  /**
+   * SchoolSubmittedNeed createMany
+   */
+  export type SchoolSubmittedNeedCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many SchoolSubmittedNeeds.
+     */
+    data: SchoolSubmittedNeedCreateManyInput | SchoolSubmittedNeedCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * SchoolSubmittedNeed createManyAndReturn
+   */
+  export type SchoolSubmittedNeedCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SchoolSubmittedNeed
+     */
+    select?: SchoolSubmittedNeedSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * The data used to create many SchoolSubmittedNeeds.
+     */
+    data: SchoolSubmittedNeedCreateManyInput | SchoolSubmittedNeedCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SchoolSubmittedNeedIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * SchoolSubmittedNeed update
+   */
+  export type SchoolSubmittedNeedUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SchoolSubmittedNeed
+     */
+    select?: SchoolSubmittedNeedSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SchoolSubmittedNeedInclude<ExtArgs> | null
+    /**
+     * The data needed to update a SchoolSubmittedNeed.
+     */
+    data: XOR<SchoolSubmittedNeedUpdateInput, SchoolSubmittedNeedUncheckedUpdateInput>
+    /**
+     * Choose, which SchoolSubmittedNeed to update.
+     */
+    where: SchoolSubmittedNeedWhereUniqueInput
+  }
+
+  /**
+   * SchoolSubmittedNeed updateMany
+   */
+  export type SchoolSubmittedNeedUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update SchoolSubmittedNeeds.
+     */
+    data: XOR<SchoolSubmittedNeedUpdateManyMutationInput, SchoolSubmittedNeedUncheckedUpdateManyInput>
+    /**
+     * Filter which SchoolSubmittedNeeds to update
+     */
+    where?: SchoolSubmittedNeedWhereInput
+  }
+
+  /**
+   * SchoolSubmittedNeed upsert
+   */
+  export type SchoolSubmittedNeedUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SchoolSubmittedNeed
+     */
+    select?: SchoolSubmittedNeedSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SchoolSubmittedNeedInclude<ExtArgs> | null
+    /**
+     * The filter to search for the SchoolSubmittedNeed to update in case it exists.
+     */
+    where: SchoolSubmittedNeedWhereUniqueInput
+    /**
+     * In case the SchoolSubmittedNeed found by the `where` argument doesn't exist, create a new SchoolSubmittedNeed with this data.
+     */
+    create: XOR<SchoolSubmittedNeedCreateInput, SchoolSubmittedNeedUncheckedCreateInput>
+    /**
+     * In case the SchoolSubmittedNeed was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<SchoolSubmittedNeedUpdateInput, SchoolSubmittedNeedUncheckedUpdateInput>
+  }
+
+  /**
+   * SchoolSubmittedNeed delete
+   */
+  export type SchoolSubmittedNeedDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SchoolSubmittedNeed
+     */
+    select?: SchoolSubmittedNeedSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SchoolSubmittedNeedInclude<ExtArgs> | null
+    /**
+     * Filter which SchoolSubmittedNeed to delete.
+     */
+    where: SchoolSubmittedNeedWhereUniqueInput
+  }
+
+  /**
+   * SchoolSubmittedNeed deleteMany
+   */
+  export type SchoolSubmittedNeedDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which SchoolSubmittedNeeds to delete
+     */
+    where?: SchoolSubmittedNeedWhereInput
+  }
+
+  /**
+   * SchoolSubmittedNeed without action
+   */
+  export type SchoolSubmittedNeedDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SchoolSubmittedNeed
+     */
+    select?: SchoolSubmittedNeedSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SchoolSubmittedNeedInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model SchoolVolunteer
+   */
+
+  export type AggregateSchoolVolunteer = {
+    _count: SchoolVolunteerCountAggregateOutputType | null
+    _avg: SchoolVolunteerAvgAggregateOutputType | null
+    _sum: SchoolVolunteerSumAggregateOutputType | null
+    _min: SchoolVolunteerMinAggregateOutputType | null
+    _max: SchoolVolunteerMaxAggregateOutputType | null
+  }
+
+  export type SchoolVolunteerAvgAggregateOutputType = {
+    hoursLogged: number | null
+  }
+
+  export type SchoolVolunteerSumAggregateOutputType = {
+    hoursLogged: number | null
+  }
+
+  export type SchoolVolunteerMinAggregateOutputType = {
+    id: string | null
+    schoolId: string | null
+    fullName: string | null
+    role: string | null
+    phone: string | null
+    email: string | null
+    skills: string | null
+    hoursLogged: number | null
+    status: $Enums.SchoolVolunteerStatus | null
+    notes: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type SchoolVolunteerMaxAggregateOutputType = {
+    id: string | null
+    schoolId: string | null
+    fullName: string | null
+    role: string | null
+    phone: string | null
+    email: string | null
+    skills: string | null
+    hoursLogged: number | null
+    status: $Enums.SchoolVolunteerStatus | null
+    notes: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type SchoolVolunteerCountAggregateOutputType = {
+    id: number
+    schoolId: number
+    fullName: number
+    role: number
+    phone: number
+    email: number
+    skills: number
+    hoursLogged: number
+    status: number
+    notes: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type SchoolVolunteerAvgAggregateInputType = {
+    hoursLogged?: true
+  }
+
+  export type SchoolVolunteerSumAggregateInputType = {
+    hoursLogged?: true
+  }
+
+  export type SchoolVolunteerMinAggregateInputType = {
+    id?: true
+    schoolId?: true
+    fullName?: true
+    role?: true
+    phone?: true
+    email?: true
+    skills?: true
+    hoursLogged?: true
+    status?: true
+    notes?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type SchoolVolunteerMaxAggregateInputType = {
+    id?: true
+    schoolId?: true
+    fullName?: true
+    role?: true
+    phone?: true
+    email?: true
+    skills?: true
+    hoursLogged?: true
+    status?: true
+    notes?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type SchoolVolunteerCountAggregateInputType = {
+    id?: true
+    schoolId?: true
+    fullName?: true
+    role?: true
+    phone?: true
+    email?: true
+    skills?: true
+    hoursLogged?: true
+    status?: true
+    notes?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type SchoolVolunteerAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which SchoolVolunteer to aggregate.
+     */
+    where?: SchoolVolunteerWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of SchoolVolunteers to fetch.
+     */
+    orderBy?: SchoolVolunteerOrderByWithRelationInput | SchoolVolunteerOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: SchoolVolunteerWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` SchoolVolunteers from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` SchoolVolunteers.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned SchoolVolunteers
+    **/
+    _count?: true | SchoolVolunteerCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: SchoolVolunteerAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: SchoolVolunteerSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: SchoolVolunteerMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: SchoolVolunteerMaxAggregateInputType
+  }
+
+  export type GetSchoolVolunteerAggregateType<T extends SchoolVolunteerAggregateArgs> = {
+        [P in keyof T & keyof AggregateSchoolVolunteer]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateSchoolVolunteer[P]>
+      : GetScalarType<T[P], AggregateSchoolVolunteer[P]>
+  }
+
+
+
+
+  export type SchoolVolunteerGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: SchoolVolunteerWhereInput
+    orderBy?: SchoolVolunteerOrderByWithAggregationInput | SchoolVolunteerOrderByWithAggregationInput[]
+    by: SchoolVolunteerScalarFieldEnum[] | SchoolVolunteerScalarFieldEnum
+    having?: SchoolVolunteerScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: SchoolVolunteerCountAggregateInputType | true
+    _avg?: SchoolVolunteerAvgAggregateInputType
+    _sum?: SchoolVolunteerSumAggregateInputType
+    _min?: SchoolVolunteerMinAggregateInputType
+    _max?: SchoolVolunteerMaxAggregateInputType
+  }
+
+  export type SchoolVolunteerGroupByOutputType = {
+    id: string
+    schoolId: string
+    fullName: string
+    role: string
+    phone: string | null
+    email: string | null
+    skills: string | null
+    hoursLogged: number
+    status: $Enums.SchoolVolunteerStatus
+    notes: string | null
+    createdAt: Date
+    updatedAt: Date
+    _count: SchoolVolunteerCountAggregateOutputType | null
+    _avg: SchoolVolunteerAvgAggregateOutputType | null
+    _sum: SchoolVolunteerSumAggregateOutputType | null
+    _min: SchoolVolunteerMinAggregateOutputType | null
+    _max: SchoolVolunteerMaxAggregateOutputType | null
+  }
+
+  type GetSchoolVolunteerGroupByPayload<T extends SchoolVolunteerGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<SchoolVolunteerGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof SchoolVolunteerGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], SchoolVolunteerGroupByOutputType[P]>
+            : GetScalarType<T[P], SchoolVolunteerGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type SchoolVolunteerSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    schoolId?: boolean
+    fullName?: boolean
+    role?: boolean
+    phone?: boolean
+    email?: boolean
+    skills?: boolean
+    hoursLogged?: boolean
+    status?: boolean
+    notes?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    school?: boolean | SchoolDefaultArgs<ExtArgs>
+    assignments?: boolean | SchoolVolunteer$assignmentsArgs<ExtArgs>
+    _count?: boolean | SchoolVolunteerCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["schoolVolunteer"]>
+
+  export type SchoolVolunteerSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    schoolId?: boolean
+    fullName?: boolean
+    role?: boolean
+    phone?: boolean
+    email?: boolean
+    skills?: boolean
+    hoursLogged?: boolean
+    status?: boolean
+    notes?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    school?: boolean | SchoolDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["schoolVolunteer"]>
+
+  export type SchoolVolunteerSelectScalar = {
+    id?: boolean
+    schoolId?: boolean
+    fullName?: boolean
+    role?: boolean
+    phone?: boolean
+    email?: boolean
+    skills?: boolean
+    hoursLogged?: boolean
+    status?: boolean
+    notes?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type SchoolVolunteerInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    school?: boolean | SchoolDefaultArgs<ExtArgs>
+    assignments?: boolean | SchoolVolunteer$assignmentsArgs<ExtArgs>
+    _count?: boolean | SchoolVolunteerCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type SchoolVolunteerIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    school?: boolean | SchoolDefaultArgs<ExtArgs>
+  }
+
+  export type $SchoolVolunteerPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "SchoolVolunteer"
+    objects: {
+      school: Prisma.$SchoolPayload<ExtArgs>
+      assignments: Prisma.$SchoolEventVolunteerPayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      schoolId: string
+      fullName: string
+      role: string
+      phone: string | null
+      email: string | null
+      skills: string | null
+      hoursLogged: number
+      status: $Enums.SchoolVolunteerStatus
+      notes: string | null
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["schoolVolunteer"]>
+    composites: {}
+  }
+
+  type SchoolVolunteerGetPayload<S extends boolean | null | undefined | SchoolVolunteerDefaultArgs> = $Result.GetResult<Prisma.$SchoolVolunteerPayload, S>
+
+  type SchoolVolunteerCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = 
+    Omit<SchoolVolunteerFindManyArgs, 'select' | 'include' | 'distinct'> & {
+      select?: SchoolVolunteerCountAggregateInputType | true
+    }
+
+  export interface SchoolVolunteerDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['SchoolVolunteer'], meta: { name: 'SchoolVolunteer' } }
+    /**
+     * Find zero or one SchoolVolunteer that matches the filter.
+     * @param {SchoolVolunteerFindUniqueArgs} args - Arguments to find a SchoolVolunteer
+     * @example
+     * // Get one SchoolVolunteer
+     * const schoolVolunteer = await prisma.schoolVolunteer.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends SchoolVolunteerFindUniqueArgs>(args: SelectSubset<T, SchoolVolunteerFindUniqueArgs<ExtArgs>>): Prisma__SchoolVolunteerClient<$Result.GetResult<Prisma.$SchoolVolunteerPayload<ExtArgs>, T, "findUnique"> | null, null, ExtArgs>
+
+    /**
+     * Find one SchoolVolunteer that matches the filter or throw an error with `error.code='P2025'` 
+     * if no matches were found.
+     * @param {SchoolVolunteerFindUniqueOrThrowArgs} args - Arguments to find a SchoolVolunteer
+     * @example
+     * // Get one SchoolVolunteer
+     * const schoolVolunteer = await prisma.schoolVolunteer.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends SchoolVolunteerFindUniqueOrThrowArgs>(args: SelectSubset<T, SchoolVolunteerFindUniqueOrThrowArgs<ExtArgs>>): Prisma__SchoolVolunteerClient<$Result.GetResult<Prisma.$SchoolVolunteerPayload<ExtArgs>, T, "findUniqueOrThrow">, never, ExtArgs>
+
+    /**
+     * Find the first SchoolVolunteer that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SchoolVolunteerFindFirstArgs} args - Arguments to find a SchoolVolunteer
+     * @example
+     * // Get one SchoolVolunteer
+     * const schoolVolunteer = await prisma.schoolVolunteer.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends SchoolVolunteerFindFirstArgs>(args?: SelectSubset<T, SchoolVolunteerFindFirstArgs<ExtArgs>>): Prisma__SchoolVolunteerClient<$Result.GetResult<Prisma.$SchoolVolunteerPayload<ExtArgs>, T, "findFirst"> | null, null, ExtArgs>
+
+    /**
+     * Find the first SchoolVolunteer that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SchoolVolunteerFindFirstOrThrowArgs} args - Arguments to find a SchoolVolunteer
+     * @example
+     * // Get one SchoolVolunteer
+     * const schoolVolunteer = await prisma.schoolVolunteer.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends SchoolVolunteerFindFirstOrThrowArgs>(args?: SelectSubset<T, SchoolVolunteerFindFirstOrThrowArgs<ExtArgs>>): Prisma__SchoolVolunteerClient<$Result.GetResult<Prisma.$SchoolVolunteerPayload<ExtArgs>, T, "findFirstOrThrow">, never, ExtArgs>
+
+    /**
+     * Find zero or more SchoolVolunteers that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SchoolVolunteerFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all SchoolVolunteers
+     * const schoolVolunteers = await prisma.schoolVolunteer.findMany()
+     * 
+     * // Get first 10 SchoolVolunteers
+     * const schoolVolunteers = await prisma.schoolVolunteer.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const schoolVolunteerWithIdOnly = await prisma.schoolVolunteer.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends SchoolVolunteerFindManyArgs>(args?: SelectSubset<T, SchoolVolunteerFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SchoolVolunteerPayload<ExtArgs>, T, "findMany">>
+
+    /**
+     * Create a SchoolVolunteer.
+     * @param {SchoolVolunteerCreateArgs} args - Arguments to create a SchoolVolunteer.
+     * @example
+     * // Create one SchoolVolunteer
+     * const SchoolVolunteer = await prisma.schoolVolunteer.create({
+     *   data: {
+     *     // ... data to create a SchoolVolunteer
+     *   }
+     * })
+     * 
+     */
+    create<T extends SchoolVolunteerCreateArgs>(args: SelectSubset<T, SchoolVolunteerCreateArgs<ExtArgs>>): Prisma__SchoolVolunteerClient<$Result.GetResult<Prisma.$SchoolVolunteerPayload<ExtArgs>, T, "create">, never, ExtArgs>
+
+    /**
+     * Create many SchoolVolunteers.
+     * @param {SchoolVolunteerCreateManyArgs} args - Arguments to create many SchoolVolunteers.
+     * @example
+     * // Create many SchoolVolunteers
+     * const schoolVolunteer = await prisma.schoolVolunteer.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends SchoolVolunteerCreateManyArgs>(args?: SelectSubset<T, SchoolVolunteerCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many SchoolVolunteers and returns the data saved in the database.
+     * @param {SchoolVolunteerCreateManyAndReturnArgs} args - Arguments to create many SchoolVolunteers.
+     * @example
+     * // Create many SchoolVolunteers
+     * const schoolVolunteer = await prisma.schoolVolunteer.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many SchoolVolunteers and only return the `id`
+     * const schoolVolunteerWithIdOnly = await prisma.schoolVolunteer.createManyAndReturn({ 
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends SchoolVolunteerCreateManyAndReturnArgs>(args?: SelectSubset<T, SchoolVolunteerCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SchoolVolunteerPayload<ExtArgs>, T, "createManyAndReturn">>
+
+    /**
+     * Delete a SchoolVolunteer.
+     * @param {SchoolVolunteerDeleteArgs} args - Arguments to delete one SchoolVolunteer.
+     * @example
+     * // Delete one SchoolVolunteer
+     * const SchoolVolunteer = await prisma.schoolVolunteer.delete({
+     *   where: {
+     *     // ... filter to delete one SchoolVolunteer
+     *   }
+     * })
+     * 
+     */
+    delete<T extends SchoolVolunteerDeleteArgs>(args: SelectSubset<T, SchoolVolunteerDeleteArgs<ExtArgs>>): Prisma__SchoolVolunteerClient<$Result.GetResult<Prisma.$SchoolVolunteerPayload<ExtArgs>, T, "delete">, never, ExtArgs>
+
+    /**
+     * Update one SchoolVolunteer.
+     * @param {SchoolVolunteerUpdateArgs} args - Arguments to update one SchoolVolunteer.
+     * @example
+     * // Update one SchoolVolunteer
+     * const schoolVolunteer = await prisma.schoolVolunteer.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends SchoolVolunteerUpdateArgs>(args: SelectSubset<T, SchoolVolunteerUpdateArgs<ExtArgs>>): Prisma__SchoolVolunteerClient<$Result.GetResult<Prisma.$SchoolVolunteerPayload<ExtArgs>, T, "update">, never, ExtArgs>
+
+    /**
+     * Delete zero or more SchoolVolunteers.
+     * @param {SchoolVolunteerDeleteManyArgs} args - Arguments to filter SchoolVolunteers to delete.
+     * @example
+     * // Delete a few SchoolVolunteers
+     * const { count } = await prisma.schoolVolunteer.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends SchoolVolunteerDeleteManyArgs>(args?: SelectSubset<T, SchoolVolunteerDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more SchoolVolunteers.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SchoolVolunteerUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many SchoolVolunteers
+     * const schoolVolunteer = await prisma.schoolVolunteer.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends SchoolVolunteerUpdateManyArgs>(args: SelectSubset<T, SchoolVolunteerUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one SchoolVolunteer.
+     * @param {SchoolVolunteerUpsertArgs} args - Arguments to update or create a SchoolVolunteer.
+     * @example
+     * // Update or create a SchoolVolunteer
+     * const schoolVolunteer = await prisma.schoolVolunteer.upsert({
+     *   create: {
+     *     // ... data to create a SchoolVolunteer
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the SchoolVolunteer we want to update
+     *   }
+     * })
+     */
+    upsert<T extends SchoolVolunteerUpsertArgs>(args: SelectSubset<T, SchoolVolunteerUpsertArgs<ExtArgs>>): Prisma__SchoolVolunteerClient<$Result.GetResult<Prisma.$SchoolVolunteerPayload<ExtArgs>, T, "upsert">, never, ExtArgs>
+
+
+    /**
+     * Count the number of SchoolVolunteers.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SchoolVolunteerCountArgs} args - Arguments to filter SchoolVolunteers to count.
+     * @example
+     * // Count the number of SchoolVolunteers
+     * const count = await prisma.schoolVolunteer.count({
+     *   where: {
+     *     // ... the filter for the SchoolVolunteers we want to count
+     *   }
+     * })
+    **/
+    count<T extends SchoolVolunteerCountArgs>(
+      args?: Subset<T, SchoolVolunteerCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], SchoolVolunteerCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a SchoolVolunteer.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SchoolVolunteerAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends SchoolVolunteerAggregateArgs>(args: Subset<T, SchoolVolunteerAggregateArgs>): Prisma.PrismaPromise<GetSchoolVolunteerAggregateType<T>>
+
+    /**
+     * Group by SchoolVolunteer.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SchoolVolunteerGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends SchoolVolunteerGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: SchoolVolunteerGroupByArgs['orderBy'] }
+        : { orderBy?: SchoolVolunteerGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, SchoolVolunteerGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetSchoolVolunteerGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the SchoolVolunteer model
+   */
+  readonly fields: SchoolVolunteerFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for SchoolVolunteer.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__SchoolVolunteerClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    school<T extends SchoolDefaultArgs<ExtArgs> = {}>(args?: Subset<T, SchoolDefaultArgs<ExtArgs>>): Prisma__SchoolClient<$Result.GetResult<Prisma.$SchoolPayload<ExtArgs>, T, "findUniqueOrThrow"> | Null, Null, ExtArgs>
+    assignments<T extends SchoolVolunteer$assignmentsArgs<ExtArgs> = {}>(args?: Subset<T, SchoolVolunteer$assignmentsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SchoolEventVolunteerPayload<ExtArgs>, T, "findMany"> | Null>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the SchoolVolunteer model
+   */ 
+  interface SchoolVolunteerFieldRefs {
+    readonly id: FieldRef<"SchoolVolunteer", 'String'>
+    readonly schoolId: FieldRef<"SchoolVolunteer", 'String'>
+    readonly fullName: FieldRef<"SchoolVolunteer", 'String'>
+    readonly role: FieldRef<"SchoolVolunteer", 'String'>
+    readonly phone: FieldRef<"SchoolVolunteer", 'String'>
+    readonly email: FieldRef<"SchoolVolunteer", 'String'>
+    readonly skills: FieldRef<"SchoolVolunteer", 'String'>
+    readonly hoursLogged: FieldRef<"SchoolVolunteer", 'Int'>
+    readonly status: FieldRef<"SchoolVolunteer", 'SchoolVolunteerStatus'>
+    readonly notes: FieldRef<"SchoolVolunteer", 'String'>
+    readonly createdAt: FieldRef<"SchoolVolunteer", 'DateTime'>
+    readonly updatedAt: FieldRef<"SchoolVolunteer", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * SchoolVolunteer findUnique
+   */
+  export type SchoolVolunteerFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SchoolVolunteer
+     */
+    select?: SchoolVolunteerSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SchoolVolunteerInclude<ExtArgs> | null
+    /**
+     * Filter, which SchoolVolunteer to fetch.
+     */
+    where: SchoolVolunteerWhereUniqueInput
+  }
+
+  /**
+   * SchoolVolunteer findUniqueOrThrow
+   */
+  export type SchoolVolunteerFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SchoolVolunteer
+     */
+    select?: SchoolVolunteerSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SchoolVolunteerInclude<ExtArgs> | null
+    /**
+     * Filter, which SchoolVolunteer to fetch.
+     */
+    where: SchoolVolunteerWhereUniqueInput
+  }
+
+  /**
+   * SchoolVolunteer findFirst
+   */
+  export type SchoolVolunteerFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SchoolVolunteer
+     */
+    select?: SchoolVolunteerSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SchoolVolunteerInclude<ExtArgs> | null
+    /**
+     * Filter, which SchoolVolunteer to fetch.
+     */
+    where?: SchoolVolunteerWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of SchoolVolunteers to fetch.
+     */
+    orderBy?: SchoolVolunteerOrderByWithRelationInput | SchoolVolunteerOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for SchoolVolunteers.
+     */
+    cursor?: SchoolVolunteerWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` SchoolVolunteers from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` SchoolVolunteers.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of SchoolVolunteers.
+     */
+    distinct?: SchoolVolunteerScalarFieldEnum | SchoolVolunteerScalarFieldEnum[]
+  }
+
+  /**
+   * SchoolVolunteer findFirstOrThrow
+   */
+  export type SchoolVolunteerFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SchoolVolunteer
+     */
+    select?: SchoolVolunteerSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SchoolVolunteerInclude<ExtArgs> | null
+    /**
+     * Filter, which SchoolVolunteer to fetch.
+     */
+    where?: SchoolVolunteerWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of SchoolVolunteers to fetch.
+     */
+    orderBy?: SchoolVolunteerOrderByWithRelationInput | SchoolVolunteerOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for SchoolVolunteers.
+     */
+    cursor?: SchoolVolunteerWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` SchoolVolunteers from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` SchoolVolunteers.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of SchoolVolunteers.
+     */
+    distinct?: SchoolVolunteerScalarFieldEnum | SchoolVolunteerScalarFieldEnum[]
+  }
+
+  /**
+   * SchoolVolunteer findMany
+   */
+  export type SchoolVolunteerFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SchoolVolunteer
+     */
+    select?: SchoolVolunteerSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SchoolVolunteerInclude<ExtArgs> | null
+    /**
+     * Filter, which SchoolVolunteers to fetch.
+     */
+    where?: SchoolVolunteerWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of SchoolVolunteers to fetch.
+     */
+    orderBy?: SchoolVolunteerOrderByWithRelationInput | SchoolVolunteerOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing SchoolVolunteers.
+     */
+    cursor?: SchoolVolunteerWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` SchoolVolunteers from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` SchoolVolunteers.
+     */
+    skip?: number
+    distinct?: SchoolVolunteerScalarFieldEnum | SchoolVolunteerScalarFieldEnum[]
+  }
+
+  /**
+   * SchoolVolunteer create
+   */
+  export type SchoolVolunteerCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SchoolVolunteer
+     */
+    select?: SchoolVolunteerSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SchoolVolunteerInclude<ExtArgs> | null
+    /**
+     * The data needed to create a SchoolVolunteer.
+     */
+    data: XOR<SchoolVolunteerCreateInput, SchoolVolunteerUncheckedCreateInput>
+  }
+
+  /**
+   * SchoolVolunteer createMany
+   */
+  export type SchoolVolunteerCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many SchoolVolunteers.
+     */
+    data: SchoolVolunteerCreateManyInput | SchoolVolunteerCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * SchoolVolunteer createManyAndReturn
+   */
+  export type SchoolVolunteerCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SchoolVolunteer
+     */
+    select?: SchoolVolunteerSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * The data used to create many SchoolVolunteers.
+     */
+    data: SchoolVolunteerCreateManyInput | SchoolVolunteerCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SchoolVolunteerIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * SchoolVolunteer update
+   */
+  export type SchoolVolunteerUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SchoolVolunteer
+     */
+    select?: SchoolVolunteerSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SchoolVolunteerInclude<ExtArgs> | null
+    /**
+     * The data needed to update a SchoolVolunteer.
+     */
+    data: XOR<SchoolVolunteerUpdateInput, SchoolVolunteerUncheckedUpdateInput>
+    /**
+     * Choose, which SchoolVolunteer to update.
+     */
+    where: SchoolVolunteerWhereUniqueInput
+  }
+
+  /**
+   * SchoolVolunteer updateMany
+   */
+  export type SchoolVolunteerUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update SchoolVolunteers.
+     */
+    data: XOR<SchoolVolunteerUpdateManyMutationInput, SchoolVolunteerUncheckedUpdateManyInput>
+    /**
+     * Filter which SchoolVolunteers to update
+     */
+    where?: SchoolVolunteerWhereInput
+  }
+
+  /**
+   * SchoolVolunteer upsert
+   */
+  export type SchoolVolunteerUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SchoolVolunteer
+     */
+    select?: SchoolVolunteerSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SchoolVolunteerInclude<ExtArgs> | null
+    /**
+     * The filter to search for the SchoolVolunteer to update in case it exists.
+     */
+    where: SchoolVolunteerWhereUniqueInput
+    /**
+     * In case the SchoolVolunteer found by the `where` argument doesn't exist, create a new SchoolVolunteer with this data.
+     */
+    create: XOR<SchoolVolunteerCreateInput, SchoolVolunteerUncheckedCreateInput>
+    /**
+     * In case the SchoolVolunteer was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<SchoolVolunteerUpdateInput, SchoolVolunteerUncheckedUpdateInput>
+  }
+
+  /**
+   * SchoolVolunteer delete
+   */
+  export type SchoolVolunteerDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SchoolVolunteer
+     */
+    select?: SchoolVolunteerSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SchoolVolunteerInclude<ExtArgs> | null
+    /**
+     * Filter which SchoolVolunteer to delete.
+     */
+    where: SchoolVolunteerWhereUniqueInput
+  }
+
+  /**
+   * SchoolVolunteer deleteMany
+   */
+  export type SchoolVolunteerDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which SchoolVolunteers to delete
+     */
+    where?: SchoolVolunteerWhereInput
+  }
+
+  /**
+   * SchoolVolunteer.assignments
+   */
+  export type SchoolVolunteer$assignmentsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SchoolEventVolunteer
+     */
+    select?: SchoolEventVolunteerSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SchoolEventVolunteerInclude<ExtArgs> | null
+    where?: SchoolEventVolunteerWhereInput
+    orderBy?: SchoolEventVolunteerOrderByWithRelationInput | SchoolEventVolunteerOrderByWithRelationInput[]
+    cursor?: SchoolEventVolunteerWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: SchoolEventVolunteerScalarFieldEnum | SchoolEventVolunteerScalarFieldEnum[]
+  }
+
+  /**
+   * SchoolVolunteer without action
+   */
+  export type SchoolVolunteerDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SchoolVolunteer
+     */
+    select?: SchoolVolunteerSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SchoolVolunteerInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model SchoolEvent
+   */
+
+  export type AggregateSchoolEvent = {
+    _count: SchoolEventCountAggregateOutputType | null
+    _avg: SchoolEventAvgAggregateOutputType | null
+    _sum: SchoolEventSumAggregateOutputType | null
+    _min: SchoolEventMinAggregateOutputType | null
+    _max: SchoolEventMaxAggregateOutputType | null
+  }
+
+  export type SchoolEventAvgAggregateOutputType = {
+    volunteerSlots: number | null
+  }
+
+  export type SchoolEventSumAggregateOutputType = {
+    volunteerSlots: number | null
+  }
+
+  export type SchoolEventMinAggregateOutputType = {
+    id: string | null
+    schoolId: string | null
+    title: string | null
+    description: string | null
+    eventType: string | null
+    location: string | null
+    startsAt: Date | null
+    endsAt: Date | null
+    volunteerSlots: number | null
+    status: $Enums.SchoolEventStatus | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type SchoolEventMaxAggregateOutputType = {
+    id: string | null
+    schoolId: string | null
+    title: string | null
+    description: string | null
+    eventType: string | null
+    location: string | null
+    startsAt: Date | null
+    endsAt: Date | null
+    volunteerSlots: number | null
+    status: $Enums.SchoolEventStatus | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type SchoolEventCountAggregateOutputType = {
+    id: number
+    schoolId: number
+    title: number
+    description: number
+    eventType: number
+    location: number
+    startsAt: number
+    endsAt: number
+    volunteerSlots: number
+    status: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type SchoolEventAvgAggregateInputType = {
+    volunteerSlots?: true
+  }
+
+  export type SchoolEventSumAggregateInputType = {
+    volunteerSlots?: true
+  }
+
+  export type SchoolEventMinAggregateInputType = {
+    id?: true
+    schoolId?: true
+    title?: true
+    description?: true
+    eventType?: true
+    location?: true
+    startsAt?: true
+    endsAt?: true
+    volunteerSlots?: true
+    status?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type SchoolEventMaxAggregateInputType = {
+    id?: true
+    schoolId?: true
+    title?: true
+    description?: true
+    eventType?: true
+    location?: true
+    startsAt?: true
+    endsAt?: true
+    volunteerSlots?: true
+    status?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type SchoolEventCountAggregateInputType = {
+    id?: true
+    schoolId?: true
+    title?: true
+    description?: true
+    eventType?: true
+    location?: true
+    startsAt?: true
+    endsAt?: true
+    volunteerSlots?: true
+    status?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type SchoolEventAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which SchoolEvent to aggregate.
+     */
+    where?: SchoolEventWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of SchoolEvents to fetch.
+     */
+    orderBy?: SchoolEventOrderByWithRelationInput | SchoolEventOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: SchoolEventWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` SchoolEvents from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` SchoolEvents.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned SchoolEvents
+    **/
+    _count?: true | SchoolEventCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: SchoolEventAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: SchoolEventSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: SchoolEventMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: SchoolEventMaxAggregateInputType
+  }
+
+  export type GetSchoolEventAggregateType<T extends SchoolEventAggregateArgs> = {
+        [P in keyof T & keyof AggregateSchoolEvent]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateSchoolEvent[P]>
+      : GetScalarType<T[P], AggregateSchoolEvent[P]>
+  }
+
+
+
+
+  export type SchoolEventGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: SchoolEventWhereInput
+    orderBy?: SchoolEventOrderByWithAggregationInput | SchoolEventOrderByWithAggregationInput[]
+    by: SchoolEventScalarFieldEnum[] | SchoolEventScalarFieldEnum
+    having?: SchoolEventScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: SchoolEventCountAggregateInputType | true
+    _avg?: SchoolEventAvgAggregateInputType
+    _sum?: SchoolEventSumAggregateInputType
+    _min?: SchoolEventMinAggregateInputType
+    _max?: SchoolEventMaxAggregateInputType
+  }
+
+  export type SchoolEventGroupByOutputType = {
+    id: string
+    schoolId: string
+    title: string
+    description: string | null
+    eventType: string
+    location: string | null
+    startsAt: Date
+    endsAt: Date | null
+    volunteerSlots: number
+    status: $Enums.SchoolEventStatus
+    createdAt: Date
+    updatedAt: Date
+    _count: SchoolEventCountAggregateOutputType | null
+    _avg: SchoolEventAvgAggregateOutputType | null
+    _sum: SchoolEventSumAggregateOutputType | null
+    _min: SchoolEventMinAggregateOutputType | null
+    _max: SchoolEventMaxAggregateOutputType | null
+  }
+
+  type GetSchoolEventGroupByPayload<T extends SchoolEventGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<SchoolEventGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof SchoolEventGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], SchoolEventGroupByOutputType[P]>
+            : GetScalarType<T[P], SchoolEventGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type SchoolEventSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    schoolId?: boolean
+    title?: boolean
+    description?: boolean
+    eventType?: boolean
+    location?: boolean
+    startsAt?: boolean
+    endsAt?: boolean
+    volunteerSlots?: boolean
+    status?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    school?: boolean | SchoolDefaultArgs<ExtArgs>
+    assignments?: boolean | SchoolEvent$assignmentsArgs<ExtArgs>
+    _count?: boolean | SchoolEventCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["schoolEvent"]>
+
+  export type SchoolEventSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    schoolId?: boolean
+    title?: boolean
+    description?: boolean
+    eventType?: boolean
+    location?: boolean
+    startsAt?: boolean
+    endsAt?: boolean
+    volunteerSlots?: boolean
+    status?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    school?: boolean | SchoolDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["schoolEvent"]>
+
+  export type SchoolEventSelectScalar = {
+    id?: boolean
+    schoolId?: boolean
+    title?: boolean
+    description?: boolean
+    eventType?: boolean
+    location?: boolean
+    startsAt?: boolean
+    endsAt?: boolean
+    volunteerSlots?: boolean
+    status?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type SchoolEventInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    school?: boolean | SchoolDefaultArgs<ExtArgs>
+    assignments?: boolean | SchoolEvent$assignmentsArgs<ExtArgs>
+    _count?: boolean | SchoolEventCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type SchoolEventIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    school?: boolean | SchoolDefaultArgs<ExtArgs>
+  }
+
+  export type $SchoolEventPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "SchoolEvent"
+    objects: {
+      school: Prisma.$SchoolPayload<ExtArgs>
+      assignments: Prisma.$SchoolEventVolunteerPayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      schoolId: string
+      title: string
+      description: string | null
+      eventType: string
+      location: string | null
+      startsAt: Date
+      endsAt: Date | null
+      volunteerSlots: number
+      status: $Enums.SchoolEventStatus
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["schoolEvent"]>
+    composites: {}
+  }
+
+  type SchoolEventGetPayload<S extends boolean | null | undefined | SchoolEventDefaultArgs> = $Result.GetResult<Prisma.$SchoolEventPayload, S>
+
+  type SchoolEventCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = 
+    Omit<SchoolEventFindManyArgs, 'select' | 'include' | 'distinct'> & {
+      select?: SchoolEventCountAggregateInputType | true
+    }
+
+  export interface SchoolEventDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['SchoolEvent'], meta: { name: 'SchoolEvent' } }
+    /**
+     * Find zero or one SchoolEvent that matches the filter.
+     * @param {SchoolEventFindUniqueArgs} args - Arguments to find a SchoolEvent
+     * @example
+     * // Get one SchoolEvent
+     * const schoolEvent = await prisma.schoolEvent.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends SchoolEventFindUniqueArgs>(args: SelectSubset<T, SchoolEventFindUniqueArgs<ExtArgs>>): Prisma__SchoolEventClient<$Result.GetResult<Prisma.$SchoolEventPayload<ExtArgs>, T, "findUnique"> | null, null, ExtArgs>
+
+    /**
+     * Find one SchoolEvent that matches the filter or throw an error with `error.code='P2025'` 
+     * if no matches were found.
+     * @param {SchoolEventFindUniqueOrThrowArgs} args - Arguments to find a SchoolEvent
+     * @example
+     * // Get one SchoolEvent
+     * const schoolEvent = await prisma.schoolEvent.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends SchoolEventFindUniqueOrThrowArgs>(args: SelectSubset<T, SchoolEventFindUniqueOrThrowArgs<ExtArgs>>): Prisma__SchoolEventClient<$Result.GetResult<Prisma.$SchoolEventPayload<ExtArgs>, T, "findUniqueOrThrow">, never, ExtArgs>
+
+    /**
+     * Find the first SchoolEvent that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SchoolEventFindFirstArgs} args - Arguments to find a SchoolEvent
+     * @example
+     * // Get one SchoolEvent
+     * const schoolEvent = await prisma.schoolEvent.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends SchoolEventFindFirstArgs>(args?: SelectSubset<T, SchoolEventFindFirstArgs<ExtArgs>>): Prisma__SchoolEventClient<$Result.GetResult<Prisma.$SchoolEventPayload<ExtArgs>, T, "findFirst"> | null, null, ExtArgs>
+
+    /**
+     * Find the first SchoolEvent that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SchoolEventFindFirstOrThrowArgs} args - Arguments to find a SchoolEvent
+     * @example
+     * // Get one SchoolEvent
+     * const schoolEvent = await prisma.schoolEvent.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends SchoolEventFindFirstOrThrowArgs>(args?: SelectSubset<T, SchoolEventFindFirstOrThrowArgs<ExtArgs>>): Prisma__SchoolEventClient<$Result.GetResult<Prisma.$SchoolEventPayload<ExtArgs>, T, "findFirstOrThrow">, never, ExtArgs>
+
+    /**
+     * Find zero or more SchoolEvents that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SchoolEventFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all SchoolEvents
+     * const schoolEvents = await prisma.schoolEvent.findMany()
+     * 
+     * // Get first 10 SchoolEvents
+     * const schoolEvents = await prisma.schoolEvent.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const schoolEventWithIdOnly = await prisma.schoolEvent.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends SchoolEventFindManyArgs>(args?: SelectSubset<T, SchoolEventFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SchoolEventPayload<ExtArgs>, T, "findMany">>
+
+    /**
+     * Create a SchoolEvent.
+     * @param {SchoolEventCreateArgs} args - Arguments to create a SchoolEvent.
+     * @example
+     * // Create one SchoolEvent
+     * const SchoolEvent = await prisma.schoolEvent.create({
+     *   data: {
+     *     // ... data to create a SchoolEvent
+     *   }
+     * })
+     * 
+     */
+    create<T extends SchoolEventCreateArgs>(args: SelectSubset<T, SchoolEventCreateArgs<ExtArgs>>): Prisma__SchoolEventClient<$Result.GetResult<Prisma.$SchoolEventPayload<ExtArgs>, T, "create">, never, ExtArgs>
+
+    /**
+     * Create many SchoolEvents.
+     * @param {SchoolEventCreateManyArgs} args - Arguments to create many SchoolEvents.
+     * @example
+     * // Create many SchoolEvents
+     * const schoolEvent = await prisma.schoolEvent.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends SchoolEventCreateManyArgs>(args?: SelectSubset<T, SchoolEventCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many SchoolEvents and returns the data saved in the database.
+     * @param {SchoolEventCreateManyAndReturnArgs} args - Arguments to create many SchoolEvents.
+     * @example
+     * // Create many SchoolEvents
+     * const schoolEvent = await prisma.schoolEvent.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many SchoolEvents and only return the `id`
+     * const schoolEventWithIdOnly = await prisma.schoolEvent.createManyAndReturn({ 
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends SchoolEventCreateManyAndReturnArgs>(args?: SelectSubset<T, SchoolEventCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SchoolEventPayload<ExtArgs>, T, "createManyAndReturn">>
+
+    /**
+     * Delete a SchoolEvent.
+     * @param {SchoolEventDeleteArgs} args - Arguments to delete one SchoolEvent.
+     * @example
+     * // Delete one SchoolEvent
+     * const SchoolEvent = await prisma.schoolEvent.delete({
+     *   where: {
+     *     // ... filter to delete one SchoolEvent
+     *   }
+     * })
+     * 
+     */
+    delete<T extends SchoolEventDeleteArgs>(args: SelectSubset<T, SchoolEventDeleteArgs<ExtArgs>>): Prisma__SchoolEventClient<$Result.GetResult<Prisma.$SchoolEventPayload<ExtArgs>, T, "delete">, never, ExtArgs>
+
+    /**
+     * Update one SchoolEvent.
+     * @param {SchoolEventUpdateArgs} args - Arguments to update one SchoolEvent.
+     * @example
+     * // Update one SchoolEvent
+     * const schoolEvent = await prisma.schoolEvent.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends SchoolEventUpdateArgs>(args: SelectSubset<T, SchoolEventUpdateArgs<ExtArgs>>): Prisma__SchoolEventClient<$Result.GetResult<Prisma.$SchoolEventPayload<ExtArgs>, T, "update">, never, ExtArgs>
+
+    /**
+     * Delete zero or more SchoolEvents.
+     * @param {SchoolEventDeleteManyArgs} args - Arguments to filter SchoolEvents to delete.
+     * @example
+     * // Delete a few SchoolEvents
+     * const { count } = await prisma.schoolEvent.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends SchoolEventDeleteManyArgs>(args?: SelectSubset<T, SchoolEventDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more SchoolEvents.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SchoolEventUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many SchoolEvents
+     * const schoolEvent = await prisma.schoolEvent.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends SchoolEventUpdateManyArgs>(args: SelectSubset<T, SchoolEventUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one SchoolEvent.
+     * @param {SchoolEventUpsertArgs} args - Arguments to update or create a SchoolEvent.
+     * @example
+     * // Update or create a SchoolEvent
+     * const schoolEvent = await prisma.schoolEvent.upsert({
+     *   create: {
+     *     // ... data to create a SchoolEvent
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the SchoolEvent we want to update
+     *   }
+     * })
+     */
+    upsert<T extends SchoolEventUpsertArgs>(args: SelectSubset<T, SchoolEventUpsertArgs<ExtArgs>>): Prisma__SchoolEventClient<$Result.GetResult<Prisma.$SchoolEventPayload<ExtArgs>, T, "upsert">, never, ExtArgs>
+
+
+    /**
+     * Count the number of SchoolEvents.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SchoolEventCountArgs} args - Arguments to filter SchoolEvents to count.
+     * @example
+     * // Count the number of SchoolEvents
+     * const count = await prisma.schoolEvent.count({
+     *   where: {
+     *     // ... the filter for the SchoolEvents we want to count
+     *   }
+     * })
+    **/
+    count<T extends SchoolEventCountArgs>(
+      args?: Subset<T, SchoolEventCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], SchoolEventCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a SchoolEvent.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SchoolEventAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends SchoolEventAggregateArgs>(args: Subset<T, SchoolEventAggregateArgs>): Prisma.PrismaPromise<GetSchoolEventAggregateType<T>>
+
+    /**
+     * Group by SchoolEvent.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SchoolEventGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends SchoolEventGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: SchoolEventGroupByArgs['orderBy'] }
+        : { orderBy?: SchoolEventGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, SchoolEventGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetSchoolEventGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the SchoolEvent model
+   */
+  readonly fields: SchoolEventFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for SchoolEvent.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__SchoolEventClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    school<T extends SchoolDefaultArgs<ExtArgs> = {}>(args?: Subset<T, SchoolDefaultArgs<ExtArgs>>): Prisma__SchoolClient<$Result.GetResult<Prisma.$SchoolPayload<ExtArgs>, T, "findUniqueOrThrow"> | Null, Null, ExtArgs>
+    assignments<T extends SchoolEvent$assignmentsArgs<ExtArgs> = {}>(args?: Subset<T, SchoolEvent$assignmentsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SchoolEventVolunteerPayload<ExtArgs>, T, "findMany"> | Null>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the SchoolEvent model
+   */ 
+  interface SchoolEventFieldRefs {
+    readonly id: FieldRef<"SchoolEvent", 'String'>
+    readonly schoolId: FieldRef<"SchoolEvent", 'String'>
+    readonly title: FieldRef<"SchoolEvent", 'String'>
+    readonly description: FieldRef<"SchoolEvent", 'String'>
+    readonly eventType: FieldRef<"SchoolEvent", 'String'>
+    readonly location: FieldRef<"SchoolEvent", 'String'>
+    readonly startsAt: FieldRef<"SchoolEvent", 'DateTime'>
+    readonly endsAt: FieldRef<"SchoolEvent", 'DateTime'>
+    readonly volunteerSlots: FieldRef<"SchoolEvent", 'Int'>
+    readonly status: FieldRef<"SchoolEvent", 'SchoolEventStatus'>
+    readonly createdAt: FieldRef<"SchoolEvent", 'DateTime'>
+    readonly updatedAt: FieldRef<"SchoolEvent", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * SchoolEvent findUnique
+   */
+  export type SchoolEventFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SchoolEvent
+     */
+    select?: SchoolEventSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SchoolEventInclude<ExtArgs> | null
+    /**
+     * Filter, which SchoolEvent to fetch.
+     */
+    where: SchoolEventWhereUniqueInput
+  }
+
+  /**
+   * SchoolEvent findUniqueOrThrow
+   */
+  export type SchoolEventFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SchoolEvent
+     */
+    select?: SchoolEventSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SchoolEventInclude<ExtArgs> | null
+    /**
+     * Filter, which SchoolEvent to fetch.
+     */
+    where: SchoolEventWhereUniqueInput
+  }
+
+  /**
+   * SchoolEvent findFirst
+   */
+  export type SchoolEventFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SchoolEvent
+     */
+    select?: SchoolEventSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SchoolEventInclude<ExtArgs> | null
+    /**
+     * Filter, which SchoolEvent to fetch.
+     */
+    where?: SchoolEventWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of SchoolEvents to fetch.
+     */
+    orderBy?: SchoolEventOrderByWithRelationInput | SchoolEventOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for SchoolEvents.
+     */
+    cursor?: SchoolEventWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` SchoolEvents from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` SchoolEvents.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of SchoolEvents.
+     */
+    distinct?: SchoolEventScalarFieldEnum | SchoolEventScalarFieldEnum[]
+  }
+
+  /**
+   * SchoolEvent findFirstOrThrow
+   */
+  export type SchoolEventFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SchoolEvent
+     */
+    select?: SchoolEventSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SchoolEventInclude<ExtArgs> | null
+    /**
+     * Filter, which SchoolEvent to fetch.
+     */
+    where?: SchoolEventWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of SchoolEvents to fetch.
+     */
+    orderBy?: SchoolEventOrderByWithRelationInput | SchoolEventOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for SchoolEvents.
+     */
+    cursor?: SchoolEventWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` SchoolEvents from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` SchoolEvents.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of SchoolEvents.
+     */
+    distinct?: SchoolEventScalarFieldEnum | SchoolEventScalarFieldEnum[]
+  }
+
+  /**
+   * SchoolEvent findMany
+   */
+  export type SchoolEventFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SchoolEvent
+     */
+    select?: SchoolEventSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SchoolEventInclude<ExtArgs> | null
+    /**
+     * Filter, which SchoolEvents to fetch.
+     */
+    where?: SchoolEventWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of SchoolEvents to fetch.
+     */
+    orderBy?: SchoolEventOrderByWithRelationInput | SchoolEventOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing SchoolEvents.
+     */
+    cursor?: SchoolEventWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` SchoolEvents from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` SchoolEvents.
+     */
+    skip?: number
+    distinct?: SchoolEventScalarFieldEnum | SchoolEventScalarFieldEnum[]
+  }
+
+  /**
+   * SchoolEvent create
+   */
+  export type SchoolEventCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SchoolEvent
+     */
+    select?: SchoolEventSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SchoolEventInclude<ExtArgs> | null
+    /**
+     * The data needed to create a SchoolEvent.
+     */
+    data: XOR<SchoolEventCreateInput, SchoolEventUncheckedCreateInput>
+  }
+
+  /**
+   * SchoolEvent createMany
+   */
+  export type SchoolEventCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many SchoolEvents.
+     */
+    data: SchoolEventCreateManyInput | SchoolEventCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * SchoolEvent createManyAndReturn
+   */
+  export type SchoolEventCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SchoolEvent
+     */
+    select?: SchoolEventSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * The data used to create many SchoolEvents.
+     */
+    data: SchoolEventCreateManyInput | SchoolEventCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SchoolEventIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * SchoolEvent update
+   */
+  export type SchoolEventUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SchoolEvent
+     */
+    select?: SchoolEventSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SchoolEventInclude<ExtArgs> | null
+    /**
+     * The data needed to update a SchoolEvent.
+     */
+    data: XOR<SchoolEventUpdateInput, SchoolEventUncheckedUpdateInput>
+    /**
+     * Choose, which SchoolEvent to update.
+     */
+    where: SchoolEventWhereUniqueInput
+  }
+
+  /**
+   * SchoolEvent updateMany
+   */
+  export type SchoolEventUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update SchoolEvents.
+     */
+    data: XOR<SchoolEventUpdateManyMutationInput, SchoolEventUncheckedUpdateManyInput>
+    /**
+     * Filter which SchoolEvents to update
+     */
+    where?: SchoolEventWhereInput
+  }
+
+  /**
+   * SchoolEvent upsert
+   */
+  export type SchoolEventUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SchoolEvent
+     */
+    select?: SchoolEventSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SchoolEventInclude<ExtArgs> | null
+    /**
+     * The filter to search for the SchoolEvent to update in case it exists.
+     */
+    where: SchoolEventWhereUniqueInput
+    /**
+     * In case the SchoolEvent found by the `where` argument doesn't exist, create a new SchoolEvent with this data.
+     */
+    create: XOR<SchoolEventCreateInput, SchoolEventUncheckedCreateInput>
+    /**
+     * In case the SchoolEvent was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<SchoolEventUpdateInput, SchoolEventUncheckedUpdateInput>
+  }
+
+  /**
+   * SchoolEvent delete
+   */
+  export type SchoolEventDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SchoolEvent
+     */
+    select?: SchoolEventSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SchoolEventInclude<ExtArgs> | null
+    /**
+     * Filter which SchoolEvent to delete.
+     */
+    where: SchoolEventWhereUniqueInput
+  }
+
+  /**
+   * SchoolEvent deleteMany
+   */
+  export type SchoolEventDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which SchoolEvents to delete
+     */
+    where?: SchoolEventWhereInput
+  }
+
+  /**
+   * SchoolEvent.assignments
+   */
+  export type SchoolEvent$assignmentsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SchoolEventVolunteer
+     */
+    select?: SchoolEventVolunteerSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SchoolEventVolunteerInclude<ExtArgs> | null
+    where?: SchoolEventVolunteerWhereInput
+    orderBy?: SchoolEventVolunteerOrderByWithRelationInput | SchoolEventVolunteerOrderByWithRelationInput[]
+    cursor?: SchoolEventVolunteerWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: SchoolEventVolunteerScalarFieldEnum | SchoolEventVolunteerScalarFieldEnum[]
+  }
+
+  /**
+   * SchoolEvent without action
+   */
+  export type SchoolEventDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SchoolEvent
+     */
+    select?: SchoolEventSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SchoolEventInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model SchoolEventVolunteer
+   */
+
+  export type AggregateSchoolEventVolunteer = {
+    _count: SchoolEventVolunteerCountAggregateOutputType | null
+    _min: SchoolEventVolunteerMinAggregateOutputType | null
+    _max: SchoolEventVolunteerMaxAggregateOutputType | null
+  }
+
+  export type SchoolEventVolunteerMinAggregateOutputType = {
+    id: string | null
+    eventId: string | null
+    volunteerId: string | null
+    role: string | null
+    createdAt: Date | null
+  }
+
+  export type SchoolEventVolunteerMaxAggregateOutputType = {
+    id: string | null
+    eventId: string | null
+    volunteerId: string | null
+    role: string | null
+    createdAt: Date | null
+  }
+
+  export type SchoolEventVolunteerCountAggregateOutputType = {
+    id: number
+    eventId: number
+    volunteerId: number
+    role: number
+    createdAt: number
+    _all: number
+  }
+
+
+  export type SchoolEventVolunteerMinAggregateInputType = {
+    id?: true
+    eventId?: true
+    volunteerId?: true
+    role?: true
+    createdAt?: true
+  }
+
+  export type SchoolEventVolunteerMaxAggregateInputType = {
+    id?: true
+    eventId?: true
+    volunteerId?: true
+    role?: true
+    createdAt?: true
+  }
+
+  export type SchoolEventVolunteerCountAggregateInputType = {
+    id?: true
+    eventId?: true
+    volunteerId?: true
+    role?: true
+    createdAt?: true
+    _all?: true
+  }
+
+  export type SchoolEventVolunteerAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which SchoolEventVolunteer to aggregate.
+     */
+    where?: SchoolEventVolunteerWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of SchoolEventVolunteers to fetch.
+     */
+    orderBy?: SchoolEventVolunteerOrderByWithRelationInput | SchoolEventVolunteerOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: SchoolEventVolunteerWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` SchoolEventVolunteers from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` SchoolEventVolunteers.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned SchoolEventVolunteers
+    **/
+    _count?: true | SchoolEventVolunteerCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: SchoolEventVolunteerMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: SchoolEventVolunteerMaxAggregateInputType
+  }
+
+  export type GetSchoolEventVolunteerAggregateType<T extends SchoolEventVolunteerAggregateArgs> = {
+        [P in keyof T & keyof AggregateSchoolEventVolunteer]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateSchoolEventVolunteer[P]>
+      : GetScalarType<T[P], AggregateSchoolEventVolunteer[P]>
+  }
+
+
+
+
+  export type SchoolEventVolunteerGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: SchoolEventVolunteerWhereInput
+    orderBy?: SchoolEventVolunteerOrderByWithAggregationInput | SchoolEventVolunteerOrderByWithAggregationInput[]
+    by: SchoolEventVolunteerScalarFieldEnum[] | SchoolEventVolunteerScalarFieldEnum
+    having?: SchoolEventVolunteerScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: SchoolEventVolunteerCountAggregateInputType | true
+    _min?: SchoolEventVolunteerMinAggregateInputType
+    _max?: SchoolEventVolunteerMaxAggregateInputType
+  }
+
+  export type SchoolEventVolunteerGroupByOutputType = {
+    id: string
+    eventId: string
+    volunteerId: string
+    role: string | null
+    createdAt: Date
+    _count: SchoolEventVolunteerCountAggregateOutputType | null
+    _min: SchoolEventVolunteerMinAggregateOutputType | null
+    _max: SchoolEventVolunteerMaxAggregateOutputType | null
+  }
+
+  type GetSchoolEventVolunteerGroupByPayload<T extends SchoolEventVolunteerGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<SchoolEventVolunteerGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof SchoolEventVolunteerGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], SchoolEventVolunteerGroupByOutputType[P]>
+            : GetScalarType<T[P], SchoolEventVolunteerGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type SchoolEventVolunteerSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    eventId?: boolean
+    volunteerId?: boolean
+    role?: boolean
+    createdAt?: boolean
+    event?: boolean | SchoolEventDefaultArgs<ExtArgs>
+    volunteer?: boolean | SchoolVolunteerDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["schoolEventVolunteer"]>
+
+  export type SchoolEventVolunteerSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    eventId?: boolean
+    volunteerId?: boolean
+    role?: boolean
+    createdAt?: boolean
+    event?: boolean | SchoolEventDefaultArgs<ExtArgs>
+    volunteer?: boolean | SchoolVolunteerDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["schoolEventVolunteer"]>
+
+  export type SchoolEventVolunteerSelectScalar = {
+    id?: boolean
+    eventId?: boolean
+    volunteerId?: boolean
+    role?: boolean
+    createdAt?: boolean
+  }
+
+  export type SchoolEventVolunteerInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    event?: boolean | SchoolEventDefaultArgs<ExtArgs>
+    volunteer?: boolean | SchoolVolunteerDefaultArgs<ExtArgs>
+  }
+  export type SchoolEventVolunteerIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    event?: boolean | SchoolEventDefaultArgs<ExtArgs>
+    volunteer?: boolean | SchoolVolunteerDefaultArgs<ExtArgs>
+  }
+
+  export type $SchoolEventVolunteerPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "SchoolEventVolunteer"
+    objects: {
+      event: Prisma.$SchoolEventPayload<ExtArgs>
+      volunteer: Prisma.$SchoolVolunteerPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      eventId: string
+      volunteerId: string
+      role: string | null
+      createdAt: Date
+    }, ExtArgs["result"]["schoolEventVolunteer"]>
+    composites: {}
+  }
+
+  type SchoolEventVolunteerGetPayload<S extends boolean | null | undefined | SchoolEventVolunteerDefaultArgs> = $Result.GetResult<Prisma.$SchoolEventVolunteerPayload, S>
+
+  type SchoolEventVolunteerCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = 
+    Omit<SchoolEventVolunteerFindManyArgs, 'select' | 'include' | 'distinct'> & {
+      select?: SchoolEventVolunteerCountAggregateInputType | true
+    }
+
+  export interface SchoolEventVolunteerDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['SchoolEventVolunteer'], meta: { name: 'SchoolEventVolunteer' } }
+    /**
+     * Find zero or one SchoolEventVolunteer that matches the filter.
+     * @param {SchoolEventVolunteerFindUniqueArgs} args - Arguments to find a SchoolEventVolunteer
+     * @example
+     * // Get one SchoolEventVolunteer
+     * const schoolEventVolunteer = await prisma.schoolEventVolunteer.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends SchoolEventVolunteerFindUniqueArgs>(args: SelectSubset<T, SchoolEventVolunteerFindUniqueArgs<ExtArgs>>): Prisma__SchoolEventVolunteerClient<$Result.GetResult<Prisma.$SchoolEventVolunteerPayload<ExtArgs>, T, "findUnique"> | null, null, ExtArgs>
+
+    /**
+     * Find one SchoolEventVolunteer that matches the filter or throw an error with `error.code='P2025'` 
+     * if no matches were found.
+     * @param {SchoolEventVolunteerFindUniqueOrThrowArgs} args - Arguments to find a SchoolEventVolunteer
+     * @example
+     * // Get one SchoolEventVolunteer
+     * const schoolEventVolunteer = await prisma.schoolEventVolunteer.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends SchoolEventVolunteerFindUniqueOrThrowArgs>(args: SelectSubset<T, SchoolEventVolunteerFindUniqueOrThrowArgs<ExtArgs>>): Prisma__SchoolEventVolunteerClient<$Result.GetResult<Prisma.$SchoolEventVolunteerPayload<ExtArgs>, T, "findUniqueOrThrow">, never, ExtArgs>
+
+    /**
+     * Find the first SchoolEventVolunteer that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SchoolEventVolunteerFindFirstArgs} args - Arguments to find a SchoolEventVolunteer
+     * @example
+     * // Get one SchoolEventVolunteer
+     * const schoolEventVolunteer = await prisma.schoolEventVolunteer.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends SchoolEventVolunteerFindFirstArgs>(args?: SelectSubset<T, SchoolEventVolunteerFindFirstArgs<ExtArgs>>): Prisma__SchoolEventVolunteerClient<$Result.GetResult<Prisma.$SchoolEventVolunteerPayload<ExtArgs>, T, "findFirst"> | null, null, ExtArgs>
+
+    /**
+     * Find the first SchoolEventVolunteer that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SchoolEventVolunteerFindFirstOrThrowArgs} args - Arguments to find a SchoolEventVolunteer
+     * @example
+     * // Get one SchoolEventVolunteer
+     * const schoolEventVolunteer = await prisma.schoolEventVolunteer.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends SchoolEventVolunteerFindFirstOrThrowArgs>(args?: SelectSubset<T, SchoolEventVolunteerFindFirstOrThrowArgs<ExtArgs>>): Prisma__SchoolEventVolunteerClient<$Result.GetResult<Prisma.$SchoolEventVolunteerPayload<ExtArgs>, T, "findFirstOrThrow">, never, ExtArgs>
+
+    /**
+     * Find zero or more SchoolEventVolunteers that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SchoolEventVolunteerFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all SchoolEventVolunteers
+     * const schoolEventVolunteers = await prisma.schoolEventVolunteer.findMany()
+     * 
+     * // Get first 10 SchoolEventVolunteers
+     * const schoolEventVolunteers = await prisma.schoolEventVolunteer.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const schoolEventVolunteerWithIdOnly = await prisma.schoolEventVolunteer.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends SchoolEventVolunteerFindManyArgs>(args?: SelectSubset<T, SchoolEventVolunteerFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SchoolEventVolunteerPayload<ExtArgs>, T, "findMany">>
+
+    /**
+     * Create a SchoolEventVolunteer.
+     * @param {SchoolEventVolunteerCreateArgs} args - Arguments to create a SchoolEventVolunteer.
+     * @example
+     * // Create one SchoolEventVolunteer
+     * const SchoolEventVolunteer = await prisma.schoolEventVolunteer.create({
+     *   data: {
+     *     // ... data to create a SchoolEventVolunteer
+     *   }
+     * })
+     * 
+     */
+    create<T extends SchoolEventVolunteerCreateArgs>(args: SelectSubset<T, SchoolEventVolunteerCreateArgs<ExtArgs>>): Prisma__SchoolEventVolunteerClient<$Result.GetResult<Prisma.$SchoolEventVolunteerPayload<ExtArgs>, T, "create">, never, ExtArgs>
+
+    /**
+     * Create many SchoolEventVolunteers.
+     * @param {SchoolEventVolunteerCreateManyArgs} args - Arguments to create many SchoolEventVolunteers.
+     * @example
+     * // Create many SchoolEventVolunteers
+     * const schoolEventVolunteer = await prisma.schoolEventVolunteer.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends SchoolEventVolunteerCreateManyArgs>(args?: SelectSubset<T, SchoolEventVolunteerCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many SchoolEventVolunteers and returns the data saved in the database.
+     * @param {SchoolEventVolunteerCreateManyAndReturnArgs} args - Arguments to create many SchoolEventVolunteers.
+     * @example
+     * // Create many SchoolEventVolunteers
+     * const schoolEventVolunteer = await prisma.schoolEventVolunteer.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many SchoolEventVolunteers and only return the `id`
+     * const schoolEventVolunteerWithIdOnly = await prisma.schoolEventVolunteer.createManyAndReturn({ 
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends SchoolEventVolunteerCreateManyAndReturnArgs>(args?: SelectSubset<T, SchoolEventVolunteerCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SchoolEventVolunteerPayload<ExtArgs>, T, "createManyAndReturn">>
+
+    /**
+     * Delete a SchoolEventVolunteer.
+     * @param {SchoolEventVolunteerDeleteArgs} args - Arguments to delete one SchoolEventVolunteer.
+     * @example
+     * // Delete one SchoolEventVolunteer
+     * const SchoolEventVolunteer = await prisma.schoolEventVolunteer.delete({
+     *   where: {
+     *     // ... filter to delete one SchoolEventVolunteer
+     *   }
+     * })
+     * 
+     */
+    delete<T extends SchoolEventVolunteerDeleteArgs>(args: SelectSubset<T, SchoolEventVolunteerDeleteArgs<ExtArgs>>): Prisma__SchoolEventVolunteerClient<$Result.GetResult<Prisma.$SchoolEventVolunteerPayload<ExtArgs>, T, "delete">, never, ExtArgs>
+
+    /**
+     * Update one SchoolEventVolunteer.
+     * @param {SchoolEventVolunteerUpdateArgs} args - Arguments to update one SchoolEventVolunteer.
+     * @example
+     * // Update one SchoolEventVolunteer
+     * const schoolEventVolunteer = await prisma.schoolEventVolunteer.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends SchoolEventVolunteerUpdateArgs>(args: SelectSubset<T, SchoolEventVolunteerUpdateArgs<ExtArgs>>): Prisma__SchoolEventVolunteerClient<$Result.GetResult<Prisma.$SchoolEventVolunteerPayload<ExtArgs>, T, "update">, never, ExtArgs>
+
+    /**
+     * Delete zero or more SchoolEventVolunteers.
+     * @param {SchoolEventVolunteerDeleteManyArgs} args - Arguments to filter SchoolEventVolunteers to delete.
+     * @example
+     * // Delete a few SchoolEventVolunteers
+     * const { count } = await prisma.schoolEventVolunteer.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends SchoolEventVolunteerDeleteManyArgs>(args?: SelectSubset<T, SchoolEventVolunteerDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more SchoolEventVolunteers.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SchoolEventVolunteerUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many SchoolEventVolunteers
+     * const schoolEventVolunteer = await prisma.schoolEventVolunteer.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends SchoolEventVolunteerUpdateManyArgs>(args: SelectSubset<T, SchoolEventVolunteerUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one SchoolEventVolunteer.
+     * @param {SchoolEventVolunteerUpsertArgs} args - Arguments to update or create a SchoolEventVolunteer.
+     * @example
+     * // Update or create a SchoolEventVolunteer
+     * const schoolEventVolunteer = await prisma.schoolEventVolunteer.upsert({
+     *   create: {
+     *     // ... data to create a SchoolEventVolunteer
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the SchoolEventVolunteer we want to update
+     *   }
+     * })
+     */
+    upsert<T extends SchoolEventVolunteerUpsertArgs>(args: SelectSubset<T, SchoolEventVolunteerUpsertArgs<ExtArgs>>): Prisma__SchoolEventVolunteerClient<$Result.GetResult<Prisma.$SchoolEventVolunteerPayload<ExtArgs>, T, "upsert">, never, ExtArgs>
+
+
+    /**
+     * Count the number of SchoolEventVolunteers.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SchoolEventVolunteerCountArgs} args - Arguments to filter SchoolEventVolunteers to count.
+     * @example
+     * // Count the number of SchoolEventVolunteers
+     * const count = await prisma.schoolEventVolunteer.count({
+     *   where: {
+     *     // ... the filter for the SchoolEventVolunteers we want to count
+     *   }
+     * })
+    **/
+    count<T extends SchoolEventVolunteerCountArgs>(
+      args?: Subset<T, SchoolEventVolunteerCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], SchoolEventVolunteerCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a SchoolEventVolunteer.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SchoolEventVolunteerAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends SchoolEventVolunteerAggregateArgs>(args: Subset<T, SchoolEventVolunteerAggregateArgs>): Prisma.PrismaPromise<GetSchoolEventVolunteerAggregateType<T>>
+
+    /**
+     * Group by SchoolEventVolunteer.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SchoolEventVolunteerGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends SchoolEventVolunteerGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: SchoolEventVolunteerGroupByArgs['orderBy'] }
+        : { orderBy?: SchoolEventVolunteerGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, SchoolEventVolunteerGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetSchoolEventVolunteerGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the SchoolEventVolunteer model
+   */
+  readonly fields: SchoolEventVolunteerFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for SchoolEventVolunteer.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__SchoolEventVolunteerClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    event<T extends SchoolEventDefaultArgs<ExtArgs> = {}>(args?: Subset<T, SchoolEventDefaultArgs<ExtArgs>>): Prisma__SchoolEventClient<$Result.GetResult<Prisma.$SchoolEventPayload<ExtArgs>, T, "findUniqueOrThrow"> | Null, Null, ExtArgs>
+    volunteer<T extends SchoolVolunteerDefaultArgs<ExtArgs> = {}>(args?: Subset<T, SchoolVolunteerDefaultArgs<ExtArgs>>): Prisma__SchoolVolunteerClient<$Result.GetResult<Prisma.$SchoolVolunteerPayload<ExtArgs>, T, "findUniqueOrThrow"> | Null, Null, ExtArgs>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the SchoolEventVolunteer model
+   */ 
+  interface SchoolEventVolunteerFieldRefs {
+    readonly id: FieldRef<"SchoolEventVolunteer", 'String'>
+    readonly eventId: FieldRef<"SchoolEventVolunteer", 'String'>
+    readonly volunteerId: FieldRef<"SchoolEventVolunteer", 'String'>
+    readonly role: FieldRef<"SchoolEventVolunteer", 'String'>
+    readonly createdAt: FieldRef<"SchoolEventVolunteer", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * SchoolEventVolunteer findUnique
+   */
+  export type SchoolEventVolunteerFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SchoolEventVolunteer
+     */
+    select?: SchoolEventVolunteerSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SchoolEventVolunteerInclude<ExtArgs> | null
+    /**
+     * Filter, which SchoolEventVolunteer to fetch.
+     */
+    where: SchoolEventVolunteerWhereUniqueInput
+  }
+
+  /**
+   * SchoolEventVolunteer findUniqueOrThrow
+   */
+  export type SchoolEventVolunteerFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SchoolEventVolunteer
+     */
+    select?: SchoolEventVolunteerSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SchoolEventVolunteerInclude<ExtArgs> | null
+    /**
+     * Filter, which SchoolEventVolunteer to fetch.
+     */
+    where: SchoolEventVolunteerWhereUniqueInput
+  }
+
+  /**
+   * SchoolEventVolunteer findFirst
+   */
+  export type SchoolEventVolunteerFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SchoolEventVolunteer
+     */
+    select?: SchoolEventVolunteerSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SchoolEventVolunteerInclude<ExtArgs> | null
+    /**
+     * Filter, which SchoolEventVolunteer to fetch.
+     */
+    where?: SchoolEventVolunteerWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of SchoolEventVolunteers to fetch.
+     */
+    orderBy?: SchoolEventVolunteerOrderByWithRelationInput | SchoolEventVolunteerOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for SchoolEventVolunteers.
+     */
+    cursor?: SchoolEventVolunteerWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` SchoolEventVolunteers from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` SchoolEventVolunteers.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of SchoolEventVolunteers.
+     */
+    distinct?: SchoolEventVolunteerScalarFieldEnum | SchoolEventVolunteerScalarFieldEnum[]
+  }
+
+  /**
+   * SchoolEventVolunteer findFirstOrThrow
+   */
+  export type SchoolEventVolunteerFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SchoolEventVolunteer
+     */
+    select?: SchoolEventVolunteerSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SchoolEventVolunteerInclude<ExtArgs> | null
+    /**
+     * Filter, which SchoolEventVolunteer to fetch.
+     */
+    where?: SchoolEventVolunteerWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of SchoolEventVolunteers to fetch.
+     */
+    orderBy?: SchoolEventVolunteerOrderByWithRelationInput | SchoolEventVolunteerOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for SchoolEventVolunteers.
+     */
+    cursor?: SchoolEventVolunteerWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` SchoolEventVolunteers from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` SchoolEventVolunteers.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of SchoolEventVolunteers.
+     */
+    distinct?: SchoolEventVolunteerScalarFieldEnum | SchoolEventVolunteerScalarFieldEnum[]
+  }
+
+  /**
+   * SchoolEventVolunteer findMany
+   */
+  export type SchoolEventVolunteerFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SchoolEventVolunteer
+     */
+    select?: SchoolEventVolunteerSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SchoolEventVolunteerInclude<ExtArgs> | null
+    /**
+     * Filter, which SchoolEventVolunteers to fetch.
+     */
+    where?: SchoolEventVolunteerWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of SchoolEventVolunteers to fetch.
+     */
+    orderBy?: SchoolEventVolunteerOrderByWithRelationInput | SchoolEventVolunteerOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing SchoolEventVolunteers.
+     */
+    cursor?: SchoolEventVolunteerWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` SchoolEventVolunteers from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` SchoolEventVolunteers.
+     */
+    skip?: number
+    distinct?: SchoolEventVolunteerScalarFieldEnum | SchoolEventVolunteerScalarFieldEnum[]
+  }
+
+  /**
+   * SchoolEventVolunteer create
+   */
+  export type SchoolEventVolunteerCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SchoolEventVolunteer
+     */
+    select?: SchoolEventVolunteerSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SchoolEventVolunteerInclude<ExtArgs> | null
+    /**
+     * The data needed to create a SchoolEventVolunteer.
+     */
+    data: XOR<SchoolEventVolunteerCreateInput, SchoolEventVolunteerUncheckedCreateInput>
+  }
+
+  /**
+   * SchoolEventVolunteer createMany
+   */
+  export type SchoolEventVolunteerCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many SchoolEventVolunteers.
+     */
+    data: SchoolEventVolunteerCreateManyInput | SchoolEventVolunteerCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * SchoolEventVolunteer createManyAndReturn
+   */
+  export type SchoolEventVolunteerCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SchoolEventVolunteer
+     */
+    select?: SchoolEventVolunteerSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * The data used to create many SchoolEventVolunteers.
+     */
+    data: SchoolEventVolunteerCreateManyInput | SchoolEventVolunteerCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SchoolEventVolunteerIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * SchoolEventVolunteer update
+   */
+  export type SchoolEventVolunteerUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SchoolEventVolunteer
+     */
+    select?: SchoolEventVolunteerSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SchoolEventVolunteerInclude<ExtArgs> | null
+    /**
+     * The data needed to update a SchoolEventVolunteer.
+     */
+    data: XOR<SchoolEventVolunteerUpdateInput, SchoolEventVolunteerUncheckedUpdateInput>
+    /**
+     * Choose, which SchoolEventVolunteer to update.
+     */
+    where: SchoolEventVolunteerWhereUniqueInput
+  }
+
+  /**
+   * SchoolEventVolunteer updateMany
+   */
+  export type SchoolEventVolunteerUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update SchoolEventVolunteers.
+     */
+    data: XOR<SchoolEventVolunteerUpdateManyMutationInput, SchoolEventVolunteerUncheckedUpdateManyInput>
+    /**
+     * Filter which SchoolEventVolunteers to update
+     */
+    where?: SchoolEventVolunteerWhereInput
+  }
+
+  /**
+   * SchoolEventVolunteer upsert
+   */
+  export type SchoolEventVolunteerUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SchoolEventVolunteer
+     */
+    select?: SchoolEventVolunteerSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SchoolEventVolunteerInclude<ExtArgs> | null
+    /**
+     * The filter to search for the SchoolEventVolunteer to update in case it exists.
+     */
+    where: SchoolEventVolunteerWhereUniqueInput
+    /**
+     * In case the SchoolEventVolunteer found by the `where` argument doesn't exist, create a new SchoolEventVolunteer with this data.
+     */
+    create: XOR<SchoolEventVolunteerCreateInput, SchoolEventVolunteerUncheckedCreateInput>
+    /**
+     * In case the SchoolEventVolunteer was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<SchoolEventVolunteerUpdateInput, SchoolEventVolunteerUncheckedUpdateInput>
+  }
+
+  /**
+   * SchoolEventVolunteer delete
+   */
+  export type SchoolEventVolunteerDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SchoolEventVolunteer
+     */
+    select?: SchoolEventVolunteerSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SchoolEventVolunteerInclude<ExtArgs> | null
+    /**
+     * Filter which SchoolEventVolunteer to delete.
+     */
+    where: SchoolEventVolunteerWhereUniqueInput
+  }
+
+  /**
+   * SchoolEventVolunteer deleteMany
+   */
+  export type SchoolEventVolunteerDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which SchoolEventVolunteers to delete
+     */
+    where?: SchoolEventVolunteerWhereInput
+  }
+
+  /**
+   * SchoolEventVolunteer without action
+   */
+  export type SchoolEventVolunteerDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SchoolEventVolunteer
+     */
+    select?: SchoolEventVolunteerSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SchoolEventVolunteerInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model SchoolAlumni
+   */
+
+  export type AggregateSchoolAlumni = {
+    _count: SchoolAlumniCountAggregateOutputType | null
+    _avg: SchoolAlumniAvgAggregateOutputType | null
+    _sum: SchoolAlumniSumAggregateOutputType | null
+    _min: SchoolAlumniMinAggregateOutputType | null
+    _max: SchoolAlumniMaxAggregateOutputType | null
+  }
+
+  export type SchoolAlumniAvgAggregateOutputType = {
+    graduationYear: number | null
+  }
+
+  export type SchoolAlumniSumAggregateOutputType = {
+    graduationYear: number | null
+  }
+
+  export type SchoolAlumniMinAggregateOutputType = {
+    id: string | null
+    schoolId: string | null
+    fullName: string | null
+    graduationYear: number | null
+    profession: string | null
+    company: string | null
+    email: string | null
+    phone: string | null
+    linkedInUrl: string | null
+    role: $Enums.SchoolAlumniRole | null
+    offering: string | null
+    status: $Enums.SchoolAlumniStatus | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type SchoolAlumniMaxAggregateOutputType = {
+    id: string | null
+    schoolId: string | null
+    fullName: string | null
+    graduationYear: number | null
+    profession: string | null
+    company: string | null
+    email: string | null
+    phone: string | null
+    linkedInUrl: string | null
+    role: $Enums.SchoolAlumniRole | null
+    offering: string | null
+    status: $Enums.SchoolAlumniStatus | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type SchoolAlumniCountAggregateOutputType = {
+    id: number
+    schoolId: number
+    fullName: number
+    graduationYear: number
+    profession: number
+    company: number
+    email: number
+    phone: number
+    linkedInUrl: number
+    role: number
+    offering: number
+    status: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type SchoolAlumniAvgAggregateInputType = {
+    graduationYear?: true
+  }
+
+  export type SchoolAlumniSumAggregateInputType = {
+    graduationYear?: true
+  }
+
+  export type SchoolAlumniMinAggregateInputType = {
+    id?: true
+    schoolId?: true
+    fullName?: true
+    graduationYear?: true
+    profession?: true
+    company?: true
+    email?: true
+    phone?: true
+    linkedInUrl?: true
+    role?: true
+    offering?: true
+    status?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type SchoolAlumniMaxAggregateInputType = {
+    id?: true
+    schoolId?: true
+    fullName?: true
+    graduationYear?: true
+    profession?: true
+    company?: true
+    email?: true
+    phone?: true
+    linkedInUrl?: true
+    role?: true
+    offering?: true
+    status?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type SchoolAlumniCountAggregateInputType = {
+    id?: true
+    schoolId?: true
+    fullName?: true
+    graduationYear?: true
+    profession?: true
+    company?: true
+    email?: true
+    phone?: true
+    linkedInUrl?: true
+    role?: true
+    offering?: true
+    status?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type SchoolAlumniAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which SchoolAlumni to aggregate.
+     */
+    where?: SchoolAlumniWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of SchoolAlumni to fetch.
+     */
+    orderBy?: SchoolAlumniOrderByWithRelationInput | SchoolAlumniOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: SchoolAlumniWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` SchoolAlumni from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` SchoolAlumni.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned SchoolAlumni
+    **/
+    _count?: true | SchoolAlumniCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: SchoolAlumniAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: SchoolAlumniSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: SchoolAlumniMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: SchoolAlumniMaxAggregateInputType
+  }
+
+  export type GetSchoolAlumniAggregateType<T extends SchoolAlumniAggregateArgs> = {
+        [P in keyof T & keyof AggregateSchoolAlumni]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateSchoolAlumni[P]>
+      : GetScalarType<T[P], AggregateSchoolAlumni[P]>
+  }
+
+
+
+
+  export type SchoolAlumniGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: SchoolAlumniWhereInput
+    orderBy?: SchoolAlumniOrderByWithAggregationInput | SchoolAlumniOrderByWithAggregationInput[]
+    by: SchoolAlumniScalarFieldEnum[] | SchoolAlumniScalarFieldEnum
+    having?: SchoolAlumniScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: SchoolAlumniCountAggregateInputType | true
+    _avg?: SchoolAlumniAvgAggregateInputType
+    _sum?: SchoolAlumniSumAggregateInputType
+    _min?: SchoolAlumniMinAggregateInputType
+    _max?: SchoolAlumniMaxAggregateInputType
+  }
+
+  export type SchoolAlumniGroupByOutputType = {
+    id: string
+    schoolId: string
+    fullName: string
+    graduationYear: number | null
+    profession: string | null
+    company: string | null
+    email: string | null
+    phone: string | null
+    linkedInUrl: string | null
+    role: $Enums.SchoolAlumniRole
+    offering: string | null
+    status: $Enums.SchoolAlumniStatus
+    createdAt: Date
+    updatedAt: Date
+    _count: SchoolAlumniCountAggregateOutputType | null
+    _avg: SchoolAlumniAvgAggregateOutputType | null
+    _sum: SchoolAlumniSumAggregateOutputType | null
+    _min: SchoolAlumniMinAggregateOutputType | null
+    _max: SchoolAlumniMaxAggregateOutputType | null
+  }
+
+  type GetSchoolAlumniGroupByPayload<T extends SchoolAlumniGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<SchoolAlumniGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof SchoolAlumniGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], SchoolAlumniGroupByOutputType[P]>
+            : GetScalarType<T[P], SchoolAlumniGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type SchoolAlumniSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    schoolId?: boolean
+    fullName?: boolean
+    graduationYear?: boolean
+    profession?: boolean
+    company?: boolean
+    email?: boolean
+    phone?: boolean
+    linkedInUrl?: boolean
+    role?: boolean
+    offering?: boolean
+    status?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    school?: boolean | SchoolDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["schoolAlumni"]>
+
+  export type SchoolAlumniSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    schoolId?: boolean
+    fullName?: boolean
+    graduationYear?: boolean
+    profession?: boolean
+    company?: boolean
+    email?: boolean
+    phone?: boolean
+    linkedInUrl?: boolean
+    role?: boolean
+    offering?: boolean
+    status?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    school?: boolean | SchoolDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["schoolAlumni"]>
+
+  export type SchoolAlumniSelectScalar = {
+    id?: boolean
+    schoolId?: boolean
+    fullName?: boolean
+    graduationYear?: boolean
+    profession?: boolean
+    company?: boolean
+    email?: boolean
+    phone?: boolean
+    linkedInUrl?: boolean
+    role?: boolean
+    offering?: boolean
+    status?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type SchoolAlumniInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    school?: boolean | SchoolDefaultArgs<ExtArgs>
+  }
+  export type SchoolAlumniIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    school?: boolean | SchoolDefaultArgs<ExtArgs>
+  }
+
+  export type $SchoolAlumniPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "SchoolAlumni"
+    objects: {
+      school: Prisma.$SchoolPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      schoolId: string
+      fullName: string
+      graduationYear: number | null
+      profession: string | null
+      company: string | null
+      email: string | null
+      phone: string | null
+      linkedInUrl: string | null
+      role: $Enums.SchoolAlumniRole
+      offering: string | null
+      status: $Enums.SchoolAlumniStatus
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["schoolAlumni"]>
+    composites: {}
+  }
+
+  type SchoolAlumniGetPayload<S extends boolean | null | undefined | SchoolAlumniDefaultArgs> = $Result.GetResult<Prisma.$SchoolAlumniPayload, S>
+
+  type SchoolAlumniCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = 
+    Omit<SchoolAlumniFindManyArgs, 'select' | 'include' | 'distinct'> & {
+      select?: SchoolAlumniCountAggregateInputType | true
+    }
+
+  export interface SchoolAlumniDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['SchoolAlumni'], meta: { name: 'SchoolAlumni' } }
+    /**
+     * Find zero or one SchoolAlumni that matches the filter.
+     * @param {SchoolAlumniFindUniqueArgs} args - Arguments to find a SchoolAlumni
+     * @example
+     * // Get one SchoolAlumni
+     * const schoolAlumni = await prisma.schoolAlumni.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends SchoolAlumniFindUniqueArgs>(args: SelectSubset<T, SchoolAlumniFindUniqueArgs<ExtArgs>>): Prisma__SchoolAlumniClient<$Result.GetResult<Prisma.$SchoolAlumniPayload<ExtArgs>, T, "findUnique"> | null, null, ExtArgs>
+
+    /**
+     * Find one SchoolAlumni that matches the filter or throw an error with `error.code='P2025'` 
+     * if no matches were found.
+     * @param {SchoolAlumniFindUniqueOrThrowArgs} args - Arguments to find a SchoolAlumni
+     * @example
+     * // Get one SchoolAlumni
+     * const schoolAlumni = await prisma.schoolAlumni.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends SchoolAlumniFindUniqueOrThrowArgs>(args: SelectSubset<T, SchoolAlumniFindUniqueOrThrowArgs<ExtArgs>>): Prisma__SchoolAlumniClient<$Result.GetResult<Prisma.$SchoolAlumniPayload<ExtArgs>, T, "findUniqueOrThrow">, never, ExtArgs>
+
+    /**
+     * Find the first SchoolAlumni that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SchoolAlumniFindFirstArgs} args - Arguments to find a SchoolAlumni
+     * @example
+     * // Get one SchoolAlumni
+     * const schoolAlumni = await prisma.schoolAlumni.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends SchoolAlumniFindFirstArgs>(args?: SelectSubset<T, SchoolAlumniFindFirstArgs<ExtArgs>>): Prisma__SchoolAlumniClient<$Result.GetResult<Prisma.$SchoolAlumniPayload<ExtArgs>, T, "findFirst"> | null, null, ExtArgs>
+
+    /**
+     * Find the first SchoolAlumni that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SchoolAlumniFindFirstOrThrowArgs} args - Arguments to find a SchoolAlumni
+     * @example
+     * // Get one SchoolAlumni
+     * const schoolAlumni = await prisma.schoolAlumni.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends SchoolAlumniFindFirstOrThrowArgs>(args?: SelectSubset<T, SchoolAlumniFindFirstOrThrowArgs<ExtArgs>>): Prisma__SchoolAlumniClient<$Result.GetResult<Prisma.$SchoolAlumniPayload<ExtArgs>, T, "findFirstOrThrow">, never, ExtArgs>
+
+    /**
+     * Find zero or more SchoolAlumni that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SchoolAlumniFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all SchoolAlumni
+     * const schoolAlumni = await prisma.schoolAlumni.findMany()
+     * 
+     * // Get first 10 SchoolAlumni
+     * const schoolAlumni = await prisma.schoolAlumni.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const schoolAlumniWithIdOnly = await prisma.schoolAlumni.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends SchoolAlumniFindManyArgs>(args?: SelectSubset<T, SchoolAlumniFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SchoolAlumniPayload<ExtArgs>, T, "findMany">>
+
+    /**
+     * Create a SchoolAlumni.
+     * @param {SchoolAlumniCreateArgs} args - Arguments to create a SchoolAlumni.
+     * @example
+     * // Create one SchoolAlumni
+     * const SchoolAlumni = await prisma.schoolAlumni.create({
+     *   data: {
+     *     // ... data to create a SchoolAlumni
+     *   }
+     * })
+     * 
+     */
+    create<T extends SchoolAlumniCreateArgs>(args: SelectSubset<T, SchoolAlumniCreateArgs<ExtArgs>>): Prisma__SchoolAlumniClient<$Result.GetResult<Prisma.$SchoolAlumniPayload<ExtArgs>, T, "create">, never, ExtArgs>
+
+    /**
+     * Create many SchoolAlumni.
+     * @param {SchoolAlumniCreateManyArgs} args - Arguments to create many SchoolAlumni.
+     * @example
+     * // Create many SchoolAlumni
+     * const schoolAlumni = await prisma.schoolAlumni.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends SchoolAlumniCreateManyArgs>(args?: SelectSubset<T, SchoolAlumniCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many SchoolAlumni and returns the data saved in the database.
+     * @param {SchoolAlumniCreateManyAndReturnArgs} args - Arguments to create many SchoolAlumni.
+     * @example
+     * // Create many SchoolAlumni
+     * const schoolAlumni = await prisma.schoolAlumni.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many SchoolAlumni and only return the `id`
+     * const schoolAlumniWithIdOnly = await prisma.schoolAlumni.createManyAndReturn({ 
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends SchoolAlumniCreateManyAndReturnArgs>(args?: SelectSubset<T, SchoolAlumniCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SchoolAlumniPayload<ExtArgs>, T, "createManyAndReturn">>
+
+    /**
+     * Delete a SchoolAlumni.
+     * @param {SchoolAlumniDeleteArgs} args - Arguments to delete one SchoolAlumni.
+     * @example
+     * // Delete one SchoolAlumni
+     * const SchoolAlumni = await prisma.schoolAlumni.delete({
+     *   where: {
+     *     // ... filter to delete one SchoolAlumni
+     *   }
+     * })
+     * 
+     */
+    delete<T extends SchoolAlumniDeleteArgs>(args: SelectSubset<T, SchoolAlumniDeleteArgs<ExtArgs>>): Prisma__SchoolAlumniClient<$Result.GetResult<Prisma.$SchoolAlumniPayload<ExtArgs>, T, "delete">, never, ExtArgs>
+
+    /**
+     * Update one SchoolAlumni.
+     * @param {SchoolAlumniUpdateArgs} args - Arguments to update one SchoolAlumni.
+     * @example
+     * // Update one SchoolAlumni
+     * const schoolAlumni = await prisma.schoolAlumni.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends SchoolAlumniUpdateArgs>(args: SelectSubset<T, SchoolAlumniUpdateArgs<ExtArgs>>): Prisma__SchoolAlumniClient<$Result.GetResult<Prisma.$SchoolAlumniPayload<ExtArgs>, T, "update">, never, ExtArgs>
+
+    /**
+     * Delete zero or more SchoolAlumni.
+     * @param {SchoolAlumniDeleteManyArgs} args - Arguments to filter SchoolAlumni to delete.
+     * @example
+     * // Delete a few SchoolAlumni
+     * const { count } = await prisma.schoolAlumni.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends SchoolAlumniDeleteManyArgs>(args?: SelectSubset<T, SchoolAlumniDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more SchoolAlumni.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SchoolAlumniUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many SchoolAlumni
+     * const schoolAlumni = await prisma.schoolAlumni.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends SchoolAlumniUpdateManyArgs>(args: SelectSubset<T, SchoolAlumniUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one SchoolAlumni.
+     * @param {SchoolAlumniUpsertArgs} args - Arguments to update or create a SchoolAlumni.
+     * @example
+     * // Update or create a SchoolAlumni
+     * const schoolAlumni = await prisma.schoolAlumni.upsert({
+     *   create: {
+     *     // ... data to create a SchoolAlumni
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the SchoolAlumni we want to update
+     *   }
+     * })
+     */
+    upsert<T extends SchoolAlumniUpsertArgs>(args: SelectSubset<T, SchoolAlumniUpsertArgs<ExtArgs>>): Prisma__SchoolAlumniClient<$Result.GetResult<Prisma.$SchoolAlumniPayload<ExtArgs>, T, "upsert">, never, ExtArgs>
+
+
+    /**
+     * Count the number of SchoolAlumni.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SchoolAlumniCountArgs} args - Arguments to filter SchoolAlumni to count.
+     * @example
+     * // Count the number of SchoolAlumni
+     * const count = await prisma.schoolAlumni.count({
+     *   where: {
+     *     // ... the filter for the SchoolAlumni we want to count
+     *   }
+     * })
+    **/
+    count<T extends SchoolAlumniCountArgs>(
+      args?: Subset<T, SchoolAlumniCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], SchoolAlumniCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a SchoolAlumni.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SchoolAlumniAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends SchoolAlumniAggregateArgs>(args: Subset<T, SchoolAlumniAggregateArgs>): Prisma.PrismaPromise<GetSchoolAlumniAggregateType<T>>
+
+    /**
+     * Group by SchoolAlumni.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SchoolAlumniGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends SchoolAlumniGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: SchoolAlumniGroupByArgs['orderBy'] }
+        : { orderBy?: SchoolAlumniGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, SchoolAlumniGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetSchoolAlumniGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the SchoolAlumni model
+   */
+  readonly fields: SchoolAlumniFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for SchoolAlumni.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__SchoolAlumniClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    school<T extends SchoolDefaultArgs<ExtArgs> = {}>(args?: Subset<T, SchoolDefaultArgs<ExtArgs>>): Prisma__SchoolClient<$Result.GetResult<Prisma.$SchoolPayload<ExtArgs>, T, "findUniqueOrThrow"> | Null, Null, ExtArgs>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the SchoolAlumni model
+   */ 
+  interface SchoolAlumniFieldRefs {
+    readonly id: FieldRef<"SchoolAlumni", 'String'>
+    readonly schoolId: FieldRef<"SchoolAlumni", 'String'>
+    readonly fullName: FieldRef<"SchoolAlumni", 'String'>
+    readonly graduationYear: FieldRef<"SchoolAlumni", 'Int'>
+    readonly profession: FieldRef<"SchoolAlumni", 'String'>
+    readonly company: FieldRef<"SchoolAlumni", 'String'>
+    readonly email: FieldRef<"SchoolAlumni", 'String'>
+    readonly phone: FieldRef<"SchoolAlumni", 'String'>
+    readonly linkedInUrl: FieldRef<"SchoolAlumni", 'String'>
+    readonly role: FieldRef<"SchoolAlumni", 'SchoolAlumniRole'>
+    readonly offering: FieldRef<"SchoolAlumni", 'String'>
+    readonly status: FieldRef<"SchoolAlumni", 'SchoolAlumniStatus'>
+    readonly createdAt: FieldRef<"SchoolAlumni", 'DateTime'>
+    readonly updatedAt: FieldRef<"SchoolAlumni", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * SchoolAlumni findUnique
+   */
+  export type SchoolAlumniFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SchoolAlumni
+     */
+    select?: SchoolAlumniSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SchoolAlumniInclude<ExtArgs> | null
+    /**
+     * Filter, which SchoolAlumni to fetch.
+     */
+    where: SchoolAlumniWhereUniqueInput
+  }
+
+  /**
+   * SchoolAlumni findUniqueOrThrow
+   */
+  export type SchoolAlumniFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SchoolAlumni
+     */
+    select?: SchoolAlumniSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SchoolAlumniInclude<ExtArgs> | null
+    /**
+     * Filter, which SchoolAlumni to fetch.
+     */
+    where: SchoolAlumniWhereUniqueInput
+  }
+
+  /**
+   * SchoolAlumni findFirst
+   */
+  export type SchoolAlumniFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SchoolAlumni
+     */
+    select?: SchoolAlumniSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SchoolAlumniInclude<ExtArgs> | null
+    /**
+     * Filter, which SchoolAlumni to fetch.
+     */
+    where?: SchoolAlumniWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of SchoolAlumni to fetch.
+     */
+    orderBy?: SchoolAlumniOrderByWithRelationInput | SchoolAlumniOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for SchoolAlumni.
+     */
+    cursor?: SchoolAlumniWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` SchoolAlumni from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` SchoolAlumni.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of SchoolAlumni.
+     */
+    distinct?: SchoolAlumniScalarFieldEnum | SchoolAlumniScalarFieldEnum[]
+  }
+
+  /**
+   * SchoolAlumni findFirstOrThrow
+   */
+  export type SchoolAlumniFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SchoolAlumni
+     */
+    select?: SchoolAlumniSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SchoolAlumniInclude<ExtArgs> | null
+    /**
+     * Filter, which SchoolAlumni to fetch.
+     */
+    where?: SchoolAlumniWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of SchoolAlumni to fetch.
+     */
+    orderBy?: SchoolAlumniOrderByWithRelationInput | SchoolAlumniOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for SchoolAlumni.
+     */
+    cursor?: SchoolAlumniWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` SchoolAlumni from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` SchoolAlumni.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of SchoolAlumni.
+     */
+    distinct?: SchoolAlumniScalarFieldEnum | SchoolAlumniScalarFieldEnum[]
+  }
+
+  /**
+   * SchoolAlumni findMany
+   */
+  export type SchoolAlumniFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SchoolAlumni
+     */
+    select?: SchoolAlumniSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SchoolAlumniInclude<ExtArgs> | null
+    /**
+     * Filter, which SchoolAlumni to fetch.
+     */
+    where?: SchoolAlumniWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of SchoolAlumni to fetch.
+     */
+    orderBy?: SchoolAlumniOrderByWithRelationInput | SchoolAlumniOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing SchoolAlumni.
+     */
+    cursor?: SchoolAlumniWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` SchoolAlumni from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` SchoolAlumni.
+     */
+    skip?: number
+    distinct?: SchoolAlumniScalarFieldEnum | SchoolAlumniScalarFieldEnum[]
+  }
+
+  /**
+   * SchoolAlumni create
+   */
+  export type SchoolAlumniCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SchoolAlumni
+     */
+    select?: SchoolAlumniSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SchoolAlumniInclude<ExtArgs> | null
+    /**
+     * The data needed to create a SchoolAlumni.
+     */
+    data: XOR<SchoolAlumniCreateInput, SchoolAlumniUncheckedCreateInput>
+  }
+
+  /**
+   * SchoolAlumni createMany
+   */
+  export type SchoolAlumniCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many SchoolAlumni.
+     */
+    data: SchoolAlumniCreateManyInput | SchoolAlumniCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * SchoolAlumni createManyAndReturn
+   */
+  export type SchoolAlumniCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SchoolAlumni
+     */
+    select?: SchoolAlumniSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * The data used to create many SchoolAlumni.
+     */
+    data: SchoolAlumniCreateManyInput | SchoolAlumniCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SchoolAlumniIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * SchoolAlumni update
+   */
+  export type SchoolAlumniUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SchoolAlumni
+     */
+    select?: SchoolAlumniSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SchoolAlumniInclude<ExtArgs> | null
+    /**
+     * The data needed to update a SchoolAlumni.
+     */
+    data: XOR<SchoolAlumniUpdateInput, SchoolAlumniUncheckedUpdateInput>
+    /**
+     * Choose, which SchoolAlumni to update.
+     */
+    where: SchoolAlumniWhereUniqueInput
+  }
+
+  /**
+   * SchoolAlumni updateMany
+   */
+  export type SchoolAlumniUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update SchoolAlumni.
+     */
+    data: XOR<SchoolAlumniUpdateManyMutationInput, SchoolAlumniUncheckedUpdateManyInput>
+    /**
+     * Filter which SchoolAlumni to update
+     */
+    where?: SchoolAlumniWhereInput
+  }
+
+  /**
+   * SchoolAlumni upsert
+   */
+  export type SchoolAlumniUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SchoolAlumni
+     */
+    select?: SchoolAlumniSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SchoolAlumniInclude<ExtArgs> | null
+    /**
+     * The filter to search for the SchoolAlumni to update in case it exists.
+     */
+    where: SchoolAlumniWhereUniqueInput
+    /**
+     * In case the SchoolAlumni found by the `where` argument doesn't exist, create a new SchoolAlumni with this data.
+     */
+    create: XOR<SchoolAlumniCreateInput, SchoolAlumniUncheckedCreateInput>
+    /**
+     * In case the SchoolAlumni was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<SchoolAlumniUpdateInput, SchoolAlumniUncheckedUpdateInput>
+  }
+
+  /**
+   * SchoolAlumni delete
+   */
+  export type SchoolAlumniDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SchoolAlumni
+     */
+    select?: SchoolAlumniSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SchoolAlumniInclude<ExtArgs> | null
+    /**
+     * Filter which SchoolAlumni to delete.
+     */
+    where: SchoolAlumniWhereUniqueInput
+  }
+
+  /**
+   * SchoolAlumni deleteMany
+   */
+  export type SchoolAlumniDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which SchoolAlumni to delete
+     */
+    where?: SchoolAlumniWhereInput
+  }
+
+  /**
+   * SchoolAlumni without action
+   */
+  export type SchoolAlumniDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SchoolAlumni
+     */
+    select?: SchoolAlumniSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SchoolAlumniInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model SchoolInnovationChallenge
+   */
+
+  export type AggregateSchoolInnovationChallenge = {
+    _count: SchoolInnovationChallengeCountAggregateOutputType | null
+    _avg: SchoolInnovationChallengeAvgAggregateOutputType | null
+    _sum: SchoolInnovationChallengeSumAggregateOutputType | null
+    _min: SchoolInnovationChallengeMinAggregateOutputType | null
+    _max: SchoolInnovationChallengeMaxAggregateOutputType | null
+  }
+
+  export type SchoolInnovationChallengeAvgAggregateOutputType = {
+    maxEntries: number | null
+  }
+
+  export type SchoolInnovationChallengeSumAggregateOutputType = {
+    maxEntries: number | null
+  }
+
+  export type SchoolInnovationChallengeMinAggregateOutputType = {
+    id: string | null
+    schoolId: string | null
+    title: string | null
+    description: string | null
+    challengeType: string | null
+    startsAt: Date | null
+    endsAt: Date | null
+    prizeDescription: string | null
+    status: $Enums.SchoolInnovationChallengeStatus | null
+    maxEntries: number | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type SchoolInnovationChallengeMaxAggregateOutputType = {
+    id: string | null
+    schoolId: string | null
+    title: string | null
+    description: string | null
+    challengeType: string | null
+    startsAt: Date | null
+    endsAt: Date | null
+    prizeDescription: string | null
+    status: $Enums.SchoolInnovationChallengeStatus | null
+    maxEntries: number | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type SchoolInnovationChallengeCountAggregateOutputType = {
+    id: number
+    schoolId: number
+    title: number
+    description: number
+    challengeType: number
+    startsAt: number
+    endsAt: number
+    prizeDescription: number
+    status: number
+    maxEntries: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type SchoolInnovationChallengeAvgAggregateInputType = {
+    maxEntries?: true
+  }
+
+  export type SchoolInnovationChallengeSumAggregateInputType = {
+    maxEntries?: true
+  }
+
+  export type SchoolInnovationChallengeMinAggregateInputType = {
+    id?: true
+    schoolId?: true
+    title?: true
+    description?: true
+    challengeType?: true
+    startsAt?: true
+    endsAt?: true
+    prizeDescription?: true
+    status?: true
+    maxEntries?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type SchoolInnovationChallengeMaxAggregateInputType = {
+    id?: true
+    schoolId?: true
+    title?: true
+    description?: true
+    challengeType?: true
+    startsAt?: true
+    endsAt?: true
+    prizeDescription?: true
+    status?: true
+    maxEntries?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type SchoolInnovationChallengeCountAggregateInputType = {
+    id?: true
+    schoolId?: true
+    title?: true
+    description?: true
+    challengeType?: true
+    startsAt?: true
+    endsAt?: true
+    prizeDescription?: true
+    status?: true
+    maxEntries?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type SchoolInnovationChallengeAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which SchoolInnovationChallenge to aggregate.
+     */
+    where?: SchoolInnovationChallengeWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of SchoolInnovationChallenges to fetch.
+     */
+    orderBy?: SchoolInnovationChallengeOrderByWithRelationInput | SchoolInnovationChallengeOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: SchoolInnovationChallengeWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` SchoolInnovationChallenges from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` SchoolInnovationChallenges.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned SchoolInnovationChallenges
+    **/
+    _count?: true | SchoolInnovationChallengeCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: SchoolInnovationChallengeAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: SchoolInnovationChallengeSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: SchoolInnovationChallengeMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: SchoolInnovationChallengeMaxAggregateInputType
+  }
+
+  export type GetSchoolInnovationChallengeAggregateType<T extends SchoolInnovationChallengeAggregateArgs> = {
+        [P in keyof T & keyof AggregateSchoolInnovationChallenge]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateSchoolInnovationChallenge[P]>
+      : GetScalarType<T[P], AggregateSchoolInnovationChallenge[P]>
+  }
+
+
+
+
+  export type SchoolInnovationChallengeGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: SchoolInnovationChallengeWhereInput
+    orderBy?: SchoolInnovationChallengeOrderByWithAggregationInput | SchoolInnovationChallengeOrderByWithAggregationInput[]
+    by: SchoolInnovationChallengeScalarFieldEnum[] | SchoolInnovationChallengeScalarFieldEnum
+    having?: SchoolInnovationChallengeScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: SchoolInnovationChallengeCountAggregateInputType | true
+    _avg?: SchoolInnovationChallengeAvgAggregateInputType
+    _sum?: SchoolInnovationChallengeSumAggregateInputType
+    _min?: SchoolInnovationChallengeMinAggregateInputType
+    _max?: SchoolInnovationChallengeMaxAggregateInputType
+  }
+
+  export type SchoolInnovationChallengeGroupByOutputType = {
+    id: string
+    schoolId: string
+    title: string
+    description: string | null
+    challengeType: string
+    startsAt: Date
+    endsAt: Date | null
+    prizeDescription: string | null
+    status: $Enums.SchoolInnovationChallengeStatus
+    maxEntries: number
+    createdAt: Date
+    updatedAt: Date
+    _count: SchoolInnovationChallengeCountAggregateOutputType | null
+    _avg: SchoolInnovationChallengeAvgAggregateOutputType | null
+    _sum: SchoolInnovationChallengeSumAggregateOutputType | null
+    _min: SchoolInnovationChallengeMinAggregateOutputType | null
+    _max: SchoolInnovationChallengeMaxAggregateOutputType | null
+  }
+
+  type GetSchoolInnovationChallengeGroupByPayload<T extends SchoolInnovationChallengeGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<SchoolInnovationChallengeGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof SchoolInnovationChallengeGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], SchoolInnovationChallengeGroupByOutputType[P]>
+            : GetScalarType<T[P], SchoolInnovationChallengeGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type SchoolInnovationChallengeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    schoolId?: boolean
+    title?: boolean
+    description?: boolean
+    challengeType?: boolean
+    startsAt?: boolean
+    endsAt?: boolean
+    prizeDescription?: boolean
+    status?: boolean
+    maxEntries?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    school?: boolean | SchoolDefaultArgs<ExtArgs>
+    projects?: boolean | SchoolInnovationChallenge$projectsArgs<ExtArgs>
+    _count?: boolean | SchoolInnovationChallengeCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["schoolInnovationChallenge"]>
+
+  export type SchoolInnovationChallengeSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    schoolId?: boolean
+    title?: boolean
+    description?: boolean
+    challengeType?: boolean
+    startsAt?: boolean
+    endsAt?: boolean
+    prizeDescription?: boolean
+    status?: boolean
+    maxEntries?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    school?: boolean | SchoolDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["schoolInnovationChallenge"]>
+
+  export type SchoolInnovationChallengeSelectScalar = {
+    id?: boolean
+    schoolId?: boolean
+    title?: boolean
+    description?: boolean
+    challengeType?: boolean
+    startsAt?: boolean
+    endsAt?: boolean
+    prizeDescription?: boolean
+    status?: boolean
+    maxEntries?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type SchoolInnovationChallengeInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    school?: boolean | SchoolDefaultArgs<ExtArgs>
+    projects?: boolean | SchoolInnovationChallenge$projectsArgs<ExtArgs>
+    _count?: boolean | SchoolInnovationChallengeCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type SchoolInnovationChallengeIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    school?: boolean | SchoolDefaultArgs<ExtArgs>
+  }
+
+  export type $SchoolInnovationChallengePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "SchoolInnovationChallenge"
+    objects: {
+      school: Prisma.$SchoolPayload<ExtArgs>
+      projects: Prisma.$SchoolEnterpriseProjectPayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      schoolId: string
+      title: string
+      description: string | null
+      challengeType: string
+      startsAt: Date
+      endsAt: Date | null
+      prizeDescription: string | null
+      status: $Enums.SchoolInnovationChallengeStatus
+      maxEntries: number
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["schoolInnovationChallenge"]>
+    composites: {}
+  }
+
+  type SchoolInnovationChallengeGetPayload<S extends boolean | null | undefined | SchoolInnovationChallengeDefaultArgs> = $Result.GetResult<Prisma.$SchoolInnovationChallengePayload, S>
+
+  type SchoolInnovationChallengeCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = 
+    Omit<SchoolInnovationChallengeFindManyArgs, 'select' | 'include' | 'distinct'> & {
+      select?: SchoolInnovationChallengeCountAggregateInputType | true
+    }
+
+  export interface SchoolInnovationChallengeDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['SchoolInnovationChallenge'], meta: { name: 'SchoolInnovationChallenge' } }
+    /**
+     * Find zero or one SchoolInnovationChallenge that matches the filter.
+     * @param {SchoolInnovationChallengeFindUniqueArgs} args - Arguments to find a SchoolInnovationChallenge
+     * @example
+     * // Get one SchoolInnovationChallenge
+     * const schoolInnovationChallenge = await prisma.schoolInnovationChallenge.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends SchoolInnovationChallengeFindUniqueArgs>(args: SelectSubset<T, SchoolInnovationChallengeFindUniqueArgs<ExtArgs>>): Prisma__SchoolInnovationChallengeClient<$Result.GetResult<Prisma.$SchoolInnovationChallengePayload<ExtArgs>, T, "findUnique"> | null, null, ExtArgs>
+
+    /**
+     * Find one SchoolInnovationChallenge that matches the filter or throw an error with `error.code='P2025'` 
+     * if no matches were found.
+     * @param {SchoolInnovationChallengeFindUniqueOrThrowArgs} args - Arguments to find a SchoolInnovationChallenge
+     * @example
+     * // Get one SchoolInnovationChallenge
+     * const schoolInnovationChallenge = await prisma.schoolInnovationChallenge.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends SchoolInnovationChallengeFindUniqueOrThrowArgs>(args: SelectSubset<T, SchoolInnovationChallengeFindUniqueOrThrowArgs<ExtArgs>>): Prisma__SchoolInnovationChallengeClient<$Result.GetResult<Prisma.$SchoolInnovationChallengePayload<ExtArgs>, T, "findUniqueOrThrow">, never, ExtArgs>
+
+    /**
+     * Find the first SchoolInnovationChallenge that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SchoolInnovationChallengeFindFirstArgs} args - Arguments to find a SchoolInnovationChallenge
+     * @example
+     * // Get one SchoolInnovationChallenge
+     * const schoolInnovationChallenge = await prisma.schoolInnovationChallenge.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends SchoolInnovationChallengeFindFirstArgs>(args?: SelectSubset<T, SchoolInnovationChallengeFindFirstArgs<ExtArgs>>): Prisma__SchoolInnovationChallengeClient<$Result.GetResult<Prisma.$SchoolInnovationChallengePayload<ExtArgs>, T, "findFirst"> | null, null, ExtArgs>
+
+    /**
+     * Find the first SchoolInnovationChallenge that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SchoolInnovationChallengeFindFirstOrThrowArgs} args - Arguments to find a SchoolInnovationChallenge
+     * @example
+     * // Get one SchoolInnovationChallenge
+     * const schoolInnovationChallenge = await prisma.schoolInnovationChallenge.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends SchoolInnovationChallengeFindFirstOrThrowArgs>(args?: SelectSubset<T, SchoolInnovationChallengeFindFirstOrThrowArgs<ExtArgs>>): Prisma__SchoolInnovationChallengeClient<$Result.GetResult<Prisma.$SchoolInnovationChallengePayload<ExtArgs>, T, "findFirstOrThrow">, never, ExtArgs>
+
+    /**
+     * Find zero or more SchoolInnovationChallenges that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SchoolInnovationChallengeFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all SchoolInnovationChallenges
+     * const schoolInnovationChallenges = await prisma.schoolInnovationChallenge.findMany()
+     * 
+     * // Get first 10 SchoolInnovationChallenges
+     * const schoolInnovationChallenges = await prisma.schoolInnovationChallenge.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const schoolInnovationChallengeWithIdOnly = await prisma.schoolInnovationChallenge.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends SchoolInnovationChallengeFindManyArgs>(args?: SelectSubset<T, SchoolInnovationChallengeFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SchoolInnovationChallengePayload<ExtArgs>, T, "findMany">>
+
+    /**
+     * Create a SchoolInnovationChallenge.
+     * @param {SchoolInnovationChallengeCreateArgs} args - Arguments to create a SchoolInnovationChallenge.
+     * @example
+     * // Create one SchoolInnovationChallenge
+     * const SchoolInnovationChallenge = await prisma.schoolInnovationChallenge.create({
+     *   data: {
+     *     // ... data to create a SchoolInnovationChallenge
+     *   }
+     * })
+     * 
+     */
+    create<T extends SchoolInnovationChallengeCreateArgs>(args: SelectSubset<T, SchoolInnovationChallengeCreateArgs<ExtArgs>>): Prisma__SchoolInnovationChallengeClient<$Result.GetResult<Prisma.$SchoolInnovationChallengePayload<ExtArgs>, T, "create">, never, ExtArgs>
+
+    /**
+     * Create many SchoolInnovationChallenges.
+     * @param {SchoolInnovationChallengeCreateManyArgs} args - Arguments to create many SchoolInnovationChallenges.
+     * @example
+     * // Create many SchoolInnovationChallenges
+     * const schoolInnovationChallenge = await prisma.schoolInnovationChallenge.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends SchoolInnovationChallengeCreateManyArgs>(args?: SelectSubset<T, SchoolInnovationChallengeCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many SchoolInnovationChallenges and returns the data saved in the database.
+     * @param {SchoolInnovationChallengeCreateManyAndReturnArgs} args - Arguments to create many SchoolInnovationChallenges.
+     * @example
+     * // Create many SchoolInnovationChallenges
+     * const schoolInnovationChallenge = await prisma.schoolInnovationChallenge.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many SchoolInnovationChallenges and only return the `id`
+     * const schoolInnovationChallengeWithIdOnly = await prisma.schoolInnovationChallenge.createManyAndReturn({ 
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends SchoolInnovationChallengeCreateManyAndReturnArgs>(args?: SelectSubset<T, SchoolInnovationChallengeCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SchoolInnovationChallengePayload<ExtArgs>, T, "createManyAndReturn">>
+
+    /**
+     * Delete a SchoolInnovationChallenge.
+     * @param {SchoolInnovationChallengeDeleteArgs} args - Arguments to delete one SchoolInnovationChallenge.
+     * @example
+     * // Delete one SchoolInnovationChallenge
+     * const SchoolInnovationChallenge = await prisma.schoolInnovationChallenge.delete({
+     *   where: {
+     *     // ... filter to delete one SchoolInnovationChallenge
+     *   }
+     * })
+     * 
+     */
+    delete<T extends SchoolInnovationChallengeDeleteArgs>(args: SelectSubset<T, SchoolInnovationChallengeDeleteArgs<ExtArgs>>): Prisma__SchoolInnovationChallengeClient<$Result.GetResult<Prisma.$SchoolInnovationChallengePayload<ExtArgs>, T, "delete">, never, ExtArgs>
+
+    /**
+     * Update one SchoolInnovationChallenge.
+     * @param {SchoolInnovationChallengeUpdateArgs} args - Arguments to update one SchoolInnovationChallenge.
+     * @example
+     * // Update one SchoolInnovationChallenge
+     * const schoolInnovationChallenge = await prisma.schoolInnovationChallenge.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends SchoolInnovationChallengeUpdateArgs>(args: SelectSubset<T, SchoolInnovationChallengeUpdateArgs<ExtArgs>>): Prisma__SchoolInnovationChallengeClient<$Result.GetResult<Prisma.$SchoolInnovationChallengePayload<ExtArgs>, T, "update">, never, ExtArgs>
+
+    /**
+     * Delete zero or more SchoolInnovationChallenges.
+     * @param {SchoolInnovationChallengeDeleteManyArgs} args - Arguments to filter SchoolInnovationChallenges to delete.
+     * @example
+     * // Delete a few SchoolInnovationChallenges
+     * const { count } = await prisma.schoolInnovationChallenge.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends SchoolInnovationChallengeDeleteManyArgs>(args?: SelectSubset<T, SchoolInnovationChallengeDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more SchoolInnovationChallenges.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SchoolInnovationChallengeUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many SchoolInnovationChallenges
+     * const schoolInnovationChallenge = await prisma.schoolInnovationChallenge.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends SchoolInnovationChallengeUpdateManyArgs>(args: SelectSubset<T, SchoolInnovationChallengeUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one SchoolInnovationChallenge.
+     * @param {SchoolInnovationChallengeUpsertArgs} args - Arguments to update or create a SchoolInnovationChallenge.
+     * @example
+     * // Update or create a SchoolInnovationChallenge
+     * const schoolInnovationChallenge = await prisma.schoolInnovationChallenge.upsert({
+     *   create: {
+     *     // ... data to create a SchoolInnovationChallenge
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the SchoolInnovationChallenge we want to update
+     *   }
+     * })
+     */
+    upsert<T extends SchoolInnovationChallengeUpsertArgs>(args: SelectSubset<T, SchoolInnovationChallengeUpsertArgs<ExtArgs>>): Prisma__SchoolInnovationChallengeClient<$Result.GetResult<Prisma.$SchoolInnovationChallengePayload<ExtArgs>, T, "upsert">, never, ExtArgs>
+
+
+    /**
+     * Count the number of SchoolInnovationChallenges.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SchoolInnovationChallengeCountArgs} args - Arguments to filter SchoolInnovationChallenges to count.
+     * @example
+     * // Count the number of SchoolInnovationChallenges
+     * const count = await prisma.schoolInnovationChallenge.count({
+     *   where: {
+     *     // ... the filter for the SchoolInnovationChallenges we want to count
+     *   }
+     * })
+    **/
+    count<T extends SchoolInnovationChallengeCountArgs>(
+      args?: Subset<T, SchoolInnovationChallengeCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], SchoolInnovationChallengeCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a SchoolInnovationChallenge.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SchoolInnovationChallengeAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends SchoolInnovationChallengeAggregateArgs>(args: Subset<T, SchoolInnovationChallengeAggregateArgs>): Prisma.PrismaPromise<GetSchoolInnovationChallengeAggregateType<T>>
+
+    /**
+     * Group by SchoolInnovationChallenge.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SchoolInnovationChallengeGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends SchoolInnovationChallengeGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: SchoolInnovationChallengeGroupByArgs['orderBy'] }
+        : { orderBy?: SchoolInnovationChallengeGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, SchoolInnovationChallengeGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetSchoolInnovationChallengeGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the SchoolInnovationChallenge model
+   */
+  readonly fields: SchoolInnovationChallengeFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for SchoolInnovationChallenge.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__SchoolInnovationChallengeClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    school<T extends SchoolDefaultArgs<ExtArgs> = {}>(args?: Subset<T, SchoolDefaultArgs<ExtArgs>>): Prisma__SchoolClient<$Result.GetResult<Prisma.$SchoolPayload<ExtArgs>, T, "findUniqueOrThrow"> | Null, Null, ExtArgs>
+    projects<T extends SchoolInnovationChallenge$projectsArgs<ExtArgs> = {}>(args?: Subset<T, SchoolInnovationChallenge$projectsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SchoolEnterpriseProjectPayload<ExtArgs>, T, "findMany"> | Null>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the SchoolInnovationChallenge model
+   */ 
+  interface SchoolInnovationChallengeFieldRefs {
+    readonly id: FieldRef<"SchoolInnovationChallenge", 'String'>
+    readonly schoolId: FieldRef<"SchoolInnovationChallenge", 'String'>
+    readonly title: FieldRef<"SchoolInnovationChallenge", 'String'>
+    readonly description: FieldRef<"SchoolInnovationChallenge", 'String'>
+    readonly challengeType: FieldRef<"SchoolInnovationChallenge", 'String'>
+    readonly startsAt: FieldRef<"SchoolInnovationChallenge", 'DateTime'>
+    readonly endsAt: FieldRef<"SchoolInnovationChallenge", 'DateTime'>
+    readonly prizeDescription: FieldRef<"SchoolInnovationChallenge", 'String'>
+    readonly status: FieldRef<"SchoolInnovationChallenge", 'SchoolInnovationChallengeStatus'>
+    readonly maxEntries: FieldRef<"SchoolInnovationChallenge", 'Int'>
+    readonly createdAt: FieldRef<"SchoolInnovationChallenge", 'DateTime'>
+    readonly updatedAt: FieldRef<"SchoolInnovationChallenge", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * SchoolInnovationChallenge findUnique
+   */
+  export type SchoolInnovationChallengeFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SchoolInnovationChallenge
+     */
+    select?: SchoolInnovationChallengeSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SchoolInnovationChallengeInclude<ExtArgs> | null
+    /**
+     * Filter, which SchoolInnovationChallenge to fetch.
+     */
+    where: SchoolInnovationChallengeWhereUniqueInput
+  }
+
+  /**
+   * SchoolInnovationChallenge findUniqueOrThrow
+   */
+  export type SchoolInnovationChallengeFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SchoolInnovationChallenge
+     */
+    select?: SchoolInnovationChallengeSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SchoolInnovationChallengeInclude<ExtArgs> | null
+    /**
+     * Filter, which SchoolInnovationChallenge to fetch.
+     */
+    where: SchoolInnovationChallengeWhereUniqueInput
+  }
+
+  /**
+   * SchoolInnovationChallenge findFirst
+   */
+  export type SchoolInnovationChallengeFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SchoolInnovationChallenge
+     */
+    select?: SchoolInnovationChallengeSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SchoolInnovationChallengeInclude<ExtArgs> | null
+    /**
+     * Filter, which SchoolInnovationChallenge to fetch.
+     */
+    where?: SchoolInnovationChallengeWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of SchoolInnovationChallenges to fetch.
+     */
+    orderBy?: SchoolInnovationChallengeOrderByWithRelationInput | SchoolInnovationChallengeOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for SchoolInnovationChallenges.
+     */
+    cursor?: SchoolInnovationChallengeWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` SchoolInnovationChallenges from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` SchoolInnovationChallenges.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of SchoolInnovationChallenges.
+     */
+    distinct?: SchoolInnovationChallengeScalarFieldEnum | SchoolInnovationChallengeScalarFieldEnum[]
+  }
+
+  /**
+   * SchoolInnovationChallenge findFirstOrThrow
+   */
+  export type SchoolInnovationChallengeFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SchoolInnovationChallenge
+     */
+    select?: SchoolInnovationChallengeSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SchoolInnovationChallengeInclude<ExtArgs> | null
+    /**
+     * Filter, which SchoolInnovationChallenge to fetch.
+     */
+    where?: SchoolInnovationChallengeWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of SchoolInnovationChallenges to fetch.
+     */
+    orderBy?: SchoolInnovationChallengeOrderByWithRelationInput | SchoolInnovationChallengeOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for SchoolInnovationChallenges.
+     */
+    cursor?: SchoolInnovationChallengeWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` SchoolInnovationChallenges from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` SchoolInnovationChallenges.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of SchoolInnovationChallenges.
+     */
+    distinct?: SchoolInnovationChallengeScalarFieldEnum | SchoolInnovationChallengeScalarFieldEnum[]
+  }
+
+  /**
+   * SchoolInnovationChallenge findMany
+   */
+  export type SchoolInnovationChallengeFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SchoolInnovationChallenge
+     */
+    select?: SchoolInnovationChallengeSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SchoolInnovationChallengeInclude<ExtArgs> | null
+    /**
+     * Filter, which SchoolInnovationChallenges to fetch.
+     */
+    where?: SchoolInnovationChallengeWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of SchoolInnovationChallenges to fetch.
+     */
+    orderBy?: SchoolInnovationChallengeOrderByWithRelationInput | SchoolInnovationChallengeOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing SchoolInnovationChallenges.
+     */
+    cursor?: SchoolInnovationChallengeWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` SchoolInnovationChallenges from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` SchoolInnovationChallenges.
+     */
+    skip?: number
+    distinct?: SchoolInnovationChallengeScalarFieldEnum | SchoolInnovationChallengeScalarFieldEnum[]
+  }
+
+  /**
+   * SchoolInnovationChallenge create
+   */
+  export type SchoolInnovationChallengeCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SchoolInnovationChallenge
+     */
+    select?: SchoolInnovationChallengeSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SchoolInnovationChallengeInclude<ExtArgs> | null
+    /**
+     * The data needed to create a SchoolInnovationChallenge.
+     */
+    data: XOR<SchoolInnovationChallengeCreateInput, SchoolInnovationChallengeUncheckedCreateInput>
+  }
+
+  /**
+   * SchoolInnovationChallenge createMany
+   */
+  export type SchoolInnovationChallengeCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many SchoolInnovationChallenges.
+     */
+    data: SchoolInnovationChallengeCreateManyInput | SchoolInnovationChallengeCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * SchoolInnovationChallenge createManyAndReturn
+   */
+  export type SchoolInnovationChallengeCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SchoolInnovationChallenge
+     */
+    select?: SchoolInnovationChallengeSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * The data used to create many SchoolInnovationChallenges.
+     */
+    data: SchoolInnovationChallengeCreateManyInput | SchoolInnovationChallengeCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SchoolInnovationChallengeIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * SchoolInnovationChallenge update
+   */
+  export type SchoolInnovationChallengeUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SchoolInnovationChallenge
+     */
+    select?: SchoolInnovationChallengeSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SchoolInnovationChallengeInclude<ExtArgs> | null
+    /**
+     * The data needed to update a SchoolInnovationChallenge.
+     */
+    data: XOR<SchoolInnovationChallengeUpdateInput, SchoolInnovationChallengeUncheckedUpdateInput>
+    /**
+     * Choose, which SchoolInnovationChallenge to update.
+     */
+    where: SchoolInnovationChallengeWhereUniqueInput
+  }
+
+  /**
+   * SchoolInnovationChallenge updateMany
+   */
+  export type SchoolInnovationChallengeUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update SchoolInnovationChallenges.
+     */
+    data: XOR<SchoolInnovationChallengeUpdateManyMutationInput, SchoolInnovationChallengeUncheckedUpdateManyInput>
+    /**
+     * Filter which SchoolInnovationChallenges to update
+     */
+    where?: SchoolInnovationChallengeWhereInput
+  }
+
+  /**
+   * SchoolInnovationChallenge upsert
+   */
+  export type SchoolInnovationChallengeUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SchoolInnovationChallenge
+     */
+    select?: SchoolInnovationChallengeSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SchoolInnovationChallengeInclude<ExtArgs> | null
+    /**
+     * The filter to search for the SchoolInnovationChallenge to update in case it exists.
+     */
+    where: SchoolInnovationChallengeWhereUniqueInput
+    /**
+     * In case the SchoolInnovationChallenge found by the `where` argument doesn't exist, create a new SchoolInnovationChallenge with this data.
+     */
+    create: XOR<SchoolInnovationChallengeCreateInput, SchoolInnovationChallengeUncheckedCreateInput>
+    /**
+     * In case the SchoolInnovationChallenge was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<SchoolInnovationChallengeUpdateInput, SchoolInnovationChallengeUncheckedUpdateInput>
+  }
+
+  /**
+   * SchoolInnovationChallenge delete
+   */
+  export type SchoolInnovationChallengeDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SchoolInnovationChallenge
+     */
+    select?: SchoolInnovationChallengeSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SchoolInnovationChallengeInclude<ExtArgs> | null
+    /**
+     * Filter which SchoolInnovationChallenge to delete.
+     */
+    where: SchoolInnovationChallengeWhereUniqueInput
+  }
+
+  /**
+   * SchoolInnovationChallenge deleteMany
+   */
+  export type SchoolInnovationChallengeDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which SchoolInnovationChallenges to delete
+     */
+    where?: SchoolInnovationChallengeWhereInput
+  }
+
+  /**
+   * SchoolInnovationChallenge.projects
+   */
+  export type SchoolInnovationChallenge$projectsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SchoolEnterpriseProject
+     */
+    select?: SchoolEnterpriseProjectSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SchoolEnterpriseProjectInclude<ExtArgs> | null
+    where?: SchoolEnterpriseProjectWhereInput
+    orderBy?: SchoolEnterpriseProjectOrderByWithRelationInput | SchoolEnterpriseProjectOrderByWithRelationInput[]
+    cursor?: SchoolEnterpriseProjectWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: SchoolEnterpriseProjectScalarFieldEnum | SchoolEnterpriseProjectScalarFieldEnum[]
+  }
+
+  /**
+   * SchoolInnovationChallenge without action
+   */
+  export type SchoolInnovationChallengeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SchoolInnovationChallenge
+     */
+    select?: SchoolInnovationChallengeSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SchoolInnovationChallengeInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model SchoolEnterpriseProject
+   */
+
+  export type AggregateSchoolEnterpriseProject = {
+    _count: SchoolEnterpriseProjectCountAggregateOutputType | null
+    _avg: SchoolEnterpriseProjectAvgAggregateOutputType | null
+    _sum: SchoolEnterpriseProjectSumAggregateOutputType | null
+    _min: SchoolEnterpriseProjectMinAggregateOutputType | null
+    _max: SchoolEnterpriseProjectMaxAggregateOutputType | null
+  }
+
+  export type SchoolEnterpriseProjectAvgAggregateOutputType = {
+    revenueZar: number | null
+  }
+
+  export type SchoolEnterpriseProjectSumAggregateOutputType = {
+    revenueZar: number | null
+  }
+
+  export type SchoolEnterpriseProjectMinAggregateOutputType = {
+    id: string | null
+    schoolId: string | null
+    challengeId: string | null
+    title: string | null
+    description: string | null
+    projectType: $Enums.SchoolEnterpriseProjectType | null
+    studentLead: string | null
+    gradeLevel: string | null
+    category: string | null
+    status: $Enums.SchoolEnterpriseProjectStatus | null
+    revenueZar: number | null
+    seekingSponsor: boolean | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type SchoolEnterpriseProjectMaxAggregateOutputType = {
+    id: string | null
+    schoolId: string | null
+    challengeId: string | null
+    title: string | null
+    description: string | null
+    projectType: $Enums.SchoolEnterpriseProjectType | null
+    studentLead: string | null
+    gradeLevel: string | null
+    category: string | null
+    status: $Enums.SchoolEnterpriseProjectStatus | null
+    revenueZar: number | null
+    seekingSponsor: boolean | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type SchoolEnterpriseProjectCountAggregateOutputType = {
+    id: number
+    schoolId: number
+    challengeId: number
+    title: number
+    description: number
+    projectType: number
+    studentLead: number
+    gradeLevel: number
+    category: number
+    status: number
+    revenueZar: number
+    seekingSponsor: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type SchoolEnterpriseProjectAvgAggregateInputType = {
+    revenueZar?: true
+  }
+
+  export type SchoolEnterpriseProjectSumAggregateInputType = {
+    revenueZar?: true
+  }
+
+  export type SchoolEnterpriseProjectMinAggregateInputType = {
+    id?: true
+    schoolId?: true
+    challengeId?: true
+    title?: true
+    description?: true
+    projectType?: true
+    studentLead?: true
+    gradeLevel?: true
+    category?: true
+    status?: true
+    revenueZar?: true
+    seekingSponsor?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type SchoolEnterpriseProjectMaxAggregateInputType = {
+    id?: true
+    schoolId?: true
+    challengeId?: true
+    title?: true
+    description?: true
+    projectType?: true
+    studentLead?: true
+    gradeLevel?: true
+    category?: true
+    status?: true
+    revenueZar?: true
+    seekingSponsor?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type SchoolEnterpriseProjectCountAggregateInputType = {
+    id?: true
+    schoolId?: true
+    challengeId?: true
+    title?: true
+    description?: true
+    projectType?: true
+    studentLead?: true
+    gradeLevel?: true
+    category?: true
+    status?: true
+    revenueZar?: true
+    seekingSponsor?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type SchoolEnterpriseProjectAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which SchoolEnterpriseProject to aggregate.
+     */
+    where?: SchoolEnterpriseProjectWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of SchoolEnterpriseProjects to fetch.
+     */
+    orderBy?: SchoolEnterpriseProjectOrderByWithRelationInput | SchoolEnterpriseProjectOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: SchoolEnterpriseProjectWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` SchoolEnterpriseProjects from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` SchoolEnterpriseProjects.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned SchoolEnterpriseProjects
+    **/
+    _count?: true | SchoolEnterpriseProjectCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: SchoolEnterpriseProjectAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: SchoolEnterpriseProjectSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: SchoolEnterpriseProjectMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: SchoolEnterpriseProjectMaxAggregateInputType
+  }
+
+  export type GetSchoolEnterpriseProjectAggregateType<T extends SchoolEnterpriseProjectAggregateArgs> = {
+        [P in keyof T & keyof AggregateSchoolEnterpriseProject]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateSchoolEnterpriseProject[P]>
+      : GetScalarType<T[P], AggregateSchoolEnterpriseProject[P]>
+  }
+
+
+
+
+  export type SchoolEnterpriseProjectGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: SchoolEnterpriseProjectWhereInput
+    orderBy?: SchoolEnterpriseProjectOrderByWithAggregationInput | SchoolEnterpriseProjectOrderByWithAggregationInput[]
+    by: SchoolEnterpriseProjectScalarFieldEnum[] | SchoolEnterpriseProjectScalarFieldEnum
+    having?: SchoolEnterpriseProjectScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: SchoolEnterpriseProjectCountAggregateInputType | true
+    _avg?: SchoolEnterpriseProjectAvgAggregateInputType
+    _sum?: SchoolEnterpriseProjectSumAggregateInputType
+    _min?: SchoolEnterpriseProjectMinAggregateInputType
+    _max?: SchoolEnterpriseProjectMaxAggregateInputType
+  }
+
+  export type SchoolEnterpriseProjectGroupByOutputType = {
+    id: string
+    schoolId: string
+    challengeId: string | null
+    title: string
+    description: string | null
+    projectType: $Enums.SchoolEnterpriseProjectType
+    studentLead: string
+    gradeLevel: string | null
+    category: string | null
+    status: $Enums.SchoolEnterpriseProjectStatus
+    revenueZar: number
+    seekingSponsor: boolean
+    createdAt: Date
+    updatedAt: Date
+    _count: SchoolEnterpriseProjectCountAggregateOutputType | null
+    _avg: SchoolEnterpriseProjectAvgAggregateOutputType | null
+    _sum: SchoolEnterpriseProjectSumAggregateOutputType | null
+    _min: SchoolEnterpriseProjectMinAggregateOutputType | null
+    _max: SchoolEnterpriseProjectMaxAggregateOutputType | null
+  }
+
+  type GetSchoolEnterpriseProjectGroupByPayload<T extends SchoolEnterpriseProjectGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<SchoolEnterpriseProjectGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof SchoolEnterpriseProjectGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], SchoolEnterpriseProjectGroupByOutputType[P]>
+            : GetScalarType<T[P], SchoolEnterpriseProjectGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type SchoolEnterpriseProjectSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    schoolId?: boolean
+    challengeId?: boolean
+    title?: boolean
+    description?: boolean
+    projectType?: boolean
+    studentLead?: boolean
+    gradeLevel?: boolean
+    category?: boolean
+    status?: boolean
+    revenueZar?: boolean
+    seekingSponsor?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    school?: boolean | SchoolDefaultArgs<ExtArgs>
+    challenge?: boolean | SchoolEnterpriseProject$challengeArgs<ExtArgs>
+  }, ExtArgs["result"]["schoolEnterpriseProject"]>
+
+  export type SchoolEnterpriseProjectSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    schoolId?: boolean
+    challengeId?: boolean
+    title?: boolean
+    description?: boolean
+    projectType?: boolean
+    studentLead?: boolean
+    gradeLevel?: boolean
+    category?: boolean
+    status?: boolean
+    revenueZar?: boolean
+    seekingSponsor?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    school?: boolean | SchoolDefaultArgs<ExtArgs>
+    challenge?: boolean | SchoolEnterpriseProject$challengeArgs<ExtArgs>
+  }, ExtArgs["result"]["schoolEnterpriseProject"]>
+
+  export type SchoolEnterpriseProjectSelectScalar = {
+    id?: boolean
+    schoolId?: boolean
+    challengeId?: boolean
+    title?: boolean
+    description?: boolean
+    projectType?: boolean
+    studentLead?: boolean
+    gradeLevel?: boolean
+    category?: boolean
+    status?: boolean
+    revenueZar?: boolean
+    seekingSponsor?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type SchoolEnterpriseProjectInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    school?: boolean | SchoolDefaultArgs<ExtArgs>
+    challenge?: boolean | SchoolEnterpriseProject$challengeArgs<ExtArgs>
+  }
+  export type SchoolEnterpriseProjectIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    school?: boolean | SchoolDefaultArgs<ExtArgs>
+    challenge?: boolean | SchoolEnterpriseProject$challengeArgs<ExtArgs>
+  }
+
+  export type $SchoolEnterpriseProjectPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "SchoolEnterpriseProject"
+    objects: {
+      school: Prisma.$SchoolPayload<ExtArgs>
+      challenge: Prisma.$SchoolInnovationChallengePayload<ExtArgs> | null
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      schoolId: string
+      challengeId: string | null
+      title: string
+      description: string | null
+      projectType: $Enums.SchoolEnterpriseProjectType
+      studentLead: string
+      gradeLevel: string | null
+      category: string | null
+      status: $Enums.SchoolEnterpriseProjectStatus
+      revenueZar: number
+      seekingSponsor: boolean
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["schoolEnterpriseProject"]>
+    composites: {}
+  }
+
+  type SchoolEnterpriseProjectGetPayload<S extends boolean | null | undefined | SchoolEnterpriseProjectDefaultArgs> = $Result.GetResult<Prisma.$SchoolEnterpriseProjectPayload, S>
+
+  type SchoolEnterpriseProjectCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = 
+    Omit<SchoolEnterpriseProjectFindManyArgs, 'select' | 'include' | 'distinct'> & {
+      select?: SchoolEnterpriseProjectCountAggregateInputType | true
+    }
+
+  export interface SchoolEnterpriseProjectDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['SchoolEnterpriseProject'], meta: { name: 'SchoolEnterpriseProject' } }
+    /**
+     * Find zero or one SchoolEnterpriseProject that matches the filter.
+     * @param {SchoolEnterpriseProjectFindUniqueArgs} args - Arguments to find a SchoolEnterpriseProject
+     * @example
+     * // Get one SchoolEnterpriseProject
+     * const schoolEnterpriseProject = await prisma.schoolEnterpriseProject.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends SchoolEnterpriseProjectFindUniqueArgs>(args: SelectSubset<T, SchoolEnterpriseProjectFindUniqueArgs<ExtArgs>>): Prisma__SchoolEnterpriseProjectClient<$Result.GetResult<Prisma.$SchoolEnterpriseProjectPayload<ExtArgs>, T, "findUnique"> | null, null, ExtArgs>
+
+    /**
+     * Find one SchoolEnterpriseProject that matches the filter or throw an error with `error.code='P2025'` 
+     * if no matches were found.
+     * @param {SchoolEnterpriseProjectFindUniqueOrThrowArgs} args - Arguments to find a SchoolEnterpriseProject
+     * @example
+     * // Get one SchoolEnterpriseProject
+     * const schoolEnterpriseProject = await prisma.schoolEnterpriseProject.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends SchoolEnterpriseProjectFindUniqueOrThrowArgs>(args: SelectSubset<T, SchoolEnterpriseProjectFindUniqueOrThrowArgs<ExtArgs>>): Prisma__SchoolEnterpriseProjectClient<$Result.GetResult<Prisma.$SchoolEnterpriseProjectPayload<ExtArgs>, T, "findUniqueOrThrow">, never, ExtArgs>
+
+    /**
+     * Find the first SchoolEnterpriseProject that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SchoolEnterpriseProjectFindFirstArgs} args - Arguments to find a SchoolEnterpriseProject
+     * @example
+     * // Get one SchoolEnterpriseProject
+     * const schoolEnterpriseProject = await prisma.schoolEnterpriseProject.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends SchoolEnterpriseProjectFindFirstArgs>(args?: SelectSubset<T, SchoolEnterpriseProjectFindFirstArgs<ExtArgs>>): Prisma__SchoolEnterpriseProjectClient<$Result.GetResult<Prisma.$SchoolEnterpriseProjectPayload<ExtArgs>, T, "findFirst"> | null, null, ExtArgs>
+
+    /**
+     * Find the first SchoolEnterpriseProject that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SchoolEnterpriseProjectFindFirstOrThrowArgs} args - Arguments to find a SchoolEnterpriseProject
+     * @example
+     * // Get one SchoolEnterpriseProject
+     * const schoolEnterpriseProject = await prisma.schoolEnterpriseProject.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends SchoolEnterpriseProjectFindFirstOrThrowArgs>(args?: SelectSubset<T, SchoolEnterpriseProjectFindFirstOrThrowArgs<ExtArgs>>): Prisma__SchoolEnterpriseProjectClient<$Result.GetResult<Prisma.$SchoolEnterpriseProjectPayload<ExtArgs>, T, "findFirstOrThrow">, never, ExtArgs>
+
+    /**
+     * Find zero or more SchoolEnterpriseProjects that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SchoolEnterpriseProjectFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all SchoolEnterpriseProjects
+     * const schoolEnterpriseProjects = await prisma.schoolEnterpriseProject.findMany()
+     * 
+     * // Get first 10 SchoolEnterpriseProjects
+     * const schoolEnterpriseProjects = await prisma.schoolEnterpriseProject.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const schoolEnterpriseProjectWithIdOnly = await prisma.schoolEnterpriseProject.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends SchoolEnterpriseProjectFindManyArgs>(args?: SelectSubset<T, SchoolEnterpriseProjectFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SchoolEnterpriseProjectPayload<ExtArgs>, T, "findMany">>
+
+    /**
+     * Create a SchoolEnterpriseProject.
+     * @param {SchoolEnterpriseProjectCreateArgs} args - Arguments to create a SchoolEnterpriseProject.
+     * @example
+     * // Create one SchoolEnterpriseProject
+     * const SchoolEnterpriseProject = await prisma.schoolEnterpriseProject.create({
+     *   data: {
+     *     // ... data to create a SchoolEnterpriseProject
+     *   }
+     * })
+     * 
+     */
+    create<T extends SchoolEnterpriseProjectCreateArgs>(args: SelectSubset<T, SchoolEnterpriseProjectCreateArgs<ExtArgs>>): Prisma__SchoolEnterpriseProjectClient<$Result.GetResult<Prisma.$SchoolEnterpriseProjectPayload<ExtArgs>, T, "create">, never, ExtArgs>
+
+    /**
+     * Create many SchoolEnterpriseProjects.
+     * @param {SchoolEnterpriseProjectCreateManyArgs} args - Arguments to create many SchoolEnterpriseProjects.
+     * @example
+     * // Create many SchoolEnterpriseProjects
+     * const schoolEnterpriseProject = await prisma.schoolEnterpriseProject.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends SchoolEnterpriseProjectCreateManyArgs>(args?: SelectSubset<T, SchoolEnterpriseProjectCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many SchoolEnterpriseProjects and returns the data saved in the database.
+     * @param {SchoolEnterpriseProjectCreateManyAndReturnArgs} args - Arguments to create many SchoolEnterpriseProjects.
+     * @example
+     * // Create many SchoolEnterpriseProjects
+     * const schoolEnterpriseProject = await prisma.schoolEnterpriseProject.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many SchoolEnterpriseProjects and only return the `id`
+     * const schoolEnterpriseProjectWithIdOnly = await prisma.schoolEnterpriseProject.createManyAndReturn({ 
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends SchoolEnterpriseProjectCreateManyAndReturnArgs>(args?: SelectSubset<T, SchoolEnterpriseProjectCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SchoolEnterpriseProjectPayload<ExtArgs>, T, "createManyAndReturn">>
+
+    /**
+     * Delete a SchoolEnterpriseProject.
+     * @param {SchoolEnterpriseProjectDeleteArgs} args - Arguments to delete one SchoolEnterpriseProject.
+     * @example
+     * // Delete one SchoolEnterpriseProject
+     * const SchoolEnterpriseProject = await prisma.schoolEnterpriseProject.delete({
+     *   where: {
+     *     // ... filter to delete one SchoolEnterpriseProject
+     *   }
+     * })
+     * 
+     */
+    delete<T extends SchoolEnterpriseProjectDeleteArgs>(args: SelectSubset<T, SchoolEnterpriseProjectDeleteArgs<ExtArgs>>): Prisma__SchoolEnterpriseProjectClient<$Result.GetResult<Prisma.$SchoolEnterpriseProjectPayload<ExtArgs>, T, "delete">, never, ExtArgs>
+
+    /**
+     * Update one SchoolEnterpriseProject.
+     * @param {SchoolEnterpriseProjectUpdateArgs} args - Arguments to update one SchoolEnterpriseProject.
+     * @example
+     * // Update one SchoolEnterpriseProject
+     * const schoolEnterpriseProject = await prisma.schoolEnterpriseProject.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends SchoolEnterpriseProjectUpdateArgs>(args: SelectSubset<T, SchoolEnterpriseProjectUpdateArgs<ExtArgs>>): Prisma__SchoolEnterpriseProjectClient<$Result.GetResult<Prisma.$SchoolEnterpriseProjectPayload<ExtArgs>, T, "update">, never, ExtArgs>
+
+    /**
+     * Delete zero or more SchoolEnterpriseProjects.
+     * @param {SchoolEnterpriseProjectDeleteManyArgs} args - Arguments to filter SchoolEnterpriseProjects to delete.
+     * @example
+     * // Delete a few SchoolEnterpriseProjects
+     * const { count } = await prisma.schoolEnterpriseProject.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends SchoolEnterpriseProjectDeleteManyArgs>(args?: SelectSubset<T, SchoolEnterpriseProjectDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more SchoolEnterpriseProjects.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SchoolEnterpriseProjectUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many SchoolEnterpriseProjects
+     * const schoolEnterpriseProject = await prisma.schoolEnterpriseProject.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends SchoolEnterpriseProjectUpdateManyArgs>(args: SelectSubset<T, SchoolEnterpriseProjectUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one SchoolEnterpriseProject.
+     * @param {SchoolEnterpriseProjectUpsertArgs} args - Arguments to update or create a SchoolEnterpriseProject.
+     * @example
+     * // Update or create a SchoolEnterpriseProject
+     * const schoolEnterpriseProject = await prisma.schoolEnterpriseProject.upsert({
+     *   create: {
+     *     // ... data to create a SchoolEnterpriseProject
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the SchoolEnterpriseProject we want to update
+     *   }
+     * })
+     */
+    upsert<T extends SchoolEnterpriseProjectUpsertArgs>(args: SelectSubset<T, SchoolEnterpriseProjectUpsertArgs<ExtArgs>>): Prisma__SchoolEnterpriseProjectClient<$Result.GetResult<Prisma.$SchoolEnterpriseProjectPayload<ExtArgs>, T, "upsert">, never, ExtArgs>
+
+
+    /**
+     * Count the number of SchoolEnterpriseProjects.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SchoolEnterpriseProjectCountArgs} args - Arguments to filter SchoolEnterpriseProjects to count.
+     * @example
+     * // Count the number of SchoolEnterpriseProjects
+     * const count = await prisma.schoolEnterpriseProject.count({
+     *   where: {
+     *     // ... the filter for the SchoolEnterpriseProjects we want to count
+     *   }
+     * })
+    **/
+    count<T extends SchoolEnterpriseProjectCountArgs>(
+      args?: Subset<T, SchoolEnterpriseProjectCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], SchoolEnterpriseProjectCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a SchoolEnterpriseProject.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SchoolEnterpriseProjectAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends SchoolEnterpriseProjectAggregateArgs>(args: Subset<T, SchoolEnterpriseProjectAggregateArgs>): Prisma.PrismaPromise<GetSchoolEnterpriseProjectAggregateType<T>>
+
+    /**
+     * Group by SchoolEnterpriseProject.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SchoolEnterpriseProjectGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends SchoolEnterpriseProjectGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: SchoolEnterpriseProjectGroupByArgs['orderBy'] }
+        : { orderBy?: SchoolEnterpriseProjectGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, SchoolEnterpriseProjectGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetSchoolEnterpriseProjectGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the SchoolEnterpriseProject model
+   */
+  readonly fields: SchoolEnterpriseProjectFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for SchoolEnterpriseProject.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__SchoolEnterpriseProjectClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    school<T extends SchoolDefaultArgs<ExtArgs> = {}>(args?: Subset<T, SchoolDefaultArgs<ExtArgs>>): Prisma__SchoolClient<$Result.GetResult<Prisma.$SchoolPayload<ExtArgs>, T, "findUniqueOrThrow"> | Null, Null, ExtArgs>
+    challenge<T extends SchoolEnterpriseProject$challengeArgs<ExtArgs> = {}>(args?: Subset<T, SchoolEnterpriseProject$challengeArgs<ExtArgs>>): Prisma__SchoolInnovationChallengeClient<$Result.GetResult<Prisma.$SchoolInnovationChallengePayload<ExtArgs>, T, "findUniqueOrThrow"> | null, null, ExtArgs>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the SchoolEnterpriseProject model
+   */ 
+  interface SchoolEnterpriseProjectFieldRefs {
+    readonly id: FieldRef<"SchoolEnterpriseProject", 'String'>
+    readonly schoolId: FieldRef<"SchoolEnterpriseProject", 'String'>
+    readonly challengeId: FieldRef<"SchoolEnterpriseProject", 'String'>
+    readonly title: FieldRef<"SchoolEnterpriseProject", 'String'>
+    readonly description: FieldRef<"SchoolEnterpriseProject", 'String'>
+    readonly projectType: FieldRef<"SchoolEnterpriseProject", 'SchoolEnterpriseProjectType'>
+    readonly studentLead: FieldRef<"SchoolEnterpriseProject", 'String'>
+    readonly gradeLevel: FieldRef<"SchoolEnterpriseProject", 'String'>
+    readonly category: FieldRef<"SchoolEnterpriseProject", 'String'>
+    readonly status: FieldRef<"SchoolEnterpriseProject", 'SchoolEnterpriseProjectStatus'>
+    readonly revenueZar: FieldRef<"SchoolEnterpriseProject", 'Int'>
+    readonly seekingSponsor: FieldRef<"SchoolEnterpriseProject", 'Boolean'>
+    readonly createdAt: FieldRef<"SchoolEnterpriseProject", 'DateTime'>
+    readonly updatedAt: FieldRef<"SchoolEnterpriseProject", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * SchoolEnterpriseProject findUnique
+   */
+  export type SchoolEnterpriseProjectFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SchoolEnterpriseProject
+     */
+    select?: SchoolEnterpriseProjectSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SchoolEnterpriseProjectInclude<ExtArgs> | null
+    /**
+     * Filter, which SchoolEnterpriseProject to fetch.
+     */
+    where: SchoolEnterpriseProjectWhereUniqueInput
+  }
+
+  /**
+   * SchoolEnterpriseProject findUniqueOrThrow
+   */
+  export type SchoolEnterpriseProjectFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SchoolEnterpriseProject
+     */
+    select?: SchoolEnterpriseProjectSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SchoolEnterpriseProjectInclude<ExtArgs> | null
+    /**
+     * Filter, which SchoolEnterpriseProject to fetch.
+     */
+    where: SchoolEnterpriseProjectWhereUniqueInput
+  }
+
+  /**
+   * SchoolEnterpriseProject findFirst
+   */
+  export type SchoolEnterpriseProjectFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SchoolEnterpriseProject
+     */
+    select?: SchoolEnterpriseProjectSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SchoolEnterpriseProjectInclude<ExtArgs> | null
+    /**
+     * Filter, which SchoolEnterpriseProject to fetch.
+     */
+    where?: SchoolEnterpriseProjectWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of SchoolEnterpriseProjects to fetch.
+     */
+    orderBy?: SchoolEnterpriseProjectOrderByWithRelationInput | SchoolEnterpriseProjectOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for SchoolEnterpriseProjects.
+     */
+    cursor?: SchoolEnterpriseProjectWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` SchoolEnterpriseProjects from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` SchoolEnterpriseProjects.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of SchoolEnterpriseProjects.
+     */
+    distinct?: SchoolEnterpriseProjectScalarFieldEnum | SchoolEnterpriseProjectScalarFieldEnum[]
+  }
+
+  /**
+   * SchoolEnterpriseProject findFirstOrThrow
+   */
+  export type SchoolEnterpriseProjectFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SchoolEnterpriseProject
+     */
+    select?: SchoolEnterpriseProjectSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SchoolEnterpriseProjectInclude<ExtArgs> | null
+    /**
+     * Filter, which SchoolEnterpriseProject to fetch.
+     */
+    where?: SchoolEnterpriseProjectWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of SchoolEnterpriseProjects to fetch.
+     */
+    orderBy?: SchoolEnterpriseProjectOrderByWithRelationInput | SchoolEnterpriseProjectOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for SchoolEnterpriseProjects.
+     */
+    cursor?: SchoolEnterpriseProjectWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` SchoolEnterpriseProjects from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` SchoolEnterpriseProjects.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of SchoolEnterpriseProjects.
+     */
+    distinct?: SchoolEnterpriseProjectScalarFieldEnum | SchoolEnterpriseProjectScalarFieldEnum[]
+  }
+
+  /**
+   * SchoolEnterpriseProject findMany
+   */
+  export type SchoolEnterpriseProjectFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SchoolEnterpriseProject
+     */
+    select?: SchoolEnterpriseProjectSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SchoolEnterpriseProjectInclude<ExtArgs> | null
+    /**
+     * Filter, which SchoolEnterpriseProjects to fetch.
+     */
+    where?: SchoolEnterpriseProjectWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of SchoolEnterpriseProjects to fetch.
+     */
+    orderBy?: SchoolEnterpriseProjectOrderByWithRelationInput | SchoolEnterpriseProjectOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing SchoolEnterpriseProjects.
+     */
+    cursor?: SchoolEnterpriseProjectWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` SchoolEnterpriseProjects from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` SchoolEnterpriseProjects.
+     */
+    skip?: number
+    distinct?: SchoolEnterpriseProjectScalarFieldEnum | SchoolEnterpriseProjectScalarFieldEnum[]
+  }
+
+  /**
+   * SchoolEnterpriseProject create
+   */
+  export type SchoolEnterpriseProjectCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SchoolEnterpriseProject
+     */
+    select?: SchoolEnterpriseProjectSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SchoolEnterpriseProjectInclude<ExtArgs> | null
+    /**
+     * The data needed to create a SchoolEnterpriseProject.
+     */
+    data: XOR<SchoolEnterpriseProjectCreateInput, SchoolEnterpriseProjectUncheckedCreateInput>
+  }
+
+  /**
+   * SchoolEnterpriseProject createMany
+   */
+  export type SchoolEnterpriseProjectCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many SchoolEnterpriseProjects.
+     */
+    data: SchoolEnterpriseProjectCreateManyInput | SchoolEnterpriseProjectCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * SchoolEnterpriseProject createManyAndReturn
+   */
+  export type SchoolEnterpriseProjectCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SchoolEnterpriseProject
+     */
+    select?: SchoolEnterpriseProjectSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * The data used to create many SchoolEnterpriseProjects.
+     */
+    data: SchoolEnterpriseProjectCreateManyInput | SchoolEnterpriseProjectCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SchoolEnterpriseProjectIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * SchoolEnterpriseProject update
+   */
+  export type SchoolEnterpriseProjectUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SchoolEnterpriseProject
+     */
+    select?: SchoolEnterpriseProjectSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SchoolEnterpriseProjectInclude<ExtArgs> | null
+    /**
+     * The data needed to update a SchoolEnterpriseProject.
+     */
+    data: XOR<SchoolEnterpriseProjectUpdateInput, SchoolEnterpriseProjectUncheckedUpdateInput>
+    /**
+     * Choose, which SchoolEnterpriseProject to update.
+     */
+    where: SchoolEnterpriseProjectWhereUniqueInput
+  }
+
+  /**
+   * SchoolEnterpriseProject updateMany
+   */
+  export type SchoolEnterpriseProjectUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update SchoolEnterpriseProjects.
+     */
+    data: XOR<SchoolEnterpriseProjectUpdateManyMutationInput, SchoolEnterpriseProjectUncheckedUpdateManyInput>
+    /**
+     * Filter which SchoolEnterpriseProjects to update
+     */
+    where?: SchoolEnterpriseProjectWhereInput
+  }
+
+  /**
+   * SchoolEnterpriseProject upsert
+   */
+  export type SchoolEnterpriseProjectUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SchoolEnterpriseProject
+     */
+    select?: SchoolEnterpriseProjectSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SchoolEnterpriseProjectInclude<ExtArgs> | null
+    /**
+     * The filter to search for the SchoolEnterpriseProject to update in case it exists.
+     */
+    where: SchoolEnterpriseProjectWhereUniqueInput
+    /**
+     * In case the SchoolEnterpriseProject found by the `where` argument doesn't exist, create a new SchoolEnterpriseProject with this data.
+     */
+    create: XOR<SchoolEnterpriseProjectCreateInput, SchoolEnterpriseProjectUncheckedCreateInput>
+    /**
+     * In case the SchoolEnterpriseProject was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<SchoolEnterpriseProjectUpdateInput, SchoolEnterpriseProjectUncheckedUpdateInput>
+  }
+
+  /**
+   * SchoolEnterpriseProject delete
+   */
+  export type SchoolEnterpriseProjectDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SchoolEnterpriseProject
+     */
+    select?: SchoolEnterpriseProjectSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SchoolEnterpriseProjectInclude<ExtArgs> | null
+    /**
+     * Filter which SchoolEnterpriseProject to delete.
+     */
+    where: SchoolEnterpriseProjectWhereUniqueInput
+  }
+
+  /**
+   * SchoolEnterpriseProject deleteMany
+   */
+  export type SchoolEnterpriseProjectDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which SchoolEnterpriseProjects to delete
+     */
+    where?: SchoolEnterpriseProjectWhereInput
+  }
+
+  /**
+   * SchoolEnterpriseProject.challenge
+   */
+  export type SchoolEnterpriseProject$challengeArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SchoolInnovationChallenge
+     */
+    select?: SchoolInnovationChallengeSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SchoolInnovationChallengeInclude<ExtArgs> | null
+    where?: SchoolInnovationChallengeWhereInput
+  }
+
+  /**
+   * SchoolEnterpriseProject without action
+   */
+  export type SchoolEnterpriseProjectDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SchoolEnterpriseProject
+     */
+    select?: SchoolEnterpriseProjectSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SchoolEnterpriseProjectInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model SchoolCrmContact
+   */
+
+  export type AggregateSchoolCrmContact = {
+    _count: SchoolCrmContactCountAggregateOutputType | null
+    _min: SchoolCrmContactMinAggregateOutputType | null
+    _max: SchoolCrmContactMaxAggregateOutputType | null
+  }
+
+  export type SchoolCrmContactMinAggregateOutputType = {
+    id: string | null
+    schoolId: string | null
+    fullName: string | null
+    organization: string | null
+    email: string | null
+    phone: string | null
+    contactType: $Enums.SchoolCrmContactType | null
+    notes: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type SchoolCrmContactMaxAggregateOutputType = {
+    id: string | null
+    schoolId: string | null
+    fullName: string | null
+    organization: string | null
+    email: string | null
+    phone: string | null
+    contactType: $Enums.SchoolCrmContactType | null
+    notes: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type SchoolCrmContactCountAggregateOutputType = {
+    id: number
+    schoolId: number
+    fullName: number
+    organization: number
+    email: number
+    phone: number
+    contactType: number
+    notes: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type SchoolCrmContactMinAggregateInputType = {
+    id?: true
+    schoolId?: true
+    fullName?: true
+    organization?: true
+    email?: true
+    phone?: true
+    contactType?: true
+    notes?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type SchoolCrmContactMaxAggregateInputType = {
+    id?: true
+    schoolId?: true
+    fullName?: true
+    organization?: true
+    email?: true
+    phone?: true
+    contactType?: true
+    notes?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type SchoolCrmContactCountAggregateInputType = {
+    id?: true
+    schoolId?: true
+    fullName?: true
+    organization?: true
+    email?: true
+    phone?: true
+    contactType?: true
+    notes?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type SchoolCrmContactAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which SchoolCrmContact to aggregate.
+     */
+    where?: SchoolCrmContactWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of SchoolCrmContacts to fetch.
+     */
+    orderBy?: SchoolCrmContactOrderByWithRelationInput | SchoolCrmContactOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: SchoolCrmContactWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` SchoolCrmContacts from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` SchoolCrmContacts.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned SchoolCrmContacts
+    **/
+    _count?: true | SchoolCrmContactCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: SchoolCrmContactMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: SchoolCrmContactMaxAggregateInputType
+  }
+
+  export type GetSchoolCrmContactAggregateType<T extends SchoolCrmContactAggregateArgs> = {
+        [P in keyof T & keyof AggregateSchoolCrmContact]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateSchoolCrmContact[P]>
+      : GetScalarType<T[P], AggregateSchoolCrmContact[P]>
+  }
+
+
+
+
+  export type SchoolCrmContactGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: SchoolCrmContactWhereInput
+    orderBy?: SchoolCrmContactOrderByWithAggregationInput | SchoolCrmContactOrderByWithAggregationInput[]
+    by: SchoolCrmContactScalarFieldEnum[] | SchoolCrmContactScalarFieldEnum
+    having?: SchoolCrmContactScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: SchoolCrmContactCountAggregateInputType | true
+    _min?: SchoolCrmContactMinAggregateInputType
+    _max?: SchoolCrmContactMaxAggregateInputType
+  }
+
+  export type SchoolCrmContactGroupByOutputType = {
+    id: string
+    schoolId: string
+    fullName: string
+    organization: string | null
+    email: string | null
+    phone: string | null
+    contactType: $Enums.SchoolCrmContactType
+    notes: string | null
+    createdAt: Date
+    updatedAt: Date
+    _count: SchoolCrmContactCountAggregateOutputType | null
+    _min: SchoolCrmContactMinAggregateOutputType | null
+    _max: SchoolCrmContactMaxAggregateOutputType | null
+  }
+
+  type GetSchoolCrmContactGroupByPayload<T extends SchoolCrmContactGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<SchoolCrmContactGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof SchoolCrmContactGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], SchoolCrmContactGroupByOutputType[P]>
+            : GetScalarType<T[P], SchoolCrmContactGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type SchoolCrmContactSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    schoolId?: boolean
+    fullName?: boolean
+    organization?: boolean
+    email?: boolean
+    phone?: boolean
+    contactType?: boolean
+    notes?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    school?: boolean | SchoolDefaultArgs<ExtArgs>
+    activities?: boolean | SchoolCrmContact$activitiesArgs<ExtArgs>
+    tasks?: boolean | SchoolCrmContact$tasksArgs<ExtArgs>
+    _count?: boolean | SchoolCrmContactCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["schoolCrmContact"]>
+
+  export type SchoolCrmContactSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    schoolId?: boolean
+    fullName?: boolean
+    organization?: boolean
+    email?: boolean
+    phone?: boolean
+    contactType?: boolean
+    notes?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    school?: boolean | SchoolDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["schoolCrmContact"]>
+
+  export type SchoolCrmContactSelectScalar = {
+    id?: boolean
+    schoolId?: boolean
+    fullName?: boolean
+    organization?: boolean
+    email?: boolean
+    phone?: boolean
+    contactType?: boolean
+    notes?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type SchoolCrmContactInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    school?: boolean | SchoolDefaultArgs<ExtArgs>
+    activities?: boolean | SchoolCrmContact$activitiesArgs<ExtArgs>
+    tasks?: boolean | SchoolCrmContact$tasksArgs<ExtArgs>
+    _count?: boolean | SchoolCrmContactCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type SchoolCrmContactIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    school?: boolean | SchoolDefaultArgs<ExtArgs>
+  }
+
+  export type $SchoolCrmContactPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "SchoolCrmContact"
+    objects: {
+      school: Prisma.$SchoolPayload<ExtArgs>
+      activities: Prisma.$SchoolCrmActivityPayload<ExtArgs>[]
+      tasks: Prisma.$SchoolCrmTaskPayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      schoolId: string
+      fullName: string
+      organization: string | null
+      email: string | null
+      phone: string | null
+      contactType: $Enums.SchoolCrmContactType
+      notes: string | null
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["schoolCrmContact"]>
+    composites: {}
+  }
+
+  type SchoolCrmContactGetPayload<S extends boolean | null | undefined | SchoolCrmContactDefaultArgs> = $Result.GetResult<Prisma.$SchoolCrmContactPayload, S>
+
+  type SchoolCrmContactCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = 
+    Omit<SchoolCrmContactFindManyArgs, 'select' | 'include' | 'distinct'> & {
+      select?: SchoolCrmContactCountAggregateInputType | true
+    }
+
+  export interface SchoolCrmContactDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['SchoolCrmContact'], meta: { name: 'SchoolCrmContact' } }
+    /**
+     * Find zero or one SchoolCrmContact that matches the filter.
+     * @param {SchoolCrmContactFindUniqueArgs} args - Arguments to find a SchoolCrmContact
+     * @example
+     * // Get one SchoolCrmContact
+     * const schoolCrmContact = await prisma.schoolCrmContact.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends SchoolCrmContactFindUniqueArgs>(args: SelectSubset<T, SchoolCrmContactFindUniqueArgs<ExtArgs>>): Prisma__SchoolCrmContactClient<$Result.GetResult<Prisma.$SchoolCrmContactPayload<ExtArgs>, T, "findUnique"> | null, null, ExtArgs>
+
+    /**
+     * Find one SchoolCrmContact that matches the filter or throw an error with `error.code='P2025'` 
+     * if no matches were found.
+     * @param {SchoolCrmContactFindUniqueOrThrowArgs} args - Arguments to find a SchoolCrmContact
+     * @example
+     * // Get one SchoolCrmContact
+     * const schoolCrmContact = await prisma.schoolCrmContact.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends SchoolCrmContactFindUniqueOrThrowArgs>(args: SelectSubset<T, SchoolCrmContactFindUniqueOrThrowArgs<ExtArgs>>): Prisma__SchoolCrmContactClient<$Result.GetResult<Prisma.$SchoolCrmContactPayload<ExtArgs>, T, "findUniqueOrThrow">, never, ExtArgs>
+
+    /**
+     * Find the first SchoolCrmContact that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SchoolCrmContactFindFirstArgs} args - Arguments to find a SchoolCrmContact
+     * @example
+     * // Get one SchoolCrmContact
+     * const schoolCrmContact = await prisma.schoolCrmContact.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends SchoolCrmContactFindFirstArgs>(args?: SelectSubset<T, SchoolCrmContactFindFirstArgs<ExtArgs>>): Prisma__SchoolCrmContactClient<$Result.GetResult<Prisma.$SchoolCrmContactPayload<ExtArgs>, T, "findFirst"> | null, null, ExtArgs>
+
+    /**
+     * Find the first SchoolCrmContact that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SchoolCrmContactFindFirstOrThrowArgs} args - Arguments to find a SchoolCrmContact
+     * @example
+     * // Get one SchoolCrmContact
+     * const schoolCrmContact = await prisma.schoolCrmContact.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends SchoolCrmContactFindFirstOrThrowArgs>(args?: SelectSubset<T, SchoolCrmContactFindFirstOrThrowArgs<ExtArgs>>): Prisma__SchoolCrmContactClient<$Result.GetResult<Prisma.$SchoolCrmContactPayload<ExtArgs>, T, "findFirstOrThrow">, never, ExtArgs>
+
+    /**
+     * Find zero or more SchoolCrmContacts that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SchoolCrmContactFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all SchoolCrmContacts
+     * const schoolCrmContacts = await prisma.schoolCrmContact.findMany()
+     * 
+     * // Get first 10 SchoolCrmContacts
+     * const schoolCrmContacts = await prisma.schoolCrmContact.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const schoolCrmContactWithIdOnly = await prisma.schoolCrmContact.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends SchoolCrmContactFindManyArgs>(args?: SelectSubset<T, SchoolCrmContactFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SchoolCrmContactPayload<ExtArgs>, T, "findMany">>
+
+    /**
+     * Create a SchoolCrmContact.
+     * @param {SchoolCrmContactCreateArgs} args - Arguments to create a SchoolCrmContact.
+     * @example
+     * // Create one SchoolCrmContact
+     * const SchoolCrmContact = await prisma.schoolCrmContact.create({
+     *   data: {
+     *     // ... data to create a SchoolCrmContact
+     *   }
+     * })
+     * 
+     */
+    create<T extends SchoolCrmContactCreateArgs>(args: SelectSubset<T, SchoolCrmContactCreateArgs<ExtArgs>>): Prisma__SchoolCrmContactClient<$Result.GetResult<Prisma.$SchoolCrmContactPayload<ExtArgs>, T, "create">, never, ExtArgs>
+
+    /**
+     * Create many SchoolCrmContacts.
+     * @param {SchoolCrmContactCreateManyArgs} args - Arguments to create many SchoolCrmContacts.
+     * @example
+     * // Create many SchoolCrmContacts
+     * const schoolCrmContact = await prisma.schoolCrmContact.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends SchoolCrmContactCreateManyArgs>(args?: SelectSubset<T, SchoolCrmContactCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many SchoolCrmContacts and returns the data saved in the database.
+     * @param {SchoolCrmContactCreateManyAndReturnArgs} args - Arguments to create many SchoolCrmContacts.
+     * @example
+     * // Create many SchoolCrmContacts
+     * const schoolCrmContact = await prisma.schoolCrmContact.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many SchoolCrmContacts and only return the `id`
+     * const schoolCrmContactWithIdOnly = await prisma.schoolCrmContact.createManyAndReturn({ 
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends SchoolCrmContactCreateManyAndReturnArgs>(args?: SelectSubset<T, SchoolCrmContactCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SchoolCrmContactPayload<ExtArgs>, T, "createManyAndReturn">>
+
+    /**
+     * Delete a SchoolCrmContact.
+     * @param {SchoolCrmContactDeleteArgs} args - Arguments to delete one SchoolCrmContact.
+     * @example
+     * // Delete one SchoolCrmContact
+     * const SchoolCrmContact = await prisma.schoolCrmContact.delete({
+     *   where: {
+     *     // ... filter to delete one SchoolCrmContact
+     *   }
+     * })
+     * 
+     */
+    delete<T extends SchoolCrmContactDeleteArgs>(args: SelectSubset<T, SchoolCrmContactDeleteArgs<ExtArgs>>): Prisma__SchoolCrmContactClient<$Result.GetResult<Prisma.$SchoolCrmContactPayload<ExtArgs>, T, "delete">, never, ExtArgs>
+
+    /**
+     * Update one SchoolCrmContact.
+     * @param {SchoolCrmContactUpdateArgs} args - Arguments to update one SchoolCrmContact.
+     * @example
+     * // Update one SchoolCrmContact
+     * const schoolCrmContact = await prisma.schoolCrmContact.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends SchoolCrmContactUpdateArgs>(args: SelectSubset<T, SchoolCrmContactUpdateArgs<ExtArgs>>): Prisma__SchoolCrmContactClient<$Result.GetResult<Prisma.$SchoolCrmContactPayload<ExtArgs>, T, "update">, never, ExtArgs>
+
+    /**
+     * Delete zero or more SchoolCrmContacts.
+     * @param {SchoolCrmContactDeleteManyArgs} args - Arguments to filter SchoolCrmContacts to delete.
+     * @example
+     * // Delete a few SchoolCrmContacts
+     * const { count } = await prisma.schoolCrmContact.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends SchoolCrmContactDeleteManyArgs>(args?: SelectSubset<T, SchoolCrmContactDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more SchoolCrmContacts.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SchoolCrmContactUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many SchoolCrmContacts
+     * const schoolCrmContact = await prisma.schoolCrmContact.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends SchoolCrmContactUpdateManyArgs>(args: SelectSubset<T, SchoolCrmContactUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one SchoolCrmContact.
+     * @param {SchoolCrmContactUpsertArgs} args - Arguments to update or create a SchoolCrmContact.
+     * @example
+     * // Update or create a SchoolCrmContact
+     * const schoolCrmContact = await prisma.schoolCrmContact.upsert({
+     *   create: {
+     *     // ... data to create a SchoolCrmContact
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the SchoolCrmContact we want to update
+     *   }
+     * })
+     */
+    upsert<T extends SchoolCrmContactUpsertArgs>(args: SelectSubset<T, SchoolCrmContactUpsertArgs<ExtArgs>>): Prisma__SchoolCrmContactClient<$Result.GetResult<Prisma.$SchoolCrmContactPayload<ExtArgs>, T, "upsert">, never, ExtArgs>
+
+
+    /**
+     * Count the number of SchoolCrmContacts.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SchoolCrmContactCountArgs} args - Arguments to filter SchoolCrmContacts to count.
+     * @example
+     * // Count the number of SchoolCrmContacts
+     * const count = await prisma.schoolCrmContact.count({
+     *   where: {
+     *     // ... the filter for the SchoolCrmContacts we want to count
+     *   }
+     * })
+    **/
+    count<T extends SchoolCrmContactCountArgs>(
+      args?: Subset<T, SchoolCrmContactCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], SchoolCrmContactCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a SchoolCrmContact.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SchoolCrmContactAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends SchoolCrmContactAggregateArgs>(args: Subset<T, SchoolCrmContactAggregateArgs>): Prisma.PrismaPromise<GetSchoolCrmContactAggregateType<T>>
+
+    /**
+     * Group by SchoolCrmContact.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SchoolCrmContactGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends SchoolCrmContactGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: SchoolCrmContactGroupByArgs['orderBy'] }
+        : { orderBy?: SchoolCrmContactGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, SchoolCrmContactGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetSchoolCrmContactGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the SchoolCrmContact model
+   */
+  readonly fields: SchoolCrmContactFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for SchoolCrmContact.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__SchoolCrmContactClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    school<T extends SchoolDefaultArgs<ExtArgs> = {}>(args?: Subset<T, SchoolDefaultArgs<ExtArgs>>): Prisma__SchoolClient<$Result.GetResult<Prisma.$SchoolPayload<ExtArgs>, T, "findUniqueOrThrow"> | Null, Null, ExtArgs>
+    activities<T extends SchoolCrmContact$activitiesArgs<ExtArgs> = {}>(args?: Subset<T, SchoolCrmContact$activitiesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SchoolCrmActivityPayload<ExtArgs>, T, "findMany"> | Null>
+    tasks<T extends SchoolCrmContact$tasksArgs<ExtArgs> = {}>(args?: Subset<T, SchoolCrmContact$tasksArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SchoolCrmTaskPayload<ExtArgs>, T, "findMany"> | Null>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the SchoolCrmContact model
+   */ 
+  interface SchoolCrmContactFieldRefs {
+    readonly id: FieldRef<"SchoolCrmContact", 'String'>
+    readonly schoolId: FieldRef<"SchoolCrmContact", 'String'>
+    readonly fullName: FieldRef<"SchoolCrmContact", 'String'>
+    readonly organization: FieldRef<"SchoolCrmContact", 'String'>
+    readonly email: FieldRef<"SchoolCrmContact", 'String'>
+    readonly phone: FieldRef<"SchoolCrmContact", 'String'>
+    readonly contactType: FieldRef<"SchoolCrmContact", 'SchoolCrmContactType'>
+    readonly notes: FieldRef<"SchoolCrmContact", 'String'>
+    readonly createdAt: FieldRef<"SchoolCrmContact", 'DateTime'>
+    readonly updatedAt: FieldRef<"SchoolCrmContact", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * SchoolCrmContact findUnique
+   */
+  export type SchoolCrmContactFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SchoolCrmContact
+     */
+    select?: SchoolCrmContactSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SchoolCrmContactInclude<ExtArgs> | null
+    /**
+     * Filter, which SchoolCrmContact to fetch.
+     */
+    where: SchoolCrmContactWhereUniqueInput
+  }
+
+  /**
+   * SchoolCrmContact findUniqueOrThrow
+   */
+  export type SchoolCrmContactFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SchoolCrmContact
+     */
+    select?: SchoolCrmContactSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SchoolCrmContactInclude<ExtArgs> | null
+    /**
+     * Filter, which SchoolCrmContact to fetch.
+     */
+    where: SchoolCrmContactWhereUniqueInput
+  }
+
+  /**
+   * SchoolCrmContact findFirst
+   */
+  export type SchoolCrmContactFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SchoolCrmContact
+     */
+    select?: SchoolCrmContactSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SchoolCrmContactInclude<ExtArgs> | null
+    /**
+     * Filter, which SchoolCrmContact to fetch.
+     */
+    where?: SchoolCrmContactWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of SchoolCrmContacts to fetch.
+     */
+    orderBy?: SchoolCrmContactOrderByWithRelationInput | SchoolCrmContactOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for SchoolCrmContacts.
+     */
+    cursor?: SchoolCrmContactWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` SchoolCrmContacts from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` SchoolCrmContacts.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of SchoolCrmContacts.
+     */
+    distinct?: SchoolCrmContactScalarFieldEnum | SchoolCrmContactScalarFieldEnum[]
+  }
+
+  /**
+   * SchoolCrmContact findFirstOrThrow
+   */
+  export type SchoolCrmContactFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SchoolCrmContact
+     */
+    select?: SchoolCrmContactSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SchoolCrmContactInclude<ExtArgs> | null
+    /**
+     * Filter, which SchoolCrmContact to fetch.
+     */
+    where?: SchoolCrmContactWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of SchoolCrmContacts to fetch.
+     */
+    orderBy?: SchoolCrmContactOrderByWithRelationInput | SchoolCrmContactOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for SchoolCrmContacts.
+     */
+    cursor?: SchoolCrmContactWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` SchoolCrmContacts from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` SchoolCrmContacts.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of SchoolCrmContacts.
+     */
+    distinct?: SchoolCrmContactScalarFieldEnum | SchoolCrmContactScalarFieldEnum[]
+  }
+
+  /**
+   * SchoolCrmContact findMany
+   */
+  export type SchoolCrmContactFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SchoolCrmContact
+     */
+    select?: SchoolCrmContactSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SchoolCrmContactInclude<ExtArgs> | null
+    /**
+     * Filter, which SchoolCrmContacts to fetch.
+     */
+    where?: SchoolCrmContactWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of SchoolCrmContacts to fetch.
+     */
+    orderBy?: SchoolCrmContactOrderByWithRelationInput | SchoolCrmContactOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing SchoolCrmContacts.
+     */
+    cursor?: SchoolCrmContactWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` SchoolCrmContacts from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` SchoolCrmContacts.
+     */
+    skip?: number
+    distinct?: SchoolCrmContactScalarFieldEnum | SchoolCrmContactScalarFieldEnum[]
+  }
+
+  /**
+   * SchoolCrmContact create
+   */
+  export type SchoolCrmContactCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SchoolCrmContact
+     */
+    select?: SchoolCrmContactSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SchoolCrmContactInclude<ExtArgs> | null
+    /**
+     * The data needed to create a SchoolCrmContact.
+     */
+    data: XOR<SchoolCrmContactCreateInput, SchoolCrmContactUncheckedCreateInput>
+  }
+
+  /**
+   * SchoolCrmContact createMany
+   */
+  export type SchoolCrmContactCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many SchoolCrmContacts.
+     */
+    data: SchoolCrmContactCreateManyInput | SchoolCrmContactCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * SchoolCrmContact createManyAndReturn
+   */
+  export type SchoolCrmContactCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SchoolCrmContact
+     */
+    select?: SchoolCrmContactSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * The data used to create many SchoolCrmContacts.
+     */
+    data: SchoolCrmContactCreateManyInput | SchoolCrmContactCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SchoolCrmContactIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * SchoolCrmContact update
+   */
+  export type SchoolCrmContactUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SchoolCrmContact
+     */
+    select?: SchoolCrmContactSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SchoolCrmContactInclude<ExtArgs> | null
+    /**
+     * The data needed to update a SchoolCrmContact.
+     */
+    data: XOR<SchoolCrmContactUpdateInput, SchoolCrmContactUncheckedUpdateInput>
+    /**
+     * Choose, which SchoolCrmContact to update.
+     */
+    where: SchoolCrmContactWhereUniqueInput
+  }
+
+  /**
+   * SchoolCrmContact updateMany
+   */
+  export type SchoolCrmContactUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update SchoolCrmContacts.
+     */
+    data: XOR<SchoolCrmContactUpdateManyMutationInput, SchoolCrmContactUncheckedUpdateManyInput>
+    /**
+     * Filter which SchoolCrmContacts to update
+     */
+    where?: SchoolCrmContactWhereInput
+  }
+
+  /**
+   * SchoolCrmContact upsert
+   */
+  export type SchoolCrmContactUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SchoolCrmContact
+     */
+    select?: SchoolCrmContactSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SchoolCrmContactInclude<ExtArgs> | null
+    /**
+     * The filter to search for the SchoolCrmContact to update in case it exists.
+     */
+    where: SchoolCrmContactWhereUniqueInput
+    /**
+     * In case the SchoolCrmContact found by the `where` argument doesn't exist, create a new SchoolCrmContact with this data.
+     */
+    create: XOR<SchoolCrmContactCreateInput, SchoolCrmContactUncheckedCreateInput>
+    /**
+     * In case the SchoolCrmContact was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<SchoolCrmContactUpdateInput, SchoolCrmContactUncheckedUpdateInput>
+  }
+
+  /**
+   * SchoolCrmContact delete
+   */
+  export type SchoolCrmContactDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SchoolCrmContact
+     */
+    select?: SchoolCrmContactSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SchoolCrmContactInclude<ExtArgs> | null
+    /**
+     * Filter which SchoolCrmContact to delete.
+     */
+    where: SchoolCrmContactWhereUniqueInput
+  }
+
+  /**
+   * SchoolCrmContact deleteMany
+   */
+  export type SchoolCrmContactDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which SchoolCrmContacts to delete
+     */
+    where?: SchoolCrmContactWhereInput
+  }
+
+  /**
+   * SchoolCrmContact.activities
+   */
+  export type SchoolCrmContact$activitiesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SchoolCrmActivity
+     */
+    select?: SchoolCrmActivitySelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SchoolCrmActivityInclude<ExtArgs> | null
+    where?: SchoolCrmActivityWhereInput
+    orderBy?: SchoolCrmActivityOrderByWithRelationInput | SchoolCrmActivityOrderByWithRelationInput[]
+    cursor?: SchoolCrmActivityWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: SchoolCrmActivityScalarFieldEnum | SchoolCrmActivityScalarFieldEnum[]
+  }
+
+  /**
+   * SchoolCrmContact.tasks
+   */
+  export type SchoolCrmContact$tasksArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SchoolCrmTask
+     */
+    select?: SchoolCrmTaskSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SchoolCrmTaskInclude<ExtArgs> | null
+    where?: SchoolCrmTaskWhereInput
+    orderBy?: SchoolCrmTaskOrderByWithRelationInput | SchoolCrmTaskOrderByWithRelationInput[]
+    cursor?: SchoolCrmTaskWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: SchoolCrmTaskScalarFieldEnum | SchoolCrmTaskScalarFieldEnum[]
+  }
+
+  /**
+   * SchoolCrmContact without action
+   */
+  export type SchoolCrmContactDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SchoolCrmContact
+     */
+    select?: SchoolCrmContactSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SchoolCrmContactInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model SchoolCrmActivity
+   */
+
+  export type AggregateSchoolCrmActivity = {
+    _count: SchoolCrmActivityCountAggregateOutputType | null
+    _min: SchoolCrmActivityMinAggregateOutputType | null
+    _max: SchoolCrmActivityMaxAggregateOutputType | null
+  }
+
+  export type SchoolCrmActivityMinAggregateOutputType = {
+    id: string | null
+    schoolId: string | null
+    contactId: string | null
+    activityType: $Enums.SchoolCrmActivityType | null
+    title: string | null
+    summary: string | null
+    occurredAt: Date | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type SchoolCrmActivityMaxAggregateOutputType = {
+    id: string | null
+    schoolId: string | null
+    contactId: string | null
+    activityType: $Enums.SchoolCrmActivityType | null
+    title: string | null
+    summary: string | null
+    occurredAt: Date | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type SchoolCrmActivityCountAggregateOutputType = {
+    id: number
+    schoolId: number
+    contactId: number
+    activityType: number
+    title: number
+    summary: number
+    occurredAt: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type SchoolCrmActivityMinAggregateInputType = {
+    id?: true
+    schoolId?: true
+    contactId?: true
+    activityType?: true
+    title?: true
+    summary?: true
+    occurredAt?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type SchoolCrmActivityMaxAggregateInputType = {
+    id?: true
+    schoolId?: true
+    contactId?: true
+    activityType?: true
+    title?: true
+    summary?: true
+    occurredAt?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type SchoolCrmActivityCountAggregateInputType = {
+    id?: true
+    schoolId?: true
+    contactId?: true
+    activityType?: true
+    title?: true
+    summary?: true
+    occurredAt?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type SchoolCrmActivityAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which SchoolCrmActivity to aggregate.
+     */
+    where?: SchoolCrmActivityWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of SchoolCrmActivities to fetch.
+     */
+    orderBy?: SchoolCrmActivityOrderByWithRelationInput | SchoolCrmActivityOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: SchoolCrmActivityWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` SchoolCrmActivities from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` SchoolCrmActivities.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned SchoolCrmActivities
+    **/
+    _count?: true | SchoolCrmActivityCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: SchoolCrmActivityMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: SchoolCrmActivityMaxAggregateInputType
+  }
+
+  export type GetSchoolCrmActivityAggregateType<T extends SchoolCrmActivityAggregateArgs> = {
+        [P in keyof T & keyof AggregateSchoolCrmActivity]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateSchoolCrmActivity[P]>
+      : GetScalarType<T[P], AggregateSchoolCrmActivity[P]>
+  }
+
+
+
+
+  export type SchoolCrmActivityGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: SchoolCrmActivityWhereInput
+    orderBy?: SchoolCrmActivityOrderByWithAggregationInput | SchoolCrmActivityOrderByWithAggregationInput[]
+    by: SchoolCrmActivityScalarFieldEnum[] | SchoolCrmActivityScalarFieldEnum
+    having?: SchoolCrmActivityScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: SchoolCrmActivityCountAggregateInputType | true
+    _min?: SchoolCrmActivityMinAggregateInputType
+    _max?: SchoolCrmActivityMaxAggregateInputType
+  }
+
+  export type SchoolCrmActivityGroupByOutputType = {
+    id: string
+    schoolId: string
+    contactId: string | null
+    activityType: $Enums.SchoolCrmActivityType
+    title: string
+    summary: string | null
+    occurredAt: Date
+    createdAt: Date
+    updatedAt: Date
+    _count: SchoolCrmActivityCountAggregateOutputType | null
+    _min: SchoolCrmActivityMinAggregateOutputType | null
+    _max: SchoolCrmActivityMaxAggregateOutputType | null
+  }
+
+  type GetSchoolCrmActivityGroupByPayload<T extends SchoolCrmActivityGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<SchoolCrmActivityGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof SchoolCrmActivityGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], SchoolCrmActivityGroupByOutputType[P]>
+            : GetScalarType<T[P], SchoolCrmActivityGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type SchoolCrmActivitySelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    schoolId?: boolean
+    contactId?: boolean
+    activityType?: boolean
+    title?: boolean
+    summary?: boolean
+    occurredAt?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    school?: boolean | SchoolDefaultArgs<ExtArgs>
+    contact?: boolean | SchoolCrmActivity$contactArgs<ExtArgs>
+  }, ExtArgs["result"]["schoolCrmActivity"]>
+
+  export type SchoolCrmActivitySelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    schoolId?: boolean
+    contactId?: boolean
+    activityType?: boolean
+    title?: boolean
+    summary?: boolean
+    occurredAt?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    school?: boolean | SchoolDefaultArgs<ExtArgs>
+    contact?: boolean | SchoolCrmActivity$contactArgs<ExtArgs>
+  }, ExtArgs["result"]["schoolCrmActivity"]>
+
+  export type SchoolCrmActivitySelectScalar = {
+    id?: boolean
+    schoolId?: boolean
+    contactId?: boolean
+    activityType?: boolean
+    title?: boolean
+    summary?: boolean
+    occurredAt?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type SchoolCrmActivityInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    school?: boolean | SchoolDefaultArgs<ExtArgs>
+    contact?: boolean | SchoolCrmActivity$contactArgs<ExtArgs>
+  }
+  export type SchoolCrmActivityIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    school?: boolean | SchoolDefaultArgs<ExtArgs>
+    contact?: boolean | SchoolCrmActivity$contactArgs<ExtArgs>
+  }
+
+  export type $SchoolCrmActivityPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "SchoolCrmActivity"
+    objects: {
+      school: Prisma.$SchoolPayload<ExtArgs>
+      contact: Prisma.$SchoolCrmContactPayload<ExtArgs> | null
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      schoolId: string
+      contactId: string | null
+      activityType: $Enums.SchoolCrmActivityType
+      title: string
+      summary: string | null
+      occurredAt: Date
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["schoolCrmActivity"]>
+    composites: {}
+  }
+
+  type SchoolCrmActivityGetPayload<S extends boolean | null | undefined | SchoolCrmActivityDefaultArgs> = $Result.GetResult<Prisma.$SchoolCrmActivityPayload, S>
+
+  type SchoolCrmActivityCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = 
+    Omit<SchoolCrmActivityFindManyArgs, 'select' | 'include' | 'distinct'> & {
+      select?: SchoolCrmActivityCountAggregateInputType | true
+    }
+
+  export interface SchoolCrmActivityDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['SchoolCrmActivity'], meta: { name: 'SchoolCrmActivity' } }
+    /**
+     * Find zero or one SchoolCrmActivity that matches the filter.
+     * @param {SchoolCrmActivityFindUniqueArgs} args - Arguments to find a SchoolCrmActivity
+     * @example
+     * // Get one SchoolCrmActivity
+     * const schoolCrmActivity = await prisma.schoolCrmActivity.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends SchoolCrmActivityFindUniqueArgs>(args: SelectSubset<T, SchoolCrmActivityFindUniqueArgs<ExtArgs>>): Prisma__SchoolCrmActivityClient<$Result.GetResult<Prisma.$SchoolCrmActivityPayload<ExtArgs>, T, "findUnique"> | null, null, ExtArgs>
+
+    /**
+     * Find one SchoolCrmActivity that matches the filter or throw an error with `error.code='P2025'` 
+     * if no matches were found.
+     * @param {SchoolCrmActivityFindUniqueOrThrowArgs} args - Arguments to find a SchoolCrmActivity
+     * @example
+     * // Get one SchoolCrmActivity
+     * const schoolCrmActivity = await prisma.schoolCrmActivity.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends SchoolCrmActivityFindUniqueOrThrowArgs>(args: SelectSubset<T, SchoolCrmActivityFindUniqueOrThrowArgs<ExtArgs>>): Prisma__SchoolCrmActivityClient<$Result.GetResult<Prisma.$SchoolCrmActivityPayload<ExtArgs>, T, "findUniqueOrThrow">, never, ExtArgs>
+
+    /**
+     * Find the first SchoolCrmActivity that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SchoolCrmActivityFindFirstArgs} args - Arguments to find a SchoolCrmActivity
+     * @example
+     * // Get one SchoolCrmActivity
+     * const schoolCrmActivity = await prisma.schoolCrmActivity.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends SchoolCrmActivityFindFirstArgs>(args?: SelectSubset<T, SchoolCrmActivityFindFirstArgs<ExtArgs>>): Prisma__SchoolCrmActivityClient<$Result.GetResult<Prisma.$SchoolCrmActivityPayload<ExtArgs>, T, "findFirst"> | null, null, ExtArgs>
+
+    /**
+     * Find the first SchoolCrmActivity that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SchoolCrmActivityFindFirstOrThrowArgs} args - Arguments to find a SchoolCrmActivity
+     * @example
+     * // Get one SchoolCrmActivity
+     * const schoolCrmActivity = await prisma.schoolCrmActivity.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends SchoolCrmActivityFindFirstOrThrowArgs>(args?: SelectSubset<T, SchoolCrmActivityFindFirstOrThrowArgs<ExtArgs>>): Prisma__SchoolCrmActivityClient<$Result.GetResult<Prisma.$SchoolCrmActivityPayload<ExtArgs>, T, "findFirstOrThrow">, never, ExtArgs>
+
+    /**
+     * Find zero or more SchoolCrmActivities that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SchoolCrmActivityFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all SchoolCrmActivities
+     * const schoolCrmActivities = await prisma.schoolCrmActivity.findMany()
+     * 
+     * // Get first 10 SchoolCrmActivities
+     * const schoolCrmActivities = await prisma.schoolCrmActivity.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const schoolCrmActivityWithIdOnly = await prisma.schoolCrmActivity.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends SchoolCrmActivityFindManyArgs>(args?: SelectSubset<T, SchoolCrmActivityFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SchoolCrmActivityPayload<ExtArgs>, T, "findMany">>
+
+    /**
+     * Create a SchoolCrmActivity.
+     * @param {SchoolCrmActivityCreateArgs} args - Arguments to create a SchoolCrmActivity.
+     * @example
+     * // Create one SchoolCrmActivity
+     * const SchoolCrmActivity = await prisma.schoolCrmActivity.create({
+     *   data: {
+     *     // ... data to create a SchoolCrmActivity
+     *   }
+     * })
+     * 
+     */
+    create<T extends SchoolCrmActivityCreateArgs>(args: SelectSubset<T, SchoolCrmActivityCreateArgs<ExtArgs>>): Prisma__SchoolCrmActivityClient<$Result.GetResult<Prisma.$SchoolCrmActivityPayload<ExtArgs>, T, "create">, never, ExtArgs>
+
+    /**
+     * Create many SchoolCrmActivities.
+     * @param {SchoolCrmActivityCreateManyArgs} args - Arguments to create many SchoolCrmActivities.
+     * @example
+     * // Create many SchoolCrmActivities
+     * const schoolCrmActivity = await prisma.schoolCrmActivity.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends SchoolCrmActivityCreateManyArgs>(args?: SelectSubset<T, SchoolCrmActivityCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many SchoolCrmActivities and returns the data saved in the database.
+     * @param {SchoolCrmActivityCreateManyAndReturnArgs} args - Arguments to create many SchoolCrmActivities.
+     * @example
+     * // Create many SchoolCrmActivities
+     * const schoolCrmActivity = await prisma.schoolCrmActivity.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many SchoolCrmActivities and only return the `id`
+     * const schoolCrmActivityWithIdOnly = await prisma.schoolCrmActivity.createManyAndReturn({ 
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends SchoolCrmActivityCreateManyAndReturnArgs>(args?: SelectSubset<T, SchoolCrmActivityCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SchoolCrmActivityPayload<ExtArgs>, T, "createManyAndReturn">>
+
+    /**
+     * Delete a SchoolCrmActivity.
+     * @param {SchoolCrmActivityDeleteArgs} args - Arguments to delete one SchoolCrmActivity.
+     * @example
+     * // Delete one SchoolCrmActivity
+     * const SchoolCrmActivity = await prisma.schoolCrmActivity.delete({
+     *   where: {
+     *     // ... filter to delete one SchoolCrmActivity
+     *   }
+     * })
+     * 
+     */
+    delete<T extends SchoolCrmActivityDeleteArgs>(args: SelectSubset<T, SchoolCrmActivityDeleteArgs<ExtArgs>>): Prisma__SchoolCrmActivityClient<$Result.GetResult<Prisma.$SchoolCrmActivityPayload<ExtArgs>, T, "delete">, never, ExtArgs>
+
+    /**
+     * Update one SchoolCrmActivity.
+     * @param {SchoolCrmActivityUpdateArgs} args - Arguments to update one SchoolCrmActivity.
+     * @example
+     * // Update one SchoolCrmActivity
+     * const schoolCrmActivity = await prisma.schoolCrmActivity.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends SchoolCrmActivityUpdateArgs>(args: SelectSubset<T, SchoolCrmActivityUpdateArgs<ExtArgs>>): Prisma__SchoolCrmActivityClient<$Result.GetResult<Prisma.$SchoolCrmActivityPayload<ExtArgs>, T, "update">, never, ExtArgs>
+
+    /**
+     * Delete zero or more SchoolCrmActivities.
+     * @param {SchoolCrmActivityDeleteManyArgs} args - Arguments to filter SchoolCrmActivities to delete.
+     * @example
+     * // Delete a few SchoolCrmActivities
+     * const { count } = await prisma.schoolCrmActivity.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends SchoolCrmActivityDeleteManyArgs>(args?: SelectSubset<T, SchoolCrmActivityDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more SchoolCrmActivities.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SchoolCrmActivityUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many SchoolCrmActivities
+     * const schoolCrmActivity = await prisma.schoolCrmActivity.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends SchoolCrmActivityUpdateManyArgs>(args: SelectSubset<T, SchoolCrmActivityUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one SchoolCrmActivity.
+     * @param {SchoolCrmActivityUpsertArgs} args - Arguments to update or create a SchoolCrmActivity.
+     * @example
+     * // Update or create a SchoolCrmActivity
+     * const schoolCrmActivity = await prisma.schoolCrmActivity.upsert({
+     *   create: {
+     *     // ... data to create a SchoolCrmActivity
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the SchoolCrmActivity we want to update
+     *   }
+     * })
+     */
+    upsert<T extends SchoolCrmActivityUpsertArgs>(args: SelectSubset<T, SchoolCrmActivityUpsertArgs<ExtArgs>>): Prisma__SchoolCrmActivityClient<$Result.GetResult<Prisma.$SchoolCrmActivityPayload<ExtArgs>, T, "upsert">, never, ExtArgs>
+
+
+    /**
+     * Count the number of SchoolCrmActivities.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SchoolCrmActivityCountArgs} args - Arguments to filter SchoolCrmActivities to count.
+     * @example
+     * // Count the number of SchoolCrmActivities
+     * const count = await prisma.schoolCrmActivity.count({
+     *   where: {
+     *     // ... the filter for the SchoolCrmActivities we want to count
+     *   }
+     * })
+    **/
+    count<T extends SchoolCrmActivityCountArgs>(
+      args?: Subset<T, SchoolCrmActivityCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], SchoolCrmActivityCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a SchoolCrmActivity.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SchoolCrmActivityAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends SchoolCrmActivityAggregateArgs>(args: Subset<T, SchoolCrmActivityAggregateArgs>): Prisma.PrismaPromise<GetSchoolCrmActivityAggregateType<T>>
+
+    /**
+     * Group by SchoolCrmActivity.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SchoolCrmActivityGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends SchoolCrmActivityGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: SchoolCrmActivityGroupByArgs['orderBy'] }
+        : { orderBy?: SchoolCrmActivityGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, SchoolCrmActivityGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetSchoolCrmActivityGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the SchoolCrmActivity model
+   */
+  readonly fields: SchoolCrmActivityFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for SchoolCrmActivity.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__SchoolCrmActivityClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    school<T extends SchoolDefaultArgs<ExtArgs> = {}>(args?: Subset<T, SchoolDefaultArgs<ExtArgs>>): Prisma__SchoolClient<$Result.GetResult<Prisma.$SchoolPayload<ExtArgs>, T, "findUniqueOrThrow"> | Null, Null, ExtArgs>
+    contact<T extends SchoolCrmActivity$contactArgs<ExtArgs> = {}>(args?: Subset<T, SchoolCrmActivity$contactArgs<ExtArgs>>): Prisma__SchoolCrmContactClient<$Result.GetResult<Prisma.$SchoolCrmContactPayload<ExtArgs>, T, "findUniqueOrThrow"> | null, null, ExtArgs>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the SchoolCrmActivity model
+   */ 
+  interface SchoolCrmActivityFieldRefs {
+    readonly id: FieldRef<"SchoolCrmActivity", 'String'>
+    readonly schoolId: FieldRef<"SchoolCrmActivity", 'String'>
+    readonly contactId: FieldRef<"SchoolCrmActivity", 'String'>
+    readonly activityType: FieldRef<"SchoolCrmActivity", 'SchoolCrmActivityType'>
+    readonly title: FieldRef<"SchoolCrmActivity", 'String'>
+    readonly summary: FieldRef<"SchoolCrmActivity", 'String'>
+    readonly occurredAt: FieldRef<"SchoolCrmActivity", 'DateTime'>
+    readonly createdAt: FieldRef<"SchoolCrmActivity", 'DateTime'>
+    readonly updatedAt: FieldRef<"SchoolCrmActivity", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * SchoolCrmActivity findUnique
+   */
+  export type SchoolCrmActivityFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SchoolCrmActivity
+     */
+    select?: SchoolCrmActivitySelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SchoolCrmActivityInclude<ExtArgs> | null
+    /**
+     * Filter, which SchoolCrmActivity to fetch.
+     */
+    where: SchoolCrmActivityWhereUniqueInput
+  }
+
+  /**
+   * SchoolCrmActivity findUniqueOrThrow
+   */
+  export type SchoolCrmActivityFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SchoolCrmActivity
+     */
+    select?: SchoolCrmActivitySelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SchoolCrmActivityInclude<ExtArgs> | null
+    /**
+     * Filter, which SchoolCrmActivity to fetch.
+     */
+    where: SchoolCrmActivityWhereUniqueInput
+  }
+
+  /**
+   * SchoolCrmActivity findFirst
+   */
+  export type SchoolCrmActivityFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SchoolCrmActivity
+     */
+    select?: SchoolCrmActivitySelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SchoolCrmActivityInclude<ExtArgs> | null
+    /**
+     * Filter, which SchoolCrmActivity to fetch.
+     */
+    where?: SchoolCrmActivityWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of SchoolCrmActivities to fetch.
+     */
+    orderBy?: SchoolCrmActivityOrderByWithRelationInput | SchoolCrmActivityOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for SchoolCrmActivities.
+     */
+    cursor?: SchoolCrmActivityWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` SchoolCrmActivities from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` SchoolCrmActivities.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of SchoolCrmActivities.
+     */
+    distinct?: SchoolCrmActivityScalarFieldEnum | SchoolCrmActivityScalarFieldEnum[]
+  }
+
+  /**
+   * SchoolCrmActivity findFirstOrThrow
+   */
+  export type SchoolCrmActivityFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SchoolCrmActivity
+     */
+    select?: SchoolCrmActivitySelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SchoolCrmActivityInclude<ExtArgs> | null
+    /**
+     * Filter, which SchoolCrmActivity to fetch.
+     */
+    where?: SchoolCrmActivityWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of SchoolCrmActivities to fetch.
+     */
+    orderBy?: SchoolCrmActivityOrderByWithRelationInput | SchoolCrmActivityOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for SchoolCrmActivities.
+     */
+    cursor?: SchoolCrmActivityWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` SchoolCrmActivities from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` SchoolCrmActivities.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of SchoolCrmActivities.
+     */
+    distinct?: SchoolCrmActivityScalarFieldEnum | SchoolCrmActivityScalarFieldEnum[]
+  }
+
+  /**
+   * SchoolCrmActivity findMany
+   */
+  export type SchoolCrmActivityFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SchoolCrmActivity
+     */
+    select?: SchoolCrmActivitySelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SchoolCrmActivityInclude<ExtArgs> | null
+    /**
+     * Filter, which SchoolCrmActivities to fetch.
+     */
+    where?: SchoolCrmActivityWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of SchoolCrmActivities to fetch.
+     */
+    orderBy?: SchoolCrmActivityOrderByWithRelationInput | SchoolCrmActivityOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing SchoolCrmActivities.
+     */
+    cursor?: SchoolCrmActivityWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` SchoolCrmActivities from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` SchoolCrmActivities.
+     */
+    skip?: number
+    distinct?: SchoolCrmActivityScalarFieldEnum | SchoolCrmActivityScalarFieldEnum[]
+  }
+
+  /**
+   * SchoolCrmActivity create
+   */
+  export type SchoolCrmActivityCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SchoolCrmActivity
+     */
+    select?: SchoolCrmActivitySelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SchoolCrmActivityInclude<ExtArgs> | null
+    /**
+     * The data needed to create a SchoolCrmActivity.
+     */
+    data: XOR<SchoolCrmActivityCreateInput, SchoolCrmActivityUncheckedCreateInput>
+  }
+
+  /**
+   * SchoolCrmActivity createMany
+   */
+  export type SchoolCrmActivityCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many SchoolCrmActivities.
+     */
+    data: SchoolCrmActivityCreateManyInput | SchoolCrmActivityCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * SchoolCrmActivity createManyAndReturn
+   */
+  export type SchoolCrmActivityCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SchoolCrmActivity
+     */
+    select?: SchoolCrmActivitySelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * The data used to create many SchoolCrmActivities.
+     */
+    data: SchoolCrmActivityCreateManyInput | SchoolCrmActivityCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SchoolCrmActivityIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * SchoolCrmActivity update
+   */
+  export type SchoolCrmActivityUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SchoolCrmActivity
+     */
+    select?: SchoolCrmActivitySelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SchoolCrmActivityInclude<ExtArgs> | null
+    /**
+     * The data needed to update a SchoolCrmActivity.
+     */
+    data: XOR<SchoolCrmActivityUpdateInput, SchoolCrmActivityUncheckedUpdateInput>
+    /**
+     * Choose, which SchoolCrmActivity to update.
+     */
+    where: SchoolCrmActivityWhereUniqueInput
+  }
+
+  /**
+   * SchoolCrmActivity updateMany
+   */
+  export type SchoolCrmActivityUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update SchoolCrmActivities.
+     */
+    data: XOR<SchoolCrmActivityUpdateManyMutationInput, SchoolCrmActivityUncheckedUpdateManyInput>
+    /**
+     * Filter which SchoolCrmActivities to update
+     */
+    where?: SchoolCrmActivityWhereInput
+  }
+
+  /**
+   * SchoolCrmActivity upsert
+   */
+  export type SchoolCrmActivityUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SchoolCrmActivity
+     */
+    select?: SchoolCrmActivitySelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SchoolCrmActivityInclude<ExtArgs> | null
+    /**
+     * The filter to search for the SchoolCrmActivity to update in case it exists.
+     */
+    where: SchoolCrmActivityWhereUniqueInput
+    /**
+     * In case the SchoolCrmActivity found by the `where` argument doesn't exist, create a new SchoolCrmActivity with this data.
+     */
+    create: XOR<SchoolCrmActivityCreateInput, SchoolCrmActivityUncheckedCreateInput>
+    /**
+     * In case the SchoolCrmActivity was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<SchoolCrmActivityUpdateInput, SchoolCrmActivityUncheckedUpdateInput>
+  }
+
+  /**
+   * SchoolCrmActivity delete
+   */
+  export type SchoolCrmActivityDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SchoolCrmActivity
+     */
+    select?: SchoolCrmActivitySelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SchoolCrmActivityInclude<ExtArgs> | null
+    /**
+     * Filter which SchoolCrmActivity to delete.
+     */
+    where: SchoolCrmActivityWhereUniqueInput
+  }
+
+  /**
+   * SchoolCrmActivity deleteMany
+   */
+  export type SchoolCrmActivityDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which SchoolCrmActivities to delete
+     */
+    where?: SchoolCrmActivityWhereInput
+  }
+
+  /**
+   * SchoolCrmActivity.contact
+   */
+  export type SchoolCrmActivity$contactArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SchoolCrmContact
+     */
+    select?: SchoolCrmContactSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SchoolCrmContactInclude<ExtArgs> | null
+    where?: SchoolCrmContactWhereInput
+  }
+
+  /**
+   * SchoolCrmActivity without action
+   */
+  export type SchoolCrmActivityDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SchoolCrmActivity
+     */
+    select?: SchoolCrmActivitySelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SchoolCrmActivityInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model SchoolCrmTask
+   */
+
+  export type AggregateSchoolCrmTask = {
+    _count: SchoolCrmTaskCountAggregateOutputType | null
+    _min: SchoolCrmTaskMinAggregateOutputType | null
+    _max: SchoolCrmTaskMaxAggregateOutputType | null
+  }
+
+  export type SchoolCrmTaskMinAggregateOutputType = {
+    id: string | null
+    schoolId: string | null
+    contactId: string | null
+    title: string | null
+    description: string | null
+    dueAt: Date | null
+    status: $Enums.SchoolCrmTaskStatus | null
+    priority: $Enums.SchoolCrmTaskPriority | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type SchoolCrmTaskMaxAggregateOutputType = {
+    id: string | null
+    schoolId: string | null
+    contactId: string | null
+    title: string | null
+    description: string | null
+    dueAt: Date | null
+    status: $Enums.SchoolCrmTaskStatus | null
+    priority: $Enums.SchoolCrmTaskPriority | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type SchoolCrmTaskCountAggregateOutputType = {
+    id: number
+    schoolId: number
+    contactId: number
+    title: number
+    description: number
+    dueAt: number
+    status: number
+    priority: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type SchoolCrmTaskMinAggregateInputType = {
+    id?: true
+    schoolId?: true
+    contactId?: true
+    title?: true
+    description?: true
+    dueAt?: true
+    status?: true
+    priority?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type SchoolCrmTaskMaxAggregateInputType = {
+    id?: true
+    schoolId?: true
+    contactId?: true
+    title?: true
+    description?: true
+    dueAt?: true
+    status?: true
+    priority?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type SchoolCrmTaskCountAggregateInputType = {
+    id?: true
+    schoolId?: true
+    contactId?: true
+    title?: true
+    description?: true
+    dueAt?: true
+    status?: true
+    priority?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type SchoolCrmTaskAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which SchoolCrmTask to aggregate.
+     */
+    where?: SchoolCrmTaskWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of SchoolCrmTasks to fetch.
+     */
+    orderBy?: SchoolCrmTaskOrderByWithRelationInput | SchoolCrmTaskOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: SchoolCrmTaskWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` SchoolCrmTasks from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` SchoolCrmTasks.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned SchoolCrmTasks
+    **/
+    _count?: true | SchoolCrmTaskCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: SchoolCrmTaskMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: SchoolCrmTaskMaxAggregateInputType
+  }
+
+  export type GetSchoolCrmTaskAggregateType<T extends SchoolCrmTaskAggregateArgs> = {
+        [P in keyof T & keyof AggregateSchoolCrmTask]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateSchoolCrmTask[P]>
+      : GetScalarType<T[P], AggregateSchoolCrmTask[P]>
+  }
+
+
+
+
+  export type SchoolCrmTaskGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: SchoolCrmTaskWhereInput
+    orderBy?: SchoolCrmTaskOrderByWithAggregationInput | SchoolCrmTaskOrderByWithAggregationInput[]
+    by: SchoolCrmTaskScalarFieldEnum[] | SchoolCrmTaskScalarFieldEnum
+    having?: SchoolCrmTaskScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: SchoolCrmTaskCountAggregateInputType | true
+    _min?: SchoolCrmTaskMinAggregateInputType
+    _max?: SchoolCrmTaskMaxAggregateInputType
+  }
+
+  export type SchoolCrmTaskGroupByOutputType = {
+    id: string
+    schoolId: string
+    contactId: string | null
+    title: string
+    description: string | null
+    dueAt: Date | null
+    status: $Enums.SchoolCrmTaskStatus
+    priority: $Enums.SchoolCrmTaskPriority
+    createdAt: Date
+    updatedAt: Date
+    _count: SchoolCrmTaskCountAggregateOutputType | null
+    _min: SchoolCrmTaskMinAggregateOutputType | null
+    _max: SchoolCrmTaskMaxAggregateOutputType | null
+  }
+
+  type GetSchoolCrmTaskGroupByPayload<T extends SchoolCrmTaskGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<SchoolCrmTaskGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof SchoolCrmTaskGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], SchoolCrmTaskGroupByOutputType[P]>
+            : GetScalarType<T[P], SchoolCrmTaskGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type SchoolCrmTaskSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    schoolId?: boolean
+    contactId?: boolean
+    title?: boolean
+    description?: boolean
+    dueAt?: boolean
+    status?: boolean
+    priority?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    school?: boolean | SchoolDefaultArgs<ExtArgs>
+    contact?: boolean | SchoolCrmTask$contactArgs<ExtArgs>
+  }, ExtArgs["result"]["schoolCrmTask"]>
+
+  export type SchoolCrmTaskSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    schoolId?: boolean
+    contactId?: boolean
+    title?: boolean
+    description?: boolean
+    dueAt?: boolean
+    status?: boolean
+    priority?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    school?: boolean | SchoolDefaultArgs<ExtArgs>
+    contact?: boolean | SchoolCrmTask$contactArgs<ExtArgs>
+  }, ExtArgs["result"]["schoolCrmTask"]>
+
+  export type SchoolCrmTaskSelectScalar = {
+    id?: boolean
+    schoolId?: boolean
+    contactId?: boolean
+    title?: boolean
+    description?: boolean
+    dueAt?: boolean
+    status?: boolean
+    priority?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type SchoolCrmTaskInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    school?: boolean | SchoolDefaultArgs<ExtArgs>
+    contact?: boolean | SchoolCrmTask$contactArgs<ExtArgs>
+  }
+  export type SchoolCrmTaskIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    school?: boolean | SchoolDefaultArgs<ExtArgs>
+    contact?: boolean | SchoolCrmTask$contactArgs<ExtArgs>
+  }
+
+  export type $SchoolCrmTaskPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "SchoolCrmTask"
+    objects: {
+      school: Prisma.$SchoolPayload<ExtArgs>
+      contact: Prisma.$SchoolCrmContactPayload<ExtArgs> | null
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      schoolId: string
+      contactId: string | null
+      title: string
+      description: string | null
+      dueAt: Date | null
+      status: $Enums.SchoolCrmTaskStatus
+      priority: $Enums.SchoolCrmTaskPriority
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["schoolCrmTask"]>
+    composites: {}
+  }
+
+  type SchoolCrmTaskGetPayload<S extends boolean | null | undefined | SchoolCrmTaskDefaultArgs> = $Result.GetResult<Prisma.$SchoolCrmTaskPayload, S>
+
+  type SchoolCrmTaskCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = 
+    Omit<SchoolCrmTaskFindManyArgs, 'select' | 'include' | 'distinct'> & {
+      select?: SchoolCrmTaskCountAggregateInputType | true
+    }
+
+  export interface SchoolCrmTaskDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['SchoolCrmTask'], meta: { name: 'SchoolCrmTask' } }
+    /**
+     * Find zero or one SchoolCrmTask that matches the filter.
+     * @param {SchoolCrmTaskFindUniqueArgs} args - Arguments to find a SchoolCrmTask
+     * @example
+     * // Get one SchoolCrmTask
+     * const schoolCrmTask = await prisma.schoolCrmTask.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends SchoolCrmTaskFindUniqueArgs>(args: SelectSubset<T, SchoolCrmTaskFindUniqueArgs<ExtArgs>>): Prisma__SchoolCrmTaskClient<$Result.GetResult<Prisma.$SchoolCrmTaskPayload<ExtArgs>, T, "findUnique"> | null, null, ExtArgs>
+
+    /**
+     * Find one SchoolCrmTask that matches the filter or throw an error with `error.code='P2025'` 
+     * if no matches were found.
+     * @param {SchoolCrmTaskFindUniqueOrThrowArgs} args - Arguments to find a SchoolCrmTask
+     * @example
+     * // Get one SchoolCrmTask
+     * const schoolCrmTask = await prisma.schoolCrmTask.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends SchoolCrmTaskFindUniqueOrThrowArgs>(args: SelectSubset<T, SchoolCrmTaskFindUniqueOrThrowArgs<ExtArgs>>): Prisma__SchoolCrmTaskClient<$Result.GetResult<Prisma.$SchoolCrmTaskPayload<ExtArgs>, T, "findUniqueOrThrow">, never, ExtArgs>
+
+    /**
+     * Find the first SchoolCrmTask that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SchoolCrmTaskFindFirstArgs} args - Arguments to find a SchoolCrmTask
+     * @example
+     * // Get one SchoolCrmTask
+     * const schoolCrmTask = await prisma.schoolCrmTask.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends SchoolCrmTaskFindFirstArgs>(args?: SelectSubset<T, SchoolCrmTaskFindFirstArgs<ExtArgs>>): Prisma__SchoolCrmTaskClient<$Result.GetResult<Prisma.$SchoolCrmTaskPayload<ExtArgs>, T, "findFirst"> | null, null, ExtArgs>
+
+    /**
+     * Find the first SchoolCrmTask that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SchoolCrmTaskFindFirstOrThrowArgs} args - Arguments to find a SchoolCrmTask
+     * @example
+     * // Get one SchoolCrmTask
+     * const schoolCrmTask = await prisma.schoolCrmTask.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends SchoolCrmTaskFindFirstOrThrowArgs>(args?: SelectSubset<T, SchoolCrmTaskFindFirstOrThrowArgs<ExtArgs>>): Prisma__SchoolCrmTaskClient<$Result.GetResult<Prisma.$SchoolCrmTaskPayload<ExtArgs>, T, "findFirstOrThrow">, never, ExtArgs>
+
+    /**
+     * Find zero or more SchoolCrmTasks that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SchoolCrmTaskFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all SchoolCrmTasks
+     * const schoolCrmTasks = await prisma.schoolCrmTask.findMany()
+     * 
+     * // Get first 10 SchoolCrmTasks
+     * const schoolCrmTasks = await prisma.schoolCrmTask.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const schoolCrmTaskWithIdOnly = await prisma.schoolCrmTask.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends SchoolCrmTaskFindManyArgs>(args?: SelectSubset<T, SchoolCrmTaskFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SchoolCrmTaskPayload<ExtArgs>, T, "findMany">>
+
+    /**
+     * Create a SchoolCrmTask.
+     * @param {SchoolCrmTaskCreateArgs} args - Arguments to create a SchoolCrmTask.
+     * @example
+     * // Create one SchoolCrmTask
+     * const SchoolCrmTask = await prisma.schoolCrmTask.create({
+     *   data: {
+     *     // ... data to create a SchoolCrmTask
+     *   }
+     * })
+     * 
+     */
+    create<T extends SchoolCrmTaskCreateArgs>(args: SelectSubset<T, SchoolCrmTaskCreateArgs<ExtArgs>>): Prisma__SchoolCrmTaskClient<$Result.GetResult<Prisma.$SchoolCrmTaskPayload<ExtArgs>, T, "create">, never, ExtArgs>
+
+    /**
+     * Create many SchoolCrmTasks.
+     * @param {SchoolCrmTaskCreateManyArgs} args - Arguments to create many SchoolCrmTasks.
+     * @example
+     * // Create many SchoolCrmTasks
+     * const schoolCrmTask = await prisma.schoolCrmTask.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends SchoolCrmTaskCreateManyArgs>(args?: SelectSubset<T, SchoolCrmTaskCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many SchoolCrmTasks and returns the data saved in the database.
+     * @param {SchoolCrmTaskCreateManyAndReturnArgs} args - Arguments to create many SchoolCrmTasks.
+     * @example
+     * // Create many SchoolCrmTasks
+     * const schoolCrmTask = await prisma.schoolCrmTask.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many SchoolCrmTasks and only return the `id`
+     * const schoolCrmTaskWithIdOnly = await prisma.schoolCrmTask.createManyAndReturn({ 
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends SchoolCrmTaskCreateManyAndReturnArgs>(args?: SelectSubset<T, SchoolCrmTaskCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SchoolCrmTaskPayload<ExtArgs>, T, "createManyAndReturn">>
+
+    /**
+     * Delete a SchoolCrmTask.
+     * @param {SchoolCrmTaskDeleteArgs} args - Arguments to delete one SchoolCrmTask.
+     * @example
+     * // Delete one SchoolCrmTask
+     * const SchoolCrmTask = await prisma.schoolCrmTask.delete({
+     *   where: {
+     *     // ... filter to delete one SchoolCrmTask
+     *   }
+     * })
+     * 
+     */
+    delete<T extends SchoolCrmTaskDeleteArgs>(args: SelectSubset<T, SchoolCrmTaskDeleteArgs<ExtArgs>>): Prisma__SchoolCrmTaskClient<$Result.GetResult<Prisma.$SchoolCrmTaskPayload<ExtArgs>, T, "delete">, never, ExtArgs>
+
+    /**
+     * Update one SchoolCrmTask.
+     * @param {SchoolCrmTaskUpdateArgs} args - Arguments to update one SchoolCrmTask.
+     * @example
+     * // Update one SchoolCrmTask
+     * const schoolCrmTask = await prisma.schoolCrmTask.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends SchoolCrmTaskUpdateArgs>(args: SelectSubset<T, SchoolCrmTaskUpdateArgs<ExtArgs>>): Prisma__SchoolCrmTaskClient<$Result.GetResult<Prisma.$SchoolCrmTaskPayload<ExtArgs>, T, "update">, never, ExtArgs>
+
+    /**
+     * Delete zero or more SchoolCrmTasks.
+     * @param {SchoolCrmTaskDeleteManyArgs} args - Arguments to filter SchoolCrmTasks to delete.
+     * @example
+     * // Delete a few SchoolCrmTasks
+     * const { count } = await prisma.schoolCrmTask.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends SchoolCrmTaskDeleteManyArgs>(args?: SelectSubset<T, SchoolCrmTaskDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more SchoolCrmTasks.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SchoolCrmTaskUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many SchoolCrmTasks
+     * const schoolCrmTask = await prisma.schoolCrmTask.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends SchoolCrmTaskUpdateManyArgs>(args: SelectSubset<T, SchoolCrmTaskUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one SchoolCrmTask.
+     * @param {SchoolCrmTaskUpsertArgs} args - Arguments to update or create a SchoolCrmTask.
+     * @example
+     * // Update or create a SchoolCrmTask
+     * const schoolCrmTask = await prisma.schoolCrmTask.upsert({
+     *   create: {
+     *     // ... data to create a SchoolCrmTask
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the SchoolCrmTask we want to update
+     *   }
+     * })
+     */
+    upsert<T extends SchoolCrmTaskUpsertArgs>(args: SelectSubset<T, SchoolCrmTaskUpsertArgs<ExtArgs>>): Prisma__SchoolCrmTaskClient<$Result.GetResult<Prisma.$SchoolCrmTaskPayload<ExtArgs>, T, "upsert">, never, ExtArgs>
+
+
+    /**
+     * Count the number of SchoolCrmTasks.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SchoolCrmTaskCountArgs} args - Arguments to filter SchoolCrmTasks to count.
+     * @example
+     * // Count the number of SchoolCrmTasks
+     * const count = await prisma.schoolCrmTask.count({
+     *   where: {
+     *     // ... the filter for the SchoolCrmTasks we want to count
+     *   }
+     * })
+    **/
+    count<T extends SchoolCrmTaskCountArgs>(
+      args?: Subset<T, SchoolCrmTaskCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], SchoolCrmTaskCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a SchoolCrmTask.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SchoolCrmTaskAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends SchoolCrmTaskAggregateArgs>(args: Subset<T, SchoolCrmTaskAggregateArgs>): Prisma.PrismaPromise<GetSchoolCrmTaskAggregateType<T>>
+
+    /**
+     * Group by SchoolCrmTask.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SchoolCrmTaskGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends SchoolCrmTaskGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: SchoolCrmTaskGroupByArgs['orderBy'] }
+        : { orderBy?: SchoolCrmTaskGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, SchoolCrmTaskGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetSchoolCrmTaskGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the SchoolCrmTask model
+   */
+  readonly fields: SchoolCrmTaskFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for SchoolCrmTask.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__SchoolCrmTaskClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    school<T extends SchoolDefaultArgs<ExtArgs> = {}>(args?: Subset<T, SchoolDefaultArgs<ExtArgs>>): Prisma__SchoolClient<$Result.GetResult<Prisma.$SchoolPayload<ExtArgs>, T, "findUniqueOrThrow"> | Null, Null, ExtArgs>
+    contact<T extends SchoolCrmTask$contactArgs<ExtArgs> = {}>(args?: Subset<T, SchoolCrmTask$contactArgs<ExtArgs>>): Prisma__SchoolCrmContactClient<$Result.GetResult<Prisma.$SchoolCrmContactPayload<ExtArgs>, T, "findUniqueOrThrow"> | null, null, ExtArgs>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the SchoolCrmTask model
+   */ 
+  interface SchoolCrmTaskFieldRefs {
+    readonly id: FieldRef<"SchoolCrmTask", 'String'>
+    readonly schoolId: FieldRef<"SchoolCrmTask", 'String'>
+    readonly contactId: FieldRef<"SchoolCrmTask", 'String'>
+    readonly title: FieldRef<"SchoolCrmTask", 'String'>
+    readonly description: FieldRef<"SchoolCrmTask", 'String'>
+    readonly dueAt: FieldRef<"SchoolCrmTask", 'DateTime'>
+    readonly status: FieldRef<"SchoolCrmTask", 'SchoolCrmTaskStatus'>
+    readonly priority: FieldRef<"SchoolCrmTask", 'SchoolCrmTaskPriority'>
+    readonly createdAt: FieldRef<"SchoolCrmTask", 'DateTime'>
+    readonly updatedAt: FieldRef<"SchoolCrmTask", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * SchoolCrmTask findUnique
+   */
+  export type SchoolCrmTaskFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SchoolCrmTask
+     */
+    select?: SchoolCrmTaskSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SchoolCrmTaskInclude<ExtArgs> | null
+    /**
+     * Filter, which SchoolCrmTask to fetch.
+     */
+    where: SchoolCrmTaskWhereUniqueInput
+  }
+
+  /**
+   * SchoolCrmTask findUniqueOrThrow
+   */
+  export type SchoolCrmTaskFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SchoolCrmTask
+     */
+    select?: SchoolCrmTaskSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SchoolCrmTaskInclude<ExtArgs> | null
+    /**
+     * Filter, which SchoolCrmTask to fetch.
+     */
+    where: SchoolCrmTaskWhereUniqueInput
+  }
+
+  /**
+   * SchoolCrmTask findFirst
+   */
+  export type SchoolCrmTaskFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SchoolCrmTask
+     */
+    select?: SchoolCrmTaskSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SchoolCrmTaskInclude<ExtArgs> | null
+    /**
+     * Filter, which SchoolCrmTask to fetch.
+     */
+    where?: SchoolCrmTaskWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of SchoolCrmTasks to fetch.
+     */
+    orderBy?: SchoolCrmTaskOrderByWithRelationInput | SchoolCrmTaskOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for SchoolCrmTasks.
+     */
+    cursor?: SchoolCrmTaskWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` SchoolCrmTasks from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` SchoolCrmTasks.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of SchoolCrmTasks.
+     */
+    distinct?: SchoolCrmTaskScalarFieldEnum | SchoolCrmTaskScalarFieldEnum[]
+  }
+
+  /**
+   * SchoolCrmTask findFirstOrThrow
+   */
+  export type SchoolCrmTaskFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SchoolCrmTask
+     */
+    select?: SchoolCrmTaskSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SchoolCrmTaskInclude<ExtArgs> | null
+    /**
+     * Filter, which SchoolCrmTask to fetch.
+     */
+    where?: SchoolCrmTaskWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of SchoolCrmTasks to fetch.
+     */
+    orderBy?: SchoolCrmTaskOrderByWithRelationInput | SchoolCrmTaskOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for SchoolCrmTasks.
+     */
+    cursor?: SchoolCrmTaskWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` SchoolCrmTasks from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` SchoolCrmTasks.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of SchoolCrmTasks.
+     */
+    distinct?: SchoolCrmTaskScalarFieldEnum | SchoolCrmTaskScalarFieldEnum[]
+  }
+
+  /**
+   * SchoolCrmTask findMany
+   */
+  export type SchoolCrmTaskFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SchoolCrmTask
+     */
+    select?: SchoolCrmTaskSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SchoolCrmTaskInclude<ExtArgs> | null
+    /**
+     * Filter, which SchoolCrmTasks to fetch.
+     */
+    where?: SchoolCrmTaskWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of SchoolCrmTasks to fetch.
+     */
+    orderBy?: SchoolCrmTaskOrderByWithRelationInput | SchoolCrmTaskOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing SchoolCrmTasks.
+     */
+    cursor?: SchoolCrmTaskWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` SchoolCrmTasks from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` SchoolCrmTasks.
+     */
+    skip?: number
+    distinct?: SchoolCrmTaskScalarFieldEnum | SchoolCrmTaskScalarFieldEnum[]
+  }
+
+  /**
+   * SchoolCrmTask create
+   */
+  export type SchoolCrmTaskCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SchoolCrmTask
+     */
+    select?: SchoolCrmTaskSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SchoolCrmTaskInclude<ExtArgs> | null
+    /**
+     * The data needed to create a SchoolCrmTask.
+     */
+    data: XOR<SchoolCrmTaskCreateInput, SchoolCrmTaskUncheckedCreateInput>
+  }
+
+  /**
+   * SchoolCrmTask createMany
+   */
+  export type SchoolCrmTaskCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many SchoolCrmTasks.
+     */
+    data: SchoolCrmTaskCreateManyInput | SchoolCrmTaskCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * SchoolCrmTask createManyAndReturn
+   */
+  export type SchoolCrmTaskCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SchoolCrmTask
+     */
+    select?: SchoolCrmTaskSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * The data used to create many SchoolCrmTasks.
+     */
+    data: SchoolCrmTaskCreateManyInput | SchoolCrmTaskCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SchoolCrmTaskIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * SchoolCrmTask update
+   */
+  export type SchoolCrmTaskUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SchoolCrmTask
+     */
+    select?: SchoolCrmTaskSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SchoolCrmTaskInclude<ExtArgs> | null
+    /**
+     * The data needed to update a SchoolCrmTask.
+     */
+    data: XOR<SchoolCrmTaskUpdateInput, SchoolCrmTaskUncheckedUpdateInput>
+    /**
+     * Choose, which SchoolCrmTask to update.
+     */
+    where: SchoolCrmTaskWhereUniqueInput
+  }
+
+  /**
+   * SchoolCrmTask updateMany
+   */
+  export type SchoolCrmTaskUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update SchoolCrmTasks.
+     */
+    data: XOR<SchoolCrmTaskUpdateManyMutationInput, SchoolCrmTaskUncheckedUpdateManyInput>
+    /**
+     * Filter which SchoolCrmTasks to update
+     */
+    where?: SchoolCrmTaskWhereInput
+  }
+
+  /**
+   * SchoolCrmTask upsert
+   */
+  export type SchoolCrmTaskUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SchoolCrmTask
+     */
+    select?: SchoolCrmTaskSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SchoolCrmTaskInclude<ExtArgs> | null
+    /**
+     * The filter to search for the SchoolCrmTask to update in case it exists.
+     */
+    where: SchoolCrmTaskWhereUniqueInput
+    /**
+     * In case the SchoolCrmTask found by the `where` argument doesn't exist, create a new SchoolCrmTask with this data.
+     */
+    create: XOR<SchoolCrmTaskCreateInput, SchoolCrmTaskUncheckedCreateInput>
+    /**
+     * In case the SchoolCrmTask was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<SchoolCrmTaskUpdateInput, SchoolCrmTaskUncheckedUpdateInput>
+  }
+
+  /**
+   * SchoolCrmTask delete
+   */
+  export type SchoolCrmTaskDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SchoolCrmTask
+     */
+    select?: SchoolCrmTaskSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SchoolCrmTaskInclude<ExtArgs> | null
+    /**
+     * Filter which SchoolCrmTask to delete.
+     */
+    where: SchoolCrmTaskWhereUniqueInput
+  }
+
+  /**
+   * SchoolCrmTask deleteMany
+   */
+  export type SchoolCrmTaskDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which SchoolCrmTasks to delete
+     */
+    where?: SchoolCrmTaskWhereInput
+  }
+
+  /**
+   * SchoolCrmTask.contact
+   */
+  export type SchoolCrmTask$contactArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SchoolCrmContact
+     */
+    select?: SchoolCrmContactSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SchoolCrmContactInclude<ExtArgs> | null
+    where?: SchoolCrmContactWhereInput
+  }
+
+  /**
+   * SchoolCrmTask without action
+   */
+  export type SchoolCrmTaskDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SchoolCrmTask
+     */
+    select?: SchoolCrmTaskSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SchoolCrmTaskInclude<ExtArgs> | null
   }
 
 
@@ -33802,11 +45903,194 @@ export namespace Prisma {
     fundingBalanceZar: 'fundingBalanceZar',
     annualCycleYear: 'annualCycleYear',
     annualCycleFocus: 'annualCycleFocus',
+    logoUrl: 'logoUrl',
+    logoPng: 'logoPng',
+    websiteUrl: 'websiteUrl',
+    publicPhone: 'publicPhone',
+    quintile: 'quintile',
+    teacherCount: 'teacherCount',
+    gpsLat: 'gpsLat',
+    gpsLng: 'gpsLng',
+    publicProfile: 'publicProfile',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
   };
 
   export type SchoolScalarFieldEnum = (typeof SchoolScalarFieldEnum)[keyof typeof SchoolScalarFieldEnum]
+
+
+  export const SchoolSubmittedNeedScalarFieldEnum: {
+    id: 'id',
+    schoolId: 'schoolId',
+    title: 'title',
+    category: 'category',
+    subcategory: 'subcategory',
+    urgency: 'urgency',
+    description: 'description',
+    learnerImpact: 'learnerImpact',
+    estimatedCostZar: 'estimatedCostZar',
+    progressPercent: 'progressPercent',
+    sponsorStatus: 'sponsorStatus',
+    photoCount: 'photoCount',
+    quoteCount: 'quoteCount',
+    status: 'status',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type SchoolSubmittedNeedScalarFieldEnum = (typeof SchoolSubmittedNeedScalarFieldEnum)[keyof typeof SchoolSubmittedNeedScalarFieldEnum]
+
+
+  export const SchoolVolunteerScalarFieldEnum: {
+    id: 'id',
+    schoolId: 'schoolId',
+    fullName: 'fullName',
+    role: 'role',
+    phone: 'phone',
+    email: 'email',
+    skills: 'skills',
+    hoursLogged: 'hoursLogged',
+    status: 'status',
+    notes: 'notes',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type SchoolVolunteerScalarFieldEnum = (typeof SchoolVolunteerScalarFieldEnum)[keyof typeof SchoolVolunteerScalarFieldEnum]
+
+
+  export const SchoolEventScalarFieldEnum: {
+    id: 'id',
+    schoolId: 'schoolId',
+    title: 'title',
+    description: 'description',
+    eventType: 'eventType',
+    location: 'location',
+    startsAt: 'startsAt',
+    endsAt: 'endsAt',
+    volunteerSlots: 'volunteerSlots',
+    status: 'status',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type SchoolEventScalarFieldEnum = (typeof SchoolEventScalarFieldEnum)[keyof typeof SchoolEventScalarFieldEnum]
+
+
+  export const SchoolEventVolunteerScalarFieldEnum: {
+    id: 'id',
+    eventId: 'eventId',
+    volunteerId: 'volunteerId',
+    role: 'role',
+    createdAt: 'createdAt'
+  };
+
+  export type SchoolEventVolunteerScalarFieldEnum = (typeof SchoolEventVolunteerScalarFieldEnum)[keyof typeof SchoolEventVolunteerScalarFieldEnum]
+
+
+  export const SchoolAlumniScalarFieldEnum: {
+    id: 'id',
+    schoolId: 'schoolId',
+    fullName: 'fullName',
+    graduationYear: 'graduationYear',
+    profession: 'profession',
+    company: 'company',
+    email: 'email',
+    phone: 'phone',
+    linkedInUrl: 'linkedInUrl',
+    role: 'role',
+    offering: 'offering',
+    status: 'status',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type SchoolAlumniScalarFieldEnum = (typeof SchoolAlumniScalarFieldEnum)[keyof typeof SchoolAlumniScalarFieldEnum]
+
+
+  export const SchoolInnovationChallengeScalarFieldEnum: {
+    id: 'id',
+    schoolId: 'schoolId',
+    title: 'title',
+    description: 'description',
+    challengeType: 'challengeType',
+    startsAt: 'startsAt',
+    endsAt: 'endsAt',
+    prizeDescription: 'prizeDescription',
+    status: 'status',
+    maxEntries: 'maxEntries',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type SchoolInnovationChallengeScalarFieldEnum = (typeof SchoolInnovationChallengeScalarFieldEnum)[keyof typeof SchoolInnovationChallengeScalarFieldEnum]
+
+
+  export const SchoolEnterpriseProjectScalarFieldEnum: {
+    id: 'id',
+    schoolId: 'schoolId',
+    challengeId: 'challengeId',
+    title: 'title',
+    description: 'description',
+    projectType: 'projectType',
+    studentLead: 'studentLead',
+    gradeLevel: 'gradeLevel',
+    category: 'category',
+    status: 'status',
+    revenueZar: 'revenueZar',
+    seekingSponsor: 'seekingSponsor',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type SchoolEnterpriseProjectScalarFieldEnum = (typeof SchoolEnterpriseProjectScalarFieldEnum)[keyof typeof SchoolEnterpriseProjectScalarFieldEnum]
+
+
+  export const SchoolCrmContactScalarFieldEnum: {
+    id: 'id',
+    schoolId: 'schoolId',
+    fullName: 'fullName',
+    organization: 'organization',
+    email: 'email',
+    phone: 'phone',
+    contactType: 'contactType',
+    notes: 'notes',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type SchoolCrmContactScalarFieldEnum = (typeof SchoolCrmContactScalarFieldEnum)[keyof typeof SchoolCrmContactScalarFieldEnum]
+
+
+  export const SchoolCrmActivityScalarFieldEnum: {
+    id: 'id',
+    schoolId: 'schoolId',
+    contactId: 'contactId',
+    activityType: 'activityType',
+    title: 'title',
+    summary: 'summary',
+    occurredAt: 'occurredAt',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type SchoolCrmActivityScalarFieldEnum = (typeof SchoolCrmActivityScalarFieldEnum)[keyof typeof SchoolCrmActivityScalarFieldEnum]
+
+
+  export const SchoolCrmTaskScalarFieldEnum: {
+    id: 'id',
+    schoolId: 'schoolId',
+    contactId: 'contactId',
+    title: 'title',
+    description: 'description',
+    dueAt: 'dueAt',
+    status: 'status',
+    priority: 'priority',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type SchoolCrmTaskScalarFieldEnum = (typeof SchoolCrmTaskScalarFieldEnum)[keyof typeof SchoolCrmTaskScalarFieldEnum]
 
 
   export const SchoolVerificationScalarFieldEnum: {
@@ -34448,6 +46732,209 @@ export namespace Prisma {
 
 
   /**
+   * Reference to a field of type 'Bytes'
+   */
+  export type BytesFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Bytes'>
+    
+
+
+  /**
+   * Reference to a field of type 'Bytes[]'
+   */
+  export type ListBytesFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Bytes[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'Float'
+   */
+  export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
+    
+
+
+  /**
+   * Reference to a field of type 'Float[]'
+   */
+  export type ListFloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'SchoolNeedStatus'
+   */
+  export type EnumSchoolNeedStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'SchoolNeedStatus'>
+    
+
+
+  /**
+   * Reference to a field of type 'SchoolNeedStatus[]'
+   */
+  export type ListEnumSchoolNeedStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'SchoolNeedStatus[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'SchoolVolunteerStatus'
+   */
+  export type EnumSchoolVolunteerStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'SchoolVolunteerStatus'>
+    
+
+
+  /**
+   * Reference to a field of type 'SchoolVolunteerStatus[]'
+   */
+  export type ListEnumSchoolVolunteerStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'SchoolVolunteerStatus[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'SchoolEventStatus'
+   */
+  export type EnumSchoolEventStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'SchoolEventStatus'>
+    
+
+
+  /**
+   * Reference to a field of type 'SchoolEventStatus[]'
+   */
+  export type ListEnumSchoolEventStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'SchoolEventStatus[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'SchoolAlumniRole'
+   */
+  export type EnumSchoolAlumniRoleFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'SchoolAlumniRole'>
+    
+
+
+  /**
+   * Reference to a field of type 'SchoolAlumniRole[]'
+   */
+  export type ListEnumSchoolAlumniRoleFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'SchoolAlumniRole[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'SchoolAlumniStatus'
+   */
+  export type EnumSchoolAlumniStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'SchoolAlumniStatus'>
+    
+
+
+  /**
+   * Reference to a field of type 'SchoolAlumniStatus[]'
+   */
+  export type ListEnumSchoolAlumniStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'SchoolAlumniStatus[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'SchoolInnovationChallengeStatus'
+   */
+  export type EnumSchoolInnovationChallengeStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'SchoolInnovationChallengeStatus'>
+    
+
+
+  /**
+   * Reference to a field of type 'SchoolInnovationChallengeStatus[]'
+   */
+  export type ListEnumSchoolInnovationChallengeStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'SchoolInnovationChallengeStatus[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'SchoolEnterpriseProjectType'
+   */
+  export type EnumSchoolEnterpriseProjectTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'SchoolEnterpriseProjectType'>
+    
+
+
+  /**
+   * Reference to a field of type 'SchoolEnterpriseProjectType[]'
+   */
+  export type ListEnumSchoolEnterpriseProjectTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'SchoolEnterpriseProjectType[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'SchoolEnterpriseProjectStatus'
+   */
+  export type EnumSchoolEnterpriseProjectStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'SchoolEnterpriseProjectStatus'>
+    
+
+
+  /**
+   * Reference to a field of type 'SchoolEnterpriseProjectStatus[]'
+   */
+  export type ListEnumSchoolEnterpriseProjectStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'SchoolEnterpriseProjectStatus[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'Boolean'
+   */
+  export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
+    
+
+
+  /**
+   * Reference to a field of type 'SchoolCrmContactType'
+   */
+  export type EnumSchoolCrmContactTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'SchoolCrmContactType'>
+    
+
+
+  /**
+   * Reference to a field of type 'SchoolCrmContactType[]'
+   */
+  export type ListEnumSchoolCrmContactTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'SchoolCrmContactType[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'SchoolCrmActivityType'
+   */
+  export type EnumSchoolCrmActivityTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'SchoolCrmActivityType'>
+    
+
+
+  /**
+   * Reference to a field of type 'SchoolCrmActivityType[]'
+   */
+  export type ListEnumSchoolCrmActivityTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'SchoolCrmActivityType[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'SchoolCrmTaskStatus'
+   */
+  export type EnumSchoolCrmTaskStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'SchoolCrmTaskStatus'>
+    
+
+
+  /**
+   * Reference to a field of type 'SchoolCrmTaskStatus[]'
+   */
+  export type ListEnumSchoolCrmTaskStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'SchoolCrmTaskStatus[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'SchoolCrmTaskPriority'
+   */
+  export type EnumSchoolCrmTaskPriorityFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'SchoolCrmTaskPriority'>
+    
+
+
+  /**
+   * Reference to a field of type 'SchoolCrmTaskPriority[]'
+   */
+  export type ListEnumSchoolCrmTaskPriorityFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'SchoolCrmTaskPriority[]'>
+    
+
+
+  /**
    * Reference to a field of type 'SchoolVerificationStatus'
    */
   export type EnumSchoolVerificationStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'SchoolVerificationStatus'>
@@ -34486,27 +46973,6 @@ export namespace Prisma {
    * Reference to a field of type 'BrandOnboardingStatus[]'
    */
   export type ListEnumBrandOnboardingStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'BrandOnboardingStatus[]'>
-    
-
-
-  /**
-   * Reference to a field of type 'Bytes'
-   */
-  export type BytesFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Bytes'>
-    
-
-
-  /**
-   * Reference to a field of type 'Bytes[]'
-   */
-  export type ListBytesFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Bytes[]'>
-    
-
-
-  /**
-   * Reference to a field of type 'Boolean'
-   */
-  export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
     
 
 
@@ -34760,20 +47226,6 @@ export namespace Prisma {
    */
   export type ListEnumNotificationDeliveryStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'NotificationDeliveryStatus[]'>
     
-
-
-  /**
-   * Reference to a field of type 'Float'
-   */
-  export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
-    
-
-
-  /**
-   * Reference to a field of type 'Float[]'
-   */
-  export type ListFloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float[]'>
-    
   /**
    * Deep Input Types
    */
@@ -34959,11 +47411,29 @@ export namespace Prisma {
     fundingBalanceZar?: DecimalFilter<"School"> | Decimal | DecimalJsLike | number | string
     annualCycleYear?: IntNullableFilter<"School"> | number | null
     annualCycleFocus?: StringNullableFilter<"School"> | string | null
+    logoUrl?: StringNullableFilter<"School"> | string | null
+    logoPng?: BytesNullableFilter<"School"> | Buffer | null
+    websiteUrl?: StringNullableFilter<"School"> | string | null
+    publicPhone?: StringNullableFilter<"School"> | string | null
+    quintile?: IntNullableFilter<"School"> | number | null
+    teacherCount?: IntNullableFilter<"School"> | number | null
+    gpsLat?: FloatNullableFilter<"School"> | number | null
+    gpsLng?: FloatNullableFilter<"School"> | number | null
+    publicProfile?: JsonNullableFilter<"School">
     createdAt?: DateTimeFilter<"School"> | Date | string
     updatedAt?: DateTimeFilter<"School"> | Date | string
     learners?: LearnerListRelationFilter
     submissions?: SubmissionListRelationFilter
     fundingContributions?: FundingContributionListRelationFilter
+    submittedNeeds?: SchoolSubmittedNeedListRelationFilter
+    volunteers?: SchoolVolunteerListRelationFilter
+    events?: SchoolEventListRelationFilter
+    alumni?: SchoolAlumniListRelationFilter
+    enterpriseProjects?: SchoolEnterpriseProjectListRelationFilter
+    innovationChallenges?: SchoolInnovationChallengeListRelationFilter
+    crmContacts?: SchoolCrmContactListRelationFilter
+    crmActivities?: SchoolCrmActivityListRelationFilter
+    crmTasks?: SchoolCrmTaskListRelationFilter
     adminUser?: XOR<UserNullableRelationFilter, UserWhereInput> | null
     verification?: XOR<SchoolVerificationNullableRelationFilter, SchoolVerificationWhereInput> | null
   }
@@ -34987,11 +47457,29 @@ export namespace Prisma {
     fundingBalanceZar?: SortOrder
     annualCycleYear?: SortOrderInput | SortOrder
     annualCycleFocus?: SortOrderInput | SortOrder
+    logoUrl?: SortOrderInput | SortOrder
+    logoPng?: SortOrderInput | SortOrder
+    websiteUrl?: SortOrderInput | SortOrder
+    publicPhone?: SortOrderInput | SortOrder
+    quintile?: SortOrderInput | SortOrder
+    teacherCount?: SortOrderInput | SortOrder
+    gpsLat?: SortOrderInput | SortOrder
+    gpsLng?: SortOrderInput | SortOrder
+    publicProfile?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     learners?: LearnerOrderByRelationAggregateInput
     submissions?: SubmissionOrderByRelationAggregateInput
     fundingContributions?: FundingContributionOrderByRelationAggregateInput
+    submittedNeeds?: SchoolSubmittedNeedOrderByRelationAggregateInput
+    volunteers?: SchoolVolunteerOrderByRelationAggregateInput
+    events?: SchoolEventOrderByRelationAggregateInput
+    alumni?: SchoolAlumniOrderByRelationAggregateInput
+    enterpriseProjects?: SchoolEnterpriseProjectOrderByRelationAggregateInput
+    innovationChallenges?: SchoolInnovationChallengeOrderByRelationAggregateInput
+    crmContacts?: SchoolCrmContactOrderByRelationAggregateInput
+    crmActivities?: SchoolCrmActivityOrderByRelationAggregateInput
+    crmTasks?: SchoolCrmTaskOrderByRelationAggregateInput
     adminUser?: UserOrderByWithRelationInput
     verification?: SchoolVerificationOrderByWithRelationInput
   }
@@ -35018,11 +47506,29 @@ export namespace Prisma {
     fundingBalanceZar?: DecimalFilter<"School"> | Decimal | DecimalJsLike | number | string
     annualCycleYear?: IntNullableFilter<"School"> | number | null
     annualCycleFocus?: StringNullableFilter<"School"> | string | null
+    logoUrl?: StringNullableFilter<"School"> | string | null
+    logoPng?: BytesNullableFilter<"School"> | Buffer | null
+    websiteUrl?: StringNullableFilter<"School"> | string | null
+    publicPhone?: StringNullableFilter<"School"> | string | null
+    quintile?: IntNullableFilter<"School"> | number | null
+    teacherCount?: IntNullableFilter<"School"> | number | null
+    gpsLat?: FloatNullableFilter<"School"> | number | null
+    gpsLng?: FloatNullableFilter<"School"> | number | null
+    publicProfile?: JsonNullableFilter<"School">
     createdAt?: DateTimeFilter<"School"> | Date | string
     updatedAt?: DateTimeFilter<"School"> | Date | string
     learners?: LearnerListRelationFilter
     submissions?: SubmissionListRelationFilter
     fundingContributions?: FundingContributionListRelationFilter
+    submittedNeeds?: SchoolSubmittedNeedListRelationFilter
+    volunteers?: SchoolVolunteerListRelationFilter
+    events?: SchoolEventListRelationFilter
+    alumni?: SchoolAlumniListRelationFilter
+    enterpriseProjects?: SchoolEnterpriseProjectListRelationFilter
+    innovationChallenges?: SchoolInnovationChallengeListRelationFilter
+    crmContacts?: SchoolCrmContactListRelationFilter
+    crmActivities?: SchoolCrmActivityListRelationFilter
+    crmTasks?: SchoolCrmTaskListRelationFilter
     adminUser?: XOR<UserNullableRelationFilter, UserWhereInput> | null
     verification?: XOR<SchoolVerificationNullableRelationFilter, SchoolVerificationWhereInput> | null
   }, "id" | "whatsappPhone" | "schoolCode">
@@ -35046,6 +47552,15 @@ export namespace Prisma {
     fundingBalanceZar?: SortOrder
     annualCycleYear?: SortOrderInput | SortOrder
     annualCycleFocus?: SortOrderInput | SortOrder
+    logoUrl?: SortOrderInput | SortOrder
+    logoPng?: SortOrderInput | SortOrder
+    websiteUrl?: SortOrderInput | SortOrder
+    publicPhone?: SortOrderInput | SortOrder
+    quintile?: SortOrderInput | SortOrder
+    teacherCount?: SortOrderInput | SortOrder
+    gpsLat?: SortOrderInput | SortOrder
+    gpsLng?: SortOrderInput | SortOrder
+    publicProfile?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     _count?: SchoolCountOrderByAggregateInput
@@ -35077,8 +47592,927 @@ export namespace Prisma {
     fundingBalanceZar?: DecimalWithAggregatesFilter<"School"> | Decimal | DecimalJsLike | number | string
     annualCycleYear?: IntNullableWithAggregatesFilter<"School"> | number | null
     annualCycleFocus?: StringNullableWithAggregatesFilter<"School"> | string | null
+    logoUrl?: StringNullableWithAggregatesFilter<"School"> | string | null
+    logoPng?: BytesNullableWithAggregatesFilter<"School"> | Buffer | null
+    websiteUrl?: StringNullableWithAggregatesFilter<"School"> | string | null
+    publicPhone?: StringNullableWithAggregatesFilter<"School"> | string | null
+    quintile?: IntNullableWithAggregatesFilter<"School"> | number | null
+    teacherCount?: IntNullableWithAggregatesFilter<"School"> | number | null
+    gpsLat?: FloatNullableWithAggregatesFilter<"School"> | number | null
+    gpsLng?: FloatNullableWithAggregatesFilter<"School"> | number | null
+    publicProfile?: JsonNullableWithAggregatesFilter<"School">
     createdAt?: DateTimeWithAggregatesFilter<"School"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"School"> | Date | string
+  }
+
+  export type SchoolSubmittedNeedWhereInput = {
+    AND?: SchoolSubmittedNeedWhereInput | SchoolSubmittedNeedWhereInput[]
+    OR?: SchoolSubmittedNeedWhereInput[]
+    NOT?: SchoolSubmittedNeedWhereInput | SchoolSubmittedNeedWhereInput[]
+    id?: StringFilter<"SchoolSubmittedNeed"> | string
+    schoolId?: StringFilter<"SchoolSubmittedNeed"> | string
+    title?: StringFilter<"SchoolSubmittedNeed"> | string
+    category?: StringFilter<"SchoolSubmittedNeed"> | string
+    subcategory?: StringFilter<"SchoolSubmittedNeed"> | string
+    urgency?: StringFilter<"SchoolSubmittedNeed"> | string
+    description?: StringFilter<"SchoolSubmittedNeed"> | string
+    learnerImpact?: IntFilter<"SchoolSubmittedNeed"> | number
+    estimatedCostZar?: IntFilter<"SchoolSubmittedNeed"> | number
+    progressPercent?: IntFilter<"SchoolSubmittedNeed"> | number
+    sponsorStatus?: StringFilter<"SchoolSubmittedNeed"> | string
+    photoCount?: IntFilter<"SchoolSubmittedNeed"> | number
+    quoteCount?: IntFilter<"SchoolSubmittedNeed"> | number
+    status?: EnumSchoolNeedStatusFilter<"SchoolSubmittedNeed"> | $Enums.SchoolNeedStatus
+    createdAt?: DateTimeFilter<"SchoolSubmittedNeed"> | Date | string
+    updatedAt?: DateTimeFilter<"SchoolSubmittedNeed"> | Date | string
+    school?: XOR<SchoolRelationFilter, SchoolWhereInput>
+  }
+
+  export type SchoolSubmittedNeedOrderByWithRelationInput = {
+    id?: SortOrder
+    schoolId?: SortOrder
+    title?: SortOrder
+    category?: SortOrder
+    subcategory?: SortOrder
+    urgency?: SortOrder
+    description?: SortOrder
+    learnerImpact?: SortOrder
+    estimatedCostZar?: SortOrder
+    progressPercent?: SortOrder
+    sponsorStatus?: SortOrder
+    photoCount?: SortOrder
+    quoteCount?: SortOrder
+    status?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    school?: SchoolOrderByWithRelationInput
+  }
+
+  export type SchoolSubmittedNeedWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: SchoolSubmittedNeedWhereInput | SchoolSubmittedNeedWhereInput[]
+    OR?: SchoolSubmittedNeedWhereInput[]
+    NOT?: SchoolSubmittedNeedWhereInput | SchoolSubmittedNeedWhereInput[]
+    schoolId?: StringFilter<"SchoolSubmittedNeed"> | string
+    title?: StringFilter<"SchoolSubmittedNeed"> | string
+    category?: StringFilter<"SchoolSubmittedNeed"> | string
+    subcategory?: StringFilter<"SchoolSubmittedNeed"> | string
+    urgency?: StringFilter<"SchoolSubmittedNeed"> | string
+    description?: StringFilter<"SchoolSubmittedNeed"> | string
+    learnerImpact?: IntFilter<"SchoolSubmittedNeed"> | number
+    estimatedCostZar?: IntFilter<"SchoolSubmittedNeed"> | number
+    progressPercent?: IntFilter<"SchoolSubmittedNeed"> | number
+    sponsorStatus?: StringFilter<"SchoolSubmittedNeed"> | string
+    photoCount?: IntFilter<"SchoolSubmittedNeed"> | number
+    quoteCount?: IntFilter<"SchoolSubmittedNeed"> | number
+    status?: EnumSchoolNeedStatusFilter<"SchoolSubmittedNeed"> | $Enums.SchoolNeedStatus
+    createdAt?: DateTimeFilter<"SchoolSubmittedNeed"> | Date | string
+    updatedAt?: DateTimeFilter<"SchoolSubmittedNeed"> | Date | string
+    school?: XOR<SchoolRelationFilter, SchoolWhereInput>
+  }, "id">
+
+  export type SchoolSubmittedNeedOrderByWithAggregationInput = {
+    id?: SortOrder
+    schoolId?: SortOrder
+    title?: SortOrder
+    category?: SortOrder
+    subcategory?: SortOrder
+    urgency?: SortOrder
+    description?: SortOrder
+    learnerImpact?: SortOrder
+    estimatedCostZar?: SortOrder
+    progressPercent?: SortOrder
+    sponsorStatus?: SortOrder
+    photoCount?: SortOrder
+    quoteCount?: SortOrder
+    status?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: SchoolSubmittedNeedCountOrderByAggregateInput
+    _avg?: SchoolSubmittedNeedAvgOrderByAggregateInput
+    _max?: SchoolSubmittedNeedMaxOrderByAggregateInput
+    _min?: SchoolSubmittedNeedMinOrderByAggregateInput
+    _sum?: SchoolSubmittedNeedSumOrderByAggregateInput
+  }
+
+  export type SchoolSubmittedNeedScalarWhereWithAggregatesInput = {
+    AND?: SchoolSubmittedNeedScalarWhereWithAggregatesInput | SchoolSubmittedNeedScalarWhereWithAggregatesInput[]
+    OR?: SchoolSubmittedNeedScalarWhereWithAggregatesInput[]
+    NOT?: SchoolSubmittedNeedScalarWhereWithAggregatesInput | SchoolSubmittedNeedScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"SchoolSubmittedNeed"> | string
+    schoolId?: StringWithAggregatesFilter<"SchoolSubmittedNeed"> | string
+    title?: StringWithAggregatesFilter<"SchoolSubmittedNeed"> | string
+    category?: StringWithAggregatesFilter<"SchoolSubmittedNeed"> | string
+    subcategory?: StringWithAggregatesFilter<"SchoolSubmittedNeed"> | string
+    urgency?: StringWithAggregatesFilter<"SchoolSubmittedNeed"> | string
+    description?: StringWithAggregatesFilter<"SchoolSubmittedNeed"> | string
+    learnerImpact?: IntWithAggregatesFilter<"SchoolSubmittedNeed"> | number
+    estimatedCostZar?: IntWithAggregatesFilter<"SchoolSubmittedNeed"> | number
+    progressPercent?: IntWithAggregatesFilter<"SchoolSubmittedNeed"> | number
+    sponsorStatus?: StringWithAggregatesFilter<"SchoolSubmittedNeed"> | string
+    photoCount?: IntWithAggregatesFilter<"SchoolSubmittedNeed"> | number
+    quoteCount?: IntWithAggregatesFilter<"SchoolSubmittedNeed"> | number
+    status?: EnumSchoolNeedStatusWithAggregatesFilter<"SchoolSubmittedNeed"> | $Enums.SchoolNeedStatus
+    createdAt?: DateTimeWithAggregatesFilter<"SchoolSubmittedNeed"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"SchoolSubmittedNeed"> | Date | string
+  }
+
+  export type SchoolVolunteerWhereInput = {
+    AND?: SchoolVolunteerWhereInput | SchoolVolunteerWhereInput[]
+    OR?: SchoolVolunteerWhereInput[]
+    NOT?: SchoolVolunteerWhereInput | SchoolVolunteerWhereInput[]
+    id?: StringFilter<"SchoolVolunteer"> | string
+    schoolId?: StringFilter<"SchoolVolunteer"> | string
+    fullName?: StringFilter<"SchoolVolunteer"> | string
+    role?: StringFilter<"SchoolVolunteer"> | string
+    phone?: StringNullableFilter<"SchoolVolunteer"> | string | null
+    email?: StringNullableFilter<"SchoolVolunteer"> | string | null
+    skills?: StringNullableFilter<"SchoolVolunteer"> | string | null
+    hoursLogged?: IntFilter<"SchoolVolunteer"> | number
+    status?: EnumSchoolVolunteerStatusFilter<"SchoolVolunteer"> | $Enums.SchoolVolunteerStatus
+    notes?: StringNullableFilter<"SchoolVolunteer"> | string | null
+    createdAt?: DateTimeFilter<"SchoolVolunteer"> | Date | string
+    updatedAt?: DateTimeFilter<"SchoolVolunteer"> | Date | string
+    school?: XOR<SchoolRelationFilter, SchoolWhereInput>
+    assignments?: SchoolEventVolunteerListRelationFilter
+  }
+
+  export type SchoolVolunteerOrderByWithRelationInput = {
+    id?: SortOrder
+    schoolId?: SortOrder
+    fullName?: SortOrder
+    role?: SortOrder
+    phone?: SortOrderInput | SortOrder
+    email?: SortOrderInput | SortOrder
+    skills?: SortOrderInput | SortOrder
+    hoursLogged?: SortOrder
+    status?: SortOrder
+    notes?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    school?: SchoolOrderByWithRelationInput
+    assignments?: SchoolEventVolunteerOrderByRelationAggregateInput
+  }
+
+  export type SchoolVolunteerWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: SchoolVolunteerWhereInput | SchoolVolunteerWhereInput[]
+    OR?: SchoolVolunteerWhereInput[]
+    NOT?: SchoolVolunteerWhereInput | SchoolVolunteerWhereInput[]
+    schoolId?: StringFilter<"SchoolVolunteer"> | string
+    fullName?: StringFilter<"SchoolVolunteer"> | string
+    role?: StringFilter<"SchoolVolunteer"> | string
+    phone?: StringNullableFilter<"SchoolVolunteer"> | string | null
+    email?: StringNullableFilter<"SchoolVolunteer"> | string | null
+    skills?: StringNullableFilter<"SchoolVolunteer"> | string | null
+    hoursLogged?: IntFilter<"SchoolVolunteer"> | number
+    status?: EnumSchoolVolunteerStatusFilter<"SchoolVolunteer"> | $Enums.SchoolVolunteerStatus
+    notes?: StringNullableFilter<"SchoolVolunteer"> | string | null
+    createdAt?: DateTimeFilter<"SchoolVolunteer"> | Date | string
+    updatedAt?: DateTimeFilter<"SchoolVolunteer"> | Date | string
+    school?: XOR<SchoolRelationFilter, SchoolWhereInput>
+    assignments?: SchoolEventVolunteerListRelationFilter
+  }, "id">
+
+  export type SchoolVolunteerOrderByWithAggregationInput = {
+    id?: SortOrder
+    schoolId?: SortOrder
+    fullName?: SortOrder
+    role?: SortOrder
+    phone?: SortOrderInput | SortOrder
+    email?: SortOrderInput | SortOrder
+    skills?: SortOrderInput | SortOrder
+    hoursLogged?: SortOrder
+    status?: SortOrder
+    notes?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: SchoolVolunteerCountOrderByAggregateInput
+    _avg?: SchoolVolunteerAvgOrderByAggregateInput
+    _max?: SchoolVolunteerMaxOrderByAggregateInput
+    _min?: SchoolVolunteerMinOrderByAggregateInput
+    _sum?: SchoolVolunteerSumOrderByAggregateInput
+  }
+
+  export type SchoolVolunteerScalarWhereWithAggregatesInput = {
+    AND?: SchoolVolunteerScalarWhereWithAggregatesInput | SchoolVolunteerScalarWhereWithAggregatesInput[]
+    OR?: SchoolVolunteerScalarWhereWithAggregatesInput[]
+    NOT?: SchoolVolunteerScalarWhereWithAggregatesInput | SchoolVolunteerScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"SchoolVolunteer"> | string
+    schoolId?: StringWithAggregatesFilter<"SchoolVolunteer"> | string
+    fullName?: StringWithAggregatesFilter<"SchoolVolunteer"> | string
+    role?: StringWithAggregatesFilter<"SchoolVolunteer"> | string
+    phone?: StringNullableWithAggregatesFilter<"SchoolVolunteer"> | string | null
+    email?: StringNullableWithAggregatesFilter<"SchoolVolunteer"> | string | null
+    skills?: StringNullableWithAggregatesFilter<"SchoolVolunteer"> | string | null
+    hoursLogged?: IntWithAggregatesFilter<"SchoolVolunteer"> | number
+    status?: EnumSchoolVolunteerStatusWithAggregatesFilter<"SchoolVolunteer"> | $Enums.SchoolVolunteerStatus
+    notes?: StringNullableWithAggregatesFilter<"SchoolVolunteer"> | string | null
+    createdAt?: DateTimeWithAggregatesFilter<"SchoolVolunteer"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"SchoolVolunteer"> | Date | string
+  }
+
+  export type SchoolEventWhereInput = {
+    AND?: SchoolEventWhereInput | SchoolEventWhereInput[]
+    OR?: SchoolEventWhereInput[]
+    NOT?: SchoolEventWhereInput | SchoolEventWhereInput[]
+    id?: StringFilter<"SchoolEvent"> | string
+    schoolId?: StringFilter<"SchoolEvent"> | string
+    title?: StringFilter<"SchoolEvent"> | string
+    description?: StringNullableFilter<"SchoolEvent"> | string | null
+    eventType?: StringFilter<"SchoolEvent"> | string
+    location?: StringNullableFilter<"SchoolEvent"> | string | null
+    startsAt?: DateTimeFilter<"SchoolEvent"> | Date | string
+    endsAt?: DateTimeNullableFilter<"SchoolEvent"> | Date | string | null
+    volunteerSlots?: IntFilter<"SchoolEvent"> | number
+    status?: EnumSchoolEventStatusFilter<"SchoolEvent"> | $Enums.SchoolEventStatus
+    createdAt?: DateTimeFilter<"SchoolEvent"> | Date | string
+    updatedAt?: DateTimeFilter<"SchoolEvent"> | Date | string
+    school?: XOR<SchoolRelationFilter, SchoolWhereInput>
+    assignments?: SchoolEventVolunteerListRelationFilter
+  }
+
+  export type SchoolEventOrderByWithRelationInput = {
+    id?: SortOrder
+    schoolId?: SortOrder
+    title?: SortOrder
+    description?: SortOrderInput | SortOrder
+    eventType?: SortOrder
+    location?: SortOrderInput | SortOrder
+    startsAt?: SortOrder
+    endsAt?: SortOrderInput | SortOrder
+    volunteerSlots?: SortOrder
+    status?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    school?: SchoolOrderByWithRelationInput
+    assignments?: SchoolEventVolunteerOrderByRelationAggregateInput
+  }
+
+  export type SchoolEventWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: SchoolEventWhereInput | SchoolEventWhereInput[]
+    OR?: SchoolEventWhereInput[]
+    NOT?: SchoolEventWhereInput | SchoolEventWhereInput[]
+    schoolId?: StringFilter<"SchoolEvent"> | string
+    title?: StringFilter<"SchoolEvent"> | string
+    description?: StringNullableFilter<"SchoolEvent"> | string | null
+    eventType?: StringFilter<"SchoolEvent"> | string
+    location?: StringNullableFilter<"SchoolEvent"> | string | null
+    startsAt?: DateTimeFilter<"SchoolEvent"> | Date | string
+    endsAt?: DateTimeNullableFilter<"SchoolEvent"> | Date | string | null
+    volunteerSlots?: IntFilter<"SchoolEvent"> | number
+    status?: EnumSchoolEventStatusFilter<"SchoolEvent"> | $Enums.SchoolEventStatus
+    createdAt?: DateTimeFilter<"SchoolEvent"> | Date | string
+    updatedAt?: DateTimeFilter<"SchoolEvent"> | Date | string
+    school?: XOR<SchoolRelationFilter, SchoolWhereInput>
+    assignments?: SchoolEventVolunteerListRelationFilter
+  }, "id">
+
+  export type SchoolEventOrderByWithAggregationInput = {
+    id?: SortOrder
+    schoolId?: SortOrder
+    title?: SortOrder
+    description?: SortOrderInput | SortOrder
+    eventType?: SortOrder
+    location?: SortOrderInput | SortOrder
+    startsAt?: SortOrder
+    endsAt?: SortOrderInput | SortOrder
+    volunteerSlots?: SortOrder
+    status?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: SchoolEventCountOrderByAggregateInput
+    _avg?: SchoolEventAvgOrderByAggregateInput
+    _max?: SchoolEventMaxOrderByAggregateInput
+    _min?: SchoolEventMinOrderByAggregateInput
+    _sum?: SchoolEventSumOrderByAggregateInput
+  }
+
+  export type SchoolEventScalarWhereWithAggregatesInput = {
+    AND?: SchoolEventScalarWhereWithAggregatesInput | SchoolEventScalarWhereWithAggregatesInput[]
+    OR?: SchoolEventScalarWhereWithAggregatesInput[]
+    NOT?: SchoolEventScalarWhereWithAggregatesInput | SchoolEventScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"SchoolEvent"> | string
+    schoolId?: StringWithAggregatesFilter<"SchoolEvent"> | string
+    title?: StringWithAggregatesFilter<"SchoolEvent"> | string
+    description?: StringNullableWithAggregatesFilter<"SchoolEvent"> | string | null
+    eventType?: StringWithAggregatesFilter<"SchoolEvent"> | string
+    location?: StringNullableWithAggregatesFilter<"SchoolEvent"> | string | null
+    startsAt?: DateTimeWithAggregatesFilter<"SchoolEvent"> | Date | string
+    endsAt?: DateTimeNullableWithAggregatesFilter<"SchoolEvent"> | Date | string | null
+    volunteerSlots?: IntWithAggregatesFilter<"SchoolEvent"> | number
+    status?: EnumSchoolEventStatusWithAggregatesFilter<"SchoolEvent"> | $Enums.SchoolEventStatus
+    createdAt?: DateTimeWithAggregatesFilter<"SchoolEvent"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"SchoolEvent"> | Date | string
+  }
+
+  export type SchoolEventVolunteerWhereInput = {
+    AND?: SchoolEventVolunteerWhereInput | SchoolEventVolunteerWhereInput[]
+    OR?: SchoolEventVolunteerWhereInput[]
+    NOT?: SchoolEventVolunteerWhereInput | SchoolEventVolunteerWhereInput[]
+    id?: StringFilter<"SchoolEventVolunteer"> | string
+    eventId?: StringFilter<"SchoolEventVolunteer"> | string
+    volunteerId?: StringFilter<"SchoolEventVolunteer"> | string
+    role?: StringNullableFilter<"SchoolEventVolunteer"> | string | null
+    createdAt?: DateTimeFilter<"SchoolEventVolunteer"> | Date | string
+    event?: XOR<SchoolEventRelationFilter, SchoolEventWhereInput>
+    volunteer?: XOR<SchoolVolunteerRelationFilter, SchoolVolunteerWhereInput>
+  }
+
+  export type SchoolEventVolunteerOrderByWithRelationInput = {
+    id?: SortOrder
+    eventId?: SortOrder
+    volunteerId?: SortOrder
+    role?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    event?: SchoolEventOrderByWithRelationInput
+    volunteer?: SchoolVolunteerOrderByWithRelationInput
+  }
+
+  export type SchoolEventVolunteerWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    eventId_volunteerId?: SchoolEventVolunteerEventIdVolunteerIdCompoundUniqueInput
+    AND?: SchoolEventVolunteerWhereInput | SchoolEventVolunteerWhereInput[]
+    OR?: SchoolEventVolunteerWhereInput[]
+    NOT?: SchoolEventVolunteerWhereInput | SchoolEventVolunteerWhereInput[]
+    eventId?: StringFilter<"SchoolEventVolunteer"> | string
+    volunteerId?: StringFilter<"SchoolEventVolunteer"> | string
+    role?: StringNullableFilter<"SchoolEventVolunteer"> | string | null
+    createdAt?: DateTimeFilter<"SchoolEventVolunteer"> | Date | string
+    event?: XOR<SchoolEventRelationFilter, SchoolEventWhereInput>
+    volunteer?: XOR<SchoolVolunteerRelationFilter, SchoolVolunteerWhereInput>
+  }, "id" | "eventId_volunteerId">
+
+  export type SchoolEventVolunteerOrderByWithAggregationInput = {
+    id?: SortOrder
+    eventId?: SortOrder
+    volunteerId?: SortOrder
+    role?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    _count?: SchoolEventVolunteerCountOrderByAggregateInput
+    _max?: SchoolEventVolunteerMaxOrderByAggregateInput
+    _min?: SchoolEventVolunteerMinOrderByAggregateInput
+  }
+
+  export type SchoolEventVolunteerScalarWhereWithAggregatesInput = {
+    AND?: SchoolEventVolunteerScalarWhereWithAggregatesInput | SchoolEventVolunteerScalarWhereWithAggregatesInput[]
+    OR?: SchoolEventVolunteerScalarWhereWithAggregatesInput[]
+    NOT?: SchoolEventVolunteerScalarWhereWithAggregatesInput | SchoolEventVolunteerScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"SchoolEventVolunteer"> | string
+    eventId?: StringWithAggregatesFilter<"SchoolEventVolunteer"> | string
+    volunteerId?: StringWithAggregatesFilter<"SchoolEventVolunteer"> | string
+    role?: StringNullableWithAggregatesFilter<"SchoolEventVolunteer"> | string | null
+    createdAt?: DateTimeWithAggregatesFilter<"SchoolEventVolunteer"> | Date | string
+  }
+
+  export type SchoolAlumniWhereInput = {
+    AND?: SchoolAlumniWhereInput | SchoolAlumniWhereInput[]
+    OR?: SchoolAlumniWhereInput[]
+    NOT?: SchoolAlumniWhereInput | SchoolAlumniWhereInput[]
+    id?: StringFilter<"SchoolAlumni"> | string
+    schoolId?: StringFilter<"SchoolAlumni"> | string
+    fullName?: StringFilter<"SchoolAlumni"> | string
+    graduationYear?: IntNullableFilter<"SchoolAlumni"> | number | null
+    profession?: StringNullableFilter<"SchoolAlumni"> | string | null
+    company?: StringNullableFilter<"SchoolAlumni"> | string | null
+    email?: StringNullableFilter<"SchoolAlumni"> | string | null
+    phone?: StringNullableFilter<"SchoolAlumni"> | string | null
+    linkedInUrl?: StringNullableFilter<"SchoolAlumni"> | string | null
+    role?: EnumSchoolAlumniRoleFilter<"SchoolAlumni"> | $Enums.SchoolAlumniRole
+    offering?: StringNullableFilter<"SchoolAlumni"> | string | null
+    status?: EnumSchoolAlumniStatusFilter<"SchoolAlumni"> | $Enums.SchoolAlumniStatus
+    createdAt?: DateTimeFilter<"SchoolAlumni"> | Date | string
+    updatedAt?: DateTimeFilter<"SchoolAlumni"> | Date | string
+    school?: XOR<SchoolRelationFilter, SchoolWhereInput>
+  }
+
+  export type SchoolAlumniOrderByWithRelationInput = {
+    id?: SortOrder
+    schoolId?: SortOrder
+    fullName?: SortOrder
+    graduationYear?: SortOrderInput | SortOrder
+    profession?: SortOrderInput | SortOrder
+    company?: SortOrderInput | SortOrder
+    email?: SortOrderInput | SortOrder
+    phone?: SortOrderInput | SortOrder
+    linkedInUrl?: SortOrderInput | SortOrder
+    role?: SortOrder
+    offering?: SortOrderInput | SortOrder
+    status?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    school?: SchoolOrderByWithRelationInput
+  }
+
+  export type SchoolAlumniWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: SchoolAlumniWhereInput | SchoolAlumniWhereInput[]
+    OR?: SchoolAlumniWhereInput[]
+    NOT?: SchoolAlumniWhereInput | SchoolAlumniWhereInput[]
+    schoolId?: StringFilter<"SchoolAlumni"> | string
+    fullName?: StringFilter<"SchoolAlumni"> | string
+    graduationYear?: IntNullableFilter<"SchoolAlumni"> | number | null
+    profession?: StringNullableFilter<"SchoolAlumni"> | string | null
+    company?: StringNullableFilter<"SchoolAlumni"> | string | null
+    email?: StringNullableFilter<"SchoolAlumni"> | string | null
+    phone?: StringNullableFilter<"SchoolAlumni"> | string | null
+    linkedInUrl?: StringNullableFilter<"SchoolAlumni"> | string | null
+    role?: EnumSchoolAlumniRoleFilter<"SchoolAlumni"> | $Enums.SchoolAlumniRole
+    offering?: StringNullableFilter<"SchoolAlumni"> | string | null
+    status?: EnumSchoolAlumniStatusFilter<"SchoolAlumni"> | $Enums.SchoolAlumniStatus
+    createdAt?: DateTimeFilter<"SchoolAlumni"> | Date | string
+    updatedAt?: DateTimeFilter<"SchoolAlumni"> | Date | string
+    school?: XOR<SchoolRelationFilter, SchoolWhereInput>
+  }, "id">
+
+  export type SchoolAlumniOrderByWithAggregationInput = {
+    id?: SortOrder
+    schoolId?: SortOrder
+    fullName?: SortOrder
+    graduationYear?: SortOrderInput | SortOrder
+    profession?: SortOrderInput | SortOrder
+    company?: SortOrderInput | SortOrder
+    email?: SortOrderInput | SortOrder
+    phone?: SortOrderInput | SortOrder
+    linkedInUrl?: SortOrderInput | SortOrder
+    role?: SortOrder
+    offering?: SortOrderInput | SortOrder
+    status?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: SchoolAlumniCountOrderByAggregateInput
+    _avg?: SchoolAlumniAvgOrderByAggregateInput
+    _max?: SchoolAlumniMaxOrderByAggregateInput
+    _min?: SchoolAlumniMinOrderByAggregateInput
+    _sum?: SchoolAlumniSumOrderByAggregateInput
+  }
+
+  export type SchoolAlumniScalarWhereWithAggregatesInput = {
+    AND?: SchoolAlumniScalarWhereWithAggregatesInput | SchoolAlumniScalarWhereWithAggregatesInput[]
+    OR?: SchoolAlumniScalarWhereWithAggregatesInput[]
+    NOT?: SchoolAlumniScalarWhereWithAggregatesInput | SchoolAlumniScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"SchoolAlumni"> | string
+    schoolId?: StringWithAggregatesFilter<"SchoolAlumni"> | string
+    fullName?: StringWithAggregatesFilter<"SchoolAlumni"> | string
+    graduationYear?: IntNullableWithAggregatesFilter<"SchoolAlumni"> | number | null
+    profession?: StringNullableWithAggregatesFilter<"SchoolAlumni"> | string | null
+    company?: StringNullableWithAggregatesFilter<"SchoolAlumni"> | string | null
+    email?: StringNullableWithAggregatesFilter<"SchoolAlumni"> | string | null
+    phone?: StringNullableWithAggregatesFilter<"SchoolAlumni"> | string | null
+    linkedInUrl?: StringNullableWithAggregatesFilter<"SchoolAlumni"> | string | null
+    role?: EnumSchoolAlumniRoleWithAggregatesFilter<"SchoolAlumni"> | $Enums.SchoolAlumniRole
+    offering?: StringNullableWithAggregatesFilter<"SchoolAlumni"> | string | null
+    status?: EnumSchoolAlumniStatusWithAggregatesFilter<"SchoolAlumni"> | $Enums.SchoolAlumniStatus
+    createdAt?: DateTimeWithAggregatesFilter<"SchoolAlumni"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"SchoolAlumni"> | Date | string
+  }
+
+  export type SchoolInnovationChallengeWhereInput = {
+    AND?: SchoolInnovationChallengeWhereInput | SchoolInnovationChallengeWhereInput[]
+    OR?: SchoolInnovationChallengeWhereInput[]
+    NOT?: SchoolInnovationChallengeWhereInput | SchoolInnovationChallengeWhereInput[]
+    id?: StringFilter<"SchoolInnovationChallenge"> | string
+    schoolId?: StringFilter<"SchoolInnovationChallenge"> | string
+    title?: StringFilter<"SchoolInnovationChallenge"> | string
+    description?: StringNullableFilter<"SchoolInnovationChallenge"> | string | null
+    challengeType?: StringFilter<"SchoolInnovationChallenge"> | string
+    startsAt?: DateTimeFilter<"SchoolInnovationChallenge"> | Date | string
+    endsAt?: DateTimeNullableFilter<"SchoolInnovationChallenge"> | Date | string | null
+    prizeDescription?: StringNullableFilter<"SchoolInnovationChallenge"> | string | null
+    status?: EnumSchoolInnovationChallengeStatusFilter<"SchoolInnovationChallenge"> | $Enums.SchoolInnovationChallengeStatus
+    maxEntries?: IntFilter<"SchoolInnovationChallenge"> | number
+    createdAt?: DateTimeFilter<"SchoolInnovationChallenge"> | Date | string
+    updatedAt?: DateTimeFilter<"SchoolInnovationChallenge"> | Date | string
+    school?: XOR<SchoolRelationFilter, SchoolWhereInput>
+    projects?: SchoolEnterpriseProjectListRelationFilter
+  }
+
+  export type SchoolInnovationChallengeOrderByWithRelationInput = {
+    id?: SortOrder
+    schoolId?: SortOrder
+    title?: SortOrder
+    description?: SortOrderInput | SortOrder
+    challengeType?: SortOrder
+    startsAt?: SortOrder
+    endsAt?: SortOrderInput | SortOrder
+    prizeDescription?: SortOrderInput | SortOrder
+    status?: SortOrder
+    maxEntries?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    school?: SchoolOrderByWithRelationInput
+    projects?: SchoolEnterpriseProjectOrderByRelationAggregateInput
+  }
+
+  export type SchoolInnovationChallengeWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: SchoolInnovationChallengeWhereInput | SchoolInnovationChallengeWhereInput[]
+    OR?: SchoolInnovationChallengeWhereInput[]
+    NOT?: SchoolInnovationChallengeWhereInput | SchoolInnovationChallengeWhereInput[]
+    schoolId?: StringFilter<"SchoolInnovationChallenge"> | string
+    title?: StringFilter<"SchoolInnovationChallenge"> | string
+    description?: StringNullableFilter<"SchoolInnovationChallenge"> | string | null
+    challengeType?: StringFilter<"SchoolInnovationChallenge"> | string
+    startsAt?: DateTimeFilter<"SchoolInnovationChallenge"> | Date | string
+    endsAt?: DateTimeNullableFilter<"SchoolInnovationChallenge"> | Date | string | null
+    prizeDescription?: StringNullableFilter<"SchoolInnovationChallenge"> | string | null
+    status?: EnumSchoolInnovationChallengeStatusFilter<"SchoolInnovationChallenge"> | $Enums.SchoolInnovationChallengeStatus
+    maxEntries?: IntFilter<"SchoolInnovationChallenge"> | number
+    createdAt?: DateTimeFilter<"SchoolInnovationChallenge"> | Date | string
+    updatedAt?: DateTimeFilter<"SchoolInnovationChallenge"> | Date | string
+    school?: XOR<SchoolRelationFilter, SchoolWhereInput>
+    projects?: SchoolEnterpriseProjectListRelationFilter
+  }, "id">
+
+  export type SchoolInnovationChallengeOrderByWithAggregationInput = {
+    id?: SortOrder
+    schoolId?: SortOrder
+    title?: SortOrder
+    description?: SortOrderInput | SortOrder
+    challengeType?: SortOrder
+    startsAt?: SortOrder
+    endsAt?: SortOrderInput | SortOrder
+    prizeDescription?: SortOrderInput | SortOrder
+    status?: SortOrder
+    maxEntries?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: SchoolInnovationChallengeCountOrderByAggregateInput
+    _avg?: SchoolInnovationChallengeAvgOrderByAggregateInput
+    _max?: SchoolInnovationChallengeMaxOrderByAggregateInput
+    _min?: SchoolInnovationChallengeMinOrderByAggregateInput
+    _sum?: SchoolInnovationChallengeSumOrderByAggregateInput
+  }
+
+  export type SchoolInnovationChallengeScalarWhereWithAggregatesInput = {
+    AND?: SchoolInnovationChallengeScalarWhereWithAggregatesInput | SchoolInnovationChallengeScalarWhereWithAggregatesInput[]
+    OR?: SchoolInnovationChallengeScalarWhereWithAggregatesInput[]
+    NOT?: SchoolInnovationChallengeScalarWhereWithAggregatesInput | SchoolInnovationChallengeScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"SchoolInnovationChallenge"> | string
+    schoolId?: StringWithAggregatesFilter<"SchoolInnovationChallenge"> | string
+    title?: StringWithAggregatesFilter<"SchoolInnovationChallenge"> | string
+    description?: StringNullableWithAggregatesFilter<"SchoolInnovationChallenge"> | string | null
+    challengeType?: StringWithAggregatesFilter<"SchoolInnovationChallenge"> | string
+    startsAt?: DateTimeWithAggregatesFilter<"SchoolInnovationChallenge"> | Date | string
+    endsAt?: DateTimeNullableWithAggregatesFilter<"SchoolInnovationChallenge"> | Date | string | null
+    prizeDescription?: StringNullableWithAggregatesFilter<"SchoolInnovationChallenge"> | string | null
+    status?: EnumSchoolInnovationChallengeStatusWithAggregatesFilter<"SchoolInnovationChallenge"> | $Enums.SchoolInnovationChallengeStatus
+    maxEntries?: IntWithAggregatesFilter<"SchoolInnovationChallenge"> | number
+    createdAt?: DateTimeWithAggregatesFilter<"SchoolInnovationChallenge"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"SchoolInnovationChallenge"> | Date | string
+  }
+
+  export type SchoolEnterpriseProjectWhereInput = {
+    AND?: SchoolEnterpriseProjectWhereInput | SchoolEnterpriseProjectWhereInput[]
+    OR?: SchoolEnterpriseProjectWhereInput[]
+    NOT?: SchoolEnterpriseProjectWhereInput | SchoolEnterpriseProjectWhereInput[]
+    id?: StringFilter<"SchoolEnterpriseProject"> | string
+    schoolId?: StringFilter<"SchoolEnterpriseProject"> | string
+    challengeId?: StringNullableFilter<"SchoolEnterpriseProject"> | string | null
+    title?: StringFilter<"SchoolEnterpriseProject"> | string
+    description?: StringNullableFilter<"SchoolEnterpriseProject"> | string | null
+    projectType?: EnumSchoolEnterpriseProjectTypeFilter<"SchoolEnterpriseProject"> | $Enums.SchoolEnterpriseProjectType
+    studentLead?: StringFilter<"SchoolEnterpriseProject"> | string
+    gradeLevel?: StringNullableFilter<"SchoolEnterpriseProject"> | string | null
+    category?: StringNullableFilter<"SchoolEnterpriseProject"> | string | null
+    status?: EnumSchoolEnterpriseProjectStatusFilter<"SchoolEnterpriseProject"> | $Enums.SchoolEnterpriseProjectStatus
+    revenueZar?: IntFilter<"SchoolEnterpriseProject"> | number
+    seekingSponsor?: BoolFilter<"SchoolEnterpriseProject"> | boolean
+    createdAt?: DateTimeFilter<"SchoolEnterpriseProject"> | Date | string
+    updatedAt?: DateTimeFilter<"SchoolEnterpriseProject"> | Date | string
+    school?: XOR<SchoolRelationFilter, SchoolWhereInput>
+    challenge?: XOR<SchoolInnovationChallengeNullableRelationFilter, SchoolInnovationChallengeWhereInput> | null
+  }
+
+  export type SchoolEnterpriseProjectOrderByWithRelationInput = {
+    id?: SortOrder
+    schoolId?: SortOrder
+    challengeId?: SortOrderInput | SortOrder
+    title?: SortOrder
+    description?: SortOrderInput | SortOrder
+    projectType?: SortOrder
+    studentLead?: SortOrder
+    gradeLevel?: SortOrderInput | SortOrder
+    category?: SortOrderInput | SortOrder
+    status?: SortOrder
+    revenueZar?: SortOrder
+    seekingSponsor?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    school?: SchoolOrderByWithRelationInput
+    challenge?: SchoolInnovationChallengeOrderByWithRelationInput
+  }
+
+  export type SchoolEnterpriseProjectWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: SchoolEnterpriseProjectWhereInput | SchoolEnterpriseProjectWhereInput[]
+    OR?: SchoolEnterpriseProjectWhereInput[]
+    NOT?: SchoolEnterpriseProjectWhereInput | SchoolEnterpriseProjectWhereInput[]
+    schoolId?: StringFilter<"SchoolEnterpriseProject"> | string
+    challengeId?: StringNullableFilter<"SchoolEnterpriseProject"> | string | null
+    title?: StringFilter<"SchoolEnterpriseProject"> | string
+    description?: StringNullableFilter<"SchoolEnterpriseProject"> | string | null
+    projectType?: EnumSchoolEnterpriseProjectTypeFilter<"SchoolEnterpriseProject"> | $Enums.SchoolEnterpriseProjectType
+    studentLead?: StringFilter<"SchoolEnterpriseProject"> | string
+    gradeLevel?: StringNullableFilter<"SchoolEnterpriseProject"> | string | null
+    category?: StringNullableFilter<"SchoolEnterpriseProject"> | string | null
+    status?: EnumSchoolEnterpriseProjectStatusFilter<"SchoolEnterpriseProject"> | $Enums.SchoolEnterpriseProjectStatus
+    revenueZar?: IntFilter<"SchoolEnterpriseProject"> | number
+    seekingSponsor?: BoolFilter<"SchoolEnterpriseProject"> | boolean
+    createdAt?: DateTimeFilter<"SchoolEnterpriseProject"> | Date | string
+    updatedAt?: DateTimeFilter<"SchoolEnterpriseProject"> | Date | string
+    school?: XOR<SchoolRelationFilter, SchoolWhereInput>
+    challenge?: XOR<SchoolInnovationChallengeNullableRelationFilter, SchoolInnovationChallengeWhereInput> | null
+  }, "id">
+
+  export type SchoolEnterpriseProjectOrderByWithAggregationInput = {
+    id?: SortOrder
+    schoolId?: SortOrder
+    challengeId?: SortOrderInput | SortOrder
+    title?: SortOrder
+    description?: SortOrderInput | SortOrder
+    projectType?: SortOrder
+    studentLead?: SortOrder
+    gradeLevel?: SortOrderInput | SortOrder
+    category?: SortOrderInput | SortOrder
+    status?: SortOrder
+    revenueZar?: SortOrder
+    seekingSponsor?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: SchoolEnterpriseProjectCountOrderByAggregateInput
+    _avg?: SchoolEnterpriseProjectAvgOrderByAggregateInput
+    _max?: SchoolEnterpriseProjectMaxOrderByAggregateInput
+    _min?: SchoolEnterpriseProjectMinOrderByAggregateInput
+    _sum?: SchoolEnterpriseProjectSumOrderByAggregateInput
+  }
+
+  export type SchoolEnterpriseProjectScalarWhereWithAggregatesInput = {
+    AND?: SchoolEnterpriseProjectScalarWhereWithAggregatesInput | SchoolEnterpriseProjectScalarWhereWithAggregatesInput[]
+    OR?: SchoolEnterpriseProjectScalarWhereWithAggregatesInput[]
+    NOT?: SchoolEnterpriseProjectScalarWhereWithAggregatesInput | SchoolEnterpriseProjectScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"SchoolEnterpriseProject"> | string
+    schoolId?: StringWithAggregatesFilter<"SchoolEnterpriseProject"> | string
+    challengeId?: StringNullableWithAggregatesFilter<"SchoolEnterpriseProject"> | string | null
+    title?: StringWithAggregatesFilter<"SchoolEnterpriseProject"> | string
+    description?: StringNullableWithAggregatesFilter<"SchoolEnterpriseProject"> | string | null
+    projectType?: EnumSchoolEnterpriseProjectTypeWithAggregatesFilter<"SchoolEnterpriseProject"> | $Enums.SchoolEnterpriseProjectType
+    studentLead?: StringWithAggregatesFilter<"SchoolEnterpriseProject"> | string
+    gradeLevel?: StringNullableWithAggregatesFilter<"SchoolEnterpriseProject"> | string | null
+    category?: StringNullableWithAggregatesFilter<"SchoolEnterpriseProject"> | string | null
+    status?: EnumSchoolEnterpriseProjectStatusWithAggregatesFilter<"SchoolEnterpriseProject"> | $Enums.SchoolEnterpriseProjectStatus
+    revenueZar?: IntWithAggregatesFilter<"SchoolEnterpriseProject"> | number
+    seekingSponsor?: BoolWithAggregatesFilter<"SchoolEnterpriseProject"> | boolean
+    createdAt?: DateTimeWithAggregatesFilter<"SchoolEnterpriseProject"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"SchoolEnterpriseProject"> | Date | string
+  }
+
+  export type SchoolCrmContactWhereInput = {
+    AND?: SchoolCrmContactWhereInput | SchoolCrmContactWhereInput[]
+    OR?: SchoolCrmContactWhereInput[]
+    NOT?: SchoolCrmContactWhereInput | SchoolCrmContactWhereInput[]
+    id?: StringFilter<"SchoolCrmContact"> | string
+    schoolId?: StringFilter<"SchoolCrmContact"> | string
+    fullName?: StringFilter<"SchoolCrmContact"> | string
+    organization?: StringNullableFilter<"SchoolCrmContact"> | string | null
+    email?: StringNullableFilter<"SchoolCrmContact"> | string | null
+    phone?: StringNullableFilter<"SchoolCrmContact"> | string | null
+    contactType?: EnumSchoolCrmContactTypeFilter<"SchoolCrmContact"> | $Enums.SchoolCrmContactType
+    notes?: StringNullableFilter<"SchoolCrmContact"> | string | null
+    createdAt?: DateTimeFilter<"SchoolCrmContact"> | Date | string
+    updatedAt?: DateTimeFilter<"SchoolCrmContact"> | Date | string
+    school?: XOR<SchoolRelationFilter, SchoolWhereInput>
+    activities?: SchoolCrmActivityListRelationFilter
+    tasks?: SchoolCrmTaskListRelationFilter
+  }
+
+  export type SchoolCrmContactOrderByWithRelationInput = {
+    id?: SortOrder
+    schoolId?: SortOrder
+    fullName?: SortOrder
+    organization?: SortOrderInput | SortOrder
+    email?: SortOrderInput | SortOrder
+    phone?: SortOrderInput | SortOrder
+    contactType?: SortOrder
+    notes?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    school?: SchoolOrderByWithRelationInput
+    activities?: SchoolCrmActivityOrderByRelationAggregateInput
+    tasks?: SchoolCrmTaskOrderByRelationAggregateInput
+  }
+
+  export type SchoolCrmContactWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: SchoolCrmContactWhereInput | SchoolCrmContactWhereInput[]
+    OR?: SchoolCrmContactWhereInput[]
+    NOT?: SchoolCrmContactWhereInput | SchoolCrmContactWhereInput[]
+    schoolId?: StringFilter<"SchoolCrmContact"> | string
+    fullName?: StringFilter<"SchoolCrmContact"> | string
+    organization?: StringNullableFilter<"SchoolCrmContact"> | string | null
+    email?: StringNullableFilter<"SchoolCrmContact"> | string | null
+    phone?: StringNullableFilter<"SchoolCrmContact"> | string | null
+    contactType?: EnumSchoolCrmContactTypeFilter<"SchoolCrmContact"> | $Enums.SchoolCrmContactType
+    notes?: StringNullableFilter<"SchoolCrmContact"> | string | null
+    createdAt?: DateTimeFilter<"SchoolCrmContact"> | Date | string
+    updatedAt?: DateTimeFilter<"SchoolCrmContact"> | Date | string
+    school?: XOR<SchoolRelationFilter, SchoolWhereInput>
+    activities?: SchoolCrmActivityListRelationFilter
+    tasks?: SchoolCrmTaskListRelationFilter
+  }, "id">
+
+  export type SchoolCrmContactOrderByWithAggregationInput = {
+    id?: SortOrder
+    schoolId?: SortOrder
+    fullName?: SortOrder
+    organization?: SortOrderInput | SortOrder
+    email?: SortOrderInput | SortOrder
+    phone?: SortOrderInput | SortOrder
+    contactType?: SortOrder
+    notes?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: SchoolCrmContactCountOrderByAggregateInput
+    _max?: SchoolCrmContactMaxOrderByAggregateInput
+    _min?: SchoolCrmContactMinOrderByAggregateInput
+  }
+
+  export type SchoolCrmContactScalarWhereWithAggregatesInput = {
+    AND?: SchoolCrmContactScalarWhereWithAggregatesInput | SchoolCrmContactScalarWhereWithAggregatesInput[]
+    OR?: SchoolCrmContactScalarWhereWithAggregatesInput[]
+    NOT?: SchoolCrmContactScalarWhereWithAggregatesInput | SchoolCrmContactScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"SchoolCrmContact"> | string
+    schoolId?: StringWithAggregatesFilter<"SchoolCrmContact"> | string
+    fullName?: StringWithAggregatesFilter<"SchoolCrmContact"> | string
+    organization?: StringNullableWithAggregatesFilter<"SchoolCrmContact"> | string | null
+    email?: StringNullableWithAggregatesFilter<"SchoolCrmContact"> | string | null
+    phone?: StringNullableWithAggregatesFilter<"SchoolCrmContact"> | string | null
+    contactType?: EnumSchoolCrmContactTypeWithAggregatesFilter<"SchoolCrmContact"> | $Enums.SchoolCrmContactType
+    notes?: StringNullableWithAggregatesFilter<"SchoolCrmContact"> | string | null
+    createdAt?: DateTimeWithAggregatesFilter<"SchoolCrmContact"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"SchoolCrmContact"> | Date | string
+  }
+
+  export type SchoolCrmActivityWhereInput = {
+    AND?: SchoolCrmActivityWhereInput | SchoolCrmActivityWhereInput[]
+    OR?: SchoolCrmActivityWhereInput[]
+    NOT?: SchoolCrmActivityWhereInput | SchoolCrmActivityWhereInput[]
+    id?: StringFilter<"SchoolCrmActivity"> | string
+    schoolId?: StringFilter<"SchoolCrmActivity"> | string
+    contactId?: StringNullableFilter<"SchoolCrmActivity"> | string | null
+    activityType?: EnumSchoolCrmActivityTypeFilter<"SchoolCrmActivity"> | $Enums.SchoolCrmActivityType
+    title?: StringFilter<"SchoolCrmActivity"> | string
+    summary?: StringNullableFilter<"SchoolCrmActivity"> | string | null
+    occurredAt?: DateTimeFilter<"SchoolCrmActivity"> | Date | string
+    createdAt?: DateTimeFilter<"SchoolCrmActivity"> | Date | string
+    updatedAt?: DateTimeFilter<"SchoolCrmActivity"> | Date | string
+    school?: XOR<SchoolRelationFilter, SchoolWhereInput>
+    contact?: XOR<SchoolCrmContactNullableRelationFilter, SchoolCrmContactWhereInput> | null
+  }
+
+  export type SchoolCrmActivityOrderByWithRelationInput = {
+    id?: SortOrder
+    schoolId?: SortOrder
+    contactId?: SortOrderInput | SortOrder
+    activityType?: SortOrder
+    title?: SortOrder
+    summary?: SortOrderInput | SortOrder
+    occurredAt?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    school?: SchoolOrderByWithRelationInput
+    contact?: SchoolCrmContactOrderByWithRelationInput
+  }
+
+  export type SchoolCrmActivityWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: SchoolCrmActivityWhereInput | SchoolCrmActivityWhereInput[]
+    OR?: SchoolCrmActivityWhereInput[]
+    NOT?: SchoolCrmActivityWhereInput | SchoolCrmActivityWhereInput[]
+    schoolId?: StringFilter<"SchoolCrmActivity"> | string
+    contactId?: StringNullableFilter<"SchoolCrmActivity"> | string | null
+    activityType?: EnumSchoolCrmActivityTypeFilter<"SchoolCrmActivity"> | $Enums.SchoolCrmActivityType
+    title?: StringFilter<"SchoolCrmActivity"> | string
+    summary?: StringNullableFilter<"SchoolCrmActivity"> | string | null
+    occurredAt?: DateTimeFilter<"SchoolCrmActivity"> | Date | string
+    createdAt?: DateTimeFilter<"SchoolCrmActivity"> | Date | string
+    updatedAt?: DateTimeFilter<"SchoolCrmActivity"> | Date | string
+    school?: XOR<SchoolRelationFilter, SchoolWhereInput>
+    contact?: XOR<SchoolCrmContactNullableRelationFilter, SchoolCrmContactWhereInput> | null
+  }, "id">
+
+  export type SchoolCrmActivityOrderByWithAggregationInput = {
+    id?: SortOrder
+    schoolId?: SortOrder
+    contactId?: SortOrderInput | SortOrder
+    activityType?: SortOrder
+    title?: SortOrder
+    summary?: SortOrderInput | SortOrder
+    occurredAt?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: SchoolCrmActivityCountOrderByAggregateInput
+    _max?: SchoolCrmActivityMaxOrderByAggregateInput
+    _min?: SchoolCrmActivityMinOrderByAggregateInput
+  }
+
+  export type SchoolCrmActivityScalarWhereWithAggregatesInput = {
+    AND?: SchoolCrmActivityScalarWhereWithAggregatesInput | SchoolCrmActivityScalarWhereWithAggregatesInput[]
+    OR?: SchoolCrmActivityScalarWhereWithAggregatesInput[]
+    NOT?: SchoolCrmActivityScalarWhereWithAggregatesInput | SchoolCrmActivityScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"SchoolCrmActivity"> | string
+    schoolId?: StringWithAggregatesFilter<"SchoolCrmActivity"> | string
+    contactId?: StringNullableWithAggregatesFilter<"SchoolCrmActivity"> | string | null
+    activityType?: EnumSchoolCrmActivityTypeWithAggregatesFilter<"SchoolCrmActivity"> | $Enums.SchoolCrmActivityType
+    title?: StringWithAggregatesFilter<"SchoolCrmActivity"> | string
+    summary?: StringNullableWithAggregatesFilter<"SchoolCrmActivity"> | string | null
+    occurredAt?: DateTimeWithAggregatesFilter<"SchoolCrmActivity"> | Date | string
+    createdAt?: DateTimeWithAggregatesFilter<"SchoolCrmActivity"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"SchoolCrmActivity"> | Date | string
+  }
+
+  export type SchoolCrmTaskWhereInput = {
+    AND?: SchoolCrmTaskWhereInput | SchoolCrmTaskWhereInput[]
+    OR?: SchoolCrmTaskWhereInput[]
+    NOT?: SchoolCrmTaskWhereInput | SchoolCrmTaskWhereInput[]
+    id?: StringFilter<"SchoolCrmTask"> | string
+    schoolId?: StringFilter<"SchoolCrmTask"> | string
+    contactId?: StringNullableFilter<"SchoolCrmTask"> | string | null
+    title?: StringFilter<"SchoolCrmTask"> | string
+    description?: StringNullableFilter<"SchoolCrmTask"> | string | null
+    dueAt?: DateTimeNullableFilter<"SchoolCrmTask"> | Date | string | null
+    status?: EnumSchoolCrmTaskStatusFilter<"SchoolCrmTask"> | $Enums.SchoolCrmTaskStatus
+    priority?: EnumSchoolCrmTaskPriorityFilter<"SchoolCrmTask"> | $Enums.SchoolCrmTaskPriority
+    createdAt?: DateTimeFilter<"SchoolCrmTask"> | Date | string
+    updatedAt?: DateTimeFilter<"SchoolCrmTask"> | Date | string
+    school?: XOR<SchoolRelationFilter, SchoolWhereInput>
+    contact?: XOR<SchoolCrmContactNullableRelationFilter, SchoolCrmContactWhereInput> | null
+  }
+
+  export type SchoolCrmTaskOrderByWithRelationInput = {
+    id?: SortOrder
+    schoolId?: SortOrder
+    contactId?: SortOrderInput | SortOrder
+    title?: SortOrder
+    description?: SortOrderInput | SortOrder
+    dueAt?: SortOrderInput | SortOrder
+    status?: SortOrder
+    priority?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    school?: SchoolOrderByWithRelationInput
+    contact?: SchoolCrmContactOrderByWithRelationInput
+  }
+
+  export type SchoolCrmTaskWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: SchoolCrmTaskWhereInput | SchoolCrmTaskWhereInput[]
+    OR?: SchoolCrmTaskWhereInput[]
+    NOT?: SchoolCrmTaskWhereInput | SchoolCrmTaskWhereInput[]
+    schoolId?: StringFilter<"SchoolCrmTask"> | string
+    contactId?: StringNullableFilter<"SchoolCrmTask"> | string | null
+    title?: StringFilter<"SchoolCrmTask"> | string
+    description?: StringNullableFilter<"SchoolCrmTask"> | string | null
+    dueAt?: DateTimeNullableFilter<"SchoolCrmTask"> | Date | string | null
+    status?: EnumSchoolCrmTaskStatusFilter<"SchoolCrmTask"> | $Enums.SchoolCrmTaskStatus
+    priority?: EnumSchoolCrmTaskPriorityFilter<"SchoolCrmTask"> | $Enums.SchoolCrmTaskPriority
+    createdAt?: DateTimeFilter<"SchoolCrmTask"> | Date | string
+    updatedAt?: DateTimeFilter<"SchoolCrmTask"> | Date | string
+    school?: XOR<SchoolRelationFilter, SchoolWhereInput>
+    contact?: XOR<SchoolCrmContactNullableRelationFilter, SchoolCrmContactWhereInput> | null
+  }, "id">
+
+  export type SchoolCrmTaskOrderByWithAggregationInput = {
+    id?: SortOrder
+    schoolId?: SortOrder
+    contactId?: SortOrderInput | SortOrder
+    title?: SortOrder
+    description?: SortOrderInput | SortOrder
+    dueAt?: SortOrderInput | SortOrder
+    status?: SortOrder
+    priority?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: SchoolCrmTaskCountOrderByAggregateInput
+    _max?: SchoolCrmTaskMaxOrderByAggregateInput
+    _min?: SchoolCrmTaskMinOrderByAggregateInput
+  }
+
+  export type SchoolCrmTaskScalarWhereWithAggregatesInput = {
+    AND?: SchoolCrmTaskScalarWhereWithAggregatesInput | SchoolCrmTaskScalarWhereWithAggregatesInput[]
+    OR?: SchoolCrmTaskScalarWhereWithAggregatesInput[]
+    NOT?: SchoolCrmTaskScalarWhereWithAggregatesInput | SchoolCrmTaskScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"SchoolCrmTask"> | string
+    schoolId?: StringWithAggregatesFilter<"SchoolCrmTask"> | string
+    contactId?: StringNullableWithAggregatesFilter<"SchoolCrmTask"> | string | null
+    title?: StringWithAggregatesFilter<"SchoolCrmTask"> | string
+    description?: StringNullableWithAggregatesFilter<"SchoolCrmTask"> | string | null
+    dueAt?: DateTimeNullableWithAggregatesFilter<"SchoolCrmTask"> | Date | string | null
+    status?: EnumSchoolCrmTaskStatusWithAggregatesFilter<"SchoolCrmTask"> | $Enums.SchoolCrmTaskStatus
+    priority?: EnumSchoolCrmTaskPriorityWithAggregatesFilter<"SchoolCrmTask"> | $Enums.SchoolCrmTaskPriority
+    createdAt?: DateTimeWithAggregatesFilter<"SchoolCrmTask"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"SchoolCrmTask"> | Date | string
   }
 
   export type SchoolVerificationWhereInput = {
@@ -37765,11 +51199,29 @@ export namespace Prisma {
     fundingBalanceZar?: Decimal | DecimalJsLike | number | string
     annualCycleYear?: number | null
     annualCycleFocus?: string | null
+    logoUrl?: string | null
+    logoPng?: Buffer | null
+    websiteUrl?: string | null
+    publicPhone?: string | null
+    quintile?: number | null
+    teacherCount?: number | null
+    gpsLat?: number | null
+    gpsLng?: number | null
+    publicProfile?: NullableJsonNullValueInput | InputJsonValue
     createdAt?: Date | string
     updatedAt?: Date | string
     learners?: LearnerCreateNestedManyWithoutSchoolInput
     submissions?: SubmissionCreateNestedManyWithoutSchoolInput
     fundingContributions?: FundingContributionCreateNestedManyWithoutSchoolInput
+    submittedNeeds?: SchoolSubmittedNeedCreateNestedManyWithoutSchoolInput
+    volunteers?: SchoolVolunteerCreateNestedManyWithoutSchoolInput
+    events?: SchoolEventCreateNestedManyWithoutSchoolInput
+    alumni?: SchoolAlumniCreateNestedManyWithoutSchoolInput
+    enterpriseProjects?: SchoolEnterpriseProjectCreateNestedManyWithoutSchoolInput
+    innovationChallenges?: SchoolInnovationChallengeCreateNestedManyWithoutSchoolInput
+    crmContacts?: SchoolCrmContactCreateNestedManyWithoutSchoolInput
+    crmActivities?: SchoolCrmActivityCreateNestedManyWithoutSchoolInput
+    crmTasks?: SchoolCrmTaskCreateNestedManyWithoutSchoolInput
     adminUser?: UserCreateNestedOneWithoutSchoolInput
     verification?: SchoolVerificationCreateNestedOneWithoutSchoolInput
   }
@@ -37793,11 +51245,29 @@ export namespace Prisma {
     fundingBalanceZar?: Decimal | DecimalJsLike | number | string
     annualCycleYear?: number | null
     annualCycleFocus?: string | null
+    logoUrl?: string | null
+    logoPng?: Buffer | null
+    websiteUrl?: string | null
+    publicPhone?: string | null
+    quintile?: number | null
+    teacherCount?: number | null
+    gpsLat?: number | null
+    gpsLng?: number | null
+    publicProfile?: NullableJsonNullValueInput | InputJsonValue
     createdAt?: Date | string
     updatedAt?: Date | string
     learners?: LearnerUncheckedCreateNestedManyWithoutSchoolInput
     submissions?: SubmissionUncheckedCreateNestedManyWithoutSchoolInput
     fundingContributions?: FundingContributionUncheckedCreateNestedManyWithoutSchoolInput
+    submittedNeeds?: SchoolSubmittedNeedUncheckedCreateNestedManyWithoutSchoolInput
+    volunteers?: SchoolVolunteerUncheckedCreateNestedManyWithoutSchoolInput
+    events?: SchoolEventUncheckedCreateNestedManyWithoutSchoolInput
+    alumni?: SchoolAlumniUncheckedCreateNestedManyWithoutSchoolInput
+    enterpriseProjects?: SchoolEnterpriseProjectUncheckedCreateNestedManyWithoutSchoolInput
+    innovationChallenges?: SchoolInnovationChallengeUncheckedCreateNestedManyWithoutSchoolInput
+    crmContacts?: SchoolCrmContactUncheckedCreateNestedManyWithoutSchoolInput
+    crmActivities?: SchoolCrmActivityUncheckedCreateNestedManyWithoutSchoolInput
+    crmTasks?: SchoolCrmTaskUncheckedCreateNestedManyWithoutSchoolInput
     adminUser?: UserUncheckedCreateNestedOneWithoutSchoolInput
     verification?: SchoolVerificationUncheckedCreateNestedOneWithoutSchoolInput
   }
@@ -37821,11 +51291,29 @@ export namespace Prisma {
     fundingBalanceZar?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     annualCycleYear?: NullableIntFieldUpdateOperationsInput | number | null
     annualCycleFocus?: NullableStringFieldUpdateOperationsInput | string | null
+    logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    logoPng?: NullableBytesFieldUpdateOperationsInput | Buffer | null
+    websiteUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    publicPhone?: NullableStringFieldUpdateOperationsInput | string | null
+    quintile?: NullableIntFieldUpdateOperationsInput | number | null
+    teacherCount?: NullableIntFieldUpdateOperationsInput | number | null
+    gpsLat?: NullableFloatFieldUpdateOperationsInput | number | null
+    gpsLng?: NullableFloatFieldUpdateOperationsInput | number | null
+    publicProfile?: NullableJsonNullValueInput | InputJsonValue
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     learners?: LearnerUpdateManyWithoutSchoolNestedInput
     submissions?: SubmissionUpdateManyWithoutSchoolNestedInput
     fundingContributions?: FundingContributionUpdateManyWithoutSchoolNestedInput
+    submittedNeeds?: SchoolSubmittedNeedUpdateManyWithoutSchoolNestedInput
+    volunteers?: SchoolVolunteerUpdateManyWithoutSchoolNestedInput
+    events?: SchoolEventUpdateManyWithoutSchoolNestedInput
+    alumni?: SchoolAlumniUpdateManyWithoutSchoolNestedInput
+    enterpriseProjects?: SchoolEnterpriseProjectUpdateManyWithoutSchoolNestedInput
+    innovationChallenges?: SchoolInnovationChallengeUpdateManyWithoutSchoolNestedInput
+    crmContacts?: SchoolCrmContactUpdateManyWithoutSchoolNestedInput
+    crmActivities?: SchoolCrmActivityUpdateManyWithoutSchoolNestedInput
+    crmTasks?: SchoolCrmTaskUpdateManyWithoutSchoolNestedInput
     adminUser?: UserUpdateOneWithoutSchoolNestedInput
     verification?: SchoolVerificationUpdateOneWithoutSchoolNestedInput
   }
@@ -37849,11 +51337,29 @@ export namespace Prisma {
     fundingBalanceZar?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     annualCycleYear?: NullableIntFieldUpdateOperationsInput | number | null
     annualCycleFocus?: NullableStringFieldUpdateOperationsInput | string | null
+    logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    logoPng?: NullableBytesFieldUpdateOperationsInput | Buffer | null
+    websiteUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    publicPhone?: NullableStringFieldUpdateOperationsInput | string | null
+    quintile?: NullableIntFieldUpdateOperationsInput | number | null
+    teacherCount?: NullableIntFieldUpdateOperationsInput | number | null
+    gpsLat?: NullableFloatFieldUpdateOperationsInput | number | null
+    gpsLng?: NullableFloatFieldUpdateOperationsInput | number | null
+    publicProfile?: NullableJsonNullValueInput | InputJsonValue
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     learners?: LearnerUncheckedUpdateManyWithoutSchoolNestedInput
     submissions?: SubmissionUncheckedUpdateManyWithoutSchoolNestedInput
     fundingContributions?: FundingContributionUncheckedUpdateManyWithoutSchoolNestedInput
+    submittedNeeds?: SchoolSubmittedNeedUncheckedUpdateManyWithoutSchoolNestedInput
+    volunteers?: SchoolVolunteerUncheckedUpdateManyWithoutSchoolNestedInput
+    events?: SchoolEventUncheckedUpdateManyWithoutSchoolNestedInput
+    alumni?: SchoolAlumniUncheckedUpdateManyWithoutSchoolNestedInput
+    enterpriseProjects?: SchoolEnterpriseProjectUncheckedUpdateManyWithoutSchoolNestedInput
+    innovationChallenges?: SchoolInnovationChallengeUncheckedUpdateManyWithoutSchoolNestedInput
+    crmContacts?: SchoolCrmContactUncheckedUpdateManyWithoutSchoolNestedInput
+    crmActivities?: SchoolCrmActivityUncheckedUpdateManyWithoutSchoolNestedInput
+    crmTasks?: SchoolCrmTaskUncheckedUpdateManyWithoutSchoolNestedInput
     adminUser?: UserUncheckedUpdateOneWithoutSchoolNestedInput
     verification?: SchoolVerificationUncheckedUpdateOneWithoutSchoolNestedInput
   }
@@ -37877,6 +51383,15 @@ export namespace Prisma {
     fundingBalanceZar?: Decimal | DecimalJsLike | number | string
     annualCycleYear?: number | null
     annualCycleFocus?: string | null
+    logoUrl?: string | null
+    logoPng?: Buffer | null
+    websiteUrl?: string | null
+    publicPhone?: string | null
+    quintile?: number | null
+    teacherCount?: number | null
+    gpsLat?: number | null
+    gpsLng?: number | null
+    publicProfile?: NullableJsonNullValueInput | InputJsonValue
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -37900,6 +51415,15 @@ export namespace Prisma {
     fundingBalanceZar?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     annualCycleYear?: NullableIntFieldUpdateOperationsInput | number | null
     annualCycleFocus?: NullableStringFieldUpdateOperationsInput | string | null
+    logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    logoPng?: NullableBytesFieldUpdateOperationsInput | Buffer | null
+    websiteUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    publicPhone?: NullableStringFieldUpdateOperationsInput | string | null
+    quintile?: NullableIntFieldUpdateOperationsInput | number | null
+    teacherCount?: NullableIntFieldUpdateOperationsInput | number | null
+    gpsLat?: NullableFloatFieldUpdateOperationsInput | number | null
+    gpsLng?: NullableFloatFieldUpdateOperationsInput | number | null
+    publicProfile?: NullableJsonNullValueInput | InputJsonValue
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -37923,6 +51447,1029 @@ export namespace Prisma {
     fundingBalanceZar?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     annualCycleYear?: NullableIntFieldUpdateOperationsInput | number | null
     annualCycleFocus?: NullableStringFieldUpdateOperationsInput | string | null
+    logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    logoPng?: NullableBytesFieldUpdateOperationsInput | Buffer | null
+    websiteUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    publicPhone?: NullableStringFieldUpdateOperationsInput | string | null
+    quintile?: NullableIntFieldUpdateOperationsInput | number | null
+    teacherCount?: NullableIntFieldUpdateOperationsInput | number | null
+    gpsLat?: NullableFloatFieldUpdateOperationsInput | number | null
+    gpsLng?: NullableFloatFieldUpdateOperationsInput | number | null
+    publicProfile?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type SchoolSubmittedNeedCreateInput = {
+    id?: string
+    title: string
+    category: string
+    subcategory: string
+    urgency: string
+    description: string
+    learnerImpact: number
+    estimatedCostZar: number
+    progressPercent?: number
+    sponsorStatus?: string
+    photoCount?: number
+    quoteCount?: number
+    status?: $Enums.SchoolNeedStatus
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    school: SchoolCreateNestedOneWithoutSubmittedNeedsInput
+  }
+
+  export type SchoolSubmittedNeedUncheckedCreateInput = {
+    id?: string
+    schoolId: string
+    title: string
+    category: string
+    subcategory: string
+    urgency: string
+    description: string
+    learnerImpact: number
+    estimatedCostZar: number
+    progressPercent?: number
+    sponsorStatus?: string
+    photoCount?: number
+    quoteCount?: number
+    status?: $Enums.SchoolNeedStatus
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type SchoolSubmittedNeedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    category?: StringFieldUpdateOperationsInput | string
+    subcategory?: StringFieldUpdateOperationsInput | string
+    urgency?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    learnerImpact?: IntFieldUpdateOperationsInput | number
+    estimatedCostZar?: IntFieldUpdateOperationsInput | number
+    progressPercent?: IntFieldUpdateOperationsInput | number
+    sponsorStatus?: StringFieldUpdateOperationsInput | string
+    photoCount?: IntFieldUpdateOperationsInput | number
+    quoteCount?: IntFieldUpdateOperationsInput | number
+    status?: EnumSchoolNeedStatusFieldUpdateOperationsInput | $Enums.SchoolNeedStatus
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    school?: SchoolUpdateOneRequiredWithoutSubmittedNeedsNestedInput
+  }
+
+  export type SchoolSubmittedNeedUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    schoolId?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    category?: StringFieldUpdateOperationsInput | string
+    subcategory?: StringFieldUpdateOperationsInput | string
+    urgency?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    learnerImpact?: IntFieldUpdateOperationsInput | number
+    estimatedCostZar?: IntFieldUpdateOperationsInput | number
+    progressPercent?: IntFieldUpdateOperationsInput | number
+    sponsorStatus?: StringFieldUpdateOperationsInput | string
+    photoCount?: IntFieldUpdateOperationsInput | number
+    quoteCount?: IntFieldUpdateOperationsInput | number
+    status?: EnumSchoolNeedStatusFieldUpdateOperationsInput | $Enums.SchoolNeedStatus
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type SchoolSubmittedNeedCreateManyInput = {
+    id?: string
+    schoolId: string
+    title: string
+    category: string
+    subcategory: string
+    urgency: string
+    description: string
+    learnerImpact: number
+    estimatedCostZar: number
+    progressPercent?: number
+    sponsorStatus?: string
+    photoCount?: number
+    quoteCount?: number
+    status?: $Enums.SchoolNeedStatus
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type SchoolSubmittedNeedUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    category?: StringFieldUpdateOperationsInput | string
+    subcategory?: StringFieldUpdateOperationsInput | string
+    urgency?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    learnerImpact?: IntFieldUpdateOperationsInput | number
+    estimatedCostZar?: IntFieldUpdateOperationsInput | number
+    progressPercent?: IntFieldUpdateOperationsInput | number
+    sponsorStatus?: StringFieldUpdateOperationsInput | string
+    photoCount?: IntFieldUpdateOperationsInput | number
+    quoteCount?: IntFieldUpdateOperationsInput | number
+    status?: EnumSchoolNeedStatusFieldUpdateOperationsInput | $Enums.SchoolNeedStatus
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type SchoolSubmittedNeedUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    schoolId?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    category?: StringFieldUpdateOperationsInput | string
+    subcategory?: StringFieldUpdateOperationsInput | string
+    urgency?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    learnerImpact?: IntFieldUpdateOperationsInput | number
+    estimatedCostZar?: IntFieldUpdateOperationsInput | number
+    progressPercent?: IntFieldUpdateOperationsInput | number
+    sponsorStatus?: StringFieldUpdateOperationsInput | string
+    photoCount?: IntFieldUpdateOperationsInput | number
+    quoteCount?: IntFieldUpdateOperationsInput | number
+    status?: EnumSchoolNeedStatusFieldUpdateOperationsInput | $Enums.SchoolNeedStatus
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type SchoolVolunteerCreateInput = {
+    id?: string
+    fullName: string
+    role: string
+    phone?: string | null
+    email?: string | null
+    skills?: string | null
+    hoursLogged?: number
+    status?: $Enums.SchoolVolunteerStatus
+    notes?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    school: SchoolCreateNestedOneWithoutVolunteersInput
+    assignments?: SchoolEventVolunteerCreateNestedManyWithoutVolunteerInput
+  }
+
+  export type SchoolVolunteerUncheckedCreateInput = {
+    id?: string
+    schoolId: string
+    fullName: string
+    role: string
+    phone?: string | null
+    email?: string | null
+    skills?: string | null
+    hoursLogged?: number
+    status?: $Enums.SchoolVolunteerStatus
+    notes?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    assignments?: SchoolEventVolunteerUncheckedCreateNestedManyWithoutVolunteerInput
+  }
+
+  export type SchoolVolunteerUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    fullName?: StringFieldUpdateOperationsInput | string
+    role?: StringFieldUpdateOperationsInput | string
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    skills?: NullableStringFieldUpdateOperationsInput | string | null
+    hoursLogged?: IntFieldUpdateOperationsInput | number
+    status?: EnumSchoolVolunteerStatusFieldUpdateOperationsInput | $Enums.SchoolVolunteerStatus
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    school?: SchoolUpdateOneRequiredWithoutVolunteersNestedInput
+    assignments?: SchoolEventVolunteerUpdateManyWithoutVolunteerNestedInput
+  }
+
+  export type SchoolVolunteerUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    schoolId?: StringFieldUpdateOperationsInput | string
+    fullName?: StringFieldUpdateOperationsInput | string
+    role?: StringFieldUpdateOperationsInput | string
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    skills?: NullableStringFieldUpdateOperationsInput | string | null
+    hoursLogged?: IntFieldUpdateOperationsInput | number
+    status?: EnumSchoolVolunteerStatusFieldUpdateOperationsInput | $Enums.SchoolVolunteerStatus
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    assignments?: SchoolEventVolunteerUncheckedUpdateManyWithoutVolunteerNestedInput
+  }
+
+  export type SchoolVolunteerCreateManyInput = {
+    id?: string
+    schoolId: string
+    fullName: string
+    role: string
+    phone?: string | null
+    email?: string | null
+    skills?: string | null
+    hoursLogged?: number
+    status?: $Enums.SchoolVolunteerStatus
+    notes?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type SchoolVolunteerUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    fullName?: StringFieldUpdateOperationsInput | string
+    role?: StringFieldUpdateOperationsInput | string
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    skills?: NullableStringFieldUpdateOperationsInput | string | null
+    hoursLogged?: IntFieldUpdateOperationsInput | number
+    status?: EnumSchoolVolunteerStatusFieldUpdateOperationsInput | $Enums.SchoolVolunteerStatus
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type SchoolVolunteerUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    schoolId?: StringFieldUpdateOperationsInput | string
+    fullName?: StringFieldUpdateOperationsInput | string
+    role?: StringFieldUpdateOperationsInput | string
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    skills?: NullableStringFieldUpdateOperationsInput | string | null
+    hoursLogged?: IntFieldUpdateOperationsInput | number
+    status?: EnumSchoolVolunteerStatusFieldUpdateOperationsInput | $Enums.SchoolVolunteerStatus
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type SchoolEventCreateInput = {
+    id?: string
+    title: string
+    description?: string | null
+    eventType: string
+    location?: string | null
+    startsAt: Date | string
+    endsAt?: Date | string | null
+    volunteerSlots?: number
+    status?: $Enums.SchoolEventStatus
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    school: SchoolCreateNestedOneWithoutEventsInput
+    assignments?: SchoolEventVolunteerCreateNestedManyWithoutEventInput
+  }
+
+  export type SchoolEventUncheckedCreateInput = {
+    id?: string
+    schoolId: string
+    title: string
+    description?: string | null
+    eventType: string
+    location?: string | null
+    startsAt: Date | string
+    endsAt?: Date | string | null
+    volunteerSlots?: number
+    status?: $Enums.SchoolEventStatus
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    assignments?: SchoolEventVolunteerUncheckedCreateNestedManyWithoutEventInput
+  }
+
+  export type SchoolEventUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    eventType?: StringFieldUpdateOperationsInput | string
+    location?: NullableStringFieldUpdateOperationsInput | string | null
+    startsAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    endsAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    volunteerSlots?: IntFieldUpdateOperationsInput | number
+    status?: EnumSchoolEventStatusFieldUpdateOperationsInput | $Enums.SchoolEventStatus
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    school?: SchoolUpdateOneRequiredWithoutEventsNestedInput
+    assignments?: SchoolEventVolunteerUpdateManyWithoutEventNestedInput
+  }
+
+  export type SchoolEventUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    schoolId?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    eventType?: StringFieldUpdateOperationsInput | string
+    location?: NullableStringFieldUpdateOperationsInput | string | null
+    startsAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    endsAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    volunteerSlots?: IntFieldUpdateOperationsInput | number
+    status?: EnumSchoolEventStatusFieldUpdateOperationsInput | $Enums.SchoolEventStatus
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    assignments?: SchoolEventVolunteerUncheckedUpdateManyWithoutEventNestedInput
+  }
+
+  export type SchoolEventCreateManyInput = {
+    id?: string
+    schoolId: string
+    title: string
+    description?: string | null
+    eventType: string
+    location?: string | null
+    startsAt: Date | string
+    endsAt?: Date | string | null
+    volunteerSlots?: number
+    status?: $Enums.SchoolEventStatus
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type SchoolEventUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    eventType?: StringFieldUpdateOperationsInput | string
+    location?: NullableStringFieldUpdateOperationsInput | string | null
+    startsAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    endsAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    volunteerSlots?: IntFieldUpdateOperationsInput | number
+    status?: EnumSchoolEventStatusFieldUpdateOperationsInput | $Enums.SchoolEventStatus
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type SchoolEventUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    schoolId?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    eventType?: StringFieldUpdateOperationsInput | string
+    location?: NullableStringFieldUpdateOperationsInput | string | null
+    startsAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    endsAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    volunteerSlots?: IntFieldUpdateOperationsInput | number
+    status?: EnumSchoolEventStatusFieldUpdateOperationsInput | $Enums.SchoolEventStatus
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type SchoolEventVolunteerCreateInput = {
+    id?: string
+    role?: string | null
+    createdAt?: Date | string
+    event: SchoolEventCreateNestedOneWithoutAssignmentsInput
+    volunteer: SchoolVolunteerCreateNestedOneWithoutAssignmentsInput
+  }
+
+  export type SchoolEventVolunteerUncheckedCreateInput = {
+    id?: string
+    eventId: string
+    volunteerId: string
+    role?: string | null
+    createdAt?: Date | string
+  }
+
+  export type SchoolEventVolunteerUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    role?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    event?: SchoolEventUpdateOneRequiredWithoutAssignmentsNestedInput
+    volunteer?: SchoolVolunteerUpdateOneRequiredWithoutAssignmentsNestedInput
+  }
+
+  export type SchoolEventVolunteerUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    eventId?: StringFieldUpdateOperationsInput | string
+    volunteerId?: StringFieldUpdateOperationsInput | string
+    role?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type SchoolEventVolunteerCreateManyInput = {
+    id?: string
+    eventId: string
+    volunteerId: string
+    role?: string | null
+    createdAt?: Date | string
+  }
+
+  export type SchoolEventVolunteerUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    role?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type SchoolEventVolunteerUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    eventId?: StringFieldUpdateOperationsInput | string
+    volunteerId?: StringFieldUpdateOperationsInput | string
+    role?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type SchoolAlumniCreateInput = {
+    id?: string
+    fullName: string
+    graduationYear?: number | null
+    profession?: string | null
+    company?: string | null
+    email?: string | null
+    phone?: string | null
+    linkedInUrl?: string | null
+    role?: $Enums.SchoolAlumniRole
+    offering?: string | null
+    status?: $Enums.SchoolAlumniStatus
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    school: SchoolCreateNestedOneWithoutAlumniInput
+  }
+
+  export type SchoolAlumniUncheckedCreateInput = {
+    id?: string
+    schoolId: string
+    fullName: string
+    graduationYear?: number | null
+    profession?: string | null
+    company?: string | null
+    email?: string | null
+    phone?: string | null
+    linkedInUrl?: string | null
+    role?: $Enums.SchoolAlumniRole
+    offering?: string | null
+    status?: $Enums.SchoolAlumniStatus
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type SchoolAlumniUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    fullName?: StringFieldUpdateOperationsInput | string
+    graduationYear?: NullableIntFieldUpdateOperationsInput | number | null
+    profession?: NullableStringFieldUpdateOperationsInput | string | null
+    company?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    linkedInUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: EnumSchoolAlumniRoleFieldUpdateOperationsInput | $Enums.SchoolAlumniRole
+    offering?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumSchoolAlumniStatusFieldUpdateOperationsInput | $Enums.SchoolAlumniStatus
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    school?: SchoolUpdateOneRequiredWithoutAlumniNestedInput
+  }
+
+  export type SchoolAlumniUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    schoolId?: StringFieldUpdateOperationsInput | string
+    fullName?: StringFieldUpdateOperationsInput | string
+    graduationYear?: NullableIntFieldUpdateOperationsInput | number | null
+    profession?: NullableStringFieldUpdateOperationsInput | string | null
+    company?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    linkedInUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: EnumSchoolAlumniRoleFieldUpdateOperationsInput | $Enums.SchoolAlumniRole
+    offering?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumSchoolAlumniStatusFieldUpdateOperationsInput | $Enums.SchoolAlumniStatus
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type SchoolAlumniCreateManyInput = {
+    id?: string
+    schoolId: string
+    fullName: string
+    graduationYear?: number | null
+    profession?: string | null
+    company?: string | null
+    email?: string | null
+    phone?: string | null
+    linkedInUrl?: string | null
+    role?: $Enums.SchoolAlumniRole
+    offering?: string | null
+    status?: $Enums.SchoolAlumniStatus
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type SchoolAlumniUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    fullName?: StringFieldUpdateOperationsInput | string
+    graduationYear?: NullableIntFieldUpdateOperationsInput | number | null
+    profession?: NullableStringFieldUpdateOperationsInput | string | null
+    company?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    linkedInUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: EnumSchoolAlumniRoleFieldUpdateOperationsInput | $Enums.SchoolAlumniRole
+    offering?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumSchoolAlumniStatusFieldUpdateOperationsInput | $Enums.SchoolAlumniStatus
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type SchoolAlumniUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    schoolId?: StringFieldUpdateOperationsInput | string
+    fullName?: StringFieldUpdateOperationsInput | string
+    graduationYear?: NullableIntFieldUpdateOperationsInput | number | null
+    profession?: NullableStringFieldUpdateOperationsInput | string | null
+    company?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    linkedInUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: EnumSchoolAlumniRoleFieldUpdateOperationsInput | $Enums.SchoolAlumniRole
+    offering?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumSchoolAlumniStatusFieldUpdateOperationsInput | $Enums.SchoolAlumniStatus
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type SchoolInnovationChallengeCreateInput = {
+    id?: string
+    title: string
+    description?: string | null
+    challengeType: string
+    startsAt: Date | string
+    endsAt?: Date | string | null
+    prizeDescription?: string | null
+    status?: $Enums.SchoolInnovationChallengeStatus
+    maxEntries?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    school: SchoolCreateNestedOneWithoutInnovationChallengesInput
+    projects?: SchoolEnterpriseProjectCreateNestedManyWithoutChallengeInput
+  }
+
+  export type SchoolInnovationChallengeUncheckedCreateInput = {
+    id?: string
+    schoolId: string
+    title: string
+    description?: string | null
+    challengeType: string
+    startsAt: Date | string
+    endsAt?: Date | string | null
+    prizeDescription?: string | null
+    status?: $Enums.SchoolInnovationChallengeStatus
+    maxEntries?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    projects?: SchoolEnterpriseProjectUncheckedCreateNestedManyWithoutChallengeInput
+  }
+
+  export type SchoolInnovationChallengeUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    challengeType?: StringFieldUpdateOperationsInput | string
+    startsAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    endsAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    prizeDescription?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumSchoolInnovationChallengeStatusFieldUpdateOperationsInput | $Enums.SchoolInnovationChallengeStatus
+    maxEntries?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    school?: SchoolUpdateOneRequiredWithoutInnovationChallengesNestedInput
+    projects?: SchoolEnterpriseProjectUpdateManyWithoutChallengeNestedInput
+  }
+
+  export type SchoolInnovationChallengeUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    schoolId?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    challengeType?: StringFieldUpdateOperationsInput | string
+    startsAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    endsAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    prizeDescription?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumSchoolInnovationChallengeStatusFieldUpdateOperationsInput | $Enums.SchoolInnovationChallengeStatus
+    maxEntries?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    projects?: SchoolEnterpriseProjectUncheckedUpdateManyWithoutChallengeNestedInput
+  }
+
+  export type SchoolInnovationChallengeCreateManyInput = {
+    id?: string
+    schoolId: string
+    title: string
+    description?: string | null
+    challengeType: string
+    startsAt: Date | string
+    endsAt?: Date | string | null
+    prizeDescription?: string | null
+    status?: $Enums.SchoolInnovationChallengeStatus
+    maxEntries?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type SchoolInnovationChallengeUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    challengeType?: StringFieldUpdateOperationsInput | string
+    startsAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    endsAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    prizeDescription?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumSchoolInnovationChallengeStatusFieldUpdateOperationsInput | $Enums.SchoolInnovationChallengeStatus
+    maxEntries?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type SchoolInnovationChallengeUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    schoolId?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    challengeType?: StringFieldUpdateOperationsInput | string
+    startsAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    endsAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    prizeDescription?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumSchoolInnovationChallengeStatusFieldUpdateOperationsInput | $Enums.SchoolInnovationChallengeStatus
+    maxEntries?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type SchoolEnterpriseProjectCreateInput = {
+    id?: string
+    title: string
+    description?: string | null
+    projectType: $Enums.SchoolEnterpriseProjectType
+    studentLead: string
+    gradeLevel?: string | null
+    category?: string | null
+    status?: $Enums.SchoolEnterpriseProjectStatus
+    revenueZar?: number
+    seekingSponsor?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    school: SchoolCreateNestedOneWithoutEnterpriseProjectsInput
+    challenge?: SchoolInnovationChallengeCreateNestedOneWithoutProjectsInput
+  }
+
+  export type SchoolEnterpriseProjectUncheckedCreateInput = {
+    id?: string
+    schoolId: string
+    challengeId?: string | null
+    title: string
+    description?: string | null
+    projectType: $Enums.SchoolEnterpriseProjectType
+    studentLead: string
+    gradeLevel?: string | null
+    category?: string | null
+    status?: $Enums.SchoolEnterpriseProjectStatus
+    revenueZar?: number
+    seekingSponsor?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type SchoolEnterpriseProjectUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    projectType?: EnumSchoolEnterpriseProjectTypeFieldUpdateOperationsInput | $Enums.SchoolEnterpriseProjectType
+    studentLead?: StringFieldUpdateOperationsInput | string
+    gradeLevel?: NullableStringFieldUpdateOperationsInput | string | null
+    category?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumSchoolEnterpriseProjectStatusFieldUpdateOperationsInput | $Enums.SchoolEnterpriseProjectStatus
+    revenueZar?: IntFieldUpdateOperationsInput | number
+    seekingSponsor?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    school?: SchoolUpdateOneRequiredWithoutEnterpriseProjectsNestedInput
+    challenge?: SchoolInnovationChallengeUpdateOneWithoutProjectsNestedInput
+  }
+
+  export type SchoolEnterpriseProjectUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    schoolId?: StringFieldUpdateOperationsInput | string
+    challengeId?: NullableStringFieldUpdateOperationsInput | string | null
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    projectType?: EnumSchoolEnterpriseProjectTypeFieldUpdateOperationsInput | $Enums.SchoolEnterpriseProjectType
+    studentLead?: StringFieldUpdateOperationsInput | string
+    gradeLevel?: NullableStringFieldUpdateOperationsInput | string | null
+    category?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumSchoolEnterpriseProjectStatusFieldUpdateOperationsInput | $Enums.SchoolEnterpriseProjectStatus
+    revenueZar?: IntFieldUpdateOperationsInput | number
+    seekingSponsor?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type SchoolEnterpriseProjectCreateManyInput = {
+    id?: string
+    schoolId: string
+    challengeId?: string | null
+    title: string
+    description?: string | null
+    projectType: $Enums.SchoolEnterpriseProjectType
+    studentLead: string
+    gradeLevel?: string | null
+    category?: string | null
+    status?: $Enums.SchoolEnterpriseProjectStatus
+    revenueZar?: number
+    seekingSponsor?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type SchoolEnterpriseProjectUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    projectType?: EnumSchoolEnterpriseProjectTypeFieldUpdateOperationsInput | $Enums.SchoolEnterpriseProjectType
+    studentLead?: StringFieldUpdateOperationsInput | string
+    gradeLevel?: NullableStringFieldUpdateOperationsInput | string | null
+    category?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumSchoolEnterpriseProjectStatusFieldUpdateOperationsInput | $Enums.SchoolEnterpriseProjectStatus
+    revenueZar?: IntFieldUpdateOperationsInput | number
+    seekingSponsor?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type SchoolEnterpriseProjectUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    schoolId?: StringFieldUpdateOperationsInput | string
+    challengeId?: NullableStringFieldUpdateOperationsInput | string | null
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    projectType?: EnumSchoolEnterpriseProjectTypeFieldUpdateOperationsInput | $Enums.SchoolEnterpriseProjectType
+    studentLead?: StringFieldUpdateOperationsInput | string
+    gradeLevel?: NullableStringFieldUpdateOperationsInput | string | null
+    category?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumSchoolEnterpriseProjectStatusFieldUpdateOperationsInput | $Enums.SchoolEnterpriseProjectStatus
+    revenueZar?: IntFieldUpdateOperationsInput | number
+    seekingSponsor?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type SchoolCrmContactCreateInput = {
+    id?: string
+    fullName: string
+    organization?: string | null
+    email?: string | null
+    phone?: string | null
+    contactType?: $Enums.SchoolCrmContactType
+    notes?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    school: SchoolCreateNestedOneWithoutCrmContactsInput
+    activities?: SchoolCrmActivityCreateNestedManyWithoutContactInput
+    tasks?: SchoolCrmTaskCreateNestedManyWithoutContactInput
+  }
+
+  export type SchoolCrmContactUncheckedCreateInput = {
+    id?: string
+    schoolId: string
+    fullName: string
+    organization?: string | null
+    email?: string | null
+    phone?: string | null
+    contactType?: $Enums.SchoolCrmContactType
+    notes?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    activities?: SchoolCrmActivityUncheckedCreateNestedManyWithoutContactInput
+    tasks?: SchoolCrmTaskUncheckedCreateNestedManyWithoutContactInput
+  }
+
+  export type SchoolCrmContactUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    fullName?: StringFieldUpdateOperationsInput | string
+    organization?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    contactType?: EnumSchoolCrmContactTypeFieldUpdateOperationsInput | $Enums.SchoolCrmContactType
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    school?: SchoolUpdateOneRequiredWithoutCrmContactsNestedInput
+    activities?: SchoolCrmActivityUpdateManyWithoutContactNestedInput
+    tasks?: SchoolCrmTaskUpdateManyWithoutContactNestedInput
+  }
+
+  export type SchoolCrmContactUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    schoolId?: StringFieldUpdateOperationsInput | string
+    fullName?: StringFieldUpdateOperationsInput | string
+    organization?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    contactType?: EnumSchoolCrmContactTypeFieldUpdateOperationsInput | $Enums.SchoolCrmContactType
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    activities?: SchoolCrmActivityUncheckedUpdateManyWithoutContactNestedInput
+    tasks?: SchoolCrmTaskUncheckedUpdateManyWithoutContactNestedInput
+  }
+
+  export type SchoolCrmContactCreateManyInput = {
+    id?: string
+    schoolId: string
+    fullName: string
+    organization?: string | null
+    email?: string | null
+    phone?: string | null
+    contactType?: $Enums.SchoolCrmContactType
+    notes?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type SchoolCrmContactUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    fullName?: StringFieldUpdateOperationsInput | string
+    organization?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    contactType?: EnumSchoolCrmContactTypeFieldUpdateOperationsInput | $Enums.SchoolCrmContactType
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type SchoolCrmContactUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    schoolId?: StringFieldUpdateOperationsInput | string
+    fullName?: StringFieldUpdateOperationsInput | string
+    organization?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    contactType?: EnumSchoolCrmContactTypeFieldUpdateOperationsInput | $Enums.SchoolCrmContactType
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type SchoolCrmActivityCreateInput = {
+    id?: string
+    activityType: $Enums.SchoolCrmActivityType
+    title: string
+    summary?: string | null
+    occurredAt: Date | string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    school: SchoolCreateNestedOneWithoutCrmActivitiesInput
+    contact?: SchoolCrmContactCreateNestedOneWithoutActivitiesInput
+  }
+
+  export type SchoolCrmActivityUncheckedCreateInput = {
+    id?: string
+    schoolId: string
+    contactId?: string | null
+    activityType: $Enums.SchoolCrmActivityType
+    title: string
+    summary?: string | null
+    occurredAt: Date | string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type SchoolCrmActivityUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    activityType?: EnumSchoolCrmActivityTypeFieldUpdateOperationsInput | $Enums.SchoolCrmActivityType
+    title?: StringFieldUpdateOperationsInput | string
+    summary?: NullableStringFieldUpdateOperationsInput | string | null
+    occurredAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    school?: SchoolUpdateOneRequiredWithoutCrmActivitiesNestedInput
+    contact?: SchoolCrmContactUpdateOneWithoutActivitiesNestedInput
+  }
+
+  export type SchoolCrmActivityUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    schoolId?: StringFieldUpdateOperationsInput | string
+    contactId?: NullableStringFieldUpdateOperationsInput | string | null
+    activityType?: EnumSchoolCrmActivityTypeFieldUpdateOperationsInput | $Enums.SchoolCrmActivityType
+    title?: StringFieldUpdateOperationsInput | string
+    summary?: NullableStringFieldUpdateOperationsInput | string | null
+    occurredAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type SchoolCrmActivityCreateManyInput = {
+    id?: string
+    schoolId: string
+    contactId?: string | null
+    activityType: $Enums.SchoolCrmActivityType
+    title: string
+    summary?: string | null
+    occurredAt: Date | string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type SchoolCrmActivityUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    activityType?: EnumSchoolCrmActivityTypeFieldUpdateOperationsInput | $Enums.SchoolCrmActivityType
+    title?: StringFieldUpdateOperationsInput | string
+    summary?: NullableStringFieldUpdateOperationsInput | string | null
+    occurredAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type SchoolCrmActivityUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    schoolId?: StringFieldUpdateOperationsInput | string
+    contactId?: NullableStringFieldUpdateOperationsInput | string | null
+    activityType?: EnumSchoolCrmActivityTypeFieldUpdateOperationsInput | $Enums.SchoolCrmActivityType
+    title?: StringFieldUpdateOperationsInput | string
+    summary?: NullableStringFieldUpdateOperationsInput | string | null
+    occurredAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type SchoolCrmTaskCreateInput = {
+    id?: string
+    title: string
+    description?: string | null
+    dueAt?: Date | string | null
+    status?: $Enums.SchoolCrmTaskStatus
+    priority?: $Enums.SchoolCrmTaskPriority
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    school: SchoolCreateNestedOneWithoutCrmTasksInput
+    contact?: SchoolCrmContactCreateNestedOneWithoutTasksInput
+  }
+
+  export type SchoolCrmTaskUncheckedCreateInput = {
+    id?: string
+    schoolId: string
+    contactId?: string | null
+    title: string
+    description?: string | null
+    dueAt?: Date | string | null
+    status?: $Enums.SchoolCrmTaskStatus
+    priority?: $Enums.SchoolCrmTaskPriority
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type SchoolCrmTaskUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    dueAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    status?: EnumSchoolCrmTaskStatusFieldUpdateOperationsInput | $Enums.SchoolCrmTaskStatus
+    priority?: EnumSchoolCrmTaskPriorityFieldUpdateOperationsInput | $Enums.SchoolCrmTaskPriority
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    school?: SchoolUpdateOneRequiredWithoutCrmTasksNestedInput
+    contact?: SchoolCrmContactUpdateOneWithoutTasksNestedInput
+  }
+
+  export type SchoolCrmTaskUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    schoolId?: StringFieldUpdateOperationsInput | string
+    contactId?: NullableStringFieldUpdateOperationsInput | string | null
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    dueAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    status?: EnumSchoolCrmTaskStatusFieldUpdateOperationsInput | $Enums.SchoolCrmTaskStatus
+    priority?: EnumSchoolCrmTaskPriorityFieldUpdateOperationsInput | $Enums.SchoolCrmTaskPriority
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type SchoolCrmTaskCreateManyInput = {
+    id?: string
+    schoolId: string
+    contactId?: string | null
+    title: string
+    description?: string | null
+    dueAt?: Date | string | null
+    status?: $Enums.SchoolCrmTaskStatus
+    priority?: $Enums.SchoolCrmTaskPriority
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type SchoolCrmTaskUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    dueAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    status?: EnumSchoolCrmTaskStatusFieldUpdateOperationsInput | $Enums.SchoolCrmTaskStatus
+    priority?: EnumSchoolCrmTaskPriorityFieldUpdateOperationsInput | $Enums.SchoolCrmTaskPriority
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type SchoolCrmTaskUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    schoolId?: StringFieldUpdateOperationsInput | string
+    contactId?: NullableStringFieldUpdateOperationsInput | string | null
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    dueAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    status?: EnumSchoolCrmTaskStatusFieldUpdateOperationsInput | $Enums.SchoolCrmTaskStatus
+    priority?: EnumSchoolCrmTaskPriorityFieldUpdateOperationsInput | $Enums.SchoolCrmTaskPriority
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -41163,6 +55710,24 @@ export namespace Prisma {
     not?: NestedIntNullableFilter<$PrismaModel> | number | null
   }
 
+  export type BytesNullableFilter<$PrismaModel = never> = {
+    equals?: Buffer | BytesFieldRefInput<$PrismaModel> | null
+    in?: Buffer[] | ListBytesFieldRefInput<$PrismaModel> | null
+    notIn?: Buffer[] | ListBytesFieldRefInput<$PrismaModel> | null
+    not?: NestedBytesNullableFilter<$PrismaModel> | Buffer | null
+  }
+
+  export type FloatNullableFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatNullableFilter<$PrismaModel> | number | null
+  }
+
   export type LearnerListRelationFilter = {
     every?: LearnerWhereInput
     some?: LearnerWhereInput
@@ -41179,6 +55744,60 @@ export namespace Prisma {
     every?: FundingContributionWhereInput
     some?: FundingContributionWhereInput
     none?: FundingContributionWhereInput
+  }
+
+  export type SchoolSubmittedNeedListRelationFilter = {
+    every?: SchoolSubmittedNeedWhereInput
+    some?: SchoolSubmittedNeedWhereInput
+    none?: SchoolSubmittedNeedWhereInput
+  }
+
+  export type SchoolVolunteerListRelationFilter = {
+    every?: SchoolVolunteerWhereInput
+    some?: SchoolVolunteerWhereInput
+    none?: SchoolVolunteerWhereInput
+  }
+
+  export type SchoolEventListRelationFilter = {
+    every?: SchoolEventWhereInput
+    some?: SchoolEventWhereInput
+    none?: SchoolEventWhereInput
+  }
+
+  export type SchoolAlumniListRelationFilter = {
+    every?: SchoolAlumniWhereInput
+    some?: SchoolAlumniWhereInput
+    none?: SchoolAlumniWhereInput
+  }
+
+  export type SchoolEnterpriseProjectListRelationFilter = {
+    every?: SchoolEnterpriseProjectWhereInput
+    some?: SchoolEnterpriseProjectWhereInput
+    none?: SchoolEnterpriseProjectWhereInput
+  }
+
+  export type SchoolInnovationChallengeListRelationFilter = {
+    every?: SchoolInnovationChallengeWhereInput
+    some?: SchoolInnovationChallengeWhereInput
+    none?: SchoolInnovationChallengeWhereInput
+  }
+
+  export type SchoolCrmContactListRelationFilter = {
+    every?: SchoolCrmContactWhereInput
+    some?: SchoolCrmContactWhereInput
+    none?: SchoolCrmContactWhereInput
+  }
+
+  export type SchoolCrmActivityListRelationFilter = {
+    every?: SchoolCrmActivityWhereInput
+    some?: SchoolCrmActivityWhereInput
+    none?: SchoolCrmActivityWhereInput
+  }
+
+  export type SchoolCrmTaskListRelationFilter = {
+    every?: SchoolCrmTaskWhereInput
+    some?: SchoolCrmTaskWhereInput
+    none?: SchoolCrmTaskWhereInput
   }
 
   export type UserNullableRelationFilter = {
@@ -41203,6 +55822,42 @@ export namespace Prisma {
     _count?: SortOrder
   }
 
+  export type SchoolSubmittedNeedOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type SchoolVolunteerOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type SchoolEventOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type SchoolAlumniOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type SchoolEnterpriseProjectOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type SchoolInnovationChallengeOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type SchoolCrmContactOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type SchoolCrmActivityOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type SchoolCrmTaskOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
   export type SchoolCountOrderByAggregateInput = {
     id?: SortOrder
     name?: SortOrder
@@ -41222,6 +55877,15 @@ export namespace Prisma {
     fundingBalanceZar?: SortOrder
     annualCycleYear?: SortOrder
     annualCycleFocus?: SortOrder
+    logoUrl?: SortOrder
+    logoPng?: SortOrder
+    websiteUrl?: SortOrder
+    publicPhone?: SortOrder
+    quintile?: SortOrder
+    teacherCount?: SortOrder
+    gpsLat?: SortOrder
+    gpsLng?: SortOrder
+    publicProfile?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -41231,6 +55895,10 @@ export namespace Prisma {
     currentPhase?: SortOrder
     fundingBalanceZar?: SortOrder
     annualCycleYear?: SortOrder
+    quintile?: SortOrder
+    teacherCount?: SortOrder
+    gpsLat?: SortOrder
+    gpsLng?: SortOrder
   }
 
   export type SchoolMaxOrderByAggregateInput = {
@@ -41249,6 +55917,14 @@ export namespace Prisma {
     fundingBalanceZar?: SortOrder
     annualCycleYear?: SortOrder
     annualCycleFocus?: SortOrder
+    logoUrl?: SortOrder
+    logoPng?: SortOrder
+    websiteUrl?: SortOrder
+    publicPhone?: SortOrder
+    quintile?: SortOrder
+    teacherCount?: SortOrder
+    gpsLat?: SortOrder
+    gpsLng?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -41269,6 +55945,14 @@ export namespace Prisma {
     fundingBalanceZar?: SortOrder
     annualCycleYear?: SortOrder
     annualCycleFocus?: SortOrder
+    logoUrl?: SortOrder
+    logoPng?: SortOrder
+    websiteUrl?: SortOrder
+    publicPhone?: SortOrder
+    quintile?: SortOrder
+    teacherCount?: SortOrder
+    gpsLat?: SortOrder
+    gpsLng?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -41278,6 +55962,10 @@ export namespace Prisma {
     currentPhase?: SortOrder
     fundingBalanceZar?: SortOrder
     annualCycleYear?: SortOrder
+    quintile?: SortOrder
+    teacherCount?: SortOrder
+    gpsLat?: SortOrder
+    gpsLng?: SortOrder
   }
 
   export type EnumOrganizationCategoryWithAggregatesFilter<$PrismaModel = never> = {
@@ -41363,16 +56051,782 @@ export namespace Prisma {
     _max?: NestedIntNullableFilter<$PrismaModel>
   }
 
-  export type EnumSchoolVerificationStatusFilter<$PrismaModel = never> = {
-    equals?: $Enums.SchoolVerificationStatus | EnumSchoolVerificationStatusFieldRefInput<$PrismaModel>
-    in?: $Enums.SchoolVerificationStatus[] | ListEnumSchoolVerificationStatusFieldRefInput<$PrismaModel>
-    notIn?: $Enums.SchoolVerificationStatus[] | ListEnumSchoolVerificationStatusFieldRefInput<$PrismaModel>
-    not?: NestedEnumSchoolVerificationStatusFilter<$PrismaModel> | $Enums.SchoolVerificationStatus
+  export type BytesNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Buffer | BytesFieldRefInput<$PrismaModel> | null
+    in?: Buffer[] | ListBytesFieldRefInput<$PrismaModel> | null
+    notIn?: Buffer[] | ListBytesFieldRefInput<$PrismaModel> | null
+    not?: NestedBytesNullableWithAggregatesFilter<$PrismaModel> | Buffer | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedBytesNullableFilter<$PrismaModel>
+    _max?: NestedBytesNullableFilter<$PrismaModel>
+  }
+
+  export type FloatNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatNullableWithAggregatesFilter<$PrismaModel> | number | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _avg?: NestedFloatNullableFilter<$PrismaModel>
+    _sum?: NestedFloatNullableFilter<$PrismaModel>
+    _min?: NestedFloatNullableFilter<$PrismaModel>
+    _max?: NestedFloatNullableFilter<$PrismaModel>
+  }
+
+  export type EnumSchoolNeedStatusFilter<$PrismaModel = never> = {
+    equals?: $Enums.SchoolNeedStatus | EnumSchoolNeedStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.SchoolNeedStatus[] | ListEnumSchoolNeedStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.SchoolNeedStatus[] | ListEnumSchoolNeedStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumSchoolNeedStatusFilter<$PrismaModel> | $Enums.SchoolNeedStatus
   }
 
   export type SchoolRelationFilter = {
     is?: SchoolWhereInput
     isNot?: SchoolWhereInput
+  }
+
+  export type SchoolSubmittedNeedCountOrderByAggregateInput = {
+    id?: SortOrder
+    schoolId?: SortOrder
+    title?: SortOrder
+    category?: SortOrder
+    subcategory?: SortOrder
+    urgency?: SortOrder
+    description?: SortOrder
+    learnerImpact?: SortOrder
+    estimatedCostZar?: SortOrder
+    progressPercent?: SortOrder
+    sponsorStatus?: SortOrder
+    photoCount?: SortOrder
+    quoteCount?: SortOrder
+    status?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type SchoolSubmittedNeedAvgOrderByAggregateInput = {
+    learnerImpact?: SortOrder
+    estimatedCostZar?: SortOrder
+    progressPercent?: SortOrder
+    photoCount?: SortOrder
+    quoteCount?: SortOrder
+  }
+
+  export type SchoolSubmittedNeedMaxOrderByAggregateInput = {
+    id?: SortOrder
+    schoolId?: SortOrder
+    title?: SortOrder
+    category?: SortOrder
+    subcategory?: SortOrder
+    urgency?: SortOrder
+    description?: SortOrder
+    learnerImpact?: SortOrder
+    estimatedCostZar?: SortOrder
+    progressPercent?: SortOrder
+    sponsorStatus?: SortOrder
+    photoCount?: SortOrder
+    quoteCount?: SortOrder
+    status?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type SchoolSubmittedNeedMinOrderByAggregateInput = {
+    id?: SortOrder
+    schoolId?: SortOrder
+    title?: SortOrder
+    category?: SortOrder
+    subcategory?: SortOrder
+    urgency?: SortOrder
+    description?: SortOrder
+    learnerImpact?: SortOrder
+    estimatedCostZar?: SortOrder
+    progressPercent?: SortOrder
+    sponsorStatus?: SortOrder
+    photoCount?: SortOrder
+    quoteCount?: SortOrder
+    status?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type SchoolSubmittedNeedSumOrderByAggregateInput = {
+    learnerImpact?: SortOrder
+    estimatedCostZar?: SortOrder
+    progressPercent?: SortOrder
+    photoCount?: SortOrder
+    quoteCount?: SortOrder
+  }
+
+  export type EnumSchoolNeedStatusWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.SchoolNeedStatus | EnumSchoolNeedStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.SchoolNeedStatus[] | ListEnumSchoolNeedStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.SchoolNeedStatus[] | ListEnumSchoolNeedStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumSchoolNeedStatusWithAggregatesFilter<$PrismaModel> | $Enums.SchoolNeedStatus
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumSchoolNeedStatusFilter<$PrismaModel>
+    _max?: NestedEnumSchoolNeedStatusFilter<$PrismaModel>
+  }
+
+  export type EnumSchoolVolunteerStatusFilter<$PrismaModel = never> = {
+    equals?: $Enums.SchoolVolunteerStatus | EnumSchoolVolunteerStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.SchoolVolunteerStatus[] | ListEnumSchoolVolunteerStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.SchoolVolunteerStatus[] | ListEnumSchoolVolunteerStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumSchoolVolunteerStatusFilter<$PrismaModel> | $Enums.SchoolVolunteerStatus
+  }
+
+  export type SchoolEventVolunteerListRelationFilter = {
+    every?: SchoolEventVolunteerWhereInput
+    some?: SchoolEventVolunteerWhereInput
+    none?: SchoolEventVolunteerWhereInput
+  }
+
+  export type SchoolEventVolunteerOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type SchoolVolunteerCountOrderByAggregateInput = {
+    id?: SortOrder
+    schoolId?: SortOrder
+    fullName?: SortOrder
+    role?: SortOrder
+    phone?: SortOrder
+    email?: SortOrder
+    skills?: SortOrder
+    hoursLogged?: SortOrder
+    status?: SortOrder
+    notes?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type SchoolVolunteerAvgOrderByAggregateInput = {
+    hoursLogged?: SortOrder
+  }
+
+  export type SchoolVolunteerMaxOrderByAggregateInput = {
+    id?: SortOrder
+    schoolId?: SortOrder
+    fullName?: SortOrder
+    role?: SortOrder
+    phone?: SortOrder
+    email?: SortOrder
+    skills?: SortOrder
+    hoursLogged?: SortOrder
+    status?: SortOrder
+    notes?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type SchoolVolunteerMinOrderByAggregateInput = {
+    id?: SortOrder
+    schoolId?: SortOrder
+    fullName?: SortOrder
+    role?: SortOrder
+    phone?: SortOrder
+    email?: SortOrder
+    skills?: SortOrder
+    hoursLogged?: SortOrder
+    status?: SortOrder
+    notes?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type SchoolVolunteerSumOrderByAggregateInput = {
+    hoursLogged?: SortOrder
+  }
+
+  export type EnumSchoolVolunteerStatusWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.SchoolVolunteerStatus | EnumSchoolVolunteerStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.SchoolVolunteerStatus[] | ListEnumSchoolVolunteerStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.SchoolVolunteerStatus[] | ListEnumSchoolVolunteerStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumSchoolVolunteerStatusWithAggregatesFilter<$PrismaModel> | $Enums.SchoolVolunteerStatus
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumSchoolVolunteerStatusFilter<$PrismaModel>
+    _max?: NestedEnumSchoolVolunteerStatusFilter<$PrismaModel>
+  }
+
+  export type EnumSchoolEventStatusFilter<$PrismaModel = never> = {
+    equals?: $Enums.SchoolEventStatus | EnumSchoolEventStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.SchoolEventStatus[] | ListEnumSchoolEventStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.SchoolEventStatus[] | ListEnumSchoolEventStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumSchoolEventStatusFilter<$PrismaModel> | $Enums.SchoolEventStatus
+  }
+
+  export type SchoolEventCountOrderByAggregateInput = {
+    id?: SortOrder
+    schoolId?: SortOrder
+    title?: SortOrder
+    description?: SortOrder
+    eventType?: SortOrder
+    location?: SortOrder
+    startsAt?: SortOrder
+    endsAt?: SortOrder
+    volunteerSlots?: SortOrder
+    status?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type SchoolEventAvgOrderByAggregateInput = {
+    volunteerSlots?: SortOrder
+  }
+
+  export type SchoolEventMaxOrderByAggregateInput = {
+    id?: SortOrder
+    schoolId?: SortOrder
+    title?: SortOrder
+    description?: SortOrder
+    eventType?: SortOrder
+    location?: SortOrder
+    startsAt?: SortOrder
+    endsAt?: SortOrder
+    volunteerSlots?: SortOrder
+    status?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type SchoolEventMinOrderByAggregateInput = {
+    id?: SortOrder
+    schoolId?: SortOrder
+    title?: SortOrder
+    description?: SortOrder
+    eventType?: SortOrder
+    location?: SortOrder
+    startsAt?: SortOrder
+    endsAt?: SortOrder
+    volunteerSlots?: SortOrder
+    status?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type SchoolEventSumOrderByAggregateInput = {
+    volunteerSlots?: SortOrder
+  }
+
+  export type EnumSchoolEventStatusWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.SchoolEventStatus | EnumSchoolEventStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.SchoolEventStatus[] | ListEnumSchoolEventStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.SchoolEventStatus[] | ListEnumSchoolEventStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumSchoolEventStatusWithAggregatesFilter<$PrismaModel> | $Enums.SchoolEventStatus
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumSchoolEventStatusFilter<$PrismaModel>
+    _max?: NestedEnumSchoolEventStatusFilter<$PrismaModel>
+  }
+
+  export type SchoolEventRelationFilter = {
+    is?: SchoolEventWhereInput
+    isNot?: SchoolEventWhereInput
+  }
+
+  export type SchoolVolunteerRelationFilter = {
+    is?: SchoolVolunteerWhereInput
+    isNot?: SchoolVolunteerWhereInput
+  }
+
+  export type SchoolEventVolunteerEventIdVolunteerIdCompoundUniqueInput = {
+    eventId: string
+    volunteerId: string
+  }
+
+  export type SchoolEventVolunteerCountOrderByAggregateInput = {
+    id?: SortOrder
+    eventId?: SortOrder
+    volunteerId?: SortOrder
+    role?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type SchoolEventVolunteerMaxOrderByAggregateInput = {
+    id?: SortOrder
+    eventId?: SortOrder
+    volunteerId?: SortOrder
+    role?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type SchoolEventVolunteerMinOrderByAggregateInput = {
+    id?: SortOrder
+    eventId?: SortOrder
+    volunteerId?: SortOrder
+    role?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type EnumSchoolAlumniRoleFilter<$PrismaModel = never> = {
+    equals?: $Enums.SchoolAlumniRole | EnumSchoolAlumniRoleFieldRefInput<$PrismaModel>
+    in?: $Enums.SchoolAlumniRole[] | ListEnumSchoolAlumniRoleFieldRefInput<$PrismaModel>
+    notIn?: $Enums.SchoolAlumniRole[] | ListEnumSchoolAlumniRoleFieldRefInput<$PrismaModel>
+    not?: NestedEnumSchoolAlumniRoleFilter<$PrismaModel> | $Enums.SchoolAlumniRole
+  }
+
+  export type EnumSchoolAlumniStatusFilter<$PrismaModel = never> = {
+    equals?: $Enums.SchoolAlumniStatus | EnumSchoolAlumniStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.SchoolAlumniStatus[] | ListEnumSchoolAlumniStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.SchoolAlumniStatus[] | ListEnumSchoolAlumniStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumSchoolAlumniStatusFilter<$PrismaModel> | $Enums.SchoolAlumniStatus
+  }
+
+  export type SchoolAlumniCountOrderByAggregateInput = {
+    id?: SortOrder
+    schoolId?: SortOrder
+    fullName?: SortOrder
+    graduationYear?: SortOrder
+    profession?: SortOrder
+    company?: SortOrder
+    email?: SortOrder
+    phone?: SortOrder
+    linkedInUrl?: SortOrder
+    role?: SortOrder
+    offering?: SortOrder
+    status?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type SchoolAlumniAvgOrderByAggregateInput = {
+    graduationYear?: SortOrder
+  }
+
+  export type SchoolAlumniMaxOrderByAggregateInput = {
+    id?: SortOrder
+    schoolId?: SortOrder
+    fullName?: SortOrder
+    graduationYear?: SortOrder
+    profession?: SortOrder
+    company?: SortOrder
+    email?: SortOrder
+    phone?: SortOrder
+    linkedInUrl?: SortOrder
+    role?: SortOrder
+    offering?: SortOrder
+    status?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type SchoolAlumniMinOrderByAggregateInput = {
+    id?: SortOrder
+    schoolId?: SortOrder
+    fullName?: SortOrder
+    graduationYear?: SortOrder
+    profession?: SortOrder
+    company?: SortOrder
+    email?: SortOrder
+    phone?: SortOrder
+    linkedInUrl?: SortOrder
+    role?: SortOrder
+    offering?: SortOrder
+    status?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type SchoolAlumniSumOrderByAggregateInput = {
+    graduationYear?: SortOrder
+  }
+
+  export type EnumSchoolAlumniRoleWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.SchoolAlumniRole | EnumSchoolAlumniRoleFieldRefInput<$PrismaModel>
+    in?: $Enums.SchoolAlumniRole[] | ListEnumSchoolAlumniRoleFieldRefInput<$PrismaModel>
+    notIn?: $Enums.SchoolAlumniRole[] | ListEnumSchoolAlumniRoleFieldRefInput<$PrismaModel>
+    not?: NestedEnumSchoolAlumniRoleWithAggregatesFilter<$PrismaModel> | $Enums.SchoolAlumniRole
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumSchoolAlumniRoleFilter<$PrismaModel>
+    _max?: NestedEnumSchoolAlumniRoleFilter<$PrismaModel>
+  }
+
+  export type EnumSchoolAlumniStatusWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.SchoolAlumniStatus | EnumSchoolAlumniStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.SchoolAlumniStatus[] | ListEnumSchoolAlumniStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.SchoolAlumniStatus[] | ListEnumSchoolAlumniStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumSchoolAlumniStatusWithAggregatesFilter<$PrismaModel> | $Enums.SchoolAlumniStatus
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumSchoolAlumniStatusFilter<$PrismaModel>
+    _max?: NestedEnumSchoolAlumniStatusFilter<$PrismaModel>
+  }
+
+  export type EnumSchoolInnovationChallengeStatusFilter<$PrismaModel = never> = {
+    equals?: $Enums.SchoolInnovationChallengeStatus | EnumSchoolInnovationChallengeStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.SchoolInnovationChallengeStatus[] | ListEnumSchoolInnovationChallengeStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.SchoolInnovationChallengeStatus[] | ListEnumSchoolInnovationChallengeStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumSchoolInnovationChallengeStatusFilter<$PrismaModel> | $Enums.SchoolInnovationChallengeStatus
+  }
+
+  export type SchoolInnovationChallengeCountOrderByAggregateInput = {
+    id?: SortOrder
+    schoolId?: SortOrder
+    title?: SortOrder
+    description?: SortOrder
+    challengeType?: SortOrder
+    startsAt?: SortOrder
+    endsAt?: SortOrder
+    prizeDescription?: SortOrder
+    status?: SortOrder
+    maxEntries?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type SchoolInnovationChallengeAvgOrderByAggregateInput = {
+    maxEntries?: SortOrder
+  }
+
+  export type SchoolInnovationChallengeMaxOrderByAggregateInput = {
+    id?: SortOrder
+    schoolId?: SortOrder
+    title?: SortOrder
+    description?: SortOrder
+    challengeType?: SortOrder
+    startsAt?: SortOrder
+    endsAt?: SortOrder
+    prizeDescription?: SortOrder
+    status?: SortOrder
+    maxEntries?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type SchoolInnovationChallengeMinOrderByAggregateInput = {
+    id?: SortOrder
+    schoolId?: SortOrder
+    title?: SortOrder
+    description?: SortOrder
+    challengeType?: SortOrder
+    startsAt?: SortOrder
+    endsAt?: SortOrder
+    prizeDescription?: SortOrder
+    status?: SortOrder
+    maxEntries?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type SchoolInnovationChallengeSumOrderByAggregateInput = {
+    maxEntries?: SortOrder
+  }
+
+  export type EnumSchoolInnovationChallengeStatusWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.SchoolInnovationChallengeStatus | EnumSchoolInnovationChallengeStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.SchoolInnovationChallengeStatus[] | ListEnumSchoolInnovationChallengeStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.SchoolInnovationChallengeStatus[] | ListEnumSchoolInnovationChallengeStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumSchoolInnovationChallengeStatusWithAggregatesFilter<$PrismaModel> | $Enums.SchoolInnovationChallengeStatus
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumSchoolInnovationChallengeStatusFilter<$PrismaModel>
+    _max?: NestedEnumSchoolInnovationChallengeStatusFilter<$PrismaModel>
+  }
+
+  export type EnumSchoolEnterpriseProjectTypeFilter<$PrismaModel = never> = {
+    equals?: $Enums.SchoolEnterpriseProjectType | EnumSchoolEnterpriseProjectTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.SchoolEnterpriseProjectType[] | ListEnumSchoolEnterpriseProjectTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.SchoolEnterpriseProjectType[] | ListEnumSchoolEnterpriseProjectTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumSchoolEnterpriseProjectTypeFilter<$PrismaModel> | $Enums.SchoolEnterpriseProjectType
+  }
+
+  export type EnumSchoolEnterpriseProjectStatusFilter<$PrismaModel = never> = {
+    equals?: $Enums.SchoolEnterpriseProjectStatus | EnumSchoolEnterpriseProjectStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.SchoolEnterpriseProjectStatus[] | ListEnumSchoolEnterpriseProjectStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.SchoolEnterpriseProjectStatus[] | ListEnumSchoolEnterpriseProjectStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumSchoolEnterpriseProjectStatusFilter<$PrismaModel> | $Enums.SchoolEnterpriseProjectStatus
+  }
+
+  export type BoolFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolFilter<$PrismaModel> | boolean
+  }
+
+  export type SchoolInnovationChallengeNullableRelationFilter = {
+    is?: SchoolInnovationChallengeWhereInput | null
+    isNot?: SchoolInnovationChallengeWhereInput | null
+  }
+
+  export type SchoolEnterpriseProjectCountOrderByAggregateInput = {
+    id?: SortOrder
+    schoolId?: SortOrder
+    challengeId?: SortOrder
+    title?: SortOrder
+    description?: SortOrder
+    projectType?: SortOrder
+    studentLead?: SortOrder
+    gradeLevel?: SortOrder
+    category?: SortOrder
+    status?: SortOrder
+    revenueZar?: SortOrder
+    seekingSponsor?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type SchoolEnterpriseProjectAvgOrderByAggregateInput = {
+    revenueZar?: SortOrder
+  }
+
+  export type SchoolEnterpriseProjectMaxOrderByAggregateInput = {
+    id?: SortOrder
+    schoolId?: SortOrder
+    challengeId?: SortOrder
+    title?: SortOrder
+    description?: SortOrder
+    projectType?: SortOrder
+    studentLead?: SortOrder
+    gradeLevel?: SortOrder
+    category?: SortOrder
+    status?: SortOrder
+    revenueZar?: SortOrder
+    seekingSponsor?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type SchoolEnterpriseProjectMinOrderByAggregateInput = {
+    id?: SortOrder
+    schoolId?: SortOrder
+    challengeId?: SortOrder
+    title?: SortOrder
+    description?: SortOrder
+    projectType?: SortOrder
+    studentLead?: SortOrder
+    gradeLevel?: SortOrder
+    category?: SortOrder
+    status?: SortOrder
+    revenueZar?: SortOrder
+    seekingSponsor?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type SchoolEnterpriseProjectSumOrderByAggregateInput = {
+    revenueZar?: SortOrder
+  }
+
+  export type EnumSchoolEnterpriseProjectTypeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.SchoolEnterpriseProjectType | EnumSchoolEnterpriseProjectTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.SchoolEnterpriseProjectType[] | ListEnumSchoolEnterpriseProjectTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.SchoolEnterpriseProjectType[] | ListEnumSchoolEnterpriseProjectTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumSchoolEnterpriseProjectTypeWithAggregatesFilter<$PrismaModel> | $Enums.SchoolEnterpriseProjectType
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumSchoolEnterpriseProjectTypeFilter<$PrismaModel>
+    _max?: NestedEnumSchoolEnterpriseProjectTypeFilter<$PrismaModel>
+  }
+
+  export type EnumSchoolEnterpriseProjectStatusWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.SchoolEnterpriseProjectStatus | EnumSchoolEnterpriseProjectStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.SchoolEnterpriseProjectStatus[] | ListEnumSchoolEnterpriseProjectStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.SchoolEnterpriseProjectStatus[] | ListEnumSchoolEnterpriseProjectStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumSchoolEnterpriseProjectStatusWithAggregatesFilter<$PrismaModel> | $Enums.SchoolEnterpriseProjectStatus
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumSchoolEnterpriseProjectStatusFilter<$PrismaModel>
+    _max?: NestedEnumSchoolEnterpriseProjectStatusFilter<$PrismaModel>
+  }
+
+  export type BoolWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedBoolFilter<$PrismaModel>
+    _max?: NestedBoolFilter<$PrismaModel>
+  }
+
+  export type EnumSchoolCrmContactTypeFilter<$PrismaModel = never> = {
+    equals?: $Enums.SchoolCrmContactType | EnumSchoolCrmContactTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.SchoolCrmContactType[] | ListEnumSchoolCrmContactTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.SchoolCrmContactType[] | ListEnumSchoolCrmContactTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumSchoolCrmContactTypeFilter<$PrismaModel> | $Enums.SchoolCrmContactType
+  }
+
+  export type SchoolCrmContactCountOrderByAggregateInput = {
+    id?: SortOrder
+    schoolId?: SortOrder
+    fullName?: SortOrder
+    organization?: SortOrder
+    email?: SortOrder
+    phone?: SortOrder
+    contactType?: SortOrder
+    notes?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type SchoolCrmContactMaxOrderByAggregateInput = {
+    id?: SortOrder
+    schoolId?: SortOrder
+    fullName?: SortOrder
+    organization?: SortOrder
+    email?: SortOrder
+    phone?: SortOrder
+    contactType?: SortOrder
+    notes?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type SchoolCrmContactMinOrderByAggregateInput = {
+    id?: SortOrder
+    schoolId?: SortOrder
+    fullName?: SortOrder
+    organization?: SortOrder
+    email?: SortOrder
+    phone?: SortOrder
+    contactType?: SortOrder
+    notes?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type EnumSchoolCrmContactTypeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.SchoolCrmContactType | EnumSchoolCrmContactTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.SchoolCrmContactType[] | ListEnumSchoolCrmContactTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.SchoolCrmContactType[] | ListEnumSchoolCrmContactTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumSchoolCrmContactTypeWithAggregatesFilter<$PrismaModel> | $Enums.SchoolCrmContactType
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumSchoolCrmContactTypeFilter<$PrismaModel>
+    _max?: NestedEnumSchoolCrmContactTypeFilter<$PrismaModel>
+  }
+
+  export type EnumSchoolCrmActivityTypeFilter<$PrismaModel = never> = {
+    equals?: $Enums.SchoolCrmActivityType | EnumSchoolCrmActivityTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.SchoolCrmActivityType[] | ListEnumSchoolCrmActivityTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.SchoolCrmActivityType[] | ListEnumSchoolCrmActivityTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumSchoolCrmActivityTypeFilter<$PrismaModel> | $Enums.SchoolCrmActivityType
+  }
+
+  export type SchoolCrmContactNullableRelationFilter = {
+    is?: SchoolCrmContactWhereInput | null
+    isNot?: SchoolCrmContactWhereInput | null
+  }
+
+  export type SchoolCrmActivityCountOrderByAggregateInput = {
+    id?: SortOrder
+    schoolId?: SortOrder
+    contactId?: SortOrder
+    activityType?: SortOrder
+    title?: SortOrder
+    summary?: SortOrder
+    occurredAt?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type SchoolCrmActivityMaxOrderByAggregateInput = {
+    id?: SortOrder
+    schoolId?: SortOrder
+    contactId?: SortOrder
+    activityType?: SortOrder
+    title?: SortOrder
+    summary?: SortOrder
+    occurredAt?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type SchoolCrmActivityMinOrderByAggregateInput = {
+    id?: SortOrder
+    schoolId?: SortOrder
+    contactId?: SortOrder
+    activityType?: SortOrder
+    title?: SortOrder
+    summary?: SortOrder
+    occurredAt?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type EnumSchoolCrmActivityTypeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.SchoolCrmActivityType | EnumSchoolCrmActivityTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.SchoolCrmActivityType[] | ListEnumSchoolCrmActivityTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.SchoolCrmActivityType[] | ListEnumSchoolCrmActivityTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumSchoolCrmActivityTypeWithAggregatesFilter<$PrismaModel> | $Enums.SchoolCrmActivityType
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumSchoolCrmActivityTypeFilter<$PrismaModel>
+    _max?: NestedEnumSchoolCrmActivityTypeFilter<$PrismaModel>
+  }
+
+  export type EnumSchoolCrmTaskStatusFilter<$PrismaModel = never> = {
+    equals?: $Enums.SchoolCrmTaskStatus | EnumSchoolCrmTaskStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.SchoolCrmTaskStatus[] | ListEnumSchoolCrmTaskStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.SchoolCrmTaskStatus[] | ListEnumSchoolCrmTaskStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumSchoolCrmTaskStatusFilter<$PrismaModel> | $Enums.SchoolCrmTaskStatus
+  }
+
+  export type EnumSchoolCrmTaskPriorityFilter<$PrismaModel = never> = {
+    equals?: $Enums.SchoolCrmTaskPriority | EnumSchoolCrmTaskPriorityFieldRefInput<$PrismaModel>
+    in?: $Enums.SchoolCrmTaskPriority[] | ListEnumSchoolCrmTaskPriorityFieldRefInput<$PrismaModel>
+    notIn?: $Enums.SchoolCrmTaskPriority[] | ListEnumSchoolCrmTaskPriorityFieldRefInput<$PrismaModel>
+    not?: NestedEnumSchoolCrmTaskPriorityFilter<$PrismaModel> | $Enums.SchoolCrmTaskPriority
+  }
+
+  export type SchoolCrmTaskCountOrderByAggregateInput = {
+    id?: SortOrder
+    schoolId?: SortOrder
+    contactId?: SortOrder
+    title?: SortOrder
+    description?: SortOrder
+    dueAt?: SortOrder
+    status?: SortOrder
+    priority?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type SchoolCrmTaskMaxOrderByAggregateInput = {
+    id?: SortOrder
+    schoolId?: SortOrder
+    contactId?: SortOrder
+    title?: SortOrder
+    description?: SortOrder
+    dueAt?: SortOrder
+    status?: SortOrder
+    priority?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type SchoolCrmTaskMinOrderByAggregateInput = {
+    id?: SortOrder
+    schoolId?: SortOrder
+    contactId?: SortOrder
+    title?: SortOrder
+    description?: SortOrder
+    dueAt?: SortOrder
+    status?: SortOrder
+    priority?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type EnumSchoolCrmTaskStatusWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.SchoolCrmTaskStatus | EnumSchoolCrmTaskStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.SchoolCrmTaskStatus[] | ListEnumSchoolCrmTaskStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.SchoolCrmTaskStatus[] | ListEnumSchoolCrmTaskStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumSchoolCrmTaskStatusWithAggregatesFilter<$PrismaModel> | $Enums.SchoolCrmTaskStatus
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumSchoolCrmTaskStatusFilter<$PrismaModel>
+    _max?: NestedEnumSchoolCrmTaskStatusFilter<$PrismaModel>
+  }
+
+  export type EnumSchoolCrmTaskPriorityWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.SchoolCrmTaskPriority | EnumSchoolCrmTaskPriorityFieldRefInput<$PrismaModel>
+    in?: $Enums.SchoolCrmTaskPriority[] | ListEnumSchoolCrmTaskPriorityFieldRefInput<$PrismaModel>
+    notIn?: $Enums.SchoolCrmTaskPriority[] | ListEnumSchoolCrmTaskPriorityFieldRefInput<$PrismaModel>
+    not?: NestedEnumSchoolCrmTaskPriorityWithAggregatesFilter<$PrismaModel> | $Enums.SchoolCrmTaskPriority
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumSchoolCrmTaskPriorityFilter<$PrismaModel>
+    _max?: NestedEnumSchoolCrmTaskPriorityFilter<$PrismaModel>
+  }
+
+  export type EnumSchoolVerificationStatusFilter<$PrismaModel = never> = {
+    equals?: $Enums.SchoolVerificationStatus | EnumSchoolVerificationStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.SchoolVerificationStatus[] | ListEnumSchoolVerificationStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.SchoolVerificationStatus[] | ListEnumSchoolVerificationStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumSchoolVerificationStatusFilter<$PrismaModel> | $Enums.SchoolVerificationStatus
   }
 
   export type SchoolVerificationCountOrderByAggregateInput = {
@@ -41497,18 +56951,6 @@ export namespace Prisma {
     hasEvery?: string[] | ListStringFieldRefInput<$PrismaModel>
     hasSome?: string[] | ListStringFieldRefInput<$PrismaModel>
     isEmpty?: boolean
-  }
-
-  export type BytesNullableFilter<$PrismaModel = never> = {
-    equals?: Buffer | BytesFieldRefInput<$PrismaModel> | null
-    in?: Buffer[] | ListBytesFieldRefInput<$PrismaModel> | null
-    notIn?: Buffer[] | ListBytesFieldRefInput<$PrismaModel> | null
-    not?: NestedBytesNullableFilter<$PrismaModel> | Buffer | null
-  }
-
-  export type BoolFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
-    not?: NestedBoolFilter<$PrismaModel> | boolean
   }
 
   export type EnumBrandSubscriptionStatusNullableFilter<$PrismaModel = never> = {
@@ -41741,24 +57183,6 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedEnumBrandOnboardingStatusFilter<$PrismaModel>
     _max?: NestedEnumBrandOnboardingStatusFilter<$PrismaModel>
-  }
-
-  export type BytesNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: Buffer | BytesFieldRefInput<$PrismaModel> | null
-    in?: Buffer[] | ListBytesFieldRefInput<$PrismaModel> | null
-    notIn?: Buffer[] | ListBytesFieldRefInput<$PrismaModel> | null
-    not?: NestedBytesNullableWithAggregatesFilter<$PrismaModel> | Buffer | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _min?: NestedBytesNullableFilter<$PrismaModel>
-    _max?: NestedBytesNullableFilter<$PrismaModel>
-  }
-
-  export type BoolWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
-    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedBoolFilter<$PrismaModel>
-    _max?: NestedBoolFilter<$PrismaModel>
   }
 
   export type EnumBrandSubscriptionStatusNullableWithAggregatesFilter<$PrismaModel = never> = {
@@ -43624,6 +59048,69 @@ export namespace Prisma {
     connect?: FundingContributionWhereUniqueInput | FundingContributionWhereUniqueInput[]
   }
 
+  export type SchoolSubmittedNeedCreateNestedManyWithoutSchoolInput = {
+    create?: XOR<SchoolSubmittedNeedCreateWithoutSchoolInput, SchoolSubmittedNeedUncheckedCreateWithoutSchoolInput> | SchoolSubmittedNeedCreateWithoutSchoolInput[] | SchoolSubmittedNeedUncheckedCreateWithoutSchoolInput[]
+    connectOrCreate?: SchoolSubmittedNeedCreateOrConnectWithoutSchoolInput | SchoolSubmittedNeedCreateOrConnectWithoutSchoolInput[]
+    createMany?: SchoolSubmittedNeedCreateManySchoolInputEnvelope
+    connect?: SchoolSubmittedNeedWhereUniqueInput | SchoolSubmittedNeedWhereUniqueInput[]
+  }
+
+  export type SchoolVolunteerCreateNestedManyWithoutSchoolInput = {
+    create?: XOR<SchoolVolunteerCreateWithoutSchoolInput, SchoolVolunteerUncheckedCreateWithoutSchoolInput> | SchoolVolunteerCreateWithoutSchoolInput[] | SchoolVolunteerUncheckedCreateWithoutSchoolInput[]
+    connectOrCreate?: SchoolVolunteerCreateOrConnectWithoutSchoolInput | SchoolVolunteerCreateOrConnectWithoutSchoolInput[]
+    createMany?: SchoolVolunteerCreateManySchoolInputEnvelope
+    connect?: SchoolVolunteerWhereUniqueInput | SchoolVolunteerWhereUniqueInput[]
+  }
+
+  export type SchoolEventCreateNestedManyWithoutSchoolInput = {
+    create?: XOR<SchoolEventCreateWithoutSchoolInput, SchoolEventUncheckedCreateWithoutSchoolInput> | SchoolEventCreateWithoutSchoolInput[] | SchoolEventUncheckedCreateWithoutSchoolInput[]
+    connectOrCreate?: SchoolEventCreateOrConnectWithoutSchoolInput | SchoolEventCreateOrConnectWithoutSchoolInput[]
+    createMany?: SchoolEventCreateManySchoolInputEnvelope
+    connect?: SchoolEventWhereUniqueInput | SchoolEventWhereUniqueInput[]
+  }
+
+  export type SchoolAlumniCreateNestedManyWithoutSchoolInput = {
+    create?: XOR<SchoolAlumniCreateWithoutSchoolInput, SchoolAlumniUncheckedCreateWithoutSchoolInput> | SchoolAlumniCreateWithoutSchoolInput[] | SchoolAlumniUncheckedCreateWithoutSchoolInput[]
+    connectOrCreate?: SchoolAlumniCreateOrConnectWithoutSchoolInput | SchoolAlumniCreateOrConnectWithoutSchoolInput[]
+    createMany?: SchoolAlumniCreateManySchoolInputEnvelope
+    connect?: SchoolAlumniWhereUniqueInput | SchoolAlumniWhereUniqueInput[]
+  }
+
+  export type SchoolEnterpriseProjectCreateNestedManyWithoutSchoolInput = {
+    create?: XOR<SchoolEnterpriseProjectCreateWithoutSchoolInput, SchoolEnterpriseProjectUncheckedCreateWithoutSchoolInput> | SchoolEnterpriseProjectCreateWithoutSchoolInput[] | SchoolEnterpriseProjectUncheckedCreateWithoutSchoolInput[]
+    connectOrCreate?: SchoolEnterpriseProjectCreateOrConnectWithoutSchoolInput | SchoolEnterpriseProjectCreateOrConnectWithoutSchoolInput[]
+    createMany?: SchoolEnterpriseProjectCreateManySchoolInputEnvelope
+    connect?: SchoolEnterpriseProjectWhereUniqueInput | SchoolEnterpriseProjectWhereUniqueInput[]
+  }
+
+  export type SchoolInnovationChallengeCreateNestedManyWithoutSchoolInput = {
+    create?: XOR<SchoolInnovationChallengeCreateWithoutSchoolInput, SchoolInnovationChallengeUncheckedCreateWithoutSchoolInput> | SchoolInnovationChallengeCreateWithoutSchoolInput[] | SchoolInnovationChallengeUncheckedCreateWithoutSchoolInput[]
+    connectOrCreate?: SchoolInnovationChallengeCreateOrConnectWithoutSchoolInput | SchoolInnovationChallengeCreateOrConnectWithoutSchoolInput[]
+    createMany?: SchoolInnovationChallengeCreateManySchoolInputEnvelope
+    connect?: SchoolInnovationChallengeWhereUniqueInput | SchoolInnovationChallengeWhereUniqueInput[]
+  }
+
+  export type SchoolCrmContactCreateNestedManyWithoutSchoolInput = {
+    create?: XOR<SchoolCrmContactCreateWithoutSchoolInput, SchoolCrmContactUncheckedCreateWithoutSchoolInput> | SchoolCrmContactCreateWithoutSchoolInput[] | SchoolCrmContactUncheckedCreateWithoutSchoolInput[]
+    connectOrCreate?: SchoolCrmContactCreateOrConnectWithoutSchoolInput | SchoolCrmContactCreateOrConnectWithoutSchoolInput[]
+    createMany?: SchoolCrmContactCreateManySchoolInputEnvelope
+    connect?: SchoolCrmContactWhereUniqueInput | SchoolCrmContactWhereUniqueInput[]
+  }
+
+  export type SchoolCrmActivityCreateNestedManyWithoutSchoolInput = {
+    create?: XOR<SchoolCrmActivityCreateWithoutSchoolInput, SchoolCrmActivityUncheckedCreateWithoutSchoolInput> | SchoolCrmActivityCreateWithoutSchoolInput[] | SchoolCrmActivityUncheckedCreateWithoutSchoolInput[]
+    connectOrCreate?: SchoolCrmActivityCreateOrConnectWithoutSchoolInput | SchoolCrmActivityCreateOrConnectWithoutSchoolInput[]
+    createMany?: SchoolCrmActivityCreateManySchoolInputEnvelope
+    connect?: SchoolCrmActivityWhereUniqueInput | SchoolCrmActivityWhereUniqueInput[]
+  }
+
+  export type SchoolCrmTaskCreateNestedManyWithoutSchoolInput = {
+    create?: XOR<SchoolCrmTaskCreateWithoutSchoolInput, SchoolCrmTaskUncheckedCreateWithoutSchoolInput> | SchoolCrmTaskCreateWithoutSchoolInput[] | SchoolCrmTaskUncheckedCreateWithoutSchoolInput[]
+    connectOrCreate?: SchoolCrmTaskCreateOrConnectWithoutSchoolInput | SchoolCrmTaskCreateOrConnectWithoutSchoolInput[]
+    createMany?: SchoolCrmTaskCreateManySchoolInputEnvelope
+    connect?: SchoolCrmTaskWhereUniqueInput | SchoolCrmTaskWhereUniqueInput[]
+  }
+
   export type UserCreateNestedOneWithoutSchoolInput = {
     create?: XOR<UserCreateWithoutSchoolInput, UserUncheckedCreateWithoutSchoolInput>
     connectOrCreate?: UserCreateOrConnectWithoutSchoolInput
@@ -43655,6 +59142,69 @@ export namespace Prisma {
     connectOrCreate?: FundingContributionCreateOrConnectWithoutSchoolInput | FundingContributionCreateOrConnectWithoutSchoolInput[]
     createMany?: FundingContributionCreateManySchoolInputEnvelope
     connect?: FundingContributionWhereUniqueInput | FundingContributionWhereUniqueInput[]
+  }
+
+  export type SchoolSubmittedNeedUncheckedCreateNestedManyWithoutSchoolInput = {
+    create?: XOR<SchoolSubmittedNeedCreateWithoutSchoolInput, SchoolSubmittedNeedUncheckedCreateWithoutSchoolInput> | SchoolSubmittedNeedCreateWithoutSchoolInput[] | SchoolSubmittedNeedUncheckedCreateWithoutSchoolInput[]
+    connectOrCreate?: SchoolSubmittedNeedCreateOrConnectWithoutSchoolInput | SchoolSubmittedNeedCreateOrConnectWithoutSchoolInput[]
+    createMany?: SchoolSubmittedNeedCreateManySchoolInputEnvelope
+    connect?: SchoolSubmittedNeedWhereUniqueInput | SchoolSubmittedNeedWhereUniqueInput[]
+  }
+
+  export type SchoolVolunteerUncheckedCreateNestedManyWithoutSchoolInput = {
+    create?: XOR<SchoolVolunteerCreateWithoutSchoolInput, SchoolVolunteerUncheckedCreateWithoutSchoolInput> | SchoolVolunteerCreateWithoutSchoolInput[] | SchoolVolunteerUncheckedCreateWithoutSchoolInput[]
+    connectOrCreate?: SchoolVolunteerCreateOrConnectWithoutSchoolInput | SchoolVolunteerCreateOrConnectWithoutSchoolInput[]
+    createMany?: SchoolVolunteerCreateManySchoolInputEnvelope
+    connect?: SchoolVolunteerWhereUniqueInput | SchoolVolunteerWhereUniqueInput[]
+  }
+
+  export type SchoolEventUncheckedCreateNestedManyWithoutSchoolInput = {
+    create?: XOR<SchoolEventCreateWithoutSchoolInput, SchoolEventUncheckedCreateWithoutSchoolInput> | SchoolEventCreateWithoutSchoolInput[] | SchoolEventUncheckedCreateWithoutSchoolInput[]
+    connectOrCreate?: SchoolEventCreateOrConnectWithoutSchoolInput | SchoolEventCreateOrConnectWithoutSchoolInput[]
+    createMany?: SchoolEventCreateManySchoolInputEnvelope
+    connect?: SchoolEventWhereUniqueInput | SchoolEventWhereUniqueInput[]
+  }
+
+  export type SchoolAlumniUncheckedCreateNestedManyWithoutSchoolInput = {
+    create?: XOR<SchoolAlumniCreateWithoutSchoolInput, SchoolAlumniUncheckedCreateWithoutSchoolInput> | SchoolAlumniCreateWithoutSchoolInput[] | SchoolAlumniUncheckedCreateWithoutSchoolInput[]
+    connectOrCreate?: SchoolAlumniCreateOrConnectWithoutSchoolInput | SchoolAlumniCreateOrConnectWithoutSchoolInput[]
+    createMany?: SchoolAlumniCreateManySchoolInputEnvelope
+    connect?: SchoolAlumniWhereUniqueInput | SchoolAlumniWhereUniqueInput[]
+  }
+
+  export type SchoolEnterpriseProjectUncheckedCreateNestedManyWithoutSchoolInput = {
+    create?: XOR<SchoolEnterpriseProjectCreateWithoutSchoolInput, SchoolEnterpriseProjectUncheckedCreateWithoutSchoolInput> | SchoolEnterpriseProjectCreateWithoutSchoolInput[] | SchoolEnterpriseProjectUncheckedCreateWithoutSchoolInput[]
+    connectOrCreate?: SchoolEnterpriseProjectCreateOrConnectWithoutSchoolInput | SchoolEnterpriseProjectCreateOrConnectWithoutSchoolInput[]
+    createMany?: SchoolEnterpriseProjectCreateManySchoolInputEnvelope
+    connect?: SchoolEnterpriseProjectWhereUniqueInput | SchoolEnterpriseProjectWhereUniqueInput[]
+  }
+
+  export type SchoolInnovationChallengeUncheckedCreateNestedManyWithoutSchoolInput = {
+    create?: XOR<SchoolInnovationChallengeCreateWithoutSchoolInput, SchoolInnovationChallengeUncheckedCreateWithoutSchoolInput> | SchoolInnovationChallengeCreateWithoutSchoolInput[] | SchoolInnovationChallengeUncheckedCreateWithoutSchoolInput[]
+    connectOrCreate?: SchoolInnovationChallengeCreateOrConnectWithoutSchoolInput | SchoolInnovationChallengeCreateOrConnectWithoutSchoolInput[]
+    createMany?: SchoolInnovationChallengeCreateManySchoolInputEnvelope
+    connect?: SchoolInnovationChallengeWhereUniqueInput | SchoolInnovationChallengeWhereUniqueInput[]
+  }
+
+  export type SchoolCrmContactUncheckedCreateNestedManyWithoutSchoolInput = {
+    create?: XOR<SchoolCrmContactCreateWithoutSchoolInput, SchoolCrmContactUncheckedCreateWithoutSchoolInput> | SchoolCrmContactCreateWithoutSchoolInput[] | SchoolCrmContactUncheckedCreateWithoutSchoolInput[]
+    connectOrCreate?: SchoolCrmContactCreateOrConnectWithoutSchoolInput | SchoolCrmContactCreateOrConnectWithoutSchoolInput[]
+    createMany?: SchoolCrmContactCreateManySchoolInputEnvelope
+    connect?: SchoolCrmContactWhereUniqueInput | SchoolCrmContactWhereUniqueInput[]
+  }
+
+  export type SchoolCrmActivityUncheckedCreateNestedManyWithoutSchoolInput = {
+    create?: XOR<SchoolCrmActivityCreateWithoutSchoolInput, SchoolCrmActivityUncheckedCreateWithoutSchoolInput> | SchoolCrmActivityCreateWithoutSchoolInput[] | SchoolCrmActivityUncheckedCreateWithoutSchoolInput[]
+    connectOrCreate?: SchoolCrmActivityCreateOrConnectWithoutSchoolInput | SchoolCrmActivityCreateOrConnectWithoutSchoolInput[]
+    createMany?: SchoolCrmActivityCreateManySchoolInputEnvelope
+    connect?: SchoolCrmActivityWhereUniqueInput | SchoolCrmActivityWhereUniqueInput[]
+  }
+
+  export type SchoolCrmTaskUncheckedCreateNestedManyWithoutSchoolInput = {
+    create?: XOR<SchoolCrmTaskCreateWithoutSchoolInput, SchoolCrmTaskUncheckedCreateWithoutSchoolInput> | SchoolCrmTaskCreateWithoutSchoolInput[] | SchoolCrmTaskUncheckedCreateWithoutSchoolInput[]
+    connectOrCreate?: SchoolCrmTaskCreateOrConnectWithoutSchoolInput | SchoolCrmTaskCreateOrConnectWithoutSchoolInput[]
+    createMany?: SchoolCrmTaskCreateManySchoolInputEnvelope
+    connect?: SchoolCrmTaskWhereUniqueInput | SchoolCrmTaskWhereUniqueInput[]
   }
 
   export type UserUncheckedCreateNestedOneWithoutSchoolInput = {
@@ -43690,6 +59240,18 @@ export namespace Prisma {
   }
 
   export type NullableIntFieldUpdateOperationsInput = {
+    set?: number | null
+    increment?: number
+    decrement?: number
+    multiply?: number
+    divide?: number
+  }
+
+  export type NullableBytesFieldUpdateOperationsInput = {
+    set?: Buffer | null
+  }
+
+  export type NullableFloatFieldUpdateOperationsInput = {
     set?: number | null
     increment?: number
     decrement?: number
@@ -43737,6 +59299,132 @@ export namespace Prisma {
     update?: FundingContributionUpdateWithWhereUniqueWithoutSchoolInput | FundingContributionUpdateWithWhereUniqueWithoutSchoolInput[]
     updateMany?: FundingContributionUpdateManyWithWhereWithoutSchoolInput | FundingContributionUpdateManyWithWhereWithoutSchoolInput[]
     deleteMany?: FundingContributionScalarWhereInput | FundingContributionScalarWhereInput[]
+  }
+
+  export type SchoolSubmittedNeedUpdateManyWithoutSchoolNestedInput = {
+    create?: XOR<SchoolSubmittedNeedCreateWithoutSchoolInput, SchoolSubmittedNeedUncheckedCreateWithoutSchoolInput> | SchoolSubmittedNeedCreateWithoutSchoolInput[] | SchoolSubmittedNeedUncheckedCreateWithoutSchoolInput[]
+    connectOrCreate?: SchoolSubmittedNeedCreateOrConnectWithoutSchoolInput | SchoolSubmittedNeedCreateOrConnectWithoutSchoolInput[]
+    upsert?: SchoolSubmittedNeedUpsertWithWhereUniqueWithoutSchoolInput | SchoolSubmittedNeedUpsertWithWhereUniqueWithoutSchoolInput[]
+    createMany?: SchoolSubmittedNeedCreateManySchoolInputEnvelope
+    set?: SchoolSubmittedNeedWhereUniqueInput | SchoolSubmittedNeedWhereUniqueInput[]
+    disconnect?: SchoolSubmittedNeedWhereUniqueInput | SchoolSubmittedNeedWhereUniqueInput[]
+    delete?: SchoolSubmittedNeedWhereUniqueInput | SchoolSubmittedNeedWhereUniqueInput[]
+    connect?: SchoolSubmittedNeedWhereUniqueInput | SchoolSubmittedNeedWhereUniqueInput[]
+    update?: SchoolSubmittedNeedUpdateWithWhereUniqueWithoutSchoolInput | SchoolSubmittedNeedUpdateWithWhereUniqueWithoutSchoolInput[]
+    updateMany?: SchoolSubmittedNeedUpdateManyWithWhereWithoutSchoolInput | SchoolSubmittedNeedUpdateManyWithWhereWithoutSchoolInput[]
+    deleteMany?: SchoolSubmittedNeedScalarWhereInput | SchoolSubmittedNeedScalarWhereInput[]
+  }
+
+  export type SchoolVolunteerUpdateManyWithoutSchoolNestedInput = {
+    create?: XOR<SchoolVolunteerCreateWithoutSchoolInput, SchoolVolunteerUncheckedCreateWithoutSchoolInput> | SchoolVolunteerCreateWithoutSchoolInput[] | SchoolVolunteerUncheckedCreateWithoutSchoolInput[]
+    connectOrCreate?: SchoolVolunteerCreateOrConnectWithoutSchoolInput | SchoolVolunteerCreateOrConnectWithoutSchoolInput[]
+    upsert?: SchoolVolunteerUpsertWithWhereUniqueWithoutSchoolInput | SchoolVolunteerUpsertWithWhereUniqueWithoutSchoolInput[]
+    createMany?: SchoolVolunteerCreateManySchoolInputEnvelope
+    set?: SchoolVolunteerWhereUniqueInput | SchoolVolunteerWhereUniqueInput[]
+    disconnect?: SchoolVolunteerWhereUniqueInput | SchoolVolunteerWhereUniqueInput[]
+    delete?: SchoolVolunteerWhereUniqueInput | SchoolVolunteerWhereUniqueInput[]
+    connect?: SchoolVolunteerWhereUniqueInput | SchoolVolunteerWhereUniqueInput[]
+    update?: SchoolVolunteerUpdateWithWhereUniqueWithoutSchoolInput | SchoolVolunteerUpdateWithWhereUniqueWithoutSchoolInput[]
+    updateMany?: SchoolVolunteerUpdateManyWithWhereWithoutSchoolInput | SchoolVolunteerUpdateManyWithWhereWithoutSchoolInput[]
+    deleteMany?: SchoolVolunteerScalarWhereInput | SchoolVolunteerScalarWhereInput[]
+  }
+
+  export type SchoolEventUpdateManyWithoutSchoolNestedInput = {
+    create?: XOR<SchoolEventCreateWithoutSchoolInput, SchoolEventUncheckedCreateWithoutSchoolInput> | SchoolEventCreateWithoutSchoolInput[] | SchoolEventUncheckedCreateWithoutSchoolInput[]
+    connectOrCreate?: SchoolEventCreateOrConnectWithoutSchoolInput | SchoolEventCreateOrConnectWithoutSchoolInput[]
+    upsert?: SchoolEventUpsertWithWhereUniqueWithoutSchoolInput | SchoolEventUpsertWithWhereUniqueWithoutSchoolInput[]
+    createMany?: SchoolEventCreateManySchoolInputEnvelope
+    set?: SchoolEventWhereUniqueInput | SchoolEventWhereUniqueInput[]
+    disconnect?: SchoolEventWhereUniqueInput | SchoolEventWhereUniqueInput[]
+    delete?: SchoolEventWhereUniqueInput | SchoolEventWhereUniqueInput[]
+    connect?: SchoolEventWhereUniqueInput | SchoolEventWhereUniqueInput[]
+    update?: SchoolEventUpdateWithWhereUniqueWithoutSchoolInput | SchoolEventUpdateWithWhereUniqueWithoutSchoolInput[]
+    updateMany?: SchoolEventUpdateManyWithWhereWithoutSchoolInput | SchoolEventUpdateManyWithWhereWithoutSchoolInput[]
+    deleteMany?: SchoolEventScalarWhereInput | SchoolEventScalarWhereInput[]
+  }
+
+  export type SchoolAlumniUpdateManyWithoutSchoolNestedInput = {
+    create?: XOR<SchoolAlumniCreateWithoutSchoolInput, SchoolAlumniUncheckedCreateWithoutSchoolInput> | SchoolAlumniCreateWithoutSchoolInput[] | SchoolAlumniUncheckedCreateWithoutSchoolInput[]
+    connectOrCreate?: SchoolAlumniCreateOrConnectWithoutSchoolInput | SchoolAlumniCreateOrConnectWithoutSchoolInput[]
+    upsert?: SchoolAlumniUpsertWithWhereUniqueWithoutSchoolInput | SchoolAlumniUpsertWithWhereUniqueWithoutSchoolInput[]
+    createMany?: SchoolAlumniCreateManySchoolInputEnvelope
+    set?: SchoolAlumniWhereUniqueInput | SchoolAlumniWhereUniqueInput[]
+    disconnect?: SchoolAlumniWhereUniqueInput | SchoolAlumniWhereUniqueInput[]
+    delete?: SchoolAlumniWhereUniqueInput | SchoolAlumniWhereUniqueInput[]
+    connect?: SchoolAlumniWhereUniqueInput | SchoolAlumniWhereUniqueInput[]
+    update?: SchoolAlumniUpdateWithWhereUniqueWithoutSchoolInput | SchoolAlumniUpdateWithWhereUniqueWithoutSchoolInput[]
+    updateMany?: SchoolAlumniUpdateManyWithWhereWithoutSchoolInput | SchoolAlumniUpdateManyWithWhereWithoutSchoolInput[]
+    deleteMany?: SchoolAlumniScalarWhereInput | SchoolAlumniScalarWhereInput[]
+  }
+
+  export type SchoolEnterpriseProjectUpdateManyWithoutSchoolNestedInput = {
+    create?: XOR<SchoolEnterpriseProjectCreateWithoutSchoolInput, SchoolEnterpriseProjectUncheckedCreateWithoutSchoolInput> | SchoolEnterpriseProjectCreateWithoutSchoolInput[] | SchoolEnterpriseProjectUncheckedCreateWithoutSchoolInput[]
+    connectOrCreate?: SchoolEnterpriseProjectCreateOrConnectWithoutSchoolInput | SchoolEnterpriseProjectCreateOrConnectWithoutSchoolInput[]
+    upsert?: SchoolEnterpriseProjectUpsertWithWhereUniqueWithoutSchoolInput | SchoolEnterpriseProjectUpsertWithWhereUniqueWithoutSchoolInput[]
+    createMany?: SchoolEnterpriseProjectCreateManySchoolInputEnvelope
+    set?: SchoolEnterpriseProjectWhereUniqueInput | SchoolEnterpriseProjectWhereUniqueInput[]
+    disconnect?: SchoolEnterpriseProjectWhereUniqueInput | SchoolEnterpriseProjectWhereUniqueInput[]
+    delete?: SchoolEnterpriseProjectWhereUniqueInput | SchoolEnterpriseProjectWhereUniqueInput[]
+    connect?: SchoolEnterpriseProjectWhereUniqueInput | SchoolEnterpriseProjectWhereUniqueInput[]
+    update?: SchoolEnterpriseProjectUpdateWithWhereUniqueWithoutSchoolInput | SchoolEnterpriseProjectUpdateWithWhereUniqueWithoutSchoolInput[]
+    updateMany?: SchoolEnterpriseProjectUpdateManyWithWhereWithoutSchoolInput | SchoolEnterpriseProjectUpdateManyWithWhereWithoutSchoolInput[]
+    deleteMany?: SchoolEnterpriseProjectScalarWhereInput | SchoolEnterpriseProjectScalarWhereInput[]
+  }
+
+  export type SchoolInnovationChallengeUpdateManyWithoutSchoolNestedInput = {
+    create?: XOR<SchoolInnovationChallengeCreateWithoutSchoolInput, SchoolInnovationChallengeUncheckedCreateWithoutSchoolInput> | SchoolInnovationChallengeCreateWithoutSchoolInput[] | SchoolInnovationChallengeUncheckedCreateWithoutSchoolInput[]
+    connectOrCreate?: SchoolInnovationChallengeCreateOrConnectWithoutSchoolInput | SchoolInnovationChallengeCreateOrConnectWithoutSchoolInput[]
+    upsert?: SchoolInnovationChallengeUpsertWithWhereUniqueWithoutSchoolInput | SchoolInnovationChallengeUpsertWithWhereUniqueWithoutSchoolInput[]
+    createMany?: SchoolInnovationChallengeCreateManySchoolInputEnvelope
+    set?: SchoolInnovationChallengeWhereUniqueInput | SchoolInnovationChallengeWhereUniqueInput[]
+    disconnect?: SchoolInnovationChallengeWhereUniqueInput | SchoolInnovationChallengeWhereUniqueInput[]
+    delete?: SchoolInnovationChallengeWhereUniqueInput | SchoolInnovationChallengeWhereUniqueInput[]
+    connect?: SchoolInnovationChallengeWhereUniqueInput | SchoolInnovationChallengeWhereUniqueInput[]
+    update?: SchoolInnovationChallengeUpdateWithWhereUniqueWithoutSchoolInput | SchoolInnovationChallengeUpdateWithWhereUniqueWithoutSchoolInput[]
+    updateMany?: SchoolInnovationChallengeUpdateManyWithWhereWithoutSchoolInput | SchoolInnovationChallengeUpdateManyWithWhereWithoutSchoolInput[]
+    deleteMany?: SchoolInnovationChallengeScalarWhereInput | SchoolInnovationChallengeScalarWhereInput[]
+  }
+
+  export type SchoolCrmContactUpdateManyWithoutSchoolNestedInput = {
+    create?: XOR<SchoolCrmContactCreateWithoutSchoolInput, SchoolCrmContactUncheckedCreateWithoutSchoolInput> | SchoolCrmContactCreateWithoutSchoolInput[] | SchoolCrmContactUncheckedCreateWithoutSchoolInput[]
+    connectOrCreate?: SchoolCrmContactCreateOrConnectWithoutSchoolInput | SchoolCrmContactCreateOrConnectWithoutSchoolInput[]
+    upsert?: SchoolCrmContactUpsertWithWhereUniqueWithoutSchoolInput | SchoolCrmContactUpsertWithWhereUniqueWithoutSchoolInput[]
+    createMany?: SchoolCrmContactCreateManySchoolInputEnvelope
+    set?: SchoolCrmContactWhereUniqueInput | SchoolCrmContactWhereUniqueInput[]
+    disconnect?: SchoolCrmContactWhereUniqueInput | SchoolCrmContactWhereUniqueInput[]
+    delete?: SchoolCrmContactWhereUniqueInput | SchoolCrmContactWhereUniqueInput[]
+    connect?: SchoolCrmContactWhereUniqueInput | SchoolCrmContactWhereUniqueInput[]
+    update?: SchoolCrmContactUpdateWithWhereUniqueWithoutSchoolInput | SchoolCrmContactUpdateWithWhereUniqueWithoutSchoolInput[]
+    updateMany?: SchoolCrmContactUpdateManyWithWhereWithoutSchoolInput | SchoolCrmContactUpdateManyWithWhereWithoutSchoolInput[]
+    deleteMany?: SchoolCrmContactScalarWhereInput | SchoolCrmContactScalarWhereInput[]
+  }
+
+  export type SchoolCrmActivityUpdateManyWithoutSchoolNestedInput = {
+    create?: XOR<SchoolCrmActivityCreateWithoutSchoolInput, SchoolCrmActivityUncheckedCreateWithoutSchoolInput> | SchoolCrmActivityCreateWithoutSchoolInput[] | SchoolCrmActivityUncheckedCreateWithoutSchoolInput[]
+    connectOrCreate?: SchoolCrmActivityCreateOrConnectWithoutSchoolInput | SchoolCrmActivityCreateOrConnectWithoutSchoolInput[]
+    upsert?: SchoolCrmActivityUpsertWithWhereUniqueWithoutSchoolInput | SchoolCrmActivityUpsertWithWhereUniqueWithoutSchoolInput[]
+    createMany?: SchoolCrmActivityCreateManySchoolInputEnvelope
+    set?: SchoolCrmActivityWhereUniqueInput | SchoolCrmActivityWhereUniqueInput[]
+    disconnect?: SchoolCrmActivityWhereUniqueInput | SchoolCrmActivityWhereUniqueInput[]
+    delete?: SchoolCrmActivityWhereUniqueInput | SchoolCrmActivityWhereUniqueInput[]
+    connect?: SchoolCrmActivityWhereUniqueInput | SchoolCrmActivityWhereUniqueInput[]
+    update?: SchoolCrmActivityUpdateWithWhereUniqueWithoutSchoolInput | SchoolCrmActivityUpdateWithWhereUniqueWithoutSchoolInput[]
+    updateMany?: SchoolCrmActivityUpdateManyWithWhereWithoutSchoolInput | SchoolCrmActivityUpdateManyWithWhereWithoutSchoolInput[]
+    deleteMany?: SchoolCrmActivityScalarWhereInput | SchoolCrmActivityScalarWhereInput[]
+  }
+
+  export type SchoolCrmTaskUpdateManyWithoutSchoolNestedInput = {
+    create?: XOR<SchoolCrmTaskCreateWithoutSchoolInput, SchoolCrmTaskUncheckedCreateWithoutSchoolInput> | SchoolCrmTaskCreateWithoutSchoolInput[] | SchoolCrmTaskUncheckedCreateWithoutSchoolInput[]
+    connectOrCreate?: SchoolCrmTaskCreateOrConnectWithoutSchoolInput | SchoolCrmTaskCreateOrConnectWithoutSchoolInput[]
+    upsert?: SchoolCrmTaskUpsertWithWhereUniqueWithoutSchoolInput | SchoolCrmTaskUpsertWithWhereUniqueWithoutSchoolInput[]
+    createMany?: SchoolCrmTaskCreateManySchoolInputEnvelope
+    set?: SchoolCrmTaskWhereUniqueInput | SchoolCrmTaskWhereUniqueInput[]
+    disconnect?: SchoolCrmTaskWhereUniqueInput | SchoolCrmTaskWhereUniqueInput[]
+    delete?: SchoolCrmTaskWhereUniqueInput | SchoolCrmTaskWhereUniqueInput[]
+    connect?: SchoolCrmTaskWhereUniqueInput | SchoolCrmTaskWhereUniqueInput[]
+    update?: SchoolCrmTaskUpdateWithWhereUniqueWithoutSchoolInput | SchoolCrmTaskUpdateWithWhereUniqueWithoutSchoolInput[]
+    updateMany?: SchoolCrmTaskUpdateManyWithWhereWithoutSchoolInput | SchoolCrmTaskUpdateManyWithWhereWithoutSchoolInput[]
+    deleteMany?: SchoolCrmTaskScalarWhereInput | SchoolCrmTaskScalarWhereInput[]
   }
 
   export type UserUpdateOneWithoutSchoolNestedInput = {
@@ -43801,6 +59489,132 @@ export namespace Prisma {
     deleteMany?: FundingContributionScalarWhereInput | FundingContributionScalarWhereInput[]
   }
 
+  export type SchoolSubmittedNeedUncheckedUpdateManyWithoutSchoolNestedInput = {
+    create?: XOR<SchoolSubmittedNeedCreateWithoutSchoolInput, SchoolSubmittedNeedUncheckedCreateWithoutSchoolInput> | SchoolSubmittedNeedCreateWithoutSchoolInput[] | SchoolSubmittedNeedUncheckedCreateWithoutSchoolInput[]
+    connectOrCreate?: SchoolSubmittedNeedCreateOrConnectWithoutSchoolInput | SchoolSubmittedNeedCreateOrConnectWithoutSchoolInput[]
+    upsert?: SchoolSubmittedNeedUpsertWithWhereUniqueWithoutSchoolInput | SchoolSubmittedNeedUpsertWithWhereUniqueWithoutSchoolInput[]
+    createMany?: SchoolSubmittedNeedCreateManySchoolInputEnvelope
+    set?: SchoolSubmittedNeedWhereUniqueInput | SchoolSubmittedNeedWhereUniqueInput[]
+    disconnect?: SchoolSubmittedNeedWhereUniqueInput | SchoolSubmittedNeedWhereUniqueInput[]
+    delete?: SchoolSubmittedNeedWhereUniqueInput | SchoolSubmittedNeedWhereUniqueInput[]
+    connect?: SchoolSubmittedNeedWhereUniqueInput | SchoolSubmittedNeedWhereUniqueInput[]
+    update?: SchoolSubmittedNeedUpdateWithWhereUniqueWithoutSchoolInput | SchoolSubmittedNeedUpdateWithWhereUniqueWithoutSchoolInput[]
+    updateMany?: SchoolSubmittedNeedUpdateManyWithWhereWithoutSchoolInput | SchoolSubmittedNeedUpdateManyWithWhereWithoutSchoolInput[]
+    deleteMany?: SchoolSubmittedNeedScalarWhereInput | SchoolSubmittedNeedScalarWhereInput[]
+  }
+
+  export type SchoolVolunteerUncheckedUpdateManyWithoutSchoolNestedInput = {
+    create?: XOR<SchoolVolunteerCreateWithoutSchoolInput, SchoolVolunteerUncheckedCreateWithoutSchoolInput> | SchoolVolunteerCreateWithoutSchoolInput[] | SchoolVolunteerUncheckedCreateWithoutSchoolInput[]
+    connectOrCreate?: SchoolVolunteerCreateOrConnectWithoutSchoolInput | SchoolVolunteerCreateOrConnectWithoutSchoolInput[]
+    upsert?: SchoolVolunteerUpsertWithWhereUniqueWithoutSchoolInput | SchoolVolunteerUpsertWithWhereUniqueWithoutSchoolInput[]
+    createMany?: SchoolVolunteerCreateManySchoolInputEnvelope
+    set?: SchoolVolunteerWhereUniqueInput | SchoolVolunteerWhereUniqueInput[]
+    disconnect?: SchoolVolunteerWhereUniqueInput | SchoolVolunteerWhereUniqueInput[]
+    delete?: SchoolVolunteerWhereUniqueInput | SchoolVolunteerWhereUniqueInput[]
+    connect?: SchoolVolunteerWhereUniqueInput | SchoolVolunteerWhereUniqueInput[]
+    update?: SchoolVolunteerUpdateWithWhereUniqueWithoutSchoolInput | SchoolVolunteerUpdateWithWhereUniqueWithoutSchoolInput[]
+    updateMany?: SchoolVolunteerUpdateManyWithWhereWithoutSchoolInput | SchoolVolunteerUpdateManyWithWhereWithoutSchoolInput[]
+    deleteMany?: SchoolVolunteerScalarWhereInput | SchoolVolunteerScalarWhereInput[]
+  }
+
+  export type SchoolEventUncheckedUpdateManyWithoutSchoolNestedInput = {
+    create?: XOR<SchoolEventCreateWithoutSchoolInput, SchoolEventUncheckedCreateWithoutSchoolInput> | SchoolEventCreateWithoutSchoolInput[] | SchoolEventUncheckedCreateWithoutSchoolInput[]
+    connectOrCreate?: SchoolEventCreateOrConnectWithoutSchoolInput | SchoolEventCreateOrConnectWithoutSchoolInput[]
+    upsert?: SchoolEventUpsertWithWhereUniqueWithoutSchoolInput | SchoolEventUpsertWithWhereUniqueWithoutSchoolInput[]
+    createMany?: SchoolEventCreateManySchoolInputEnvelope
+    set?: SchoolEventWhereUniqueInput | SchoolEventWhereUniqueInput[]
+    disconnect?: SchoolEventWhereUniqueInput | SchoolEventWhereUniqueInput[]
+    delete?: SchoolEventWhereUniqueInput | SchoolEventWhereUniqueInput[]
+    connect?: SchoolEventWhereUniqueInput | SchoolEventWhereUniqueInput[]
+    update?: SchoolEventUpdateWithWhereUniqueWithoutSchoolInput | SchoolEventUpdateWithWhereUniqueWithoutSchoolInput[]
+    updateMany?: SchoolEventUpdateManyWithWhereWithoutSchoolInput | SchoolEventUpdateManyWithWhereWithoutSchoolInput[]
+    deleteMany?: SchoolEventScalarWhereInput | SchoolEventScalarWhereInput[]
+  }
+
+  export type SchoolAlumniUncheckedUpdateManyWithoutSchoolNestedInput = {
+    create?: XOR<SchoolAlumniCreateWithoutSchoolInput, SchoolAlumniUncheckedCreateWithoutSchoolInput> | SchoolAlumniCreateWithoutSchoolInput[] | SchoolAlumniUncheckedCreateWithoutSchoolInput[]
+    connectOrCreate?: SchoolAlumniCreateOrConnectWithoutSchoolInput | SchoolAlumniCreateOrConnectWithoutSchoolInput[]
+    upsert?: SchoolAlumniUpsertWithWhereUniqueWithoutSchoolInput | SchoolAlumniUpsertWithWhereUniqueWithoutSchoolInput[]
+    createMany?: SchoolAlumniCreateManySchoolInputEnvelope
+    set?: SchoolAlumniWhereUniqueInput | SchoolAlumniWhereUniqueInput[]
+    disconnect?: SchoolAlumniWhereUniqueInput | SchoolAlumniWhereUniqueInput[]
+    delete?: SchoolAlumniWhereUniqueInput | SchoolAlumniWhereUniqueInput[]
+    connect?: SchoolAlumniWhereUniqueInput | SchoolAlumniWhereUniqueInput[]
+    update?: SchoolAlumniUpdateWithWhereUniqueWithoutSchoolInput | SchoolAlumniUpdateWithWhereUniqueWithoutSchoolInput[]
+    updateMany?: SchoolAlumniUpdateManyWithWhereWithoutSchoolInput | SchoolAlumniUpdateManyWithWhereWithoutSchoolInput[]
+    deleteMany?: SchoolAlumniScalarWhereInput | SchoolAlumniScalarWhereInput[]
+  }
+
+  export type SchoolEnterpriseProjectUncheckedUpdateManyWithoutSchoolNestedInput = {
+    create?: XOR<SchoolEnterpriseProjectCreateWithoutSchoolInput, SchoolEnterpriseProjectUncheckedCreateWithoutSchoolInput> | SchoolEnterpriseProjectCreateWithoutSchoolInput[] | SchoolEnterpriseProjectUncheckedCreateWithoutSchoolInput[]
+    connectOrCreate?: SchoolEnterpriseProjectCreateOrConnectWithoutSchoolInput | SchoolEnterpriseProjectCreateOrConnectWithoutSchoolInput[]
+    upsert?: SchoolEnterpriseProjectUpsertWithWhereUniqueWithoutSchoolInput | SchoolEnterpriseProjectUpsertWithWhereUniqueWithoutSchoolInput[]
+    createMany?: SchoolEnterpriseProjectCreateManySchoolInputEnvelope
+    set?: SchoolEnterpriseProjectWhereUniqueInput | SchoolEnterpriseProjectWhereUniqueInput[]
+    disconnect?: SchoolEnterpriseProjectWhereUniqueInput | SchoolEnterpriseProjectWhereUniqueInput[]
+    delete?: SchoolEnterpriseProjectWhereUniqueInput | SchoolEnterpriseProjectWhereUniqueInput[]
+    connect?: SchoolEnterpriseProjectWhereUniqueInput | SchoolEnterpriseProjectWhereUniqueInput[]
+    update?: SchoolEnterpriseProjectUpdateWithWhereUniqueWithoutSchoolInput | SchoolEnterpriseProjectUpdateWithWhereUniqueWithoutSchoolInput[]
+    updateMany?: SchoolEnterpriseProjectUpdateManyWithWhereWithoutSchoolInput | SchoolEnterpriseProjectUpdateManyWithWhereWithoutSchoolInput[]
+    deleteMany?: SchoolEnterpriseProjectScalarWhereInput | SchoolEnterpriseProjectScalarWhereInput[]
+  }
+
+  export type SchoolInnovationChallengeUncheckedUpdateManyWithoutSchoolNestedInput = {
+    create?: XOR<SchoolInnovationChallengeCreateWithoutSchoolInput, SchoolInnovationChallengeUncheckedCreateWithoutSchoolInput> | SchoolInnovationChallengeCreateWithoutSchoolInput[] | SchoolInnovationChallengeUncheckedCreateWithoutSchoolInput[]
+    connectOrCreate?: SchoolInnovationChallengeCreateOrConnectWithoutSchoolInput | SchoolInnovationChallengeCreateOrConnectWithoutSchoolInput[]
+    upsert?: SchoolInnovationChallengeUpsertWithWhereUniqueWithoutSchoolInput | SchoolInnovationChallengeUpsertWithWhereUniqueWithoutSchoolInput[]
+    createMany?: SchoolInnovationChallengeCreateManySchoolInputEnvelope
+    set?: SchoolInnovationChallengeWhereUniqueInput | SchoolInnovationChallengeWhereUniqueInput[]
+    disconnect?: SchoolInnovationChallengeWhereUniqueInput | SchoolInnovationChallengeWhereUniqueInput[]
+    delete?: SchoolInnovationChallengeWhereUniqueInput | SchoolInnovationChallengeWhereUniqueInput[]
+    connect?: SchoolInnovationChallengeWhereUniqueInput | SchoolInnovationChallengeWhereUniqueInput[]
+    update?: SchoolInnovationChallengeUpdateWithWhereUniqueWithoutSchoolInput | SchoolInnovationChallengeUpdateWithWhereUniqueWithoutSchoolInput[]
+    updateMany?: SchoolInnovationChallengeUpdateManyWithWhereWithoutSchoolInput | SchoolInnovationChallengeUpdateManyWithWhereWithoutSchoolInput[]
+    deleteMany?: SchoolInnovationChallengeScalarWhereInput | SchoolInnovationChallengeScalarWhereInput[]
+  }
+
+  export type SchoolCrmContactUncheckedUpdateManyWithoutSchoolNestedInput = {
+    create?: XOR<SchoolCrmContactCreateWithoutSchoolInput, SchoolCrmContactUncheckedCreateWithoutSchoolInput> | SchoolCrmContactCreateWithoutSchoolInput[] | SchoolCrmContactUncheckedCreateWithoutSchoolInput[]
+    connectOrCreate?: SchoolCrmContactCreateOrConnectWithoutSchoolInput | SchoolCrmContactCreateOrConnectWithoutSchoolInput[]
+    upsert?: SchoolCrmContactUpsertWithWhereUniqueWithoutSchoolInput | SchoolCrmContactUpsertWithWhereUniqueWithoutSchoolInput[]
+    createMany?: SchoolCrmContactCreateManySchoolInputEnvelope
+    set?: SchoolCrmContactWhereUniqueInput | SchoolCrmContactWhereUniqueInput[]
+    disconnect?: SchoolCrmContactWhereUniqueInput | SchoolCrmContactWhereUniqueInput[]
+    delete?: SchoolCrmContactWhereUniqueInput | SchoolCrmContactWhereUniqueInput[]
+    connect?: SchoolCrmContactWhereUniqueInput | SchoolCrmContactWhereUniqueInput[]
+    update?: SchoolCrmContactUpdateWithWhereUniqueWithoutSchoolInput | SchoolCrmContactUpdateWithWhereUniqueWithoutSchoolInput[]
+    updateMany?: SchoolCrmContactUpdateManyWithWhereWithoutSchoolInput | SchoolCrmContactUpdateManyWithWhereWithoutSchoolInput[]
+    deleteMany?: SchoolCrmContactScalarWhereInput | SchoolCrmContactScalarWhereInput[]
+  }
+
+  export type SchoolCrmActivityUncheckedUpdateManyWithoutSchoolNestedInput = {
+    create?: XOR<SchoolCrmActivityCreateWithoutSchoolInput, SchoolCrmActivityUncheckedCreateWithoutSchoolInput> | SchoolCrmActivityCreateWithoutSchoolInput[] | SchoolCrmActivityUncheckedCreateWithoutSchoolInput[]
+    connectOrCreate?: SchoolCrmActivityCreateOrConnectWithoutSchoolInput | SchoolCrmActivityCreateOrConnectWithoutSchoolInput[]
+    upsert?: SchoolCrmActivityUpsertWithWhereUniqueWithoutSchoolInput | SchoolCrmActivityUpsertWithWhereUniqueWithoutSchoolInput[]
+    createMany?: SchoolCrmActivityCreateManySchoolInputEnvelope
+    set?: SchoolCrmActivityWhereUniqueInput | SchoolCrmActivityWhereUniqueInput[]
+    disconnect?: SchoolCrmActivityWhereUniqueInput | SchoolCrmActivityWhereUniqueInput[]
+    delete?: SchoolCrmActivityWhereUniqueInput | SchoolCrmActivityWhereUniqueInput[]
+    connect?: SchoolCrmActivityWhereUniqueInput | SchoolCrmActivityWhereUniqueInput[]
+    update?: SchoolCrmActivityUpdateWithWhereUniqueWithoutSchoolInput | SchoolCrmActivityUpdateWithWhereUniqueWithoutSchoolInput[]
+    updateMany?: SchoolCrmActivityUpdateManyWithWhereWithoutSchoolInput | SchoolCrmActivityUpdateManyWithWhereWithoutSchoolInput[]
+    deleteMany?: SchoolCrmActivityScalarWhereInput | SchoolCrmActivityScalarWhereInput[]
+  }
+
+  export type SchoolCrmTaskUncheckedUpdateManyWithoutSchoolNestedInput = {
+    create?: XOR<SchoolCrmTaskCreateWithoutSchoolInput, SchoolCrmTaskUncheckedCreateWithoutSchoolInput> | SchoolCrmTaskCreateWithoutSchoolInput[] | SchoolCrmTaskUncheckedCreateWithoutSchoolInput[]
+    connectOrCreate?: SchoolCrmTaskCreateOrConnectWithoutSchoolInput | SchoolCrmTaskCreateOrConnectWithoutSchoolInput[]
+    upsert?: SchoolCrmTaskUpsertWithWhereUniqueWithoutSchoolInput | SchoolCrmTaskUpsertWithWhereUniqueWithoutSchoolInput[]
+    createMany?: SchoolCrmTaskCreateManySchoolInputEnvelope
+    set?: SchoolCrmTaskWhereUniqueInput | SchoolCrmTaskWhereUniqueInput[]
+    disconnect?: SchoolCrmTaskWhereUniqueInput | SchoolCrmTaskWhereUniqueInput[]
+    delete?: SchoolCrmTaskWhereUniqueInput | SchoolCrmTaskWhereUniqueInput[]
+    connect?: SchoolCrmTaskWhereUniqueInput | SchoolCrmTaskWhereUniqueInput[]
+    update?: SchoolCrmTaskUpdateWithWhereUniqueWithoutSchoolInput | SchoolCrmTaskUpdateWithWhereUniqueWithoutSchoolInput[]
+    updateMany?: SchoolCrmTaskUpdateManyWithWhereWithoutSchoolInput | SchoolCrmTaskUpdateManyWithWhereWithoutSchoolInput[]
+    deleteMany?: SchoolCrmTaskScalarWhereInput | SchoolCrmTaskScalarWhereInput[]
+  }
+
   export type UserUncheckedUpdateOneWithoutSchoolNestedInput = {
     create?: XOR<UserCreateWithoutSchoolInput, UserUncheckedCreateWithoutSchoolInput>
     connectOrCreate?: UserCreateOrConnectWithoutSchoolInput
@@ -43819,6 +59633,470 @@ export namespace Prisma {
     delete?: SchoolVerificationWhereInput | boolean
     connect?: SchoolVerificationWhereUniqueInput
     update?: XOR<XOR<SchoolVerificationUpdateToOneWithWhereWithoutSchoolInput, SchoolVerificationUpdateWithoutSchoolInput>, SchoolVerificationUncheckedUpdateWithoutSchoolInput>
+  }
+
+  export type SchoolCreateNestedOneWithoutSubmittedNeedsInput = {
+    create?: XOR<SchoolCreateWithoutSubmittedNeedsInput, SchoolUncheckedCreateWithoutSubmittedNeedsInput>
+    connectOrCreate?: SchoolCreateOrConnectWithoutSubmittedNeedsInput
+    connect?: SchoolWhereUniqueInput
+  }
+
+  export type EnumSchoolNeedStatusFieldUpdateOperationsInput = {
+    set?: $Enums.SchoolNeedStatus
+  }
+
+  export type SchoolUpdateOneRequiredWithoutSubmittedNeedsNestedInput = {
+    create?: XOR<SchoolCreateWithoutSubmittedNeedsInput, SchoolUncheckedCreateWithoutSubmittedNeedsInput>
+    connectOrCreate?: SchoolCreateOrConnectWithoutSubmittedNeedsInput
+    upsert?: SchoolUpsertWithoutSubmittedNeedsInput
+    connect?: SchoolWhereUniqueInput
+    update?: XOR<XOR<SchoolUpdateToOneWithWhereWithoutSubmittedNeedsInput, SchoolUpdateWithoutSubmittedNeedsInput>, SchoolUncheckedUpdateWithoutSubmittedNeedsInput>
+  }
+
+  export type SchoolCreateNestedOneWithoutVolunteersInput = {
+    create?: XOR<SchoolCreateWithoutVolunteersInput, SchoolUncheckedCreateWithoutVolunteersInput>
+    connectOrCreate?: SchoolCreateOrConnectWithoutVolunteersInput
+    connect?: SchoolWhereUniqueInput
+  }
+
+  export type SchoolEventVolunteerCreateNestedManyWithoutVolunteerInput = {
+    create?: XOR<SchoolEventVolunteerCreateWithoutVolunteerInput, SchoolEventVolunteerUncheckedCreateWithoutVolunteerInput> | SchoolEventVolunteerCreateWithoutVolunteerInput[] | SchoolEventVolunteerUncheckedCreateWithoutVolunteerInput[]
+    connectOrCreate?: SchoolEventVolunteerCreateOrConnectWithoutVolunteerInput | SchoolEventVolunteerCreateOrConnectWithoutVolunteerInput[]
+    createMany?: SchoolEventVolunteerCreateManyVolunteerInputEnvelope
+    connect?: SchoolEventVolunteerWhereUniqueInput | SchoolEventVolunteerWhereUniqueInput[]
+  }
+
+  export type SchoolEventVolunteerUncheckedCreateNestedManyWithoutVolunteerInput = {
+    create?: XOR<SchoolEventVolunteerCreateWithoutVolunteerInput, SchoolEventVolunteerUncheckedCreateWithoutVolunteerInput> | SchoolEventVolunteerCreateWithoutVolunteerInput[] | SchoolEventVolunteerUncheckedCreateWithoutVolunteerInput[]
+    connectOrCreate?: SchoolEventVolunteerCreateOrConnectWithoutVolunteerInput | SchoolEventVolunteerCreateOrConnectWithoutVolunteerInput[]
+    createMany?: SchoolEventVolunteerCreateManyVolunteerInputEnvelope
+    connect?: SchoolEventVolunteerWhereUniqueInput | SchoolEventVolunteerWhereUniqueInput[]
+  }
+
+  export type EnumSchoolVolunteerStatusFieldUpdateOperationsInput = {
+    set?: $Enums.SchoolVolunteerStatus
+  }
+
+  export type SchoolUpdateOneRequiredWithoutVolunteersNestedInput = {
+    create?: XOR<SchoolCreateWithoutVolunteersInput, SchoolUncheckedCreateWithoutVolunteersInput>
+    connectOrCreate?: SchoolCreateOrConnectWithoutVolunteersInput
+    upsert?: SchoolUpsertWithoutVolunteersInput
+    connect?: SchoolWhereUniqueInput
+    update?: XOR<XOR<SchoolUpdateToOneWithWhereWithoutVolunteersInput, SchoolUpdateWithoutVolunteersInput>, SchoolUncheckedUpdateWithoutVolunteersInput>
+  }
+
+  export type SchoolEventVolunteerUpdateManyWithoutVolunteerNestedInput = {
+    create?: XOR<SchoolEventVolunteerCreateWithoutVolunteerInput, SchoolEventVolunteerUncheckedCreateWithoutVolunteerInput> | SchoolEventVolunteerCreateWithoutVolunteerInput[] | SchoolEventVolunteerUncheckedCreateWithoutVolunteerInput[]
+    connectOrCreate?: SchoolEventVolunteerCreateOrConnectWithoutVolunteerInput | SchoolEventVolunteerCreateOrConnectWithoutVolunteerInput[]
+    upsert?: SchoolEventVolunteerUpsertWithWhereUniqueWithoutVolunteerInput | SchoolEventVolunteerUpsertWithWhereUniqueWithoutVolunteerInput[]
+    createMany?: SchoolEventVolunteerCreateManyVolunteerInputEnvelope
+    set?: SchoolEventVolunteerWhereUniqueInput | SchoolEventVolunteerWhereUniqueInput[]
+    disconnect?: SchoolEventVolunteerWhereUniqueInput | SchoolEventVolunteerWhereUniqueInput[]
+    delete?: SchoolEventVolunteerWhereUniqueInput | SchoolEventVolunteerWhereUniqueInput[]
+    connect?: SchoolEventVolunteerWhereUniqueInput | SchoolEventVolunteerWhereUniqueInput[]
+    update?: SchoolEventVolunteerUpdateWithWhereUniqueWithoutVolunteerInput | SchoolEventVolunteerUpdateWithWhereUniqueWithoutVolunteerInput[]
+    updateMany?: SchoolEventVolunteerUpdateManyWithWhereWithoutVolunteerInput | SchoolEventVolunteerUpdateManyWithWhereWithoutVolunteerInput[]
+    deleteMany?: SchoolEventVolunteerScalarWhereInput | SchoolEventVolunteerScalarWhereInput[]
+  }
+
+  export type SchoolEventVolunteerUncheckedUpdateManyWithoutVolunteerNestedInput = {
+    create?: XOR<SchoolEventVolunteerCreateWithoutVolunteerInput, SchoolEventVolunteerUncheckedCreateWithoutVolunteerInput> | SchoolEventVolunteerCreateWithoutVolunteerInput[] | SchoolEventVolunteerUncheckedCreateWithoutVolunteerInput[]
+    connectOrCreate?: SchoolEventVolunteerCreateOrConnectWithoutVolunteerInput | SchoolEventVolunteerCreateOrConnectWithoutVolunteerInput[]
+    upsert?: SchoolEventVolunteerUpsertWithWhereUniqueWithoutVolunteerInput | SchoolEventVolunteerUpsertWithWhereUniqueWithoutVolunteerInput[]
+    createMany?: SchoolEventVolunteerCreateManyVolunteerInputEnvelope
+    set?: SchoolEventVolunteerWhereUniqueInput | SchoolEventVolunteerWhereUniqueInput[]
+    disconnect?: SchoolEventVolunteerWhereUniqueInput | SchoolEventVolunteerWhereUniqueInput[]
+    delete?: SchoolEventVolunteerWhereUniqueInput | SchoolEventVolunteerWhereUniqueInput[]
+    connect?: SchoolEventVolunteerWhereUniqueInput | SchoolEventVolunteerWhereUniqueInput[]
+    update?: SchoolEventVolunteerUpdateWithWhereUniqueWithoutVolunteerInput | SchoolEventVolunteerUpdateWithWhereUniqueWithoutVolunteerInput[]
+    updateMany?: SchoolEventVolunteerUpdateManyWithWhereWithoutVolunteerInput | SchoolEventVolunteerUpdateManyWithWhereWithoutVolunteerInput[]
+    deleteMany?: SchoolEventVolunteerScalarWhereInput | SchoolEventVolunteerScalarWhereInput[]
+  }
+
+  export type SchoolCreateNestedOneWithoutEventsInput = {
+    create?: XOR<SchoolCreateWithoutEventsInput, SchoolUncheckedCreateWithoutEventsInput>
+    connectOrCreate?: SchoolCreateOrConnectWithoutEventsInput
+    connect?: SchoolWhereUniqueInput
+  }
+
+  export type SchoolEventVolunteerCreateNestedManyWithoutEventInput = {
+    create?: XOR<SchoolEventVolunteerCreateWithoutEventInput, SchoolEventVolunteerUncheckedCreateWithoutEventInput> | SchoolEventVolunteerCreateWithoutEventInput[] | SchoolEventVolunteerUncheckedCreateWithoutEventInput[]
+    connectOrCreate?: SchoolEventVolunteerCreateOrConnectWithoutEventInput | SchoolEventVolunteerCreateOrConnectWithoutEventInput[]
+    createMany?: SchoolEventVolunteerCreateManyEventInputEnvelope
+    connect?: SchoolEventVolunteerWhereUniqueInput | SchoolEventVolunteerWhereUniqueInput[]
+  }
+
+  export type SchoolEventVolunteerUncheckedCreateNestedManyWithoutEventInput = {
+    create?: XOR<SchoolEventVolunteerCreateWithoutEventInput, SchoolEventVolunteerUncheckedCreateWithoutEventInput> | SchoolEventVolunteerCreateWithoutEventInput[] | SchoolEventVolunteerUncheckedCreateWithoutEventInput[]
+    connectOrCreate?: SchoolEventVolunteerCreateOrConnectWithoutEventInput | SchoolEventVolunteerCreateOrConnectWithoutEventInput[]
+    createMany?: SchoolEventVolunteerCreateManyEventInputEnvelope
+    connect?: SchoolEventVolunteerWhereUniqueInput | SchoolEventVolunteerWhereUniqueInput[]
+  }
+
+  export type EnumSchoolEventStatusFieldUpdateOperationsInput = {
+    set?: $Enums.SchoolEventStatus
+  }
+
+  export type SchoolUpdateOneRequiredWithoutEventsNestedInput = {
+    create?: XOR<SchoolCreateWithoutEventsInput, SchoolUncheckedCreateWithoutEventsInput>
+    connectOrCreate?: SchoolCreateOrConnectWithoutEventsInput
+    upsert?: SchoolUpsertWithoutEventsInput
+    connect?: SchoolWhereUniqueInput
+    update?: XOR<XOR<SchoolUpdateToOneWithWhereWithoutEventsInput, SchoolUpdateWithoutEventsInput>, SchoolUncheckedUpdateWithoutEventsInput>
+  }
+
+  export type SchoolEventVolunteerUpdateManyWithoutEventNestedInput = {
+    create?: XOR<SchoolEventVolunteerCreateWithoutEventInput, SchoolEventVolunteerUncheckedCreateWithoutEventInput> | SchoolEventVolunteerCreateWithoutEventInput[] | SchoolEventVolunteerUncheckedCreateWithoutEventInput[]
+    connectOrCreate?: SchoolEventVolunteerCreateOrConnectWithoutEventInput | SchoolEventVolunteerCreateOrConnectWithoutEventInput[]
+    upsert?: SchoolEventVolunteerUpsertWithWhereUniqueWithoutEventInput | SchoolEventVolunteerUpsertWithWhereUniqueWithoutEventInput[]
+    createMany?: SchoolEventVolunteerCreateManyEventInputEnvelope
+    set?: SchoolEventVolunteerWhereUniqueInput | SchoolEventVolunteerWhereUniqueInput[]
+    disconnect?: SchoolEventVolunteerWhereUniqueInput | SchoolEventVolunteerWhereUniqueInput[]
+    delete?: SchoolEventVolunteerWhereUniqueInput | SchoolEventVolunteerWhereUniqueInput[]
+    connect?: SchoolEventVolunteerWhereUniqueInput | SchoolEventVolunteerWhereUniqueInput[]
+    update?: SchoolEventVolunteerUpdateWithWhereUniqueWithoutEventInput | SchoolEventVolunteerUpdateWithWhereUniqueWithoutEventInput[]
+    updateMany?: SchoolEventVolunteerUpdateManyWithWhereWithoutEventInput | SchoolEventVolunteerUpdateManyWithWhereWithoutEventInput[]
+    deleteMany?: SchoolEventVolunteerScalarWhereInput | SchoolEventVolunteerScalarWhereInput[]
+  }
+
+  export type SchoolEventVolunteerUncheckedUpdateManyWithoutEventNestedInput = {
+    create?: XOR<SchoolEventVolunteerCreateWithoutEventInput, SchoolEventVolunteerUncheckedCreateWithoutEventInput> | SchoolEventVolunteerCreateWithoutEventInput[] | SchoolEventVolunteerUncheckedCreateWithoutEventInput[]
+    connectOrCreate?: SchoolEventVolunteerCreateOrConnectWithoutEventInput | SchoolEventVolunteerCreateOrConnectWithoutEventInput[]
+    upsert?: SchoolEventVolunteerUpsertWithWhereUniqueWithoutEventInput | SchoolEventVolunteerUpsertWithWhereUniqueWithoutEventInput[]
+    createMany?: SchoolEventVolunteerCreateManyEventInputEnvelope
+    set?: SchoolEventVolunteerWhereUniqueInput | SchoolEventVolunteerWhereUniqueInput[]
+    disconnect?: SchoolEventVolunteerWhereUniqueInput | SchoolEventVolunteerWhereUniqueInput[]
+    delete?: SchoolEventVolunteerWhereUniqueInput | SchoolEventVolunteerWhereUniqueInput[]
+    connect?: SchoolEventVolunteerWhereUniqueInput | SchoolEventVolunteerWhereUniqueInput[]
+    update?: SchoolEventVolunteerUpdateWithWhereUniqueWithoutEventInput | SchoolEventVolunteerUpdateWithWhereUniqueWithoutEventInput[]
+    updateMany?: SchoolEventVolunteerUpdateManyWithWhereWithoutEventInput | SchoolEventVolunteerUpdateManyWithWhereWithoutEventInput[]
+    deleteMany?: SchoolEventVolunteerScalarWhereInput | SchoolEventVolunteerScalarWhereInput[]
+  }
+
+  export type SchoolEventCreateNestedOneWithoutAssignmentsInput = {
+    create?: XOR<SchoolEventCreateWithoutAssignmentsInput, SchoolEventUncheckedCreateWithoutAssignmentsInput>
+    connectOrCreate?: SchoolEventCreateOrConnectWithoutAssignmentsInput
+    connect?: SchoolEventWhereUniqueInput
+  }
+
+  export type SchoolVolunteerCreateNestedOneWithoutAssignmentsInput = {
+    create?: XOR<SchoolVolunteerCreateWithoutAssignmentsInput, SchoolVolunteerUncheckedCreateWithoutAssignmentsInput>
+    connectOrCreate?: SchoolVolunteerCreateOrConnectWithoutAssignmentsInput
+    connect?: SchoolVolunteerWhereUniqueInput
+  }
+
+  export type SchoolEventUpdateOneRequiredWithoutAssignmentsNestedInput = {
+    create?: XOR<SchoolEventCreateWithoutAssignmentsInput, SchoolEventUncheckedCreateWithoutAssignmentsInput>
+    connectOrCreate?: SchoolEventCreateOrConnectWithoutAssignmentsInput
+    upsert?: SchoolEventUpsertWithoutAssignmentsInput
+    connect?: SchoolEventWhereUniqueInput
+    update?: XOR<XOR<SchoolEventUpdateToOneWithWhereWithoutAssignmentsInput, SchoolEventUpdateWithoutAssignmentsInput>, SchoolEventUncheckedUpdateWithoutAssignmentsInput>
+  }
+
+  export type SchoolVolunteerUpdateOneRequiredWithoutAssignmentsNestedInput = {
+    create?: XOR<SchoolVolunteerCreateWithoutAssignmentsInput, SchoolVolunteerUncheckedCreateWithoutAssignmentsInput>
+    connectOrCreate?: SchoolVolunteerCreateOrConnectWithoutAssignmentsInput
+    upsert?: SchoolVolunteerUpsertWithoutAssignmentsInput
+    connect?: SchoolVolunteerWhereUniqueInput
+    update?: XOR<XOR<SchoolVolunteerUpdateToOneWithWhereWithoutAssignmentsInput, SchoolVolunteerUpdateWithoutAssignmentsInput>, SchoolVolunteerUncheckedUpdateWithoutAssignmentsInput>
+  }
+
+  export type SchoolCreateNestedOneWithoutAlumniInput = {
+    create?: XOR<SchoolCreateWithoutAlumniInput, SchoolUncheckedCreateWithoutAlumniInput>
+    connectOrCreate?: SchoolCreateOrConnectWithoutAlumniInput
+    connect?: SchoolWhereUniqueInput
+  }
+
+  export type EnumSchoolAlumniRoleFieldUpdateOperationsInput = {
+    set?: $Enums.SchoolAlumniRole
+  }
+
+  export type EnumSchoolAlumniStatusFieldUpdateOperationsInput = {
+    set?: $Enums.SchoolAlumniStatus
+  }
+
+  export type SchoolUpdateOneRequiredWithoutAlumniNestedInput = {
+    create?: XOR<SchoolCreateWithoutAlumniInput, SchoolUncheckedCreateWithoutAlumniInput>
+    connectOrCreate?: SchoolCreateOrConnectWithoutAlumniInput
+    upsert?: SchoolUpsertWithoutAlumniInput
+    connect?: SchoolWhereUniqueInput
+    update?: XOR<XOR<SchoolUpdateToOneWithWhereWithoutAlumniInput, SchoolUpdateWithoutAlumniInput>, SchoolUncheckedUpdateWithoutAlumniInput>
+  }
+
+  export type SchoolCreateNestedOneWithoutInnovationChallengesInput = {
+    create?: XOR<SchoolCreateWithoutInnovationChallengesInput, SchoolUncheckedCreateWithoutInnovationChallengesInput>
+    connectOrCreate?: SchoolCreateOrConnectWithoutInnovationChallengesInput
+    connect?: SchoolWhereUniqueInput
+  }
+
+  export type SchoolEnterpriseProjectCreateNestedManyWithoutChallengeInput = {
+    create?: XOR<SchoolEnterpriseProjectCreateWithoutChallengeInput, SchoolEnterpriseProjectUncheckedCreateWithoutChallengeInput> | SchoolEnterpriseProjectCreateWithoutChallengeInput[] | SchoolEnterpriseProjectUncheckedCreateWithoutChallengeInput[]
+    connectOrCreate?: SchoolEnterpriseProjectCreateOrConnectWithoutChallengeInput | SchoolEnterpriseProjectCreateOrConnectWithoutChallengeInput[]
+    createMany?: SchoolEnterpriseProjectCreateManyChallengeInputEnvelope
+    connect?: SchoolEnterpriseProjectWhereUniqueInput | SchoolEnterpriseProjectWhereUniqueInput[]
+  }
+
+  export type SchoolEnterpriseProjectUncheckedCreateNestedManyWithoutChallengeInput = {
+    create?: XOR<SchoolEnterpriseProjectCreateWithoutChallengeInput, SchoolEnterpriseProjectUncheckedCreateWithoutChallengeInput> | SchoolEnterpriseProjectCreateWithoutChallengeInput[] | SchoolEnterpriseProjectUncheckedCreateWithoutChallengeInput[]
+    connectOrCreate?: SchoolEnterpriseProjectCreateOrConnectWithoutChallengeInput | SchoolEnterpriseProjectCreateOrConnectWithoutChallengeInput[]
+    createMany?: SchoolEnterpriseProjectCreateManyChallengeInputEnvelope
+    connect?: SchoolEnterpriseProjectWhereUniqueInput | SchoolEnterpriseProjectWhereUniqueInput[]
+  }
+
+  export type EnumSchoolInnovationChallengeStatusFieldUpdateOperationsInput = {
+    set?: $Enums.SchoolInnovationChallengeStatus
+  }
+
+  export type SchoolUpdateOneRequiredWithoutInnovationChallengesNestedInput = {
+    create?: XOR<SchoolCreateWithoutInnovationChallengesInput, SchoolUncheckedCreateWithoutInnovationChallengesInput>
+    connectOrCreate?: SchoolCreateOrConnectWithoutInnovationChallengesInput
+    upsert?: SchoolUpsertWithoutInnovationChallengesInput
+    connect?: SchoolWhereUniqueInput
+    update?: XOR<XOR<SchoolUpdateToOneWithWhereWithoutInnovationChallengesInput, SchoolUpdateWithoutInnovationChallengesInput>, SchoolUncheckedUpdateWithoutInnovationChallengesInput>
+  }
+
+  export type SchoolEnterpriseProjectUpdateManyWithoutChallengeNestedInput = {
+    create?: XOR<SchoolEnterpriseProjectCreateWithoutChallengeInput, SchoolEnterpriseProjectUncheckedCreateWithoutChallengeInput> | SchoolEnterpriseProjectCreateWithoutChallengeInput[] | SchoolEnterpriseProjectUncheckedCreateWithoutChallengeInput[]
+    connectOrCreate?: SchoolEnterpriseProjectCreateOrConnectWithoutChallengeInput | SchoolEnterpriseProjectCreateOrConnectWithoutChallengeInput[]
+    upsert?: SchoolEnterpriseProjectUpsertWithWhereUniqueWithoutChallengeInput | SchoolEnterpriseProjectUpsertWithWhereUniqueWithoutChallengeInput[]
+    createMany?: SchoolEnterpriseProjectCreateManyChallengeInputEnvelope
+    set?: SchoolEnterpriseProjectWhereUniqueInput | SchoolEnterpriseProjectWhereUniqueInput[]
+    disconnect?: SchoolEnterpriseProjectWhereUniqueInput | SchoolEnterpriseProjectWhereUniqueInput[]
+    delete?: SchoolEnterpriseProjectWhereUniqueInput | SchoolEnterpriseProjectWhereUniqueInput[]
+    connect?: SchoolEnterpriseProjectWhereUniqueInput | SchoolEnterpriseProjectWhereUniqueInput[]
+    update?: SchoolEnterpriseProjectUpdateWithWhereUniqueWithoutChallengeInput | SchoolEnterpriseProjectUpdateWithWhereUniqueWithoutChallengeInput[]
+    updateMany?: SchoolEnterpriseProjectUpdateManyWithWhereWithoutChallengeInput | SchoolEnterpriseProjectUpdateManyWithWhereWithoutChallengeInput[]
+    deleteMany?: SchoolEnterpriseProjectScalarWhereInput | SchoolEnterpriseProjectScalarWhereInput[]
+  }
+
+  export type SchoolEnterpriseProjectUncheckedUpdateManyWithoutChallengeNestedInput = {
+    create?: XOR<SchoolEnterpriseProjectCreateWithoutChallengeInput, SchoolEnterpriseProjectUncheckedCreateWithoutChallengeInput> | SchoolEnterpriseProjectCreateWithoutChallengeInput[] | SchoolEnterpriseProjectUncheckedCreateWithoutChallengeInput[]
+    connectOrCreate?: SchoolEnterpriseProjectCreateOrConnectWithoutChallengeInput | SchoolEnterpriseProjectCreateOrConnectWithoutChallengeInput[]
+    upsert?: SchoolEnterpriseProjectUpsertWithWhereUniqueWithoutChallengeInput | SchoolEnterpriseProjectUpsertWithWhereUniqueWithoutChallengeInput[]
+    createMany?: SchoolEnterpriseProjectCreateManyChallengeInputEnvelope
+    set?: SchoolEnterpriseProjectWhereUniqueInput | SchoolEnterpriseProjectWhereUniqueInput[]
+    disconnect?: SchoolEnterpriseProjectWhereUniqueInput | SchoolEnterpriseProjectWhereUniqueInput[]
+    delete?: SchoolEnterpriseProjectWhereUniqueInput | SchoolEnterpriseProjectWhereUniqueInput[]
+    connect?: SchoolEnterpriseProjectWhereUniqueInput | SchoolEnterpriseProjectWhereUniqueInput[]
+    update?: SchoolEnterpriseProjectUpdateWithWhereUniqueWithoutChallengeInput | SchoolEnterpriseProjectUpdateWithWhereUniqueWithoutChallengeInput[]
+    updateMany?: SchoolEnterpriseProjectUpdateManyWithWhereWithoutChallengeInput | SchoolEnterpriseProjectUpdateManyWithWhereWithoutChallengeInput[]
+    deleteMany?: SchoolEnterpriseProjectScalarWhereInput | SchoolEnterpriseProjectScalarWhereInput[]
+  }
+
+  export type SchoolCreateNestedOneWithoutEnterpriseProjectsInput = {
+    create?: XOR<SchoolCreateWithoutEnterpriseProjectsInput, SchoolUncheckedCreateWithoutEnterpriseProjectsInput>
+    connectOrCreate?: SchoolCreateOrConnectWithoutEnterpriseProjectsInput
+    connect?: SchoolWhereUniqueInput
+  }
+
+  export type SchoolInnovationChallengeCreateNestedOneWithoutProjectsInput = {
+    create?: XOR<SchoolInnovationChallengeCreateWithoutProjectsInput, SchoolInnovationChallengeUncheckedCreateWithoutProjectsInput>
+    connectOrCreate?: SchoolInnovationChallengeCreateOrConnectWithoutProjectsInput
+    connect?: SchoolInnovationChallengeWhereUniqueInput
+  }
+
+  export type EnumSchoolEnterpriseProjectTypeFieldUpdateOperationsInput = {
+    set?: $Enums.SchoolEnterpriseProjectType
+  }
+
+  export type EnumSchoolEnterpriseProjectStatusFieldUpdateOperationsInput = {
+    set?: $Enums.SchoolEnterpriseProjectStatus
+  }
+
+  export type BoolFieldUpdateOperationsInput = {
+    set?: boolean
+  }
+
+  export type SchoolUpdateOneRequiredWithoutEnterpriseProjectsNestedInput = {
+    create?: XOR<SchoolCreateWithoutEnterpriseProjectsInput, SchoolUncheckedCreateWithoutEnterpriseProjectsInput>
+    connectOrCreate?: SchoolCreateOrConnectWithoutEnterpriseProjectsInput
+    upsert?: SchoolUpsertWithoutEnterpriseProjectsInput
+    connect?: SchoolWhereUniqueInput
+    update?: XOR<XOR<SchoolUpdateToOneWithWhereWithoutEnterpriseProjectsInput, SchoolUpdateWithoutEnterpriseProjectsInput>, SchoolUncheckedUpdateWithoutEnterpriseProjectsInput>
+  }
+
+  export type SchoolInnovationChallengeUpdateOneWithoutProjectsNestedInput = {
+    create?: XOR<SchoolInnovationChallengeCreateWithoutProjectsInput, SchoolInnovationChallengeUncheckedCreateWithoutProjectsInput>
+    connectOrCreate?: SchoolInnovationChallengeCreateOrConnectWithoutProjectsInput
+    upsert?: SchoolInnovationChallengeUpsertWithoutProjectsInput
+    disconnect?: SchoolInnovationChallengeWhereInput | boolean
+    delete?: SchoolInnovationChallengeWhereInput | boolean
+    connect?: SchoolInnovationChallengeWhereUniqueInput
+    update?: XOR<XOR<SchoolInnovationChallengeUpdateToOneWithWhereWithoutProjectsInput, SchoolInnovationChallengeUpdateWithoutProjectsInput>, SchoolInnovationChallengeUncheckedUpdateWithoutProjectsInput>
+  }
+
+  export type SchoolCreateNestedOneWithoutCrmContactsInput = {
+    create?: XOR<SchoolCreateWithoutCrmContactsInput, SchoolUncheckedCreateWithoutCrmContactsInput>
+    connectOrCreate?: SchoolCreateOrConnectWithoutCrmContactsInput
+    connect?: SchoolWhereUniqueInput
+  }
+
+  export type SchoolCrmActivityCreateNestedManyWithoutContactInput = {
+    create?: XOR<SchoolCrmActivityCreateWithoutContactInput, SchoolCrmActivityUncheckedCreateWithoutContactInput> | SchoolCrmActivityCreateWithoutContactInput[] | SchoolCrmActivityUncheckedCreateWithoutContactInput[]
+    connectOrCreate?: SchoolCrmActivityCreateOrConnectWithoutContactInput | SchoolCrmActivityCreateOrConnectWithoutContactInput[]
+    createMany?: SchoolCrmActivityCreateManyContactInputEnvelope
+    connect?: SchoolCrmActivityWhereUniqueInput | SchoolCrmActivityWhereUniqueInput[]
+  }
+
+  export type SchoolCrmTaskCreateNestedManyWithoutContactInput = {
+    create?: XOR<SchoolCrmTaskCreateWithoutContactInput, SchoolCrmTaskUncheckedCreateWithoutContactInput> | SchoolCrmTaskCreateWithoutContactInput[] | SchoolCrmTaskUncheckedCreateWithoutContactInput[]
+    connectOrCreate?: SchoolCrmTaskCreateOrConnectWithoutContactInput | SchoolCrmTaskCreateOrConnectWithoutContactInput[]
+    createMany?: SchoolCrmTaskCreateManyContactInputEnvelope
+    connect?: SchoolCrmTaskWhereUniqueInput | SchoolCrmTaskWhereUniqueInput[]
+  }
+
+  export type SchoolCrmActivityUncheckedCreateNestedManyWithoutContactInput = {
+    create?: XOR<SchoolCrmActivityCreateWithoutContactInput, SchoolCrmActivityUncheckedCreateWithoutContactInput> | SchoolCrmActivityCreateWithoutContactInput[] | SchoolCrmActivityUncheckedCreateWithoutContactInput[]
+    connectOrCreate?: SchoolCrmActivityCreateOrConnectWithoutContactInput | SchoolCrmActivityCreateOrConnectWithoutContactInput[]
+    createMany?: SchoolCrmActivityCreateManyContactInputEnvelope
+    connect?: SchoolCrmActivityWhereUniqueInput | SchoolCrmActivityWhereUniqueInput[]
+  }
+
+  export type SchoolCrmTaskUncheckedCreateNestedManyWithoutContactInput = {
+    create?: XOR<SchoolCrmTaskCreateWithoutContactInput, SchoolCrmTaskUncheckedCreateWithoutContactInput> | SchoolCrmTaskCreateWithoutContactInput[] | SchoolCrmTaskUncheckedCreateWithoutContactInput[]
+    connectOrCreate?: SchoolCrmTaskCreateOrConnectWithoutContactInput | SchoolCrmTaskCreateOrConnectWithoutContactInput[]
+    createMany?: SchoolCrmTaskCreateManyContactInputEnvelope
+    connect?: SchoolCrmTaskWhereUniqueInput | SchoolCrmTaskWhereUniqueInput[]
+  }
+
+  export type EnumSchoolCrmContactTypeFieldUpdateOperationsInput = {
+    set?: $Enums.SchoolCrmContactType
+  }
+
+  export type SchoolUpdateOneRequiredWithoutCrmContactsNestedInput = {
+    create?: XOR<SchoolCreateWithoutCrmContactsInput, SchoolUncheckedCreateWithoutCrmContactsInput>
+    connectOrCreate?: SchoolCreateOrConnectWithoutCrmContactsInput
+    upsert?: SchoolUpsertWithoutCrmContactsInput
+    connect?: SchoolWhereUniqueInput
+    update?: XOR<XOR<SchoolUpdateToOneWithWhereWithoutCrmContactsInput, SchoolUpdateWithoutCrmContactsInput>, SchoolUncheckedUpdateWithoutCrmContactsInput>
+  }
+
+  export type SchoolCrmActivityUpdateManyWithoutContactNestedInput = {
+    create?: XOR<SchoolCrmActivityCreateWithoutContactInput, SchoolCrmActivityUncheckedCreateWithoutContactInput> | SchoolCrmActivityCreateWithoutContactInput[] | SchoolCrmActivityUncheckedCreateWithoutContactInput[]
+    connectOrCreate?: SchoolCrmActivityCreateOrConnectWithoutContactInput | SchoolCrmActivityCreateOrConnectWithoutContactInput[]
+    upsert?: SchoolCrmActivityUpsertWithWhereUniqueWithoutContactInput | SchoolCrmActivityUpsertWithWhereUniqueWithoutContactInput[]
+    createMany?: SchoolCrmActivityCreateManyContactInputEnvelope
+    set?: SchoolCrmActivityWhereUniqueInput | SchoolCrmActivityWhereUniqueInput[]
+    disconnect?: SchoolCrmActivityWhereUniqueInput | SchoolCrmActivityWhereUniqueInput[]
+    delete?: SchoolCrmActivityWhereUniqueInput | SchoolCrmActivityWhereUniqueInput[]
+    connect?: SchoolCrmActivityWhereUniqueInput | SchoolCrmActivityWhereUniqueInput[]
+    update?: SchoolCrmActivityUpdateWithWhereUniqueWithoutContactInput | SchoolCrmActivityUpdateWithWhereUniqueWithoutContactInput[]
+    updateMany?: SchoolCrmActivityUpdateManyWithWhereWithoutContactInput | SchoolCrmActivityUpdateManyWithWhereWithoutContactInput[]
+    deleteMany?: SchoolCrmActivityScalarWhereInput | SchoolCrmActivityScalarWhereInput[]
+  }
+
+  export type SchoolCrmTaskUpdateManyWithoutContactNestedInput = {
+    create?: XOR<SchoolCrmTaskCreateWithoutContactInput, SchoolCrmTaskUncheckedCreateWithoutContactInput> | SchoolCrmTaskCreateWithoutContactInput[] | SchoolCrmTaskUncheckedCreateWithoutContactInput[]
+    connectOrCreate?: SchoolCrmTaskCreateOrConnectWithoutContactInput | SchoolCrmTaskCreateOrConnectWithoutContactInput[]
+    upsert?: SchoolCrmTaskUpsertWithWhereUniqueWithoutContactInput | SchoolCrmTaskUpsertWithWhereUniqueWithoutContactInput[]
+    createMany?: SchoolCrmTaskCreateManyContactInputEnvelope
+    set?: SchoolCrmTaskWhereUniqueInput | SchoolCrmTaskWhereUniqueInput[]
+    disconnect?: SchoolCrmTaskWhereUniqueInput | SchoolCrmTaskWhereUniqueInput[]
+    delete?: SchoolCrmTaskWhereUniqueInput | SchoolCrmTaskWhereUniqueInput[]
+    connect?: SchoolCrmTaskWhereUniqueInput | SchoolCrmTaskWhereUniqueInput[]
+    update?: SchoolCrmTaskUpdateWithWhereUniqueWithoutContactInput | SchoolCrmTaskUpdateWithWhereUniqueWithoutContactInput[]
+    updateMany?: SchoolCrmTaskUpdateManyWithWhereWithoutContactInput | SchoolCrmTaskUpdateManyWithWhereWithoutContactInput[]
+    deleteMany?: SchoolCrmTaskScalarWhereInput | SchoolCrmTaskScalarWhereInput[]
+  }
+
+  export type SchoolCrmActivityUncheckedUpdateManyWithoutContactNestedInput = {
+    create?: XOR<SchoolCrmActivityCreateWithoutContactInput, SchoolCrmActivityUncheckedCreateWithoutContactInput> | SchoolCrmActivityCreateWithoutContactInput[] | SchoolCrmActivityUncheckedCreateWithoutContactInput[]
+    connectOrCreate?: SchoolCrmActivityCreateOrConnectWithoutContactInput | SchoolCrmActivityCreateOrConnectWithoutContactInput[]
+    upsert?: SchoolCrmActivityUpsertWithWhereUniqueWithoutContactInput | SchoolCrmActivityUpsertWithWhereUniqueWithoutContactInput[]
+    createMany?: SchoolCrmActivityCreateManyContactInputEnvelope
+    set?: SchoolCrmActivityWhereUniqueInput | SchoolCrmActivityWhereUniqueInput[]
+    disconnect?: SchoolCrmActivityWhereUniqueInput | SchoolCrmActivityWhereUniqueInput[]
+    delete?: SchoolCrmActivityWhereUniqueInput | SchoolCrmActivityWhereUniqueInput[]
+    connect?: SchoolCrmActivityWhereUniqueInput | SchoolCrmActivityWhereUniqueInput[]
+    update?: SchoolCrmActivityUpdateWithWhereUniqueWithoutContactInput | SchoolCrmActivityUpdateWithWhereUniqueWithoutContactInput[]
+    updateMany?: SchoolCrmActivityUpdateManyWithWhereWithoutContactInput | SchoolCrmActivityUpdateManyWithWhereWithoutContactInput[]
+    deleteMany?: SchoolCrmActivityScalarWhereInput | SchoolCrmActivityScalarWhereInput[]
+  }
+
+  export type SchoolCrmTaskUncheckedUpdateManyWithoutContactNestedInput = {
+    create?: XOR<SchoolCrmTaskCreateWithoutContactInput, SchoolCrmTaskUncheckedCreateWithoutContactInput> | SchoolCrmTaskCreateWithoutContactInput[] | SchoolCrmTaskUncheckedCreateWithoutContactInput[]
+    connectOrCreate?: SchoolCrmTaskCreateOrConnectWithoutContactInput | SchoolCrmTaskCreateOrConnectWithoutContactInput[]
+    upsert?: SchoolCrmTaskUpsertWithWhereUniqueWithoutContactInput | SchoolCrmTaskUpsertWithWhereUniqueWithoutContactInput[]
+    createMany?: SchoolCrmTaskCreateManyContactInputEnvelope
+    set?: SchoolCrmTaskWhereUniqueInput | SchoolCrmTaskWhereUniqueInput[]
+    disconnect?: SchoolCrmTaskWhereUniqueInput | SchoolCrmTaskWhereUniqueInput[]
+    delete?: SchoolCrmTaskWhereUniqueInput | SchoolCrmTaskWhereUniqueInput[]
+    connect?: SchoolCrmTaskWhereUniqueInput | SchoolCrmTaskWhereUniqueInput[]
+    update?: SchoolCrmTaskUpdateWithWhereUniqueWithoutContactInput | SchoolCrmTaskUpdateWithWhereUniqueWithoutContactInput[]
+    updateMany?: SchoolCrmTaskUpdateManyWithWhereWithoutContactInput | SchoolCrmTaskUpdateManyWithWhereWithoutContactInput[]
+    deleteMany?: SchoolCrmTaskScalarWhereInput | SchoolCrmTaskScalarWhereInput[]
+  }
+
+  export type SchoolCreateNestedOneWithoutCrmActivitiesInput = {
+    create?: XOR<SchoolCreateWithoutCrmActivitiesInput, SchoolUncheckedCreateWithoutCrmActivitiesInput>
+    connectOrCreate?: SchoolCreateOrConnectWithoutCrmActivitiesInput
+    connect?: SchoolWhereUniqueInput
+  }
+
+  export type SchoolCrmContactCreateNestedOneWithoutActivitiesInput = {
+    create?: XOR<SchoolCrmContactCreateWithoutActivitiesInput, SchoolCrmContactUncheckedCreateWithoutActivitiesInput>
+    connectOrCreate?: SchoolCrmContactCreateOrConnectWithoutActivitiesInput
+    connect?: SchoolCrmContactWhereUniqueInput
+  }
+
+  export type EnumSchoolCrmActivityTypeFieldUpdateOperationsInput = {
+    set?: $Enums.SchoolCrmActivityType
+  }
+
+  export type SchoolUpdateOneRequiredWithoutCrmActivitiesNestedInput = {
+    create?: XOR<SchoolCreateWithoutCrmActivitiesInput, SchoolUncheckedCreateWithoutCrmActivitiesInput>
+    connectOrCreate?: SchoolCreateOrConnectWithoutCrmActivitiesInput
+    upsert?: SchoolUpsertWithoutCrmActivitiesInput
+    connect?: SchoolWhereUniqueInput
+    update?: XOR<XOR<SchoolUpdateToOneWithWhereWithoutCrmActivitiesInput, SchoolUpdateWithoutCrmActivitiesInput>, SchoolUncheckedUpdateWithoutCrmActivitiesInput>
+  }
+
+  export type SchoolCrmContactUpdateOneWithoutActivitiesNestedInput = {
+    create?: XOR<SchoolCrmContactCreateWithoutActivitiesInput, SchoolCrmContactUncheckedCreateWithoutActivitiesInput>
+    connectOrCreate?: SchoolCrmContactCreateOrConnectWithoutActivitiesInput
+    upsert?: SchoolCrmContactUpsertWithoutActivitiesInput
+    disconnect?: SchoolCrmContactWhereInput | boolean
+    delete?: SchoolCrmContactWhereInput | boolean
+    connect?: SchoolCrmContactWhereUniqueInput
+    update?: XOR<XOR<SchoolCrmContactUpdateToOneWithWhereWithoutActivitiesInput, SchoolCrmContactUpdateWithoutActivitiesInput>, SchoolCrmContactUncheckedUpdateWithoutActivitiesInput>
+  }
+
+  export type SchoolCreateNestedOneWithoutCrmTasksInput = {
+    create?: XOR<SchoolCreateWithoutCrmTasksInput, SchoolUncheckedCreateWithoutCrmTasksInput>
+    connectOrCreate?: SchoolCreateOrConnectWithoutCrmTasksInput
+    connect?: SchoolWhereUniqueInput
+  }
+
+  export type SchoolCrmContactCreateNestedOneWithoutTasksInput = {
+    create?: XOR<SchoolCrmContactCreateWithoutTasksInput, SchoolCrmContactUncheckedCreateWithoutTasksInput>
+    connectOrCreate?: SchoolCrmContactCreateOrConnectWithoutTasksInput
+    connect?: SchoolCrmContactWhereUniqueInput
+  }
+
+  export type EnumSchoolCrmTaskStatusFieldUpdateOperationsInput = {
+    set?: $Enums.SchoolCrmTaskStatus
+  }
+
+  export type EnumSchoolCrmTaskPriorityFieldUpdateOperationsInput = {
+    set?: $Enums.SchoolCrmTaskPriority
+  }
+
+  export type SchoolUpdateOneRequiredWithoutCrmTasksNestedInput = {
+    create?: XOR<SchoolCreateWithoutCrmTasksInput, SchoolUncheckedCreateWithoutCrmTasksInput>
+    connectOrCreate?: SchoolCreateOrConnectWithoutCrmTasksInput
+    upsert?: SchoolUpsertWithoutCrmTasksInput
+    connect?: SchoolWhereUniqueInput
+    update?: XOR<XOR<SchoolUpdateToOneWithWhereWithoutCrmTasksInput, SchoolUpdateWithoutCrmTasksInput>, SchoolUncheckedUpdateWithoutCrmTasksInput>
+  }
+
+  export type SchoolCrmContactUpdateOneWithoutTasksNestedInput = {
+    create?: XOR<SchoolCrmContactCreateWithoutTasksInput, SchoolCrmContactUncheckedCreateWithoutTasksInput>
+    connectOrCreate?: SchoolCrmContactCreateOrConnectWithoutTasksInput
+    upsert?: SchoolCrmContactUpsertWithoutTasksInput
+    disconnect?: SchoolCrmContactWhereInput | boolean
+    delete?: SchoolCrmContactWhereInput | boolean
+    connect?: SchoolCrmContactWhereUniqueInput
+    update?: XOR<XOR<SchoolCrmContactUpdateToOneWithWhereWithoutTasksInput, SchoolCrmContactUpdateWithoutTasksInput>, SchoolCrmContactUncheckedUpdateWithoutTasksInput>
   }
 
   export type SchoolCreateNestedOneWithoutVerificationInput = {
@@ -43986,14 +60264,6 @@ export namespace Prisma {
   export type BrandUpdateintendedProvincesInput = {
     set?: string[]
     push?: string | string[]
-  }
-
-  export type NullableBytesFieldUpdateOperationsInput = {
-    set?: Buffer | null
-  }
-
-  export type BoolFieldUpdateOperationsInput = {
-    set?: boolean
   }
 
   export type NullableEnumBrandSubscriptionStatusFieldUpdateOperationsInput = {
@@ -45345,6 +61615,24 @@ export namespace Prisma {
     not?: NestedDecimalFilter<$PrismaModel> | Decimal | DecimalJsLike | number | string
   }
 
+  export type NestedBytesNullableFilter<$PrismaModel = never> = {
+    equals?: Buffer | BytesFieldRefInput<$PrismaModel> | null
+    in?: Buffer[] | ListBytesFieldRefInput<$PrismaModel> | null
+    notIn?: Buffer[] | ListBytesFieldRefInput<$PrismaModel> | null
+    not?: NestedBytesNullableFilter<$PrismaModel> | Buffer | null
+  }
+
+  export type NestedFloatNullableFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatNullableFilter<$PrismaModel> | number | null
+  }
+
   export type NestedEnumOrganizationCategoryWithAggregatesFilter<$PrismaModel = never> = {
     equals?: $Enums.OrganizationCategory | EnumOrganizationCategoryFieldRefInput<$PrismaModel>
     in?: $Enums.OrganizationCategory[] | ListEnumOrganizationCategoryFieldRefInput<$PrismaModel>
@@ -45436,7 +61724,17 @@ export namespace Prisma {
     _max?: NestedIntNullableFilter<$PrismaModel>
   }
 
-  export type NestedFloatNullableFilter<$PrismaModel = never> = {
+  export type NestedBytesNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Buffer | BytesFieldRefInput<$PrismaModel> | null
+    in?: Buffer[] | ListBytesFieldRefInput<$PrismaModel> | null
+    notIn?: Buffer[] | ListBytesFieldRefInput<$PrismaModel> | null
+    not?: NestedBytesNullableWithAggregatesFilter<$PrismaModel> | Buffer | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedBytesNullableFilter<$PrismaModel>
+    _max?: NestedBytesNullableFilter<$PrismaModel>
+  }
+
+  export type NestedFloatNullableWithAggregatesFilter<$PrismaModel = never> = {
     equals?: number | FloatFieldRefInput<$PrismaModel> | null
     in?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
     notIn?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
@@ -45444,7 +61742,229 @@ export namespace Prisma {
     lte?: number | FloatFieldRefInput<$PrismaModel>
     gt?: number | FloatFieldRefInput<$PrismaModel>
     gte?: number | FloatFieldRefInput<$PrismaModel>
-    not?: NestedFloatNullableFilter<$PrismaModel> | number | null
+    not?: NestedFloatNullableWithAggregatesFilter<$PrismaModel> | number | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _avg?: NestedFloatNullableFilter<$PrismaModel>
+    _sum?: NestedFloatNullableFilter<$PrismaModel>
+    _min?: NestedFloatNullableFilter<$PrismaModel>
+    _max?: NestedFloatNullableFilter<$PrismaModel>
+  }
+
+  export type NestedEnumSchoolNeedStatusFilter<$PrismaModel = never> = {
+    equals?: $Enums.SchoolNeedStatus | EnumSchoolNeedStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.SchoolNeedStatus[] | ListEnumSchoolNeedStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.SchoolNeedStatus[] | ListEnumSchoolNeedStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumSchoolNeedStatusFilter<$PrismaModel> | $Enums.SchoolNeedStatus
+  }
+
+  export type NestedEnumSchoolNeedStatusWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.SchoolNeedStatus | EnumSchoolNeedStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.SchoolNeedStatus[] | ListEnumSchoolNeedStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.SchoolNeedStatus[] | ListEnumSchoolNeedStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumSchoolNeedStatusWithAggregatesFilter<$PrismaModel> | $Enums.SchoolNeedStatus
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumSchoolNeedStatusFilter<$PrismaModel>
+    _max?: NestedEnumSchoolNeedStatusFilter<$PrismaModel>
+  }
+
+  export type NestedEnumSchoolVolunteerStatusFilter<$PrismaModel = never> = {
+    equals?: $Enums.SchoolVolunteerStatus | EnumSchoolVolunteerStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.SchoolVolunteerStatus[] | ListEnumSchoolVolunteerStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.SchoolVolunteerStatus[] | ListEnumSchoolVolunteerStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumSchoolVolunteerStatusFilter<$PrismaModel> | $Enums.SchoolVolunteerStatus
+  }
+
+  export type NestedEnumSchoolVolunteerStatusWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.SchoolVolunteerStatus | EnumSchoolVolunteerStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.SchoolVolunteerStatus[] | ListEnumSchoolVolunteerStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.SchoolVolunteerStatus[] | ListEnumSchoolVolunteerStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumSchoolVolunteerStatusWithAggregatesFilter<$PrismaModel> | $Enums.SchoolVolunteerStatus
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumSchoolVolunteerStatusFilter<$PrismaModel>
+    _max?: NestedEnumSchoolVolunteerStatusFilter<$PrismaModel>
+  }
+
+  export type NestedEnumSchoolEventStatusFilter<$PrismaModel = never> = {
+    equals?: $Enums.SchoolEventStatus | EnumSchoolEventStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.SchoolEventStatus[] | ListEnumSchoolEventStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.SchoolEventStatus[] | ListEnumSchoolEventStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumSchoolEventStatusFilter<$PrismaModel> | $Enums.SchoolEventStatus
+  }
+
+  export type NestedEnumSchoolEventStatusWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.SchoolEventStatus | EnumSchoolEventStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.SchoolEventStatus[] | ListEnumSchoolEventStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.SchoolEventStatus[] | ListEnumSchoolEventStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumSchoolEventStatusWithAggregatesFilter<$PrismaModel> | $Enums.SchoolEventStatus
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumSchoolEventStatusFilter<$PrismaModel>
+    _max?: NestedEnumSchoolEventStatusFilter<$PrismaModel>
+  }
+
+  export type NestedEnumSchoolAlumniRoleFilter<$PrismaModel = never> = {
+    equals?: $Enums.SchoolAlumniRole | EnumSchoolAlumniRoleFieldRefInput<$PrismaModel>
+    in?: $Enums.SchoolAlumniRole[] | ListEnumSchoolAlumniRoleFieldRefInput<$PrismaModel>
+    notIn?: $Enums.SchoolAlumniRole[] | ListEnumSchoolAlumniRoleFieldRefInput<$PrismaModel>
+    not?: NestedEnumSchoolAlumniRoleFilter<$PrismaModel> | $Enums.SchoolAlumniRole
+  }
+
+  export type NestedEnumSchoolAlumniStatusFilter<$PrismaModel = never> = {
+    equals?: $Enums.SchoolAlumniStatus | EnumSchoolAlumniStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.SchoolAlumniStatus[] | ListEnumSchoolAlumniStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.SchoolAlumniStatus[] | ListEnumSchoolAlumniStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumSchoolAlumniStatusFilter<$PrismaModel> | $Enums.SchoolAlumniStatus
+  }
+
+  export type NestedEnumSchoolAlumniRoleWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.SchoolAlumniRole | EnumSchoolAlumniRoleFieldRefInput<$PrismaModel>
+    in?: $Enums.SchoolAlumniRole[] | ListEnumSchoolAlumniRoleFieldRefInput<$PrismaModel>
+    notIn?: $Enums.SchoolAlumniRole[] | ListEnumSchoolAlumniRoleFieldRefInput<$PrismaModel>
+    not?: NestedEnumSchoolAlumniRoleWithAggregatesFilter<$PrismaModel> | $Enums.SchoolAlumniRole
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumSchoolAlumniRoleFilter<$PrismaModel>
+    _max?: NestedEnumSchoolAlumniRoleFilter<$PrismaModel>
+  }
+
+  export type NestedEnumSchoolAlumniStatusWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.SchoolAlumniStatus | EnumSchoolAlumniStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.SchoolAlumniStatus[] | ListEnumSchoolAlumniStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.SchoolAlumniStatus[] | ListEnumSchoolAlumniStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumSchoolAlumniStatusWithAggregatesFilter<$PrismaModel> | $Enums.SchoolAlumniStatus
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumSchoolAlumniStatusFilter<$PrismaModel>
+    _max?: NestedEnumSchoolAlumniStatusFilter<$PrismaModel>
+  }
+
+  export type NestedEnumSchoolInnovationChallengeStatusFilter<$PrismaModel = never> = {
+    equals?: $Enums.SchoolInnovationChallengeStatus | EnumSchoolInnovationChallengeStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.SchoolInnovationChallengeStatus[] | ListEnumSchoolInnovationChallengeStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.SchoolInnovationChallengeStatus[] | ListEnumSchoolInnovationChallengeStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumSchoolInnovationChallengeStatusFilter<$PrismaModel> | $Enums.SchoolInnovationChallengeStatus
+  }
+
+  export type NestedEnumSchoolInnovationChallengeStatusWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.SchoolInnovationChallengeStatus | EnumSchoolInnovationChallengeStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.SchoolInnovationChallengeStatus[] | ListEnumSchoolInnovationChallengeStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.SchoolInnovationChallengeStatus[] | ListEnumSchoolInnovationChallengeStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumSchoolInnovationChallengeStatusWithAggregatesFilter<$PrismaModel> | $Enums.SchoolInnovationChallengeStatus
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumSchoolInnovationChallengeStatusFilter<$PrismaModel>
+    _max?: NestedEnumSchoolInnovationChallengeStatusFilter<$PrismaModel>
+  }
+
+  export type NestedEnumSchoolEnterpriseProjectTypeFilter<$PrismaModel = never> = {
+    equals?: $Enums.SchoolEnterpriseProjectType | EnumSchoolEnterpriseProjectTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.SchoolEnterpriseProjectType[] | ListEnumSchoolEnterpriseProjectTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.SchoolEnterpriseProjectType[] | ListEnumSchoolEnterpriseProjectTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumSchoolEnterpriseProjectTypeFilter<$PrismaModel> | $Enums.SchoolEnterpriseProjectType
+  }
+
+  export type NestedEnumSchoolEnterpriseProjectStatusFilter<$PrismaModel = never> = {
+    equals?: $Enums.SchoolEnterpriseProjectStatus | EnumSchoolEnterpriseProjectStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.SchoolEnterpriseProjectStatus[] | ListEnumSchoolEnterpriseProjectStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.SchoolEnterpriseProjectStatus[] | ListEnumSchoolEnterpriseProjectStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumSchoolEnterpriseProjectStatusFilter<$PrismaModel> | $Enums.SchoolEnterpriseProjectStatus
+  }
+
+  export type NestedBoolFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolFilter<$PrismaModel> | boolean
+  }
+
+  export type NestedEnumSchoolEnterpriseProjectTypeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.SchoolEnterpriseProjectType | EnumSchoolEnterpriseProjectTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.SchoolEnterpriseProjectType[] | ListEnumSchoolEnterpriseProjectTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.SchoolEnterpriseProjectType[] | ListEnumSchoolEnterpriseProjectTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumSchoolEnterpriseProjectTypeWithAggregatesFilter<$PrismaModel> | $Enums.SchoolEnterpriseProjectType
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumSchoolEnterpriseProjectTypeFilter<$PrismaModel>
+    _max?: NestedEnumSchoolEnterpriseProjectTypeFilter<$PrismaModel>
+  }
+
+  export type NestedEnumSchoolEnterpriseProjectStatusWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.SchoolEnterpriseProjectStatus | EnumSchoolEnterpriseProjectStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.SchoolEnterpriseProjectStatus[] | ListEnumSchoolEnterpriseProjectStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.SchoolEnterpriseProjectStatus[] | ListEnumSchoolEnterpriseProjectStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumSchoolEnterpriseProjectStatusWithAggregatesFilter<$PrismaModel> | $Enums.SchoolEnterpriseProjectStatus
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumSchoolEnterpriseProjectStatusFilter<$PrismaModel>
+    _max?: NestedEnumSchoolEnterpriseProjectStatusFilter<$PrismaModel>
+  }
+
+  export type NestedBoolWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedBoolFilter<$PrismaModel>
+    _max?: NestedBoolFilter<$PrismaModel>
+  }
+
+  export type NestedEnumSchoolCrmContactTypeFilter<$PrismaModel = never> = {
+    equals?: $Enums.SchoolCrmContactType | EnumSchoolCrmContactTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.SchoolCrmContactType[] | ListEnumSchoolCrmContactTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.SchoolCrmContactType[] | ListEnumSchoolCrmContactTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumSchoolCrmContactTypeFilter<$PrismaModel> | $Enums.SchoolCrmContactType
+  }
+
+  export type NestedEnumSchoolCrmContactTypeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.SchoolCrmContactType | EnumSchoolCrmContactTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.SchoolCrmContactType[] | ListEnumSchoolCrmContactTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.SchoolCrmContactType[] | ListEnumSchoolCrmContactTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumSchoolCrmContactTypeWithAggregatesFilter<$PrismaModel> | $Enums.SchoolCrmContactType
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumSchoolCrmContactTypeFilter<$PrismaModel>
+    _max?: NestedEnumSchoolCrmContactTypeFilter<$PrismaModel>
+  }
+
+  export type NestedEnumSchoolCrmActivityTypeFilter<$PrismaModel = never> = {
+    equals?: $Enums.SchoolCrmActivityType | EnumSchoolCrmActivityTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.SchoolCrmActivityType[] | ListEnumSchoolCrmActivityTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.SchoolCrmActivityType[] | ListEnumSchoolCrmActivityTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumSchoolCrmActivityTypeFilter<$PrismaModel> | $Enums.SchoolCrmActivityType
+  }
+
+  export type NestedEnumSchoolCrmActivityTypeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.SchoolCrmActivityType | EnumSchoolCrmActivityTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.SchoolCrmActivityType[] | ListEnumSchoolCrmActivityTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.SchoolCrmActivityType[] | ListEnumSchoolCrmActivityTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumSchoolCrmActivityTypeWithAggregatesFilter<$PrismaModel> | $Enums.SchoolCrmActivityType
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumSchoolCrmActivityTypeFilter<$PrismaModel>
+    _max?: NestedEnumSchoolCrmActivityTypeFilter<$PrismaModel>
+  }
+
+  export type NestedEnumSchoolCrmTaskStatusFilter<$PrismaModel = never> = {
+    equals?: $Enums.SchoolCrmTaskStatus | EnumSchoolCrmTaskStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.SchoolCrmTaskStatus[] | ListEnumSchoolCrmTaskStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.SchoolCrmTaskStatus[] | ListEnumSchoolCrmTaskStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumSchoolCrmTaskStatusFilter<$PrismaModel> | $Enums.SchoolCrmTaskStatus
+  }
+
+  export type NestedEnumSchoolCrmTaskPriorityFilter<$PrismaModel = never> = {
+    equals?: $Enums.SchoolCrmTaskPriority | EnumSchoolCrmTaskPriorityFieldRefInput<$PrismaModel>
+    in?: $Enums.SchoolCrmTaskPriority[] | ListEnumSchoolCrmTaskPriorityFieldRefInput<$PrismaModel>
+    notIn?: $Enums.SchoolCrmTaskPriority[] | ListEnumSchoolCrmTaskPriorityFieldRefInput<$PrismaModel>
+    not?: NestedEnumSchoolCrmTaskPriorityFilter<$PrismaModel> | $Enums.SchoolCrmTaskPriority
+  }
+
+  export type NestedEnumSchoolCrmTaskStatusWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.SchoolCrmTaskStatus | EnumSchoolCrmTaskStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.SchoolCrmTaskStatus[] | ListEnumSchoolCrmTaskStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.SchoolCrmTaskStatus[] | ListEnumSchoolCrmTaskStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumSchoolCrmTaskStatusWithAggregatesFilter<$PrismaModel> | $Enums.SchoolCrmTaskStatus
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumSchoolCrmTaskStatusFilter<$PrismaModel>
+    _max?: NestedEnumSchoolCrmTaskStatusFilter<$PrismaModel>
+  }
+
+  export type NestedEnumSchoolCrmTaskPriorityWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.SchoolCrmTaskPriority | EnumSchoolCrmTaskPriorityFieldRefInput<$PrismaModel>
+    in?: $Enums.SchoolCrmTaskPriority[] | ListEnumSchoolCrmTaskPriorityFieldRefInput<$PrismaModel>
+    notIn?: $Enums.SchoolCrmTaskPriority[] | ListEnumSchoolCrmTaskPriorityFieldRefInput<$PrismaModel>
+    not?: NestedEnumSchoolCrmTaskPriorityWithAggregatesFilter<$PrismaModel> | $Enums.SchoolCrmTaskPriority
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumSchoolCrmTaskPriorityFilter<$PrismaModel>
+    _max?: NestedEnumSchoolCrmTaskPriorityFilter<$PrismaModel>
   }
 
   export type NestedEnumSchoolVerificationStatusFilter<$PrismaModel = never> = {
@@ -45476,18 +61996,6 @@ export namespace Prisma {
     in?: $Enums.BrandOnboardingStatus[] | ListEnumBrandOnboardingStatusFieldRefInput<$PrismaModel>
     notIn?: $Enums.BrandOnboardingStatus[] | ListEnumBrandOnboardingStatusFieldRefInput<$PrismaModel>
     not?: NestedEnumBrandOnboardingStatusFilter<$PrismaModel> | $Enums.BrandOnboardingStatus
-  }
-
-  export type NestedBytesNullableFilter<$PrismaModel = never> = {
-    equals?: Buffer | BytesFieldRefInput<$PrismaModel> | null
-    in?: Buffer[] | ListBytesFieldRefInput<$PrismaModel> | null
-    notIn?: Buffer[] | ListBytesFieldRefInput<$PrismaModel> | null
-    not?: NestedBytesNullableFilter<$PrismaModel> | Buffer | null
-  }
-
-  export type NestedBoolFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
-    not?: NestedBoolFilter<$PrismaModel> | boolean
   }
 
   export type NestedEnumBrandSubscriptionStatusNullableFilter<$PrismaModel = never> = {
@@ -45540,24 +62048,6 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedEnumBrandOnboardingStatusFilter<$PrismaModel>
     _max?: NestedEnumBrandOnboardingStatusFilter<$PrismaModel>
-  }
-
-  export type NestedBytesNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: Buffer | BytesFieldRefInput<$PrismaModel> | null
-    in?: Buffer[] | ListBytesFieldRefInput<$PrismaModel> | null
-    notIn?: Buffer[] | ListBytesFieldRefInput<$PrismaModel> | null
-    not?: NestedBytesNullableWithAggregatesFilter<$PrismaModel> | Buffer | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _min?: NestedBytesNullableFilter<$PrismaModel>
-    _max?: NestedBytesNullableFilter<$PrismaModel>
-  }
-
-  export type NestedBoolWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
-    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedBoolFilter<$PrismaModel>
-    _max?: NestedBoolFilter<$PrismaModel>
   }
 
   export type NestedEnumBrandSubscriptionStatusNullableWithAggregatesFilter<$PrismaModel = never> = {
@@ -45902,11 +62392,29 @@ export namespace Prisma {
     fundingBalanceZar?: Decimal | DecimalJsLike | number | string
     annualCycleYear?: number | null
     annualCycleFocus?: string | null
+    logoUrl?: string | null
+    logoPng?: Buffer | null
+    websiteUrl?: string | null
+    publicPhone?: string | null
+    quintile?: number | null
+    teacherCount?: number | null
+    gpsLat?: number | null
+    gpsLng?: number | null
+    publicProfile?: NullableJsonNullValueInput | InputJsonValue
     createdAt?: Date | string
     updatedAt?: Date | string
     learners?: LearnerCreateNestedManyWithoutSchoolInput
     submissions?: SubmissionCreateNestedManyWithoutSchoolInput
     fundingContributions?: FundingContributionCreateNestedManyWithoutSchoolInput
+    submittedNeeds?: SchoolSubmittedNeedCreateNestedManyWithoutSchoolInput
+    volunteers?: SchoolVolunteerCreateNestedManyWithoutSchoolInput
+    events?: SchoolEventCreateNestedManyWithoutSchoolInput
+    alumni?: SchoolAlumniCreateNestedManyWithoutSchoolInput
+    enterpriseProjects?: SchoolEnterpriseProjectCreateNestedManyWithoutSchoolInput
+    innovationChallenges?: SchoolInnovationChallengeCreateNestedManyWithoutSchoolInput
+    crmContacts?: SchoolCrmContactCreateNestedManyWithoutSchoolInput
+    crmActivities?: SchoolCrmActivityCreateNestedManyWithoutSchoolInput
+    crmTasks?: SchoolCrmTaskCreateNestedManyWithoutSchoolInput
     verification?: SchoolVerificationCreateNestedOneWithoutSchoolInput
   }
 
@@ -45929,11 +62437,29 @@ export namespace Prisma {
     fundingBalanceZar?: Decimal | DecimalJsLike | number | string
     annualCycleYear?: number | null
     annualCycleFocus?: string | null
+    logoUrl?: string | null
+    logoPng?: Buffer | null
+    websiteUrl?: string | null
+    publicPhone?: string | null
+    quintile?: number | null
+    teacherCount?: number | null
+    gpsLat?: number | null
+    gpsLng?: number | null
+    publicProfile?: NullableJsonNullValueInput | InputJsonValue
     createdAt?: Date | string
     updatedAt?: Date | string
     learners?: LearnerUncheckedCreateNestedManyWithoutSchoolInput
     submissions?: SubmissionUncheckedCreateNestedManyWithoutSchoolInput
     fundingContributions?: FundingContributionUncheckedCreateNestedManyWithoutSchoolInput
+    submittedNeeds?: SchoolSubmittedNeedUncheckedCreateNestedManyWithoutSchoolInput
+    volunteers?: SchoolVolunteerUncheckedCreateNestedManyWithoutSchoolInput
+    events?: SchoolEventUncheckedCreateNestedManyWithoutSchoolInput
+    alumni?: SchoolAlumniUncheckedCreateNestedManyWithoutSchoolInput
+    enterpriseProjects?: SchoolEnterpriseProjectUncheckedCreateNestedManyWithoutSchoolInput
+    innovationChallenges?: SchoolInnovationChallengeUncheckedCreateNestedManyWithoutSchoolInput
+    crmContacts?: SchoolCrmContactUncheckedCreateNestedManyWithoutSchoolInput
+    crmActivities?: SchoolCrmActivityUncheckedCreateNestedManyWithoutSchoolInput
+    crmTasks?: SchoolCrmTaskUncheckedCreateNestedManyWithoutSchoolInput
     verification?: SchoolVerificationUncheckedCreateNestedOneWithoutSchoolInput
   }
 
@@ -46303,11 +62829,29 @@ export namespace Prisma {
     fundingBalanceZar?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     annualCycleYear?: NullableIntFieldUpdateOperationsInput | number | null
     annualCycleFocus?: NullableStringFieldUpdateOperationsInput | string | null
+    logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    logoPng?: NullableBytesFieldUpdateOperationsInput | Buffer | null
+    websiteUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    publicPhone?: NullableStringFieldUpdateOperationsInput | string | null
+    quintile?: NullableIntFieldUpdateOperationsInput | number | null
+    teacherCount?: NullableIntFieldUpdateOperationsInput | number | null
+    gpsLat?: NullableFloatFieldUpdateOperationsInput | number | null
+    gpsLng?: NullableFloatFieldUpdateOperationsInput | number | null
+    publicProfile?: NullableJsonNullValueInput | InputJsonValue
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     learners?: LearnerUpdateManyWithoutSchoolNestedInput
     submissions?: SubmissionUpdateManyWithoutSchoolNestedInput
     fundingContributions?: FundingContributionUpdateManyWithoutSchoolNestedInput
+    submittedNeeds?: SchoolSubmittedNeedUpdateManyWithoutSchoolNestedInput
+    volunteers?: SchoolVolunteerUpdateManyWithoutSchoolNestedInput
+    events?: SchoolEventUpdateManyWithoutSchoolNestedInput
+    alumni?: SchoolAlumniUpdateManyWithoutSchoolNestedInput
+    enterpriseProjects?: SchoolEnterpriseProjectUpdateManyWithoutSchoolNestedInput
+    innovationChallenges?: SchoolInnovationChallengeUpdateManyWithoutSchoolNestedInput
+    crmContacts?: SchoolCrmContactUpdateManyWithoutSchoolNestedInput
+    crmActivities?: SchoolCrmActivityUpdateManyWithoutSchoolNestedInput
+    crmTasks?: SchoolCrmTaskUpdateManyWithoutSchoolNestedInput
     verification?: SchoolVerificationUpdateOneWithoutSchoolNestedInput
   }
 
@@ -46330,11 +62874,29 @@ export namespace Prisma {
     fundingBalanceZar?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     annualCycleYear?: NullableIntFieldUpdateOperationsInput | number | null
     annualCycleFocus?: NullableStringFieldUpdateOperationsInput | string | null
+    logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    logoPng?: NullableBytesFieldUpdateOperationsInput | Buffer | null
+    websiteUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    publicPhone?: NullableStringFieldUpdateOperationsInput | string | null
+    quintile?: NullableIntFieldUpdateOperationsInput | number | null
+    teacherCount?: NullableIntFieldUpdateOperationsInput | number | null
+    gpsLat?: NullableFloatFieldUpdateOperationsInput | number | null
+    gpsLng?: NullableFloatFieldUpdateOperationsInput | number | null
+    publicProfile?: NullableJsonNullValueInput | InputJsonValue
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     learners?: LearnerUncheckedUpdateManyWithoutSchoolNestedInput
     submissions?: SubmissionUncheckedUpdateManyWithoutSchoolNestedInput
     fundingContributions?: FundingContributionUncheckedUpdateManyWithoutSchoolNestedInput
+    submittedNeeds?: SchoolSubmittedNeedUncheckedUpdateManyWithoutSchoolNestedInput
+    volunteers?: SchoolVolunteerUncheckedUpdateManyWithoutSchoolNestedInput
+    events?: SchoolEventUncheckedUpdateManyWithoutSchoolNestedInput
+    alumni?: SchoolAlumniUncheckedUpdateManyWithoutSchoolNestedInput
+    enterpriseProjects?: SchoolEnterpriseProjectUncheckedUpdateManyWithoutSchoolNestedInput
+    innovationChallenges?: SchoolInnovationChallengeUncheckedUpdateManyWithoutSchoolNestedInput
+    crmContacts?: SchoolCrmContactUncheckedUpdateManyWithoutSchoolNestedInput
+    crmActivities?: SchoolCrmActivityUncheckedUpdateManyWithoutSchoolNestedInput
+    crmTasks?: SchoolCrmTaskUncheckedUpdateManyWithoutSchoolNestedInput
     verification?: SchoolVerificationUncheckedUpdateOneWithoutSchoolNestedInput
   }
 
@@ -46822,6 +63384,360 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type SchoolSubmittedNeedCreateWithoutSchoolInput = {
+    id?: string
+    title: string
+    category: string
+    subcategory: string
+    urgency: string
+    description: string
+    learnerImpact: number
+    estimatedCostZar: number
+    progressPercent?: number
+    sponsorStatus?: string
+    photoCount?: number
+    quoteCount?: number
+    status?: $Enums.SchoolNeedStatus
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type SchoolSubmittedNeedUncheckedCreateWithoutSchoolInput = {
+    id?: string
+    title: string
+    category: string
+    subcategory: string
+    urgency: string
+    description: string
+    learnerImpact: number
+    estimatedCostZar: number
+    progressPercent?: number
+    sponsorStatus?: string
+    photoCount?: number
+    quoteCount?: number
+    status?: $Enums.SchoolNeedStatus
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type SchoolSubmittedNeedCreateOrConnectWithoutSchoolInput = {
+    where: SchoolSubmittedNeedWhereUniqueInput
+    create: XOR<SchoolSubmittedNeedCreateWithoutSchoolInput, SchoolSubmittedNeedUncheckedCreateWithoutSchoolInput>
+  }
+
+  export type SchoolSubmittedNeedCreateManySchoolInputEnvelope = {
+    data: SchoolSubmittedNeedCreateManySchoolInput | SchoolSubmittedNeedCreateManySchoolInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type SchoolVolunteerCreateWithoutSchoolInput = {
+    id?: string
+    fullName: string
+    role: string
+    phone?: string | null
+    email?: string | null
+    skills?: string | null
+    hoursLogged?: number
+    status?: $Enums.SchoolVolunteerStatus
+    notes?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    assignments?: SchoolEventVolunteerCreateNestedManyWithoutVolunteerInput
+  }
+
+  export type SchoolVolunteerUncheckedCreateWithoutSchoolInput = {
+    id?: string
+    fullName: string
+    role: string
+    phone?: string | null
+    email?: string | null
+    skills?: string | null
+    hoursLogged?: number
+    status?: $Enums.SchoolVolunteerStatus
+    notes?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    assignments?: SchoolEventVolunteerUncheckedCreateNestedManyWithoutVolunteerInput
+  }
+
+  export type SchoolVolunteerCreateOrConnectWithoutSchoolInput = {
+    where: SchoolVolunteerWhereUniqueInput
+    create: XOR<SchoolVolunteerCreateWithoutSchoolInput, SchoolVolunteerUncheckedCreateWithoutSchoolInput>
+  }
+
+  export type SchoolVolunteerCreateManySchoolInputEnvelope = {
+    data: SchoolVolunteerCreateManySchoolInput | SchoolVolunteerCreateManySchoolInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type SchoolEventCreateWithoutSchoolInput = {
+    id?: string
+    title: string
+    description?: string | null
+    eventType: string
+    location?: string | null
+    startsAt: Date | string
+    endsAt?: Date | string | null
+    volunteerSlots?: number
+    status?: $Enums.SchoolEventStatus
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    assignments?: SchoolEventVolunteerCreateNestedManyWithoutEventInput
+  }
+
+  export type SchoolEventUncheckedCreateWithoutSchoolInput = {
+    id?: string
+    title: string
+    description?: string | null
+    eventType: string
+    location?: string | null
+    startsAt: Date | string
+    endsAt?: Date | string | null
+    volunteerSlots?: number
+    status?: $Enums.SchoolEventStatus
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    assignments?: SchoolEventVolunteerUncheckedCreateNestedManyWithoutEventInput
+  }
+
+  export type SchoolEventCreateOrConnectWithoutSchoolInput = {
+    where: SchoolEventWhereUniqueInput
+    create: XOR<SchoolEventCreateWithoutSchoolInput, SchoolEventUncheckedCreateWithoutSchoolInput>
+  }
+
+  export type SchoolEventCreateManySchoolInputEnvelope = {
+    data: SchoolEventCreateManySchoolInput | SchoolEventCreateManySchoolInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type SchoolAlumniCreateWithoutSchoolInput = {
+    id?: string
+    fullName: string
+    graduationYear?: number | null
+    profession?: string | null
+    company?: string | null
+    email?: string | null
+    phone?: string | null
+    linkedInUrl?: string | null
+    role?: $Enums.SchoolAlumniRole
+    offering?: string | null
+    status?: $Enums.SchoolAlumniStatus
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type SchoolAlumniUncheckedCreateWithoutSchoolInput = {
+    id?: string
+    fullName: string
+    graduationYear?: number | null
+    profession?: string | null
+    company?: string | null
+    email?: string | null
+    phone?: string | null
+    linkedInUrl?: string | null
+    role?: $Enums.SchoolAlumniRole
+    offering?: string | null
+    status?: $Enums.SchoolAlumniStatus
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type SchoolAlumniCreateOrConnectWithoutSchoolInput = {
+    where: SchoolAlumniWhereUniqueInput
+    create: XOR<SchoolAlumniCreateWithoutSchoolInput, SchoolAlumniUncheckedCreateWithoutSchoolInput>
+  }
+
+  export type SchoolAlumniCreateManySchoolInputEnvelope = {
+    data: SchoolAlumniCreateManySchoolInput | SchoolAlumniCreateManySchoolInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type SchoolEnterpriseProjectCreateWithoutSchoolInput = {
+    id?: string
+    title: string
+    description?: string | null
+    projectType: $Enums.SchoolEnterpriseProjectType
+    studentLead: string
+    gradeLevel?: string | null
+    category?: string | null
+    status?: $Enums.SchoolEnterpriseProjectStatus
+    revenueZar?: number
+    seekingSponsor?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    challenge?: SchoolInnovationChallengeCreateNestedOneWithoutProjectsInput
+  }
+
+  export type SchoolEnterpriseProjectUncheckedCreateWithoutSchoolInput = {
+    id?: string
+    challengeId?: string | null
+    title: string
+    description?: string | null
+    projectType: $Enums.SchoolEnterpriseProjectType
+    studentLead: string
+    gradeLevel?: string | null
+    category?: string | null
+    status?: $Enums.SchoolEnterpriseProjectStatus
+    revenueZar?: number
+    seekingSponsor?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type SchoolEnterpriseProjectCreateOrConnectWithoutSchoolInput = {
+    where: SchoolEnterpriseProjectWhereUniqueInput
+    create: XOR<SchoolEnterpriseProjectCreateWithoutSchoolInput, SchoolEnterpriseProjectUncheckedCreateWithoutSchoolInput>
+  }
+
+  export type SchoolEnterpriseProjectCreateManySchoolInputEnvelope = {
+    data: SchoolEnterpriseProjectCreateManySchoolInput | SchoolEnterpriseProjectCreateManySchoolInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type SchoolInnovationChallengeCreateWithoutSchoolInput = {
+    id?: string
+    title: string
+    description?: string | null
+    challengeType: string
+    startsAt: Date | string
+    endsAt?: Date | string | null
+    prizeDescription?: string | null
+    status?: $Enums.SchoolInnovationChallengeStatus
+    maxEntries?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    projects?: SchoolEnterpriseProjectCreateNestedManyWithoutChallengeInput
+  }
+
+  export type SchoolInnovationChallengeUncheckedCreateWithoutSchoolInput = {
+    id?: string
+    title: string
+    description?: string | null
+    challengeType: string
+    startsAt: Date | string
+    endsAt?: Date | string | null
+    prizeDescription?: string | null
+    status?: $Enums.SchoolInnovationChallengeStatus
+    maxEntries?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    projects?: SchoolEnterpriseProjectUncheckedCreateNestedManyWithoutChallengeInput
+  }
+
+  export type SchoolInnovationChallengeCreateOrConnectWithoutSchoolInput = {
+    where: SchoolInnovationChallengeWhereUniqueInput
+    create: XOR<SchoolInnovationChallengeCreateWithoutSchoolInput, SchoolInnovationChallengeUncheckedCreateWithoutSchoolInput>
+  }
+
+  export type SchoolInnovationChallengeCreateManySchoolInputEnvelope = {
+    data: SchoolInnovationChallengeCreateManySchoolInput | SchoolInnovationChallengeCreateManySchoolInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type SchoolCrmContactCreateWithoutSchoolInput = {
+    id?: string
+    fullName: string
+    organization?: string | null
+    email?: string | null
+    phone?: string | null
+    contactType?: $Enums.SchoolCrmContactType
+    notes?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    activities?: SchoolCrmActivityCreateNestedManyWithoutContactInput
+    tasks?: SchoolCrmTaskCreateNestedManyWithoutContactInput
+  }
+
+  export type SchoolCrmContactUncheckedCreateWithoutSchoolInput = {
+    id?: string
+    fullName: string
+    organization?: string | null
+    email?: string | null
+    phone?: string | null
+    contactType?: $Enums.SchoolCrmContactType
+    notes?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    activities?: SchoolCrmActivityUncheckedCreateNestedManyWithoutContactInput
+    tasks?: SchoolCrmTaskUncheckedCreateNestedManyWithoutContactInput
+  }
+
+  export type SchoolCrmContactCreateOrConnectWithoutSchoolInput = {
+    where: SchoolCrmContactWhereUniqueInput
+    create: XOR<SchoolCrmContactCreateWithoutSchoolInput, SchoolCrmContactUncheckedCreateWithoutSchoolInput>
+  }
+
+  export type SchoolCrmContactCreateManySchoolInputEnvelope = {
+    data: SchoolCrmContactCreateManySchoolInput | SchoolCrmContactCreateManySchoolInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type SchoolCrmActivityCreateWithoutSchoolInput = {
+    id?: string
+    activityType: $Enums.SchoolCrmActivityType
+    title: string
+    summary?: string | null
+    occurredAt: Date | string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    contact?: SchoolCrmContactCreateNestedOneWithoutActivitiesInput
+  }
+
+  export type SchoolCrmActivityUncheckedCreateWithoutSchoolInput = {
+    id?: string
+    contactId?: string | null
+    activityType: $Enums.SchoolCrmActivityType
+    title: string
+    summary?: string | null
+    occurredAt: Date | string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type SchoolCrmActivityCreateOrConnectWithoutSchoolInput = {
+    where: SchoolCrmActivityWhereUniqueInput
+    create: XOR<SchoolCrmActivityCreateWithoutSchoolInput, SchoolCrmActivityUncheckedCreateWithoutSchoolInput>
+  }
+
+  export type SchoolCrmActivityCreateManySchoolInputEnvelope = {
+    data: SchoolCrmActivityCreateManySchoolInput | SchoolCrmActivityCreateManySchoolInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type SchoolCrmTaskCreateWithoutSchoolInput = {
+    id?: string
+    title: string
+    description?: string | null
+    dueAt?: Date | string | null
+    status?: $Enums.SchoolCrmTaskStatus
+    priority?: $Enums.SchoolCrmTaskPriority
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    contact?: SchoolCrmContactCreateNestedOneWithoutTasksInput
+  }
+
+  export type SchoolCrmTaskUncheckedCreateWithoutSchoolInput = {
+    id?: string
+    contactId?: string | null
+    title: string
+    description?: string | null
+    dueAt?: Date | string | null
+    status?: $Enums.SchoolCrmTaskStatus
+    priority?: $Enums.SchoolCrmTaskPriority
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type SchoolCrmTaskCreateOrConnectWithoutSchoolInput = {
+    where: SchoolCrmTaskWhereUniqueInput
+    create: XOR<SchoolCrmTaskCreateWithoutSchoolInput, SchoolCrmTaskUncheckedCreateWithoutSchoolInput>
+  }
+
+  export type SchoolCrmTaskCreateManySchoolInputEnvelope = {
+    data: SchoolCrmTaskCreateManySchoolInput | SchoolCrmTaskCreateManySchoolInput[]
+    skipDuplicates?: boolean
+  }
+
   export type UserCreateWithoutSchoolInput = {
     id?: string
     fullName: string
@@ -47002,6 +63918,313 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"FundingContribution"> | Date | string
   }
 
+  export type SchoolSubmittedNeedUpsertWithWhereUniqueWithoutSchoolInput = {
+    where: SchoolSubmittedNeedWhereUniqueInput
+    update: XOR<SchoolSubmittedNeedUpdateWithoutSchoolInput, SchoolSubmittedNeedUncheckedUpdateWithoutSchoolInput>
+    create: XOR<SchoolSubmittedNeedCreateWithoutSchoolInput, SchoolSubmittedNeedUncheckedCreateWithoutSchoolInput>
+  }
+
+  export type SchoolSubmittedNeedUpdateWithWhereUniqueWithoutSchoolInput = {
+    where: SchoolSubmittedNeedWhereUniqueInput
+    data: XOR<SchoolSubmittedNeedUpdateWithoutSchoolInput, SchoolSubmittedNeedUncheckedUpdateWithoutSchoolInput>
+  }
+
+  export type SchoolSubmittedNeedUpdateManyWithWhereWithoutSchoolInput = {
+    where: SchoolSubmittedNeedScalarWhereInput
+    data: XOR<SchoolSubmittedNeedUpdateManyMutationInput, SchoolSubmittedNeedUncheckedUpdateManyWithoutSchoolInput>
+  }
+
+  export type SchoolSubmittedNeedScalarWhereInput = {
+    AND?: SchoolSubmittedNeedScalarWhereInput | SchoolSubmittedNeedScalarWhereInput[]
+    OR?: SchoolSubmittedNeedScalarWhereInput[]
+    NOT?: SchoolSubmittedNeedScalarWhereInput | SchoolSubmittedNeedScalarWhereInput[]
+    id?: StringFilter<"SchoolSubmittedNeed"> | string
+    schoolId?: StringFilter<"SchoolSubmittedNeed"> | string
+    title?: StringFilter<"SchoolSubmittedNeed"> | string
+    category?: StringFilter<"SchoolSubmittedNeed"> | string
+    subcategory?: StringFilter<"SchoolSubmittedNeed"> | string
+    urgency?: StringFilter<"SchoolSubmittedNeed"> | string
+    description?: StringFilter<"SchoolSubmittedNeed"> | string
+    learnerImpact?: IntFilter<"SchoolSubmittedNeed"> | number
+    estimatedCostZar?: IntFilter<"SchoolSubmittedNeed"> | number
+    progressPercent?: IntFilter<"SchoolSubmittedNeed"> | number
+    sponsorStatus?: StringFilter<"SchoolSubmittedNeed"> | string
+    photoCount?: IntFilter<"SchoolSubmittedNeed"> | number
+    quoteCount?: IntFilter<"SchoolSubmittedNeed"> | number
+    status?: EnumSchoolNeedStatusFilter<"SchoolSubmittedNeed"> | $Enums.SchoolNeedStatus
+    createdAt?: DateTimeFilter<"SchoolSubmittedNeed"> | Date | string
+    updatedAt?: DateTimeFilter<"SchoolSubmittedNeed"> | Date | string
+  }
+
+  export type SchoolVolunteerUpsertWithWhereUniqueWithoutSchoolInput = {
+    where: SchoolVolunteerWhereUniqueInput
+    update: XOR<SchoolVolunteerUpdateWithoutSchoolInput, SchoolVolunteerUncheckedUpdateWithoutSchoolInput>
+    create: XOR<SchoolVolunteerCreateWithoutSchoolInput, SchoolVolunteerUncheckedCreateWithoutSchoolInput>
+  }
+
+  export type SchoolVolunteerUpdateWithWhereUniqueWithoutSchoolInput = {
+    where: SchoolVolunteerWhereUniqueInput
+    data: XOR<SchoolVolunteerUpdateWithoutSchoolInput, SchoolVolunteerUncheckedUpdateWithoutSchoolInput>
+  }
+
+  export type SchoolVolunteerUpdateManyWithWhereWithoutSchoolInput = {
+    where: SchoolVolunteerScalarWhereInput
+    data: XOR<SchoolVolunteerUpdateManyMutationInput, SchoolVolunteerUncheckedUpdateManyWithoutSchoolInput>
+  }
+
+  export type SchoolVolunteerScalarWhereInput = {
+    AND?: SchoolVolunteerScalarWhereInput | SchoolVolunteerScalarWhereInput[]
+    OR?: SchoolVolunteerScalarWhereInput[]
+    NOT?: SchoolVolunteerScalarWhereInput | SchoolVolunteerScalarWhereInput[]
+    id?: StringFilter<"SchoolVolunteer"> | string
+    schoolId?: StringFilter<"SchoolVolunteer"> | string
+    fullName?: StringFilter<"SchoolVolunteer"> | string
+    role?: StringFilter<"SchoolVolunteer"> | string
+    phone?: StringNullableFilter<"SchoolVolunteer"> | string | null
+    email?: StringNullableFilter<"SchoolVolunteer"> | string | null
+    skills?: StringNullableFilter<"SchoolVolunteer"> | string | null
+    hoursLogged?: IntFilter<"SchoolVolunteer"> | number
+    status?: EnumSchoolVolunteerStatusFilter<"SchoolVolunteer"> | $Enums.SchoolVolunteerStatus
+    notes?: StringNullableFilter<"SchoolVolunteer"> | string | null
+    createdAt?: DateTimeFilter<"SchoolVolunteer"> | Date | string
+    updatedAt?: DateTimeFilter<"SchoolVolunteer"> | Date | string
+  }
+
+  export type SchoolEventUpsertWithWhereUniqueWithoutSchoolInput = {
+    where: SchoolEventWhereUniqueInput
+    update: XOR<SchoolEventUpdateWithoutSchoolInput, SchoolEventUncheckedUpdateWithoutSchoolInput>
+    create: XOR<SchoolEventCreateWithoutSchoolInput, SchoolEventUncheckedCreateWithoutSchoolInput>
+  }
+
+  export type SchoolEventUpdateWithWhereUniqueWithoutSchoolInput = {
+    where: SchoolEventWhereUniqueInput
+    data: XOR<SchoolEventUpdateWithoutSchoolInput, SchoolEventUncheckedUpdateWithoutSchoolInput>
+  }
+
+  export type SchoolEventUpdateManyWithWhereWithoutSchoolInput = {
+    where: SchoolEventScalarWhereInput
+    data: XOR<SchoolEventUpdateManyMutationInput, SchoolEventUncheckedUpdateManyWithoutSchoolInput>
+  }
+
+  export type SchoolEventScalarWhereInput = {
+    AND?: SchoolEventScalarWhereInput | SchoolEventScalarWhereInput[]
+    OR?: SchoolEventScalarWhereInput[]
+    NOT?: SchoolEventScalarWhereInput | SchoolEventScalarWhereInput[]
+    id?: StringFilter<"SchoolEvent"> | string
+    schoolId?: StringFilter<"SchoolEvent"> | string
+    title?: StringFilter<"SchoolEvent"> | string
+    description?: StringNullableFilter<"SchoolEvent"> | string | null
+    eventType?: StringFilter<"SchoolEvent"> | string
+    location?: StringNullableFilter<"SchoolEvent"> | string | null
+    startsAt?: DateTimeFilter<"SchoolEvent"> | Date | string
+    endsAt?: DateTimeNullableFilter<"SchoolEvent"> | Date | string | null
+    volunteerSlots?: IntFilter<"SchoolEvent"> | number
+    status?: EnumSchoolEventStatusFilter<"SchoolEvent"> | $Enums.SchoolEventStatus
+    createdAt?: DateTimeFilter<"SchoolEvent"> | Date | string
+    updatedAt?: DateTimeFilter<"SchoolEvent"> | Date | string
+  }
+
+  export type SchoolAlumniUpsertWithWhereUniqueWithoutSchoolInput = {
+    where: SchoolAlumniWhereUniqueInput
+    update: XOR<SchoolAlumniUpdateWithoutSchoolInput, SchoolAlumniUncheckedUpdateWithoutSchoolInput>
+    create: XOR<SchoolAlumniCreateWithoutSchoolInput, SchoolAlumniUncheckedCreateWithoutSchoolInput>
+  }
+
+  export type SchoolAlumniUpdateWithWhereUniqueWithoutSchoolInput = {
+    where: SchoolAlumniWhereUniqueInput
+    data: XOR<SchoolAlumniUpdateWithoutSchoolInput, SchoolAlumniUncheckedUpdateWithoutSchoolInput>
+  }
+
+  export type SchoolAlumniUpdateManyWithWhereWithoutSchoolInput = {
+    where: SchoolAlumniScalarWhereInput
+    data: XOR<SchoolAlumniUpdateManyMutationInput, SchoolAlumniUncheckedUpdateManyWithoutSchoolInput>
+  }
+
+  export type SchoolAlumniScalarWhereInput = {
+    AND?: SchoolAlumniScalarWhereInput | SchoolAlumniScalarWhereInput[]
+    OR?: SchoolAlumniScalarWhereInput[]
+    NOT?: SchoolAlumniScalarWhereInput | SchoolAlumniScalarWhereInput[]
+    id?: StringFilter<"SchoolAlumni"> | string
+    schoolId?: StringFilter<"SchoolAlumni"> | string
+    fullName?: StringFilter<"SchoolAlumni"> | string
+    graduationYear?: IntNullableFilter<"SchoolAlumni"> | number | null
+    profession?: StringNullableFilter<"SchoolAlumni"> | string | null
+    company?: StringNullableFilter<"SchoolAlumni"> | string | null
+    email?: StringNullableFilter<"SchoolAlumni"> | string | null
+    phone?: StringNullableFilter<"SchoolAlumni"> | string | null
+    linkedInUrl?: StringNullableFilter<"SchoolAlumni"> | string | null
+    role?: EnumSchoolAlumniRoleFilter<"SchoolAlumni"> | $Enums.SchoolAlumniRole
+    offering?: StringNullableFilter<"SchoolAlumni"> | string | null
+    status?: EnumSchoolAlumniStatusFilter<"SchoolAlumni"> | $Enums.SchoolAlumniStatus
+    createdAt?: DateTimeFilter<"SchoolAlumni"> | Date | string
+    updatedAt?: DateTimeFilter<"SchoolAlumni"> | Date | string
+  }
+
+  export type SchoolEnterpriseProjectUpsertWithWhereUniqueWithoutSchoolInput = {
+    where: SchoolEnterpriseProjectWhereUniqueInput
+    update: XOR<SchoolEnterpriseProjectUpdateWithoutSchoolInput, SchoolEnterpriseProjectUncheckedUpdateWithoutSchoolInput>
+    create: XOR<SchoolEnterpriseProjectCreateWithoutSchoolInput, SchoolEnterpriseProjectUncheckedCreateWithoutSchoolInput>
+  }
+
+  export type SchoolEnterpriseProjectUpdateWithWhereUniqueWithoutSchoolInput = {
+    where: SchoolEnterpriseProjectWhereUniqueInput
+    data: XOR<SchoolEnterpriseProjectUpdateWithoutSchoolInput, SchoolEnterpriseProjectUncheckedUpdateWithoutSchoolInput>
+  }
+
+  export type SchoolEnterpriseProjectUpdateManyWithWhereWithoutSchoolInput = {
+    where: SchoolEnterpriseProjectScalarWhereInput
+    data: XOR<SchoolEnterpriseProjectUpdateManyMutationInput, SchoolEnterpriseProjectUncheckedUpdateManyWithoutSchoolInput>
+  }
+
+  export type SchoolEnterpriseProjectScalarWhereInput = {
+    AND?: SchoolEnterpriseProjectScalarWhereInput | SchoolEnterpriseProjectScalarWhereInput[]
+    OR?: SchoolEnterpriseProjectScalarWhereInput[]
+    NOT?: SchoolEnterpriseProjectScalarWhereInput | SchoolEnterpriseProjectScalarWhereInput[]
+    id?: StringFilter<"SchoolEnterpriseProject"> | string
+    schoolId?: StringFilter<"SchoolEnterpriseProject"> | string
+    challengeId?: StringNullableFilter<"SchoolEnterpriseProject"> | string | null
+    title?: StringFilter<"SchoolEnterpriseProject"> | string
+    description?: StringNullableFilter<"SchoolEnterpriseProject"> | string | null
+    projectType?: EnumSchoolEnterpriseProjectTypeFilter<"SchoolEnterpriseProject"> | $Enums.SchoolEnterpriseProjectType
+    studentLead?: StringFilter<"SchoolEnterpriseProject"> | string
+    gradeLevel?: StringNullableFilter<"SchoolEnterpriseProject"> | string | null
+    category?: StringNullableFilter<"SchoolEnterpriseProject"> | string | null
+    status?: EnumSchoolEnterpriseProjectStatusFilter<"SchoolEnterpriseProject"> | $Enums.SchoolEnterpriseProjectStatus
+    revenueZar?: IntFilter<"SchoolEnterpriseProject"> | number
+    seekingSponsor?: BoolFilter<"SchoolEnterpriseProject"> | boolean
+    createdAt?: DateTimeFilter<"SchoolEnterpriseProject"> | Date | string
+    updatedAt?: DateTimeFilter<"SchoolEnterpriseProject"> | Date | string
+  }
+
+  export type SchoolInnovationChallengeUpsertWithWhereUniqueWithoutSchoolInput = {
+    where: SchoolInnovationChallengeWhereUniqueInput
+    update: XOR<SchoolInnovationChallengeUpdateWithoutSchoolInput, SchoolInnovationChallengeUncheckedUpdateWithoutSchoolInput>
+    create: XOR<SchoolInnovationChallengeCreateWithoutSchoolInput, SchoolInnovationChallengeUncheckedCreateWithoutSchoolInput>
+  }
+
+  export type SchoolInnovationChallengeUpdateWithWhereUniqueWithoutSchoolInput = {
+    where: SchoolInnovationChallengeWhereUniqueInput
+    data: XOR<SchoolInnovationChallengeUpdateWithoutSchoolInput, SchoolInnovationChallengeUncheckedUpdateWithoutSchoolInput>
+  }
+
+  export type SchoolInnovationChallengeUpdateManyWithWhereWithoutSchoolInput = {
+    where: SchoolInnovationChallengeScalarWhereInput
+    data: XOR<SchoolInnovationChallengeUpdateManyMutationInput, SchoolInnovationChallengeUncheckedUpdateManyWithoutSchoolInput>
+  }
+
+  export type SchoolInnovationChallengeScalarWhereInput = {
+    AND?: SchoolInnovationChallengeScalarWhereInput | SchoolInnovationChallengeScalarWhereInput[]
+    OR?: SchoolInnovationChallengeScalarWhereInput[]
+    NOT?: SchoolInnovationChallengeScalarWhereInput | SchoolInnovationChallengeScalarWhereInput[]
+    id?: StringFilter<"SchoolInnovationChallenge"> | string
+    schoolId?: StringFilter<"SchoolInnovationChallenge"> | string
+    title?: StringFilter<"SchoolInnovationChallenge"> | string
+    description?: StringNullableFilter<"SchoolInnovationChallenge"> | string | null
+    challengeType?: StringFilter<"SchoolInnovationChallenge"> | string
+    startsAt?: DateTimeFilter<"SchoolInnovationChallenge"> | Date | string
+    endsAt?: DateTimeNullableFilter<"SchoolInnovationChallenge"> | Date | string | null
+    prizeDescription?: StringNullableFilter<"SchoolInnovationChallenge"> | string | null
+    status?: EnumSchoolInnovationChallengeStatusFilter<"SchoolInnovationChallenge"> | $Enums.SchoolInnovationChallengeStatus
+    maxEntries?: IntFilter<"SchoolInnovationChallenge"> | number
+    createdAt?: DateTimeFilter<"SchoolInnovationChallenge"> | Date | string
+    updatedAt?: DateTimeFilter<"SchoolInnovationChallenge"> | Date | string
+  }
+
+  export type SchoolCrmContactUpsertWithWhereUniqueWithoutSchoolInput = {
+    where: SchoolCrmContactWhereUniqueInput
+    update: XOR<SchoolCrmContactUpdateWithoutSchoolInput, SchoolCrmContactUncheckedUpdateWithoutSchoolInput>
+    create: XOR<SchoolCrmContactCreateWithoutSchoolInput, SchoolCrmContactUncheckedCreateWithoutSchoolInput>
+  }
+
+  export type SchoolCrmContactUpdateWithWhereUniqueWithoutSchoolInput = {
+    where: SchoolCrmContactWhereUniqueInput
+    data: XOR<SchoolCrmContactUpdateWithoutSchoolInput, SchoolCrmContactUncheckedUpdateWithoutSchoolInput>
+  }
+
+  export type SchoolCrmContactUpdateManyWithWhereWithoutSchoolInput = {
+    where: SchoolCrmContactScalarWhereInput
+    data: XOR<SchoolCrmContactUpdateManyMutationInput, SchoolCrmContactUncheckedUpdateManyWithoutSchoolInput>
+  }
+
+  export type SchoolCrmContactScalarWhereInput = {
+    AND?: SchoolCrmContactScalarWhereInput | SchoolCrmContactScalarWhereInput[]
+    OR?: SchoolCrmContactScalarWhereInput[]
+    NOT?: SchoolCrmContactScalarWhereInput | SchoolCrmContactScalarWhereInput[]
+    id?: StringFilter<"SchoolCrmContact"> | string
+    schoolId?: StringFilter<"SchoolCrmContact"> | string
+    fullName?: StringFilter<"SchoolCrmContact"> | string
+    organization?: StringNullableFilter<"SchoolCrmContact"> | string | null
+    email?: StringNullableFilter<"SchoolCrmContact"> | string | null
+    phone?: StringNullableFilter<"SchoolCrmContact"> | string | null
+    contactType?: EnumSchoolCrmContactTypeFilter<"SchoolCrmContact"> | $Enums.SchoolCrmContactType
+    notes?: StringNullableFilter<"SchoolCrmContact"> | string | null
+    createdAt?: DateTimeFilter<"SchoolCrmContact"> | Date | string
+    updatedAt?: DateTimeFilter<"SchoolCrmContact"> | Date | string
+  }
+
+  export type SchoolCrmActivityUpsertWithWhereUniqueWithoutSchoolInput = {
+    where: SchoolCrmActivityWhereUniqueInput
+    update: XOR<SchoolCrmActivityUpdateWithoutSchoolInput, SchoolCrmActivityUncheckedUpdateWithoutSchoolInput>
+    create: XOR<SchoolCrmActivityCreateWithoutSchoolInput, SchoolCrmActivityUncheckedCreateWithoutSchoolInput>
+  }
+
+  export type SchoolCrmActivityUpdateWithWhereUniqueWithoutSchoolInput = {
+    where: SchoolCrmActivityWhereUniqueInput
+    data: XOR<SchoolCrmActivityUpdateWithoutSchoolInput, SchoolCrmActivityUncheckedUpdateWithoutSchoolInput>
+  }
+
+  export type SchoolCrmActivityUpdateManyWithWhereWithoutSchoolInput = {
+    where: SchoolCrmActivityScalarWhereInput
+    data: XOR<SchoolCrmActivityUpdateManyMutationInput, SchoolCrmActivityUncheckedUpdateManyWithoutSchoolInput>
+  }
+
+  export type SchoolCrmActivityScalarWhereInput = {
+    AND?: SchoolCrmActivityScalarWhereInput | SchoolCrmActivityScalarWhereInput[]
+    OR?: SchoolCrmActivityScalarWhereInput[]
+    NOT?: SchoolCrmActivityScalarWhereInput | SchoolCrmActivityScalarWhereInput[]
+    id?: StringFilter<"SchoolCrmActivity"> | string
+    schoolId?: StringFilter<"SchoolCrmActivity"> | string
+    contactId?: StringNullableFilter<"SchoolCrmActivity"> | string | null
+    activityType?: EnumSchoolCrmActivityTypeFilter<"SchoolCrmActivity"> | $Enums.SchoolCrmActivityType
+    title?: StringFilter<"SchoolCrmActivity"> | string
+    summary?: StringNullableFilter<"SchoolCrmActivity"> | string | null
+    occurredAt?: DateTimeFilter<"SchoolCrmActivity"> | Date | string
+    createdAt?: DateTimeFilter<"SchoolCrmActivity"> | Date | string
+    updatedAt?: DateTimeFilter<"SchoolCrmActivity"> | Date | string
+  }
+
+  export type SchoolCrmTaskUpsertWithWhereUniqueWithoutSchoolInput = {
+    where: SchoolCrmTaskWhereUniqueInput
+    update: XOR<SchoolCrmTaskUpdateWithoutSchoolInput, SchoolCrmTaskUncheckedUpdateWithoutSchoolInput>
+    create: XOR<SchoolCrmTaskCreateWithoutSchoolInput, SchoolCrmTaskUncheckedCreateWithoutSchoolInput>
+  }
+
+  export type SchoolCrmTaskUpdateWithWhereUniqueWithoutSchoolInput = {
+    where: SchoolCrmTaskWhereUniqueInput
+    data: XOR<SchoolCrmTaskUpdateWithoutSchoolInput, SchoolCrmTaskUncheckedUpdateWithoutSchoolInput>
+  }
+
+  export type SchoolCrmTaskUpdateManyWithWhereWithoutSchoolInput = {
+    where: SchoolCrmTaskScalarWhereInput
+    data: XOR<SchoolCrmTaskUpdateManyMutationInput, SchoolCrmTaskUncheckedUpdateManyWithoutSchoolInput>
+  }
+
+  export type SchoolCrmTaskScalarWhereInput = {
+    AND?: SchoolCrmTaskScalarWhereInput | SchoolCrmTaskScalarWhereInput[]
+    OR?: SchoolCrmTaskScalarWhereInput[]
+    NOT?: SchoolCrmTaskScalarWhereInput | SchoolCrmTaskScalarWhereInput[]
+    id?: StringFilter<"SchoolCrmTask"> | string
+    schoolId?: StringFilter<"SchoolCrmTask"> | string
+    contactId?: StringNullableFilter<"SchoolCrmTask"> | string | null
+    title?: StringFilter<"SchoolCrmTask"> | string
+    description?: StringNullableFilter<"SchoolCrmTask"> | string | null
+    dueAt?: DateTimeNullableFilter<"SchoolCrmTask"> | Date | string | null
+    status?: EnumSchoolCrmTaskStatusFilter<"SchoolCrmTask"> | $Enums.SchoolCrmTaskStatus
+    priority?: EnumSchoolCrmTaskPriorityFilter<"SchoolCrmTask"> | $Enums.SchoolCrmTaskPriority
+    createdAt?: DateTimeFilter<"SchoolCrmTask"> | Date | string
+    updatedAt?: DateTimeFilter<"SchoolCrmTask"> | Date | string
+  }
+
   export type UserUpsertWithoutSchoolInput = {
     update: XOR<UserUpdateWithoutSchoolInput, UserUncheckedUpdateWithoutSchoolInput>
     create: XOR<UserCreateWithoutSchoolInput, UserUncheckedCreateWithoutSchoolInput>
@@ -47098,6 +64321,2389 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type SchoolCreateWithoutSubmittedNeedsInput = {
+    id?: string
+    name: string
+    province: string
+    district: string
+    principalName: string
+    contactEmail?: string | null
+    whatsappPhone: string
+    schoolCode: string
+    organizationCategory?: $Enums.OrganizationCategory
+    status?: $Enums.EntityStatus
+    developmentTier?: number
+    currentPhase?: number
+    developmentScores?: NullableJsonNullValueInput | InputJsonValue
+    phaseHistory?: NullableJsonNullValueInput | InputJsonValue
+    infrastructureItems?: NullableJsonNullValueInput | InputJsonValue
+    fundingBalanceZar?: Decimal | DecimalJsLike | number | string
+    annualCycleYear?: number | null
+    annualCycleFocus?: string | null
+    logoUrl?: string | null
+    logoPng?: Buffer | null
+    websiteUrl?: string | null
+    publicPhone?: string | null
+    quintile?: number | null
+    teacherCount?: number | null
+    gpsLat?: number | null
+    gpsLng?: number | null
+    publicProfile?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    learners?: LearnerCreateNestedManyWithoutSchoolInput
+    submissions?: SubmissionCreateNestedManyWithoutSchoolInput
+    fundingContributions?: FundingContributionCreateNestedManyWithoutSchoolInput
+    volunteers?: SchoolVolunteerCreateNestedManyWithoutSchoolInput
+    events?: SchoolEventCreateNestedManyWithoutSchoolInput
+    alumni?: SchoolAlumniCreateNestedManyWithoutSchoolInput
+    enterpriseProjects?: SchoolEnterpriseProjectCreateNestedManyWithoutSchoolInput
+    innovationChallenges?: SchoolInnovationChallengeCreateNestedManyWithoutSchoolInput
+    crmContacts?: SchoolCrmContactCreateNestedManyWithoutSchoolInput
+    crmActivities?: SchoolCrmActivityCreateNestedManyWithoutSchoolInput
+    crmTasks?: SchoolCrmTaskCreateNestedManyWithoutSchoolInput
+    adminUser?: UserCreateNestedOneWithoutSchoolInput
+    verification?: SchoolVerificationCreateNestedOneWithoutSchoolInput
+  }
+
+  export type SchoolUncheckedCreateWithoutSubmittedNeedsInput = {
+    id?: string
+    name: string
+    province: string
+    district: string
+    principalName: string
+    contactEmail?: string | null
+    whatsappPhone: string
+    schoolCode: string
+    organizationCategory?: $Enums.OrganizationCategory
+    status?: $Enums.EntityStatus
+    developmentTier?: number
+    currentPhase?: number
+    developmentScores?: NullableJsonNullValueInput | InputJsonValue
+    phaseHistory?: NullableJsonNullValueInput | InputJsonValue
+    infrastructureItems?: NullableJsonNullValueInput | InputJsonValue
+    fundingBalanceZar?: Decimal | DecimalJsLike | number | string
+    annualCycleYear?: number | null
+    annualCycleFocus?: string | null
+    logoUrl?: string | null
+    logoPng?: Buffer | null
+    websiteUrl?: string | null
+    publicPhone?: string | null
+    quintile?: number | null
+    teacherCount?: number | null
+    gpsLat?: number | null
+    gpsLng?: number | null
+    publicProfile?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    learners?: LearnerUncheckedCreateNestedManyWithoutSchoolInput
+    submissions?: SubmissionUncheckedCreateNestedManyWithoutSchoolInput
+    fundingContributions?: FundingContributionUncheckedCreateNestedManyWithoutSchoolInput
+    volunteers?: SchoolVolunteerUncheckedCreateNestedManyWithoutSchoolInput
+    events?: SchoolEventUncheckedCreateNestedManyWithoutSchoolInput
+    alumni?: SchoolAlumniUncheckedCreateNestedManyWithoutSchoolInput
+    enterpriseProjects?: SchoolEnterpriseProjectUncheckedCreateNestedManyWithoutSchoolInput
+    innovationChallenges?: SchoolInnovationChallengeUncheckedCreateNestedManyWithoutSchoolInput
+    crmContacts?: SchoolCrmContactUncheckedCreateNestedManyWithoutSchoolInput
+    crmActivities?: SchoolCrmActivityUncheckedCreateNestedManyWithoutSchoolInput
+    crmTasks?: SchoolCrmTaskUncheckedCreateNestedManyWithoutSchoolInput
+    adminUser?: UserUncheckedCreateNestedOneWithoutSchoolInput
+    verification?: SchoolVerificationUncheckedCreateNestedOneWithoutSchoolInput
+  }
+
+  export type SchoolCreateOrConnectWithoutSubmittedNeedsInput = {
+    where: SchoolWhereUniqueInput
+    create: XOR<SchoolCreateWithoutSubmittedNeedsInput, SchoolUncheckedCreateWithoutSubmittedNeedsInput>
+  }
+
+  export type SchoolUpsertWithoutSubmittedNeedsInput = {
+    update: XOR<SchoolUpdateWithoutSubmittedNeedsInput, SchoolUncheckedUpdateWithoutSubmittedNeedsInput>
+    create: XOR<SchoolCreateWithoutSubmittedNeedsInput, SchoolUncheckedCreateWithoutSubmittedNeedsInput>
+    where?: SchoolWhereInput
+  }
+
+  export type SchoolUpdateToOneWithWhereWithoutSubmittedNeedsInput = {
+    where?: SchoolWhereInput
+    data: XOR<SchoolUpdateWithoutSubmittedNeedsInput, SchoolUncheckedUpdateWithoutSubmittedNeedsInput>
+  }
+
+  export type SchoolUpdateWithoutSubmittedNeedsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    province?: StringFieldUpdateOperationsInput | string
+    district?: StringFieldUpdateOperationsInput | string
+    principalName?: StringFieldUpdateOperationsInput | string
+    contactEmail?: NullableStringFieldUpdateOperationsInput | string | null
+    whatsappPhone?: StringFieldUpdateOperationsInput | string
+    schoolCode?: StringFieldUpdateOperationsInput | string
+    organizationCategory?: EnumOrganizationCategoryFieldUpdateOperationsInput | $Enums.OrganizationCategory
+    status?: EnumEntityStatusFieldUpdateOperationsInput | $Enums.EntityStatus
+    developmentTier?: IntFieldUpdateOperationsInput | number
+    currentPhase?: IntFieldUpdateOperationsInput | number
+    developmentScores?: NullableJsonNullValueInput | InputJsonValue
+    phaseHistory?: NullableJsonNullValueInput | InputJsonValue
+    infrastructureItems?: NullableJsonNullValueInput | InputJsonValue
+    fundingBalanceZar?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    annualCycleYear?: NullableIntFieldUpdateOperationsInput | number | null
+    annualCycleFocus?: NullableStringFieldUpdateOperationsInput | string | null
+    logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    logoPng?: NullableBytesFieldUpdateOperationsInput | Buffer | null
+    websiteUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    publicPhone?: NullableStringFieldUpdateOperationsInput | string | null
+    quintile?: NullableIntFieldUpdateOperationsInput | number | null
+    teacherCount?: NullableIntFieldUpdateOperationsInput | number | null
+    gpsLat?: NullableFloatFieldUpdateOperationsInput | number | null
+    gpsLng?: NullableFloatFieldUpdateOperationsInput | number | null
+    publicProfile?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    learners?: LearnerUpdateManyWithoutSchoolNestedInput
+    submissions?: SubmissionUpdateManyWithoutSchoolNestedInput
+    fundingContributions?: FundingContributionUpdateManyWithoutSchoolNestedInput
+    volunteers?: SchoolVolunteerUpdateManyWithoutSchoolNestedInput
+    events?: SchoolEventUpdateManyWithoutSchoolNestedInput
+    alumni?: SchoolAlumniUpdateManyWithoutSchoolNestedInput
+    enterpriseProjects?: SchoolEnterpriseProjectUpdateManyWithoutSchoolNestedInput
+    innovationChallenges?: SchoolInnovationChallengeUpdateManyWithoutSchoolNestedInput
+    crmContacts?: SchoolCrmContactUpdateManyWithoutSchoolNestedInput
+    crmActivities?: SchoolCrmActivityUpdateManyWithoutSchoolNestedInput
+    crmTasks?: SchoolCrmTaskUpdateManyWithoutSchoolNestedInput
+    adminUser?: UserUpdateOneWithoutSchoolNestedInput
+    verification?: SchoolVerificationUpdateOneWithoutSchoolNestedInput
+  }
+
+  export type SchoolUncheckedUpdateWithoutSubmittedNeedsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    province?: StringFieldUpdateOperationsInput | string
+    district?: StringFieldUpdateOperationsInput | string
+    principalName?: StringFieldUpdateOperationsInput | string
+    contactEmail?: NullableStringFieldUpdateOperationsInput | string | null
+    whatsappPhone?: StringFieldUpdateOperationsInput | string
+    schoolCode?: StringFieldUpdateOperationsInput | string
+    organizationCategory?: EnumOrganizationCategoryFieldUpdateOperationsInput | $Enums.OrganizationCategory
+    status?: EnumEntityStatusFieldUpdateOperationsInput | $Enums.EntityStatus
+    developmentTier?: IntFieldUpdateOperationsInput | number
+    currentPhase?: IntFieldUpdateOperationsInput | number
+    developmentScores?: NullableJsonNullValueInput | InputJsonValue
+    phaseHistory?: NullableJsonNullValueInput | InputJsonValue
+    infrastructureItems?: NullableJsonNullValueInput | InputJsonValue
+    fundingBalanceZar?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    annualCycleYear?: NullableIntFieldUpdateOperationsInput | number | null
+    annualCycleFocus?: NullableStringFieldUpdateOperationsInput | string | null
+    logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    logoPng?: NullableBytesFieldUpdateOperationsInput | Buffer | null
+    websiteUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    publicPhone?: NullableStringFieldUpdateOperationsInput | string | null
+    quintile?: NullableIntFieldUpdateOperationsInput | number | null
+    teacherCount?: NullableIntFieldUpdateOperationsInput | number | null
+    gpsLat?: NullableFloatFieldUpdateOperationsInput | number | null
+    gpsLng?: NullableFloatFieldUpdateOperationsInput | number | null
+    publicProfile?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    learners?: LearnerUncheckedUpdateManyWithoutSchoolNestedInput
+    submissions?: SubmissionUncheckedUpdateManyWithoutSchoolNestedInput
+    fundingContributions?: FundingContributionUncheckedUpdateManyWithoutSchoolNestedInput
+    volunteers?: SchoolVolunteerUncheckedUpdateManyWithoutSchoolNestedInput
+    events?: SchoolEventUncheckedUpdateManyWithoutSchoolNestedInput
+    alumni?: SchoolAlumniUncheckedUpdateManyWithoutSchoolNestedInput
+    enterpriseProjects?: SchoolEnterpriseProjectUncheckedUpdateManyWithoutSchoolNestedInput
+    innovationChallenges?: SchoolInnovationChallengeUncheckedUpdateManyWithoutSchoolNestedInput
+    crmContacts?: SchoolCrmContactUncheckedUpdateManyWithoutSchoolNestedInput
+    crmActivities?: SchoolCrmActivityUncheckedUpdateManyWithoutSchoolNestedInput
+    crmTasks?: SchoolCrmTaskUncheckedUpdateManyWithoutSchoolNestedInput
+    adminUser?: UserUncheckedUpdateOneWithoutSchoolNestedInput
+    verification?: SchoolVerificationUncheckedUpdateOneWithoutSchoolNestedInput
+  }
+
+  export type SchoolCreateWithoutVolunteersInput = {
+    id?: string
+    name: string
+    province: string
+    district: string
+    principalName: string
+    contactEmail?: string | null
+    whatsappPhone: string
+    schoolCode: string
+    organizationCategory?: $Enums.OrganizationCategory
+    status?: $Enums.EntityStatus
+    developmentTier?: number
+    currentPhase?: number
+    developmentScores?: NullableJsonNullValueInput | InputJsonValue
+    phaseHistory?: NullableJsonNullValueInput | InputJsonValue
+    infrastructureItems?: NullableJsonNullValueInput | InputJsonValue
+    fundingBalanceZar?: Decimal | DecimalJsLike | number | string
+    annualCycleYear?: number | null
+    annualCycleFocus?: string | null
+    logoUrl?: string | null
+    logoPng?: Buffer | null
+    websiteUrl?: string | null
+    publicPhone?: string | null
+    quintile?: number | null
+    teacherCount?: number | null
+    gpsLat?: number | null
+    gpsLng?: number | null
+    publicProfile?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    learners?: LearnerCreateNestedManyWithoutSchoolInput
+    submissions?: SubmissionCreateNestedManyWithoutSchoolInput
+    fundingContributions?: FundingContributionCreateNestedManyWithoutSchoolInput
+    submittedNeeds?: SchoolSubmittedNeedCreateNestedManyWithoutSchoolInput
+    events?: SchoolEventCreateNestedManyWithoutSchoolInput
+    alumni?: SchoolAlumniCreateNestedManyWithoutSchoolInput
+    enterpriseProjects?: SchoolEnterpriseProjectCreateNestedManyWithoutSchoolInput
+    innovationChallenges?: SchoolInnovationChallengeCreateNestedManyWithoutSchoolInput
+    crmContacts?: SchoolCrmContactCreateNestedManyWithoutSchoolInput
+    crmActivities?: SchoolCrmActivityCreateNestedManyWithoutSchoolInput
+    crmTasks?: SchoolCrmTaskCreateNestedManyWithoutSchoolInput
+    adminUser?: UserCreateNestedOneWithoutSchoolInput
+    verification?: SchoolVerificationCreateNestedOneWithoutSchoolInput
+  }
+
+  export type SchoolUncheckedCreateWithoutVolunteersInput = {
+    id?: string
+    name: string
+    province: string
+    district: string
+    principalName: string
+    contactEmail?: string | null
+    whatsappPhone: string
+    schoolCode: string
+    organizationCategory?: $Enums.OrganizationCategory
+    status?: $Enums.EntityStatus
+    developmentTier?: number
+    currentPhase?: number
+    developmentScores?: NullableJsonNullValueInput | InputJsonValue
+    phaseHistory?: NullableJsonNullValueInput | InputJsonValue
+    infrastructureItems?: NullableJsonNullValueInput | InputJsonValue
+    fundingBalanceZar?: Decimal | DecimalJsLike | number | string
+    annualCycleYear?: number | null
+    annualCycleFocus?: string | null
+    logoUrl?: string | null
+    logoPng?: Buffer | null
+    websiteUrl?: string | null
+    publicPhone?: string | null
+    quintile?: number | null
+    teacherCount?: number | null
+    gpsLat?: number | null
+    gpsLng?: number | null
+    publicProfile?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    learners?: LearnerUncheckedCreateNestedManyWithoutSchoolInput
+    submissions?: SubmissionUncheckedCreateNestedManyWithoutSchoolInput
+    fundingContributions?: FundingContributionUncheckedCreateNestedManyWithoutSchoolInput
+    submittedNeeds?: SchoolSubmittedNeedUncheckedCreateNestedManyWithoutSchoolInput
+    events?: SchoolEventUncheckedCreateNestedManyWithoutSchoolInput
+    alumni?: SchoolAlumniUncheckedCreateNestedManyWithoutSchoolInput
+    enterpriseProjects?: SchoolEnterpriseProjectUncheckedCreateNestedManyWithoutSchoolInput
+    innovationChallenges?: SchoolInnovationChallengeUncheckedCreateNestedManyWithoutSchoolInput
+    crmContacts?: SchoolCrmContactUncheckedCreateNestedManyWithoutSchoolInput
+    crmActivities?: SchoolCrmActivityUncheckedCreateNestedManyWithoutSchoolInput
+    crmTasks?: SchoolCrmTaskUncheckedCreateNestedManyWithoutSchoolInput
+    adminUser?: UserUncheckedCreateNestedOneWithoutSchoolInput
+    verification?: SchoolVerificationUncheckedCreateNestedOneWithoutSchoolInput
+  }
+
+  export type SchoolCreateOrConnectWithoutVolunteersInput = {
+    where: SchoolWhereUniqueInput
+    create: XOR<SchoolCreateWithoutVolunteersInput, SchoolUncheckedCreateWithoutVolunteersInput>
+  }
+
+  export type SchoolEventVolunteerCreateWithoutVolunteerInput = {
+    id?: string
+    role?: string | null
+    createdAt?: Date | string
+    event: SchoolEventCreateNestedOneWithoutAssignmentsInput
+  }
+
+  export type SchoolEventVolunteerUncheckedCreateWithoutVolunteerInput = {
+    id?: string
+    eventId: string
+    role?: string | null
+    createdAt?: Date | string
+  }
+
+  export type SchoolEventVolunteerCreateOrConnectWithoutVolunteerInput = {
+    where: SchoolEventVolunteerWhereUniqueInput
+    create: XOR<SchoolEventVolunteerCreateWithoutVolunteerInput, SchoolEventVolunteerUncheckedCreateWithoutVolunteerInput>
+  }
+
+  export type SchoolEventVolunteerCreateManyVolunteerInputEnvelope = {
+    data: SchoolEventVolunteerCreateManyVolunteerInput | SchoolEventVolunteerCreateManyVolunteerInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type SchoolUpsertWithoutVolunteersInput = {
+    update: XOR<SchoolUpdateWithoutVolunteersInput, SchoolUncheckedUpdateWithoutVolunteersInput>
+    create: XOR<SchoolCreateWithoutVolunteersInput, SchoolUncheckedCreateWithoutVolunteersInput>
+    where?: SchoolWhereInput
+  }
+
+  export type SchoolUpdateToOneWithWhereWithoutVolunteersInput = {
+    where?: SchoolWhereInput
+    data: XOR<SchoolUpdateWithoutVolunteersInput, SchoolUncheckedUpdateWithoutVolunteersInput>
+  }
+
+  export type SchoolUpdateWithoutVolunteersInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    province?: StringFieldUpdateOperationsInput | string
+    district?: StringFieldUpdateOperationsInput | string
+    principalName?: StringFieldUpdateOperationsInput | string
+    contactEmail?: NullableStringFieldUpdateOperationsInput | string | null
+    whatsappPhone?: StringFieldUpdateOperationsInput | string
+    schoolCode?: StringFieldUpdateOperationsInput | string
+    organizationCategory?: EnumOrganizationCategoryFieldUpdateOperationsInput | $Enums.OrganizationCategory
+    status?: EnumEntityStatusFieldUpdateOperationsInput | $Enums.EntityStatus
+    developmentTier?: IntFieldUpdateOperationsInput | number
+    currentPhase?: IntFieldUpdateOperationsInput | number
+    developmentScores?: NullableJsonNullValueInput | InputJsonValue
+    phaseHistory?: NullableJsonNullValueInput | InputJsonValue
+    infrastructureItems?: NullableJsonNullValueInput | InputJsonValue
+    fundingBalanceZar?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    annualCycleYear?: NullableIntFieldUpdateOperationsInput | number | null
+    annualCycleFocus?: NullableStringFieldUpdateOperationsInput | string | null
+    logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    logoPng?: NullableBytesFieldUpdateOperationsInput | Buffer | null
+    websiteUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    publicPhone?: NullableStringFieldUpdateOperationsInput | string | null
+    quintile?: NullableIntFieldUpdateOperationsInput | number | null
+    teacherCount?: NullableIntFieldUpdateOperationsInput | number | null
+    gpsLat?: NullableFloatFieldUpdateOperationsInput | number | null
+    gpsLng?: NullableFloatFieldUpdateOperationsInput | number | null
+    publicProfile?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    learners?: LearnerUpdateManyWithoutSchoolNestedInput
+    submissions?: SubmissionUpdateManyWithoutSchoolNestedInput
+    fundingContributions?: FundingContributionUpdateManyWithoutSchoolNestedInput
+    submittedNeeds?: SchoolSubmittedNeedUpdateManyWithoutSchoolNestedInput
+    events?: SchoolEventUpdateManyWithoutSchoolNestedInput
+    alumni?: SchoolAlumniUpdateManyWithoutSchoolNestedInput
+    enterpriseProjects?: SchoolEnterpriseProjectUpdateManyWithoutSchoolNestedInput
+    innovationChallenges?: SchoolInnovationChallengeUpdateManyWithoutSchoolNestedInput
+    crmContacts?: SchoolCrmContactUpdateManyWithoutSchoolNestedInput
+    crmActivities?: SchoolCrmActivityUpdateManyWithoutSchoolNestedInput
+    crmTasks?: SchoolCrmTaskUpdateManyWithoutSchoolNestedInput
+    adminUser?: UserUpdateOneWithoutSchoolNestedInput
+    verification?: SchoolVerificationUpdateOneWithoutSchoolNestedInput
+  }
+
+  export type SchoolUncheckedUpdateWithoutVolunteersInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    province?: StringFieldUpdateOperationsInput | string
+    district?: StringFieldUpdateOperationsInput | string
+    principalName?: StringFieldUpdateOperationsInput | string
+    contactEmail?: NullableStringFieldUpdateOperationsInput | string | null
+    whatsappPhone?: StringFieldUpdateOperationsInput | string
+    schoolCode?: StringFieldUpdateOperationsInput | string
+    organizationCategory?: EnumOrganizationCategoryFieldUpdateOperationsInput | $Enums.OrganizationCategory
+    status?: EnumEntityStatusFieldUpdateOperationsInput | $Enums.EntityStatus
+    developmentTier?: IntFieldUpdateOperationsInput | number
+    currentPhase?: IntFieldUpdateOperationsInput | number
+    developmentScores?: NullableJsonNullValueInput | InputJsonValue
+    phaseHistory?: NullableJsonNullValueInput | InputJsonValue
+    infrastructureItems?: NullableJsonNullValueInput | InputJsonValue
+    fundingBalanceZar?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    annualCycleYear?: NullableIntFieldUpdateOperationsInput | number | null
+    annualCycleFocus?: NullableStringFieldUpdateOperationsInput | string | null
+    logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    logoPng?: NullableBytesFieldUpdateOperationsInput | Buffer | null
+    websiteUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    publicPhone?: NullableStringFieldUpdateOperationsInput | string | null
+    quintile?: NullableIntFieldUpdateOperationsInput | number | null
+    teacherCount?: NullableIntFieldUpdateOperationsInput | number | null
+    gpsLat?: NullableFloatFieldUpdateOperationsInput | number | null
+    gpsLng?: NullableFloatFieldUpdateOperationsInput | number | null
+    publicProfile?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    learners?: LearnerUncheckedUpdateManyWithoutSchoolNestedInput
+    submissions?: SubmissionUncheckedUpdateManyWithoutSchoolNestedInput
+    fundingContributions?: FundingContributionUncheckedUpdateManyWithoutSchoolNestedInput
+    submittedNeeds?: SchoolSubmittedNeedUncheckedUpdateManyWithoutSchoolNestedInput
+    events?: SchoolEventUncheckedUpdateManyWithoutSchoolNestedInput
+    alumni?: SchoolAlumniUncheckedUpdateManyWithoutSchoolNestedInput
+    enterpriseProjects?: SchoolEnterpriseProjectUncheckedUpdateManyWithoutSchoolNestedInput
+    innovationChallenges?: SchoolInnovationChallengeUncheckedUpdateManyWithoutSchoolNestedInput
+    crmContacts?: SchoolCrmContactUncheckedUpdateManyWithoutSchoolNestedInput
+    crmActivities?: SchoolCrmActivityUncheckedUpdateManyWithoutSchoolNestedInput
+    crmTasks?: SchoolCrmTaskUncheckedUpdateManyWithoutSchoolNestedInput
+    adminUser?: UserUncheckedUpdateOneWithoutSchoolNestedInput
+    verification?: SchoolVerificationUncheckedUpdateOneWithoutSchoolNestedInput
+  }
+
+  export type SchoolEventVolunteerUpsertWithWhereUniqueWithoutVolunteerInput = {
+    where: SchoolEventVolunteerWhereUniqueInput
+    update: XOR<SchoolEventVolunteerUpdateWithoutVolunteerInput, SchoolEventVolunteerUncheckedUpdateWithoutVolunteerInput>
+    create: XOR<SchoolEventVolunteerCreateWithoutVolunteerInput, SchoolEventVolunteerUncheckedCreateWithoutVolunteerInput>
+  }
+
+  export type SchoolEventVolunteerUpdateWithWhereUniqueWithoutVolunteerInput = {
+    where: SchoolEventVolunteerWhereUniqueInput
+    data: XOR<SchoolEventVolunteerUpdateWithoutVolunteerInput, SchoolEventVolunteerUncheckedUpdateWithoutVolunteerInput>
+  }
+
+  export type SchoolEventVolunteerUpdateManyWithWhereWithoutVolunteerInput = {
+    where: SchoolEventVolunteerScalarWhereInput
+    data: XOR<SchoolEventVolunteerUpdateManyMutationInput, SchoolEventVolunteerUncheckedUpdateManyWithoutVolunteerInput>
+  }
+
+  export type SchoolEventVolunteerScalarWhereInput = {
+    AND?: SchoolEventVolunteerScalarWhereInput | SchoolEventVolunteerScalarWhereInput[]
+    OR?: SchoolEventVolunteerScalarWhereInput[]
+    NOT?: SchoolEventVolunteerScalarWhereInput | SchoolEventVolunteerScalarWhereInput[]
+    id?: StringFilter<"SchoolEventVolunteer"> | string
+    eventId?: StringFilter<"SchoolEventVolunteer"> | string
+    volunteerId?: StringFilter<"SchoolEventVolunteer"> | string
+    role?: StringNullableFilter<"SchoolEventVolunteer"> | string | null
+    createdAt?: DateTimeFilter<"SchoolEventVolunteer"> | Date | string
+  }
+
+  export type SchoolCreateWithoutEventsInput = {
+    id?: string
+    name: string
+    province: string
+    district: string
+    principalName: string
+    contactEmail?: string | null
+    whatsappPhone: string
+    schoolCode: string
+    organizationCategory?: $Enums.OrganizationCategory
+    status?: $Enums.EntityStatus
+    developmentTier?: number
+    currentPhase?: number
+    developmentScores?: NullableJsonNullValueInput | InputJsonValue
+    phaseHistory?: NullableJsonNullValueInput | InputJsonValue
+    infrastructureItems?: NullableJsonNullValueInput | InputJsonValue
+    fundingBalanceZar?: Decimal | DecimalJsLike | number | string
+    annualCycleYear?: number | null
+    annualCycleFocus?: string | null
+    logoUrl?: string | null
+    logoPng?: Buffer | null
+    websiteUrl?: string | null
+    publicPhone?: string | null
+    quintile?: number | null
+    teacherCount?: number | null
+    gpsLat?: number | null
+    gpsLng?: number | null
+    publicProfile?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    learners?: LearnerCreateNestedManyWithoutSchoolInput
+    submissions?: SubmissionCreateNestedManyWithoutSchoolInput
+    fundingContributions?: FundingContributionCreateNestedManyWithoutSchoolInput
+    submittedNeeds?: SchoolSubmittedNeedCreateNestedManyWithoutSchoolInput
+    volunteers?: SchoolVolunteerCreateNestedManyWithoutSchoolInput
+    alumni?: SchoolAlumniCreateNestedManyWithoutSchoolInput
+    enterpriseProjects?: SchoolEnterpriseProjectCreateNestedManyWithoutSchoolInput
+    innovationChallenges?: SchoolInnovationChallengeCreateNestedManyWithoutSchoolInput
+    crmContacts?: SchoolCrmContactCreateNestedManyWithoutSchoolInput
+    crmActivities?: SchoolCrmActivityCreateNestedManyWithoutSchoolInput
+    crmTasks?: SchoolCrmTaskCreateNestedManyWithoutSchoolInput
+    adminUser?: UserCreateNestedOneWithoutSchoolInput
+    verification?: SchoolVerificationCreateNestedOneWithoutSchoolInput
+  }
+
+  export type SchoolUncheckedCreateWithoutEventsInput = {
+    id?: string
+    name: string
+    province: string
+    district: string
+    principalName: string
+    contactEmail?: string | null
+    whatsappPhone: string
+    schoolCode: string
+    organizationCategory?: $Enums.OrganizationCategory
+    status?: $Enums.EntityStatus
+    developmentTier?: number
+    currentPhase?: number
+    developmentScores?: NullableJsonNullValueInput | InputJsonValue
+    phaseHistory?: NullableJsonNullValueInput | InputJsonValue
+    infrastructureItems?: NullableJsonNullValueInput | InputJsonValue
+    fundingBalanceZar?: Decimal | DecimalJsLike | number | string
+    annualCycleYear?: number | null
+    annualCycleFocus?: string | null
+    logoUrl?: string | null
+    logoPng?: Buffer | null
+    websiteUrl?: string | null
+    publicPhone?: string | null
+    quintile?: number | null
+    teacherCount?: number | null
+    gpsLat?: number | null
+    gpsLng?: number | null
+    publicProfile?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    learners?: LearnerUncheckedCreateNestedManyWithoutSchoolInput
+    submissions?: SubmissionUncheckedCreateNestedManyWithoutSchoolInput
+    fundingContributions?: FundingContributionUncheckedCreateNestedManyWithoutSchoolInput
+    submittedNeeds?: SchoolSubmittedNeedUncheckedCreateNestedManyWithoutSchoolInput
+    volunteers?: SchoolVolunteerUncheckedCreateNestedManyWithoutSchoolInput
+    alumni?: SchoolAlumniUncheckedCreateNestedManyWithoutSchoolInput
+    enterpriseProjects?: SchoolEnterpriseProjectUncheckedCreateNestedManyWithoutSchoolInput
+    innovationChallenges?: SchoolInnovationChallengeUncheckedCreateNestedManyWithoutSchoolInput
+    crmContacts?: SchoolCrmContactUncheckedCreateNestedManyWithoutSchoolInput
+    crmActivities?: SchoolCrmActivityUncheckedCreateNestedManyWithoutSchoolInput
+    crmTasks?: SchoolCrmTaskUncheckedCreateNestedManyWithoutSchoolInput
+    adminUser?: UserUncheckedCreateNestedOneWithoutSchoolInput
+    verification?: SchoolVerificationUncheckedCreateNestedOneWithoutSchoolInput
+  }
+
+  export type SchoolCreateOrConnectWithoutEventsInput = {
+    where: SchoolWhereUniqueInput
+    create: XOR<SchoolCreateWithoutEventsInput, SchoolUncheckedCreateWithoutEventsInput>
+  }
+
+  export type SchoolEventVolunteerCreateWithoutEventInput = {
+    id?: string
+    role?: string | null
+    createdAt?: Date | string
+    volunteer: SchoolVolunteerCreateNestedOneWithoutAssignmentsInput
+  }
+
+  export type SchoolEventVolunteerUncheckedCreateWithoutEventInput = {
+    id?: string
+    volunteerId: string
+    role?: string | null
+    createdAt?: Date | string
+  }
+
+  export type SchoolEventVolunteerCreateOrConnectWithoutEventInput = {
+    where: SchoolEventVolunteerWhereUniqueInput
+    create: XOR<SchoolEventVolunteerCreateWithoutEventInput, SchoolEventVolunteerUncheckedCreateWithoutEventInput>
+  }
+
+  export type SchoolEventVolunteerCreateManyEventInputEnvelope = {
+    data: SchoolEventVolunteerCreateManyEventInput | SchoolEventVolunteerCreateManyEventInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type SchoolUpsertWithoutEventsInput = {
+    update: XOR<SchoolUpdateWithoutEventsInput, SchoolUncheckedUpdateWithoutEventsInput>
+    create: XOR<SchoolCreateWithoutEventsInput, SchoolUncheckedCreateWithoutEventsInput>
+    where?: SchoolWhereInput
+  }
+
+  export type SchoolUpdateToOneWithWhereWithoutEventsInput = {
+    where?: SchoolWhereInput
+    data: XOR<SchoolUpdateWithoutEventsInput, SchoolUncheckedUpdateWithoutEventsInput>
+  }
+
+  export type SchoolUpdateWithoutEventsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    province?: StringFieldUpdateOperationsInput | string
+    district?: StringFieldUpdateOperationsInput | string
+    principalName?: StringFieldUpdateOperationsInput | string
+    contactEmail?: NullableStringFieldUpdateOperationsInput | string | null
+    whatsappPhone?: StringFieldUpdateOperationsInput | string
+    schoolCode?: StringFieldUpdateOperationsInput | string
+    organizationCategory?: EnumOrganizationCategoryFieldUpdateOperationsInput | $Enums.OrganizationCategory
+    status?: EnumEntityStatusFieldUpdateOperationsInput | $Enums.EntityStatus
+    developmentTier?: IntFieldUpdateOperationsInput | number
+    currentPhase?: IntFieldUpdateOperationsInput | number
+    developmentScores?: NullableJsonNullValueInput | InputJsonValue
+    phaseHistory?: NullableJsonNullValueInput | InputJsonValue
+    infrastructureItems?: NullableJsonNullValueInput | InputJsonValue
+    fundingBalanceZar?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    annualCycleYear?: NullableIntFieldUpdateOperationsInput | number | null
+    annualCycleFocus?: NullableStringFieldUpdateOperationsInput | string | null
+    logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    logoPng?: NullableBytesFieldUpdateOperationsInput | Buffer | null
+    websiteUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    publicPhone?: NullableStringFieldUpdateOperationsInput | string | null
+    quintile?: NullableIntFieldUpdateOperationsInput | number | null
+    teacherCount?: NullableIntFieldUpdateOperationsInput | number | null
+    gpsLat?: NullableFloatFieldUpdateOperationsInput | number | null
+    gpsLng?: NullableFloatFieldUpdateOperationsInput | number | null
+    publicProfile?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    learners?: LearnerUpdateManyWithoutSchoolNestedInput
+    submissions?: SubmissionUpdateManyWithoutSchoolNestedInput
+    fundingContributions?: FundingContributionUpdateManyWithoutSchoolNestedInput
+    submittedNeeds?: SchoolSubmittedNeedUpdateManyWithoutSchoolNestedInput
+    volunteers?: SchoolVolunteerUpdateManyWithoutSchoolNestedInput
+    alumni?: SchoolAlumniUpdateManyWithoutSchoolNestedInput
+    enterpriseProjects?: SchoolEnterpriseProjectUpdateManyWithoutSchoolNestedInput
+    innovationChallenges?: SchoolInnovationChallengeUpdateManyWithoutSchoolNestedInput
+    crmContacts?: SchoolCrmContactUpdateManyWithoutSchoolNestedInput
+    crmActivities?: SchoolCrmActivityUpdateManyWithoutSchoolNestedInput
+    crmTasks?: SchoolCrmTaskUpdateManyWithoutSchoolNestedInput
+    adminUser?: UserUpdateOneWithoutSchoolNestedInput
+    verification?: SchoolVerificationUpdateOneWithoutSchoolNestedInput
+  }
+
+  export type SchoolUncheckedUpdateWithoutEventsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    province?: StringFieldUpdateOperationsInput | string
+    district?: StringFieldUpdateOperationsInput | string
+    principalName?: StringFieldUpdateOperationsInput | string
+    contactEmail?: NullableStringFieldUpdateOperationsInput | string | null
+    whatsappPhone?: StringFieldUpdateOperationsInput | string
+    schoolCode?: StringFieldUpdateOperationsInput | string
+    organizationCategory?: EnumOrganizationCategoryFieldUpdateOperationsInput | $Enums.OrganizationCategory
+    status?: EnumEntityStatusFieldUpdateOperationsInput | $Enums.EntityStatus
+    developmentTier?: IntFieldUpdateOperationsInput | number
+    currentPhase?: IntFieldUpdateOperationsInput | number
+    developmentScores?: NullableJsonNullValueInput | InputJsonValue
+    phaseHistory?: NullableJsonNullValueInput | InputJsonValue
+    infrastructureItems?: NullableJsonNullValueInput | InputJsonValue
+    fundingBalanceZar?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    annualCycleYear?: NullableIntFieldUpdateOperationsInput | number | null
+    annualCycleFocus?: NullableStringFieldUpdateOperationsInput | string | null
+    logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    logoPng?: NullableBytesFieldUpdateOperationsInput | Buffer | null
+    websiteUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    publicPhone?: NullableStringFieldUpdateOperationsInput | string | null
+    quintile?: NullableIntFieldUpdateOperationsInput | number | null
+    teacherCount?: NullableIntFieldUpdateOperationsInput | number | null
+    gpsLat?: NullableFloatFieldUpdateOperationsInput | number | null
+    gpsLng?: NullableFloatFieldUpdateOperationsInput | number | null
+    publicProfile?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    learners?: LearnerUncheckedUpdateManyWithoutSchoolNestedInput
+    submissions?: SubmissionUncheckedUpdateManyWithoutSchoolNestedInput
+    fundingContributions?: FundingContributionUncheckedUpdateManyWithoutSchoolNestedInput
+    submittedNeeds?: SchoolSubmittedNeedUncheckedUpdateManyWithoutSchoolNestedInput
+    volunteers?: SchoolVolunteerUncheckedUpdateManyWithoutSchoolNestedInput
+    alumni?: SchoolAlumniUncheckedUpdateManyWithoutSchoolNestedInput
+    enterpriseProjects?: SchoolEnterpriseProjectUncheckedUpdateManyWithoutSchoolNestedInput
+    innovationChallenges?: SchoolInnovationChallengeUncheckedUpdateManyWithoutSchoolNestedInput
+    crmContacts?: SchoolCrmContactUncheckedUpdateManyWithoutSchoolNestedInput
+    crmActivities?: SchoolCrmActivityUncheckedUpdateManyWithoutSchoolNestedInput
+    crmTasks?: SchoolCrmTaskUncheckedUpdateManyWithoutSchoolNestedInput
+    adminUser?: UserUncheckedUpdateOneWithoutSchoolNestedInput
+    verification?: SchoolVerificationUncheckedUpdateOneWithoutSchoolNestedInput
+  }
+
+  export type SchoolEventVolunteerUpsertWithWhereUniqueWithoutEventInput = {
+    where: SchoolEventVolunteerWhereUniqueInput
+    update: XOR<SchoolEventVolunteerUpdateWithoutEventInput, SchoolEventVolunteerUncheckedUpdateWithoutEventInput>
+    create: XOR<SchoolEventVolunteerCreateWithoutEventInput, SchoolEventVolunteerUncheckedCreateWithoutEventInput>
+  }
+
+  export type SchoolEventVolunteerUpdateWithWhereUniqueWithoutEventInput = {
+    where: SchoolEventVolunteerWhereUniqueInput
+    data: XOR<SchoolEventVolunteerUpdateWithoutEventInput, SchoolEventVolunteerUncheckedUpdateWithoutEventInput>
+  }
+
+  export type SchoolEventVolunteerUpdateManyWithWhereWithoutEventInput = {
+    where: SchoolEventVolunteerScalarWhereInput
+    data: XOR<SchoolEventVolunteerUpdateManyMutationInput, SchoolEventVolunteerUncheckedUpdateManyWithoutEventInput>
+  }
+
+  export type SchoolEventCreateWithoutAssignmentsInput = {
+    id?: string
+    title: string
+    description?: string | null
+    eventType: string
+    location?: string | null
+    startsAt: Date | string
+    endsAt?: Date | string | null
+    volunteerSlots?: number
+    status?: $Enums.SchoolEventStatus
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    school: SchoolCreateNestedOneWithoutEventsInput
+  }
+
+  export type SchoolEventUncheckedCreateWithoutAssignmentsInput = {
+    id?: string
+    schoolId: string
+    title: string
+    description?: string | null
+    eventType: string
+    location?: string | null
+    startsAt: Date | string
+    endsAt?: Date | string | null
+    volunteerSlots?: number
+    status?: $Enums.SchoolEventStatus
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type SchoolEventCreateOrConnectWithoutAssignmentsInput = {
+    where: SchoolEventWhereUniqueInput
+    create: XOR<SchoolEventCreateWithoutAssignmentsInput, SchoolEventUncheckedCreateWithoutAssignmentsInput>
+  }
+
+  export type SchoolVolunteerCreateWithoutAssignmentsInput = {
+    id?: string
+    fullName: string
+    role: string
+    phone?: string | null
+    email?: string | null
+    skills?: string | null
+    hoursLogged?: number
+    status?: $Enums.SchoolVolunteerStatus
+    notes?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    school: SchoolCreateNestedOneWithoutVolunteersInput
+  }
+
+  export type SchoolVolunteerUncheckedCreateWithoutAssignmentsInput = {
+    id?: string
+    schoolId: string
+    fullName: string
+    role: string
+    phone?: string | null
+    email?: string | null
+    skills?: string | null
+    hoursLogged?: number
+    status?: $Enums.SchoolVolunteerStatus
+    notes?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type SchoolVolunteerCreateOrConnectWithoutAssignmentsInput = {
+    where: SchoolVolunteerWhereUniqueInput
+    create: XOR<SchoolVolunteerCreateWithoutAssignmentsInput, SchoolVolunteerUncheckedCreateWithoutAssignmentsInput>
+  }
+
+  export type SchoolEventUpsertWithoutAssignmentsInput = {
+    update: XOR<SchoolEventUpdateWithoutAssignmentsInput, SchoolEventUncheckedUpdateWithoutAssignmentsInput>
+    create: XOR<SchoolEventCreateWithoutAssignmentsInput, SchoolEventUncheckedCreateWithoutAssignmentsInput>
+    where?: SchoolEventWhereInput
+  }
+
+  export type SchoolEventUpdateToOneWithWhereWithoutAssignmentsInput = {
+    where?: SchoolEventWhereInput
+    data: XOR<SchoolEventUpdateWithoutAssignmentsInput, SchoolEventUncheckedUpdateWithoutAssignmentsInput>
+  }
+
+  export type SchoolEventUpdateWithoutAssignmentsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    eventType?: StringFieldUpdateOperationsInput | string
+    location?: NullableStringFieldUpdateOperationsInput | string | null
+    startsAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    endsAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    volunteerSlots?: IntFieldUpdateOperationsInput | number
+    status?: EnumSchoolEventStatusFieldUpdateOperationsInput | $Enums.SchoolEventStatus
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    school?: SchoolUpdateOneRequiredWithoutEventsNestedInput
+  }
+
+  export type SchoolEventUncheckedUpdateWithoutAssignmentsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    schoolId?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    eventType?: StringFieldUpdateOperationsInput | string
+    location?: NullableStringFieldUpdateOperationsInput | string | null
+    startsAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    endsAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    volunteerSlots?: IntFieldUpdateOperationsInput | number
+    status?: EnumSchoolEventStatusFieldUpdateOperationsInput | $Enums.SchoolEventStatus
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type SchoolVolunteerUpsertWithoutAssignmentsInput = {
+    update: XOR<SchoolVolunteerUpdateWithoutAssignmentsInput, SchoolVolunteerUncheckedUpdateWithoutAssignmentsInput>
+    create: XOR<SchoolVolunteerCreateWithoutAssignmentsInput, SchoolVolunteerUncheckedCreateWithoutAssignmentsInput>
+    where?: SchoolVolunteerWhereInput
+  }
+
+  export type SchoolVolunteerUpdateToOneWithWhereWithoutAssignmentsInput = {
+    where?: SchoolVolunteerWhereInput
+    data: XOR<SchoolVolunteerUpdateWithoutAssignmentsInput, SchoolVolunteerUncheckedUpdateWithoutAssignmentsInput>
+  }
+
+  export type SchoolVolunteerUpdateWithoutAssignmentsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    fullName?: StringFieldUpdateOperationsInput | string
+    role?: StringFieldUpdateOperationsInput | string
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    skills?: NullableStringFieldUpdateOperationsInput | string | null
+    hoursLogged?: IntFieldUpdateOperationsInput | number
+    status?: EnumSchoolVolunteerStatusFieldUpdateOperationsInput | $Enums.SchoolVolunteerStatus
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    school?: SchoolUpdateOneRequiredWithoutVolunteersNestedInput
+  }
+
+  export type SchoolVolunteerUncheckedUpdateWithoutAssignmentsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    schoolId?: StringFieldUpdateOperationsInput | string
+    fullName?: StringFieldUpdateOperationsInput | string
+    role?: StringFieldUpdateOperationsInput | string
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    skills?: NullableStringFieldUpdateOperationsInput | string | null
+    hoursLogged?: IntFieldUpdateOperationsInput | number
+    status?: EnumSchoolVolunteerStatusFieldUpdateOperationsInput | $Enums.SchoolVolunteerStatus
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type SchoolCreateWithoutAlumniInput = {
+    id?: string
+    name: string
+    province: string
+    district: string
+    principalName: string
+    contactEmail?: string | null
+    whatsappPhone: string
+    schoolCode: string
+    organizationCategory?: $Enums.OrganizationCategory
+    status?: $Enums.EntityStatus
+    developmentTier?: number
+    currentPhase?: number
+    developmentScores?: NullableJsonNullValueInput | InputJsonValue
+    phaseHistory?: NullableJsonNullValueInput | InputJsonValue
+    infrastructureItems?: NullableJsonNullValueInput | InputJsonValue
+    fundingBalanceZar?: Decimal | DecimalJsLike | number | string
+    annualCycleYear?: number | null
+    annualCycleFocus?: string | null
+    logoUrl?: string | null
+    logoPng?: Buffer | null
+    websiteUrl?: string | null
+    publicPhone?: string | null
+    quintile?: number | null
+    teacherCount?: number | null
+    gpsLat?: number | null
+    gpsLng?: number | null
+    publicProfile?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    learners?: LearnerCreateNestedManyWithoutSchoolInput
+    submissions?: SubmissionCreateNestedManyWithoutSchoolInput
+    fundingContributions?: FundingContributionCreateNestedManyWithoutSchoolInput
+    submittedNeeds?: SchoolSubmittedNeedCreateNestedManyWithoutSchoolInput
+    volunteers?: SchoolVolunteerCreateNestedManyWithoutSchoolInput
+    events?: SchoolEventCreateNestedManyWithoutSchoolInput
+    enterpriseProjects?: SchoolEnterpriseProjectCreateNestedManyWithoutSchoolInput
+    innovationChallenges?: SchoolInnovationChallengeCreateNestedManyWithoutSchoolInput
+    crmContacts?: SchoolCrmContactCreateNestedManyWithoutSchoolInput
+    crmActivities?: SchoolCrmActivityCreateNestedManyWithoutSchoolInput
+    crmTasks?: SchoolCrmTaskCreateNestedManyWithoutSchoolInput
+    adminUser?: UserCreateNestedOneWithoutSchoolInput
+    verification?: SchoolVerificationCreateNestedOneWithoutSchoolInput
+  }
+
+  export type SchoolUncheckedCreateWithoutAlumniInput = {
+    id?: string
+    name: string
+    province: string
+    district: string
+    principalName: string
+    contactEmail?: string | null
+    whatsappPhone: string
+    schoolCode: string
+    organizationCategory?: $Enums.OrganizationCategory
+    status?: $Enums.EntityStatus
+    developmentTier?: number
+    currentPhase?: number
+    developmentScores?: NullableJsonNullValueInput | InputJsonValue
+    phaseHistory?: NullableJsonNullValueInput | InputJsonValue
+    infrastructureItems?: NullableJsonNullValueInput | InputJsonValue
+    fundingBalanceZar?: Decimal | DecimalJsLike | number | string
+    annualCycleYear?: number | null
+    annualCycleFocus?: string | null
+    logoUrl?: string | null
+    logoPng?: Buffer | null
+    websiteUrl?: string | null
+    publicPhone?: string | null
+    quintile?: number | null
+    teacherCount?: number | null
+    gpsLat?: number | null
+    gpsLng?: number | null
+    publicProfile?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    learners?: LearnerUncheckedCreateNestedManyWithoutSchoolInput
+    submissions?: SubmissionUncheckedCreateNestedManyWithoutSchoolInput
+    fundingContributions?: FundingContributionUncheckedCreateNestedManyWithoutSchoolInput
+    submittedNeeds?: SchoolSubmittedNeedUncheckedCreateNestedManyWithoutSchoolInput
+    volunteers?: SchoolVolunteerUncheckedCreateNestedManyWithoutSchoolInput
+    events?: SchoolEventUncheckedCreateNestedManyWithoutSchoolInput
+    enterpriseProjects?: SchoolEnterpriseProjectUncheckedCreateNestedManyWithoutSchoolInput
+    innovationChallenges?: SchoolInnovationChallengeUncheckedCreateNestedManyWithoutSchoolInput
+    crmContacts?: SchoolCrmContactUncheckedCreateNestedManyWithoutSchoolInput
+    crmActivities?: SchoolCrmActivityUncheckedCreateNestedManyWithoutSchoolInput
+    crmTasks?: SchoolCrmTaskUncheckedCreateNestedManyWithoutSchoolInput
+    adminUser?: UserUncheckedCreateNestedOneWithoutSchoolInput
+    verification?: SchoolVerificationUncheckedCreateNestedOneWithoutSchoolInput
+  }
+
+  export type SchoolCreateOrConnectWithoutAlumniInput = {
+    where: SchoolWhereUniqueInput
+    create: XOR<SchoolCreateWithoutAlumniInput, SchoolUncheckedCreateWithoutAlumniInput>
+  }
+
+  export type SchoolUpsertWithoutAlumniInput = {
+    update: XOR<SchoolUpdateWithoutAlumniInput, SchoolUncheckedUpdateWithoutAlumniInput>
+    create: XOR<SchoolCreateWithoutAlumniInput, SchoolUncheckedCreateWithoutAlumniInput>
+    where?: SchoolWhereInput
+  }
+
+  export type SchoolUpdateToOneWithWhereWithoutAlumniInput = {
+    where?: SchoolWhereInput
+    data: XOR<SchoolUpdateWithoutAlumniInput, SchoolUncheckedUpdateWithoutAlumniInput>
+  }
+
+  export type SchoolUpdateWithoutAlumniInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    province?: StringFieldUpdateOperationsInput | string
+    district?: StringFieldUpdateOperationsInput | string
+    principalName?: StringFieldUpdateOperationsInput | string
+    contactEmail?: NullableStringFieldUpdateOperationsInput | string | null
+    whatsappPhone?: StringFieldUpdateOperationsInput | string
+    schoolCode?: StringFieldUpdateOperationsInput | string
+    organizationCategory?: EnumOrganizationCategoryFieldUpdateOperationsInput | $Enums.OrganizationCategory
+    status?: EnumEntityStatusFieldUpdateOperationsInput | $Enums.EntityStatus
+    developmentTier?: IntFieldUpdateOperationsInput | number
+    currentPhase?: IntFieldUpdateOperationsInput | number
+    developmentScores?: NullableJsonNullValueInput | InputJsonValue
+    phaseHistory?: NullableJsonNullValueInput | InputJsonValue
+    infrastructureItems?: NullableJsonNullValueInput | InputJsonValue
+    fundingBalanceZar?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    annualCycleYear?: NullableIntFieldUpdateOperationsInput | number | null
+    annualCycleFocus?: NullableStringFieldUpdateOperationsInput | string | null
+    logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    logoPng?: NullableBytesFieldUpdateOperationsInput | Buffer | null
+    websiteUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    publicPhone?: NullableStringFieldUpdateOperationsInput | string | null
+    quintile?: NullableIntFieldUpdateOperationsInput | number | null
+    teacherCount?: NullableIntFieldUpdateOperationsInput | number | null
+    gpsLat?: NullableFloatFieldUpdateOperationsInput | number | null
+    gpsLng?: NullableFloatFieldUpdateOperationsInput | number | null
+    publicProfile?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    learners?: LearnerUpdateManyWithoutSchoolNestedInput
+    submissions?: SubmissionUpdateManyWithoutSchoolNestedInput
+    fundingContributions?: FundingContributionUpdateManyWithoutSchoolNestedInput
+    submittedNeeds?: SchoolSubmittedNeedUpdateManyWithoutSchoolNestedInput
+    volunteers?: SchoolVolunteerUpdateManyWithoutSchoolNestedInput
+    events?: SchoolEventUpdateManyWithoutSchoolNestedInput
+    enterpriseProjects?: SchoolEnterpriseProjectUpdateManyWithoutSchoolNestedInput
+    innovationChallenges?: SchoolInnovationChallengeUpdateManyWithoutSchoolNestedInput
+    crmContacts?: SchoolCrmContactUpdateManyWithoutSchoolNestedInput
+    crmActivities?: SchoolCrmActivityUpdateManyWithoutSchoolNestedInput
+    crmTasks?: SchoolCrmTaskUpdateManyWithoutSchoolNestedInput
+    adminUser?: UserUpdateOneWithoutSchoolNestedInput
+    verification?: SchoolVerificationUpdateOneWithoutSchoolNestedInput
+  }
+
+  export type SchoolUncheckedUpdateWithoutAlumniInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    province?: StringFieldUpdateOperationsInput | string
+    district?: StringFieldUpdateOperationsInput | string
+    principalName?: StringFieldUpdateOperationsInput | string
+    contactEmail?: NullableStringFieldUpdateOperationsInput | string | null
+    whatsappPhone?: StringFieldUpdateOperationsInput | string
+    schoolCode?: StringFieldUpdateOperationsInput | string
+    organizationCategory?: EnumOrganizationCategoryFieldUpdateOperationsInput | $Enums.OrganizationCategory
+    status?: EnumEntityStatusFieldUpdateOperationsInput | $Enums.EntityStatus
+    developmentTier?: IntFieldUpdateOperationsInput | number
+    currentPhase?: IntFieldUpdateOperationsInput | number
+    developmentScores?: NullableJsonNullValueInput | InputJsonValue
+    phaseHistory?: NullableJsonNullValueInput | InputJsonValue
+    infrastructureItems?: NullableJsonNullValueInput | InputJsonValue
+    fundingBalanceZar?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    annualCycleYear?: NullableIntFieldUpdateOperationsInput | number | null
+    annualCycleFocus?: NullableStringFieldUpdateOperationsInput | string | null
+    logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    logoPng?: NullableBytesFieldUpdateOperationsInput | Buffer | null
+    websiteUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    publicPhone?: NullableStringFieldUpdateOperationsInput | string | null
+    quintile?: NullableIntFieldUpdateOperationsInput | number | null
+    teacherCount?: NullableIntFieldUpdateOperationsInput | number | null
+    gpsLat?: NullableFloatFieldUpdateOperationsInput | number | null
+    gpsLng?: NullableFloatFieldUpdateOperationsInput | number | null
+    publicProfile?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    learners?: LearnerUncheckedUpdateManyWithoutSchoolNestedInput
+    submissions?: SubmissionUncheckedUpdateManyWithoutSchoolNestedInput
+    fundingContributions?: FundingContributionUncheckedUpdateManyWithoutSchoolNestedInput
+    submittedNeeds?: SchoolSubmittedNeedUncheckedUpdateManyWithoutSchoolNestedInput
+    volunteers?: SchoolVolunteerUncheckedUpdateManyWithoutSchoolNestedInput
+    events?: SchoolEventUncheckedUpdateManyWithoutSchoolNestedInput
+    enterpriseProjects?: SchoolEnterpriseProjectUncheckedUpdateManyWithoutSchoolNestedInput
+    innovationChallenges?: SchoolInnovationChallengeUncheckedUpdateManyWithoutSchoolNestedInput
+    crmContacts?: SchoolCrmContactUncheckedUpdateManyWithoutSchoolNestedInput
+    crmActivities?: SchoolCrmActivityUncheckedUpdateManyWithoutSchoolNestedInput
+    crmTasks?: SchoolCrmTaskUncheckedUpdateManyWithoutSchoolNestedInput
+    adminUser?: UserUncheckedUpdateOneWithoutSchoolNestedInput
+    verification?: SchoolVerificationUncheckedUpdateOneWithoutSchoolNestedInput
+  }
+
+  export type SchoolCreateWithoutInnovationChallengesInput = {
+    id?: string
+    name: string
+    province: string
+    district: string
+    principalName: string
+    contactEmail?: string | null
+    whatsappPhone: string
+    schoolCode: string
+    organizationCategory?: $Enums.OrganizationCategory
+    status?: $Enums.EntityStatus
+    developmentTier?: number
+    currentPhase?: number
+    developmentScores?: NullableJsonNullValueInput | InputJsonValue
+    phaseHistory?: NullableJsonNullValueInput | InputJsonValue
+    infrastructureItems?: NullableJsonNullValueInput | InputJsonValue
+    fundingBalanceZar?: Decimal | DecimalJsLike | number | string
+    annualCycleYear?: number | null
+    annualCycleFocus?: string | null
+    logoUrl?: string | null
+    logoPng?: Buffer | null
+    websiteUrl?: string | null
+    publicPhone?: string | null
+    quintile?: number | null
+    teacherCount?: number | null
+    gpsLat?: number | null
+    gpsLng?: number | null
+    publicProfile?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    learners?: LearnerCreateNestedManyWithoutSchoolInput
+    submissions?: SubmissionCreateNestedManyWithoutSchoolInput
+    fundingContributions?: FundingContributionCreateNestedManyWithoutSchoolInput
+    submittedNeeds?: SchoolSubmittedNeedCreateNestedManyWithoutSchoolInput
+    volunteers?: SchoolVolunteerCreateNestedManyWithoutSchoolInput
+    events?: SchoolEventCreateNestedManyWithoutSchoolInput
+    alumni?: SchoolAlumniCreateNestedManyWithoutSchoolInput
+    enterpriseProjects?: SchoolEnterpriseProjectCreateNestedManyWithoutSchoolInput
+    crmContacts?: SchoolCrmContactCreateNestedManyWithoutSchoolInput
+    crmActivities?: SchoolCrmActivityCreateNestedManyWithoutSchoolInput
+    crmTasks?: SchoolCrmTaskCreateNestedManyWithoutSchoolInput
+    adminUser?: UserCreateNestedOneWithoutSchoolInput
+    verification?: SchoolVerificationCreateNestedOneWithoutSchoolInput
+  }
+
+  export type SchoolUncheckedCreateWithoutInnovationChallengesInput = {
+    id?: string
+    name: string
+    province: string
+    district: string
+    principalName: string
+    contactEmail?: string | null
+    whatsappPhone: string
+    schoolCode: string
+    organizationCategory?: $Enums.OrganizationCategory
+    status?: $Enums.EntityStatus
+    developmentTier?: number
+    currentPhase?: number
+    developmentScores?: NullableJsonNullValueInput | InputJsonValue
+    phaseHistory?: NullableJsonNullValueInput | InputJsonValue
+    infrastructureItems?: NullableJsonNullValueInput | InputJsonValue
+    fundingBalanceZar?: Decimal | DecimalJsLike | number | string
+    annualCycleYear?: number | null
+    annualCycleFocus?: string | null
+    logoUrl?: string | null
+    logoPng?: Buffer | null
+    websiteUrl?: string | null
+    publicPhone?: string | null
+    quintile?: number | null
+    teacherCount?: number | null
+    gpsLat?: number | null
+    gpsLng?: number | null
+    publicProfile?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    learners?: LearnerUncheckedCreateNestedManyWithoutSchoolInput
+    submissions?: SubmissionUncheckedCreateNestedManyWithoutSchoolInput
+    fundingContributions?: FundingContributionUncheckedCreateNestedManyWithoutSchoolInput
+    submittedNeeds?: SchoolSubmittedNeedUncheckedCreateNestedManyWithoutSchoolInput
+    volunteers?: SchoolVolunteerUncheckedCreateNestedManyWithoutSchoolInput
+    events?: SchoolEventUncheckedCreateNestedManyWithoutSchoolInput
+    alumni?: SchoolAlumniUncheckedCreateNestedManyWithoutSchoolInput
+    enterpriseProjects?: SchoolEnterpriseProjectUncheckedCreateNestedManyWithoutSchoolInput
+    crmContacts?: SchoolCrmContactUncheckedCreateNestedManyWithoutSchoolInput
+    crmActivities?: SchoolCrmActivityUncheckedCreateNestedManyWithoutSchoolInput
+    crmTasks?: SchoolCrmTaskUncheckedCreateNestedManyWithoutSchoolInput
+    adminUser?: UserUncheckedCreateNestedOneWithoutSchoolInput
+    verification?: SchoolVerificationUncheckedCreateNestedOneWithoutSchoolInput
+  }
+
+  export type SchoolCreateOrConnectWithoutInnovationChallengesInput = {
+    where: SchoolWhereUniqueInput
+    create: XOR<SchoolCreateWithoutInnovationChallengesInput, SchoolUncheckedCreateWithoutInnovationChallengesInput>
+  }
+
+  export type SchoolEnterpriseProjectCreateWithoutChallengeInput = {
+    id?: string
+    title: string
+    description?: string | null
+    projectType: $Enums.SchoolEnterpriseProjectType
+    studentLead: string
+    gradeLevel?: string | null
+    category?: string | null
+    status?: $Enums.SchoolEnterpriseProjectStatus
+    revenueZar?: number
+    seekingSponsor?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    school: SchoolCreateNestedOneWithoutEnterpriseProjectsInput
+  }
+
+  export type SchoolEnterpriseProjectUncheckedCreateWithoutChallengeInput = {
+    id?: string
+    schoolId: string
+    title: string
+    description?: string | null
+    projectType: $Enums.SchoolEnterpriseProjectType
+    studentLead: string
+    gradeLevel?: string | null
+    category?: string | null
+    status?: $Enums.SchoolEnterpriseProjectStatus
+    revenueZar?: number
+    seekingSponsor?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type SchoolEnterpriseProjectCreateOrConnectWithoutChallengeInput = {
+    where: SchoolEnterpriseProjectWhereUniqueInput
+    create: XOR<SchoolEnterpriseProjectCreateWithoutChallengeInput, SchoolEnterpriseProjectUncheckedCreateWithoutChallengeInput>
+  }
+
+  export type SchoolEnterpriseProjectCreateManyChallengeInputEnvelope = {
+    data: SchoolEnterpriseProjectCreateManyChallengeInput | SchoolEnterpriseProjectCreateManyChallengeInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type SchoolUpsertWithoutInnovationChallengesInput = {
+    update: XOR<SchoolUpdateWithoutInnovationChallengesInput, SchoolUncheckedUpdateWithoutInnovationChallengesInput>
+    create: XOR<SchoolCreateWithoutInnovationChallengesInput, SchoolUncheckedCreateWithoutInnovationChallengesInput>
+    where?: SchoolWhereInput
+  }
+
+  export type SchoolUpdateToOneWithWhereWithoutInnovationChallengesInput = {
+    where?: SchoolWhereInput
+    data: XOR<SchoolUpdateWithoutInnovationChallengesInput, SchoolUncheckedUpdateWithoutInnovationChallengesInput>
+  }
+
+  export type SchoolUpdateWithoutInnovationChallengesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    province?: StringFieldUpdateOperationsInput | string
+    district?: StringFieldUpdateOperationsInput | string
+    principalName?: StringFieldUpdateOperationsInput | string
+    contactEmail?: NullableStringFieldUpdateOperationsInput | string | null
+    whatsappPhone?: StringFieldUpdateOperationsInput | string
+    schoolCode?: StringFieldUpdateOperationsInput | string
+    organizationCategory?: EnumOrganizationCategoryFieldUpdateOperationsInput | $Enums.OrganizationCategory
+    status?: EnumEntityStatusFieldUpdateOperationsInput | $Enums.EntityStatus
+    developmentTier?: IntFieldUpdateOperationsInput | number
+    currentPhase?: IntFieldUpdateOperationsInput | number
+    developmentScores?: NullableJsonNullValueInput | InputJsonValue
+    phaseHistory?: NullableJsonNullValueInput | InputJsonValue
+    infrastructureItems?: NullableJsonNullValueInput | InputJsonValue
+    fundingBalanceZar?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    annualCycleYear?: NullableIntFieldUpdateOperationsInput | number | null
+    annualCycleFocus?: NullableStringFieldUpdateOperationsInput | string | null
+    logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    logoPng?: NullableBytesFieldUpdateOperationsInput | Buffer | null
+    websiteUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    publicPhone?: NullableStringFieldUpdateOperationsInput | string | null
+    quintile?: NullableIntFieldUpdateOperationsInput | number | null
+    teacherCount?: NullableIntFieldUpdateOperationsInput | number | null
+    gpsLat?: NullableFloatFieldUpdateOperationsInput | number | null
+    gpsLng?: NullableFloatFieldUpdateOperationsInput | number | null
+    publicProfile?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    learners?: LearnerUpdateManyWithoutSchoolNestedInput
+    submissions?: SubmissionUpdateManyWithoutSchoolNestedInput
+    fundingContributions?: FundingContributionUpdateManyWithoutSchoolNestedInput
+    submittedNeeds?: SchoolSubmittedNeedUpdateManyWithoutSchoolNestedInput
+    volunteers?: SchoolVolunteerUpdateManyWithoutSchoolNestedInput
+    events?: SchoolEventUpdateManyWithoutSchoolNestedInput
+    alumni?: SchoolAlumniUpdateManyWithoutSchoolNestedInput
+    enterpriseProjects?: SchoolEnterpriseProjectUpdateManyWithoutSchoolNestedInput
+    crmContacts?: SchoolCrmContactUpdateManyWithoutSchoolNestedInput
+    crmActivities?: SchoolCrmActivityUpdateManyWithoutSchoolNestedInput
+    crmTasks?: SchoolCrmTaskUpdateManyWithoutSchoolNestedInput
+    adminUser?: UserUpdateOneWithoutSchoolNestedInput
+    verification?: SchoolVerificationUpdateOneWithoutSchoolNestedInput
+  }
+
+  export type SchoolUncheckedUpdateWithoutInnovationChallengesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    province?: StringFieldUpdateOperationsInput | string
+    district?: StringFieldUpdateOperationsInput | string
+    principalName?: StringFieldUpdateOperationsInput | string
+    contactEmail?: NullableStringFieldUpdateOperationsInput | string | null
+    whatsappPhone?: StringFieldUpdateOperationsInput | string
+    schoolCode?: StringFieldUpdateOperationsInput | string
+    organizationCategory?: EnumOrganizationCategoryFieldUpdateOperationsInput | $Enums.OrganizationCategory
+    status?: EnumEntityStatusFieldUpdateOperationsInput | $Enums.EntityStatus
+    developmentTier?: IntFieldUpdateOperationsInput | number
+    currentPhase?: IntFieldUpdateOperationsInput | number
+    developmentScores?: NullableJsonNullValueInput | InputJsonValue
+    phaseHistory?: NullableJsonNullValueInput | InputJsonValue
+    infrastructureItems?: NullableJsonNullValueInput | InputJsonValue
+    fundingBalanceZar?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    annualCycleYear?: NullableIntFieldUpdateOperationsInput | number | null
+    annualCycleFocus?: NullableStringFieldUpdateOperationsInput | string | null
+    logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    logoPng?: NullableBytesFieldUpdateOperationsInput | Buffer | null
+    websiteUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    publicPhone?: NullableStringFieldUpdateOperationsInput | string | null
+    quintile?: NullableIntFieldUpdateOperationsInput | number | null
+    teacherCount?: NullableIntFieldUpdateOperationsInput | number | null
+    gpsLat?: NullableFloatFieldUpdateOperationsInput | number | null
+    gpsLng?: NullableFloatFieldUpdateOperationsInput | number | null
+    publicProfile?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    learners?: LearnerUncheckedUpdateManyWithoutSchoolNestedInput
+    submissions?: SubmissionUncheckedUpdateManyWithoutSchoolNestedInput
+    fundingContributions?: FundingContributionUncheckedUpdateManyWithoutSchoolNestedInput
+    submittedNeeds?: SchoolSubmittedNeedUncheckedUpdateManyWithoutSchoolNestedInput
+    volunteers?: SchoolVolunteerUncheckedUpdateManyWithoutSchoolNestedInput
+    events?: SchoolEventUncheckedUpdateManyWithoutSchoolNestedInput
+    alumni?: SchoolAlumniUncheckedUpdateManyWithoutSchoolNestedInput
+    enterpriseProjects?: SchoolEnterpriseProjectUncheckedUpdateManyWithoutSchoolNestedInput
+    crmContacts?: SchoolCrmContactUncheckedUpdateManyWithoutSchoolNestedInput
+    crmActivities?: SchoolCrmActivityUncheckedUpdateManyWithoutSchoolNestedInput
+    crmTasks?: SchoolCrmTaskUncheckedUpdateManyWithoutSchoolNestedInput
+    adminUser?: UserUncheckedUpdateOneWithoutSchoolNestedInput
+    verification?: SchoolVerificationUncheckedUpdateOneWithoutSchoolNestedInput
+  }
+
+  export type SchoolEnterpriseProjectUpsertWithWhereUniqueWithoutChallengeInput = {
+    where: SchoolEnterpriseProjectWhereUniqueInput
+    update: XOR<SchoolEnterpriseProjectUpdateWithoutChallengeInput, SchoolEnterpriseProjectUncheckedUpdateWithoutChallengeInput>
+    create: XOR<SchoolEnterpriseProjectCreateWithoutChallengeInput, SchoolEnterpriseProjectUncheckedCreateWithoutChallengeInput>
+  }
+
+  export type SchoolEnterpriseProjectUpdateWithWhereUniqueWithoutChallengeInput = {
+    where: SchoolEnterpriseProjectWhereUniqueInput
+    data: XOR<SchoolEnterpriseProjectUpdateWithoutChallengeInput, SchoolEnterpriseProjectUncheckedUpdateWithoutChallengeInput>
+  }
+
+  export type SchoolEnterpriseProjectUpdateManyWithWhereWithoutChallengeInput = {
+    where: SchoolEnterpriseProjectScalarWhereInput
+    data: XOR<SchoolEnterpriseProjectUpdateManyMutationInput, SchoolEnterpriseProjectUncheckedUpdateManyWithoutChallengeInput>
+  }
+
+  export type SchoolCreateWithoutEnterpriseProjectsInput = {
+    id?: string
+    name: string
+    province: string
+    district: string
+    principalName: string
+    contactEmail?: string | null
+    whatsappPhone: string
+    schoolCode: string
+    organizationCategory?: $Enums.OrganizationCategory
+    status?: $Enums.EntityStatus
+    developmentTier?: number
+    currentPhase?: number
+    developmentScores?: NullableJsonNullValueInput | InputJsonValue
+    phaseHistory?: NullableJsonNullValueInput | InputJsonValue
+    infrastructureItems?: NullableJsonNullValueInput | InputJsonValue
+    fundingBalanceZar?: Decimal | DecimalJsLike | number | string
+    annualCycleYear?: number | null
+    annualCycleFocus?: string | null
+    logoUrl?: string | null
+    logoPng?: Buffer | null
+    websiteUrl?: string | null
+    publicPhone?: string | null
+    quintile?: number | null
+    teacherCount?: number | null
+    gpsLat?: number | null
+    gpsLng?: number | null
+    publicProfile?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    learners?: LearnerCreateNestedManyWithoutSchoolInput
+    submissions?: SubmissionCreateNestedManyWithoutSchoolInput
+    fundingContributions?: FundingContributionCreateNestedManyWithoutSchoolInput
+    submittedNeeds?: SchoolSubmittedNeedCreateNestedManyWithoutSchoolInput
+    volunteers?: SchoolVolunteerCreateNestedManyWithoutSchoolInput
+    events?: SchoolEventCreateNestedManyWithoutSchoolInput
+    alumni?: SchoolAlumniCreateNestedManyWithoutSchoolInput
+    innovationChallenges?: SchoolInnovationChallengeCreateNestedManyWithoutSchoolInput
+    crmContacts?: SchoolCrmContactCreateNestedManyWithoutSchoolInput
+    crmActivities?: SchoolCrmActivityCreateNestedManyWithoutSchoolInput
+    crmTasks?: SchoolCrmTaskCreateNestedManyWithoutSchoolInput
+    adminUser?: UserCreateNestedOneWithoutSchoolInput
+    verification?: SchoolVerificationCreateNestedOneWithoutSchoolInput
+  }
+
+  export type SchoolUncheckedCreateWithoutEnterpriseProjectsInput = {
+    id?: string
+    name: string
+    province: string
+    district: string
+    principalName: string
+    contactEmail?: string | null
+    whatsappPhone: string
+    schoolCode: string
+    organizationCategory?: $Enums.OrganizationCategory
+    status?: $Enums.EntityStatus
+    developmentTier?: number
+    currentPhase?: number
+    developmentScores?: NullableJsonNullValueInput | InputJsonValue
+    phaseHistory?: NullableJsonNullValueInput | InputJsonValue
+    infrastructureItems?: NullableJsonNullValueInput | InputJsonValue
+    fundingBalanceZar?: Decimal | DecimalJsLike | number | string
+    annualCycleYear?: number | null
+    annualCycleFocus?: string | null
+    logoUrl?: string | null
+    logoPng?: Buffer | null
+    websiteUrl?: string | null
+    publicPhone?: string | null
+    quintile?: number | null
+    teacherCount?: number | null
+    gpsLat?: number | null
+    gpsLng?: number | null
+    publicProfile?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    learners?: LearnerUncheckedCreateNestedManyWithoutSchoolInput
+    submissions?: SubmissionUncheckedCreateNestedManyWithoutSchoolInput
+    fundingContributions?: FundingContributionUncheckedCreateNestedManyWithoutSchoolInput
+    submittedNeeds?: SchoolSubmittedNeedUncheckedCreateNestedManyWithoutSchoolInput
+    volunteers?: SchoolVolunteerUncheckedCreateNestedManyWithoutSchoolInput
+    events?: SchoolEventUncheckedCreateNestedManyWithoutSchoolInput
+    alumni?: SchoolAlumniUncheckedCreateNestedManyWithoutSchoolInput
+    innovationChallenges?: SchoolInnovationChallengeUncheckedCreateNestedManyWithoutSchoolInput
+    crmContacts?: SchoolCrmContactUncheckedCreateNestedManyWithoutSchoolInput
+    crmActivities?: SchoolCrmActivityUncheckedCreateNestedManyWithoutSchoolInput
+    crmTasks?: SchoolCrmTaskUncheckedCreateNestedManyWithoutSchoolInput
+    adminUser?: UserUncheckedCreateNestedOneWithoutSchoolInput
+    verification?: SchoolVerificationUncheckedCreateNestedOneWithoutSchoolInput
+  }
+
+  export type SchoolCreateOrConnectWithoutEnterpriseProjectsInput = {
+    where: SchoolWhereUniqueInput
+    create: XOR<SchoolCreateWithoutEnterpriseProjectsInput, SchoolUncheckedCreateWithoutEnterpriseProjectsInput>
+  }
+
+  export type SchoolInnovationChallengeCreateWithoutProjectsInput = {
+    id?: string
+    title: string
+    description?: string | null
+    challengeType: string
+    startsAt: Date | string
+    endsAt?: Date | string | null
+    prizeDescription?: string | null
+    status?: $Enums.SchoolInnovationChallengeStatus
+    maxEntries?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    school: SchoolCreateNestedOneWithoutInnovationChallengesInput
+  }
+
+  export type SchoolInnovationChallengeUncheckedCreateWithoutProjectsInput = {
+    id?: string
+    schoolId: string
+    title: string
+    description?: string | null
+    challengeType: string
+    startsAt: Date | string
+    endsAt?: Date | string | null
+    prizeDescription?: string | null
+    status?: $Enums.SchoolInnovationChallengeStatus
+    maxEntries?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type SchoolInnovationChallengeCreateOrConnectWithoutProjectsInput = {
+    where: SchoolInnovationChallengeWhereUniqueInput
+    create: XOR<SchoolInnovationChallengeCreateWithoutProjectsInput, SchoolInnovationChallengeUncheckedCreateWithoutProjectsInput>
+  }
+
+  export type SchoolUpsertWithoutEnterpriseProjectsInput = {
+    update: XOR<SchoolUpdateWithoutEnterpriseProjectsInput, SchoolUncheckedUpdateWithoutEnterpriseProjectsInput>
+    create: XOR<SchoolCreateWithoutEnterpriseProjectsInput, SchoolUncheckedCreateWithoutEnterpriseProjectsInput>
+    where?: SchoolWhereInput
+  }
+
+  export type SchoolUpdateToOneWithWhereWithoutEnterpriseProjectsInput = {
+    where?: SchoolWhereInput
+    data: XOR<SchoolUpdateWithoutEnterpriseProjectsInput, SchoolUncheckedUpdateWithoutEnterpriseProjectsInput>
+  }
+
+  export type SchoolUpdateWithoutEnterpriseProjectsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    province?: StringFieldUpdateOperationsInput | string
+    district?: StringFieldUpdateOperationsInput | string
+    principalName?: StringFieldUpdateOperationsInput | string
+    contactEmail?: NullableStringFieldUpdateOperationsInput | string | null
+    whatsappPhone?: StringFieldUpdateOperationsInput | string
+    schoolCode?: StringFieldUpdateOperationsInput | string
+    organizationCategory?: EnumOrganizationCategoryFieldUpdateOperationsInput | $Enums.OrganizationCategory
+    status?: EnumEntityStatusFieldUpdateOperationsInput | $Enums.EntityStatus
+    developmentTier?: IntFieldUpdateOperationsInput | number
+    currentPhase?: IntFieldUpdateOperationsInput | number
+    developmentScores?: NullableJsonNullValueInput | InputJsonValue
+    phaseHistory?: NullableJsonNullValueInput | InputJsonValue
+    infrastructureItems?: NullableJsonNullValueInput | InputJsonValue
+    fundingBalanceZar?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    annualCycleYear?: NullableIntFieldUpdateOperationsInput | number | null
+    annualCycleFocus?: NullableStringFieldUpdateOperationsInput | string | null
+    logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    logoPng?: NullableBytesFieldUpdateOperationsInput | Buffer | null
+    websiteUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    publicPhone?: NullableStringFieldUpdateOperationsInput | string | null
+    quintile?: NullableIntFieldUpdateOperationsInput | number | null
+    teacherCount?: NullableIntFieldUpdateOperationsInput | number | null
+    gpsLat?: NullableFloatFieldUpdateOperationsInput | number | null
+    gpsLng?: NullableFloatFieldUpdateOperationsInput | number | null
+    publicProfile?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    learners?: LearnerUpdateManyWithoutSchoolNestedInput
+    submissions?: SubmissionUpdateManyWithoutSchoolNestedInput
+    fundingContributions?: FundingContributionUpdateManyWithoutSchoolNestedInput
+    submittedNeeds?: SchoolSubmittedNeedUpdateManyWithoutSchoolNestedInput
+    volunteers?: SchoolVolunteerUpdateManyWithoutSchoolNestedInput
+    events?: SchoolEventUpdateManyWithoutSchoolNestedInput
+    alumni?: SchoolAlumniUpdateManyWithoutSchoolNestedInput
+    innovationChallenges?: SchoolInnovationChallengeUpdateManyWithoutSchoolNestedInput
+    crmContacts?: SchoolCrmContactUpdateManyWithoutSchoolNestedInput
+    crmActivities?: SchoolCrmActivityUpdateManyWithoutSchoolNestedInput
+    crmTasks?: SchoolCrmTaskUpdateManyWithoutSchoolNestedInput
+    adminUser?: UserUpdateOneWithoutSchoolNestedInput
+    verification?: SchoolVerificationUpdateOneWithoutSchoolNestedInput
+  }
+
+  export type SchoolUncheckedUpdateWithoutEnterpriseProjectsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    province?: StringFieldUpdateOperationsInput | string
+    district?: StringFieldUpdateOperationsInput | string
+    principalName?: StringFieldUpdateOperationsInput | string
+    contactEmail?: NullableStringFieldUpdateOperationsInput | string | null
+    whatsappPhone?: StringFieldUpdateOperationsInput | string
+    schoolCode?: StringFieldUpdateOperationsInput | string
+    organizationCategory?: EnumOrganizationCategoryFieldUpdateOperationsInput | $Enums.OrganizationCategory
+    status?: EnumEntityStatusFieldUpdateOperationsInput | $Enums.EntityStatus
+    developmentTier?: IntFieldUpdateOperationsInput | number
+    currentPhase?: IntFieldUpdateOperationsInput | number
+    developmentScores?: NullableJsonNullValueInput | InputJsonValue
+    phaseHistory?: NullableJsonNullValueInput | InputJsonValue
+    infrastructureItems?: NullableJsonNullValueInput | InputJsonValue
+    fundingBalanceZar?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    annualCycleYear?: NullableIntFieldUpdateOperationsInput | number | null
+    annualCycleFocus?: NullableStringFieldUpdateOperationsInput | string | null
+    logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    logoPng?: NullableBytesFieldUpdateOperationsInput | Buffer | null
+    websiteUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    publicPhone?: NullableStringFieldUpdateOperationsInput | string | null
+    quintile?: NullableIntFieldUpdateOperationsInput | number | null
+    teacherCount?: NullableIntFieldUpdateOperationsInput | number | null
+    gpsLat?: NullableFloatFieldUpdateOperationsInput | number | null
+    gpsLng?: NullableFloatFieldUpdateOperationsInput | number | null
+    publicProfile?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    learners?: LearnerUncheckedUpdateManyWithoutSchoolNestedInput
+    submissions?: SubmissionUncheckedUpdateManyWithoutSchoolNestedInput
+    fundingContributions?: FundingContributionUncheckedUpdateManyWithoutSchoolNestedInput
+    submittedNeeds?: SchoolSubmittedNeedUncheckedUpdateManyWithoutSchoolNestedInput
+    volunteers?: SchoolVolunteerUncheckedUpdateManyWithoutSchoolNestedInput
+    events?: SchoolEventUncheckedUpdateManyWithoutSchoolNestedInput
+    alumni?: SchoolAlumniUncheckedUpdateManyWithoutSchoolNestedInput
+    innovationChallenges?: SchoolInnovationChallengeUncheckedUpdateManyWithoutSchoolNestedInput
+    crmContacts?: SchoolCrmContactUncheckedUpdateManyWithoutSchoolNestedInput
+    crmActivities?: SchoolCrmActivityUncheckedUpdateManyWithoutSchoolNestedInput
+    crmTasks?: SchoolCrmTaskUncheckedUpdateManyWithoutSchoolNestedInput
+    adminUser?: UserUncheckedUpdateOneWithoutSchoolNestedInput
+    verification?: SchoolVerificationUncheckedUpdateOneWithoutSchoolNestedInput
+  }
+
+  export type SchoolInnovationChallengeUpsertWithoutProjectsInput = {
+    update: XOR<SchoolInnovationChallengeUpdateWithoutProjectsInput, SchoolInnovationChallengeUncheckedUpdateWithoutProjectsInput>
+    create: XOR<SchoolInnovationChallengeCreateWithoutProjectsInput, SchoolInnovationChallengeUncheckedCreateWithoutProjectsInput>
+    where?: SchoolInnovationChallengeWhereInput
+  }
+
+  export type SchoolInnovationChallengeUpdateToOneWithWhereWithoutProjectsInput = {
+    where?: SchoolInnovationChallengeWhereInput
+    data: XOR<SchoolInnovationChallengeUpdateWithoutProjectsInput, SchoolInnovationChallengeUncheckedUpdateWithoutProjectsInput>
+  }
+
+  export type SchoolInnovationChallengeUpdateWithoutProjectsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    challengeType?: StringFieldUpdateOperationsInput | string
+    startsAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    endsAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    prizeDescription?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumSchoolInnovationChallengeStatusFieldUpdateOperationsInput | $Enums.SchoolInnovationChallengeStatus
+    maxEntries?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    school?: SchoolUpdateOneRequiredWithoutInnovationChallengesNestedInput
+  }
+
+  export type SchoolInnovationChallengeUncheckedUpdateWithoutProjectsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    schoolId?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    challengeType?: StringFieldUpdateOperationsInput | string
+    startsAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    endsAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    prizeDescription?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumSchoolInnovationChallengeStatusFieldUpdateOperationsInput | $Enums.SchoolInnovationChallengeStatus
+    maxEntries?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type SchoolCreateWithoutCrmContactsInput = {
+    id?: string
+    name: string
+    province: string
+    district: string
+    principalName: string
+    contactEmail?: string | null
+    whatsappPhone: string
+    schoolCode: string
+    organizationCategory?: $Enums.OrganizationCategory
+    status?: $Enums.EntityStatus
+    developmentTier?: number
+    currentPhase?: number
+    developmentScores?: NullableJsonNullValueInput | InputJsonValue
+    phaseHistory?: NullableJsonNullValueInput | InputJsonValue
+    infrastructureItems?: NullableJsonNullValueInput | InputJsonValue
+    fundingBalanceZar?: Decimal | DecimalJsLike | number | string
+    annualCycleYear?: number | null
+    annualCycleFocus?: string | null
+    logoUrl?: string | null
+    logoPng?: Buffer | null
+    websiteUrl?: string | null
+    publicPhone?: string | null
+    quintile?: number | null
+    teacherCount?: number | null
+    gpsLat?: number | null
+    gpsLng?: number | null
+    publicProfile?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    learners?: LearnerCreateNestedManyWithoutSchoolInput
+    submissions?: SubmissionCreateNestedManyWithoutSchoolInput
+    fundingContributions?: FundingContributionCreateNestedManyWithoutSchoolInput
+    submittedNeeds?: SchoolSubmittedNeedCreateNestedManyWithoutSchoolInput
+    volunteers?: SchoolVolunteerCreateNestedManyWithoutSchoolInput
+    events?: SchoolEventCreateNestedManyWithoutSchoolInput
+    alumni?: SchoolAlumniCreateNestedManyWithoutSchoolInput
+    enterpriseProjects?: SchoolEnterpriseProjectCreateNestedManyWithoutSchoolInput
+    innovationChallenges?: SchoolInnovationChallengeCreateNestedManyWithoutSchoolInput
+    crmActivities?: SchoolCrmActivityCreateNestedManyWithoutSchoolInput
+    crmTasks?: SchoolCrmTaskCreateNestedManyWithoutSchoolInput
+    adminUser?: UserCreateNestedOneWithoutSchoolInput
+    verification?: SchoolVerificationCreateNestedOneWithoutSchoolInput
+  }
+
+  export type SchoolUncheckedCreateWithoutCrmContactsInput = {
+    id?: string
+    name: string
+    province: string
+    district: string
+    principalName: string
+    contactEmail?: string | null
+    whatsappPhone: string
+    schoolCode: string
+    organizationCategory?: $Enums.OrganizationCategory
+    status?: $Enums.EntityStatus
+    developmentTier?: number
+    currentPhase?: number
+    developmentScores?: NullableJsonNullValueInput | InputJsonValue
+    phaseHistory?: NullableJsonNullValueInput | InputJsonValue
+    infrastructureItems?: NullableJsonNullValueInput | InputJsonValue
+    fundingBalanceZar?: Decimal | DecimalJsLike | number | string
+    annualCycleYear?: number | null
+    annualCycleFocus?: string | null
+    logoUrl?: string | null
+    logoPng?: Buffer | null
+    websiteUrl?: string | null
+    publicPhone?: string | null
+    quintile?: number | null
+    teacherCount?: number | null
+    gpsLat?: number | null
+    gpsLng?: number | null
+    publicProfile?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    learners?: LearnerUncheckedCreateNestedManyWithoutSchoolInput
+    submissions?: SubmissionUncheckedCreateNestedManyWithoutSchoolInput
+    fundingContributions?: FundingContributionUncheckedCreateNestedManyWithoutSchoolInput
+    submittedNeeds?: SchoolSubmittedNeedUncheckedCreateNestedManyWithoutSchoolInput
+    volunteers?: SchoolVolunteerUncheckedCreateNestedManyWithoutSchoolInput
+    events?: SchoolEventUncheckedCreateNestedManyWithoutSchoolInput
+    alumni?: SchoolAlumniUncheckedCreateNestedManyWithoutSchoolInput
+    enterpriseProjects?: SchoolEnterpriseProjectUncheckedCreateNestedManyWithoutSchoolInput
+    innovationChallenges?: SchoolInnovationChallengeUncheckedCreateNestedManyWithoutSchoolInput
+    crmActivities?: SchoolCrmActivityUncheckedCreateNestedManyWithoutSchoolInput
+    crmTasks?: SchoolCrmTaskUncheckedCreateNestedManyWithoutSchoolInput
+    adminUser?: UserUncheckedCreateNestedOneWithoutSchoolInput
+    verification?: SchoolVerificationUncheckedCreateNestedOneWithoutSchoolInput
+  }
+
+  export type SchoolCreateOrConnectWithoutCrmContactsInput = {
+    where: SchoolWhereUniqueInput
+    create: XOR<SchoolCreateWithoutCrmContactsInput, SchoolUncheckedCreateWithoutCrmContactsInput>
+  }
+
+  export type SchoolCrmActivityCreateWithoutContactInput = {
+    id?: string
+    activityType: $Enums.SchoolCrmActivityType
+    title: string
+    summary?: string | null
+    occurredAt: Date | string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    school: SchoolCreateNestedOneWithoutCrmActivitiesInput
+  }
+
+  export type SchoolCrmActivityUncheckedCreateWithoutContactInput = {
+    id?: string
+    schoolId: string
+    activityType: $Enums.SchoolCrmActivityType
+    title: string
+    summary?: string | null
+    occurredAt: Date | string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type SchoolCrmActivityCreateOrConnectWithoutContactInput = {
+    where: SchoolCrmActivityWhereUniqueInput
+    create: XOR<SchoolCrmActivityCreateWithoutContactInput, SchoolCrmActivityUncheckedCreateWithoutContactInput>
+  }
+
+  export type SchoolCrmActivityCreateManyContactInputEnvelope = {
+    data: SchoolCrmActivityCreateManyContactInput | SchoolCrmActivityCreateManyContactInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type SchoolCrmTaskCreateWithoutContactInput = {
+    id?: string
+    title: string
+    description?: string | null
+    dueAt?: Date | string | null
+    status?: $Enums.SchoolCrmTaskStatus
+    priority?: $Enums.SchoolCrmTaskPriority
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    school: SchoolCreateNestedOneWithoutCrmTasksInput
+  }
+
+  export type SchoolCrmTaskUncheckedCreateWithoutContactInput = {
+    id?: string
+    schoolId: string
+    title: string
+    description?: string | null
+    dueAt?: Date | string | null
+    status?: $Enums.SchoolCrmTaskStatus
+    priority?: $Enums.SchoolCrmTaskPriority
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type SchoolCrmTaskCreateOrConnectWithoutContactInput = {
+    where: SchoolCrmTaskWhereUniqueInput
+    create: XOR<SchoolCrmTaskCreateWithoutContactInput, SchoolCrmTaskUncheckedCreateWithoutContactInput>
+  }
+
+  export type SchoolCrmTaskCreateManyContactInputEnvelope = {
+    data: SchoolCrmTaskCreateManyContactInput | SchoolCrmTaskCreateManyContactInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type SchoolUpsertWithoutCrmContactsInput = {
+    update: XOR<SchoolUpdateWithoutCrmContactsInput, SchoolUncheckedUpdateWithoutCrmContactsInput>
+    create: XOR<SchoolCreateWithoutCrmContactsInput, SchoolUncheckedCreateWithoutCrmContactsInput>
+    where?: SchoolWhereInput
+  }
+
+  export type SchoolUpdateToOneWithWhereWithoutCrmContactsInput = {
+    where?: SchoolWhereInput
+    data: XOR<SchoolUpdateWithoutCrmContactsInput, SchoolUncheckedUpdateWithoutCrmContactsInput>
+  }
+
+  export type SchoolUpdateWithoutCrmContactsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    province?: StringFieldUpdateOperationsInput | string
+    district?: StringFieldUpdateOperationsInput | string
+    principalName?: StringFieldUpdateOperationsInput | string
+    contactEmail?: NullableStringFieldUpdateOperationsInput | string | null
+    whatsappPhone?: StringFieldUpdateOperationsInput | string
+    schoolCode?: StringFieldUpdateOperationsInput | string
+    organizationCategory?: EnumOrganizationCategoryFieldUpdateOperationsInput | $Enums.OrganizationCategory
+    status?: EnumEntityStatusFieldUpdateOperationsInput | $Enums.EntityStatus
+    developmentTier?: IntFieldUpdateOperationsInput | number
+    currentPhase?: IntFieldUpdateOperationsInput | number
+    developmentScores?: NullableJsonNullValueInput | InputJsonValue
+    phaseHistory?: NullableJsonNullValueInput | InputJsonValue
+    infrastructureItems?: NullableJsonNullValueInput | InputJsonValue
+    fundingBalanceZar?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    annualCycleYear?: NullableIntFieldUpdateOperationsInput | number | null
+    annualCycleFocus?: NullableStringFieldUpdateOperationsInput | string | null
+    logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    logoPng?: NullableBytesFieldUpdateOperationsInput | Buffer | null
+    websiteUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    publicPhone?: NullableStringFieldUpdateOperationsInput | string | null
+    quintile?: NullableIntFieldUpdateOperationsInput | number | null
+    teacherCount?: NullableIntFieldUpdateOperationsInput | number | null
+    gpsLat?: NullableFloatFieldUpdateOperationsInput | number | null
+    gpsLng?: NullableFloatFieldUpdateOperationsInput | number | null
+    publicProfile?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    learners?: LearnerUpdateManyWithoutSchoolNestedInput
+    submissions?: SubmissionUpdateManyWithoutSchoolNestedInput
+    fundingContributions?: FundingContributionUpdateManyWithoutSchoolNestedInput
+    submittedNeeds?: SchoolSubmittedNeedUpdateManyWithoutSchoolNestedInput
+    volunteers?: SchoolVolunteerUpdateManyWithoutSchoolNestedInput
+    events?: SchoolEventUpdateManyWithoutSchoolNestedInput
+    alumni?: SchoolAlumniUpdateManyWithoutSchoolNestedInput
+    enterpriseProjects?: SchoolEnterpriseProjectUpdateManyWithoutSchoolNestedInput
+    innovationChallenges?: SchoolInnovationChallengeUpdateManyWithoutSchoolNestedInput
+    crmActivities?: SchoolCrmActivityUpdateManyWithoutSchoolNestedInput
+    crmTasks?: SchoolCrmTaskUpdateManyWithoutSchoolNestedInput
+    adminUser?: UserUpdateOneWithoutSchoolNestedInput
+    verification?: SchoolVerificationUpdateOneWithoutSchoolNestedInput
+  }
+
+  export type SchoolUncheckedUpdateWithoutCrmContactsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    province?: StringFieldUpdateOperationsInput | string
+    district?: StringFieldUpdateOperationsInput | string
+    principalName?: StringFieldUpdateOperationsInput | string
+    contactEmail?: NullableStringFieldUpdateOperationsInput | string | null
+    whatsappPhone?: StringFieldUpdateOperationsInput | string
+    schoolCode?: StringFieldUpdateOperationsInput | string
+    organizationCategory?: EnumOrganizationCategoryFieldUpdateOperationsInput | $Enums.OrganizationCategory
+    status?: EnumEntityStatusFieldUpdateOperationsInput | $Enums.EntityStatus
+    developmentTier?: IntFieldUpdateOperationsInput | number
+    currentPhase?: IntFieldUpdateOperationsInput | number
+    developmentScores?: NullableJsonNullValueInput | InputJsonValue
+    phaseHistory?: NullableJsonNullValueInput | InputJsonValue
+    infrastructureItems?: NullableJsonNullValueInput | InputJsonValue
+    fundingBalanceZar?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    annualCycleYear?: NullableIntFieldUpdateOperationsInput | number | null
+    annualCycleFocus?: NullableStringFieldUpdateOperationsInput | string | null
+    logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    logoPng?: NullableBytesFieldUpdateOperationsInput | Buffer | null
+    websiteUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    publicPhone?: NullableStringFieldUpdateOperationsInput | string | null
+    quintile?: NullableIntFieldUpdateOperationsInput | number | null
+    teacherCount?: NullableIntFieldUpdateOperationsInput | number | null
+    gpsLat?: NullableFloatFieldUpdateOperationsInput | number | null
+    gpsLng?: NullableFloatFieldUpdateOperationsInput | number | null
+    publicProfile?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    learners?: LearnerUncheckedUpdateManyWithoutSchoolNestedInput
+    submissions?: SubmissionUncheckedUpdateManyWithoutSchoolNestedInput
+    fundingContributions?: FundingContributionUncheckedUpdateManyWithoutSchoolNestedInput
+    submittedNeeds?: SchoolSubmittedNeedUncheckedUpdateManyWithoutSchoolNestedInput
+    volunteers?: SchoolVolunteerUncheckedUpdateManyWithoutSchoolNestedInput
+    events?: SchoolEventUncheckedUpdateManyWithoutSchoolNestedInput
+    alumni?: SchoolAlumniUncheckedUpdateManyWithoutSchoolNestedInput
+    enterpriseProjects?: SchoolEnterpriseProjectUncheckedUpdateManyWithoutSchoolNestedInput
+    innovationChallenges?: SchoolInnovationChallengeUncheckedUpdateManyWithoutSchoolNestedInput
+    crmActivities?: SchoolCrmActivityUncheckedUpdateManyWithoutSchoolNestedInput
+    crmTasks?: SchoolCrmTaskUncheckedUpdateManyWithoutSchoolNestedInput
+    adminUser?: UserUncheckedUpdateOneWithoutSchoolNestedInput
+    verification?: SchoolVerificationUncheckedUpdateOneWithoutSchoolNestedInput
+  }
+
+  export type SchoolCrmActivityUpsertWithWhereUniqueWithoutContactInput = {
+    where: SchoolCrmActivityWhereUniqueInput
+    update: XOR<SchoolCrmActivityUpdateWithoutContactInput, SchoolCrmActivityUncheckedUpdateWithoutContactInput>
+    create: XOR<SchoolCrmActivityCreateWithoutContactInput, SchoolCrmActivityUncheckedCreateWithoutContactInput>
+  }
+
+  export type SchoolCrmActivityUpdateWithWhereUniqueWithoutContactInput = {
+    where: SchoolCrmActivityWhereUniqueInput
+    data: XOR<SchoolCrmActivityUpdateWithoutContactInput, SchoolCrmActivityUncheckedUpdateWithoutContactInput>
+  }
+
+  export type SchoolCrmActivityUpdateManyWithWhereWithoutContactInput = {
+    where: SchoolCrmActivityScalarWhereInput
+    data: XOR<SchoolCrmActivityUpdateManyMutationInput, SchoolCrmActivityUncheckedUpdateManyWithoutContactInput>
+  }
+
+  export type SchoolCrmTaskUpsertWithWhereUniqueWithoutContactInput = {
+    where: SchoolCrmTaskWhereUniqueInput
+    update: XOR<SchoolCrmTaskUpdateWithoutContactInput, SchoolCrmTaskUncheckedUpdateWithoutContactInput>
+    create: XOR<SchoolCrmTaskCreateWithoutContactInput, SchoolCrmTaskUncheckedCreateWithoutContactInput>
+  }
+
+  export type SchoolCrmTaskUpdateWithWhereUniqueWithoutContactInput = {
+    where: SchoolCrmTaskWhereUniqueInput
+    data: XOR<SchoolCrmTaskUpdateWithoutContactInput, SchoolCrmTaskUncheckedUpdateWithoutContactInput>
+  }
+
+  export type SchoolCrmTaskUpdateManyWithWhereWithoutContactInput = {
+    where: SchoolCrmTaskScalarWhereInput
+    data: XOR<SchoolCrmTaskUpdateManyMutationInput, SchoolCrmTaskUncheckedUpdateManyWithoutContactInput>
+  }
+
+  export type SchoolCreateWithoutCrmActivitiesInput = {
+    id?: string
+    name: string
+    province: string
+    district: string
+    principalName: string
+    contactEmail?: string | null
+    whatsappPhone: string
+    schoolCode: string
+    organizationCategory?: $Enums.OrganizationCategory
+    status?: $Enums.EntityStatus
+    developmentTier?: number
+    currentPhase?: number
+    developmentScores?: NullableJsonNullValueInput | InputJsonValue
+    phaseHistory?: NullableJsonNullValueInput | InputJsonValue
+    infrastructureItems?: NullableJsonNullValueInput | InputJsonValue
+    fundingBalanceZar?: Decimal | DecimalJsLike | number | string
+    annualCycleYear?: number | null
+    annualCycleFocus?: string | null
+    logoUrl?: string | null
+    logoPng?: Buffer | null
+    websiteUrl?: string | null
+    publicPhone?: string | null
+    quintile?: number | null
+    teacherCount?: number | null
+    gpsLat?: number | null
+    gpsLng?: number | null
+    publicProfile?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    learners?: LearnerCreateNestedManyWithoutSchoolInput
+    submissions?: SubmissionCreateNestedManyWithoutSchoolInput
+    fundingContributions?: FundingContributionCreateNestedManyWithoutSchoolInput
+    submittedNeeds?: SchoolSubmittedNeedCreateNestedManyWithoutSchoolInput
+    volunteers?: SchoolVolunteerCreateNestedManyWithoutSchoolInput
+    events?: SchoolEventCreateNestedManyWithoutSchoolInput
+    alumni?: SchoolAlumniCreateNestedManyWithoutSchoolInput
+    enterpriseProjects?: SchoolEnterpriseProjectCreateNestedManyWithoutSchoolInput
+    innovationChallenges?: SchoolInnovationChallengeCreateNestedManyWithoutSchoolInput
+    crmContacts?: SchoolCrmContactCreateNestedManyWithoutSchoolInput
+    crmTasks?: SchoolCrmTaskCreateNestedManyWithoutSchoolInput
+    adminUser?: UserCreateNestedOneWithoutSchoolInput
+    verification?: SchoolVerificationCreateNestedOneWithoutSchoolInput
+  }
+
+  export type SchoolUncheckedCreateWithoutCrmActivitiesInput = {
+    id?: string
+    name: string
+    province: string
+    district: string
+    principalName: string
+    contactEmail?: string | null
+    whatsappPhone: string
+    schoolCode: string
+    organizationCategory?: $Enums.OrganizationCategory
+    status?: $Enums.EntityStatus
+    developmentTier?: number
+    currentPhase?: number
+    developmentScores?: NullableJsonNullValueInput | InputJsonValue
+    phaseHistory?: NullableJsonNullValueInput | InputJsonValue
+    infrastructureItems?: NullableJsonNullValueInput | InputJsonValue
+    fundingBalanceZar?: Decimal | DecimalJsLike | number | string
+    annualCycleYear?: number | null
+    annualCycleFocus?: string | null
+    logoUrl?: string | null
+    logoPng?: Buffer | null
+    websiteUrl?: string | null
+    publicPhone?: string | null
+    quintile?: number | null
+    teacherCount?: number | null
+    gpsLat?: number | null
+    gpsLng?: number | null
+    publicProfile?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    learners?: LearnerUncheckedCreateNestedManyWithoutSchoolInput
+    submissions?: SubmissionUncheckedCreateNestedManyWithoutSchoolInput
+    fundingContributions?: FundingContributionUncheckedCreateNestedManyWithoutSchoolInput
+    submittedNeeds?: SchoolSubmittedNeedUncheckedCreateNestedManyWithoutSchoolInput
+    volunteers?: SchoolVolunteerUncheckedCreateNestedManyWithoutSchoolInput
+    events?: SchoolEventUncheckedCreateNestedManyWithoutSchoolInput
+    alumni?: SchoolAlumniUncheckedCreateNestedManyWithoutSchoolInput
+    enterpriseProjects?: SchoolEnterpriseProjectUncheckedCreateNestedManyWithoutSchoolInput
+    innovationChallenges?: SchoolInnovationChallengeUncheckedCreateNestedManyWithoutSchoolInput
+    crmContacts?: SchoolCrmContactUncheckedCreateNestedManyWithoutSchoolInput
+    crmTasks?: SchoolCrmTaskUncheckedCreateNestedManyWithoutSchoolInput
+    adminUser?: UserUncheckedCreateNestedOneWithoutSchoolInput
+    verification?: SchoolVerificationUncheckedCreateNestedOneWithoutSchoolInput
+  }
+
+  export type SchoolCreateOrConnectWithoutCrmActivitiesInput = {
+    where: SchoolWhereUniqueInput
+    create: XOR<SchoolCreateWithoutCrmActivitiesInput, SchoolUncheckedCreateWithoutCrmActivitiesInput>
+  }
+
+  export type SchoolCrmContactCreateWithoutActivitiesInput = {
+    id?: string
+    fullName: string
+    organization?: string | null
+    email?: string | null
+    phone?: string | null
+    contactType?: $Enums.SchoolCrmContactType
+    notes?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    school: SchoolCreateNestedOneWithoutCrmContactsInput
+    tasks?: SchoolCrmTaskCreateNestedManyWithoutContactInput
+  }
+
+  export type SchoolCrmContactUncheckedCreateWithoutActivitiesInput = {
+    id?: string
+    schoolId: string
+    fullName: string
+    organization?: string | null
+    email?: string | null
+    phone?: string | null
+    contactType?: $Enums.SchoolCrmContactType
+    notes?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    tasks?: SchoolCrmTaskUncheckedCreateNestedManyWithoutContactInput
+  }
+
+  export type SchoolCrmContactCreateOrConnectWithoutActivitiesInput = {
+    where: SchoolCrmContactWhereUniqueInput
+    create: XOR<SchoolCrmContactCreateWithoutActivitiesInput, SchoolCrmContactUncheckedCreateWithoutActivitiesInput>
+  }
+
+  export type SchoolUpsertWithoutCrmActivitiesInput = {
+    update: XOR<SchoolUpdateWithoutCrmActivitiesInput, SchoolUncheckedUpdateWithoutCrmActivitiesInput>
+    create: XOR<SchoolCreateWithoutCrmActivitiesInput, SchoolUncheckedCreateWithoutCrmActivitiesInput>
+    where?: SchoolWhereInput
+  }
+
+  export type SchoolUpdateToOneWithWhereWithoutCrmActivitiesInput = {
+    where?: SchoolWhereInput
+    data: XOR<SchoolUpdateWithoutCrmActivitiesInput, SchoolUncheckedUpdateWithoutCrmActivitiesInput>
+  }
+
+  export type SchoolUpdateWithoutCrmActivitiesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    province?: StringFieldUpdateOperationsInput | string
+    district?: StringFieldUpdateOperationsInput | string
+    principalName?: StringFieldUpdateOperationsInput | string
+    contactEmail?: NullableStringFieldUpdateOperationsInput | string | null
+    whatsappPhone?: StringFieldUpdateOperationsInput | string
+    schoolCode?: StringFieldUpdateOperationsInput | string
+    organizationCategory?: EnumOrganizationCategoryFieldUpdateOperationsInput | $Enums.OrganizationCategory
+    status?: EnumEntityStatusFieldUpdateOperationsInput | $Enums.EntityStatus
+    developmentTier?: IntFieldUpdateOperationsInput | number
+    currentPhase?: IntFieldUpdateOperationsInput | number
+    developmentScores?: NullableJsonNullValueInput | InputJsonValue
+    phaseHistory?: NullableJsonNullValueInput | InputJsonValue
+    infrastructureItems?: NullableJsonNullValueInput | InputJsonValue
+    fundingBalanceZar?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    annualCycleYear?: NullableIntFieldUpdateOperationsInput | number | null
+    annualCycleFocus?: NullableStringFieldUpdateOperationsInput | string | null
+    logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    logoPng?: NullableBytesFieldUpdateOperationsInput | Buffer | null
+    websiteUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    publicPhone?: NullableStringFieldUpdateOperationsInput | string | null
+    quintile?: NullableIntFieldUpdateOperationsInput | number | null
+    teacherCount?: NullableIntFieldUpdateOperationsInput | number | null
+    gpsLat?: NullableFloatFieldUpdateOperationsInput | number | null
+    gpsLng?: NullableFloatFieldUpdateOperationsInput | number | null
+    publicProfile?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    learners?: LearnerUpdateManyWithoutSchoolNestedInput
+    submissions?: SubmissionUpdateManyWithoutSchoolNestedInput
+    fundingContributions?: FundingContributionUpdateManyWithoutSchoolNestedInput
+    submittedNeeds?: SchoolSubmittedNeedUpdateManyWithoutSchoolNestedInput
+    volunteers?: SchoolVolunteerUpdateManyWithoutSchoolNestedInput
+    events?: SchoolEventUpdateManyWithoutSchoolNestedInput
+    alumni?: SchoolAlumniUpdateManyWithoutSchoolNestedInput
+    enterpriseProjects?: SchoolEnterpriseProjectUpdateManyWithoutSchoolNestedInput
+    innovationChallenges?: SchoolInnovationChallengeUpdateManyWithoutSchoolNestedInput
+    crmContacts?: SchoolCrmContactUpdateManyWithoutSchoolNestedInput
+    crmTasks?: SchoolCrmTaskUpdateManyWithoutSchoolNestedInput
+    adminUser?: UserUpdateOneWithoutSchoolNestedInput
+    verification?: SchoolVerificationUpdateOneWithoutSchoolNestedInput
+  }
+
+  export type SchoolUncheckedUpdateWithoutCrmActivitiesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    province?: StringFieldUpdateOperationsInput | string
+    district?: StringFieldUpdateOperationsInput | string
+    principalName?: StringFieldUpdateOperationsInput | string
+    contactEmail?: NullableStringFieldUpdateOperationsInput | string | null
+    whatsappPhone?: StringFieldUpdateOperationsInput | string
+    schoolCode?: StringFieldUpdateOperationsInput | string
+    organizationCategory?: EnumOrganizationCategoryFieldUpdateOperationsInput | $Enums.OrganizationCategory
+    status?: EnumEntityStatusFieldUpdateOperationsInput | $Enums.EntityStatus
+    developmentTier?: IntFieldUpdateOperationsInput | number
+    currentPhase?: IntFieldUpdateOperationsInput | number
+    developmentScores?: NullableJsonNullValueInput | InputJsonValue
+    phaseHistory?: NullableJsonNullValueInput | InputJsonValue
+    infrastructureItems?: NullableJsonNullValueInput | InputJsonValue
+    fundingBalanceZar?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    annualCycleYear?: NullableIntFieldUpdateOperationsInput | number | null
+    annualCycleFocus?: NullableStringFieldUpdateOperationsInput | string | null
+    logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    logoPng?: NullableBytesFieldUpdateOperationsInput | Buffer | null
+    websiteUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    publicPhone?: NullableStringFieldUpdateOperationsInput | string | null
+    quintile?: NullableIntFieldUpdateOperationsInput | number | null
+    teacherCount?: NullableIntFieldUpdateOperationsInput | number | null
+    gpsLat?: NullableFloatFieldUpdateOperationsInput | number | null
+    gpsLng?: NullableFloatFieldUpdateOperationsInput | number | null
+    publicProfile?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    learners?: LearnerUncheckedUpdateManyWithoutSchoolNestedInput
+    submissions?: SubmissionUncheckedUpdateManyWithoutSchoolNestedInput
+    fundingContributions?: FundingContributionUncheckedUpdateManyWithoutSchoolNestedInput
+    submittedNeeds?: SchoolSubmittedNeedUncheckedUpdateManyWithoutSchoolNestedInput
+    volunteers?: SchoolVolunteerUncheckedUpdateManyWithoutSchoolNestedInput
+    events?: SchoolEventUncheckedUpdateManyWithoutSchoolNestedInput
+    alumni?: SchoolAlumniUncheckedUpdateManyWithoutSchoolNestedInput
+    enterpriseProjects?: SchoolEnterpriseProjectUncheckedUpdateManyWithoutSchoolNestedInput
+    innovationChallenges?: SchoolInnovationChallengeUncheckedUpdateManyWithoutSchoolNestedInput
+    crmContacts?: SchoolCrmContactUncheckedUpdateManyWithoutSchoolNestedInput
+    crmTasks?: SchoolCrmTaskUncheckedUpdateManyWithoutSchoolNestedInput
+    adminUser?: UserUncheckedUpdateOneWithoutSchoolNestedInput
+    verification?: SchoolVerificationUncheckedUpdateOneWithoutSchoolNestedInput
+  }
+
+  export type SchoolCrmContactUpsertWithoutActivitiesInput = {
+    update: XOR<SchoolCrmContactUpdateWithoutActivitiesInput, SchoolCrmContactUncheckedUpdateWithoutActivitiesInput>
+    create: XOR<SchoolCrmContactCreateWithoutActivitiesInput, SchoolCrmContactUncheckedCreateWithoutActivitiesInput>
+    where?: SchoolCrmContactWhereInput
+  }
+
+  export type SchoolCrmContactUpdateToOneWithWhereWithoutActivitiesInput = {
+    where?: SchoolCrmContactWhereInput
+    data: XOR<SchoolCrmContactUpdateWithoutActivitiesInput, SchoolCrmContactUncheckedUpdateWithoutActivitiesInput>
+  }
+
+  export type SchoolCrmContactUpdateWithoutActivitiesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    fullName?: StringFieldUpdateOperationsInput | string
+    organization?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    contactType?: EnumSchoolCrmContactTypeFieldUpdateOperationsInput | $Enums.SchoolCrmContactType
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    school?: SchoolUpdateOneRequiredWithoutCrmContactsNestedInput
+    tasks?: SchoolCrmTaskUpdateManyWithoutContactNestedInput
+  }
+
+  export type SchoolCrmContactUncheckedUpdateWithoutActivitiesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    schoolId?: StringFieldUpdateOperationsInput | string
+    fullName?: StringFieldUpdateOperationsInput | string
+    organization?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    contactType?: EnumSchoolCrmContactTypeFieldUpdateOperationsInput | $Enums.SchoolCrmContactType
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    tasks?: SchoolCrmTaskUncheckedUpdateManyWithoutContactNestedInput
+  }
+
+  export type SchoolCreateWithoutCrmTasksInput = {
+    id?: string
+    name: string
+    province: string
+    district: string
+    principalName: string
+    contactEmail?: string | null
+    whatsappPhone: string
+    schoolCode: string
+    organizationCategory?: $Enums.OrganizationCategory
+    status?: $Enums.EntityStatus
+    developmentTier?: number
+    currentPhase?: number
+    developmentScores?: NullableJsonNullValueInput | InputJsonValue
+    phaseHistory?: NullableJsonNullValueInput | InputJsonValue
+    infrastructureItems?: NullableJsonNullValueInput | InputJsonValue
+    fundingBalanceZar?: Decimal | DecimalJsLike | number | string
+    annualCycleYear?: number | null
+    annualCycleFocus?: string | null
+    logoUrl?: string | null
+    logoPng?: Buffer | null
+    websiteUrl?: string | null
+    publicPhone?: string | null
+    quintile?: number | null
+    teacherCount?: number | null
+    gpsLat?: number | null
+    gpsLng?: number | null
+    publicProfile?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    learners?: LearnerCreateNestedManyWithoutSchoolInput
+    submissions?: SubmissionCreateNestedManyWithoutSchoolInput
+    fundingContributions?: FundingContributionCreateNestedManyWithoutSchoolInput
+    submittedNeeds?: SchoolSubmittedNeedCreateNestedManyWithoutSchoolInput
+    volunteers?: SchoolVolunteerCreateNestedManyWithoutSchoolInput
+    events?: SchoolEventCreateNestedManyWithoutSchoolInput
+    alumni?: SchoolAlumniCreateNestedManyWithoutSchoolInput
+    enterpriseProjects?: SchoolEnterpriseProjectCreateNestedManyWithoutSchoolInput
+    innovationChallenges?: SchoolInnovationChallengeCreateNestedManyWithoutSchoolInput
+    crmContacts?: SchoolCrmContactCreateNestedManyWithoutSchoolInput
+    crmActivities?: SchoolCrmActivityCreateNestedManyWithoutSchoolInput
+    adminUser?: UserCreateNestedOneWithoutSchoolInput
+    verification?: SchoolVerificationCreateNestedOneWithoutSchoolInput
+  }
+
+  export type SchoolUncheckedCreateWithoutCrmTasksInput = {
+    id?: string
+    name: string
+    province: string
+    district: string
+    principalName: string
+    contactEmail?: string | null
+    whatsappPhone: string
+    schoolCode: string
+    organizationCategory?: $Enums.OrganizationCategory
+    status?: $Enums.EntityStatus
+    developmentTier?: number
+    currentPhase?: number
+    developmentScores?: NullableJsonNullValueInput | InputJsonValue
+    phaseHistory?: NullableJsonNullValueInput | InputJsonValue
+    infrastructureItems?: NullableJsonNullValueInput | InputJsonValue
+    fundingBalanceZar?: Decimal | DecimalJsLike | number | string
+    annualCycleYear?: number | null
+    annualCycleFocus?: string | null
+    logoUrl?: string | null
+    logoPng?: Buffer | null
+    websiteUrl?: string | null
+    publicPhone?: string | null
+    quintile?: number | null
+    teacherCount?: number | null
+    gpsLat?: number | null
+    gpsLng?: number | null
+    publicProfile?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    learners?: LearnerUncheckedCreateNestedManyWithoutSchoolInput
+    submissions?: SubmissionUncheckedCreateNestedManyWithoutSchoolInput
+    fundingContributions?: FundingContributionUncheckedCreateNestedManyWithoutSchoolInput
+    submittedNeeds?: SchoolSubmittedNeedUncheckedCreateNestedManyWithoutSchoolInput
+    volunteers?: SchoolVolunteerUncheckedCreateNestedManyWithoutSchoolInput
+    events?: SchoolEventUncheckedCreateNestedManyWithoutSchoolInput
+    alumni?: SchoolAlumniUncheckedCreateNestedManyWithoutSchoolInput
+    enterpriseProjects?: SchoolEnterpriseProjectUncheckedCreateNestedManyWithoutSchoolInput
+    innovationChallenges?: SchoolInnovationChallengeUncheckedCreateNestedManyWithoutSchoolInput
+    crmContacts?: SchoolCrmContactUncheckedCreateNestedManyWithoutSchoolInput
+    crmActivities?: SchoolCrmActivityUncheckedCreateNestedManyWithoutSchoolInput
+    adminUser?: UserUncheckedCreateNestedOneWithoutSchoolInput
+    verification?: SchoolVerificationUncheckedCreateNestedOneWithoutSchoolInput
+  }
+
+  export type SchoolCreateOrConnectWithoutCrmTasksInput = {
+    where: SchoolWhereUniqueInput
+    create: XOR<SchoolCreateWithoutCrmTasksInput, SchoolUncheckedCreateWithoutCrmTasksInput>
+  }
+
+  export type SchoolCrmContactCreateWithoutTasksInput = {
+    id?: string
+    fullName: string
+    organization?: string | null
+    email?: string | null
+    phone?: string | null
+    contactType?: $Enums.SchoolCrmContactType
+    notes?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    school: SchoolCreateNestedOneWithoutCrmContactsInput
+    activities?: SchoolCrmActivityCreateNestedManyWithoutContactInput
+  }
+
+  export type SchoolCrmContactUncheckedCreateWithoutTasksInput = {
+    id?: string
+    schoolId: string
+    fullName: string
+    organization?: string | null
+    email?: string | null
+    phone?: string | null
+    contactType?: $Enums.SchoolCrmContactType
+    notes?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    activities?: SchoolCrmActivityUncheckedCreateNestedManyWithoutContactInput
+  }
+
+  export type SchoolCrmContactCreateOrConnectWithoutTasksInput = {
+    where: SchoolCrmContactWhereUniqueInput
+    create: XOR<SchoolCrmContactCreateWithoutTasksInput, SchoolCrmContactUncheckedCreateWithoutTasksInput>
+  }
+
+  export type SchoolUpsertWithoutCrmTasksInput = {
+    update: XOR<SchoolUpdateWithoutCrmTasksInput, SchoolUncheckedUpdateWithoutCrmTasksInput>
+    create: XOR<SchoolCreateWithoutCrmTasksInput, SchoolUncheckedCreateWithoutCrmTasksInput>
+    where?: SchoolWhereInput
+  }
+
+  export type SchoolUpdateToOneWithWhereWithoutCrmTasksInput = {
+    where?: SchoolWhereInput
+    data: XOR<SchoolUpdateWithoutCrmTasksInput, SchoolUncheckedUpdateWithoutCrmTasksInput>
+  }
+
+  export type SchoolUpdateWithoutCrmTasksInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    province?: StringFieldUpdateOperationsInput | string
+    district?: StringFieldUpdateOperationsInput | string
+    principalName?: StringFieldUpdateOperationsInput | string
+    contactEmail?: NullableStringFieldUpdateOperationsInput | string | null
+    whatsappPhone?: StringFieldUpdateOperationsInput | string
+    schoolCode?: StringFieldUpdateOperationsInput | string
+    organizationCategory?: EnumOrganizationCategoryFieldUpdateOperationsInput | $Enums.OrganizationCategory
+    status?: EnumEntityStatusFieldUpdateOperationsInput | $Enums.EntityStatus
+    developmentTier?: IntFieldUpdateOperationsInput | number
+    currentPhase?: IntFieldUpdateOperationsInput | number
+    developmentScores?: NullableJsonNullValueInput | InputJsonValue
+    phaseHistory?: NullableJsonNullValueInput | InputJsonValue
+    infrastructureItems?: NullableJsonNullValueInput | InputJsonValue
+    fundingBalanceZar?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    annualCycleYear?: NullableIntFieldUpdateOperationsInput | number | null
+    annualCycleFocus?: NullableStringFieldUpdateOperationsInput | string | null
+    logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    logoPng?: NullableBytesFieldUpdateOperationsInput | Buffer | null
+    websiteUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    publicPhone?: NullableStringFieldUpdateOperationsInput | string | null
+    quintile?: NullableIntFieldUpdateOperationsInput | number | null
+    teacherCount?: NullableIntFieldUpdateOperationsInput | number | null
+    gpsLat?: NullableFloatFieldUpdateOperationsInput | number | null
+    gpsLng?: NullableFloatFieldUpdateOperationsInput | number | null
+    publicProfile?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    learners?: LearnerUpdateManyWithoutSchoolNestedInput
+    submissions?: SubmissionUpdateManyWithoutSchoolNestedInput
+    fundingContributions?: FundingContributionUpdateManyWithoutSchoolNestedInput
+    submittedNeeds?: SchoolSubmittedNeedUpdateManyWithoutSchoolNestedInput
+    volunteers?: SchoolVolunteerUpdateManyWithoutSchoolNestedInput
+    events?: SchoolEventUpdateManyWithoutSchoolNestedInput
+    alumni?: SchoolAlumniUpdateManyWithoutSchoolNestedInput
+    enterpriseProjects?: SchoolEnterpriseProjectUpdateManyWithoutSchoolNestedInput
+    innovationChallenges?: SchoolInnovationChallengeUpdateManyWithoutSchoolNestedInput
+    crmContacts?: SchoolCrmContactUpdateManyWithoutSchoolNestedInput
+    crmActivities?: SchoolCrmActivityUpdateManyWithoutSchoolNestedInput
+    adminUser?: UserUpdateOneWithoutSchoolNestedInput
+    verification?: SchoolVerificationUpdateOneWithoutSchoolNestedInput
+  }
+
+  export type SchoolUncheckedUpdateWithoutCrmTasksInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    province?: StringFieldUpdateOperationsInput | string
+    district?: StringFieldUpdateOperationsInput | string
+    principalName?: StringFieldUpdateOperationsInput | string
+    contactEmail?: NullableStringFieldUpdateOperationsInput | string | null
+    whatsappPhone?: StringFieldUpdateOperationsInput | string
+    schoolCode?: StringFieldUpdateOperationsInput | string
+    organizationCategory?: EnumOrganizationCategoryFieldUpdateOperationsInput | $Enums.OrganizationCategory
+    status?: EnumEntityStatusFieldUpdateOperationsInput | $Enums.EntityStatus
+    developmentTier?: IntFieldUpdateOperationsInput | number
+    currentPhase?: IntFieldUpdateOperationsInput | number
+    developmentScores?: NullableJsonNullValueInput | InputJsonValue
+    phaseHistory?: NullableJsonNullValueInput | InputJsonValue
+    infrastructureItems?: NullableJsonNullValueInput | InputJsonValue
+    fundingBalanceZar?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    annualCycleYear?: NullableIntFieldUpdateOperationsInput | number | null
+    annualCycleFocus?: NullableStringFieldUpdateOperationsInput | string | null
+    logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    logoPng?: NullableBytesFieldUpdateOperationsInput | Buffer | null
+    websiteUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    publicPhone?: NullableStringFieldUpdateOperationsInput | string | null
+    quintile?: NullableIntFieldUpdateOperationsInput | number | null
+    teacherCount?: NullableIntFieldUpdateOperationsInput | number | null
+    gpsLat?: NullableFloatFieldUpdateOperationsInput | number | null
+    gpsLng?: NullableFloatFieldUpdateOperationsInput | number | null
+    publicProfile?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    learners?: LearnerUncheckedUpdateManyWithoutSchoolNestedInput
+    submissions?: SubmissionUncheckedUpdateManyWithoutSchoolNestedInput
+    fundingContributions?: FundingContributionUncheckedUpdateManyWithoutSchoolNestedInput
+    submittedNeeds?: SchoolSubmittedNeedUncheckedUpdateManyWithoutSchoolNestedInput
+    volunteers?: SchoolVolunteerUncheckedUpdateManyWithoutSchoolNestedInput
+    events?: SchoolEventUncheckedUpdateManyWithoutSchoolNestedInput
+    alumni?: SchoolAlumniUncheckedUpdateManyWithoutSchoolNestedInput
+    enterpriseProjects?: SchoolEnterpriseProjectUncheckedUpdateManyWithoutSchoolNestedInput
+    innovationChallenges?: SchoolInnovationChallengeUncheckedUpdateManyWithoutSchoolNestedInput
+    crmContacts?: SchoolCrmContactUncheckedUpdateManyWithoutSchoolNestedInput
+    crmActivities?: SchoolCrmActivityUncheckedUpdateManyWithoutSchoolNestedInput
+    adminUser?: UserUncheckedUpdateOneWithoutSchoolNestedInput
+    verification?: SchoolVerificationUncheckedUpdateOneWithoutSchoolNestedInput
+  }
+
+  export type SchoolCrmContactUpsertWithoutTasksInput = {
+    update: XOR<SchoolCrmContactUpdateWithoutTasksInput, SchoolCrmContactUncheckedUpdateWithoutTasksInput>
+    create: XOR<SchoolCrmContactCreateWithoutTasksInput, SchoolCrmContactUncheckedCreateWithoutTasksInput>
+    where?: SchoolCrmContactWhereInput
+  }
+
+  export type SchoolCrmContactUpdateToOneWithWhereWithoutTasksInput = {
+    where?: SchoolCrmContactWhereInput
+    data: XOR<SchoolCrmContactUpdateWithoutTasksInput, SchoolCrmContactUncheckedUpdateWithoutTasksInput>
+  }
+
+  export type SchoolCrmContactUpdateWithoutTasksInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    fullName?: StringFieldUpdateOperationsInput | string
+    organization?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    contactType?: EnumSchoolCrmContactTypeFieldUpdateOperationsInput | $Enums.SchoolCrmContactType
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    school?: SchoolUpdateOneRequiredWithoutCrmContactsNestedInput
+    activities?: SchoolCrmActivityUpdateManyWithoutContactNestedInput
+  }
+
+  export type SchoolCrmContactUncheckedUpdateWithoutTasksInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    schoolId?: StringFieldUpdateOperationsInput | string
+    fullName?: StringFieldUpdateOperationsInput | string
+    organization?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    contactType?: EnumSchoolCrmContactTypeFieldUpdateOperationsInput | $Enums.SchoolCrmContactType
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    activities?: SchoolCrmActivityUncheckedUpdateManyWithoutContactNestedInput
+  }
+
   export type SchoolCreateWithoutVerificationInput = {
     id?: string
     name: string
@@ -47117,11 +66723,29 @@ export namespace Prisma {
     fundingBalanceZar?: Decimal | DecimalJsLike | number | string
     annualCycleYear?: number | null
     annualCycleFocus?: string | null
+    logoUrl?: string | null
+    logoPng?: Buffer | null
+    websiteUrl?: string | null
+    publicPhone?: string | null
+    quintile?: number | null
+    teacherCount?: number | null
+    gpsLat?: number | null
+    gpsLng?: number | null
+    publicProfile?: NullableJsonNullValueInput | InputJsonValue
     createdAt?: Date | string
     updatedAt?: Date | string
     learners?: LearnerCreateNestedManyWithoutSchoolInput
     submissions?: SubmissionCreateNestedManyWithoutSchoolInput
     fundingContributions?: FundingContributionCreateNestedManyWithoutSchoolInput
+    submittedNeeds?: SchoolSubmittedNeedCreateNestedManyWithoutSchoolInput
+    volunteers?: SchoolVolunteerCreateNestedManyWithoutSchoolInput
+    events?: SchoolEventCreateNestedManyWithoutSchoolInput
+    alumni?: SchoolAlumniCreateNestedManyWithoutSchoolInput
+    enterpriseProjects?: SchoolEnterpriseProjectCreateNestedManyWithoutSchoolInput
+    innovationChallenges?: SchoolInnovationChallengeCreateNestedManyWithoutSchoolInput
+    crmContacts?: SchoolCrmContactCreateNestedManyWithoutSchoolInput
+    crmActivities?: SchoolCrmActivityCreateNestedManyWithoutSchoolInput
+    crmTasks?: SchoolCrmTaskCreateNestedManyWithoutSchoolInput
     adminUser?: UserCreateNestedOneWithoutSchoolInput
   }
 
@@ -47144,11 +66768,29 @@ export namespace Prisma {
     fundingBalanceZar?: Decimal | DecimalJsLike | number | string
     annualCycleYear?: number | null
     annualCycleFocus?: string | null
+    logoUrl?: string | null
+    logoPng?: Buffer | null
+    websiteUrl?: string | null
+    publicPhone?: string | null
+    quintile?: number | null
+    teacherCount?: number | null
+    gpsLat?: number | null
+    gpsLng?: number | null
+    publicProfile?: NullableJsonNullValueInput | InputJsonValue
     createdAt?: Date | string
     updatedAt?: Date | string
     learners?: LearnerUncheckedCreateNestedManyWithoutSchoolInput
     submissions?: SubmissionUncheckedCreateNestedManyWithoutSchoolInput
     fundingContributions?: FundingContributionUncheckedCreateNestedManyWithoutSchoolInput
+    submittedNeeds?: SchoolSubmittedNeedUncheckedCreateNestedManyWithoutSchoolInput
+    volunteers?: SchoolVolunteerUncheckedCreateNestedManyWithoutSchoolInput
+    events?: SchoolEventUncheckedCreateNestedManyWithoutSchoolInput
+    alumni?: SchoolAlumniUncheckedCreateNestedManyWithoutSchoolInput
+    enterpriseProjects?: SchoolEnterpriseProjectUncheckedCreateNestedManyWithoutSchoolInput
+    innovationChallenges?: SchoolInnovationChallengeUncheckedCreateNestedManyWithoutSchoolInput
+    crmContacts?: SchoolCrmContactUncheckedCreateNestedManyWithoutSchoolInput
+    crmActivities?: SchoolCrmActivityUncheckedCreateNestedManyWithoutSchoolInput
+    crmTasks?: SchoolCrmTaskUncheckedCreateNestedManyWithoutSchoolInput
     adminUser?: UserUncheckedCreateNestedOneWithoutSchoolInput
   }
 
@@ -47187,11 +66829,29 @@ export namespace Prisma {
     fundingBalanceZar?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     annualCycleYear?: NullableIntFieldUpdateOperationsInput | number | null
     annualCycleFocus?: NullableStringFieldUpdateOperationsInput | string | null
+    logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    logoPng?: NullableBytesFieldUpdateOperationsInput | Buffer | null
+    websiteUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    publicPhone?: NullableStringFieldUpdateOperationsInput | string | null
+    quintile?: NullableIntFieldUpdateOperationsInput | number | null
+    teacherCount?: NullableIntFieldUpdateOperationsInput | number | null
+    gpsLat?: NullableFloatFieldUpdateOperationsInput | number | null
+    gpsLng?: NullableFloatFieldUpdateOperationsInput | number | null
+    publicProfile?: NullableJsonNullValueInput | InputJsonValue
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     learners?: LearnerUpdateManyWithoutSchoolNestedInput
     submissions?: SubmissionUpdateManyWithoutSchoolNestedInput
     fundingContributions?: FundingContributionUpdateManyWithoutSchoolNestedInput
+    submittedNeeds?: SchoolSubmittedNeedUpdateManyWithoutSchoolNestedInput
+    volunteers?: SchoolVolunteerUpdateManyWithoutSchoolNestedInput
+    events?: SchoolEventUpdateManyWithoutSchoolNestedInput
+    alumni?: SchoolAlumniUpdateManyWithoutSchoolNestedInput
+    enterpriseProjects?: SchoolEnterpriseProjectUpdateManyWithoutSchoolNestedInput
+    innovationChallenges?: SchoolInnovationChallengeUpdateManyWithoutSchoolNestedInput
+    crmContacts?: SchoolCrmContactUpdateManyWithoutSchoolNestedInput
+    crmActivities?: SchoolCrmActivityUpdateManyWithoutSchoolNestedInput
+    crmTasks?: SchoolCrmTaskUpdateManyWithoutSchoolNestedInput
     adminUser?: UserUpdateOneWithoutSchoolNestedInput
   }
 
@@ -47214,11 +66874,29 @@ export namespace Prisma {
     fundingBalanceZar?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     annualCycleYear?: NullableIntFieldUpdateOperationsInput | number | null
     annualCycleFocus?: NullableStringFieldUpdateOperationsInput | string | null
+    logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    logoPng?: NullableBytesFieldUpdateOperationsInput | Buffer | null
+    websiteUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    publicPhone?: NullableStringFieldUpdateOperationsInput | string | null
+    quintile?: NullableIntFieldUpdateOperationsInput | number | null
+    teacherCount?: NullableIntFieldUpdateOperationsInput | number | null
+    gpsLat?: NullableFloatFieldUpdateOperationsInput | number | null
+    gpsLng?: NullableFloatFieldUpdateOperationsInput | number | null
+    publicProfile?: NullableJsonNullValueInput | InputJsonValue
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     learners?: LearnerUncheckedUpdateManyWithoutSchoolNestedInput
     submissions?: SubmissionUncheckedUpdateManyWithoutSchoolNestedInput
     fundingContributions?: FundingContributionUncheckedUpdateManyWithoutSchoolNestedInput
+    submittedNeeds?: SchoolSubmittedNeedUncheckedUpdateManyWithoutSchoolNestedInput
+    volunteers?: SchoolVolunteerUncheckedUpdateManyWithoutSchoolNestedInput
+    events?: SchoolEventUncheckedUpdateManyWithoutSchoolNestedInput
+    alumni?: SchoolAlumniUncheckedUpdateManyWithoutSchoolNestedInput
+    enterpriseProjects?: SchoolEnterpriseProjectUncheckedUpdateManyWithoutSchoolNestedInput
+    innovationChallenges?: SchoolInnovationChallengeUncheckedUpdateManyWithoutSchoolNestedInput
+    crmContacts?: SchoolCrmContactUncheckedUpdateManyWithoutSchoolNestedInput
+    crmActivities?: SchoolCrmActivityUncheckedUpdateManyWithoutSchoolNestedInput
+    crmTasks?: SchoolCrmTaskUncheckedUpdateManyWithoutSchoolNestedInput
     adminUser?: UserUncheckedUpdateOneWithoutSchoolNestedInput
   }
 
@@ -47241,10 +66919,28 @@ export namespace Prisma {
     fundingBalanceZar?: Decimal | DecimalJsLike | number | string
     annualCycleYear?: number | null
     annualCycleFocus?: string | null
+    logoUrl?: string | null
+    logoPng?: Buffer | null
+    websiteUrl?: string | null
+    publicPhone?: string | null
+    quintile?: number | null
+    teacherCount?: number | null
+    gpsLat?: number | null
+    gpsLng?: number | null
+    publicProfile?: NullableJsonNullValueInput | InputJsonValue
     createdAt?: Date | string
     updatedAt?: Date | string
     submissions?: SubmissionCreateNestedManyWithoutSchoolInput
     fundingContributions?: FundingContributionCreateNestedManyWithoutSchoolInput
+    submittedNeeds?: SchoolSubmittedNeedCreateNestedManyWithoutSchoolInput
+    volunteers?: SchoolVolunteerCreateNestedManyWithoutSchoolInput
+    events?: SchoolEventCreateNestedManyWithoutSchoolInput
+    alumni?: SchoolAlumniCreateNestedManyWithoutSchoolInput
+    enterpriseProjects?: SchoolEnterpriseProjectCreateNestedManyWithoutSchoolInput
+    innovationChallenges?: SchoolInnovationChallengeCreateNestedManyWithoutSchoolInput
+    crmContacts?: SchoolCrmContactCreateNestedManyWithoutSchoolInput
+    crmActivities?: SchoolCrmActivityCreateNestedManyWithoutSchoolInput
+    crmTasks?: SchoolCrmTaskCreateNestedManyWithoutSchoolInput
     adminUser?: UserCreateNestedOneWithoutSchoolInput
     verification?: SchoolVerificationCreateNestedOneWithoutSchoolInput
   }
@@ -47268,10 +66964,28 @@ export namespace Prisma {
     fundingBalanceZar?: Decimal | DecimalJsLike | number | string
     annualCycleYear?: number | null
     annualCycleFocus?: string | null
+    logoUrl?: string | null
+    logoPng?: Buffer | null
+    websiteUrl?: string | null
+    publicPhone?: string | null
+    quintile?: number | null
+    teacherCount?: number | null
+    gpsLat?: number | null
+    gpsLng?: number | null
+    publicProfile?: NullableJsonNullValueInput | InputJsonValue
     createdAt?: Date | string
     updatedAt?: Date | string
     submissions?: SubmissionUncheckedCreateNestedManyWithoutSchoolInput
     fundingContributions?: FundingContributionUncheckedCreateNestedManyWithoutSchoolInput
+    submittedNeeds?: SchoolSubmittedNeedUncheckedCreateNestedManyWithoutSchoolInput
+    volunteers?: SchoolVolunteerUncheckedCreateNestedManyWithoutSchoolInput
+    events?: SchoolEventUncheckedCreateNestedManyWithoutSchoolInput
+    alumni?: SchoolAlumniUncheckedCreateNestedManyWithoutSchoolInput
+    enterpriseProjects?: SchoolEnterpriseProjectUncheckedCreateNestedManyWithoutSchoolInput
+    innovationChallenges?: SchoolInnovationChallengeUncheckedCreateNestedManyWithoutSchoolInput
+    crmContacts?: SchoolCrmContactUncheckedCreateNestedManyWithoutSchoolInput
+    crmActivities?: SchoolCrmActivityUncheckedCreateNestedManyWithoutSchoolInput
+    crmTasks?: SchoolCrmTaskUncheckedCreateNestedManyWithoutSchoolInput
     adminUser?: UserUncheckedCreateNestedOneWithoutSchoolInput
     verification?: SchoolVerificationUncheckedCreateNestedOneWithoutSchoolInput
   }
@@ -47359,10 +67073,28 @@ export namespace Prisma {
     fundingBalanceZar?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     annualCycleYear?: NullableIntFieldUpdateOperationsInput | number | null
     annualCycleFocus?: NullableStringFieldUpdateOperationsInput | string | null
+    logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    logoPng?: NullableBytesFieldUpdateOperationsInput | Buffer | null
+    websiteUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    publicPhone?: NullableStringFieldUpdateOperationsInput | string | null
+    quintile?: NullableIntFieldUpdateOperationsInput | number | null
+    teacherCount?: NullableIntFieldUpdateOperationsInput | number | null
+    gpsLat?: NullableFloatFieldUpdateOperationsInput | number | null
+    gpsLng?: NullableFloatFieldUpdateOperationsInput | number | null
+    publicProfile?: NullableJsonNullValueInput | InputJsonValue
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     submissions?: SubmissionUpdateManyWithoutSchoolNestedInput
     fundingContributions?: FundingContributionUpdateManyWithoutSchoolNestedInput
+    submittedNeeds?: SchoolSubmittedNeedUpdateManyWithoutSchoolNestedInput
+    volunteers?: SchoolVolunteerUpdateManyWithoutSchoolNestedInput
+    events?: SchoolEventUpdateManyWithoutSchoolNestedInput
+    alumni?: SchoolAlumniUpdateManyWithoutSchoolNestedInput
+    enterpriseProjects?: SchoolEnterpriseProjectUpdateManyWithoutSchoolNestedInput
+    innovationChallenges?: SchoolInnovationChallengeUpdateManyWithoutSchoolNestedInput
+    crmContacts?: SchoolCrmContactUpdateManyWithoutSchoolNestedInput
+    crmActivities?: SchoolCrmActivityUpdateManyWithoutSchoolNestedInput
+    crmTasks?: SchoolCrmTaskUpdateManyWithoutSchoolNestedInput
     adminUser?: UserUpdateOneWithoutSchoolNestedInput
     verification?: SchoolVerificationUpdateOneWithoutSchoolNestedInput
   }
@@ -47386,10 +67118,28 @@ export namespace Prisma {
     fundingBalanceZar?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     annualCycleYear?: NullableIntFieldUpdateOperationsInput | number | null
     annualCycleFocus?: NullableStringFieldUpdateOperationsInput | string | null
+    logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    logoPng?: NullableBytesFieldUpdateOperationsInput | Buffer | null
+    websiteUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    publicPhone?: NullableStringFieldUpdateOperationsInput | string | null
+    quintile?: NullableIntFieldUpdateOperationsInput | number | null
+    teacherCount?: NullableIntFieldUpdateOperationsInput | number | null
+    gpsLat?: NullableFloatFieldUpdateOperationsInput | number | null
+    gpsLng?: NullableFloatFieldUpdateOperationsInput | number | null
+    publicProfile?: NullableJsonNullValueInput | InputJsonValue
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     submissions?: SubmissionUncheckedUpdateManyWithoutSchoolNestedInput
     fundingContributions?: FundingContributionUncheckedUpdateManyWithoutSchoolNestedInput
+    submittedNeeds?: SchoolSubmittedNeedUncheckedUpdateManyWithoutSchoolNestedInput
+    volunteers?: SchoolVolunteerUncheckedUpdateManyWithoutSchoolNestedInput
+    events?: SchoolEventUncheckedUpdateManyWithoutSchoolNestedInput
+    alumni?: SchoolAlumniUncheckedUpdateManyWithoutSchoolNestedInput
+    enterpriseProjects?: SchoolEnterpriseProjectUncheckedUpdateManyWithoutSchoolNestedInput
+    innovationChallenges?: SchoolInnovationChallengeUncheckedUpdateManyWithoutSchoolNestedInput
+    crmContacts?: SchoolCrmContactUncheckedUpdateManyWithoutSchoolNestedInput
+    crmActivities?: SchoolCrmActivityUncheckedUpdateManyWithoutSchoolNestedInput
+    crmTasks?: SchoolCrmTaskUncheckedUpdateManyWithoutSchoolNestedInput
     adminUser?: UserUncheckedUpdateOneWithoutSchoolNestedInput
     verification?: SchoolVerificationUncheckedUpdateOneWithoutSchoolNestedInput
   }
@@ -50509,10 +70259,28 @@ export namespace Prisma {
     fundingBalanceZar?: Decimal | DecimalJsLike | number | string
     annualCycleYear?: number | null
     annualCycleFocus?: string | null
+    logoUrl?: string | null
+    logoPng?: Buffer | null
+    websiteUrl?: string | null
+    publicPhone?: string | null
+    quintile?: number | null
+    teacherCount?: number | null
+    gpsLat?: number | null
+    gpsLng?: number | null
+    publicProfile?: NullableJsonNullValueInput | InputJsonValue
     createdAt?: Date | string
     updatedAt?: Date | string
     learners?: LearnerCreateNestedManyWithoutSchoolInput
     fundingContributions?: FundingContributionCreateNestedManyWithoutSchoolInput
+    submittedNeeds?: SchoolSubmittedNeedCreateNestedManyWithoutSchoolInput
+    volunteers?: SchoolVolunteerCreateNestedManyWithoutSchoolInput
+    events?: SchoolEventCreateNestedManyWithoutSchoolInput
+    alumni?: SchoolAlumniCreateNestedManyWithoutSchoolInput
+    enterpriseProjects?: SchoolEnterpriseProjectCreateNestedManyWithoutSchoolInput
+    innovationChallenges?: SchoolInnovationChallengeCreateNestedManyWithoutSchoolInput
+    crmContacts?: SchoolCrmContactCreateNestedManyWithoutSchoolInput
+    crmActivities?: SchoolCrmActivityCreateNestedManyWithoutSchoolInput
+    crmTasks?: SchoolCrmTaskCreateNestedManyWithoutSchoolInput
     adminUser?: UserCreateNestedOneWithoutSchoolInput
     verification?: SchoolVerificationCreateNestedOneWithoutSchoolInput
   }
@@ -50536,10 +70304,28 @@ export namespace Prisma {
     fundingBalanceZar?: Decimal | DecimalJsLike | number | string
     annualCycleYear?: number | null
     annualCycleFocus?: string | null
+    logoUrl?: string | null
+    logoPng?: Buffer | null
+    websiteUrl?: string | null
+    publicPhone?: string | null
+    quintile?: number | null
+    teacherCount?: number | null
+    gpsLat?: number | null
+    gpsLng?: number | null
+    publicProfile?: NullableJsonNullValueInput | InputJsonValue
     createdAt?: Date | string
     updatedAt?: Date | string
     learners?: LearnerUncheckedCreateNestedManyWithoutSchoolInput
     fundingContributions?: FundingContributionUncheckedCreateNestedManyWithoutSchoolInput
+    submittedNeeds?: SchoolSubmittedNeedUncheckedCreateNestedManyWithoutSchoolInput
+    volunteers?: SchoolVolunteerUncheckedCreateNestedManyWithoutSchoolInput
+    events?: SchoolEventUncheckedCreateNestedManyWithoutSchoolInput
+    alumni?: SchoolAlumniUncheckedCreateNestedManyWithoutSchoolInput
+    enterpriseProjects?: SchoolEnterpriseProjectUncheckedCreateNestedManyWithoutSchoolInput
+    innovationChallenges?: SchoolInnovationChallengeUncheckedCreateNestedManyWithoutSchoolInput
+    crmContacts?: SchoolCrmContactUncheckedCreateNestedManyWithoutSchoolInput
+    crmActivities?: SchoolCrmActivityUncheckedCreateNestedManyWithoutSchoolInput
+    crmTasks?: SchoolCrmTaskUncheckedCreateNestedManyWithoutSchoolInput
     adminUser?: UserUncheckedCreateNestedOneWithoutSchoolInput
     verification?: SchoolVerificationUncheckedCreateNestedOneWithoutSchoolInput
   }
@@ -50813,10 +70599,28 @@ export namespace Prisma {
     fundingBalanceZar?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     annualCycleYear?: NullableIntFieldUpdateOperationsInput | number | null
     annualCycleFocus?: NullableStringFieldUpdateOperationsInput | string | null
+    logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    logoPng?: NullableBytesFieldUpdateOperationsInput | Buffer | null
+    websiteUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    publicPhone?: NullableStringFieldUpdateOperationsInput | string | null
+    quintile?: NullableIntFieldUpdateOperationsInput | number | null
+    teacherCount?: NullableIntFieldUpdateOperationsInput | number | null
+    gpsLat?: NullableFloatFieldUpdateOperationsInput | number | null
+    gpsLng?: NullableFloatFieldUpdateOperationsInput | number | null
+    publicProfile?: NullableJsonNullValueInput | InputJsonValue
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     learners?: LearnerUpdateManyWithoutSchoolNestedInput
     fundingContributions?: FundingContributionUpdateManyWithoutSchoolNestedInput
+    submittedNeeds?: SchoolSubmittedNeedUpdateManyWithoutSchoolNestedInput
+    volunteers?: SchoolVolunteerUpdateManyWithoutSchoolNestedInput
+    events?: SchoolEventUpdateManyWithoutSchoolNestedInput
+    alumni?: SchoolAlumniUpdateManyWithoutSchoolNestedInput
+    enterpriseProjects?: SchoolEnterpriseProjectUpdateManyWithoutSchoolNestedInput
+    innovationChallenges?: SchoolInnovationChallengeUpdateManyWithoutSchoolNestedInput
+    crmContacts?: SchoolCrmContactUpdateManyWithoutSchoolNestedInput
+    crmActivities?: SchoolCrmActivityUpdateManyWithoutSchoolNestedInput
+    crmTasks?: SchoolCrmTaskUpdateManyWithoutSchoolNestedInput
     adminUser?: UserUpdateOneWithoutSchoolNestedInput
     verification?: SchoolVerificationUpdateOneWithoutSchoolNestedInput
   }
@@ -50840,10 +70644,28 @@ export namespace Prisma {
     fundingBalanceZar?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     annualCycleYear?: NullableIntFieldUpdateOperationsInput | number | null
     annualCycleFocus?: NullableStringFieldUpdateOperationsInput | string | null
+    logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    logoPng?: NullableBytesFieldUpdateOperationsInput | Buffer | null
+    websiteUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    publicPhone?: NullableStringFieldUpdateOperationsInput | string | null
+    quintile?: NullableIntFieldUpdateOperationsInput | number | null
+    teacherCount?: NullableIntFieldUpdateOperationsInput | number | null
+    gpsLat?: NullableFloatFieldUpdateOperationsInput | number | null
+    gpsLng?: NullableFloatFieldUpdateOperationsInput | number | null
+    publicProfile?: NullableJsonNullValueInput | InputJsonValue
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     learners?: LearnerUncheckedUpdateManyWithoutSchoolNestedInput
     fundingContributions?: FundingContributionUncheckedUpdateManyWithoutSchoolNestedInput
+    submittedNeeds?: SchoolSubmittedNeedUncheckedUpdateManyWithoutSchoolNestedInput
+    volunteers?: SchoolVolunteerUncheckedUpdateManyWithoutSchoolNestedInput
+    events?: SchoolEventUncheckedUpdateManyWithoutSchoolNestedInput
+    alumni?: SchoolAlumniUncheckedUpdateManyWithoutSchoolNestedInput
+    enterpriseProjects?: SchoolEnterpriseProjectUncheckedUpdateManyWithoutSchoolNestedInput
+    innovationChallenges?: SchoolInnovationChallengeUncheckedUpdateManyWithoutSchoolNestedInput
+    crmContacts?: SchoolCrmContactUncheckedUpdateManyWithoutSchoolNestedInput
+    crmActivities?: SchoolCrmActivityUncheckedUpdateManyWithoutSchoolNestedInput
+    crmTasks?: SchoolCrmTaskUncheckedUpdateManyWithoutSchoolNestedInput
     adminUser?: UserUncheckedUpdateOneWithoutSchoolNestedInput
     verification?: SchoolVerificationUncheckedUpdateOneWithoutSchoolNestedInput
   }
@@ -51724,10 +71546,28 @@ export namespace Prisma {
     fundingBalanceZar?: Decimal | DecimalJsLike | number | string
     annualCycleYear?: number | null
     annualCycleFocus?: string | null
+    logoUrl?: string | null
+    logoPng?: Buffer | null
+    websiteUrl?: string | null
+    publicPhone?: string | null
+    quintile?: number | null
+    teacherCount?: number | null
+    gpsLat?: number | null
+    gpsLng?: number | null
+    publicProfile?: NullableJsonNullValueInput | InputJsonValue
     createdAt?: Date | string
     updatedAt?: Date | string
     learners?: LearnerCreateNestedManyWithoutSchoolInput
     submissions?: SubmissionCreateNestedManyWithoutSchoolInput
+    submittedNeeds?: SchoolSubmittedNeedCreateNestedManyWithoutSchoolInput
+    volunteers?: SchoolVolunteerCreateNestedManyWithoutSchoolInput
+    events?: SchoolEventCreateNestedManyWithoutSchoolInput
+    alumni?: SchoolAlumniCreateNestedManyWithoutSchoolInput
+    enterpriseProjects?: SchoolEnterpriseProjectCreateNestedManyWithoutSchoolInput
+    innovationChallenges?: SchoolInnovationChallengeCreateNestedManyWithoutSchoolInput
+    crmContacts?: SchoolCrmContactCreateNestedManyWithoutSchoolInput
+    crmActivities?: SchoolCrmActivityCreateNestedManyWithoutSchoolInput
+    crmTasks?: SchoolCrmTaskCreateNestedManyWithoutSchoolInput
     adminUser?: UserCreateNestedOneWithoutSchoolInput
     verification?: SchoolVerificationCreateNestedOneWithoutSchoolInput
   }
@@ -51751,10 +71591,28 @@ export namespace Prisma {
     fundingBalanceZar?: Decimal | DecimalJsLike | number | string
     annualCycleYear?: number | null
     annualCycleFocus?: string | null
+    logoUrl?: string | null
+    logoPng?: Buffer | null
+    websiteUrl?: string | null
+    publicPhone?: string | null
+    quintile?: number | null
+    teacherCount?: number | null
+    gpsLat?: number | null
+    gpsLng?: number | null
+    publicProfile?: NullableJsonNullValueInput | InputJsonValue
     createdAt?: Date | string
     updatedAt?: Date | string
     learners?: LearnerUncheckedCreateNestedManyWithoutSchoolInput
     submissions?: SubmissionUncheckedCreateNestedManyWithoutSchoolInput
+    submittedNeeds?: SchoolSubmittedNeedUncheckedCreateNestedManyWithoutSchoolInput
+    volunteers?: SchoolVolunteerUncheckedCreateNestedManyWithoutSchoolInput
+    events?: SchoolEventUncheckedCreateNestedManyWithoutSchoolInput
+    alumni?: SchoolAlumniUncheckedCreateNestedManyWithoutSchoolInput
+    enterpriseProjects?: SchoolEnterpriseProjectUncheckedCreateNestedManyWithoutSchoolInput
+    innovationChallenges?: SchoolInnovationChallengeUncheckedCreateNestedManyWithoutSchoolInput
+    crmContacts?: SchoolCrmContactUncheckedCreateNestedManyWithoutSchoolInput
+    crmActivities?: SchoolCrmActivityUncheckedCreateNestedManyWithoutSchoolInput
+    crmTasks?: SchoolCrmTaskUncheckedCreateNestedManyWithoutSchoolInput
     adminUser?: UserUncheckedCreateNestedOneWithoutSchoolInput
     verification?: SchoolVerificationUncheckedCreateNestedOneWithoutSchoolInput
   }
@@ -51944,10 +71802,28 @@ export namespace Prisma {
     fundingBalanceZar?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     annualCycleYear?: NullableIntFieldUpdateOperationsInput | number | null
     annualCycleFocus?: NullableStringFieldUpdateOperationsInput | string | null
+    logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    logoPng?: NullableBytesFieldUpdateOperationsInput | Buffer | null
+    websiteUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    publicPhone?: NullableStringFieldUpdateOperationsInput | string | null
+    quintile?: NullableIntFieldUpdateOperationsInput | number | null
+    teacherCount?: NullableIntFieldUpdateOperationsInput | number | null
+    gpsLat?: NullableFloatFieldUpdateOperationsInput | number | null
+    gpsLng?: NullableFloatFieldUpdateOperationsInput | number | null
+    publicProfile?: NullableJsonNullValueInput | InputJsonValue
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     learners?: LearnerUpdateManyWithoutSchoolNestedInput
     submissions?: SubmissionUpdateManyWithoutSchoolNestedInput
+    submittedNeeds?: SchoolSubmittedNeedUpdateManyWithoutSchoolNestedInput
+    volunteers?: SchoolVolunteerUpdateManyWithoutSchoolNestedInput
+    events?: SchoolEventUpdateManyWithoutSchoolNestedInput
+    alumni?: SchoolAlumniUpdateManyWithoutSchoolNestedInput
+    enterpriseProjects?: SchoolEnterpriseProjectUpdateManyWithoutSchoolNestedInput
+    innovationChallenges?: SchoolInnovationChallengeUpdateManyWithoutSchoolNestedInput
+    crmContacts?: SchoolCrmContactUpdateManyWithoutSchoolNestedInput
+    crmActivities?: SchoolCrmActivityUpdateManyWithoutSchoolNestedInput
+    crmTasks?: SchoolCrmTaskUpdateManyWithoutSchoolNestedInput
     adminUser?: UserUpdateOneWithoutSchoolNestedInput
     verification?: SchoolVerificationUpdateOneWithoutSchoolNestedInput
   }
@@ -51971,10 +71847,28 @@ export namespace Prisma {
     fundingBalanceZar?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     annualCycleYear?: NullableIntFieldUpdateOperationsInput | number | null
     annualCycleFocus?: NullableStringFieldUpdateOperationsInput | string | null
+    logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    logoPng?: NullableBytesFieldUpdateOperationsInput | Buffer | null
+    websiteUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    publicPhone?: NullableStringFieldUpdateOperationsInput | string | null
+    quintile?: NullableIntFieldUpdateOperationsInput | number | null
+    teacherCount?: NullableIntFieldUpdateOperationsInput | number | null
+    gpsLat?: NullableFloatFieldUpdateOperationsInput | number | null
+    gpsLng?: NullableFloatFieldUpdateOperationsInput | number | null
+    publicProfile?: NullableJsonNullValueInput | InputJsonValue
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     learners?: LearnerUncheckedUpdateManyWithoutSchoolNestedInput
     submissions?: SubmissionUncheckedUpdateManyWithoutSchoolNestedInput
+    submittedNeeds?: SchoolSubmittedNeedUncheckedUpdateManyWithoutSchoolNestedInput
+    volunteers?: SchoolVolunteerUncheckedUpdateManyWithoutSchoolNestedInput
+    events?: SchoolEventUncheckedUpdateManyWithoutSchoolNestedInput
+    alumni?: SchoolAlumniUncheckedUpdateManyWithoutSchoolNestedInput
+    enterpriseProjects?: SchoolEnterpriseProjectUncheckedUpdateManyWithoutSchoolNestedInput
+    innovationChallenges?: SchoolInnovationChallengeUncheckedUpdateManyWithoutSchoolNestedInput
+    crmContacts?: SchoolCrmContactUncheckedUpdateManyWithoutSchoolNestedInput
+    crmActivities?: SchoolCrmActivityUncheckedUpdateManyWithoutSchoolNestedInput
+    crmTasks?: SchoolCrmTaskUncheckedUpdateManyWithoutSchoolNestedInput
     adminUser?: UserUncheckedUpdateOneWithoutSchoolNestedInput
     verification?: SchoolVerificationUncheckedUpdateOneWithoutSchoolNestedInput
   }
@@ -52767,6 +72661,133 @@ export namespace Prisma {
     createdAt?: Date | string
   }
 
+  export type SchoolSubmittedNeedCreateManySchoolInput = {
+    id?: string
+    title: string
+    category: string
+    subcategory: string
+    urgency: string
+    description: string
+    learnerImpact: number
+    estimatedCostZar: number
+    progressPercent?: number
+    sponsorStatus?: string
+    photoCount?: number
+    quoteCount?: number
+    status?: $Enums.SchoolNeedStatus
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type SchoolVolunteerCreateManySchoolInput = {
+    id?: string
+    fullName: string
+    role: string
+    phone?: string | null
+    email?: string | null
+    skills?: string | null
+    hoursLogged?: number
+    status?: $Enums.SchoolVolunteerStatus
+    notes?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type SchoolEventCreateManySchoolInput = {
+    id?: string
+    title: string
+    description?: string | null
+    eventType: string
+    location?: string | null
+    startsAt: Date | string
+    endsAt?: Date | string | null
+    volunteerSlots?: number
+    status?: $Enums.SchoolEventStatus
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type SchoolAlumniCreateManySchoolInput = {
+    id?: string
+    fullName: string
+    graduationYear?: number | null
+    profession?: string | null
+    company?: string | null
+    email?: string | null
+    phone?: string | null
+    linkedInUrl?: string | null
+    role?: $Enums.SchoolAlumniRole
+    offering?: string | null
+    status?: $Enums.SchoolAlumniStatus
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type SchoolEnterpriseProjectCreateManySchoolInput = {
+    id?: string
+    challengeId?: string | null
+    title: string
+    description?: string | null
+    projectType: $Enums.SchoolEnterpriseProjectType
+    studentLead: string
+    gradeLevel?: string | null
+    category?: string | null
+    status?: $Enums.SchoolEnterpriseProjectStatus
+    revenueZar?: number
+    seekingSponsor?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type SchoolInnovationChallengeCreateManySchoolInput = {
+    id?: string
+    title: string
+    description?: string | null
+    challengeType: string
+    startsAt: Date | string
+    endsAt?: Date | string | null
+    prizeDescription?: string | null
+    status?: $Enums.SchoolInnovationChallengeStatus
+    maxEntries?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type SchoolCrmContactCreateManySchoolInput = {
+    id?: string
+    fullName: string
+    organization?: string | null
+    email?: string | null
+    phone?: string | null
+    contactType?: $Enums.SchoolCrmContactType
+    notes?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type SchoolCrmActivityCreateManySchoolInput = {
+    id?: string
+    contactId?: string | null
+    activityType: $Enums.SchoolCrmActivityType
+    title: string
+    summary?: string | null
+    occurredAt: Date | string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type SchoolCrmTaskCreateManySchoolInput = {
+    id?: string
+    contactId?: string | null
+    title: string
+    description?: string | null
+    dueAt?: Date | string | null
+    status?: $Enums.SchoolCrmTaskStatus
+    priority?: $Enums.SchoolCrmTaskPriority
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
   export type LearnerUpdateWithoutSchoolInput = {
     id?: StringFieldUpdateOperationsInput | string
     fullName?: StringFieldUpdateOperationsInput | string
@@ -52881,6 +72902,609 @@ export namespace Prisma {
     grossAmountZar?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     allocations?: JsonNullValueInput | InputJsonValue
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type SchoolSubmittedNeedUpdateWithoutSchoolInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    category?: StringFieldUpdateOperationsInput | string
+    subcategory?: StringFieldUpdateOperationsInput | string
+    urgency?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    learnerImpact?: IntFieldUpdateOperationsInput | number
+    estimatedCostZar?: IntFieldUpdateOperationsInput | number
+    progressPercent?: IntFieldUpdateOperationsInput | number
+    sponsorStatus?: StringFieldUpdateOperationsInput | string
+    photoCount?: IntFieldUpdateOperationsInput | number
+    quoteCount?: IntFieldUpdateOperationsInput | number
+    status?: EnumSchoolNeedStatusFieldUpdateOperationsInput | $Enums.SchoolNeedStatus
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type SchoolSubmittedNeedUncheckedUpdateWithoutSchoolInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    category?: StringFieldUpdateOperationsInput | string
+    subcategory?: StringFieldUpdateOperationsInput | string
+    urgency?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    learnerImpact?: IntFieldUpdateOperationsInput | number
+    estimatedCostZar?: IntFieldUpdateOperationsInput | number
+    progressPercent?: IntFieldUpdateOperationsInput | number
+    sponsorStatus?: StringFieldUpdateOperationsInput | string
+    photoCount?: IntFieldUpdateOperationsInput | number
+    quoteCount?: IntFieldUpdateOperationsInput | number
+    status?: EnumSchoolNeedStatusFieldUpdateOperationsInput | $Enums.SchoolNeedStatus
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type SchoolSubmittedNeedUncheckedUpdateManyWithoutSchoolInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    category?: StringFieldUpdateOperationsInput | string
+    subcategory?: StringFieldUpdateOperationsInput | string
+    urgency?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    learnerImpact?: IntFieldUpdateOperationsInput | number
+    estimatedCostZar?: IntFieldUpdateOperationsInput | number
+    progressPercent?: IntFieldUpdateOperationsInput | number
+    sponsorStatus?: StringFieldUpdateOperationsInput | string
+    photoCount?: IntFieldUpdateOperationsInput | number
+    quoteCount?: IntFieldUpdateOperationsInput | number
+    status?: EnumSchoolNeedStatusFieldUpdateOperationsInput | $Enums.SchoolNeedStatus
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type SchoolVolunteerUpdateWithoutSchoolInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    fullName?: StringFieldUpdateOperationsInput | string
+    role?: StringFieldUpdateOperationsInput | string
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    skills?: NullableStringFieldUpdateOperationsInput | string | null
+    hoursLogged?: IntFieldUpdateOperationsInput | number
+    status?: EnumSchoolVolunteerStatusFieldUpdateOperationsInput | $Enums.SchoolVolunteerStatus
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    assignments?: SchoolEventVolunteerUpdateManyWithoutVolunteerNestedInput
+  }
+
+  export type SchoolVolunteerUncheckedUpdateWithoutSchoolInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    fullName?: StringFieldUpdateOperationsInput | string
+    role?: StringFieldUpdateOperationsInput | string
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    skills?: NullableStringFieldUpdateOperationsInput | string | null
+    hoursLogged?: IntFieldUpdateOperationsInput | number
+    status?: EnumSchoolVolunteerStatusFieldUpdateOperationsInput | $Enums.SchoolVolunteerStatus
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    assignments?: SchoolEventVolunteerUncheckedUpdateManyWithoutVolunteerNestedInput
+  }
+
+  export type SchoolVolunteerUncheckedUpdateManyWithoutSchoolInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    fullName?: StringFieldUpdateOperationsInput | string
+    role?: StringFieldUpdateOperationsInput | string
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    skills?: NullableStringFieldUpdateOperationsInput | string | null
+    hoursLogged?: IntFieldUpdateOperationsInput | number
+    status?: EnumSchoolVolunteerStatusFieldUpdateOperationsInput | $Enums.SchoolVolunteerStatus
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type SchoolEventUpdateWithoutSchoolInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    eventType?: StringFieldUpdateOperationsInput | string
+    location?: NullableStringFieldUpdateOperationsInput | string | null
+    startsAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    endsAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    volunteerSlots?: IntFieldUpdateOperationsInput | number
+    status?: EnumSchoolEventStatusFieldUpdateOperationsInput | $Enums.SchoolEventStatus
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    assignments?: SchoolEventVolunteerUpdateManyWithoutEventNestedInput
+  }
+
+  export type SchoolEventUncheckedUpdateWithoutSchoolInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    eventType?: StringFieldUpdateOperationsInput | string
+    location?: NullableStringFieldUpdateOperationsInput | string | null
+    startsAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    endsAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    volunteerSlots?: IntFieldUpdateOperationsInput | number
+    status?: EnumSchoolEventStatusFieldUpdateOperationsInput | $Enums.SchoolEventStatus
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    assignments?: SchoolEventVolunteerUncheckedUpdateManyWithoutEventNestedInput
+  }
+
+  export type SchoolEventUncheckedUpdateManyWithoutSchoolInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    eventType?: StringFieldUpdateOperationsInput | string
+    location?: NullableStringFieldUpdateOperationsInput | string | null
+    startsAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    endsAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    volunteerSlots?: IntFieldUpdateOperationsInput | number
+    status?: EnumSchoolEventStatusFieldUpdateOperationsInput | $Enums.SchoolEventStatus
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type SchoolAlumniUpdateWithoutSchoolInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    fullName?: StringFieldUpdateOperationsInput | string
+    graduationYear?: NullableIntFieldUpdateOperationsInput | number | null
+    profession?: NullableStringFieldUpdateOperationsInput | string | null
+    company?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    linkedInUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: EnumSchoolAlumniRoleFieldUpdateOperationsInput | $Enums.SchoolAlumniRole
+    offering?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumSchoolAlumniStatusFieldUpdateOperationsInput | $Enums.SchoolAlumniStatus
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type SchoolAlumniUncheckedUpdateWithoutSchoolInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    fullName?: StringFieldUpdateOperationsInput | string
+    graduationYear?: NullableIntFieldUpdateOperationsInput | number | null
+    profession?: NullableStringFieldUpdateOperationsInput | string | null
+    company?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    linkedInUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: EnumSchoolAlumniRoleFieldUpdateOperationsInput | $Enums.SchoolAlumniRole
+    offering?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumSchoolAlumniStatusFieldUpdateOperationsInput | $Enums.SchoolAlumniStatus
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type SchoolAlumniUncheckedUpdateManyWithoutSchoolInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    fullName?: StringFieldUpdateOperationsInput | string
+    graduationYear?: NullableIntFieldUpdateOperationsInput | number | null
+    profession?: NullableStringFieldUpdateOperationsInput | string | null
+    company?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    linkedInUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: EnumSchoolAlumniRoleFieldUpdateOperationsInput | $Enums.SchoolAlumniRole
+    offering?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumSchoolAlumniStatusFieldUpdateOperationsInput | $Enums.SchoolAlumniStatus
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type SchoolEnterpriseProjectUpdateWithoutSchoolInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    projectType?: EnumSchoolEnterpriseProjectTypeFieldUpdateOperationsInput | $Enums.SchoolEnterpriseProjectType
+    studentLead?: StringFieldUpdateOperationsInput | string
+    gradeLevel?: NullableStringFieldUpdateOperationsInput | string | null
+    category?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumSchoolEnterpriseProjectStatusFieldUpdateOperationsInput | $Enums.SchoolEnterpriseProjectStatus
+    revenueZar?: IntFieldUpdateOperationsInput | number
+    seekingSponsor?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    challenge?: SchoolInnovationChallengeUpdateOneWithoutProjectsNestedInput
+  }
+
+  export type SchoolEnterpriseProjectUncheckedUpdateWithoutSchoolInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    challengeId?: NullableStringFieldUpdateOperationsInput | string | null
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    projectType?: EnumSchoolEnterpriseProjectTypeFieldUpdateOperationsInput | $Enums.SchoolEnterpriseProjectType
+    studentLead?: StringFieldUpdateOperationsInput | string
+    gradeLevel?: NullableStringFieldUpdateOperationsInput | string | null
+    category?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumSchoolEnterpriseProjectStatusFieldUpdateOperationsInput | $Enums.SchoolEnterpriseProjectStatus
+    revenueZar?: IntFieldUpdateOperationsInput | number
+    seekingSponsor?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type SchoolEnterpriseProjectUncheckedUpdateManyWithoutSchoolInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    challengeId?: NullableStringFieldUpdateOperationsInput | string | null
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    projectType?: EnumSchoolEnterpriseProjectTypeFieldUpdateOperationsInput | $Enums.SchoolEnterpriseProjectType
+    studentLead?: StringFieldUpdateOperationsInput | string
+    gradeLevel?: NullableStringFieldUpdateOperationsInput | string | null
+    category?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumSchoolEnterpriseProjectStatusFieldUpdateOperationsInput | $Enums.SchoolEnterpriseProjectStatus
+    revenueZar?: IntFieldUpdateOperationsInput | number
+    seekingSponsor?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type SchoolInnovationChallengeUpdateWithoutSchoolInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    challengeType?: StringFieldUpdateOperationsInput | string
+    startsAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    endsAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    prizeDescription?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumSchoolInnovationChallengeStatusFieldUpdateOperationsInput | $Enums.SchoolInnovationChallengeStatus
+    maxEntries?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    projects?: SchoolEnterpriseProjectUpdateManyWithoutChallengeNestedInput
+  }
+
+  export type SchoolInnovationChallengeUncheckedUpdateWithoutSchoolInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    challengeType?: StringFieldUpdateOperationsInput | string
+    startsAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    endsAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    prizeDescription?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumSchoolInnovationChallengeStatusFieldUpdateOperationsInput | $Enums.SchoolInnovationChallengeStatus
+    maxEntries?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    projects?: SchoolEnterpriseProjectUncheckedUpdateManyWithoutChallengeNestedInput
+  }
+
+  export type SchoolInnovationChallengeUncheckedUpdateManyWithoutSchoolInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    challengeType?: StringFieldUpdateOperationsInput | string
+    startsAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    endsAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    prizeDescription?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumSchoolInnovationChallengeStatusFieldUpdateOperationsInput | $Enums.SchoolInnovationChallengeStatus
+    maxEntries?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type SchoolCrmContactUpdateWithoutSchoolInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    fullName?: StringFieldUpdateOperationsInput | string
+    organization?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    contactType?: EnumSchoolCrmContactTypeFieldUpdateOperationsInput | $Enums.SchoolCrmContactType
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    activities?: SchoolCrmActivityUpdateManyWithoutContactNestedInput
+    tasks?: SchoolCrmTaskUpdateManyWithoutContactNestedInput
+  }
+
+  export type SchoolCrmContactUncheckedUpdateWithoutSchoolInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    fullName?: StringFieldUpdateOperationsInput | string
+    organization?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    contactType?: EnumSchoolCrmContactTypeFieldUpdateOperationsInput | $Enums.SchoolCrmContactType
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    activities?: SchoolCrmActivityUncheckedUpdateManyWithoutContactNestedInput
+    tasks?: SchoolCrmTaskUncheckedUpdateManyWithoutContactNestedInput
+  }
+
+  export type SchoolCrmContactUncheckedUpdateManyWithoutSchoolInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    fullName?: StringFieldUpdateOperationsInput | string
+    organization?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    contactType?: EnumSchoolCrmContactTypeFieldUpdateOperationsInput | $Enums.SchoolCrmContactType
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type SchoolCrmActivityUpdateWithoutSchoolInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    activityType?: EnumSchoolCrmActivityTypeFieldUpdateOperationsInput | $Enums.SchoolCrmActivityType
+    title?: StringFieldUpdateOperationsInput | string
+    summary?: NullableStringFieldUpdateOperationsInput | string | null
+    occurredAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    contact?: SchoolCrmContactUpdateOneWithoutActivitiesNestedInput
+  }
+
+  export type SchoolCrmActivityUncheckedUpdateWithoutSchoolInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    contactId?: NullableStringFieldUpdateOperationsInput | string | null
+    activityType?: EnumSchoolCrmActivityTypeFieldUpdateOperationsInput | $Enums.SchoolCrmActivityType
+    title?: StringFieldUpdateOperationsInput | string
+    summary?: NullableStringFieldUpdateOperationsInput | string | null
+    occurredAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type SchoolCrmActivityUncheckedUpdateManyWithoutSchoolInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    contactId?: NullableStringFieldUpdateOperationsInput | string | null
+    activityType?: EnumSchoolCrmActivityTypeFieldUpdateOperationsInput | $Enums.SchoolCrmActivityType
+    title?: StringFieldUpdateOperationsInput | string
+    summary?: NullableStringFieldUpdateOperationsInput | string | null
+    occurredAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type SchoolCrmTaskUpdateWithoutSchoolInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    dueAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    status?: EnumSchoolCrmTaskStatusFieldUpdateOperationsInput | $Enums.SchoolCrmTaskStatus
+    priority?: EnumSchoolCrmTaskPriorityFieldUpdateOperationsInput | $Enums.SchoolCrmTaskPriority
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    contact?: SchoolCrmContactUpdateOneWithoutTasksNestedInput
+  }
+
+  export type SchoolCrmTaskUncheckedUpdateWithoutSchoolInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    contactId?: NullableStringFieldUpdateOperationsInput | string | null
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    dueAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    status?: EnumSchoolCrmTaskStatusFieldUpdateOperationsInput | $Enums.SchoolCrmTaskStatus
+    priority?: EnumSchoolCrmTaskPriorityFieldUpdateOperationsInput | $Enums.SchoolCrmTaskPriority
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type SchoolCrmTaskUncheckedUpdateManyWithoutSchoolInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    contactId?: NullableStringFieldUpdateOperationsInput | string | null
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    dueAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    status?: EnumSchoolCrmTaskStatusFieldUpdateOperationsInput | $Enums.SchoolCrmTaskStatus
+    priority?: EnumSchoolCrmTaskPriorityFieldUpdateOperationsInput | $Enums.SchoolCrmTaskPriority
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type SchoolEventVolunteerCreateManyVolunteerInput = {
+    id?: string
+    eventId: string
+    role?: string | null
+    createdAt?: Date | string
+  }
+
+  export type SchoolEventVolunteerUpdateWithoutVolunteerInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    role?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    event?: SchoolEventUpdateOneRequiredWithoutAssignmentsNestedInput
+  }
+
+  export type SchoolEventVolunteerUncheckedUpdateWithoutVolunteerInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    eventId?: StringFieldUpdateOperationsInput | string
+    role?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type SchoolEventVolunteerUncheckedUpdateManyWithoutVolunteerInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    eventId?: StringFieldUpdateOperationsInput | string
+    role?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type SchoolEventVolunteerCreateManyEventInput = {
+    id?: string
+    volunteerId: string
+    role?: string | null
+    createdAt?: Date | string
+  }
+
+  export type SchoolEventVolunteerUpdateWithoutEventInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    role?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    volunteer?: SchoolVolunteerUpdateOneRequiredWithoutAssignmentsNestedInput
+  }
+
+  export type SchoolEventVolunteerUncheckedUpdateWithoutEventInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    volunteerId?: StringFieldUpdateOperationsInput | string
+    role?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type SchoolEventVolunteerUncheckedUpdateManyWithoutEventInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    volunteerId?: StringFieldUpdateOperationsInput | string
+    role?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type SchoolEnterpriseProjectCreateManyChallengeInput = {
+    id?: string
+    schoolId: string
+    title: string
+    description?: string | null
+    projectType: $Enums.SchoolEnterpriseProjectType
+    studentLead: string
+    gradeLevel?: string | null
+    category?: string | null
+    status?: $Enums.SchoolEnterpriseProjectStatus
+    revenueZar?: number
+    seekingSponsor?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type SchoolEnterpriseProjectUpdateWithoutChallengeInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    projectType?: EnumSchoolEnterpriseProjectTypeFieldUpdateOperationsInput | $Enums.SchoolEnterpriseProjectType
+    studentLead?: StringFieldUpdateOperationsInput | string
+    gradeLevel?: NullableStringFieldUpdateOperationsInput | string | null
+    category?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumSchoolEnterpriseProjectStatusFieldUpdateOperationsInput | $Enums.SchoolEnterpriseProjectStatus
+    revenueZar?: IntFieldUpdateOperationsInput | number
+    seekingSponsor?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    school?: SchoolUpdateOneRequiredWithoutEnterpriseProjectsNestedInput
+  }
+
+  export type SchoolEnterpriseProjectUncheckedUpdateWithoutChallengeInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    schoolId?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    projectType?: EnumSchoolEnterpriseProjectTypeFieldUpdateOperationsInput | $Enums.SchoolEnterpriseProjectType
+    studentLead?: StringFieldUpdateOperationsInput | string
+    gradeLevel?: NullableStringFieldUpdateOperationsInput | string | null
+    category?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumSchoolEnterpriseProjectStatusFieldUpdateOperationsInput | $Enums.SchoolEnterpriseProjectStatus
+    revenueZar?: IntFieldUpdateOperationsInput | number
+    seekingSponsor?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type SchoolEnterpriseProjectUncheckedUpdateManyWithoutChallengeInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    schoolId?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    projectType?: EnumSchoolEnterpriseProjectTypeFieldUpdateOperationsInput | $Enums.SchoolEnterpriseProjectType
+    studentLead?: StringFieldUpdateOperationsInput | string
+    gradeLevel?: NullableStringFieldUpdateOperationsInput | string | null
+    category?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumSchoolEnterpriseProjectStatusFieldUpdateOperationsInput | $Enums.SchoolEnterpriseProjectStatus
+    revenueZar?: IntFieldUpdateOperationsInput | number
+    seekingSponsor?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type SchoolCrmActivityCreateManyContactInput = {
+    id?: string
+    schoolId: string
+    activityType: $Enums.SchoolCrmActivityType
+    title: string
+    summary?: string | null
+    occurredAt: Date | string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type SchoolCrmTaskCreateManyContactInput = {
+    id?: string
+    schoolId: string
+    title: string
+    description?: string | null
+    dueAt?: Date | string | null
+    status?: $Enums.SchoolCrmTaskStatus
+    priority?: $Enums.SchoolCrmTaskPriority
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type SchoolCrmActivityUpdateWithoutContactInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    activityType?: EnumSchoolCrmActivityTypeFieldUpdateOperationsInput | $Enums.SchoolCrmActivityType
+    title?: StringFieldUpdateOperationsInput | string
+    summary?: NullableStringFieldUpdateOperationsInput | string | null
+    occurredAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    school?: SchoolUpdateOneRequiredWithoutCrmActivitiesNestedInput
+  }
+
+  export type SchoolCrmActivityUncheckedUpdateWithoutContactInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    schoolId?: StringFieldUpdateOperationsInput | string
+    activityType?: EnumSchoolCrmActivityTypeFieldUpdateOperationsInput | $Enums.SchoolCrmActivityType
+    title?: StringFieldUpdateOperationsInput | string
+    summary?: NullableStringFieldUpdateOperationsInput | string | null
+    occurredAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type SchoolCrmActivityUncheckedUpdateManyWithoutContactInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    schoolId?: StringFieldUpdateOperationsInput | string
+    activityType?: EnumSchoolCrmActivityTypeFieldUpdateOperationsInput | $Enums.SchoolCrmActivityType
+    title?: StringFieldUpdateOperationsInput | string
+    summary?: NullableStringFieldUpdateOperationsInput | string | null
+    occurredAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type SchoolCrmTaskUpdateWithoutContactInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    dueAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    status?: EnumSchoolCrmTaskStatusFieldUpdateOperationsInput | $Enums.SchoolCrmTaskStatus
+    priority?: EnumSchoolCrmTaskPriorityFieldUpdateOperationsInput | $Enums.SchoolCrmTaskPriority
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    school?: SchoolUpdateOneRequiredWithoutCrmTasksNestedInput
+  }
+
+  export type SchoolCrmTaskUncheckedUpdateWithoutContactInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    schoolId?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    dueAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    status?: EnumSchoolCrmTaskStatusFieldUpdateOperationsInput | $Enums.SchoolCrmTaskStatus
+    priority?: EnumSchoolCrmTaskPriorityFieldUpdateOperationsInput | $Enums.SchoolCrmTaskPriority
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type SchoolCrmTaskUncheckedUpdateManyWithoutContactInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    schoolId?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    dueAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    status?: EnumSchoolCrmTaskStatusFieldUpdateOperationsInput | $Enums.SchoolCrmTaskStatus
+    priority?: EnumSchoolCrmTaskPriorityFieldUpdateOperationsInput | $Enums.SchoolCrmTaskPriority
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type SubmissionCreateManyLearnerInput = {
@@ -54133,6 +74757,22 @@ export namespace Prisma {
      */
     export type SchoolCountOutputTypeArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = SchoolCountOutputTypeDefaultArgs<ExtArgs>
     /**
+     * @deprecated Use SchoolVolunteerCountOutputTypeDefaultArgs instead
+     */
+    export type SchoolVolunteerCountOutputTypeArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = SchoolVolunteerCountOutputTypeDefaultArgs<ExtArgs>
+    /**
+     * @deprecated Use SchoolEventCountOutputTypeDefaultArgs instead
+     */
+    export type SchoolEventCountOutputTypeArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = SchoolEventCountOutputTypeDefaultArgs<ExtArgs>
+    /**
+     * @deprecated Use SchoolInnovationChallengeCountOutputTypeDefaultArgs instead
+     */
+    export type SchoolInnovationChallengeCountOutputTypeArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = SchoolInnovationChallengeCountOutputTypeDefaultArgs<ExtArgs>
+    /**
+     * @deprecated Use SchoolCrmContactCountOutputTypeDefaultArgs instead
+     */
+    export type SchoolCrmContactCountOutputTypeArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = SchoolCrmContactCountOutputTypeDefaultArgs<ExtArgs>
+    /**
      * @deprecated Use LearnerCountOutputTypeDefaultArgs instead
      */
     export type LearnerCountOutputTypeArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = LearnerCountOutputTypeDefaultArgs<ExtArgs>
@@ -54172,6 +74812,46 @@ export namespace Prisma {
      * @deprecated Use SchoolDefaultArgs instead
      */
     export type SchoolArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = SchoolDefaultArgs<ExtArgs>
+    /**
+     * @deprecated Use SchoolSubmittedNeedDefaultArgs instead
+     */
+    export type SchoolSubmittedNeedArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = SchoolSubmittedNeedDefaultArgs<ExtArgs>
+    /**
+     * @deprecated Use SchoolVolunteerDefaultArgs instead
+     */
+    export type SchoolVolunteerArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = SchoolVolunteerDefaultArgs<ExtArgs>
+    /**
+     * @deprecated Use SchoolEventDefaultArgs instead
+     */
+    export type SchoolEventArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = SchoolEventDefaultArgs<ExtArgs>
+    /**
+     * @deprecated Use SchoolEventVolunteerDefaultArgs instead
+     */
+    export type SchoolEventVolunteerArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = SchoolEventVolunteerDefaultArgs<ExtArgs>
+    /**
+     * @deprecated Use SchoolAlumniDefaultArgs instead
+     */
+    export type SchoolAlumniArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = SchoolAlumniDefaultArgs<ExtArgs>
+    /**
+     * @deprecated Use SchoolInnovationChallengeDefaultArgs instead
+     */
+    export type SchoolInnovationChallengeArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = SchoolInnovationChallengeDefaultArgs<ExtArgs>
+    /**
+     * @deprecated Use SchoolEnterpriseProjectDefaultArgs instead
+     */
+    export type SchoolEnterpriseProjectArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = SchoolEnterpriseProjectDefaultArgs<ExtArgs>
+    /**
+     * @deprecated Use SchoolCrmContactDefaultArgs instead
+     */
+    export type SchoolCrmContactArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = SchoolCrmContactDefaultArgs<ExtArgs>
+    /**
+     * @deprecated Use SchoolCrmActivityDefaultArgs instead
+     */
+    export type SchoolCrmActivityArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = SchoolCrmActivityDefaultArgs<ExtArgs>
+    /**
+     * @deprecated Use SchoolCrmTaskDefaultArgs instead
+     */
+    export type SchoolCrmTaskArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = SchoolCrmTaskDefaultArgs<ExtArgs>
     /**
      * @deprecated Use SchoolVerificationDefaultArgs instead
      */

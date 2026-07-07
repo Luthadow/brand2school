@@ -4,7 +4,7 @@ import XLSX from "xlsx";
 import { z } from "zod";
 import { prisma } from "../../lib/prisma.js";
 import { deriveBrandPrefix, deriveCampaignCode } from "../../lib/codeIdentity.js";
-import { slugifyBrandCode } from "../../lib/slugify.js";
+import { slugifyBrandCode, slugifyName } from "../../lib/slugify.js";
 import { requireAuth, requireRole } from "../../middleware/auth.js";
 import { campaignsRateLimit } from "../../middleware/rateLimit.js";
 import { generateSecureCodeBatch } from "../codes/generateBatch.js";
@@ -45,11 +45,21 @@ const eligibilityFieldsSchema = z.object({
   overflowCampaignId: z.string().cuid().nullable().optional()
 });
 
+const campaignGoalFieldsSchema = z.object({
+  category: z.string().min(2).max(80).optional(),
+  infrastructureGoal: z.string().min(2).max(120).optional(),
+  targetSubmissions: z.coerce.number().int().min(1).max(50_000_000).optional(),
+  contributionPerCodeZar: z.coerce.number().positive().max(1_000_000).optional(),
+  contributionPoolZar: z.coerce.number().nonnegative().optional(),
+  partnershipLabel: z.string().max(120).optional(),
+  description: z.string().max(500).optional()
+});
+
 const createCampaignSchema = z
   .object({
-    brandId: z.string().cuid(),
+    brandId: z.string().cuid().optional(),
     name: z.string().min(4),
-    slug: z.string().min(3),
+    slug: z.string().min(3).max(48).optional(),
     campaignCode: z
       .string()
       .regex(/^[A-Za-z0-9]{2,6}$/)
@@ -58,7 +68,19 @@ const createCampaignSchema = z
     startsAt: z.coerce.date(),
     endsAt: z.coerce.date()
   })
-  .merge(eligibilityFieldsSchema);
+  .merge(eligibilityFieldsSchema)
+  .merge(campaignGoalFieldsSchema);
+
+const patchCampaignSetupSchema = campaignGoalFieldsSchema.extend({
+  name: z.string().min(4).optional(),
+  startsAt: z.coerce.date().optional(),
+  endsAt: z.coerce.date().optional()
+});
+
+const createProductSchema = z.object({
+  name: z.string().min(2).max(120),
+  sku: z.string().max(40).optional()
+});
 
 const patchCampaignEligibilitySchema = eligibilityFieldsSchema.extend({
   isActive: z.boolean().optional()
@@ -172,7 +194,7 @@ campaignsRouter.post(
       res.status(403).json({ message: "Brand scope required." });
       return;
     }
-    if (req.user?.role === "BRAND_ADMIN" && payload.data.brandId !== req.user.brandId) {
+    if (req.user?.role === "BRAND_ADMIN" && payload.data.brandId && payload.data.brandId !== req.user.brandId) {
       res.status(403).json({ message: "Cannot create campaigns for another brand." });
       return;
     }
@@ -183,7 +205,14 @@ campaignsRouter.post(
     }
 
     const scopeType = (payload.data.scopeType ?? "NATIONAL") as CampaignScopeType;
+    if (scopeType === "PROVINCIAL" && (payload.data.allowedProvinces ?? []).length === 0) {
+      res.status(400).json({ message: "Select at least one province for provincial campaigns." });
+      return;
+    }
+
     const setupFeeZar = setupFeeZarForScope(scopeType);
+    const slugBase = payload.data.slug ?? slugifyName(payload.data.name);
+    const slug = slugBase.length >= 3 ? slugBase : `${slugBase}-${Date.now().toString(36)}`.slice(0, 48);
 
     const endsAt = payload.data.endsAt;
     const gracePeriodEndsAt = computeGracePeriodEndsAt({
@@ -191,29 +220,208 @@ campaignsRouter.post(
       gracePeriodDays: 14
     });
 
-    const campaign = await prisma.campaign.create({
+    try {
+      const campaign = await prisma.campaign.create({
+        data: {
+          brandId,
+          name: payload.data.name,
+          slug: slug.toLowerCase(),
+          campaignCode: payload.data.campaignCode ?? deriveCampaignCode(slug, payload.data.name),
+          startsAt: payload.data.startsAt,
+          endsAt,
+          gracePeriodEndsAt,
+          isActive: false,
+          commercialStatus: "DRAFT",
+          setupFeeZar,
+          scopeType,
+          allowedProvinces: payload.data.allowedProvinces ?? [],
+          allowedDistricts: payload.data.allowedDistricts ?? [],
+          allowedSchoolIds: payload.data.allowedSchoolIds ?? [],
+          budgetAllocatedZar: payload.data.budgetAllocatedZar,
+          pauseOnBudgetExhausted: payload.data.pauseOnBudgetExhausted ?? true,
+          overflowCampaignId: payload.data.overflowCampaignId ?? undefined,
+          category: payload.data.category,
+          infrastructureGoal: payload.data.infrastructureGoal,
+          targetSubmissions: payload.data.targetSubmissions ?? 100,
+          contributionPerCodeZar: payload.data.contributionPerCodeZar,
+          contributionPoolZar: payload.data.contributionPoolZar,
+          partnershipLabel: payload.data.partnershipLabel,
+          impactTarget: payload.data.description
+            ? { description: payload.data.description }
+            : undefined
+        }
+      });
+      await markRulesConfiguredIfReady(campaign.id, campaign);
+      res.status(201).json({
+        ...campaign,
+        scopeLabel: describeCampaignScope(campaign),
+        remainingBudgetZar: remainingCampaignBudgetZar(campaign)
+      });
+    } catch (err) {
+      const message = err instanceof Error ? err.message : "Could not create campaign.";
+      if (message.includes("Unique constraint")) {
+        res.status(409).json({ message: "A campaign with this slug or code already exists. Try a different name." });
+        return;
+      }
+      res.status(400).json({ message });
+    }
+  }
+);
+
+campaignsRouter.get(
+  "/:campaignId/activation",
+  requireAuth,
+  requireRole(["SUPER_ADMIN", "ADMIN_STAFF", "BRAND_ADMIN"]),
+  async (req, res) => {
+    const campaign = await prisma.campaign.findUnique({
+      where: { id: req.params.campaignId },
+      select: { brandId: true }
+    });
+    if (!campaign) {
+      res.status(404).json({ message: "Campaign not found." });
+      return;
+    }
+    if (campaignForbiddenForBrandAdmin(req, campaign.brandId)) {
+      res.status(403).json({ message: "Cannot view another brand's campaign." });
+      return;
+    }
+
+    const gate = await assertCampaignCanGoLive(req.params.campaignId);
+    res.json(gate);
+  }
+);
+
+campaignsRouter.get(
+  "/:campaignId/products",
+  requireAuth,
+  requireRole(["SUPER_ADMIN", "ADMIN_STAFF", "BRAND_ADMIN"]),
+  async (req, res) => {
+    const campaign = await prisma.campaign.findUnique({
+      where: { id: req.params.campaignId },
+      select: { brandId: true }
+    });
+    if (!campaign) {
+      res.status(404).json({ message: "Campaign not found." });
+      return;
+    }
+    if (campaignForbiddenForBrandAdmin(req, campaign.brandId)) {
+      res.status(403).json({ message: "Cannot view another brand's campaign." });
+      return;
+    }
+
+    const products = await prisma.product.findMany({
+      where: { campaignId: req.params.campaignId },
+      orderBy: { createdAt: "asc" }
+    });
+    res.json(products);
+  }
+);
+
+campaignsRouter.post(
+  "/:campaignId/products",
+  requireAuth,
+  requireRole(["SUPER_ADMIN", "ADMIN_STAFF", "BRAND_ADMIN"]),
+  async (req, res) => {
+    const payload = createProductSchema.safeParse(req.body);
+    if (!payload.success) {
+      res.status(400).json({ message: "Validation failed.", issues: payload.error.flatten() });
+      return;
+    }
+
+    const campaign = await prisma.campaign.findUnique({
+      where: { id: req.params.campaignId },
+      select: { brandId: true }
+    });
+    if (!campaign) {
+      res.status(404).json({ message: "Campaign not found." });
+      return;
+    }
+    if (campaignForbiddenForBrandAdmin(req, campaign.brandId)) {
+      res.status(403).json({ message: "Cannot manage another brand's campaign." });
+      return;
+    }
+
+    const slug = slugifyName(payload.data.name) || `product-${Date.now().toString(36)}`;
+    try {
+      const product = await prisma.product.create({
+        data: {
+          campaignId: req.params.campaignId,
+          name: payload.data.name,
+          slug,
+          sku: payload.data.sku
+        }
+      });
+      res.status(201).json(product);
+    } catch (err) {
+      const message = err instanceof Error ? err.message : "Could not create product.";
+      if (message.includes("Unique constraint")) {
+        res.status(409).json({ message: "A product with this name already exists on this campaign." });
+        return;
+      }
+      res.status(400).json({ message });
+    }
+  }
+);
+
+campaignsRouter.patch(
+  "/:campaignId/setup",
+  requireAuth,
+  requireRole(["SUPER_ADMIN", "ADMIN_STAFF", "BRAND_ADMIN"]),
+  async (req, res) => {
+    const payload = patchCampaignSetupSchema.safeParse(req.body);
+    if (!payload.success) {
+      res.status(400).json({ message: "Validation failed.", issues: payload.error.flatten() });
+      return;
+    }
+
+    const existing = await prisma.campaign.findUnique({ where: { id: req.params.campaignId } });
+    if (!existing) {
+      res.status(404).json({ message: "Campaign not found." });
+      return;
+    }
+    if (req.user?.role === "BRAND_ADMIN" && existing.brandId !== req.user.brandId) {
+      res.status(403).json({ message: "Cannot edit another brand's campaign." });
+      return;
+    }
+
+    if (
+      payload.data.endsAt &&
+      payload.data.startsAt &&
+      payload.data.endsAt <= payload.data.startsAt
+    ) {
+      res.status(400).json({ message: "endsAt must be after startsAt." });
+      return;
+    }
+
+    const campaign = await prisma.campaign.update({
+      where: { id: existing.id },
       data: {
-        brandId,
-        name: payload.data.name,
-        slug: payload.data.slug.toLowerCase(),
-        campaignCode: payload.data.campaignCode ?? deriveCampaignCode(payload.data.slug, payload.data.name),
-        startsAt: payload.data.startsAt,
-        endsAt,
-        gracePeriodEndsAt,
-        isActive: false,
-        commercialStatus: "DRAFT",
-        setupFeeZar,
-        scopeType,
-        allowedProvinces: payload.data.allowedProvinces ?? [],
-        allowedDistricts: payload.data.allowedDistricts ?? [],
-        allowedSchoolIds: payload.data.allowedSchoolIds ?? [],
-        budgetAllocatedZar: payload.data.budgetAllocatedZar,
-        pauseOnBudgetExhausted: payload.data.pauseOnBudgetExhausted ?? true,
-        overflowCampaignId: payload.data.overflowCampaignId ?? undefined
+        ...(payload.data.name !== undefined ? { name: payload.data.name } : {}),
+        ...(payload.data.startsAt !== undefined ? { startsAt: payload.data.startsAt } : {}),
+        ...(payload.data.endsAt !== undefined ? { endsAt: payload.data.endsAt } : {}),
+        ...(payload.data.category !== undefined ? { category: payload.data.category } : {}),
+        ...(payload.data.infrastructureGoal !== undefined
+          ? { infrastructureGoal: payload.data.infrastructureGoal }
+          : {}),
+        ...(payload.data.targetSubmissions !== undefined
+          ? { targetSubmissions: payload.data.targetSubmissions }
+          : {}),
+        ...(payload.data.contributionPerCodeZar !== undefined
+          ? { contributionPerCodeZar: payload.data.contributionPerCodeZar }
+          : {}),
+        ...(payload.data.contributionPoolZar !== undefined
+          ? { contributionPoolZar: payload.data.contributionPoolZar }
+          : {}),
+        ...(payload.data.partnershipLabel !== undefined
+          ? { partnershipLabel: payload.data.partnershipLabel }
+          : {}),
+        ...(payload.data.description !== undefined
+          ? { impactTarget: { description: payload.data.description } }
+          : {})
       }
     });
-    await markRulesConfiguredIfReady(campaign.id, campaign);
-    res.status(201).json({
+
+    res.json({
       ...campaign,
       scopeLabel: describeCampaignScope(campaign),
       remainingBudgetZar: remainingCampaignBudgetZar(campaign)

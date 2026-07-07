@@ -1,6 +1,7 @@
 import { z } from "zod";
 import { prisma } from "../../lib/prisma.js";
 import { brandLogoWebPath, hasBrandLogo } from "../../lib/brandLogo.js";
+import { publicSchoolProfilePath } from "./publicSchools.js";
 
 const REGISTERED_SCHOOL_STATUSES = ["PENDING", "VERIFIED", "APPROVED", "ACTIVE"] as const;
 
@@ -40,6 +41,7 @@ export const publicSearchQuerySchema = z.object({
 export type PublicSchoolSearchHit = {
   type: "school";
   name: string;
+  schoolCode: string;
   province: string;
   district: string;
   address: string;
@@ -47,6 +49,7 @@ export type PublicSchoolSearchHit = {
   organizationLabel: string;
   status: string;
   statusLabel: string;
+  profileUrl: string;
   registered: true;
 };
 
@@ -87,6 +90,7 @@ export async function searchPlatformPublic(options: {
           },
           select: {
             name: true,
+            schoolCode: true,
             province: true,
             district: true,
             status: true,
@@ -116,6 +120,7 @@ export async function searchPlatformPublic(options: {
   const schools: PublicSchoolSearchHit[] = schoolRows.map((row) => ({
     type: "school",
     name: row.name,
+    schoolCode: row.schoolCode,
     province: row.province,
     district: row.district,
     address: `${row.district}, ${row.province}`,
@@ -123,6 +128,7 @@ export async function searchPlatformPublic(options: {
     organizationLabel: ORG_LABEL[row.organizationCategory] ?? row.organizationCategory,
     status: row.status,
     statusLabel: schoolStatusLabel(row.status),
+    profileUrl: publicSchoolProfilePath(row.schoolCode),
     registered: true
   }));
 

@@ -15,6 +15,21 @@ import {
   REGISTRATION_DEFERRAL_KEY
 } from "./schoolVerification/documentDeferrals.js";
 import { serializeSchoolVerification } from "./schoolVerification/serializeSchoolVerification.js";
+import { buildSchoolSuccessCentre, type SchoolSuccessCentre } from "./schoolSuccessCentre.js";
+import { buildSchoolPublicProfile, type SchoolPublicProfilePayload } from "./schoolPublicProfile.js";
+import { buildDocumentVault, type DocumentVaultEntry } from "./schoolDocumentVault.js";
+import { evaluateSchoolPublicVisibility, publicSchoolProfilePath } from "../platform/publicSchools.js";
+import { buildSchoolCommunityHub, type SchoolCommunityHub } from "./schoolCommunityHub.js";
+import { buildSchoolPeopleHub, type SchoolPeopleHub } from "./schoolPeopleHub.js";
+import { buildSchoolEnterpriseHub, type SchoolEnterpriseHub } from "./schoolEnterpriseHub.js";
+import { buildSchoolCrmHub, type SchoolCrmHub } from "./schoolCrmHub.js";
+import {
+  listSchoolSubmittedNeeds,
+  serializeSubmittedNeed,
+  type SchoolSubmittedNeedItem
+} from "./schoolSubmittedNeeds.js";
+import { getSchoolLeaderboardsDashboard, type SchoolLeaderboardsDashboard } from "./schoolLeaderboards.js";
+import { badgeLabels, buildSchoolBadges, type SchoolBadgesPayload } from "./schoolBadges.js";
 
 export type SchoolNeedItem = {
   id: string;
@@ -144,11 +159,13 @@ export type SchoolPortal = {
   submissionsTrend: Array<{ label: string; count: number }>;
   notifications: SchoolNotification[];
   gamification: {
-    level: "bronze" | "silver" | "gold";
+    level: "bronze" | "silver" | "gold" | "platinum";
     label: string;
     badges: string[];
     nationalRank: number | null;
   };
+  badges: SchoolBadgesPayload;
+  leaderboards: SchoolLeaderboardsDashboard;
   whatsapp: {
     phone: string;
     commands: string[];
@@ -160,38 +177,34 @@ export type SchoolPortal = {
   };
   brandPartners: Array<{ brand: string; categories: string[] }>;
   annualCycles: Array<{ year: number; focus: string; phase: number }>;
+  successCentre: SchoolSuccessCentre;
+  publicProfile: SchoolPublicProfilePayload;
+  submittedNeeds: SchoolSubmittedNeedItem[];
+  documentVault: {
+    entries: DocumentVaultEntry[];
+    expiringSoon: number;
+    expired: number;
+  };
+  publicPage: {
+    visible: boolean;
+    url: string | null;
+    message: string;
+  };
+  communityHub: SchoolCommunityHub;
+  peopleHub: SchoolPeopleHub;
+  enterpriseHub: SchoolEnterpriseHub;
+  crmHub: SchoolCrmHub;
 };
 
-function gamificationLevel(validSubmissions: number): SchoolPortal["gamification"] {
-  if (validSubmissions === 0) {
-    return {
-      level: "bronze",
-      label: "Getting started",
-      badges: [],
-      nationalRank: null
-    };
-  }
-  if (validSubmissions >= 500) {
-    return {
-      level: "gold",
-      label: "Gold Impact School",
-      badges: ["National Participant", "Verified Partner", "Community Champion"],
-      nationalRank: null
-    };
-  }
-  if (validSubmissions >= 150) {
-    return {
-      level: "silver",
-      label: "Silver Impact School",
-      badges: ["Verified Partner", "Rising Momentum"],
-      nationalRank: null
-    };
-  }
+function gamificationFromBadges(
+  badges: SchoolBadgesPayload,
+  nationalRank: number | null
+): SchoolPortal["gamification"] {
   return {
-    level: "bronze",
-    label: "Bronze Impact School",
-    badges: ["Registered", "Onboarding Complete"],
-    nationalRank: null
+    level: badges.level,
+    label: badges.levelLabel,
+    badges: badgeLabels(badges),
+    nationalRank
   };
 }
 
@@ -297,9 +310,6 @@ export async function getSchoolPortal(userId: string): Promise<SchoolPortal | nu
     }));
 
   let needs: SchoolNeedItem[] = [];
-
-  const gamification = gamificationLevel(validSubmissions);
-  if (rankEntry) gamification.nationalRank = rankEntry.rank;
 
   const notifications: SchoolNotification[] = [
     {
@@ -437,6 +447,160 @@ export async function getSchoolPortal(userId: string): Promise<SchoolPortal | nu
   const category = getOrganizationCategory(school.organizationCategory);
   const serializedVerification = serializeSchoolVerification(verificationRow, school.organizationCategory);
 
+  const [activeVolunteers, upcomingEvents, alumniCount, enterpriseProjectCount, crmOpenTasks, crmOverdueTasks] =
+    await Promise.all([
+    prisma.schoolVolunteer.count({ where: { schoolId: school.id, status: "ACTIVE" } }),
+    prisma.schoolEvent.count({
+      where: { schoolId: school.id, status: "SCHEDULED", startsAt: { gte: new Date() } }
+    }),
+    prisma.schoolAlumni.count({ where: { schoolId: school.id, status: "ACTIVE" } }),
+    prisma.schoolEnterpriseProject.count({
+      where: { schoolId: school.id, status: { in: ["ACTIVE", "COMPETING", "AWARDED"] } }
+    }),
+    prisma.schoolCrmTask.count({ where: { schoolId: school.id, status: "OPEN" } }),
+    prisma.schoolCrmTask.count({
+      where: { schoolId: school.id, status: "OPEN", dueAt: { lt: new Date() } }
+    })
+  ]);
+
+  const successCentre = await buildSchoolSuccessCentre({
+    schoolId: school.id,
+    schoolCreatedAt: schoolRecord?.createdAt ?? new Date(),
+    province: school.province,
+    district: school.district,
+    hasLogo: Boolean(schoolRecord?.logoUrl),
+    activeVolunteers,
+    upcomingEvents,
+    alumniCount,
+    enterpriseProjectCount,
+    crmOpenTasks,
+    crmOverdueTasks,
+    verification: {
+      status: verificationRow.status,
+      submittedAt: verificationRow.submittedAt?.toISOString() ?? null,
+      reviewedAt: verificationRow.reviewedAt?.toISOString() ?? null,
+      emisNumber: verificationRow.emisNumber,
+      registrationNumber: verificationRow.registrationNumber,
+      claimReady: serializedVerification.claimReady,
+      documents: serializedVerification.documents.map((d) => ({
+        key: d.key,
+        label: d.label,
+        uploaded: d.uploaded,
+        deferred: d.deferred
+      })),
+      principalUploaded: Boolean(verificationRow.principalIdPath),
+      locationComplete: Boolean(school.province && school.district && (verificationRow.emisNumber || verificationRow.registrationNumber))
+    },
+    validSubmissions,
+    targets,
+    needs,
+    development,
+    nationalRank: rankEntry?.rank ?? null,
+    needsAssessmentComplete: needsEngineSummary.complete >= 2 || needs.length >= 3
+  });
+
+  const submittedNeedRows = await listSchoolSubmittedNeeds(school.id);
+  const submittedNeeds = submittedNeedRows.map(serializeSubmittedNeed);
+  const publicProfile = buildSchoolPublicProfile({
+    logoUrl: schoolRecord?.logoUrl ?? null,
+    websiteUrl: schoolRecord?.websiteUrl ?? null,
+    publicPhone: schoolRecord?.publicPhone ?? null,
+    quintile: schoolRecord?.quintile ?? null,
+    teacherCount: schoolRecord?.teacherCount ?? null,
+    gpsLat: schoolRecord?.gpsLat ?? null,
+    gpsLng: schoolRecord?.gpsLng ?? null,
+    publicProfile: schoolRecord?.publicProfile ?? null,
+    schoolCode: school.schoolCode,
+    principalName: school.principalName,
+    contactEmail: school.contactEmail,
+    province: school.province,
+    district: school.district
+  });
+  const documentVault = buildDocumentVault(
+    serializedVerification.documents.map((d) => ({
+      key: d.key,
+      label: d.label,
+      uploaded: d.uploaded,
+      deferred: d.deferred
+    })),
+    verificationRow.submittedAt?.toISOString() ?? null
+  );
+
+  if (documentVault.expiringSoon > 0 || documentVault.expired > 0) {
+    notifications.unshift({
+      id: "n-docs-expiry",
+      title:
+        documentVault.expired > 0
+          ? `${documentVault.expired} document(s) may need renewal`
+          : `${documentVault.expiringSoon} document(s) expiring soon`,
+      body: "Review your document vault and upload refreshed copies before they expire.",
+      type: "compliance",
+      createdAt: new Date().toISOString(),
+      read: false
+    });
+  }
+
+  if (crmOverdueTasks > 0) {
+    notifications.unshift({
+      id: "n-crm-overdue",
+      title: `${crmOverdueTasks} overdue CRM task(s)`,
+      body: "Follow up on renewals, support requests, and campaign actions in School CRM.",
+      type: "compliance",
+      createdAt: new Date().toISOString(),
+      read: false
+    });
+  }
+
+  const badgesPayload = buildSchoolBadges({
+    validSubmissions,
+    verificationStatus: verificationRow.status,
+    verificationScorePercent: successCentre.verificationScore.percent,
+    profileCompletionPercent: publicProfile.completionPercent,
+    nationalRank: successCentre.participation.nationalRank,
+    provinceRank: successCentre.participation.provinceRank,
+    districtRank: successCentre.participation.districtRank,
+    targets,
+    submittedNeedsCount: submittedNeeds.length,
+    completedPhases: development.phases.filter((p) => p.status === "completed").length,
+    schoolCreatedAt: schoolRecord?.createdAt ?? new Date(),
+    alumniCount,
+    enterpriseProjectCount
+  });
+
+  const leaderboards = await getSchoolLeaderboardsDashboard({
+    schoolId: school.id,
+    province: school.province,
+    district: school.district
+  });
+
+  const gamification = gamificationFromBadges(badgesPayload, rankEntry?.rank ?? null);
+
+  const publicVisibility = evaluateSchoolPublicVisibility({
+    status: school.status,
+    verificationStatus: verificationRow.status,
+    profileCompletionPercent: publicProfile.completionPercent
+  });
+  const publicPage = {
+    visible: publicVisibility.visible,
+    url: publicVisibility.visible ? publicSchoolProfilePath(school.schoolCode) : null,
+    message: publicVisibility.message
+  };
+
+  const communityHub = await buildSchoolCommunityHub({
+    schoolId: school.id,
+    schoolName: school.name,
+    schoolCode: school.schoolCode,
+    whatsappPhone: school.whatsappPhone,
+    province: school.province,
+    district: school.district,
+    learnerCount,
+    organizationCategory: school.organizationCategory
+  });
+
+  const peopleHub = await buildSchoolPeopleHub(school.id);
+  const enterpriseHub = await buildSchoolEnterpriseHub(school.id);
+  const crmHub = await buildSchoolCrmHub(school.id);
+
   return {
     school: {
       id: school.id,
@@ -510,6 +674,8 @@ export async function getSchoolPortal(userId: string): Promise<SchoolPortal | nu
     submissionsTrend,
     notifications,
     gamification,
+    badges: badgesPayload,
+    leaderboards,
     whatsapp: {
       phone: school.whatsappPhone,
       commands: [
@@ -530,6 +696,15 @@ export async function getSchoolPortal(userId: string): Promise<SchoolPortal | nu
         orderBy: { name: "asc" }
       })
     ).map((b) => ({ brand: b.name, categories: [] as string[] })),
-    annualCycles: [...ANNUAL_CYCLES]
+    annualCycles: [...ANNUAL_CYCLES],
+    successCentre,
+    publicProfile,
+    submittedNeeds,
+    documentVault,
+    publicPage,
+    communityHub,
+    peopleHub,
+    enterpriseHub,
+    crmHub
   };
 }

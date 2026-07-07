@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 import type { Route } from "next";
 import { useEffect, useState } from "react";
 import {
+  Briefcase,
   FileText,
   Home,
   LogOut,
@@ -12,10 +13,14 @@ import {
   MessageCircle,
   Send,
   Map,
+  Rocket,
   Target,
   TrendingUp,
+  Trophy,
   Upload,
   User,
+  UserCheck,
+  Users,
   Wrench,
   X
 } from "lucide-react";
@@ -29,7 +34,12 @@ const NAV: Array<{
   short: string;
   report?: SchoolReportSlug;
 }> = [
-  { href: "/school/dashboard", label: "Home", icon: Home, short: "Home", report: "overview" },
+  { href: "/school/dashboard", label: "Success Centre", icon: Home, short: "Home", report: "overview" },
+  { href: "/school/dashboard/leaderboards" as Route, label: "Leaderboards", icon: Trophy, short: "Ranks" },
+  { href: "/school/dashboard/community" as Route, label: "Community", icon: Users, short: "Hub" },
+  { href: "/school/dashboard/people" as Route, label: "People", icon: UserCheck, short: "Team" },
+  { href: "/school/dashboard/enterprise" as Route, label: "Enterprise", icon: Rocket, short: "Biz" },
+  { href: "/school/dashboard/crm" as Route, label: "CRM", icon: Briefcase, short: "CRM" },
   { href: "/school/dashboard/roadmap", label: "Roadmap", icon: Map, short: "Plan", report: "roadmap" },
   { href: "/school/dashboard/needs", label: "Needs", icon: Send, short: "Needs", report: "needs" },
   { href: "/school/dashboard/targets", label: "Targets", icon: Target, short: "Goals", report: "targets" },

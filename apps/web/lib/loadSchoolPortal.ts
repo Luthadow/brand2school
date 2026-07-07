@@ -2,6 +2,7 @@ import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import { ACCESS_COOKIE, apiBaseUrl, readSessionCookies } from "./auth";
 import type { SchoolPortal } from "./schoolPortal";
+import { isCommunityOrganization } from "./communityOrganizations";
 
 const LOGIN_PATH = "/organisations/login?category=school";
 
@@ -26,5 +27,11 @@ export async function requireSchoolPortal(): Promise<SchoolPortal> {
     throw new Error("PORTAL_UNAVAILABLE");
   }
 
-  return (await res.json()) as SchoolPortal;
+  const portal = (await res.json()) as SchoolPortal;
+
+  if (isCommunityOrganization(portal.school.organizationCategory)) {
+    redirect("/community/dashboard");
+  }
+
+  return portal;
 }
