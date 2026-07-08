@@ -34,6 +34,17 @@ type PlatformSnapshot = {
   pendingUsers: number;
   totalSubmissions: number;
   verifiedSubmissions: number;
+  verificationPacketsPendingReview: number;
+  recentVerificationSubmissions: Array<{
+    schoolId: string;
+    schoolName: string;
+    province: string;
+    district: string;
+    principalName: string;
+    organizationCategory: string;
+    verificationStatus: string;
+    submittedAt: string;
+  }>;
   schoolRegistrationTrend: Array<{ period: string; count: number }>;
 };
 
@@ -162,6 +173,42 @@ export function DashboardOverviewClient(): JSX.Element {
         </time>
       </header>
 
+      {snapshot.verificationPacketsPendingReview > 0 ? (
+        <section className="admin-verification-alert" aria-live="polite">
+          <div className="admin-verification-alert__head">
+            <strong>
+              {snapshot.verificationPacketsPendingReview} organisation
+              {snapshot.verificationPacketsPendingReview === 1 ? "" : "s"} submitted verification documents
+            </strong>
+            <p>Review packets on the Verify screen — you do not need to wait for schools to contact you.</p>
+          </div>
+          <Link href="/dashboard/approvals" className="admin-verification-alert__cta">
+            Open approvals queue →
+          </Link>
+        </section>
+      ) : null}
+
+      {snapshot.recentVerificationSubmissions.length > 0 ? (
+        <section className="admin-verification-feed card" aria-label="Recent verification submissions">
+          <h2>Recent document submissions</h2>
+          <ul className="admin-verification-feed__list">
+            {snapshot.recentVerificationSubmissions.slice(0, 6).map((item) => (
+              <li key={`${item.schoolId}-${item.submittedAt}`}>
+                <div>
+                  <Link href={`/dashboard/schools/${item.schoolId}/verification`}>{item.schoolName}</Link>
+                  <span className="admin-verification-feed__meta">
+                    {item.district}, {item.province} · {item.verificationStatus.replace(/_/g, " ")}
+                  </span>
+                </div>
+                <time dateTime={item.submittedAt}>
+                  {new Date(item.submittedAt).toLocaleString("en-ZA", { dateStyle: "short", timeStyle: "short" })}
+                </time>
+              </li>
+            ))}
+          </ul>
+        </section>
+      ) : null}
+
       <section className="admin-pending-strip" aria-label="Platform counts">
         <div className="admin-pending-pill admin-pending-pill--static">
           <span className="admin-pending-pill__value">{snapshot.schoolsRegistered}</span>
@@ -174,6 +221,10 @@ export function DashboardOverviewClient(): JSX.Element {
         <Link href="/dashboard/approvals" className="admin-pending-pill">
           <span className="admin-pending-pill__value">{snapshot.pendingBrands}</span>
           <span className="admin-pending-pill__label">Brands in pipeline</span>
+        </Link>
+        <Link href="/dashboard/approvals" className="admin-pending-pill admin-pending-pill--warn">
+          <span className="admin-pending-pill__value">{snapshot.verificationPacketsPendingReview}</span>
+          <span className="admin-pending-pill__label">Docs awaiting review</span>
         </Link>
         <Link href="/dashboard/moderation" className="admin-pending-pill admin-pending-pill--warn">
           <span className="admin-pending-pill__value">{snapshot.openFraudFlags}</span>

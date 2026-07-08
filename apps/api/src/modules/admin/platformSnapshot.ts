@@ -1,6 +1,17 @@
 import { prisma } from "../../lib/prisma.js";
 import { registeredSchoolWhere } from "../../lib/schoolMetrics.js";
 
+export type VerificationSubmissionAlert = {
+  schoolId: string;
+  schoolName: string;
+  province: string;
+  district: string;
+  principalName: string;
+  organizationCategory: string;
+  verificationStatus: string;
+  submittedAt: string;
+};
+
 export type AdminPlatformSnapshot = {
   generatedAt: string;
   schoolsRegistered: number;
@@ -12,6 +23,8 @@ export type AdminPlatformSnapshot = {
   pendingUsers: number;
   totalSubmissions: number;
   verifiedSubmissions: number;
+  verificationPacketsPendingReview: number;
+  recentVerificationSubmissions: VerificationSubmissionAlert[];
   schoolRegistrationTrend: Array<{ period: string; count: number }>;
 };
 
@@ -51,6 +64,8 @@ export async function getAdminPlatformSnapshot(): Promise<AdminPlatformSnapshot>
     pendingUsers,
     totalSubmissions,
     verifiedSubmissions,
+    verificationPacketsPendingReview,
+    recentVerificationRows,
     registeredSchools
   ] = await Promise.all([
     prisma.school.count({ where: registeredSchoolWhere }),
@@ -62,6 +77,26 @@ export async function getAdminPlatformSnapshot(): Promise<AdminPlatformSnapshot>
     prisma.user.count({ where: { status: { in: ["PENDING", "VERIFIED", "APPROVED"] } } }),
     prisma.submission.count(),
     prisma.submission.count({ where: { state: "VALID" } }),
+    prisma.schoolVerification.count({
+      where: { status: { in: ["SUBMITTED", "UNDER_REVIEW"] } }
+    }),
+    prisma.schoolVerification.findMany({
+      where: { status: { in: ["SUBMITTED", "UNDER_REVIEW"] }, submittedAt: { not: null } },
+      orderBy: { submittedAt: "desc" },
+      take: 12,
+      include: {
+        school: {
+          select: {
+            id: true,
+            name: true,
+            province: true,
+            district: true,
+            principalName: true,
+            organizationCategory: true
+          }
+        }
+      }
+    }),
     prisma.school.findMany({
       where: registeredSchoolWhere,
       select: { createdAt: true },
@@ -80,6 +115,17 @@ export async function getAdminPlatformSnapshot(): Promise<AdminPlatformSnapshot>
     pendingUsers,
     totalSubmissions,
     verifiedSubmissions,
+    verificationPacketsPendingReview,
+    recentVerificationSubmissions: recentVerificationRows.map((row) => ({
+      schoolId: row.school.id,
+      schoolName: row.school.name,
+      province: row.school.province,
+      district: row.school.district,
+      principalName: row.school.principalName,
+      organizationCategory: row.school.organizationCategory,
+      verificationStatus: row.status,
+      submittedAt: row.submittedAt!.toISOString()
+    })),
     schoolRegistrationTrend: buildSchoolRegistrationTrend(registeredSchools)
   };
 }

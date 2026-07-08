@@ -25,12 +25,21 @@ export function drawReportBanner(doc: InstanceType<typeof PDFDocument>, reportTi
   doc.y = 160;
 }
 
-export function ensureReportSpace(doc: InstanceType<typeof PDFDocument>, needed = 72): void {
-  if (doc.y > doc.page.height - needed) {
+const REPORT_PAGE_MARGIN = 48;
+const REPORT_BOTTOM_MARGIN = 56;
+const REPORT_CONTINUATION_Y = 130;
+
+/** Returns true when a new page was started. */
+export function ensureReportSpace(doc: InstanceType<typeof PDFDocument>, needed = 72): boolean {
+  const bottomY = doc.page.height - REPORT_BOTTOM_MARGIN;
+  if (doc.y + needed > bottomY) {
     doc.addPage();
     drawLetterhead(doc);
-    doc.y = 130;
+    doc.x = REPORT_PAGE_MARGIN;
+    doc.y = REPORT_CONTINUATION_Y;
+    return true;
   }
+  return false;
 }
 
 export function drawReportKeyValues(
@@ -52,17 +61,18 @@ export function drawReportTableHeader(
   columns: Array<{ label: string; width: number }>
 ): void {
   ensureReportSpace(doc, 28);
-  let x = 48;
+  let x = REPORT_PAGE_MARGIN;
   const y = doc.y;
   doc.fontSize(9).fillColor("#003B8E");
   for (const col of columns) {
-    doc.text(col.label, x, y, { width: col.width });
+    doc.text(col.label, x, y, { width: col.width, lineBreak: false });
     x += col.width;
   }
+  doc.x = REPORT_PAGE_MARGIN;
   doc.y = y + 14;
   doc
-    .moveTo(48, doc.y)
-    .lineTo(doc.page.width - 48, doc.y)
+    .moveTo(REPORT_PAGE_MARGIN, doc.y)
+    .lineTo(doc.page.width - REPORT_PAGE_MARGIN, doc.y)
     .strokeColor("#E5E7EB")
     .stroke();
   doc.y += 6;
@@ -71,20 +81,24 @@ export function drawReportTableHeader(
 export function drawReportTableRow(
   doc: InstanceType<typeof PDFDocument>,
   cells: string[],
-  widths: number[]
+  widths: number[],
+  options?: { onPageBreak?: () => void }
 ): void {
-  ensureReportSpace(doc, 20);
-  let x = 48;
+  if (ensureReportSpace(doc, 20)) {
+    options?.onPageBreak?.();
+  }
+  let x = REPORT_PAGE_MARGIN;
   const y = doc.y;
   doc.fontSize(9).fillColor("#374151");
   cells.forEach((cell, i) => {
-    doc.text(cell, x, y, { width: widths[i] - 4, lineBreak: false });
-    x += widths[i];
+    doc.text(cell, x, y, { width: widths[i]! - 4, lineBreak: false });
+    x += widths[i]!;
   });
+  doc.x = REPORT_PAGE_MARGIN;
   doc.y = y + 14;
 }
 
-const MODERN_TABLE_MARGIN = 48;
+const MODERN_TABLE_MARGIN = REPORT_PAGE_MARGIN;
 const MODERN_TABLE_PAD_X = 8;
 const MODERN_TABLE_PAD_Y = 10;
 const MODERN_TABLE_HEADER_H = 30;
@@ -109,11 +123,13 @@ function drawModernTableHeaderRow(
   for (const col of columns) {
     doc.text(col.label, cx + MODERN_TABLE_PAD_X, y + 10, {
       width: col.width - MODERN_TABLE_PAD_X * 2,
-      align: "left"
+      align: "left",
+      lineBreak: false
     });
     cx += col.width;
   }
 
+  doc.x = MODERN_TABLE_MARGIN;
   doc.y = y + MODERN_TABLE_HEADER_H + 6;
 }
 
@@ -148,14 +164,12 @@ export function createModernTable(
     for (let i = 0; i < texts.length; i++) {
       contentHeight = Math.max(
         contentHeight,
-        doc.heightOfString(texts[i]!, { width: widths[i]! - MODERN_TABLE_PAD_X * 2 })
+        doc.heightOfString(texts[i]!, { width: widths[i]! - MODERN_TABLE_PAD_X * 2, lineGap: 2 })
       );
     }
     const rowHeight = contentHeight + MODERN_TABLE_PAD_Y * 2;
 
-    const yBefore = doc.y;
-    ensureReportSpace(doc, rowHeight + 8);
-    if (doc.y < yBefore) {
+    if (ensureReportSpace(doc, rowHeight + 8)) {
       drawHeader();
     }
 
@@ -187,6 +201,7 @@ export function createModernTable(
       cx += widths[i]!;
     }
 
+    doc.x = MODERN_TABLE_MARGIN;
     doc.y = y + rowHeight + 4;
     rowIndex += 1;
   };

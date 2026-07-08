@@ -26,8 +26,10 @@ import { submitSchoolVerificationPacket } from "./schoolVerification/submitSchoo
 import { parseDocumentDeferrals } from "./schoolVerification/documentDeferrals.js";
 import {
   buildSchoolPublicProfile,
+  canonicalProvinceName,
   mergePublicProfilePatch,
-  publicProfilePatchSchema
+  publicProfilePatchSchema,
+  validateDistrictForProvince
 } from "./schoolPublicProfile.js";
 import { persistSchoolLogo } from "../../lib/schoolLogo.js";
 import {
@@ -286,7 +288,24 @@ schoolsRouter.patch("/profile", requireAuth, requireRole(["SCHOOL_ADMIN"]), asyn
   const existing = await prisma.school.findUniqueOrThrow({ where: { id: school.id } });
   const mergedProfile = mergePublicProfilePatch(existing.publicProfile, payload.data);
 
+  const nextProvince =
+    payload.data.province !== undefined ? canonicalProvinceName(payload.data.province) : existing.province;
+  if (payload.data.district !== undefined) {
+    const districtError = validateDistrictForProvince(
+      nextProvince,
+      payload.data.district,
+      existing.district
+    );
+    if (districtError) {
+      res.status(400).json({ message: districtError });
+      return;
+    }
+  }
+
   const scalar: Record<string, unknown> = { publicProfile: mergedProfile };
+  if (payload.data.name !== undefined) scalar.name = payload.data.name.trim();
+  if (payload.data.province !== undefined) scalar.province = nextProvince;
+  if (payload.data.district !== undefined) scalar.district = payload.data.district.trim();
   if (payload.data.principalName !== undefined) scalar.principalName = payload.data.principalName;
   if (payload.data.contactEmail !== undefined) scalar.contactEmail = payload.data.contactEmail;
   if (payload.data.websiteUrl !== undefined) scalar.websiteUrl = payload.data.websiteUrl;
@@ -301,8 +320,41 @@ schoolsRouter.patch("/profile", requireAuth, requireRole(["SCHOOL_ADMIN"]), asyn
     data: scalar
   });
 
+  const changedCoreFields =
+    payload.data.name !== undefined ||
+    payload.data.province !== undefined ||
+    payload.data.district !== undefined ||
+    payload.data.principalName !== undefined ||
+    payload.data.contactEmail !== undefined;
+
+  if (changedCoreFields) {
+    await prisma.auditLog.create({
+      data: {
+        action: "SCHOOL_PROFILE_UPDATED",
+        targetType: "School",
+        targetId: school.id,
+        payload: {
+          name: updated.name,
+          province: updated.province,
+          district: updated.district,
+          principalName: updated.principalName,
+          contactEmail: updated.contactEmail
+        }
+      }
+    });
+  }
+
   res.json({
     message: "Profile updated.",
+    school: {
+      id: updated.id,
+      name: updated.name,
+      schoolCode: updated.schoolCode,
+      province: updated.province,
+      district: updated.district,
+      principalName: updated.principalName,
+      contactEmail: updated.contactEmail
+    },
     profile: buildSchoolPublicProfile(updated)
   });
 });

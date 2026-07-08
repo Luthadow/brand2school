@@ -16,8 +16,11 @@ import {
   createModernTable,
   drawHorizontalBarChart,
   drawLineChart,
+  drawReportTableHeader,
+  drawReportTableRow,
   drawStackedBarChart,
-  drawVerticalBarChart
+  drawVerticalBarChart,
+  ensureReportSpace
 } from "../../lib/pdf/reportLayout.js";
 import { getAdminPlatformSnapshot } from "./platformSnapshot.js";
 import { getPlatformExecutiveAnalytics } from "../analytics/getPlatformExecutiveAnalytics.js";
@@ -46,60 +49,15 @@ function drawReportBanner(doc: InstanceType<typeof PDFDocument>, reportTitle: st
   doc.y = 160;
 }
 
-function ensureSpace(doc: InstanceType<typeof PDFDocument>, needed = 72): void {
-  if (doc.y > doc.page.height - needed) {
-    doc.addPage();
-    drawLetterhead(doc);
-    doc.y = 130;
-  }
-}
-
 function drawKeyValues(doc: InstanceType<typeof PDFDocument>, rows: Array<{ label: string; value: string }>): void {
   for (const row of rows) {
-    ensureSpace(doc, 24);
+    ensureReportSpace(doc, 24);
     const y = doc.y;
     doc.fontSize(10).fillColor("#003B8E").text(row.label, 48, y, { width: 200 });
     doc.fillColor("#374151").text(row.value, 240, y, { width: doc.page.width - 288 });
     doc.y = y + 16;
   }
   doc.moveDown(0.5);
-}
-
-function drawTableHeader(
-  doc: InstanceType<typeof PDFDocument>,
-  columns: Array<{ label: string; width: number }>
-): void {
-  ensureSpace(doc, 28);
-  let x = 48;
-  const y = doc.y;
-  doc.fontSize(9).fillColor("#003B8E");
-  for (const col of columns) {
-    doc.text(col.label, x, y, { width: col.width });
-    x += col.width;
-  }
-  doc.y = y + 14;
-  doc
-    .moveTo(48, doc.y)
-    .lineTo(doc.page.width - 48, doc.y)
-    .strokeColor("#E5E7EB")
-    .stroke();
-  doc.y += 6;
-}
-
-function drawTableRow(
-  doc: InstanceType<typeof PDFDocument>,
-  cells: string[],
-  widths: number[]
-): void {
-  ensureSpace(doc, 20);
-  let x = 48;
-  const y = doc.y;
-  doc.fontSize(9).fillColor("#374151");
-  cells.forEach((cell, i) => {
-    doc.text(cell, x, y, { width: widths[i] - 4, lineBreak: false });
-    x += widths[i];
-  });
-  doc.y = y + 14;
 }
 
 export function adminReportContentDisposition(module: AdminReportModule): string {
@@ -150,7 +108,7 @@ async function buildOverviewReportPdf(): Promise<Buffer> {
     ]);
 
     drawSection(doc, "Registration trend (weekly)", "New organisation registrations over recent weeks.");
-    ensureSpace(doc, 170);
+    ensureReportSpace(doc, 170);
     const trendData = snapshot.schoolRegistrationTrend.map((row) => ({
       label: row.period.slice(5),
       value: row.count
@@ -162,7 +120,7 @@ async function buildOverviewReportPdf(): Promise<Buffer> {
     advanceAfterChart(doc, trendBottom);
 
     drawSection(doc, "Approval pipeline mix", "Organisations and brands awaiting governance action.");
-    ensureSpace(doc, 120);
+    ensureReportSpace(doc, 120);
     const pipelineBottom = drawStackedBarChart(
       doc,
       chartBox(doc, 100),
@@ -198,7 +156,7 @@ async function buildAnalyticsReportPdf(): Promise<Buffer> {
     );
 
     drawSection(doc, "Transformation funnel", "Participation journey from registration to infrastructure milestones.");
-    ensureSpace(doc, 170);
+    ensureReportSpace(doc, 170);
     const funnelBottom = drawVerticalBarChart(
       doc,
       chartBox(doc, 155),
@@ -212,7 +170,7 @@ async function buildAnalyticsReportPdf(): Promise<Buffer> {
     advanceAfterChart(doc, funnelBottom);
 
     drawSection(doc, "Submission trend (weekly)", "Verified vs total submissions nationally.");
-    ensureSpace(doc, 180);
+    ensureReportSpace(doc, 180);
     const weekly = data.submissionTrend.weekly;
     const lineBottom = drawLineChart(
       doc,
@@ -234,16 +192,18 @@ async function buildAnalyticsReportPdf(): Promise<Buffer> {
     advanceAfterChart(doc, lineBottom);
 
     drawSection(doc, "Top brand rankings", "By valid submissions and schools reached.");
-    drawTableHeader(doc, [
+    const brandColumns = [
       { label: "#", width: 28 },
       { label: "Brand", width: 140 },
       { label: "Submissions", width: 72 },
       { label: "Schools", width: 56 },
       { label: "Score", width: 48 }
-    ]);
-    const widths = [28, 140, 72, 56, 48];
+    ];
+    const brandWidths = [28, 140, 72, 56, 48];
+    const drawBrandHeader = (): void => drawReportTableHeader(doc, brandColumns);
+    drawBrandHeader();
     for (const row of data.brandRankings.slice(0, 15)) {
-      drawTableRow(
+      drawReportTableRow(
         doc,
         [
           String(row.rank),
@@ -252,12 +212,13 @@ async function buildAnalyticsReportPdf(): Promise<Buffer> {
           String(row.schoolsReached),
           String(row.impactScore)
         ],
-        widths
+        brandWidths,
+        { onPageBreak: drawBrandHeader }
       );
     }
 
     drawSection(doc, "Provincial activity", "Valid submissions and registered schools by province.");
-    ensureSpace(doc, 200);
+    ensureReportSpace(doc, 200);
     const provChartBottom = drawHorizontalBarChart(
       doc,
       chartBox(doc, Math.min(220, 40 + data.provinces.slice(0, 9).length * 16)),
@@ -270,18 +231,21 @@ async function buildAnalyticsReportPdf(): Promise<Buffer> {
     );
     advanceAfterChart(doc, provChartBottom);
 
-    drawTableHeader(doc, [
+    const provinceColumns = [
       { label: "Province", width: 120 },
       { label: "Submissions", width: 72 },
       { label: "Schools", width: 56 },
       { label: "Intensity", width: 56 }
-    ]);
+    ];
     const provWidths = [120, 72, 56, 56];
+    const drawProvinceHeader = (): void => drawReportTableHeader(doc, provinceColumns);
+    drawProvinceHeader();
     for (const row of data.provinces.slice(0, 9)) {
-      drawTableRow(
+      drawReportTableRow(
         doc,
         [row.name, String(row.submissions), String(row.schools), `${row.intensity}%`],
-        provWidths
+        provWidths,
+        { onPageBreak: drawProvinceHeader }
       );
     }
 
@@ -307,7 +271,7 @@ async function buildCommercialReportPdf(): Promise<Buffer> {
     drawTitle(doc, "Commercial workflow", `Generated ${generated}`);
 
     drawSection(doc, "Pipeline summary", "Brand and campaign counts by workflow stage.");
-    ensureSpace(doc, 200);
+    ensureReportSpace(doc, 200);
     const pipelineEntries = Object.entries(board.pipeline).filter(([, count]) => count > 0);
     const pipelineChartBottom = drawVerticalBarChart(
       doc,
@@ -336,15 +300,17 @@ async function buildCommercialReportPdf(): Promise<Buffer> {
     );
 
     drawSection(doc, "Brand portfolio", "Up to 40 brands with current workflow stage.");
-    drawTableHeader(doc, [
+    const portfolioColumns = [
       { label: "Brand", width: 130 },
       { label: "Stage", width: 110 },
       { label: "Campaigns", width: 56 },
       { label: "Agreement", width: 72 }
-    ]);
-    const widths = [130, 110, 56, 72];
+    ];
+    const portfolioWidths = [130, 110, 56, 72];
+    const drawPortfolioHeader = (): void => drawReportTableHeader(doc, portfolioColumns);
+    drawPortfolioHeader();
     for (const brand of board.brands.slice(0, 40)) {
-      drawTableRow(
+      drawReportTableRow(
         doc,
         [
           brand.name.slice(0, 28),
@@ -352,7 +318,8 @@ async function buildCommercialReportPdf(): Promise<Buffer> {
           String(brand.campaigns.length),
           brand.agreementStatus ?? "—"
         ],
-        widths
+        portfolioWidths,
+        { onPageBreak: drawPortfolioHeader }
       );
     }
 
@@ -388,7 +355,7 @@ async function buildBrandsReportPdf(): Promise<Buffer> {
       `Active: ${brands.filter((b) => b.status === "ACTIVE").length} · Pending pipeline: ${brands.filter((b) => ["PENDING", "VERIFIED", "APPROVED"].includes(b.status)).length} · Featured on home: ${brands.filter((b) => b.featuredOnHome).length}`
     );
 
-    ensureSpace(doc, 130);
+    ensureReportSpace(doc, 130);
     const statusCounts = ["ACTIVE", "PENDING", "VERIFIED", "APPROVED", "SUSPENDED"].map((status) => ({
       label: status,
       value: brands.filter((b) => b.status === status).length,
@@ -402,16 +369,18 @@ async function buildBrandsReportPdf(): Promise<Buffer> {
     );
     advanceAfterChart(doc, statusBottom);
 
-    drawTableHeader(doc, [
+    const registryColumns = [
       { label: "Brand", width: 100 },
       { label: "Prefix", width: 44 },
       { label: "Status", width: 56 },
       { label: "Trust", width: 72 },
       { label: "Featured", width: 44 }
-    ]);
-    const widths = [100, 44, 56, 72, 44];
+    ];
+    const registryWidths = [100, 44, 56, 72, 44];
+    const drawRegistryHeader = (): void => drawReportTableHeader(doc, registryColumns);
+    drawRegistryHeader();
     for (const brand of brands) {
-      drawTableRow(
+      drawReportTableRow(
         doc,
         [
           brand.name.slice(0, 22),
@@ -420,7 +389,8 @@ async function buildBrandsReportPdf(): Promise<Buffer> {
           brand.verificationStatus,
           brand.featuredOnHome ? "Yes" : "No"
         ],
-        widths
+        registryWidths,
+        { onPageBreak: drawRegistryHeader }
       );
     }
 

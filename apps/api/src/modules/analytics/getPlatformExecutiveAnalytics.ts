@@ -335,5 +335,8 @@ function formatLiveMessage(action: string, payload: unknown): string {
   if (action === "ATTEMPT_FRAUD_BLOCKED") return "Suspicious submission blocked by fraud engine";
   if (action === "ATTEMPT_DUPLICATE") return "Duplicate code attempt rejected";
   if (action === "CODE_FLAGGED") return "Submission flagged for moderator review";
+  if (action === "SCHOOL_VERIFICATION_SUBMITTED") {
+    return `Verification documents submitted (${String(p.organizationCategory ?? "organisation")})`;
+  }
   return action.replace(/_/g, " ").toLowerCase();
 }

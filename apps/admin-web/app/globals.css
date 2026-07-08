@@ -285,6 +285,21 @@ body:has(.admin-app) {
   opacity: 0.9;
 }
 
+.admin-sidebar__badge {
+  margin-left: auto;
+  min-width: 1.35rem;
+  height: 1.35rem;
+  padding: 0 0.35rem;
+  border-radius: 999px;
+  background: #f59e0b;
+  color: #1f2937;
+  font-size: 0.68rem;
+  font-weight: 800;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .admin-sidebar__foot {
   margin-top: 1rem;
   padding-top: 1rem;
@@ -398,8 +413,89 @@ body:has(.admin-app) {
 
 .admin-pending-strip {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns: repeat(5, minmax(0, 1fr));
   gap: 0.75rem;
+}
+
+.admin-verification-alert {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-bottom: 1rem;
+  padding: 1rem 1.15rem;
+  border-radius: var(--admin-radius);
+  border: 1px solid #fcd34d;
+  background: linear-gradient(135deg, #fffbeb 0%, #fff 100%);
+  box-shadow: var(--admin-shadow);
+}
+
+.admin-verification-alert__head strong {
+  display: block;
+  color: #92400e;
+  margin-bottom: 0.25rem;
+}
+
+.admin-verification-alert__head p {
+  margin: 0;
+  font-size: 0.88rem;
+  color: #78350f;
+}
+
+.admin-verification-alert__cta {
+  font-weight: 700;
+  color: var(--admin-navy);
+  white-space: nowrap;
+}
+
+.admin-verification-feed {
+  margin-bottom: 1rem;
+}
+
+.admin-verification-feed h2 {
+  margin-top: 0;
+  font-size: 1rem;
+}
+
+.admin-verification-feed__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+}
+
+.admin-verification-feed__list li {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1rem;
+  padding-bottom: 0.65rem;
+  border-bottom: 1px solid var(--admin-border);
+}
+
+.admin-verification-feed__list li:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.admin-verification-feed__meta {
+  display: block;
+  font-size: 0.8rem;
+  color: var(--admin-muted);
+  margin-top: 0.15rem;
+}
+
+.admin-verification-feed__list time {
+  font-size: 0.78rem;
+  color: var(--admin-muted);
+  white-space: nowrap;
+}
+
+.admin-verification-queue h2 {
+  margin-top: 0;
 }
 
 .admin-pending-pill {
@@ -853,6 +949,17 @@ body:has(.admin-app) {
 
 .school-profile__section-head h2 {
   margin: 0;
+}
+
+.school-profile__alert {
+  margin: 0 0 1rem;
+  padding: 0.75rem 0.9rem;
+  border-radius: 10px;
+  background: rgba(245, 158, 11, 0.12);
+  border: 1px solid rgba(245, 158, 11, 0.35);
+  color: #92400e;
+  font-size: 0.9rem;
+  line-height: 1.5;
 }
 
 .school-profile-detail {

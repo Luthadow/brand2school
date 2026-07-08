@@ -1,8 +1,21 @@
 import { z } from "zod";
 import type { Prisma } from "../../generated/prisma/index.js";
 import { hasSchoolLogo, schoolLogoWebPath } from "../../lib/schoolLogo.js";
+import { provinceNameFromCode, SA_PROVINCES, normalizeProvinceCode } from "../analytics/provinces.js";
+import { listCanonicalDistrictsForProvince } from "../../lib/saDistricts.js";
+
+const provinceNameSchema = z
+  .string()
+  .min(2)
+  .refine(
+    (value) => SA_PROVINCES.some((p) => p.name.toLowerCase() === value.trim().toLowerCase()),
+    "Select a valid South African province."
+  );
 
 export const publicProfilePatchSchema = z.object({
+  name: z.string().min(3).max(200).optional(),
+  province: provinceNameSchema.optional(),
+  district: z.string().min(2).max(120).optional(),
   principalName: z.string().min(2).optional(),
   contactEmail: z.string().email().nullable().optional(),
   websiteUrl: z.string().url().nullable().optional(),
@@ -145,4 +158,25 @@ export function mergePublicProfilePatch(
   if (patch.impactStories !== undefined) next.impactStories = patch.impactStories;
 
   return next;
+}
+
+export function canonicalProvinceName(raw: string): string {
+  const code = normalizeProvinceCode(raw);
+  return provinceNameFromCode(code);
+}
+
+export function validateDistrictForProvince(
+  province: string,
+  district: string,
+  existingDistrict?: string | null
+): string | null {
+  const trimmed = district.trim();
+  if (trimmed.length < 2) return "District must be at least 2 characters.";
+  if (existingDistrict && trimmed.toLowerCase() === existingDistrict.trim().toLowerCase()) {
+    return null;
+  }
+  const allowed = listCanonicalDistrictsForProvince(province);
+  if (allowed.length === 0) return null;
+  const match = allowed.find((d) => d.toLowerCase() === trimmed.toLowerCase());
+  return match ? null : "Select a valid district for the chosen province.";
 }

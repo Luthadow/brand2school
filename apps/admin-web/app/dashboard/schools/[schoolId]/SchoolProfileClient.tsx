@@ -174,6 +174,11 @@ export function SchoolProfileClient({ schoolId }: { schoolId: string }): JSX.Ele
   const orgLabel = ORG_CATEGORY_LABEL[school.organizationCategory] ?? school.organizationCategory;
   const next = nextStatus(school.status);
   const regValue = verification?.emisNumber ?? verification?.registrationNumber;
+  const needsPacketApproval =
+    Boolean(next && ["APPROVED", "ACTIVE"].includes(next)) &&
+    verification != null &&
+    verification.status !== "APPROVED" &&
+    verification.status !== "REJECTED";
 
   return (
     <div className="school-profile">
@@ -199,7 +204,11 @@ export function SchoolProfileClient({ schoolId }: { schoolId: string }): JSX.Ele
           </Link>
           {next ? (
             <button type="button" disabled={advancing} onClick={() => void advanceStatus()}>
-              {advancing ? "Updating…" : `Move to ${next}`}
+              {advancing
+                ? "Updating…"
+                : needsPacketApproval
+                  ? `Approve docs & move to ${next}`
+                  : `Move to ${next}`}
             </button>
           ) : null}
         </div>
@@ -238,6 +247,14 @@ export function SchoolProfileClient({ schoolId }: { schoolId: string }): JSX.Ele
           </div>
           {verification ? (
             <>
+              {needsPacketApproval ? (
+                <p className="school-profile__alert">
+                  Documents are submitted but the verification packet is not approved yet. Click{" "}
+                  <strong>Approve docs &amp; move to {next}</strong> above to review and advance in one step, or open{" "}
+                  <Link href={`/dashboard/schools/${schoolId}/verification`}>Verification</Link> to approve manually
+                  first.
+                </p>
+              ) : null}
               <DetailRow
                 label="Packet status"
                 value={VERIFICATION_STATUS_LABEL[verification.status] ?? verification.status}

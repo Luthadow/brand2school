@@ -4,6 +4,7 @@ import Link from "next/link";
 import type { Route } from "next";
 import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 import { useAdminSession } from "./useAdminSession";
 import { csrfFetch } from "./admin-client-utils";
 import brandLogo from "../../../../brand2school.png";
@@ -44,13 +45,15 @@ function NavRow({
   label,
   icon,
   active,
-  report
+  report,
+  badge
 }: {
   href: Route;
   label: string;
   icon: string;
   active: boolean;
   report?: "overview" | "analytics" | "commercial" | "brands" | "verified";
+  badge?: number;
 }): JSX.Element {
   return (
     <div className={`admin-sidebar__row${active ? " admin-sidebar__row--active" : ""}`}>
@@ -59,6 +62,11 @@ function NavRow({
           {icon}
         </span>
         {label}
+        {badge && badge > 0 ? (
+          <span className="admin-sidebar__badge" aria-label={`${badge} pending`}>
+            {badge > 99 ? "99+" : badge}
+          </span>
+        ) : null}
       </Link>
       {report ? (
         <a
@@ -79,6 +87,21 @@ export function AdminShell({ children }: { children: React.ReactNode }): JSX.Ele
   const pathname = usePathname();
   const router = useRouter();
   const { session, loading } = useAdminSession();
+  const [verificationPending, setVerificationPending] = useState(0);
+
+  useEffect(() => {
+    if (!session || session.user.role !== "SUPER_ADMIN") return;
+    void (async () => {
+      try {
+        const res = await fetch("/api/admin/platform-snapshot", { cache: "no-store" });
+        if (!res.ok) return;
+        const data = (await res.json()) as { verificationPacketsPendingReview?: number };
+        setVerificationPending(data.verificationPacketsPendingReview ?? 0);
+      } catch {
+        /* ignore */
+      }
+    })();
+  }, [session, pathname]);
 
   const logout = async (): Promise<void> => {
     await csrfFetch("/api/auth/logout", { method: "POST" });
@@ -122,6 +145,7 @@ export function AdminShell({ children }: { children: React.ReactNode }): JSX.Ele
               icon={link.icon}
               active={isActive(pathname, link.href)}
               report={link.report}
+              badge={link.href === "/dashboard/approvals" ? verificationPending : undefined}
             />
           ))}
         </nav>

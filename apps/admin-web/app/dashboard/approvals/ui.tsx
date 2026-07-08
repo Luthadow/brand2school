@@ -29,6 +29,18 @@ type QueueResponse = {
     pendingBrands: { page: number; totalPages: number };
   };
 };
+type VerificationQueueItem = {
+  status: string;
+  submittedAt: string | null;
+  school: {
+    id: string;
+    name: string;
+    province: string;
+    district: string;
+    entityStatus: string;
+    principalName: string;
+  };
+};
 type Preset = { id: string; name: string; module: string; filters: { search?: string } };
 
 const ORG_CATEGORY_LABEL: Record<string, string> = {
@@ -47,6 +59,7 @@ const nextStatus = (status: string): string | null => {
 export function ApprovalsClient(): JSX.Element {
   const { session, loading } = useAdminSession();
   const [data, setData] = useState<QueueResponse | null>(null);
+  const [verificationQueue, setVerificationQueue] = useState<VerificationQueueItem[]>([]);
   const [search, setSearch] = useState("");
   const [page, setPage] = useState(1);
   const [toast, setToast] = useState<string | null>(null);
@@ -58,9 +71,18 @@ export function ApprovalsClient(): JSX.Element {
 
   const loadData = async (): Promise<void> => {
     const query = new URLSearchParams({ page: String(page), pageSize: "15", search }).toString();
-    const res = await csrfFetch(`/api/admin/queue?${query}`);
-    if (!res.ok) return;
-    setData((await res.json()) as QueueResponse);
+    const [queueRes, verificationRes] = await Promise.all([
+      csrfFetch(`/api/admin/queue?${query}`),
+      csrfFetch("/api/admin/school-verification/queue")
+    ]);
+    if (!queueRes.ok) return;
+    setData((await queueRes.json()) as QueueResponse);
+    if (verificationRes.ok) {
+      const verificationJson = (await verificationRes.json()) as { items: VerificationQueueItem[] };
+      setVerificationQueue(verificationJson.items ?? []);
+    } else {
+      setVerificationQueue([]);
+    }
     setSelectedUsers([]);
     setSelectedSchools([]);
     setSelectedBrands([]);
@@ -176,6 +198,55 @@ export function ApprovalsClient(): JSX.Element {
           ))}
         </select>
       </div>
+
+      {verificationQueue.length > 0 ? (
+        <section className="card admin-verification-queue" style={{ marginBottom: "1rem" }}>
+          <h2>Verification documents submitted</h2>
+          <p style={{ color: "#5a6d8a", fontSize: "0.9rem", marginTop: 0 }}>
+            These organisations uploaded documents and are waiting for admin review. Open Verify to approve or request
+            corrections — no need to wait for them to email you.
+          </p>
+          <div className="table-wrap">
+            <table className="table">
+              <thead>
+                <tr>
+                  <th>Organisation</th>
+                  <th>District</th>
+                  <th>Principal</th>
+                  <th>Entity status</th>
+                  <th>Packet</th>
+                  <th>Submitted</th>
+                  <th>Review</th>
+                </tr>
+              </thead>
+              <tbody>
+                {verificationQueue.map((item) => (
+                  <tr key={item.school.id}>
+                    <td>{item.school.name}</td>
+                    <td>
+                      {item.school.district}, {item.school.province}
+                    </td>
+                    <td>{item.school.principalName}</td>
+                    <td>{item.school.entityStatus}</td>
+                    <td>{item.status.replace(/_/g, " ")}</td>
+                    <td>
+                      {item.submittedAt
+                        ? new Date(item.submittedAt).toLocaleString("en-ZA", {
+                            dateStyle: "short",
+                            timeStyle: "short"
+                          })
+                        : "—"}
+                    </td>
+                    <td>
+                      <Link href={`/dashboard/schools/${item.school.id}/verification`}>Verify →</Link>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </section>
+      ) : null}
 
       <section className="card" style={{ marginBottom: "1rem" }}>
         <h2>Users</h2>

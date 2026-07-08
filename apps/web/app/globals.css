@@ -11606,6 +11606,47 @@ span,
   font-size: 0.88rem;
 }
 
+.cp-profile-form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.85rem 1rem;
+  margin-bottom: 1rem;
+}
+
+.cp-profile-form-grid label {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  font-size: 0.82rem;
+}
+
+.cp-profile-form-grid input,
+.cp-profile-form-grid select {
+  padding: 0.55rem 0.65rem;
+  border: 1px solid #d8e4ff;
+  border-radius: var(--ds-radius-md);
+}
+
+.cp-profile-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.cp-form-msg {
+  margin: 0;
+  font-size: 0.85rem;
+}
+
+.cp-form-msg--ok {
+  color: #047857;
+}
+
+.cp-form-msg--err {
+  color: #b91c1c;
+}
+
 .cp-field {
   display: flex;
   flex-direction: column;

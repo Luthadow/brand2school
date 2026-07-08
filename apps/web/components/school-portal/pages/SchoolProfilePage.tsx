@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 import type { Route } from "next";
 import { csrfHeaders } from "../../../lib/clientFetch";
@@ -9,13 +9,32 @@ import { useSchoolPortal } from "../SchoolPortalContext";
 
 const QUINTILES = [1, 2, 3, 4, 5] as const;
 
+const PROVINCES = [
+  "Eastern Cape",
+  "Free State",
+  "Gauteng",
+  "KwaZulu-Natal",
+  "Limpopo",
+  "Mpumalanga",
+  "Northern Cape",
+  "North West",
+  "Western Cape"
+] as const;
+
+type DistrictOption = { name: string; schoolCount: number };
+
 export function SchoolProfilePage(): JSX.Element {
   const { school, overview, gamification, publicProfile, publicPage, refresh } = useSchoolPortal();
   const [busy, setBusy] = useState(false);
   const [message, setMessage] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const [districts, setDistricts] = useState<DistrictOption[]>([]);
+  const [loadingDistricts, setLoadingDistricts] = useState(false);
 
   const [form, setForm] = useState({
+    name: school.name,
+    province: school.province,
+    district: school.district,
     principalName: school.principalName,
     contactEmail: school.contactEmail ?? "",
     websiteUrl: publicProfile.websiteUrl ?? "",
@@ -41,6 +60,31 @@ export function SchoolProfilePage(): JSX.Element {
     [publicProfile.completionItems]
   );
 
+  const loadDistricts = useCallback(async (prov: string, keepDistrict?: string) => {
+    setLoadingDistricts(true);
+    try {
+      const res = await fetch(`/api/participation/school-options?province=${encodeURIComponent(prov)}`);
+      const data = (await res.json().catch(() => ({}))) as {
+        districts?: DistrictOption[] | string[];
+      };
+      const raw = data.districts ?? [];
+      const options = raw.map((d) =>
+        typeof d === "string" ? { name: d, schoolCount: 0 } : { name: d.name, schoolCount: d.schoolCount ?? 0 }
+      );
+      setDistricts(options);
+      if (keepDistrict && !options.some((d) => d.name.toLowerCase() === keepDistrict.toLowerCase())) {
+        setDistricts((current) => [{ name: keepDistrict, schoolCount: 0 }, ...current]);
+      }
+    } finally {
+      setLoadingDistricts(false);
+    }
+  }, []);
+
+  useEffect(() => {
+    void loadDistricts(form.province, school.district);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [form.province, loadDistricts]);
+
   async function saveProfile(e: React.FormEvent): Promise<void> {
     e.preventDefault();
     setBusy(true);
@@ -48,6 +92,9 @@ export function SchoolProfilePage(): JSX.Element {
     setMessage(null);
     try {
       const payload = {
+        name: form.name.trim(),
+        province: form.province,
+        district: form.district,
         principalName: form.principalName,
         contactEmail: form.contactEmail.trim() || null,
         websiteUrl: form.websiteUrl.trim() || null,
@@ -211,14 +258,54 @@ export function SchoolProfilePage(): JSX.Element {
         <form className="sp-profile-form" onSubmit={(e) => void saveProfile(e)}>
           <section className="sp-profile-section">
             <h2>Identity &amp; contact</h2>
+            <p className="sp-muted">Correct spelling mistakes in your school name or location — your school code stays the same.</p>
             <div className="sp-profile-grid">
               <label>
-                Principal
+                School / organisation name
+                <input
+                  required
+                  minLength={3}
+                  value={form.name}
+                  onChange={(e) => setForm({ ...form, name: e.target.value })}
+                />
+              </label>
+              <label>
+                Principal / contact name
                 <input
                   required
                   value={form.principalName}
                   onChange={(e) => setForm({ ...form, principalName: e.target.value })}
                 />
+              </label>
+              <label>
+                Province
+                <select
+                  required
+                  value={form.province}
+                  onChange={(e) => setForm({ ...form, province: e.target.value, district: "" })}
+                >
+                  {PROVINCES.map((p) => (
+                    <option key={p} value={p}>
+                      {p}
+                    </option>
+                  ))}
+                </select>
+              </label>
+              <label>
+                District
+                <select
+                  required
+                  value={form.district}
+                  disabled={loadingDistricts}
+                  onChange={(e) => setForm({ ...form, district: e.target.value })}
+                >
+                  <option value="">{loadingDistricts ? "Loading districts…" : "Select district"}</option>
+                  {districts.map((d) => (
+                    <option key={d.name} value={d.name}>
+                      {d.name}
+                    </option>
+                  ))}
+                </select>
               </label>
               <label>
                 Contact email
@@ -258,9 +345,6 @@ export function SchoolProfilePage(): JSX.Element {
 
           <section className="sp-profile-section">
             <h2>Location &amp; school data</h2>
-            <p className="sp-muted">
-              {school.district}, {school.province}
-            </p>
             <div className="sp-profile-grid">
               <label>
                 GPS latitude

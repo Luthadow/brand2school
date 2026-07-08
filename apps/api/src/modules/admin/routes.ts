@@ -16,6 +16,7 @@ import {
   assertSchoolVerificationApproved,
   schoolStatusRequiresVerificationApproval
 } from "../schools/schoolVerification/verificationGate.js";
+import { reviewSchoolVerificationPacket } from "../schools/schoolVerification/reviewSchoolVerification.js";
 import { commercialAdminRouter } from "../commercial/routes.js";
 import { getPlatformExecutiveAnalytics } from "../analytics/getPlatformExecutiveAnalytics.js";
 import { getAdminPlatformSnapshot } from "./platformSnapshot.js";
@@ -181,6 +182,31 @@ adminRouter.patch("/approvals/schools/:id/status", async (req, res) => {
   }
 
   if (schoolStatusRequiresVerificationApproval(payload.data.status)) {
+    const verification = await prisma.schoolVerification.findUnique({ where: { schoolId: school.id } });
+    if (!verification || verification.status !== "APPROVED") {
+      if (verification?.status === "REJECTED") {
+        res.status(409).json({
+          message:
+            "Verification was rejected. The organisation must resubmit documents on the verification screen before advancing to APPROVED or ACTIVE.",
+          verificationStatus: verification.status
+        });
+        return;
+      }
+
+      const review = await reviewSchoolVerificationPacket({
+        schoolId: school.id,
+        reviewerUserId: req.user.id,
+        body: {
+          action: "APPROVE",
+          reviewerNotes: `Approved when advancing entity status to ${payload.data.status}.`
+        }
+      });
+      if (!review.ok) {
+        res.status(review.status).json({ message: review.message });
+        return;
+      }
+    }
+
     const gate = await assertSchoolVerificationApproved(school.id);
     if (!gate.ok) {
       res.status(409).json({
