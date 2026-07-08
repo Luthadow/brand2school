@@ -89,7 +89,6 @@ export function CommunityDocumentsPage(): JSX.Element {
     const form = new FormData();
     form.set("centreType", centreType);
 
-    const regField = organizationMeta.registrationNumber;
     if (regField) {
       if (regField.key === "emisNumber") {
         form.set("emisNumber", registrationNumber.trim());
