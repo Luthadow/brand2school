@@ -24,6 +24,9 @@ export type SchoolPortal = {
       key: string;
       label: string;
       placeholder: string;
+      minLength: number;
+      maxLength: number;
+      validationMessage: string;
     } | null;
     documents: Array<{ key: string; label: string; required: boolean }>;
     centreTypes: Array<{ id: string; label: string }>;

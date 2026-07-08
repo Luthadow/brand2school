@@ -18,12 +18,22 @@ export type CommunityPortal = {
     portalEyebrow: string;
     documentsTitle: string;
     documentsIntro: string;
-    registrationNumber: { key: string; label: string; placeholder: string } | null;
+    registrationNumber: {
+      key: string;
+      label: string;
+      placeholder: string;
+      minLength: number;
+      maxLength: number;
+      validationMessage: string;
+    } | null;
     documents: Array<{ key: string; label: string; required: boolean }>;
     centreTypes: Array<{ id: string; label: string }>;
   };
   verification: {
     status: string;
+    emisNumber: string | null;
+    registrationNumber: string | null;
+    registrationDeferred: boolean;
     canSubmit: boolean;
     canCompleteDocuments: boolean;
     claimReady: boolean;

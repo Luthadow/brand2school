@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useState } from "react";
 import { csrfHeaders } from "../../../lib/clientFetch";
+import { RegistrationReferenceInput } from "../../shared/RegistrationReferenceInput";
 import { useSchoolPortal } from "../SchoolPortalContext";
 
 const STATUS_LABEL: Record<string, string> = {
@@ -39,6 +40,12 @@ export function SchoolDocumentsPage(): JSX.Element {
 
   const regRequired = organization.id === "SCHOOL" || organization.id === "NGO_NPO";
 
+  const regField = organization.registrationNumber;
+  const regLooksComplete =
+    !regField ||
+    registrationNumber.trim().length >= regField.minLength ||
+    (regField.key !== "emisNumber" && registrationNumber.trim().length > 0);
+
   async function submitPacket(e: React.FormEvent): Promise<void> {
     e.preventDefault();
     setBusy(true);
@@ -57,6 +64,23 @@ export function SchoolDocumentsPage(): JSX.Element {
       );
       setBusy(false);
       return;
+    }
+
+    if (regField && registrationNumber.trim() && !registrationDeferred) {
+      if (regField.key === "emisNumber" && !/^\d{6,20}$/.test(registrationNumber.trim())) {
+        setError(regField.validationMessage);
+        setBusy(false);
+        return;
+      }
+      if (
+        regField.key !== "emisNumber" &&
+        regField.minLength > 0 &&
+        registrationNumber.trim().length < regField.minLength
+      ) {
+        setError(regField.validationMessage);
+        setBusy(false);
+        return;
+      }
     }
 
     for (const doc of organization.documents) {
@@ -271,11 +295,15 @@ export function SchoolDocumentsPage(): JSX.Element {
             <div className="sp-field">
               <label>
                 <span>{organization.registrationNumber.label}</span>
-                <input
+                <RegistrationReferenceInput
+                  field={organization.registrationNumber}
                   value={registrationNumber}
-                  onChange={(e) => setRegistrationNumber(e.target.value)}
-                  placeholder={organization.registrationNumber.placeholder}
-                  disabled={verification.registrationDeferred && isCompletingDeferred && Boolean(registrationNumber)}
+                  onChange={setRegistrationNumber}
+                  disabled={
+                    verification.registrationDeferred &&
+                    isCompletingDeferred &&
+                    regLooksComplete
+                  }
                 />
               </label>
               {regRequired ? (

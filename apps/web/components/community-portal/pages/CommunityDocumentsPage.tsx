@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { csrfHeaders } from "../../../lib/clientFetch";
+import { RegistrationReferenceInput } from "../../shared/RegistrationReferenceInput";
 import { useCommunityPortal } from "../CommunityPortalContext";
 
 const STATUS_LABEL: Record<string, string> = {
@@ -14,7 +15,9 @@ const STATUS_LABEL: Record<string, string> = {
 
 export function CommunityDocumentsPage(): JSX.Element {
   const { organization, organizationMeta, verification, documentVault, refresh } = useCommunityPortal();
-  const [registrationNumber, setRegistrationNumber] = useState("");
+  const [registrationNumber, setRegistrationNumber] = useState(
+    verification.emisNumber ?? verification.registrationNumber ?? ""
+  );
   const [centreType, setCentreType] = useState("");
   const [files, setFiles] = useState<Record<string, File | null>>({});
   const [deferrals, setDeferrals] = useState<Record<string, boolean>>(() => {
@@ -24,13 +27,15 @@ export function CommunityDocumentsPage(): JSX.Element {
     }
     return initial;
   });
-  const [registrationDeferred, setRegistrationDeferred] = useState(false);
+  const [registrationDeferred, setRegistrationDeferred] = useState(verification.registrationDeferred);
   const [busy, setBusy] = useState(false);
   const [message, setMessage] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
 
   const isCompletingDeferred = verification.canCompleteDocuments && verification.status !== "NOT_SUBMITTED";
   const regRequired = organizationMeta.id === "NGO_NPO";
+
+  const regField = organizationMeta.registrationNumber;
 
   async function submitPacket(e: React.FormEvent): Promise<void> {
     e.preventDefault();
@@ -50,6 +55,23 @@ export function CommunityDocumentsPage(): JSX.Element {
       );
       setBusy(false);
       return;
+    }
+
+    if (regField && registrationNumber.trim() && !registrationDeferred) {
+      if (regField.key === "emisNumber" && !/^\d{6,20}$/.test(registrationNumber.trim())) {
+        setError(regField.validationMessage);
+        setBusy(false);
+        return;
+      }
+      if (
+        regField.key !== "emisNumber" &&
+        regField.minLength > 0 &&
+        registrationNumber.trim().length < regField.minLength
+      ) {
+        setError(regField.validationMessage);
+        setBusy(false);
+        return;
+      }
     }
 
     for (const doc of organizationMeta.documents) {
@@ -176,10 +198,11 @@ export function CommunityDocumentsPage(): JSX.Element {
           {organizationMeta.registrationNumber ? (
             <label className="cp-field">
               <span>{organizationMeta.registrationNumber.label}</span>
-              <input
+              <RegistrationReferenceInput
+                field={organizationMeta.registrationNumber}
                 value={registrationNumber}
-                onChange={(e) => setRegistrationNumber(e.target.value)}
-                placeholder={organizationMeta.registrationNumber.placeholder}
+                onChange={setRegistrationNumber}
+                className="registration-reference-input"
               />
             </label>
           ) : null}

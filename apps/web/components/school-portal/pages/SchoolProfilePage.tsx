@@ -334,7 +334,11 @@ export function SchoolProfilePage(): JSX.Element {
               </label>
               <label>
                 EMIS / registration
-                <input value={school.emisNumber} readOnly disabled />
+                <input value={school.emisNumber} readOnly disabled className="registration-reference-input" />
+                <span className="registration-reference-hint">
+                  Enter or update your EMIS number on the{" "}
+                  <Link href="/school/dashboard/documents">Docs</Link> page when submitting verification.
+                </span>
               </label>
               <label>
                 School code

@@ -40,12 +40,18 @@ export type CommunityPortal = {
       key: string;
       label: string;
       placeholder: string;
+      minLength: number;
+      maxLength: number;
+      validationMessage: string;
     } | null;
     documents: Array<{ key: string; label: string; required: boolean }>;
     centreTypes: Array<{ id: string; label: string }>;
   };
   verification: {
     status: string;
+    emisNumber: string | null;
+    registrationNumber: string | null;
+    registrationDeferred: boolean;
     canSubmit: boolean;
     canCompleteDocuments: boolean;
     claimReady: boolean;
@@ -227,7 +233,10 @@ export async function getCommunityPortal(userId: string): Promise<CommunityPorta
         ? {
             key: category.registrationNumber.key,
             label: category.registrationNumber.label,
-            placeholder: category.registrationNumber.placeholder
+            placeholder: category.registrationNumber.placeholder,
+            minLength: category.registrationNumber.minLength,
+            maxLength: category.registrationNumber.maxLength,
+            validationMessage: category.registrationNumber.validationMessage
           }
         : null,
       documents: category.documents.map((doc) => ({
@@ -242,6 +251,9 @@ export async function getCommunityPortal(userId: string): Promise<CommunityPorta
     },
     verification: {
       status: verificationRow.status,
+      emisNumber: verificationRow.emisNumber,
+      registrationNumber: verificationRow.registrationNumber,
+      registrationDeferred: serializedVerification.registrationDeferred,
       canSubmit: canSubmitVerification,
       canCompleteDocuments,
       claimReady: serializedVerification.claimReady,

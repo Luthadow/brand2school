@@ -7410,10 +7410,34 @@ body:has(.sp-root) .chat-widget {
 }
 
 .sp-field input[type="text"],
-.sp-field input[type="file"] {
+.sp-field input[type="file"],
+.sp-field input:not([type="file"]):not([type="checkbox"]) {
   padding: 0.5rem 0.65rem;
   border: 1px solid #d7e6ff;
   border-radius: 8px;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+.registration-reference-input {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  padding: 0.55rem 0.65rem;
+  border: 1px solid #d7e6ff;
+  border-radius: 8px;
+  font-size: 1rem;
+  letter-spacing: 0.02em;
+}
+
+.registration-reference-hint {
+  display: block;
+  margin-top: 0.35rem;
+  font-size: 0.82rem;
+  color: var(--text-muted, #64748b);
+  line-height: 1.4;
 }
 
 .sp-verification-form.card,
@@ -11625,6 +11649,19 @@ span,
   padding: 0.55rem 0.65rem;
   border: 1px solid #d8e4ff;
   border-radius: var(--ds-radius-md);
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+.cp-field input:not([type="file"]):not([type="checkbox"]),
+.cp-field select {
+  padding: 0.55rem 0.65rem;
+  border: 1px solid #d8e4ff;
+  border-radius: var(--ds-radius-md);
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
 }
 
 .cp-profile-actions {
