@@ -1087,3 +1087,22 @@ model ProvinceNomination {
   @@index([provinceCode, createdAt])
   @@index([status, createdAt])
 }
+
+model BrandWishlistNomination {
+  id           String   @id @default(cuid())
+  categoryId   String
+  categoryLabel String
+  brandId      String
+  brandName    String
+  provinceCode String
+  provinceName String
+  contactName  String?
+  schoolName   String?
+  reason       String?
+  source       String   @default("web")
+  createdAt    DateTime @default(now())
+
+  @@index([brandId, createdAt])
+  @@index([categoryId, createdAt])
+  @@index([provinceCode, createdAt])
+}

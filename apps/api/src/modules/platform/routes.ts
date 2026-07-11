@@ -21,6 +21,12 @@ import {
   buildVerifyQrByCode
 } from "./brandCertificateHandlers.js";
 import {
+  createBrandWishlistNomination,
+  createBrandWishlistNominationSchema,
+  getBrandWishlistPublicResults,
+  listBrandWishlistCategories
+} from "./brandWishlist.js";
+import {
   createProvinceNomination,
   createProvinceNominationSchema,
   listProvinceNominationOptions,
@@ -283,6 +289,42 @@ platformRouter.post("/province-nominations", async (req, res) => {
     message: `Thank you — ${row.provinceName} has been nominated for future brand campaigns.`,
     nomination: row
   });
+});
+
+platformRouter.get("/brand-wishlist", participationRateLimit, async (_req, res) => {
+  const results = await getBrandWishlistPublicResults();
+  res.json(results);
+});
+
+platformRouter.get("/brand-wishlist/categories", (_req, res) => {
+  res.json({ categories: listBrandWishlistCategories() });
+});
+
+platformRouter.post("/brand-wishlist/nominations", participationRateLimit, async (req, res) => {
+  const payload = createBrandWishlistNominationSchema.safeParse(req.body);
+  if (!payload.success) {
+    res.status(400).json({ message: "Validation failed.", issues: payload.error.flatten() });
+    return;
+  }
+
+  try {
+    const row = await createBrandWishlistNomination(payload.data);
+    res.status(201).json({
+      message: `Thank you — your nomination for ${row.brandName} has been recorded.`,
+      nomination: row
+    });
+  } catch (err) {
+    const code = err instanceof Error ? err.message : "";
+    if (code === "INVALID_BRAND") {
+      res.status(400).json({ message: "Select a valid brand from the list." });
+      return;
+    }
+    if (code === "INVALID_PROVINCE") {
+      res.status(400).json({ message: "Select a valid South African province." });
+      return;
+    }
+    throw err;
+  }
 });
 
 platformRouter.get("/live/stream", analyticsRateLimit, platformLiveStreamHandler);

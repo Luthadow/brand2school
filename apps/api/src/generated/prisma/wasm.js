@@ -725,6 +725,21 @@ exports.Prisma.ProvinceNominationScalarFieldEnum = {
   createdAt: 'createdAt'
 };
 
+exports.Prisma.BrandWishlistNominationScalarFieldEnum = {
+  id: 'id',
+  categoryId: 'categoryId',
+  categoryLabel: 'categoryLabel',
+  brandId: 'brandId',
+  brandName: 'brandName',
+  provinceCode: 'provinceCode',
+  provinceName: 'provinceName',
+  contactName: 'contactName',
+  schoolName: 'schoolName',
+  reason: 'reason',
+  source: 'source',
+  createdAt: 'createdAt'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -1066,7 +1081,8 @@ exports.Prisma.ModelName = {
   EsgReportDelivery: 'EsgReportDelivery',
   NotificationLog: 'NotificationLog',
   NotificationJob: 'NotificationJob',
-  ProvinceNomination: 'ProvinceNomination'
+  ProvinceNomination: 'ProvinceNomination',
+  BrandWishlistNomination: 'BrandWishlistNomination'
 };
 
 /**

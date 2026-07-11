@@ -37,6 +37,7 @@ import { LiveImpactBand } from "../components/landing/LiveImpactBand";
 import { LiveMovementPanel } from "../components/landing/LiveMovementPanel";
 import { LivePlatformProvider } from "../components/landing/LivePlatformProvider";
 import { ProvinceNominationForm } from "../components/campaigns/ProvinceNominationForm";
+import { BrandWishlistSection } from "../components/landing/BrandWishlistSection";
 import { HomepageCredibilityBand } from "../components/landing/HomepageCredibilityBand";
 import { LiveTicker } from "../components/landing/LiveTicker";
 import { SectionHeader } from "../components/landing/SectionHeader";
@@ -496,6 +497,8 @@ export default async function HomePage(): Promise<JSX.Element> {
           <LiveMovementPanel />
         </div>
       </section>
+
+      <BrandWishlistSection />
 
       {/* ENTERPRISE LAYER — audience tabs */}
       <section id="for-brands" className="lp-section lp-section-light">

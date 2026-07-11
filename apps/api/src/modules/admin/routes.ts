@@ -19,7 +19,15 @@ import {
 import { reviewSchoolVerificationPacket } from "../schools/schoolVerification/reviewSchoolVerification.js";
 import { commercialAdminRouter } from "../commercial/routes.js";
 import { getPlatformExecutiveAnalytics } from "../analytics/getPlatformExecutiveAnalytics.js";
-import { getAdminPlatformSnapshot } from "./platformSnapshot.js";
+import {
+  buildBrandWishlistBrandReportPdf,
+  brandWishlistReportContentDisposition
+} from "./brandWishlistReportPdfs.js";
+import {
+  getBrandWishlistAdminSummary,
+  getBrandWishlistBrandReportData,
+  listBrandWishlistNominationsForAdmin
+} from "./brandWishlistAdmin.js";
 import { buildAdminReportPdf, adminReportContentDisposition, type AdminReportModule } from "./adminReportPdfs.js";
 import { listVerifiedSchools } from "./verifiedSchools.js";
 import {
@@ -29,6 +37,7 @@ import {
 import { removeVerifiedSchool } from "./removeVerifiedSchool.js";
 import { listProvinceNominations } from "../platform/provinceNominations.js";
 import { applyBrandVerificationSideEffects } from "../platform/syncBrandVerification.js";
+import { getAdminPlatformSnapshot } from "./platformSnapshot.js";
 
 const updateStatusSchema = z.object({
   status: z.enum(["PENDING", "VERIFIED", "APPROVED", "ACTIVE"])
@@ -1032,4 +1041,61 @@ adminRouter.patch("/province-nominations/:id/status", async (req, res) => {
   });
 
   res.json(row);
+});
+
+adminRouter.get("/brand-wishlist/summary", async (req, res) => {
+  if (req.user?.role !== "SUPER_ADMIN" && req.user?.role !== "ADMIN_STAFF") {
+    res.status(403).json({ message: "Admin role required." });
+    return;
+  }
+  const summary = await getBrandWishlistAdminSummary();
+  res.json(summary);
+});
+
+adminRouter.get("/brand-wishlist/nominations", async (req, res) => {
+  if (req.user?.role !== "SUPER_ADMIN" && req.user?.role !== "ADMIN_STAFF") {
+    res.status(403).json({ message: "Admin role required." });
+    return;
+  }
+
+  const page = Number(req.query.page ?? 1);
+  const pageSize = Number(req.query.pageSize ?? 25);
+  const brandId = typeof req.query.brandId === "string" ? req.query.brandId : undefined;
+  const commentsOnly =
+    req.query.commentsOnly === "true" || req.query.commentsOnly === "1";
+
+  const result = await listBrandWishlistNominationsForAdmin({
+    page,
+    pageSize,
+    brandId,
+    commentsOnly
+  });
+  res.json(result);
+});
+
+adminRouter.get("/brand-wishlist/brands/:brandId/report/pdf", async (req, res) => {
+  if (req.user?.role !== "SUPER_ADMIN" && req.user?.role !== "ADMIN_STAFF") {
+    res.status(403).json({ message: "Admin role required." });
+    return;
+  }
+
+  const meta = await getBrandWishlistBrandReportData(req.params.brandId);
+  if (!meta) {
+    res.status(404).json({ message: "Brand not found in wishlist catalogue." });
+    return;
+  }
+
+  try {
+    const pdf = await buildBrandWishlistBrandReportPdf(req.params.brandId);
+    if (!pdf) {
+      res.status(404).json({ message: "Could not generate report." });
+      return;
+    }
+    res.setHeader("Content-Type", "application/pdf");
+    res.setHeader("Content-Disposition", brandWishlistReportContentDisposition(meta.brandId, meta.brandName));
+    res.send(pdf);
+  } catch (err) {
+    console.error("[admin] brand wishlist PDF failed:", req.params.brandId, err);
+    res.status(500).json({ message: "Could not generate PDF report." });
+  }
 });

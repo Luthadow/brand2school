@@ -25,6 +25,7 @@ const superAdminLinks: NavLink[] = [
   { href: "/dashboard/commercial", label: "Commercial", icon: "◎", report: "commercial" },
   { href: "/dashboard/brands", label: "Brands", icon: "◇", report: "brands" },
   { href: "/dashboard/campaigns", label: "Campaigns", icon: "◆" },
+  { href: "/dashboard/brand-wishlist", label: "Brand Wishlist", icon: "★" },
   { href: "/dashboard/moderation", label: "Moderation", icon: "!" },
   { href: "/dashboard/audit", label: "Audit", icon: "≡" },
   { href: "/dashboard/notifications", label: "Notifications", icon: "✉" }

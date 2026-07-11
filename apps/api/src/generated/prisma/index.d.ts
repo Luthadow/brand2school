@@ -203,6 +203,11 @@ export type NotificationJob = $Result.DefaultSelection<Prisma.$NotificationJobPa
  * 
  */
 export type ProvinceNomination = $Result.DefaultSelection<Prisma.$ProvinceNominationPayload>
+/**
+ * Model BrandWishlistNomination
+ * 
+ */
+export type BrandWishlistNomination = $Result.DefaultSelection<Prisma.$BrandWishlistNominationPayload>
 
 /**
  * Enums
@@ -1237,6 +1242,16 @@ export class PrismaClient<
     * ```
     */
   get provinceNomination(): Prisma.ProvinceNominationDelegate<ExtArgs>;
+
+  /**
+   * `prisma.brandWishlistNomination`: Exposes CRUD operations for the **BrandWishlistNomination** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more BrandWishlistNominations
+    * const brandWishlistNominations = await prisma.brandWishlistNomination.findMany()
+    * ```
+    */
+  get brandWishlistNomination(): Prisma.BrandWishlistNominationDelegate<ExtArgs>;
 }
 
 export namespace Prisma {
@@ -1715,7 +1730,8 @@ export namespace Prisma {
     EsgReportDelivery: 'EsgReportDelivery',
     NotificationLog: 'NotificationLog',
     NotificationJob: 'NotificationJob',
-    ProvinceNomination: 'ProvinceNomination'
+    ProvinceNomination: 'ProvinceNomination',
+    BrandWishlistNomination: 'BrandWishlistNomination'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -1731,7 +1747,7 @@ export namespace Prisma {
 
   export type TypeMap<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> = {
     meta: {
-      modelProps: "user" | "passwordResetToken" | "school" | "schoolSubmittedNeed" | "schoolVolunteer" | "schoolEvent" | "schoolEventVolunteer" | "schoolAlumni" | "schoolInnovationChallenge" | "schoolEnterpriseProject" | "schoolCrmContact" | "schoolCrmActivity" | "schoolCrmTask" | "schoolVerification" | "learner" | "brand" | "campaign" | "brandAgreement" | "campaignInvoice" | "product" | "codeBatch" | "code" | "submissionAttempt" | "submission" | "auditLog" | "refreshSession" | "fraudFlag" | "adminQueuePreset" | "auditExportJob" | "whatsAppConversation" | "whatsAppMessage" | "webhookDedup" | "esgReportSchedule" | "fundingContribution" | "esgReportDelivery" | "notificationLog" | "notificationJob" | "provinceNomination"
+      modelProps: "user" | "passwordResetToken" | "school" | "schoolSubmittedNeed" | "schoolVolunteer" | "schoolEvent" | "schoolEventVolunteer" | "schoolAlumni" | "schoolInnovationChallenge" | "schoolEnterpriseProject" | "schoolCrmContact" | "schoolCrmActivity" | "schoolCrmTask" | "schoolVerification" | "learner" | "brand" | "campaign" | "brandAgreement" | "campaignInvoice" | "product" | "codeBatch" | "code" | "submissionAttempt" | "submission" | "auditLog" | "refreshSession" | "fraudFlag" | "adminQueuePreset" | "auditExportJob" | "whatsAppConversation" | "whatsAppMessage" | "webhookDedup" | "esgReportSchedule" | "fundingContribution" | "esgReportDelivery" | "notificationLog" | "notificationJob" | "provinceNomination" | "brandWishlistNomination"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -4392,6 +4408,76 @@ export namespace Prisma {
           count: {
             args: Prisma.ProvinceNominationCountArgs<ExtArgs>
             result: $Utils.Optional<ProvinceNominationCountAggregateOutputType> | number
+          }
+        }
+      }
+      BrandWishlistNomination: {
+        payload: Prisma.$BrandWishlistNominationPayload<ExtArgs>
+        fields: Prisma.BrandWishlistNominationFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.BrandWishlistNominationFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BrandWishlistNominationPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.BrandWishlistNominationFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BrandWishlistNominationPayload>
+          }
+          findFirst: {
+            args: Prisma.BrandWishlistNominationFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BrandWishlistNominationPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.BrandWishlistNominationFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BrandWishlistNominationPayload>
+          }
+          findMany: {
+            args: Prisma.BrandWishlistNominationFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BrandWishlistNominationPayload>[]
+          }
+          create: {
+            args: Prisma.BrandWishlistNominationCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BrandWishlistNominationPayload>
+          }
+          createMany: {
+            args: Prisma.BrandWishlistNominationCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.BrandWishlistNominationCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BrandWishlistNominationPayload>[]
+          }
+          delete: {
+            args: Prisma.BrandWishlistNominationDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BrandWishlistNominationPayload>
+          }
+          update: {
+            args: Prisma.BrandWishlistNominationUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BrandWishlistNominationPayload>
+          }
+          deleteMany: {
+            args: Prisma.BrandWishlistNominationDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.BrandWishlistNominationUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          upsert: {
+            args: Prisma.BrandWishlistNominationUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BrandWishlistNominationPayload>
+          }
+          aggregate: {
+            args: Prisma.BrandWishlistNominationAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateBrandWishlistNomination>
+          }
+          groupBy: {
+            args: Prisma.BrandWishlistNominationGroupByArgs<ExtArgs>
+            result: $Utils.Optional<BrandWishlistNominationGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.BrandWishlistNominationCountArgs<ExtArgs>
+            result: $Utils.Optional<BrandWishlistNominationCountAggregateOutputType> | number
           }
         }
       }
@@ -45843,6 +45929,968 @@ export namespace Prisma {
 
 
   /**
+   * Model BrandWishlistNomination
+   */
+
+  export type AggregateBrandWishlistNomination = {
+    _count: BrandWishlistNominationCountAggregateOutputType | null
+    _min: BrandWishlistNominationMinAggregateOutputType | null
+    _max: BrandWishlistNominationMaxAggregateOutputType | null
+  }
+
+  export type BrandWishlistNominationMinAggregateOutputType = {
+    id: string | null
+    categoryId: string | null
+    categoryLabel: string | null
+    brandId: string | null
+    brandName: string | null
+    provinceCode: string | null
+    provinceName: string | null
+    contactName: string | null
+    schoolName: string | null
+    reason: string | null
+    source: string | null
+    createdAt: Date | null
+  }
+
+  export type BrandWishlistNominationMaxAggregateOutputType = {
+    id: string | null
+    categoryId: string | null
+    categoryLabel: string | null
+    brandId: string | null
+    brandName: string | null
+    provinceCode: string | null
+    provinceName: string | null
+    contactName: string | null
+    schoolName: string | null
+    reason: string | null
+    source: string | null
+    createdAt: Date | null
+  }
+
+  export type BrandWishlistNominationCountAggregateOutputType = {
+    id: number
+    categoryId: number
+    categoryLabel: number
+    brandId: number
+    brandName: number
+    provinceCode: number
+    provinceName: number
+    contactName: number
+    schoolName: number
+    reason: number
+    source: number
+    createdAt: number
+    _all: number
+  }
+
+
+  export type BrandWishlistNominationMinAggregateInputType = {
+    id?: true
+    categoryId?: true
+    categoryLabel?: true
+    brandId?: true
+    brandName?: true
+    provinceCode?: true
+    provinceName?: true
+    contactName?: true
+    schoolName?: true
+    reason?: true
+    source?: true
+    createdAt?: true
+  }
+
+  export type BrandWishlistNominationMaxAggregateInputType = {
+    id?: true
+    categoryId?: true
+    categoryLabel?: true
+    brandId?: true
+    brandName?: true
+    provinceCode?: true
+    provinceName?: true
+    contactName?: true
+    schoolName?: true
+    reason?: true
+    source?: true
+    createdAt?: true
+  }
+
+  export type BrandWishlistNominationCountAggregateInputType = {
+    id?: true
+    categoryId?: true
+    categoryLabel?: true
+    brandId?: true
+    brandName?: true
+    provinceCode?: true
+    provinceName?: true
+    contactName?: true
+    schoolName?: true
+    reason?: true
+    source?: true
+    createdAt?: true
+    _all?: true
+  }
+
+  export type BrandWishlistNominationAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which BrandWishlistNomination to aggregate.
+     */
+    where?: BrandWishlistNominationWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of BrandWishlistNominations to fetch.
+     */
+    orderBy?: BrandWishlistNominationOrderByWithRelationInput | BrandWishlistNominationOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: BrandWishlistNominationWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` BrandWishlistNominations from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` BrandWishlistNominations.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned BrandWishlistNominations
+    **/
+    _count?: true | BrandWishlistNominationCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: BrandWishlistNominationMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: BrandWishlistNominationMaxAggregateInputType
+  }
+
+  export type GetBrandWishlistNominationAggregateType<T extends BrandWishlistNominationAggregateArgs> = {
+        [P in keyof T & keyof AggregateBrandWishlistNomination]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateBrandWishlistNomination[P]>
+      : GetScalarType<T[P], AggregateBrandWishlistNomination[P]>
+  }
+
+
+
+
+  export type BrandWishlistNominationGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: BrandWishlistNominationWhereInput
+    orderBy?: BrandWishlistNominationOrderByWithAggregationInput | BrandWishlistNominationOrderByWithAggregationInput[]
+    by: BrandWishlistNominationScalarFieldEnum[] | BrandWishlistNominationScalarFieldEnum
+    having?: BrandWishlistNominationScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: BrandWishlistNominationCountAggregateInputType | true
+    _min?: BrandWishlistNominationMinAggregateInputType
+    _max?: BrandWishlistNominationMaxAggregateInputType
+  }
+
+  export type BrandWishlistNominationGroupByOutputType = {
+    id: string
+    categoryId: string
+    categoryLabel: string
+    brandId: string
+    brandName: string
+    provinceCode: string
+    provinceName: string
+    contactName: string | null
+    schoolName: string | null
+    reason: string | null
+    source: string
+    createdAt: Date
+    _count: BrandWishlistNominationCountAggregateOutputType | null
+    _min: BrandWishlistNominationMinAggregateOutputType | null
+    _max: BrandWishlistNominationMaxAggregateOutputType | null
+  }
+
+  type GetBrandWishlistNominationGroupByPayload<T extends BrandWishlistNominationGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<BrandWishlistNominationGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof BrandWishlistNominationGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], BrandWishlistNominationGroupByOutputType[P]>
+            : GetScalarType<T[P], BrandWishlistNominationGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type BrandWishlistNominationSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    categoryId?: boolean
+    categoryLabel?: boolean
+    brandId?: boolean
+    brandName?: boolean
+    provinceCode?: boolean
+    provinceName?: boolean
+    contactName?: boolean
+    schoolName?: boolean
+    reason?: boolean
+    source?: boolean
+    createdAt?: boolean
+  }, ExtArgs["result"]["brandWishlistNomination"]>
+
+  export type BrandWishlistNominationSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    categoryId?: boolean
+    categoryLabel?: boolean
+    brandId?: boolean
+    brandName?: boolean
+    provinceCode?: boolean
+    provinceName?: boolean
+    contactName?: boolean
+    schoolName?: boolean
+    reason?: boolean
+    source?: boolean
+    createdAt?: boolean
+  }, ExtArgs["result"]["brandWishlistNomination"]>
+
+  export type BrandWishlistNominationSelectScalar = {
+    id?: boolean
+    categoryId?: boolean
+    categoryLabel?: boolean
+    brandId?: boolean
+    brandName?: boolean
+    provinceCode?: boolean
+    provinceName?: boolean
+    contactName?: boolean
+    schoolName?: boolean
+    reason?: boolean
+    source?: boolean
+    createdAt?: boolean
+  }
+
+
+  export type $BrandWishlistNominationPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "BrandWishlistNomination"
+    objects: {}
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      categoryId: string
+      categoryLabel: string
+      brandId: string
+      brandName: string
+      provinceCode: string
+      provinceName: string
+      contactName: string | null
+      schoolName: string | null
+      reason: string | null
+      source: string
+      createdAt: Date
+    }, ExtArgs["result"]["brandWishlistNomination"]>
+    composites: {}
+  }
+
+  type BrandWishlistNominationGetPayload<S extends boolean | null | undefined | BrandWishlistNominationDefaultArgs> = $Result.GetResult<Prisma.$BrandWishlistNominationPayload, S>
+
+  type BrandWishlistNominationCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = 
+    Omit<BrandWishlistNominationFindManyArgs, 'select' | 'include' | 'distinct'> & {
+      select?: BrandWishlistNominationCountAggregateInputType | true
+    }
+
+  export interface BrandWishlistNominationDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['BrandWishlistNomination'], meta: { name: 'BrandWishlistNomination' } }
+    /**
+     * Find zero or one BrandWishlistNomination that matches the filter.
+     * @param {BrandWishlistNominationFindUniqueArgs} args - Arguments to find a BrandWishlistNomination
+     * @example
+     * // Get one BrandWishlistNomination
+     * const brandWishlistNomination = await prisma.brandWishlistNomination.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends BrandWishlistNominationFindUniqueArgs>(args: SelectSubset<T, BrandWishlistNominationFindUniqueArgs<ExtArgs>>): Prisma__BrandWishlistNominationClient<$Result.GetResult<Prisma.$BrandWishlistNominationPayload<ExtArgs>, T, "findUnique"> | null, null, ExtArgs>
+
+    /**
+     * Find one BrandWishlistNomination that matches the filter or throw an error with `error.code='P2025'` 
+     * if no matches were found.
+     * @param {BrandWishlistNominationFindUniqueOrThrowArgs} args - Arguments to find a BrandWishlistNomination
+     * @example
+     * // Get one BrandWishlistNomination
+     * const brandWishlistNomination = await prisma.brandWishlistNomination.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends BrandWishlistNominationFindUniqueOrThrowArgs>(args: SelectSubset<T, BrandWishlistNominationFindUniqueOrThrowArgs<ExtArgs>>): Prisma__BrandWishlistNominationClient<$Result.GetResult<Prisma.$BrandWishlistNominationPayload<ExtArgs>, T, "findUniqueOrThrow">, never, ExtArgs>
+
+    /**
+     * Find the first BrandWishlistNomination that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BrandWishlistNominationFindFirstArgs} args - Arguments to find a BrandWishlistNomination
+     * @example
+     * // Get one BrandWishlistNomination
+     * const brandWishlistNomination = await prisma.brandWishlistNomination.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends BrandWishlistNominationFindFirstArgs>(args?: SelectSubset<T, BrandWishlistNominationFindFirstArgs<ExtArgs>>): Prisma__BrandWishlistNominationClient<$Result.GetResult<Prisma.$BrandWishlistNominationPayload<ExtArgs>, T, "findFirst"> | null, null, ExtArgs>
+
+    /**
+     * Find the first BrandWishlistNomination that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BrandWishlistNominationFindFirstOrThrowArgs} args - Arguments to find a BrandWishlistNomination
+     * @example
+     * // Get one BrandWishlistNomination
+     * const brandWishlistNomination = await prisma.brandWishlistNomination.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends BrandWishlistNominationFindFirstOrThrowArgs>(args?: SelectSubset<T, BrandWishlistNominationFindFirstOrThrowArgs<ExtArgs>>): Prisma__BrandWishlistNominationClient<$Result.GetResult<Prisma.$BrandWishlistNominationPayload<ExtArgs>, T, "findFirstOrThrow">, never, ExtArgs>
+
+    /**
+     * Find zero or more BrandWishlistNominations that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BrandWishlistNominationFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all BrandWishlistNominations
+     * const brandWishlistNominations = await prisma.brandWishlistNomination.findMany()
+     * 
+     * // Get first 10 BrandWishlistNominations
+     * const brandWishlistNominations = await prisma.brandWishlistNomination.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const brandWishlistNominationWithIdOnly = await prisma.brandWishlistNomination.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends BrandWishlistNominationFindManyArgs>(args?: SelectSubset<T, BrandWishlistNominationFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$BrandWishlistNominationPayload<ExtArgs>, T, "findMany">>
+
+    /**
+     * Create a BrandWishlistNomination.
+     * @param {BrandWishlistNominationCreateArgs} args - Arguments to create a BrandWishlistNomination.
+     * @example
+     * // Create one BrandWishlistNomination
+     * const BrandWishlistNomination = await prisma.brandWishlistNomination.create({
+     *   data: {
+     *     // ... data to create a BrandWishlistNomination
+     *   }
+     * })
+     * 
+     */
+    create<T extends BrandWishlistNominationCreateArgs>(args: SelectSubset<T, BrandWishlistNominationCreateArgs<ExtArgs>>): Prisma__BrandWishlistNominationClient<$Result.GetResult<Prisma.$BrandWishlistNominationPayload<ExtArgs>, T, "create">, never, ExtArgs>
+
+    /**
+     * Create many BrandWishlistNominations.
+     * @param {BrandWishlistNominationCreateManyArgs} args - Arguments to create many BrandWishlistNominations.
+     * @example
+     * // Create many BrandWishlistNominations
+     * const brandWishlistNomination = await prisma.brandWishlistNomination.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends BrandWishlistNominationCreateManyArgs>(args?: SelectSubset<T, BrandWishlistNominationCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many BrandWishlistNominations and returns the data saved in the database.
+     * @param {BrandWishlistNominationCreateManyAndReturnArgs} args - Arguments to create many BrandWishlistNominations.
+     * @example
+     * // Create many BrandWishlistNominations
+     * const brandWishlistNomination = await prisma.brandWishlistNomination.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many BrandWishlistNominations and only return the `id`
+     * const brandWishlistNominationWithIdOnly = await prisma.brandWishlistNomination.createManyAndReturn({ 
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends BrandWishlistNominationCreateManyAndReturnArgs>(args?: SelectSubset<T, BrandWishlistNominationCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$BrandWishlistNominationPayload<ExtArgs>, T, "createManyAndReturn">>
+
+    /**
+     * Delete a BrandWishlistNomination.
+     * @param {BrandWishlistNominationDeleteArgs} args - Arguments to delete one BrandWishlistNomination.
+     * @example
+     * // Delete one BrandWishlistNomination
+     * const BrandWishlistNomination = await prisma.brandWishlistNomination.delete({
+     *   where: {
+     *     // ... filter to delete one BrandWishlistNomination
+     *   }
+     * })
+     * 
+     */
+    delete<T extends BrandWishlistNominationDeleteArgs>(args: SelectSubset<T, BrandWishlistNominationDeleteArgs<ExtArgs>>): Prisma__BrandWishlistNominationClient<$Result.GetResult<Prisma.$BrandWishlistNominationPayload<ExtArgs>, T, "delete">, never, ExtArgs>
+
+    /**
+     * Update one BrandWishlistNomination.
+     * @param {BrandWishlistNominationUpdateArgs} args - Arguments to update one BrandWishlistNomination.
+     * @example
+     * // Update one BrandWishlistNomination
+     * const brandWishlistNomination = await prisma.brandWishlistNomination.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends BrandWishlistNominationUpdateArgs>(args: SelectSubset<T, BrandWishlistNominationUpdateArgs<ExtArgs>>): Prisma__BrandWishlistNominationClient<$Result.GetResult<Prisma.$BrandWishlistNominationPayload<ExtArgs>, T, "update">, never, ExtArgs>
+
+    /**
+     * Delete zero or more BrandWishlistNominations.
+     * @param {BrandWishlistNominationDeleteManyArgs} args - Arguments to filter BrandWishlistNominations to delete.
+     * @example
+     * // Delete a few BrandWishlistNominations
+     * const { count } = await prisma.brandWishlistNomination.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends BrandWishlistNominationDeleteManyArgs>(args?: SelectSubset<T, BrandWishlistNominationDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more BrandWishlistNominations.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BrandWishlistNominationUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many BrandWishlistNominations
+     * const brandWishlistNomination = await prisma.brandWishlistNomination.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends BrandWishlistNominationUpdateManyArgs>(args: SelectSubset<T, BrandWishlistNominationUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one BrandWishlistNomination.
+     * @param {BrandWishlistNominationUpsertArgs} args - Arguments to update or create a BrandWishlistNomination.
+     * @example
+     * // Update or create a BrandWishlistNomination
+     * const brandWishlistNomination = await prisma.brandWishlistNomination.upsert({
+     *   create: {
+     *     // ... data to create a BrandWishlistNomination
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the BrandWishlistNomination we want to update
+     *   }
+     * })
+     */
+    upsert<T extends BrandWishlistNominationUpsertArgs>(args: SelectSubset<T, BrandWishlistNominationUpsertArgs<ExtArgs>>): Prisma__BrandWishlistNominationClient<$Result.GetResult<Prisma.$BrandWishlistNominationPayload<ExtArgs>, T, "upsert">, never, ExtArgs>
+
+
+    /**
+     * Count the number of BrandWishlistNominations.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BrandWishlistNominationCountArgs} args - Arguments to filter BrandWishlistNominations to count.
+     * @example
+     * // Count the number of BrandWishlistNominations
+     * const count = await prisma.brandWishlistNomination.count({
+     *   where: {
+     *     // ... the filter for the BrandWishlistNominations we want to count
+     *   }
+     * })
+    **/
+    count<T extends BrandWishlistNominationCountArgs>(
+      args?: Subset<T, BrandWishlistNominationCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], BrandWishlistNominationCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a BrandWishlistNomination.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BrandWishlistNominationAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends BrandWishlistNominationAggregateArgs>(args: Subset<T, BrandWishlistNominationAggregateArgs>): Prisma.PrismaPromise<GetBrandWishlistNominationAggregateType<T>>
+
+    /**
+     * Group by BrandWishlistNomination.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BrandWishlistNominationGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends BrandWishlistNominationGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: BrandWishlistNominationGroupByArgs['orderBy'] }
+        : { orderBy?: BrandWishlistNominationGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, BrandWishlistNominationGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetBrandWishlistNominationGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the BrandWishlistNomination model
+   */
+  readonly fields: BrandWishlistNominationFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for BrandWishlistNomination.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__BrandWishlistNominationClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the BrandWishlistNomination model
+   */ 
+  interface BrandWishlistNominationFieldRefs {
+    readonly id: FieldRef<"BrandWishlistNomination", 'String'>
+    readonly categoryId: FieldRef<"BrandWishlistNomination", 'String'>
+    readonly categoryLabel: FieldRef<"BrandWishlistNomination", 'String'>
+    readonly brandId: FieldRef<"BrandWishlistNomination", 'String'>
+    readonly brandName: FieldRef<"BrandWishlistNomination", 'String'>
+    readonly provinceCode: FieldRef<"BrandWishlistNomination", 'String'>
+    readonly provinceName: FieldRef<"BrandWishlistNomination", 'String'>
+    readonly contactName: FieldRef<"BrandWishlistNomination", 'String'>
+    readonly schoolName: FieldRef<"BrandWishlistNomination", 'String'>
+    readonly reason: FieldRef<"BrandWishlistNomination", 'String'>
+    readonly source: FieldRef<"BrandWishlistNomination", 'String'>
+    readonly createdAt: FieldRef<"BrandWishlistNomination", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * BrandWishlistNomination findUnique
+   */
+  export type BrandWishlistNominationFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BrandWishlistNomination
+     */
+    select?: BrandWishlistNominationSelect<ExtArgs> | null
+    /**
+     * Filter, which BrandWishlistNomination to fetch.
+     */
+    where: BrandWishlistNominationWhereUniqueInput
+  }
+
+  /**
+   * BrandWishlistNomination findUniqueOrThrow
+   */
+  export type BrandWishlistNominationFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BrandWishlistNomination
+     */
+    select?: BrandWishlistNominationSelect<ExtArgs> | null
+    /**
+     * Filter, which BrandWishlistNomination to fetch.
+     */
+    where: BrandWishlistNominationWhereUniqueInput
+  }
+
+  /**
+   * BrandWishlistNomination findFirst
+   */
+  export type BrandWishlistNominationFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BrandWishlistNomination
+     */
+    select?: BrandWishlistNominationSelect<ExtArgs> | null
+    /**
+     * Filter, which BrandWishlistNomination to fetch.
+     */
+    where?: BrandWishlistNominationWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of BrandWishlistNominations to fetch.
+     */
+    orderBy?: BrandWishlistNominationOrderByWithRelationInput | BrandWishlistNominationOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for BrandWishlistNominations.
+     */
+    cursor?: BrandWishlistNominationWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` BrandWishlistNominations from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` BrandWishlistNominations.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of BrandWishlistNominations.
+     */
+    distinct?: BrandWishlistNominationScalarFieldEnum | BrandWishlistNominationScalarFieldEnum[]
+  }
+
+  /**
+   * BrandWishlistNomination findFirstOrThrow
+   */
+  export type BrandWishlistNominationFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BrandWishlistNomination
+     */
+    select?: BrandWishlistNominationSelect<ExtArgs> | null
+    /**
+     * Filter, which BrandWishlistNomination to fetch.
+     */
+    where?: BrandWishlistNominationWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of BrandWishlistNominations to fetch.
+     */
+    orderBy?: BrandWishlistNominationOrderByWithRelationInput | BrandWishlistNominationOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for BrandWishlistNominations.
+     */
+    cursor?: BrandWishlistNominationWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` BrandWishlistNominations from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` BrandWishlistNominations.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of BrandWishlistNominations.
+     */
+    distinct?: BrandWishlistNominationScalarFieldEnum | BrandWishlistNominationScalarFieldEnum[]
+  }
+
+  /**
+   * BrandWishlistNomination findMany
+   */
+  export type BrandWishlistNominationFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BrandWishlistNomination
+     */
+    select?: BrandWishlistNominationSelect<ExtArgs> | null
+    /**
+     * Filter, which BrandWishlistNominations to fetch.
+     */
+    where?: BrandWishlistNominationWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of BrandWishlistNominations to fetch.
+     */
+    orderBy?: BrandWishlistNominationOrderByWithRelationInput | BrandWishlistNominationOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing BrandWishlistNominations.
+     */
+    cursor?: BrandWishlistNominationWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` BrandWishlistNominations from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` BrandWishlistNominations.
+     */
+    skip?: number
+    distinct?: BrandWishlistNominationScalarFieldEnum | BrandWishlistNominationScalarFieldEnum[]
+  }
+
+  /**
+   * BrandWishlistNomination create
+   */
+  export type BrandWishlistNominationCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BrandWishlistNomination
+     */
+    select?: BrandWishlistNominationSelect<ExtArgs> | null
+    /**
+     * The data needed to create a BrandWishlistNomination.
+     */
+    data: XOR<BrandWishlistNominationCreateInput, BrandWishlistNominationUncheckedCreateInput>
+  }
+
+  /**
+   * BrandWishlistNomination createMany
+   */
+  export type BrandWishlistNominationCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many BrandWishlistNominations.
+     */
+    data: BrandWishlistNominationCreateManyInput | BrandWishlistNominationCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * BrandWishlistNomination createManyAndReturn
+   */
+  export type BrandWishlistNominationCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BrandWishlistNomination
+     */
+    select?: BrandWishlistNominationSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * The data used to create many BrandWishlistNominations.
+     */
+    data: BrandWishlistNominationCreateManyInput | BrandWishlistNominationCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * BrandWishlistNomination update
+   */
+  export type BrandWishlistNominationUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BrandWishlistNomination
+     */
+    select?: BrandWishlistNominationSelect<ExtArgs> | null
+    /**
+     * The data needed to update a BrandWishlistNomination.
+     */
+    data: XOR<BrandWishlistNominationUpdateInput, BrandWishlistNominationUncheckedUpdateInput>
+    /**
+     * Choose, which BrandWishlistNomination to update.
+     */
+    where: BrandWishlistNominationWhereUniqueInput
+  }
+
+  /**
+   * BrandWishlistNomination updateMany
+   */
+  export type BrandWishlistNominationUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update BrandWishlistNominations.
+     */
+    data: XOR<BrandWishlistNominationUpdateManyMutationInput, BrandWishlistNominationUncheckedUpdateManyInput>
+    /**
+     * Filter which BrandWishlistNominations to update
+     */
+    where?: BrandWishlistNominationWhereInput
+  }
+
+  /**
+   * BrandWishlistNomination upsert
+   */
+  export type BrandWishlistNominationUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BrandWishlistNomination
+     */
+    select?: BrandWishlistNominationSelect<ExtArgs> | null
+    /**
+     * The filter to search for the BrandWishlistNomination to update in case it exists.
+     */
+    where: BrandWishlistNominationWhereUniqueInput
+    /**
+     * In case the BrandWishlistNomination found by the `where` argument doesn't exist, create a new BrandWishlistNomination with this data.
+     */
+    create: XOR<BrandWishlistNominationCreateInput, BrandWishlistNominationUncheckedCreateInput>
+    /**
+     * In case the BrandWishlistNomination was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<BrandWishlistNominationUpdateInput, BrandWishlistNominationUncheckedUpdateInput>
+  }
+
+  /**
+   * BrandWishlistNomination delete
+   */
+  export type BrandWishlistNominationDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BrandWishlistNomination
+     */
+    select?: BrandWishlistNominationSelect<ExtArgs> | null
+    /**
+     * Filter which BrandWishlistNomination to delete.
+     */
+    where: BrandWishlistNominationWhereUniqueInput
+  }
+
+  /**
+   * BrandWishlistNomination deleteMany
+   */
+  export type BrandWishlistNominationDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which BrandWishlistNominations to delete
+     */
+    where?: BrandWishlistNominationWhereInput
+  }
+
+  /**
+   * BrandWishlistNomination without action
+   */
+  export type BrandWishlistNominationDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BrandWishlistNomination
+     */
+    select?: BrandWishlistNominationSelect<ExtArgs> | null
+  }
+
+
+  /**
    * Enums
    */
 
@@ -46571,6 +47619,24 @@ export namespace Prisma {
   };
 
   export type ProvinceNominationScalarFieldEnum = (typeof ProvinceNominationScalarFieldEnum)[keyof typeof ProvinceNominationScalarFieldEnum]
+
+
+  export const BrandWishlistNominationScalarFieldEnum: {
+    id: 'id',
+    categoryId: 'categoryId',
+    categoryLabel: 'categoryLabel',
+    brandId: 'brandId',
+    brandName: 'brandName',
+    provinceCode: 'provinceCode',
+    provinceName: 'provinceName',
+    contactName: 'contactName',
+    schoolName: 'schoolName',
+    reason: 'reason',
+    source: 'source',
+    createdAt: 'createdAt'
+  };
+
+  export type BrandWishlistNominationScalarFieldEnum = (typeof BrandWishlistNominationScalarFieldEnum)[keyof typeof BrandWishlistNominationScalarFieldEnum]
 
 
   export const SortOrder: {
@@ -51009,6 +52075,93 @@ export namespace Prisma {
     createdAt?: DateTimeWithAggregatesFilter<"ProvinceNomination"> | Date | string
   }
 
+  export type BrandWishlistNominationWhereInput = {
+    AND?: BrandWishlistNominationWhereInput | BrandWishlistNominationWhereInput[]
+    OR?: BrandWishlistNominationWhereInput[]
+    NOT?: BrandWishlistNominationWhereInput | BrandWishlistNominationWhereInput[]
+    id?: StringFilter<"BrandWishlistNomination"> | string
+    categoryId?: StringFilter<"BrandWishlistNomination"> | string
+    categoryLabel?: StringFilter<"BrandWishlistNomination"> | string
+    brandId?: StringFilter<"BrandWishlistNomination"> | string
+    brandName?: StringFilter<"BrandWishlistNomination"> | string
+    provinceCode?: StringFilter<"BrandWishlistNomination"> | string
+    provinceName?: StringFilter<"BrandWishlistNomination"> | string
+    contactName?: StringNullableFilter<"BrandWishlistNomination"> | string | null
+    schoolName?: StringNullableFilter<"BrandWishlistNomination"> | string | null
+    reason?: StringNullableFilter<"BrandWishlistNomination"> | string | null
+    source?: StringFilter<"BrandWishlistNomination"> | string
+    createdAt?: DateTimeFilter<"BrandWishlistNomination"> | Date | string
+  }
+
+  export type BrandWishlistNominationOrderByWithRelationInput = {
+    id?: SortOrder
+    categoryId?: SortOrder
+    categoryLabel?: SortOrder
+    brandId?: SortOrder
+    brandName?: SortOrder
+    provinceCode?: SortOrder
+    provinceName?: SortOrder
+    contactName?: SortOrderInput | SortOrder
+    schoolName?: SortOrderInput | SortOrder
+    reason?: SortOrderInput | SortOrder
+    source?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type BrandWishlistNominationWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: BrandWishlistNominationWhereInput | BrandWishlistNominationWhereInput[]
+    OR?: BrandWishlistNominationWhereInput[]
+    NOT?: BrandWishlistNominationWhereInput | BrandWishlistNominationWhereInput[]
+    categoryId?: StringFilter<"BrandWishlistNomination"> | string
+    categoryLabel?: StringFilter<"BrandWishlistNomination"> | string
+    brandId?: StringFilter<"BrandWishlistNomination"> | string
+    brandName?: StringFilter<"BrandWishlistNomination"> | string
+    provinceCode?: StringFilter<"BrandWishlistNomination"> | string
+    provinceName?: StringFilter<"BrandWishlistNomination"> | string
+    contactName?: StringNullableFilter<"BrandWishlistNomination"> | string | null
+    schoolName?: StringNullableFilter<"BrandWishlistNomination"> | string | null
+    reason?: StringNullableFilter<"BrandWishlistNomination"> | string | null
+    source?: StringFilter<"BrandWishlistNomination"> | string
+    createdAt?: DateTimeFilter<"BrandWishlistNomination"> | Date | string
+  }, "id">
+
+  export type BrandWishlistNominationOrderByWithAggregationInput = {
+    id?: SortOrder
+    categoryId?: SortOrder
+    categoryLabel?: SortOrder
+    brandId?: SortOrder
+    brandName?: SortOrder
+    provinceCode?: SortOrder
+    provinceName?: SortOrder
+    contactName?: SortOrderInput | SortOrder
+    schoolName?: SortOrderInput | SortOrder
+    reason?: SortOrderInput | SortOrder
+    source?: SortOrder
+    createdAt?: SortOrder
+    _count?: BrandWishlistNominationCountOrderByAggregateInput
+    _max?: BrandWishlistNominationMaxOrderByAggregateInput
+    _min?: BrandWishlistNominationMinOrderByAggregateInput
+  }
+
+  export type BrandWishlistNominationScalarWhereWithAggregatesInput = {
+    AND?: BrandWishlistNominationScalarWhereWithAggregatesInput | BrandWishlistNominationScalarWhereWithAggregatesInput[]
+    OR?: BrandWishlistNominationScalarWhereWithAggregatesInput[]
+    NOT?: BrandWishlistNominationScalarWhereWithAggregatesInput | BrandWishlistNominationScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"BrandWishlistNomination"> | string
+    categoryId?: StringWithAggregatesFilter<"BrandWishlistNomination"> | string
+    categoryLabel?: StringWithAggregatesFilter<"BrandWishlistNomination"> | string
+    brandId?: StringWithAggregatesFilter<"BrandWishlistNomination"> | string
+    brandName?: StringWithAggregatesFilter<"BrandWishlistNomination"> | string
+    provinceCode?: StringWithAggregatesFilter<"BrandWishlistNomination"> | string
+    provinceName?: StringWithAggregatesFilter<"BrandWishlistNomination"> | string
+    contactName?: StringNullableWithAggregatesFilter<"BrandWishlistNomination"> | string | null
+    schoolName?: StringNullableWithAggregatesFilter<"BrandWishlistNomination"> | string | null
+    reason?: StringNullableWithAggregatesFilter<"BrandWishlistNomination"> | string | null
+    source?: StringWithAggregatesFilter<"BrandWishlistNomination"> | string
+    createdAt?: DateTimeWithAggregatesFilter<"BrandWishlistNomination"> | Date | string
+  }
+
   export type UserCreateInput = {
     id?: string
     fullName: string
@@ -55362,6 +56515,111 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type BrandWishlistNominationCreateInput = {
+    id?: string
+    categoryId: string
+    categoryLabel: string
+    brandId: string
+    brandName: string
+    provinceCode: string
+    provinceName: string
+    contactName?: string | null
+    schoolName?: string | null
+    reason?: string | null
+    source?: string
+    createdAt?: Date | string
+  }
+
+  export type BrandWishlistNominationUncheckedCreateInput = {
+    id?: string
+    categoryId: string
+    categoryLabel: string
+    brandId: string
+    brandName: string
+    provinceCode: string
+    provinceName: string
+    contactName?: string | null
+    schoolName?: string | null
+    reason?: string | null
+    source?: string
+    createdAt?: Date | string
+  }
+
+  export type BrandWishlistNominationUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    categoryId?: StringFieldUpdateOperationsInput | string
+    categoryLabel?: StringFieldUpdateOperationsInput | string
+    brandId?: StringFieldUpdateOperationsInput | string
+    brandName?: StringFieldUpdateOperationsInput | string
+    provinceCode?: StringFieldUpdateOperationsInput | string
+    provinceName?: StringFieldUpdateOperationsInput | string
+    contactName?: NullableStringFieldUpdateOperationsInput | string | null
+    schoolName?: NullableStringFieldUpdateOperationsInput | string | null
+    reason?: NullableStringFieldUpdateOperationsInput | string | null
+    source?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type BrandWishlistNominationUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    categoryId?: StringFieldUpdateOperationsInput | string
+    categoryLabel?: StringFieldUpdateOperationsInput | string
+    brandId?: StringFieldUpdateOperationsInput | string
+    brandName?: StringFieldUpdateOperationsInput | string
+    provinceCode?: StringFieldUpdateOperationsInput | string
+    provinceName?: StringFieldUpdateOperationsInput | string
+    contactName?: NullableStringFieldUpdateOperationsInput | string | null
+    schoolName?: NullableStringFieldUpdateOperationsInput | string | null
+    reason?: NullableStringFieldUpdateOperationsInput | string | null
+    source?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type BrandWishlistNominationCreateManyInput = {
+    id?: string
+    categoryId: string
+    categoryLabel: string
+    brandId: string
+    brandName: string
+    provinceCode: string
+    provinceName: string
+    contactName?: string | null
+    schoolName?: string | null
+    reason?: string | null
+    source?: string
+    createdAt?: Date | string
+  }
+
+  export type BrandWishlistNominationUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    categoryId?: StringFieldUpdateOperationsInput | string
+    categoryLabel?: StringFieldUpdateOperationsInput | string
+    brandId?: StringFieldUpdateOperationsInput | string
+    brandName?: StringFieldUpdateOperationsInput | string
+    provinceCode?: StringFieldUpdateOperationsInput | string
+    provinceName?: StringFieldUpdateOperationsInput | string
+    contactName?: NullableStringFieldUpdateOperationsInput | string | null
+    schoolName?: NullableStringFieldUpdateOperationsInput | string | null
+    reason?: NullableStringFieldUpdateOperationsInput | string | null
+    source?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type BrandWishlistNominationUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    categoryId?: StringFieldUpdateOperationsInput | string
+    categoryLabel?: StringFieldUpdateOperationsInput | string
+    brandId?: StringFieldUpdateOperationsInput | string
+    brandName?: StringFieldUpdateOperationsInput | string
+    provinceCode?: StringFieldUpdateOperationsInput | string
+    provinceName?: StringFieldUpdateOperationsInput | string
+    contactName?: NullableStringFieldUpdateOperationsInput | string | null
+    schoolName?: NullableStringFieldUpdateOperationsInput | string | null
+    reason?: NullableStringFieldUpdateOperationsInput | string | null
+    source?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type StringFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
     in?: string[] | ListStringFieldRefInput<$PrismaModel>
@@ -58744,6 +60002,51 @@ export namespace Prisma {
     message?: SortOrder
     source?: SortOrder
     status?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type BrandWishlistNominationCountOrderByAggregateInput = {
+    id?: SortOrder
+    categoryId?: SortOrder
+    categoryLabel?: SortOrder
+    brandId?: SortOrder
+    brandName?: SortOrder
+    provinceCode?: SortOrder
+    provinceName?: SortOrder
+    contactName?: SortOrder
+    schoolName?: SortOrder
+    reason?: SortOrder
+    source?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type BrandWishlistNominationMaxOrderByAggregateInput = {
+    id?: SortOrder
+    categoryId?: SortOrder
+    categoryLabel?: SortOrder
+    brandId?: SortOrder
+    brandName?: SortOrder
+    provinceCode?: SortOrder
+    provinceName?: SortOrder
+    contactName?: SortOrder
+    schoolName?: SortOrder
+    reason?: SortOrder
+    source?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type BrandWishlistNominationMinOrderByAggregateInput = {
+    id?: SortOrder
+    categoryId?: SortOrder
+    categoryLabel?: SortOrder
+    brandId?: SortOrder
+    brandName?: SortOrder
+    provinceCode?: SortOrder
+    provinceName?: SortOrder
+    contactName?: SortOrder
+    schoolName?: SortOrder
+    reason?: SortOrder
+    source?: SortOrder
     createdAt?: SortOrder
   }
 
@@ -74952,6 +76255,10 @@ export namespace Prisma {
      * @deprecated Use ProvinceNominationDefaultArgs instead
      */
     export type ProvinceNominationArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = ProvinceNominationDefaultArgs<ExtArgs>
+    /**
+     * @deprecated Use BrandWishlistNominationDefaultArgs instead
+     */
+    export type BrandWishlistNominationArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = BrandWishlistNominationDefaultArgs<ExtArgs>
 
   /**
    * Batch Payload for updateMany & deleteMany & createMany
