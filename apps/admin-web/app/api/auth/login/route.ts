@@ -4,11 +4,21 @@ import { createCsrfToken } from "../../../../lib/csrf";
 
 export async function POST(req: NextRequest): Promise<NextResponse> {
   const body = await req.json().catch(() => null);
-  const loginRes = await fetch(`${apiBaseUrl()}/api/v1/auth/login`, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(body ?? {})
-  });
+
+  let loginRes: Response;
+  try {
+    loginRes = await fetch(`${apiBaseUrl()}/api/v1/auth/login`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(body ?? {})
+    });
+  } catch {
+    return NextResponse.json(
+      { message: "Could not reach the API. Check NEXT_PUBLIC_API_BASE_URL and that the API service is online." },
+      { status: 502 }
+    );
+  }
+
   const loginData = await loginRes.json().catch(() => ({ message: "Login failed." }));
   if (!loginRes.ok) return NextResponse.json(loginData, { status: loginRes.status });
 

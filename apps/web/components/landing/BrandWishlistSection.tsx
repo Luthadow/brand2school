@@ -118,7 +118,7 @@ export function BrandWishlistSection(): JSX.Element {
           <FadeIn delay={0.06} className="lp-brand-wishlist-form-col">
             <div className="lp-brand-wishlist-intro card">
               <p>
-                Your vote helps us understand which brands communities want to engage with next. Share{" "}
+                Your nomination helps us understand which brands communities want to engage with next. Share{" "}
                 <strong>why</strong> you chose a brand — those responses become valuable community insight for
                 future outreach.
               </p>
