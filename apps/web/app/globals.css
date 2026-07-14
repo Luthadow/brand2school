@@ -5245,7 +5245,9 @@ button:disabled {
   .about-intro-grid,
   .about-vision-grid,
   .about-nkanyezi-grid,
-  .about-values-grid { grid-template-columns: 1fr; }
+  .about-two-col,
+  .about-values-grid,
+  .about-check-list--grid { grid-template-columns: 1fr; }
 }
 
 /* ─── About Page ─── */
@@ -5257,9 +5259,30 @@ button:disabled {
   font-size: 1rem;
 }
 
+.about-body--emphasis {
+  color: var(--brand-navy, #003b8e);
+  font-weight: 700;
+  font-size: 1.05rem;
+}
+
+.about-body--narrow {
+  max-width: 42rem;
+}
+
+.about-prose {
+  max-width: 48rem;
+}
+
 .about-intro-grid {
   display: grid;
   grid-template-columns: 1.2fr 0.8fr;
+  gap: 2rem;
+  align-items: start;
+}
+
+.about-two-col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
   gap: 2rem;
   align-items: start;
 }
@@ -5270,6 +5293,12 @@ button:disabled {
   list-style: none;
   display: grid;
   gap: 0.55rem;
+}
+
+.about-check-list--grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.65rem 1.25rem;
+  margin-top: 1.25rem;
 }
 
 .about-check-list li {
@@ -5475,6 +5504,40 @@ button:disabled {
   max-width: 640px;
   opacity: 0.9;
   line-height: 1.6;
+}
+
+.about-cta .ds-eyebrow {
+  color: rgba(255, 255, 255, 0.75);
+}
+
+.about-cta-closing {
+  font-weight: 600 !important;
+  opacity: 1 !important;
+}
+
+.about-trust-card__icon {
+  color: var(--brand-green);
+  margin-bottom: 0.5rem;
+}
+
+.about-founder {
+  display: flex;
+  gap: 0.85rem;
+  margin-top: 1.5rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid rgba(0, 59, 142, 0.12);
+}
+
+.about-founder > svg {
+  color: var(--brand-orange, #f7931e);
+  flex-shrink: 0;
+  margin-top: 0.2rem;
+}
+
+.about-founder h3 {
+  margin: 0 0 0.65rem;
+  color: var(--brand-navy, #003b8e);
+  font-size: 1.15rem;
 }
 
 .about-cta .lp-hero-actions {

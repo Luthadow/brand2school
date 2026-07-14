@@ -21,6 +21,10 @@ import {
   buildVerifyQrByCode
 } from "./brandCertificateHandlers.js";
 import {
+  buildCompanyProfilePdf,
+  companyProfileContentDisposition
+} from "./companyProfilePdf.js";
+import {
   createBrandWishlistNomination,
   createBrandWishlistNominationSchema,
   getBrandWishlistPublicResults,
@@ -294,6 +298,19 @@ platformRouter.post("/province-nominations", async (req, res) => {
 platformRouter.get("/brand-wishlist", participationRateLimit, async (_req, res) => {
   const results = await getBrandWishlistPublicResults();
   res.json(results);
+});
+
+platformRouter.get("/company-profile/pdf", analyticsRateLimit, async (_req, res) => {
+  try {
+    const pdf = await buildCompanyProfilePdf();
+    res.setHeader("Content-Type", "application/pdf");
+    res.setHeader("Content-Disposition", companyProfileContentDisposition());
+    res.setHeader("Cache-Control", "public, max-age=3600");
+    res.send(pdf);
+  } catch (err) {
+    console.error("[platform] company profile PDF failed:", err);
+    res.status(500).json({ message: "Could not generate company profile PDF." });
+  }
 });
 
 platformRouter.get("/brand-wishlist/categories", (_req, res) => {
