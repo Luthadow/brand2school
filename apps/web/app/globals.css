@@ -5401,17 +5401,31 @@ button:disabled {
   padding: 1.5rem;
 }
 
+.about-company-card .about-body,
+.about-company-card .about-check-list li,
+.about-company-card p,
+.about-company-card li {
+  color: rgba(255, 255, 255, 0.92);
+}
+
+.about-company-card .about-check-list svg,
+.about-trust-card__icon {
+  color: #6cc24a;
+}
+
 .about-company-eyebrow {
   margin: 0 0 0.5rem;
   font-size: 0.75rem;
   text-transform: uppercase;
   letter-spacing: 0.06em;
-  opacity: 0.8;
+  color: #fff;
+  opacity: 0.85;
 }
 
 .about-company-card h3 {
   margin: 0 0 1rem;
   font-size: 1.1rem;
+  color: #fff;
 }
 
 .about-company-dl {
