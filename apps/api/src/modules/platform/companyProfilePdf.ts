@@ -362,8 +362,10 @@ function drawFullLetterhead(doc: InstanceType<typeof PDFDocument>, bannerTitle: 
     .text(LETTERHEAD.phone, rightX, top + 62);
 
   doc.rect(0, 108, doc.page.width, 32).fill(REPORT_BRAND_BLUE);
-  doc.fillColor("#ffffff").fontSize(12).font("Helvetica-Bold").text("Brand2School", MARGIN, 114);
-  doc.fontSize(9).font("Helvetica").text(bannerTitle, MARGIN, 128);
+  doc.fillColor("#ffffff").fontSize(12).font("Helvetica-Bold").text("Brand2School", MARGIN, 114, {
+    lineBreak: false
+  });
+  doc.fontSize(9).font("Helvetica").text(bannerTitle, MARGIN, 128, { lineBreak: false });
   doc.fillColor("#374151");
   doc.x = MARGIN;
   doc.y = 156;
@@ -448,25 +450,40 @@ function drawServiceBlock(doc: InstanceType<typeof PDFDocument>, title: string, 
 
 function drawPageFooters(doc: InstanceType<typeof PDFDocument>): void {
   const range = doc.bufferedPageRange();
-  for (let i = range.start; i < range.start + range.count; i += 1) {
-    doc.switchToPage(i);
-    const y = doc.page.height - 40;
+  // Capture count up front — PDFKit can append blank pages if the flow cursor
+  // is left near the bottom when stamping earlier pages.
+  const pageCount = range.count;
+
+  for (let i = 0; i < pageCount; i += 1) {
+    doc.switchToPage(range.start + i);
+    const footerY = doc.page.height - 40;
+    // Reset the flow cursor BEFORE drawing. Without this, text() sees a high
+    // doc.y from the final content page and auto-creates blank pages.
+    doc.x = MARGIN;
+    doc.y = footerY;
+
     doc
-      .moveTo(MARGIN, y - 8)
-      .lineTo(doc.page.width - MARGIN, y - 8)
+      .moveTo(MARGIN, footerY - 8)
+      .lineTo(doc.page.width - MARGIN, footerY - 8)
       .strokeColor("#E5E7EB")
       .stroke();
+
     doc
       .fontSize(7.5)
       .font("Helvetica")
       .fillColor("#6B7280")
-      .text(LETTERHEAD.productLine, MARGIN, y, {
-        width: doc.page.width - MARGIN * 2 - 60,
-        align: "left",
-        lineBreak: false
+      .text(LETTERHEAD.productLine, MARGIN, footerY, {
+        width: Math.max(180, doc.page.width - MARGIN * 2 - 90),
+        height: 12,
+        lineBreak: false,
+        ellipsis: true
       });
-    doc.text(`Page ${i - range.start + 1} of ${range.count}`, MARGIN, y, {
+
+    doc.x = MARGIN;
+    doc.y = footerY;
+    doc.text(`Page ${i + 1} of ${pageCount}`, MARGIN, footerY, {
       width: doc.page.width - MARGIN * 2,
+      height: 12,
       align: "right",
       lineBreak: false
     });
