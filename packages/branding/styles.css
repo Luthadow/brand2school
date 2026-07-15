@@ -145,14 +145,19 @@
 }
 
 .b2s-nav-drawer--open {
-  max-height: min(80vh, 640px);
+  max-height: min(85dvh, 720px);
   opacity: 1;
   pointer-events: auto;
+  overflow-x: hidden;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior: contain;
 }
 
 .b2s-nav-drawer-inner {
   margin-top: 0.5rem;
   padding: 1.25rem;
+  padding-bottom: max(1.25rem, env(safe-area-inset-bottom, 0px));
   background: #fff;
   border: 1px solid #e2eaf5;
   border-radius: 16px;
@@ -233,6 +238,16 @@
 }
 
 @media (max-width: 640px) {
+  .b2s-nav-drawer--open {
+    max-height: calc(100dvh - 4.5rem);
+  }
+
+  .b2s-nav-drawer-list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 380px) {
   .b2s-nav-drawer-list {
     grid-template-columns: 1fr;
   }
