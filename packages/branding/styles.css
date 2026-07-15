@@ -145,7 +145,7 @@
 }
 
 .b2s-nav-drawer--open {
-  max-height: min(85dvh, 720px);
+  max-height: min(72vh, 560px);
   opacity: 1;
   pointer-events: auto;
   overflow-x: hidden;
@@ -239,7 +239,7 @@
 
 @media (max-width: 640px) {
   .b2s-nav-drawer--open {
-    max-height: calc(100dvh - 4.5rem);
+    max-height: min(70dvh, calc(100dvh - 5.5rem));
   }
 
   .b2s-nav-drawer-list {

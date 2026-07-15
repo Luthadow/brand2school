@@ -102,15 +102,15 @@ const coreValues = [
 
 export default function AboutPage(): JSX.Element {
   return (
-    <div className="lp">
-      <section className="lp-hero lp-hero--movement about-hero">
+    <div className="lp about-page">
+      <section className="lp-hero about-hero">
         <div className="lp-hero-glow" aria-hidden="true" />
         <div className="lp-hero-inner lp-hero-inner--single">
           <FadeIn className="lp-hero-copy">
             <p className="ds-eyebrow ds-eyebrow--pulse">About Us</p>
-            <h1 className="lp-hero-title">
-              Brand2School
-              <span className="lp-hero-title-accent">Transforming Everyday Participation into Lasting Impact</span>
+            <p className="about-hero-brand">Brand2School</p>
+            <h1 className="about-hero-title">
+              Transforming Everyday Participation into Lasting Impact
             </h1>
             <p className="lp-hero-sub lp-hero-sub--emotional">
               South Africa&apos;s Customer Participation Platform — connecting brands, schools, community
@@ -129,7 +129,7 @@ export default function AboutPage(): JSX.Element {
         </div>
       </section>
 
-      <section className="lp-section lp-section-light">
+      <section className="lp-section lp-section-light about-page-section">
         <div className="lp-container about-intro-grid">
           <FadeIn className="about-intro-copy">
             <SectionHeader
@@ -168,7 +168,7 @@ export default function AboutPage(): JSX.Element {
         </div>
       </section>
 
-      <section className="lp-section">
+      <section className="lp-section about-page-section">
         <div className="lp-container about-prose">
           <FadeIn>
             <SectionHeader
@@ -196,7 +196,7 @@ export default function AboutPage(): JSX.Element {
         </div>
       </section>
 
-      <section className="lp-section lp-section-light">
+      <section className="lp-section lp-section-light about-page-section">
         <div className="lp-container">
           <FadeIn>
             <SectionHeader
@@ -222,7 +222,7 @@ export default function AboutPage(): JSX.Element {
         </div>
       </section>
 
-      <section className="lp-section">
+      <section className="lp-section about-page-section">
         <div className="lp-container about-vision-grid">
           <FadeIn className="about-vision-card">
             <Globe2 size={28} />
@@ -244,7 +244,7 @@ export default function AboutPage(): JSX.Element {
         </div>
       </section>
 
-      <section className="lp-section lp-section-light">
+      <section className="lp-section lp-section-light about-page-section">
         <div className="lp-container about-two-col">
           <FadeIn>
             <SectionHeader
@@ -291,7 +291,7 @@ export default function AboutPage(): JSX.Element {
         </div>
       </section>
 
-      <section className="lp-section">
+      <section className="lp-section about-page-section">
         <div className="lp-container">
           <FadeIn>
             <SectionHeader
@@ -319,7 +319,7 @@ export default function AboutPage(): JSX.Element {
         </div>
       </section>
 
-      <section className="lp-section lp-section-light">
+      <section className="lp-section lp-section-light about-page-section">
         <div className="lp-container">
           <FadeIn>
             <SectionHeader
@@ -431,7 +431,7 @@ export default function AboutPage(): JSX.Element {
         </div>
       </section>
 
-      <section className="lp-section about-cta">
+      <section className="lp-section about-cta about-page-section">
         <div className="lp-container about-cta-inner">
           <FadeIn>
             <p className="ds-eyebrow">Building South Africa Together</p>
