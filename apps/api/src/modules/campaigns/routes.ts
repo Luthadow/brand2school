@@ -26,6 +26,11 @@ import {
   validateCodeBatchUpload
 } from "../codes/importCodeBatchFromFile.js";
 import { formatStructuredCode } from "../../lib/codeIdentity.js";
+import {
+  contributionPerCodeIsLocked,
+  isAllowedContributionPerCodeZar
+} from "../funding/contributionPerCode.js";
+import { ensureFounderCampaignParticipationReady } from "../../bootstrap/activateFounderCampaign.js";
 
 const createBrandSchema = z.object({
   name: z.string().min(2),
@@ -48,11 +53,17 @@ const eligibilityFieldsSchema = z.object({
   overflowCampaignId: z.string().cuid().nullable().optional()
 });
 
+const contributionPerCodeSchema = z
+  .coerce.number()
+  .refine((v) => v === 2 || v === 5 || v === 10, {
+    message: "Contribution per verified code must be R2, R5, or R10."
+  });
+
 const campaignGoalFieldsSchema = z.object({
   category: z.string().min(2).max(80).optional(),
   infrastructureGoal: z.string().min(2).max(120).optional(),
   targetSubmissions: z.coerce.number().int().min(1).max(50_000_000).optional(),
-  contributionPerCodeZar: z.coerce.number().positive().max(1_000_000).optional(),
+  contributionPerCodeZar: contributionPerCodeSchema.optional(),
   contributionPoolZar: z.coerce.number().nonnegative().optional(),
   partnershipLabel: z.string().max(120).optional(),
   description: z.string().max(500).optional()
@@ -69,10 +80,12 @@ const createCampaignSchema = z
       .transform((v) => v.toUpperCase())
       .optional(),
     startsAt: z.coerce.date(),
-    endsAt: z.coerce.date()
+    endsAt: z.coerce.date(),
+    /** Required: R2 / R5 / R10 per verified code. */
+    contributionPerCodeZar: contributionPerCodeSchema
   })
   .merge(eligibilityFieldsSchema)
-  .merge(campaignGoalFieldsSchema);
+  .merge(campaignGoalFieldsSchema.omit({ contributionPerCodeZar: true }));
 
 const patchCampaignSetupSchema = campaignGoalFieldsSchema.extend({
   name: z.string().min(4).optional(),
@@ -396,7 +409,18 @@ campaignsRouter.patch(
       return;
     }
 
-    const campaign = await prisma.campaign.update({
+    if (
+      payload.data.contributionPerCodeZar !== undefined &&
+      contributionPerCodeIsLocked(existing.commercialStatus)
+    ) {
+      res.status(409).json({
+        message:
+          "Contribution per verified code is locked after the campaign is activated. Create a new campaign to change the rate."
+      });
+      return;
+    }
+
+    let campaign = await prisma.campaign.update({
       where: { id: existing.id },
       data: {
         ...(payload.data.name !== undefined ? { name: payload.data.name } : {}),
@@ -423,6 +447,14 @@ campaignsRouter.patch(
           : {})
       }
     });
+
+    if (
+      payload.data.contributionPerCodeZar !== undefined &&
+      isAllowedContributionPerCodeZar(payload.data.contributionPerCodeZar)
+    ) {
+      await ensureFounderCampaignParticipationReady(prisma, campaign.brandId, campaign.id);
+      campaign = (await prisma.campaign.findUnique({ where: { id: campaign.id } })) ?? campaign;
+    }
 
     res.json({
       ...campaign,

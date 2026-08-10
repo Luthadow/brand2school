@@ -1,6 +1,7 @@
 import type { PrismaClient } from "../generated/prisma/index.js";
 import { generateSecureCodeBatch } from "../modules/codes/generateBatch.js";
 import { generateSecureCodeBatchPacks } from "../modules/codes/generateBatchPacks.js";
+import { isAllowedContributionPerCodeZar } from "../modules/funding/contributionPerCode.js";
 import { FOUNDER_BRAND_SLUG } from "./bootstrapFounderBrand.js";
 import { MAGOME_BRAND_SLUG, MAGOME_CAMPAIGN_TARGET } from "./bootstrapMagomeBrand.js";
 
@@ -53,6 +54,26 @@ export async function ensureFounderCampaignParticipationReady(
         data: { codeMode: "GENERATE" }
       });
     }
+  }
+
+  const contributionZar = Number(campaign.contributionPerCodeZar ?? 0);
+  /** Magome brand admin must choose R2 / R5 / R10 before the campaign goes LIVE. */
+  const magomeAwaitingContribution =
+    brand.slug === MAGOME_BRAND_SLUG && !isAllowedContributionPerCodeZar(contributionZar);
+
+  if (magomeAwaitingContribution) {
+    await prisma.campaign.update({
+      where: { id: campaignId },
+      data: {
+        isActive: false,
+        commercialStatus: "READY_FOR_APPROVAL",
+        codesApprovedAt: campaign.codesApprovedAt ?? new Date(),
+        rulesConfiguredAt: campaign.rulesConfiguredAt ?? new Date(),
+        paymentVerifiedAt: campaign.paymentVerifiedAt ?? new Date(),
+        codeMode: campaign.codeMode ?? "GENERATE"
+      }
+    });
+    return { activated: false, codesSeeded };
   }
 
   const now = new Date();

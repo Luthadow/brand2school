@@ -32,6 +32,9 @@ export function CampaignShowcaseCard({ campaign }: { campaign: PublicCampaignCar
         <span className="lp-campaign-pct">
           {campaign.percentToTarget}% · {formatCount(campaign.validSubmissions)} /{" "}
           {formatCount(campaign.targetSubmissions)} verified
+          {campaign.schoolSupportGeneratedZar
+            ? ` · R${Number(campaign.schoolSupportGeneratedZar).toLocaleString("en-ZA")} support generated`
+            : ""}
         </span>
         {campaign.isActive ? (
           <span className="lp-campaign-live">

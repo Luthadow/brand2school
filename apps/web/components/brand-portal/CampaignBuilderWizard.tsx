@@ -8,6 +8,7 @@ import { brandCsrfHeaders } from "../../lib/brandClientFetch";
 import {
   ACTIVATION_CHECKLIST_LABELS,
   buildCreateCampaignPayload,
+  CONTRIBUTION_PER_CODE_OPTIONS_ZAR,
   defaultCampaignDraft,
   slugPreviewFromName,
   WIZARD_STEPS,
@@ -36,7 +37,9 @@ function validateStep(step: WizardStepKey, draft: CampaignBuilderDraft): string 
   if (step === "impact") {
     if (!draft.category) return "Select an infrastructure category.";
     if (draft.targetSubmissions < 1) return "Set a participation target of at least 1.";
-    if (draft.contributionPerCodeZar <= 0) return "Contribution per code must be greater than zero.";
+    if (![2, 5, 10].includes(draft.contributionPerCodeZar)) {
+      return "Select contribution per verified code: R2, R5, or R10.";
+    }
   }
   if (step === "territory") {
     if (draft.scopeType === "PROVINCIAL" && draft.allowedProvinces.length === 0) {
@@ -302,27 +305,45 @@ export function CampaignBuilderWizard(): JSX.Element {
                 placeholder={`e.g. Fund ${draft.category.toLowerCase()} at 50 schools`}
               />
             </label>
-            <div className="bp-wizard-row">
-              <label className="bp-wizard-field">
-                <span>Target verified submissions</span>
-                <input
-                  type="number"
-                  min={1}
-                  value={draft.targetSubmissions}
-                  onChange={(e) => updateDraft("targetSubmissions", Number(e.target.value) || 0)}
-                />
-              </label>
-              <label className="bp-wizard-field">
-                <span>Contribution per code (ZAR)</span>
-                <input
-                  type="number"
-                  min={0.01}
-                  step={0.01}
-                  value={draft.contributionPerCodeZar}
-                  onChange={(e) => updateDraft("contributionPerCodeZar", Number(e.target.value) || 0)}
-                />
-              </label>
-            </div>
+            <label className="bp-wizard-field">
+              <span>Target verified submissions</span>
+              <input
+                type="number"
+                min={1}
+                value={draft.targetSubmissions}
+                onChange={(e) => updateDraft("targetSubmissions", Number(e.target.value) || 0)}
+              />
+            </label>
+            <fieldset className="bp-wizard-field">
+              <legend>Contribution per verified code</legend>
+              <p className="bp-muted" style={{ marginBottom: "0.65rem" }}>
+                How much will your brand contribute for every verified campaign code? Locked after activation.
+              </p>
+              <div className="bp-contrib-options">
+                {CONTRIBUTION_PER_CODE_OPTIONS_ZAR.map((amount) => (
+                  <button
+                    key={amount}
+                    type="button"
+                    className={
+                      draft.contributionPerCodeZar === amount
+                        ? "bp-contrib-option bp-contrib-option--active"
+                        : "bp-contrib-option"
+                    }
+                    onClick={() => updateDraft("contributionPerCodeZar", amount)}
+                  >
+                    R{amount.toFixed(2)}
+                  </button>
+                ))}
+              </div>
+              <p className="bp-muted" style={{ marginTop: "0.65rem" }}>
+                At {draft.targetSubmissions.toLocaleString("en-ZA")} verified codes →{" "}
+                <strong>
+                  R{(draft.targetSubmissions * draft.contributionPerCodeZar).toLocaleString("en-ZA")} School Support
+                  Generated
+                </strong>{" "}
+                (target).
+              </p>
+            </fieldset>
             <label className="bp-wizard-field">
               <span>Transformation pool budget (ZAR, optional)</span>
               <input

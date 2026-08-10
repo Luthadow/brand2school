@@ -13,6 +13,9 @@ export type PortalCampaign = {
   startsAt: string;
   endsAt: string;
   isActive: boolean;
+  contributionPerCodeZar?: number;
+  needsContributionSelection?: boolean;
+  commercialStatus?: string;
 };
 
 export type SchoolNeed = {

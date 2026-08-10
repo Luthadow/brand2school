@@ -2,11 +2,17 @@ import Image from "next/image";
 import Link from "next/link";
 import type { Route } from "next";
 import { notFound } from "next/navigation";
-import { CampaignScopeBadge } from "../../../components/campaigns/CampaignScopeBadge";
+import { CampaignMilestonePanel } from "../../../components/campaigns/CampaignMilestonePanel";
 import { ProvinceNominationForm } from "../../../components/campaigns/ProvinceNominationForm";
 import { ParticipationSubmitForm } from "../../../components/participation/ParticipationSubmitForm";
 import { fetchPublicCampaign } from "../../../lib/platformPublic";
 import { formatCount } from "../../../lib/formatCount";
+
+function formatZar(value: string): string {
+  const n = Number(value);
+  if (!Number.isFinite(n)) return `R${value}`;
+  return `R${n.toLocaleString("en-ZA", { minimumFractionDigits: 0, maximumFractionDigits: 2 })}`;
+}
 
 export default async function PublicCampaignPage({
   params
@@ -17,6 +23,7 @@ export default async function PublicCampaignPage({
   if (!campaign) notFound();
 
   const accent = campaign.brandColor ?? "#003b8e";
+  const generated = campaign.schoolSupportGeneratedZar ?? campaign.fundingRaisedZar;
 
   return (
     <div className="lp pp-page">
@@ -28,29 +35,43 @@ export default async function PublicCampaignPage({
           </p>
           <h1 className="ds-section-title ds-section-title--left">{campaign.name}</h1>
           <p className="lp-problem-text">
-            {campaign.infrastructureGoal ?? "Verified community participation toward measurable school infrastructure."}
+            Helping turn everyday purchases into school support.
+            {campaign.infrastructureGoal ? ` ${campaign.infrastructureGoal}` : ""}
           </p>
           <div className="pp-profile-stats">
             <div>
-              <strong>{campaign.percentToTarget}%</strong>
-              <span>To milestone</span>
-            </div>
-            <div>
               <strong>{formatCount(campaign.validSubmissions)}</strong>
-              <span>Verified</span>
+              <span>Verified codes</span>
             </div>
             <div>
-              <strong>{campaign.schoolsParticipating}</strong>
-              <span>Schools</span>
+              <strong>{formatZar(generated)}</strong>
+              <span>School Support Generated</span>
+            </div>
+            <div>
+              <strong>{campaign.percentToTarget}%</strong>
+              <span>Campaign progress</span>
             </div>
           </div>
           {campaign.brandLogoUrl ? (
-            <Image src={campaign.brandLogoUrl} alt="" width={120} height={48} className="lp-trust-logo-img" style={{ marginTop: "1rem" }} />
+            <Image
+              src={campaign.brandLogoUrl}
+              alt=""
+              width={120}
+              height={48}
+              className="lp-trust-logo-img"
+              style={{ marginTop: "1rem" }}
+            />
           ) : null}
         </div>
       </section>
 
       <section className="lp-section">
+        <div className="lp-container" style={{ maxWidth: "48rem" }}>
+          <CampaignMilestonePanel campaign={campaign} />
+        </div>
+      </section>
+
+      <section className="lp-section lp-section-light">
         <div className="lp-container pp-campaign-detail-grid">
           <div className="card">
             <h2>How to participate</h2>
@@ -68,29 +89,34 @@ export default async function PublicCampaignPage({
             </div>
           </div>
           <div className="card">
-            <h2>Campaign details</h2>
+            <h2>Verified impact</h2>
             <ul className="lp-trust-list">
-              <li>Contribution per code: R{campaign.contributionPerCodeZar}</li>
-              <li>Funding raised: R{campaign.fundingRaisedZar}</li>
               <li>
-                Runs: {new Date(campaign.startsAt).toLocaleDateString()} –{" "}
-                {new Date(campaign.endsAt).toLocaleDateString()}
+                Contribution per verified code: <strong>{formatZar(campaign.contributionPerCodeZar)}</strong>
+              </li>
+              <li>
+                School Support Generated: <strong>{formatZar(generated)}</strong>
+              </li>
+              <li>
+                {formatCount(campaign.validSubmissions)} verified × {formatZar(campaign.contributionPerCodeZar)}
+              </li>
+              <li>
+                Runs: {new Date(campaign.startsAt).toLocaleDateString("en-ZA")} –{" "}
+                {new Date(campaign.endsAt).toLocaleDateString("en-ZA")}
               </li>
               <li>Target: {formatCount(campaign.targetSubmissions)} verified participations</li>
               <li>Scope: {campaign.scopeLabel}</li>
-              {campaign.remainingBudgetZar != null ? (
-                <li>Budget remaining: R{formatCount(Math.round(campaign.remainingBudgetZar))}</li>
-              ) : null}
             </ul>
           </div>
         </div>
       </section>
 
-      <section className="lp-section lp-section-light">
+      <section className="lp-section">
         <div className="lp-container" style={{ maxWidth: "42rem" }}>
           <h2 className="ds-section-title ds-section-title--left">Submit on the website</h2>
           <p className="lp-problem-text" style={{ marginBottom: "1.25rem" }}>
-            Use the form below or WhatsApp — same verification engine.
+            Use the form below or WhatsApp — same verification engine. Contribution only increases after a code is
+            verified.
           </p>
           <ParticipationSubmitForm
             defaultBrandSlug={campaign.brandSlug}

@@ -3,6 +3,12 @@ import { resolveLogoPublicUrl } from "../../lib/brandStorage.js";
 import type { CampaignScopeType } from "../../generated/prisma/index.js";
 import { describeCampaignScope, remainingCampaignBudgetZar } from "../campaigns/campaignEligibility.js";
 import { getCampaignExpiryBlockReason } from "../commercial/campaignExpiry.js";
+import {
+  buildCampaignMilestones,
+  schoolSupportGeneratedZar,
+  type CampaignMilestone
+} from "../funding/contributionPerCode.js";
+import { contributionPerCodeFromCampaign } from "../funding/fundingConversion.js";
 
 export type PublicCampaignCard = {
   slug: string;
@@ -21,18 +27,27 @@ export type PublicCampaignCard = {
   scopeLabel: string;
   eligibleProvinces: string[];
   scopeBadge: string;
+  contributionPerCodeZar: string;
+  schoolSupportGeneratedZar: string;
 };
 
 export type PublicCampaignDetail = PublicCampaignCard & {
   startsAt: string;
   endsAt: string;
-  contributionPerCodeZar: string;
   fundingRaisedZar: string;
   brandWebsiteUrl: string | null;
   brandColor: string | null;
   participationHint: string;
   budgetAllocatedZar: number | null;
   remainingBudgetZar: number | null;
+  submittedCount: number;
+  rejectedCount: number;
+  remainingToTarget: number;
+  milestones: CampaignMilestone[];
+  terminology: {
+    generatedLabel: string;
+    note: string;
+  };
 };
 
 function mapCampaignRow(campaign: {
@@ -50,7 +65,7 @@ function mapCampaignRow(campaign: {
   allowedSchoolIds: string[];
   budgetAllocatedZar: { toString(): string } | null;
   budgetConsumedZar: { toString(): string };
-  contributionPerCodeZar: { toString(): string };
+  contributionPerCodeZar: { toString(): string } | number | null;
   fundingRaisedZar: { toString(): string };
   brand: {
     slug: string;
@@ -70,8 +85,10 @@ function mapCampaignRow(campaign: {
   const schoolsParticipating = new Set(campaign.submissions.map((s) => s.schoolId)).size;
   const percentToTarget =
     campaign.targetSubmissions > 0
-      ? Math.min(100, Math.round((validSubmissions / campaign.targetSubmissions) * 100))
+      ? Math.min(100, Math.round((validSubmissions / campaign.targetSubmissions) * 1000) / 10)
       : 0;
+  const perCode = contributionPerCodeFromCampaign(campaign);
+  const generated = schoolSupportGeneratedZar(validSubmissions, perCode);
 
   return {
     slug: campaign.slug,
@@ -89,7 +106,9 @@ function mapCampaignRow(campaign: {
     scopeType: campaign.scopeType,
     scopeLabel: describeCampaignScope(campaign),
     eligibleProvinces: campaign.allowedProvinces,
-    scopeBadge: formatPublicScopeBadge(campaign.scopeType, describeCampaignScope(campaign))
+    scopeBadge: formatPublicScopeBadge(campaign.scopeType, describeCampaignScope(campaign)),
+    contributionPerCodeZar: perCode.toFixed(2),
+    schoolSupportGeneratedZar: generated.toFixed(2)
   };
 }
 
@@ -163,6 +182,11 @@ export async function getPublicCampaignBySlug(slug: string): Promise<PublicCampa
       submissions: {
         where: { state: "VALID" },
         select: { schoolId: true }
+      },
+      _count: {
+        select: {
+          submissions: true
+        }
       }
     }
   });
@@ -176,17 +200,36 @@ export async function getPublicCampaignBySlug(slug: string): Promise<PublicCampa
   });
   if (!card) return null;
 
+  const [rejectedCount, submittedCount] = await Promise.all([
+    prisma.submission.count({ where: { campaignId: campaign.id, state: "REJECTED" } }),
+    prisma.submission.count({ where: { campaignId: campaign.id } })
+  ]);
+
+  const perCode = contributionPerCodeFromCampaign(campaign);
+  const milestones = buildCampaignMilestones({
+    targetSubmissions: campaign.targetSubmissions,
+    verifiedCount: card.validSubmissions,
+    contributionPerCodeZar: perCode
+  });
+
   return {
     ...card,
     startsAt: campaign.startsAt.toISOString(),
     endsAt: campaign.endsAt.toISOString(),
-    contributionPerCodeZar: campaign.contributionPerCodeZar.toString(),
     fundingRaisedZar: campaign.fundingRaisedZar.toString(),
     brandWebsiteUrl: campaign.brand.websiteUrl,
     brandColor: campaign.brand.brandColor,
     participationHint: buildParticipationHint(campaign),
     budgetAllocatedZar: campaign.budgetAllocatedZar != null ? Number(campaign.budgetAllocatedZar) : null,
-    remainingBudgetZar: remainingCampaignBudgetZar(campaign)
+    remainingBudgetZar: remainingCampaignBudgetZar(campaign),
+    submittedCount,
+    rejectedCount,
+    remainingToTarget: Math.max(0, campaign.targetSubmissions - card.validSubmissions),
+    milestones,
+    terminology: {
+      generatedLabel: "School Support Generated",
+      note: "Generated from verified participations. Delivered only after the brand fulfils the support obligation."
+    }
   };
 }
 

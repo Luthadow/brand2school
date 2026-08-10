@@ -50,6 +50,20 @@ Use **Check file** before **Import**; invalid or duplicate rows are reported bef
 
 Batch inventory statuses: `AVAILABLE` → `DISTRIBUTED` (downloaded) → `PARTIALLY_USED` / `USED` / `EXPIRED`.
 
+## Contribution per verified code
+
+Every campaign must pick a locked contribution tier at creation: **R2 / R5 / R10**.
+
+| Rule | Behaviour |
+|------|-----------|
+| Source of truth | `Campaign.contributionPerCodeZar` (Decimal) |
+| When it increases | Only after a code is **VERIFIED** (`FundingContribution` + `fundingRaisedZar`) |
+| Public label | **School Support Generated** (not “donated/delivered” until fulfilment) |
+| Lock | Cannot change after `LIVE` / `PAUSED` / `SUSPENDED` / `EXPIRED` |
+| Formula | `verified codes × contributionPerCodeZar` |
+
+Magome pilot ships with a **1,000** verified-code target; the Magome brand admin must select **R2 / R5 / R10** in the brand portal before the campaign goes live.
+
 ## Governance
 
 Public visibility requires **ACTIVE** status plus admin approval:

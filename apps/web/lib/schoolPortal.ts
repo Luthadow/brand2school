@@ -76,6 +76,8 @@ export type SchoolPortal = {
     percentToTarget: number;
     remainingToTarget: number;
     estimatedCompletionMonths: number;
+    contributionPerCodeZar?: number;
+    schoolSupportGeneratedZar?: number;
   }>;
   needs: Array<{
     id: string;

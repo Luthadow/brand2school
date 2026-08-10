@@ -249,6 +249,8 @@ export async function bootstrapMagomeBrand(
         impactTarget: {
           tagline: "Every Meal Can Make an Impact.",
           verifiedParticipationsTarget: MAGOME_CAMPAIGN_TARGET,
+          currency: "ZAR",
+          contributionPerCodePendingBrandSelection: true,
           pilotSchool: null
         }
       }

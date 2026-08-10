@@ -1,5 +1,6 @@
 import { prisma } from "../../lib/prisma.js";
 import { deriveCodeBatchStatus } from "../codes/batchInventory.js";
+import { schoolSupportGeneratedZar } from "../funding/contributionPerCode.js";
 
 export type BrandCodeInventory = {
   totalCodes: number;
@@ -31,6 +32,8 @@ export type CodeBatchInventoryRow = {
   source: string | null;
   downloadCount: number;
   downloadedAt: string | null;
+  contributionPerCodeZar: number;
+  schoolSupportGeneratedZar: number;
   totalCodes: number;
   unused: number;
   pending: number;
@@ -205,7 +208,9 @@ export async function getBrandCodeInventoryDashboard(
         }),
         prisma.codeBatch.findMany({
           where: batchWhere,
-          include: { campaign: { select: { id: true, name: true } } },
+          include: {
+            campaign: { select: { id: true, name: true, contributionPerCodeZar: true } }
+          },
           orderBy: { createdAt: "desc" }
         }),
         prisma.submissionAttempt.count({
@@ -258,6 +263,7 @@ export async function getBrandCodeInventoryDashboard(
         downloadCount: batch.downloadCount,
         expiresAt: batch.expiresAt
       });
+      const contributionPerCodeZar = Number(batch.campaign.contributionPerCodeZar ?? 0);
       return {
         id: batch.id,
         batchName: batch.batchName,
@@ -271,6 +277,8 @@ export async function getBrandCodeInventoryDashboard(
         source: batch.source,
         downloadCount: batch.downloadCount,
         downloadedAt: batch.downloadedAt?.toISOString() ?? null,
+        contributionPerCodeZar,
+        schoolSupportGeneratedZar: schoolSupportGeneratedZar(batchCounts.USED, contributionPerCodeZar),
         totalCodes: batchTotal,
         unused: batchCounts.UNUSED,
         pending: batchCounts.PENDING,

@@ -1,6 +1,7 @@
 import { emptyBrandPortal } from "../../lib/emptyPayloads.js";
 import { hasBrandLogo } from "../../lib/brandLogo.js";
 import { prisma } from "../../lib/prisma.js";
+import { isAllowedContributionPerCodeZar } from "../funding/contributionPerCode.js";
 import { getBrandAnalytics, type BrandAnalytics } from "./getBrandAnalytics.js";
 import { getBrandCodeInventory, type BrandCodeInventory } from "./getBrandCodeInventory.js";
 import { getBrandSchoolMarketplace, type BrandSchoolMarketplace } from "./getBrandSchoolMarketplace.js";
@@ -19,6 +20,10 @@ export type PortalCampaign = {
   startsAt: string;
   endsAt: string;
   isActive: boolean;
+  contributionPerCodeZar: number;
+  /** True when brand must pick R2 / R5 / R10 before go-live. */
+  needsContributionSelection: boolean;
+  commercialStatus: string;
 };
 
 export type SchoolNeed = {
@@ -176,6 +181,7 @@ export async function getBrandPortal(campaignId?: string, brandId?: string): Pro
       const provinces = [
         ...new Set(c.submissions.map((s) => normalizeProvinceCode(s.school.province)))
       ];
+      const contributionPerCodeZar = Number(c.contributionPerCodeZar ?? 0);
       return {
         id: c.id,
         name: c.name,
@@ -188,7 +194,10 @@ export async function getBrandPortal(campaignId?: string, brandId?: string): Pro
         provinces,
         startsAt: c.startsAt.toISOString(),
         endsAt: c.endsAt.toISOString(),
-        isActive: c.isActive
+        isActive: c.isActive,
+        contributionPerCodeZar,
+        needsContributionSelection: !isAllowedContributionPerCodeZar(contributionPerCodeZar),
+        commercialStatus: c.commercialStatus
       };
     });
 

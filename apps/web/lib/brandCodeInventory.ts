@@ -28,6 +28,8 @@ export type CodeBatchInventoryRow = {
   source?: string | null;
   downloadCount?: number;
   downloadedAt?: string | null;
+  contributionPerCodeZar?: number;
+  schoolSupportGeneratedZar?: number;
   totalCodes: number;
   unused: number;
   pending: number;

@@ -230,8 +230,19 @@ export function SchoolOverview(): JSX.Element {
                   </div>
                   <p className="sp-muted">
                     {formatCount(t.validSubmissions)} / {formatCount(t.targetSubmissions)} ·{" "}
-                    {formatCount(t.remainingToTarget)} remaining · ~{t.estimatedCompletionMonths} mo. est.
+                    {formatCount(t.remainingToTarget)} remaining
                   </p>
+                  {t.schoolSupportGeneratedZar != null && t.contributionPerCodeZar != null ? (
+                    <p className="sp-muted">
+                      School Support Generated:{" "}
+                      <strong>
+                        R{t.schoolSupportGeneratedZar.toLocaleString("en-ZA", { maximumFractionDigits: 2 })}
+                      </strong>{" "}
+                      ({formatCount(t.validSubmissions)} × R{t.contributionPerCodeZar})
+                    </p>
+                  ) : (
+                    <p className="sp-muted">~{t.estimatedCompletionMonths} mo. est.</p>
+                  )}
                 </div>
               ))}
             </div>

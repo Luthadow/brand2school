@@ -76,7 +76,7 @@ function formatVerifiedResponse(
 ): string {
   const goalLine = infrastructureGoal ? `\nOutcome target: ${infrastructureGoal}` : "";
   const fundingLine = funding
-    ? `\nFunding: R${funding.grossZar} contributed (R${funding.schoolInfrastructureZar} to school infrastructure)`
+    ? `\nSchool Support Generated: R${funding.grossZar} (R${funding.schoolInfrastructureZar} toward school infrastructure)`
     : "";
   return [
     "✅ Code Verified",
@@ -90,7 +90,7 @@ function formatVerifiedResponse(
     fundingLine,
     "",
     "Progress:",
-    `${progress.validSubmissions} / ${progress.targetSubmissions} submissions`,
+    `${progress.validSubmissions} / ${progress.targetSubmissions} verified contributions`,
     `${progress.percentToTarget}% toward target`
   ]
     .filter(Boolean)
@@ -332,7 +332,7 @@ export async function processParticipationSubmission(
       funding = {
         grossZar: recorded.grossZar,
         schoolInfrastructureZar: recorded.allocations.schoolInfrastructure,
-        message: `R${recorded.grossZar} contributed (R${recorded.allocations.schoolInfrastructure} to school infrastructure)`
+        message: `R${recorded.grossZar} School Support Generated (R${recorded.allocations.schoolInfrastructure} toward school infrastructure)`
       };
     }
   }

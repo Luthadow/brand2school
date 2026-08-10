@@ -169,7 +169,8 @@ export async function getSchoolFundingLedger(schoolId: string, limit = 20) {
       campaignName: r.campaign.name,
       createdAt: r.createdAt.toISOString()
     })),
-    message: "Every verified code contributes R1 (default) to school infrastructure — split transparently."
+    message:
+      "School Support Generated increases only after a code is verified. Figures are contribution values — not proof of delivery until the brand fulfils support."
   };
 }
 

@@ -26,18 +26,25 @@ export function SchoolTargetsPage(): JSX.Element {
               <span>verified</span>
             </div>
             <div>
-              <strong>{formatCount(t.targetSubmissions)}</strong>
-              <span>target</span>
+              <strong>
+                R{(t.schoolSupportGeneratedZar ?? 0).toLocaleString("en-ZA", { maximumFractionDigits: 2 })}
+              </strong>
+              <span>support generated</span>
             </div>
             <div>
               <strong>{t.percentToTarget}%</strong>
               <span>complete</span>
             </div>
             <div>
-              <strong>~{t.estimatedCompletionMonths} mo</strong>
-              <span>est. finish</span>
+              <strong>{formatCount(t.remainingToTarget)}</strong>
+              <span>remaining</span>
             </div>
           </div>
+          {t.contributionPerCodeZar != null ? (
+            <p className="sp-muted">
+              {formatCount(t.validSubmissions)} verified codes × R{t.contributionPerCodeZar}
+            </p>
+          ) : null}
           {t.infrastructureGoal ? <p className="sp-goal">Unlocking: {t.infrastructureGoal}</p> : null}
         </article>
       ))}

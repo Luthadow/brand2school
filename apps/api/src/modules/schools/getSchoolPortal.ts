@@ -56,6 +56,8 @@ export type SchoolTarget = {
   percentToTarget: number;
   remainingToTarget: number;
   estimatedCompletionMonths: number;
+  contributionPerCodeZar: number;
+  schoolSupportGeneratedZar: number;
 };
 
 export type SchoolProject = {
@@ -258,6 +260,9 @@ export async function getSchoolPortal(userId: string): Promise<SchoolPortal | nu
         campaign.targetSubmissions
       );
       const monthsLeft = Math.max(1, Math.ceil(progress.remainingToTarget / Math.max(progress.validSubmissions / 3, 1)));
+      const contributionPerCodeZar = Number(campaign.contributionPerCodeZar ?? 0);
+      const schoolSupportGeneratedZar =
+        Math.round(progress.validSubmissions * contributionPerCodeZar * 100) / 100;
       return {
         id: campaign.id,
         name: campaign.name,
@@ -268,7 +273,9 @@ export async function getSchoolPortal(userId: string): Promise<SchoolPortal | nu
         validSubmissions: progress.validSubmissions,
         percentToTarget: progress.percentToTarget,
         remainingToTarget: progress.remainingToTarget,
-        estimatedCompletionMonths: monthsLeft
+        estimatedCompletionMonths: monthsLeft,
+        contributionPerCodeZar,
+        schoolSupportGeneratedZar
       };
     })
   );

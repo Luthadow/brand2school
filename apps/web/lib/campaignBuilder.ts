@@ -65,8 +65,8 @@ export function defaultCampaignDraft(): CampaignBuilderDraft {
     endsAt: padDate(endsAt),
     category: "Libraries",
     infrastructureGoal: "",
-    targetSubmissions: 10_000,
-    contributionPerCodeZar: 1,
+    targetSubmissions: 1_000,
+    contributionPerCodeZar: 5,
     contributionPoolZar: "",
     scopeType: "NATIONAL",
     allowedProvinces: [],
@@ -84,6 +84,8 @@ export function slugPreviewFromName(name: string): string {
     .replace(/^-|-$/g, "")
     .slice(0, 48);
 }
+
+export const CONTRIBUTION_PER_CODE_OPTIONS_ZAR = [2, 5, 10] as const;
 
 export function buildCreateCampaignPayload(
   draft: CampaignBuilderDraft,

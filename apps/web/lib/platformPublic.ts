@@ -66,6 +66,16 @@ export type PublicCampaignCard = {
   scopeLabel?: string;
   eligibleProvinces?: string[];
   scopeBadge?: string;
+  contributionPerCodeZar?: string;
+  schoolSupportGeneratedZar?: string;
+};
+
+export type PublicCampaignMilestone = {
+  verifiedCodes: number;
+  generatedZar: number;
+  fraction: number;
+  reached: boolean;
+  label: string;
 };
 
 export type PublicCampaignDetail = PublicCampaignCard & {
@@ -73,11 +83,17 @@ export type PublicCampaignDetail = PublicCampaignCard & {
   endsAt: string;
   contributionPerCodeZar: string;
   fundingRaisedZar: string;
+  schoolSupportGeneratedZar: string;
   brandWebsiteUrl: string | null;
   brandColor: string | null;
   participationHint: string;
   budgetAllocatedZar?: number | null;
   remainingBudgetZar?: number | null;
+  submittedCount?: number;
+  rejectedCount?: number;
+  remainingToTarget?: number;
+  milestones?: PublicCampaignMilestone[];
+  terminology?: { generatedLabel: string; note: string };
 };
 
 export type PlatformRankings = {

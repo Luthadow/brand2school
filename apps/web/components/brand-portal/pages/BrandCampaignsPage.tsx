@@ -3,14 +3,18 @@
 import Link from "next/link";
 import type { Route } from "next";
 import { Plus } from "lucide-react";
+import { useRouter } from "next/navigation";
 import { useBrandPortal } from "../BrandPortalContext";
 import { BrandPageHeader } from "../BrandPageHeader";
+import { CampaignContributionPicker } from "../CampaignContributionPicker";
 import { campaignStatusLabel } from "../../../lib/brandPortal";
 import { formatCount } from "../../../lib/formatCount";
 import { CodeBatchUploadPanel } from "../CodeBatchUploadPanel";
 
 export function BrandCampaignsPage(): JSX.Element {
   const { campaigns } = useBrandPortal();
+  const router = useRouter();
+  const pendingContribution = campaigns.filter((c) => c.needsContributionSelection);
 
   return (
     <div className="bp-page">
@@ -25,16 +29,29 @@ export function BrandCampaignsPage(): JSX.Element {
           </Link>
         }
       />
+
+      {pendingContribution.length > 0 ? (
+        <section className="bp-section" style={{ display: "grid", gap: "1rem", marginBottom: "1.25rem" }}>
+          {pendingContribution.map((campaign) => (
+            <CampaignContributionPicker
+              key={campaign.id}
+              campaign={campaign}
+              onSaved={() => router.refresh()}
+            />
+          ))}
+        </section>
+      ) : null}
+
       <div className="bp-table-wrap">
         <table className="bp-table">
           <thead>
             <tr>
               <th>Campaign</th>
               <th>Status</th>
+              <th>Per verified code</th>
               <th>Target</th>
               <th>Verified</th>
               <th>Provinces</th>
-              <th>Infrastructure</th>
             </tr>
           </thead>
           <tbody>
@@ -58,10 +75,14 @@ export function BrandCampaignsPage(): JSX.Element {
                   <td>
                     <span className={`bp-pill bp-pill--${c.status}`}>{campaignStatusLabel(c.status)}</span>
                   </td>
+                  <td>
+                    {c.needsContributionSelection
+                      ? "Select R2 / R5 / R10"
+                      : `R${Number(c.contributionPerCodeZar ?? 0).toFixed(2)}`}
+                  </td>
                   <td>{formatCount(c.targetSubmissions)}</td>
                   <td>{formatCount(c.validSubmissions)}</td>
                   <td>{c.provinces.join(", ") || "National"}</td>
-                  <td>{c.infrastructureGoal ?? c.category ?? "—"}</td>
                 </tr>
               ))
             )}

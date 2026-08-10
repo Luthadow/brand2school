@@ -293,7 +293,7 @@ export function BrandCodeInventoryPage(): JSX.Element {
                     <th>Status</th>
                     <th>Qty</th>
                     <th>Used</th>
-                    <th>Available</th>
+                    <th>Support generated</th>
                     <th>Downloads</th>
                     <th>Actions</th>
                   </tr>
@@ -313,7 +313,12 @@ export function BrandCodeInventoryPage(): JSX.Element {
                         <td>{BATCH_STATUS_LABELS[status] ?? status}</td>
                         <td>{formatCount(batch.totalCodes)}</td>
                         <td>{formatCount(batch.used)}</td>
-                        <td>{formatCount(batch.unused)}</td>
+                        <td>
+                          R
+                          {(batch.schoolSupportGeneratedZar ?? 0).toLocaleString("en-ZA", {
+                            maximumFractionDigits: 2
+                          })}
+                        </td>
                         <td>{formatCount(batch.downloadCount ?? 0)}</td>
                         <td>
                           <button
