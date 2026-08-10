@@ -24,7 +24,7 @@ import {
   subscriptionPlanFromPackageId
 } from "./brandSubscription.js";
 import { setupFeeZarForScope, formatZar } from "./setupFees.js";
-import { defaultMonthlySubscriptionZar } from "./territorialPackages.js";
+import { issueSaasSubscriptionInvoice } from "./subscriptionInvoices.js";
 import { filterCodesForBrand } from "./codeOwnership.js";
 import { packageById, serializeCommercialCatalog, type TerritorialPackageId } from "./territorialPackages.js";
 import { getCommercialWorkflowBoard } from "./getCommercialWorkflow.js";
@@ -938,57 +938,23 @@ commercialAdminRouter.post("/campaigns/:campaignId/verify-payment", async (req, 
 });
 
 commercialAdminRouter.post("/campaigns/:campaignId/invoices/subscription", async (req, res) => {
-  const campaign = await prisma.campaign.findUnique({
-    where: { id: req.params.campaignId },
-    include: { brand: true }
+  const issued = await issueSaasSubscriptionInvoice({
+    campaignId: req.params.campaignId,
+    autoRenewal: false,
+    sendPaymentEmail: true
   });
-  if (!campaign) {
-    res.status(404).json({ message: "Campaign not found." });
+  if ("error" in issued) {
+    res.status(issued.status).json({ message: issued.error });
     return;
   }
 
-  const stored = campaign.brand.recurringAmountZar != null ? Number(campaign.brand.recurringAmountZar) : 0;
-  const fallback = defaultMonthlySubscriptionZar(campaign.scopeType).min;
-  const amount = stored > 0 ? stored : fallback;
-  if (amount <= 0) {
-    res.status(400).json({ message: "No recurring subscription amount configured for this brand." });
-    return;
-  }
-
-  const invoiceNumber = await nextInvoiceNumber();
-  const eftReference = `B2S-${campaign.slug.slice(0, 10).toUpperCase()}-SUB`;
-
-  const invoice = await prisma.campaignInvoice.create({
-    data: {
-      campaignId: campaign.id,
-      invoiceNumber,
-      invoiceType: "SAAS_SUBSCRIPTION",
-      amountZar: amount,
-      status: "ISSUED",
-      eftReference,
-      issuedAt: new Date(),
-      notes: `Enterprise ESG infrastructure subscription (${campaign.brand.billingCycle}): ${formatZar(amount)}`
-    }
-  });
-
-  void trySendBrandLifecycleEmail(campaign.brand, (c) =>
-    sendBrandPaymentPendingEmail({
-      to: c.email,
-      contactName: c.name,
-      brandName: campaign.brand.name,
-      campaignName: campaign.name,
-      invoiceNumber,
-      amountZar: formatZar(amount),
-      eftReference
-    })
-  );
-
+  const invoice = await prisma.campaignInvoice.findUnique({ where: { id: issued.invoiceId } });
   res.status(201).json({
-    invoice: { ...invoice, amountZar: Number(invoice.amountZar) },
+    invoice: invoice ? { ...invoice, amountZar: Number(invoice.amountZar) } : null,
     paymentInstructions: {
       method: "EFT",
-      reference: eftReference,
-      amountZar: amount,
+      reference: issued.eftReference,
+      amountZar: issued.amountZar,
       note: "Monthly enterprise ESG infrastructure subscription — not a donation."
     }
   });

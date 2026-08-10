@@ -8,6 +8,7 @@ This document maps **Prisma models and migrations** to **runtime features**. Aft
 npm run db:migrate:deploy -w @brand2school/api
 npm run brand:backfill-verification    # once — INTERNAL_API_KEY
 npm run railway:bootstrap-founder      # R2kay founder brand
+npm run railway:bootstrap-magome       # Magome founding restaurant pilot
 ```
 
 Validate locally: `npx prisma validate` (in `apps/api`).
@@ -112,6 +113,7 @@ Earlier migrations (20260501 init through commercial governance) cover schools, 
 | Feature | Schema support |
 |---------|----------------|
 | Founder brand (R2kay) | `founderExempt`, `homeSortOrder`, `verificationStatus`, `verificationCode` |
+| Magome founding pilot | `founderExempt`, 6-month `subscriptionEndDate`, `REVIEW_REQUIRED` on expiry |
 | Public verify + QR + PDF | `verificationCode`, `verificationStatus`, `verifiedAt` |
 | `/brand/[slug]` profile | `slug`, `publicProfileEnabled`, `status` |
 | Web submit (province/district/school) | `School.province`, `School.district`, `School.status` |
@@ -129,6 +131,7 @@ Earlier migrations (20260501 init through commercial governance) cover schools, 
 |--------|---------|
 | `npm run brand:backfill-verification` | Codes + trust status for existing brands |
 | `npm run railway:bootstrap-founder` | R2kay Liquid Freeze founder row |
+| `npm run railway:bootstrap-magome` | Magome Bakery & Eatery founding partner (6-month waiver) |
 | `npm run brand:set-home-order` | Reorder homepage brands |
 
 ---

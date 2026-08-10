@@ -912,7 +912,8 @@ exports.BrandOnboardingStatus = exports.$Enums.BrandOnboardingStatus = {
 exports.BrandSubscriptionStatus = exports.$Enums.BrandSubscriptionStatus = {
   ACTIVE: 'ACTIVE',
   PAST_DUE: 'PAST_DUE',
-  SUSPENDED: 'SUSPENDED'
+  SUSPENDED: 'SUSPENDED',
+  REVIEW_REQUIRED: 'REVIEW_REQUIRED'
 };
 
 exports.BrandSubscriptionPlan = exports.$Enums.BrandSubscriptionPlan = {

@@ -40,6 +40,7 @@ import { platformLiveStreamHandler } from "./liveStream.js";
 import { requireInternalApiKey } from "../../middleware/requireInternalApiKey.js";
 import { bootstrapSuperAdmin } from "../../bootstrap/bootstrapSuperAdmin.js";
 import { bootstrapFounderBrand } from "../../bootstrap/bootstrapFounderBrand.js";
+import { bootstrapMagomeBrand } from "../../bootstrap/bootstrapMagomeBrand.js";
 import { backfillBrandVerification } from "../../bootstrap/backfillBrandVerification.js";
 import { purgeDemoData } from "../../bootstrap/purgeDemoData.js";
 import { readBrandLogoBuffer } from "../../lib/brandLogo.js";
@@ -458,6 +459,29 @@ platformRouter.post("/bootstrap-founder-brand", requireInternalApiKey, async (re
     });
   } catch (err) {
     const message = err instanceof Error ? err.message : "Founder bootstrap failed.";
+    res.status(500).json({ ok: false, message });
+  }
+});
+
+/** Provision Magome Bakery & Eatery founding partner (6-month fee waiver; requires INTERNAL_API_KEY). */
+platformRouter.post("/bootstrap-magome-brand", requireInternalApiKey, async (req, res) => {
+  try {
+    const body = (req.body ?? {}) as {
+      adminEmail?: string;
+      adminPassword?: string;
+      adminFullName?: string;
+      contactPhone?: string;
+      skipLogo?: boolean;
+    };
+    const result = await bootstrapMagomeBrand(prisma, body);
+    res.json({
+      ok: true,
+      message: "Magome founding partner bootstrapped.",
+      publicProfileUrl: `/partners/${result.slug}`,
+      ...result
+    });
+  } catch (err) {
+    const message = err instanceof Error ? err.message : "Magome bootstrap failed.";
     res.status(500).json({ ok: false, message });
   }
 });

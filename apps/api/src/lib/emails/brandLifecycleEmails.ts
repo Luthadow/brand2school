@@ -325,7 +325,7 @@ export function buildBrandSubscriptionRenewalNoticeHtml(
     subtitle: `Your enterprise ESG infrastructure access ends on ${escapeHtml(endDate)}.`,
     bodyParagraphs: [
       `Your recurring subscription (${escapeHtml(input.recurringAmountZar)}) is due for renewal in ${input.daysRemaining} days.`,
-      "This is enterprise platform access — not a donation. Finance will receive an EFT invoice or you may contact partnerships to renew."
+      "This is enterprise platform access — not a donation. Your next-cycle EFT invoice has been issued automatically — pay using the reference on the invoice (also available in your commercial dashboard)."
     ],
     primaryCta: { label: "Commercial dashboard", href: brandPortalUrl("/brand/dashboard/commercial") }
   });
@@ -407,6 +407,79 @@ export function buildBrandSubscriptionSuspendedText(input: BrandSubscriptionSusp
     `${input.campaignsPaused} campaign(s) paused.`,
     "",
     "Contact partnerships to reactivate after payment."
+  ]);
+}
+
+export type FoundingPartnershipExpiryNoticeInput = BrandLifecycleEmailBase & {
+  daysRemaining: number;
+  endDateIso: string;
+  reviewRequired: boolean;
+};
+
+export function buildFoundingPartnershipExpiryNoticeSubject(
+  input: FoundingPartnershipExpiryNoticeInput
+): string {
+  if (input.reviewRequired) {
+    return `Brand2School — founding partnership review (${input.brandName})`;
+  }
+  return `Brand2School — founding partnership expires in ${input.daysRemaining} days (${input.brandName})`;
+}
+
+export function buildFoundingPartnershipExpiryNoticeHtml(
+  input: FoundingPartnershipExpiryNoticeInput
+): string {
+  const endDate = new Date(input.endDateIso).toLocaleDateString("en-ZA", {
+    day: "numeric",
+    month: "long",
+    year: "numeric"
+  });
+
+  if (input.reviewRequired) {
+    return lifecycleHtml({
+      ...input,
+      preheader: "Founding partnership period ended — review required",
+      title: "Founding partnership — review required",
+      subtitle: `Your six-month founding partnership for <strong>${escapeHtml(input.brandName)}</strong> ended on ${escapeHtml(endDate)}.`,
+      bodyParagraphs: [
+        "Your platform fee waiver period has ended. Campaign participation is paused while we review your pilot results together.",
+        "We'll share what your six months generated — verified participations, school impact, and your Brand2School story — and discuss next steps."
+      ],
+      primaryCta: {
+        label: "Book partnership review",
+        href: `mailto:${CONTACT.brands}?subject=${encodeURIComponent(`Founding partnership review: ${input.brandName}`)}`
+      }
+    });
+  }
+
+  return lifecycleHtml({
+    ...input,
+    preheader: `Founding partnership expires in ${input.daysRemaining} days`,
+    title: "Founding partnership expiry notice",
+    subtitle: `Your founding partnership ends on ${escapeHtml(endDate)} (${input.daysRemaining} days).`,
+    bodyParagraphs: [
+      `Founding partnership expires in ${input.daysRemaining} days.`,
+      "Platform fees remain waived until the end date. After expiry we schedule a review to walk through your pilot impact and conversion options."
+    ],
+    primaryCta: { label: "Brand dashboard", href: brandPortalUrl("/brand/dashboard") }
+  });
+}
+
+export function buildFoundingPartnershipExpiryNoticeText(
+  input: FoundingPartnershipExpiryNoticeInput
+): string {
+  const endDate = new Date(input.endDateIso).toLocaleDateString("en-ZA");
+  if (input.reviewRequired) {
+    return lifecycleText(input, [
+      `Founding partnership for ${input.brandName} ended on ${endDate}.`,
+      "Review required — we'll walk through your six-month impact and next steps.",
+      "",
+      `Contact: ${CONTACT.brands}`
+    ]);
+  }
+  return lifecycleText(input, [
+    `Founding partnership for ${input.brandName} expires in ${input.daysRemaining} days (${endDate}).`,
+    "",
+    `Dashboard: ${brandPortalUrl("/brand/dashboard")}`
   ]);
 }
 

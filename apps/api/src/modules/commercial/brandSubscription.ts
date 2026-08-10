@@ -16,6 +16,10 @@ export const SUBSCRIPTION_LIFECYCLE = [
   { stage: "ACTIVE", action: "Full campaign functionality" },
   { stage: "PAST_DUE", action: "Warning notifications — limited access during grace period" },
   { stage: "SUSPENDED", action: "Campaign participation paused — historical data retained" },
+  {
+    stage: "REVIEW_REQUIRED",
+    action: "Founding-partner waiver ended — case-study review and conversion conversation"
+  },
   { stage: "REACTIVATED", action: "Full access restored upon payment verification" }
 ] as const;
 
@@ -55,7 +59,7 @@ export function initBrandSubscriptionFromScope(scopeType: CampaignScopeType): {
 }
 
 export function subscriptionBlocksParticipation(status: BrandSubscriptionStatus | null | undefined): boolean {
-  return status === "SUSPENDED";
+  return status === "SUSPENDED" || status === "REVIEW_REQUIRED";
 }
 
 export function subscriptionAllowsLimitedAccess(status: BrandSubscriptionStatus | null | undefined): boolean {

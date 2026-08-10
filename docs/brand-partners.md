@@ -96,6 +96,69 @@ Requires `B2S_INTERNAL_API_KEY` and `B2S_API_URL`. Upload the logo in **admin �
 
 The account is created when `npm run railway:bootstrap-founder` runs, or automatically on API startup if that user is still missing. If login says **Invalid credentials**, the user row does not exist yet — run the bootstrap command above, then try again.
 
+### Magome Bakery & Eatery (founding restaurant pilot)
+
+**6-month platform fee waiver** (`founderExempt`, `FOUNDER_VERIFIED`, recurring R0). Proves: Restaurant → Customer → Participation → Verification → School → Impact → Reporting.
+
+| | |
+|--|--|
+| Business | Magome Bakery & Eatery |
+| Location | Boitekong, Rustenburg |
+| Contact | Ashley Speelman · `ashleyshimrora21@gmail.com` |
+| Campaign | Magome Bakery & Eatery × Brand2School |
+| Tagline | Every Meal Can Make an Impact. |
+| Target | 1,000 verified participations |
+| Homepage order | `1` (after R2kay) |
+| Public profile | `/partners/magome-bakery-eatery` |
+
+```bash
+npm run db:migrate:deploy -w @brand2school/api
+npm run brand:bootstrap-magome
+```
+
+Production:
+
+```bash
+npm run railway:bootstrap-magome
+```
+
+Logo ships from `apps/api/assets/brands/magome-bakery-eatery.png` during bootstrap. Brand portal password defaults to `ChangeMe123!` until changed.
+
+**Partnership expiry:** subscription worker sends notices at 30 / 14 / 7 days, then sets `subscriptionStatus = REVIEW_REQUIRED` for the case-study / conversion conversation.
+
+### Magome Bakery & Eatery (founding restaurant pilot)
+
+**6-month Founding Brand Partner** — platform fee waived (R0), `FOUNDER_VERIFIED`, homepage order `1`, live campaign **Magome Bakery & Eatery × Brand2School** (target 1,000 verified participations).
+
+| | |
+|--|--|
+| Location | Boitekong, Rustenburg (North West) |
+| Contact | Ashley Speelman |
+| Public profile | `/partners/magome-bakery-eatery` |
+| Partnership end | `subscriptionEndDate` = start + 6 months → then `REVIEW_REQUIRED` |
+| Notices | 30 / 14 / 7 days before expiry (subscription worker) |
+
+```bash
+npm run db:migrate:deploy -w @brand2school/api
+MAGOME_BRAND_ADMIN_EMAIL=ashleyshimrora21@gmail.com npm run brand:bootstrap-magome
+```
+
+Production:
+
+```bash
+npm run railway:bootstrap-magome
+```
+
+Logo ships from `apps/api/assets/brands/magome-bakery-eatery.png` during bootstrap (also re-uploadable in admin).
+
+#### Magome brand portal login
+
+| | |
+|--|--|
+| **URL** | `https://brand2school.co.za/brand/login` |
+| **Email** | `ashleyshimrora21@gmail.com` |
+| **Password** | `ChangeMe123!` (until you change it) |
+
 ## Public API
 
 | Endpoint | Purpose |

@@ -86,6 +86,8 @@ enum BrandSubscriptionStatus {
   ACTIVE
   PAST_DUE
   SUSPENDED
+  /// Founding-partner fee-waiver period ended — conversion / case-study review.
+  REVIEW_REQUIRED
 }
 
 enum BrandSubscriptionPlan {

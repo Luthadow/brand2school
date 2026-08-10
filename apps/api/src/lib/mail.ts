@@ -38,6 +38,9 @@ import {
   buildBrandVerificationApprovedHtml,
   buildBrandVerificationApprovedSubject,
   buildBrandVerificationApprovedText,
+  buildFoundingPartnershipExpiryNoticeHtml,
+  buildFoundingPartnershipExpiryNoticeSubject,
+  buildFoundingPartnershipExpiryNoticeText,
   type BrandAgreementRequiredInput,
   type BrandCampaignActivatedInput,
   type BrandPaymentPendingInput,
@@ -47,7 +50,8 @@ import {
   type BrandSubscriptionReactivatedInput,
   type BrandSubscriptionRenewalNoticeInput,
   type BrandSubscriptionSuspendedInput,
-  type BrandVerificationApprovedInput
+  type BrandVerificationApprovedInput,
+  type FoundingPartnershipExpiryNoticeInput
 } from "./emails/brandLifecycleEmails.js";
 import { buildBrandedEmail, escapeHtml, paragraphs } from "./emailTemplate.js";
 import { buildSchoolWelcomeEmail } from "./emails/schoolWelcomeEmail.js";
@@ -331,6 +335,18 @@ export async function sendBrandSubscriptionRenewalNoticeEmail(
     subject,
     text: buildBrandSubscriptionRenewalNoticeText(input),
     html: buildBrandSubscriptionRenewalNoticeHtml(input)
+  });
+}
+
+export async function sendFoundingPartnershipExpiryNoticeEmail(
+  input: FoundingPartnershipExpiryNoticeInput
+): Promise<{ subject: string }> {
+  const subject = buildFoundingPartnershipExpiryNoticeSubject(input);
+  return sendBrandLifecycleMail({
+    to: input.to,
+    subject,
+    text: buildFoundingPartnershipExpiryNoticeText(input),
+    html: buildFoundingPartnershipExpiryNoticeHtml(input)
   });
 }
 

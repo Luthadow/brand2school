@@ -410,7 +410,8 @@ export type BrandOnboardingStatus = (typeof BrandOnboardingStatus)[keyof typeof 
 export const BrandSubscriptionStatus: {
   ACTIVE: 'ACTIVE',
   PAST_DUE: 'PAST_DUE',
-  SUSPENDED: 'SUSPENDED'
+  SUSPENDED: 'SUSPENDED',
+  REVIEW_REQUIRED: 'REVIEW_REQUIRED'
 };
 
 export type BrandSubscriptionStatus = (typeof BrandSubscriptionStatus)[keyof typeof BrandSubscriptionStatus]

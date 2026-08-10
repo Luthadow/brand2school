@@ -22,7 +22,14 @@ async function main(): Promise<void> {
   while (shouldRun) {
     try {
       const result = await processSubscriptionGovernance();
-      if (result.markedPastDue > 0 || result.suspended > 0) {
+      if (
+        result.markedPastDue > 0 ||
+        result.suspended > 0 ||
+        result.invoicesIssued > 0 ||
+        result.renewalNoticesSent > 0 ||
+        result.foundingPartnershipNoticesSent > 0 ||
+        result.foundingPartnershipReviewRequired > 0
+      ) {
         logger.info(result, "Subscription governance tick");
       }
     } catch (error) {

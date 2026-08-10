@@ -74,7 +74,14 @@ type WorkflowBoard = {
   activationChain: Array<{ step: number; key: string; label: string }>;
   pipeline: Record<WorkflowStage, number>;
   licenseRenewal?: { pendingRenewal: number; lapsed: number };
-  subscriptionGovernance?: { markedPastDue: number; suspended: number };
+  subscriptionGovernance?: {
+    markedPastDue: number;
+    suspended: number;
+    invoicesIssued?: number;
+    renewalNoticesSent?: number;
+    foundingPartnershipNoticesSent?: number;
+    foundingPartnershipReviewRequired?: number;
+  };
   brands: Array<{
     id: string;
     name: string;
@@ -246,7 +253,10 @@ export function CommercialGovernanceClient(): JSX.Element {
         {workflow?.subscriptionGovernance ? (
           <span style={{ fontSize: "0.85rem", color: "#64748b", alignSelf: "center" }}>
             Last tick: {workflow.subscriptionGovernance.markedPastDue} past-due ·{" "}
-            {workflow.subscriptionGovernance.suspended} suspended
+            {workflow.subscriptionGovernance.suspended} suspended ·{" "}
+            {workflow.subscriptionGovernance.invoicesIssued ?? 0} renewals invoiced ·{" "}
+            {workflow.subscriptionGovernance.foundingPartnershipNoticesSent ?? 0} founding notices ·{" "}
+            {workflow.subscriptionGovernance.foundingPartnershipReviewRequired ?? 0} review required
           </span>
         ) : null}
       </div>

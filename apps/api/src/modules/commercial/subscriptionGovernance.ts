@@ -7,7 +7,9 @@ import {
 import { trySendBrandLifecycleEmail } from "./brandEmailNotify.js";
 import { syncCampaignCommercialStatus } from "./campaignActivation.js";
 import { SUBSCRIPTION_GRACE_DAYS } from "./brandSubscription.js";
+import { processFoundingPartnershipGovernance } from "./foundingPartnershipGovernance.js";
 import { formatZar } from "./setupFees.js";
+import { issueDueSubscriptionRenewalInvoices } from "./subscriptionInvoices.js";
 
 function addDays(date: Date, days: number): Date {
   const next = new Date(date);
@@ -35,18 +37,30 @@ async function suspendBrandCampaigns(brandId: string): Promise<number> {
   return campaigns.length;
 }
 
-/** Automated subscription lifecycle: past-due grace, then suspension. */
+/** Automated subscription lifecycle: renew invoices, past-due grace, then suspension. */
 export async function processSubscriptionGovernance(now = new Date()): Promise<{
   markedPastDue: number;
   suspended: number;
+  invoicesIssued: number;
+  renewalNoticesSent: number;
+  foundingPartnershipNoticesSent: number;
+  foundingPartnershipReviewRequired: number;
 }> {
   let markedPastDue = 0;
   let suspended = 0;
 
+  // Founding-partner fee-waiver notices + REVIEW_REQUIRED (before paid-subscription PAST_DUE).
+  const founding = await processFoundingPartnershipGovernance(now);
+
+  // Issue next-cycle invoices before / as periods end (idempotent — skips open invoices).
+  const renewals = await issueDueSubscriptionRenewalInvoices(now);
+
   const expiredActive = await prisma.brand.findMany({
     where: {
       subscriptionStatus: "ACTIVE",
-      subscriptionEndDate: { lte: now }
+      subscriptionEndDate: { lte: now },
+      // Waived founding partners are handled by foundingPartnershipGovernance.
+      founderExempt: false
     }
   });
 
@@ -96,7 +110,14 @@ export async function processSubscriptionGovernance(now = new Date()): Promise<{
     suspended += 1;
   }
 
-  return { markedPastDue, suspended };
+  return {
+    markedPastDue,
+    suspended,
+    invoicesIssued: renewals.invoicesIssued,
+    renewalNoticesSent: renewals.renewalNoticesSent,
+    foundingPartnershipNoticesSent: founding.noticesSent,
+    foundingPartnershipReviewRequired: founding.markedReviewRequired
+  };
 }
 
 export async function notifySubscriptionReactivated(

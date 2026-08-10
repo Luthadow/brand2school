@@ -1,6 +1,7 @@
 import { env, logProductionReadinessWarnings } from "./config/env.js";
 import { app } from "./app.js";
 import { ensureFounderBrandIfMissing } from "./bootstrap/ensureFounderBrand.js";
+import { ensureMagomeBrandIfMissing } from "./bootstrap/ensureMagomeBrand.js";
 import { ensureSuperAdminIfMissing } from "./bootstrap/ensureSuperAdmin.js";
 import { runPendingMigrations } from "./bootstrap/runMigrations.js";
 import { logger } from "./lib/logger.js";
@@ -26,5 +27,6 @@ app.listen(port, "0.0.0.0", () => {
 
   void ensureSuperAdminIfMissing();
   void ensureFounderBrandIfMissing();
+  void ensureMagomeBrandIfMissing();
   void verifyMailOnStartup();
 });
