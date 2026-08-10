@@ -435,6 +435,7 @@ exports.Prisma.CampaignScalarFieldEnum = {
   partnershipLabel: 'partnershipLabel',
   sponsorshipTrack: 'sponsorshipTrack',
   licenseTermMonths: 'licenseTermMonths',
+  codeMode: 'codeMode',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };
@@ -489,6 +490,21 @@ exports.Prisma.CodeBatchScalarFieldEnum = {
   batchCode: 'batchCode',
   codeVersion: 'codeVersion',
   expiresAt: 'expiresAt',
+  status: 'status',
+  source: 'source',
+  downloadedAt: 'downloadedAt',
+  downloadCount: 'downloadCount',
+  createdByUserId: 'createdByUserId',
+  createdAt: 'createdAt'
+};
+
+exports.Prisma.CodeBatchDownloadScalarFieldEnum = {
+  id: 'id',
+  batchId: 'batchId',
+  downloadedByUserId: 'downloadedByUserId',
+  ipAddress: 'ipAddress',
+  userAgent: 'userAgent',
+  codeCount: 'codeCount',
   createdAt: 'createdAt'
 };
 
@@ -956,6 +972,11 @@ exports.CampaignRenewalStatus = exports.$Enums.CampaignRenewalStatus = {
   LAPSED: 'LAPSED'
 };
 
+exports.CampaignCodeMode = exports.$Enums.CampaignCodeMode = {
+  UPLOAD: 'UPLOAD',
+  GENERATE: 'GENERATE'
+};
+
 exports.BrandAgreementStatus = exports.$Enums.BrandAgreementStatus = {
   DRAFT: 'DRAFT',
   GENERATED: 'GENERATED',
@@ -977,6 +998,14 @@ exports.CampaignInvoiceStatus = exports.$Enums.CampaignInvoiceStatus = {
   PAYMENT_REPORTED: 'PAYMENT_REPORTED',
   VERIFIED: 'VERIFIED',
   VOID: 'VOID'
+};
+
+exports.CodeBatchStatus = exports.$Enums.CodeBatchStatus = {
+  AVAILABLE: 'AVAILABLE',
+  DISTRIBUTED: 'DISTRIBUTED',
+  PARTIALLY_USED: 'PARTIALLY_USED',
+  USED: 'USED',
+  EXPIRED: 'EXPIRED'
 };
 
 exports.CodeStatus = exports.$Enums.CodeStatus = {
@@ -1066,6 +1095,7 @@ exports.Prisma.ModelName = {
   CampaignInvoice: 'CampaignInvoice',
   Product: 'Product',
   CodeBatch: 'CodeBatch',
+  CodeBatchDownload: 'CodeBatchDownload',
   Code: 'Code',
   SubmissionAttempt: 'SubmissionAttempt',
   Submission: 'Submission',

@@ -194,7 +194,7 @@ export function CampaignBuilderWizard(): JSX.Element {
           ) : null}
           <div className="bp-wizard-success-actions">
             <Link href={"/brand/dashboard/inventory" as Route} className="bp-inv-btn bp-inv-btn--primary">
-              Upload product codes
+              Set up campaign codes
             </Link>
             <Link href={"/brand/dashboard/commercial" as Route} className="bp-inv-btn">
               View agreement

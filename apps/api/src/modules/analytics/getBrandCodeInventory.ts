@@ -1,4 +1,5 @@
 import { prisma } from "../../lib/prisma.js";
+import { deriveCodeBatchStatus } from "../codes/batchInventory.js";
 
 export type BrandCodeInventory = {
   totalCodes: number;
@@ -26,6 +27,10 @@ export type CodeBatchInventoryRow = {
   campaignName: string;
   createdAt: string;
   expiresAt: string | null;
+  status: string;
+  source: string | null;
+  downloadCount: number;
+  downloadedAt: string | null;
   totalCodes: number;
   unused: number;
   pending: number;
@@ -246,6 +251,13 @@ export async function getBrandCodeInventoryDashboard(
     const batchRows: CodeBatchInventoryRow[] = batches.map((batch) => {
       const batchCounts = batchStatusMap.get(batch.id) ?? emptyCounts();
       const batchTotal = STATUS_KEYS.reduce((sum, key) => sum + batchCounts[key], 0);
+      const status = deriveCodeBatchStatus({
+        totalCodes: batchTotal,
+        usedCodes: batchCounts.USED,
+        expiredCodes: batchCounts.EXPIRED + batchCounts.INVALIDATED,
+        downloadCount: batch.downloadCount,
+        expiresAt: batch.expiresAt
+      });
       return {
         id: batch.id,
         batchName: batch.batchName,
@@ -255,6 +267,10 @@ export async function getBrandCodeInventoryDashboard(
         campaignName: batch.campaign.name,
         createdAt: batch.createdAt.toISOString(),
         expiresAt: batch.expiresAt?.toISOString() ?? null,
+        status,
+        source: batch.source,
+        downloadCount: batch.downloadCount,
+        downloadedAt: batch.downloadedAt?.toISOString() ?? null,
         totalCodes: batchTotal,
         unused: batchCounts.UNUSED,
         pending: batchCounts.PENDING,

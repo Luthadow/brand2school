@@ -1,6 +1,8 @@
 import type { PrismaClient } from "../generated/prisma/index.js";
 import { generateSecureCodeBatch } from "../modules/codes/generateBatch.js";
+import { generateSecureCodeBatchPacks } from "../modules/codes/generateBatchPacks.js";
 import { FOUNDER_BRAND_SLUG } from "./bootstrapFounderBrand.js";
+import { MAGOME_BRAND_SLUG, MAGOME_CAMPAIGN_TARGET } from "./bootstrapMagomeBrand.js";
 
 const FOUNDER_STARTER_CODE_COUNT = 100;
 
@@ -28,12 +30,29 @@ export async function ensureFounderCampaignParticipationReady(
 
   let codesSeeded = 0;
   if (campaign._count.codes === 0) {
-    const batch = await generateSecureCodeBatch({
-      campaignId,
-      batchName: "Founder launch codes",
-      count: FOUNDER_STARTER_CODE_COUNT
-    });
-    codesSeeded = batch.generatedCount;
+    if (brand.slug === MAGOME_BRAND_SLUG) {
+      const packs = await generateSecureCodeBatchPacks({
+        campaignId,
+        quantity: MAGOME_CAMPAIGN_TARGET,
+        batchNamePrefix: "Magome pilot codes"
+      });
+      codesSeeded = packs.generatedCount;
+    } else {
+      const batch = await generateSecureCodeBatch({
+        campaignId,
+        batchName: "Founder launch codes",
+        count: FOUNDER_STARTER_CODE_COUNT
+      });
+      codesSeeded = batch.generatedCount;
+      await prisma.codeBatch.update({
+        where: { id: batch.batchId },
+        data: { status: "AVAILABLE", source: "GENERATE" }
+      });
+      await prisma.campaign.update({
+        where: { id: campaignId },
+        data: { codeMode: "GENERATE" }
+      });
+    }
   }
 
   const now = new Date();
@@ -52,7 +71,8 @@ export async function ensureFounderCampaignParticipationReady(
         codesApprovedAt: campaign.codesApprovedAt ?? now,
         launchApprovedAt: campaign.launchApprovedAt ?? now,
         rulesConfiguredAt: campaign.rulesConfiguredAt ?? now,
-        paymentVerifiedAt: campaign.paymentVerifiedAt ?? now
+        paymentVerifiedAt: campaign.paymentVerifiedAt ?? now,
+        ...(brand.slug === MAGOME_BRAND_SLUG ? { codeMode: "GENERATE" } : {})
       }
     });
 

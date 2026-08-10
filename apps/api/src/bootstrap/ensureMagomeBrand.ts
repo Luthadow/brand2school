@@ -1,7 +1,9 @@
 import { prisma } from "../lib/prisma.js";
 import { logger } from "../lib/logger.js";
+import { hasBrandLogo } from "../lib/brandLogo.js";
 import { ensureFounderCampaignParticipationReady } from "./activateFounderCampaign.js";
 import {
+  applyMagomeLogo,
   bootstrapMagomeBrand,
   MAGOME_BRAND_ADMIN_EMAIL_DEFAULT,
   MAGOME_BRAND_SLUG
@@ -59,6 +61,23 @@ export async function ensureMagomeBrandIfMissing(): Promise<void> {
     });
 
     if (!brand) return;
+
+    // Homepage "Verified partners" requires ACTIVE + featuredOnHome + logoUrl.
+    const needsLogo = !hasBrandLogo(brand.logoUrl) || !brand.featuredOnHome || brand.status !== "ACTIVE";
+    if (needsLogo) {
+      const logoUploaded = await applyMagomeLogo(prisma, brand.id);
+      if (logoUploaded) {
+        logger.info({ brandId: brand.id }, "Magome logo repaired for verified partners strip");
+      } else if (!brand.featuredOnHome || brand.status !== "ACTIVE") {
+        await prisma.brand.update({
+          where: { id: brand.id },
+          data: {
+            ...(hasBrandLogo(brand.logoUrl) ? { featuredOnHome: true, publicProfileEnabled: true } : {}),
+            status: "ACTIVE"
+          }
+        });
+      }
+    }
 
     for (const campaign of brand.campaigns) {
       const live = await ensureFounderCampaignParticipationReady(prisma, brand.id, campaign.id);

@@ -33,20 +33,22 @@ After deploy, run once: `npm run brand:backfill-verification` (requires `B2S_INT
 
 ## Product / participation codes (campaign batches)
 
-Brands upload **lists of codes** tied to a campaign so learners can submit them on the web or WhatsApp flow.
+Brands choose **Upload my codes** or **Generate codes** (recommended). Generated codes are split into **50-code download packs**.
 
 | Channel | How |
 |---------|-----|
-| Brand portal | **Campaigns → Upload product codes** — Excel (.xlsx/.xls), CSV, Word (.docx), or plain text |
+| Brand portal | **Code inventory → Generate codes** or **Upload CSV** |
 | API | `POST /api/v1/campaigns/:campaignId/code-batches/validate-file` (preview) |
 | API | `POST /api/v1/campaigns/:campaignId/code-batches/import` (multipart: `file`, `batchName`, optional `expiresAt`) |
+| API | `POST /api/v1/campaigns/:campaignId/code-batches/generate` — body `{ quantity }` (auto-packs of 50) |
+| API | `GET /api/v1/campaigns/:campaignId/code-batches/:batchId/download` — CSV download + audit |
 | Template | `GET /api/v1/campaigns/:campaignId/code-batches/import-template` |
 
 **File format:** one column named `code` in spreadsheets, or one code per line in Word/text. Structured codes use  
 `{BRAND}-{CAMPAIGN}-{BATCH}-{TOKEN}-{CHECK}` (must match the brand’s `codePrefix`).  
 Use **Check file** before **Import**; invalid or duplicate rows are reported before anything is saved.
 
-System-generated batches: `POST .../code-batches/generate` (up to 50k codes).
+Batch inventory statuses: `AVAILABLE` → `DISTRIBUTED` (downloaded) → `PARTIALLY_USED` / `USED` / `EXPIRED`.
 
 ## Governance
 

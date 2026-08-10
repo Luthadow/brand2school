@@ -24,6 +24,10 @@ export type CodeBatchInventoryRow = {
   campaignName: string;
   createdAt: string;
   expiresAt: string | null;
+  status?: string;
+  source?: string | null;
+  downloadCount?: number;
+  downloadedAt?: string | null;
   totalCodes: number;
   unused: number;
   pending: number;
@@ -35,6 +39,14 @@ export type CodeBatchInventoryRow = {
   invalidated: number;
   blocked: number;
   utilizationPercent: number;
+};
+
+export const BATCH_STATUS_LABELS: Record<string, string> = {
+  AVAILABLE: "Available",
+  DISTRIBUTED: "Distributed",
+  PARTIALLY_USED: "Partially used",
+  USED: "Used",
+  EXPIRED: "Expired"
 };
 
 export type AttemptOutcomeRow = {

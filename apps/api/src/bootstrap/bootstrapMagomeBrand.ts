@@ -31,10 +31,35 @@ const MAGOME_CAMPAIGN_INTENTION =
 const MAGOME_INTERNAL_NOTES =
   "Founding Brand Partner pilot — 6-month platform fee waiver (R0). Prove journey: Restaurant → Customer → Participation → Verification → School → Impact → Reporting.";
 
-const logoAssetPath = path.resolve(
+export const MAGOME_LOGO_ASSET_PATH = path.resolve(
   path.dirname(fileURLToPath(import.meta.url)),
   "../../assets/brands/magome-bakery-eatery.png"
 );
+
+/** Upload Magome logo + enable homepage strip when asset is present. */
+export async function applyMagomeLogo(prisma: PrismaClient, brandId: string): Promise<boolean> {
+  try {
+    const buffer = await fs.readFile(MAGOME_LOGO_ASSET_PATH);
+    const storedPath = await saveBrandLogo(brandId, {
+      buffer,
+      mimetype: "image/png",
+      size: buffer.length
+    });
+    await prisma.brand.update({
+      where: { id: brandId },
+      data: {
+        logoUrl: storedPath,
+        logoPng: buffer,
+        featuredOnHome: true,
+        publicProfileEnabled: true,
+        status: "ACTIVE"
+      }
+    });
+    return true;
+  } catch {
+    return false;
+  }
+}
 
 export type BootstrapMagomeBrandInput = {
   adminEmail?: string;
@@ -286,21 +311,7 @@ export async function bootstrapMagomeBrand(
 
   let logoUploaded = false;
   if (!input.skipLogo) {
-    try {
-      const buffer = await fs.readFile(logoAssetPath);
-      const storedPath = await saveBrandLogo(brandId, {
-        buffer,
-        mimetype: "image/png",
-        size: buffer.length
-      });
-      await prisma.brand.update({
-        where: { id: brandId },
-        data: { logoUrl: storedPath, logoPng: buffer, featuredOnHome: true }
-      });
-      logoUploaded = true;
-    } catch {
-      // Logo can be uploaded later in admin → Brands.
-    }
+    logoUploaded = await applyMagomeLogo(prisma, brandId);
   }
 
   const verificationCode = await ensureBrandVerificationCode(

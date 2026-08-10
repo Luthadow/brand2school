@@ -145,8 +145,15 @@ export async function importCodeBatchFromFile(input: {
       batchName: input.batchName,
       batchCode,
       codeVersion: "V1",
-      expiresAt: input.expiresAt
+      expiresAt: input.expiresAt,
+      status: "AVAILABLE",
+      source: "UPLOAD"
     }
+  });
+
+  await prisma.campaign.update({
+    where: { id: campaign.id },
+    data: { codeMode: "UPLOAD" }
   });
 
   if (toInsert.length > 0) {

@@ -6397,6 +6397,50 @@ body:has(.bp-root) .b2s-top-strip {
   color: #fff;
 }
 
+.bp-code-setup {
+  display: grid;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.bp-code-setup-card {
+  border: 1px solid #d7e6ff;
+  border-radius: var(--ds-radius-lg);
+  background: #fff;
+  padding: 1.1rem 1.25rem;
+  display: grid;
+  gap: 0.75rem;
+}
+
+.bp-code-setup-card--recommended {
+  border-color: #9fd0ff;
+  box-shadow: inset 0 0 0 1px rgba(21, 101, 192, 0.08);
+}
+
+.bp-code-setup-badge {
+  margin: 0;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--brand-blue);
+}
+
+.bp-code-setup-card h3 {
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  color: var(--brand-navy);
+  font-size: 1.05rem;
+}
+
+.bp-code-setup-card p {
+  margin: 0;
+  color: #4a6280;
+  font-size: 0.9rem;
+}
+
 .bp-inv-kpi-strip {
   display: grid;
   grid-template-columns: repeat(4, 1fr);

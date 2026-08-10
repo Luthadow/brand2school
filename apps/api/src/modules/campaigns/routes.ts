@@ -8,6 +8,9 @@ import { slugifyBrandCode, slugifyName } from "../../lib/slugify.js";
 import { requireAuth, requireRole } from "../../middleware/auth.js";
 import { campaignsRateLimit } from "../../middleware/rateLimit.js";
 import { generateSecureCodeBatch } from "../codes/generateBatch.js";
+import { generateSecureCodeBatchPacks } from "../codes/generateBatchPacks.js";
+import { downloadCodeBatchCsv } from "../codes/downloadCodeBatch.js";
+import { CODE_DOWNLOAD_BATCH_SIZE } from "../codes/batchInventory.js";
 import { CampaignScopeType } from "../../generated/prisma/index.js";
 import { describeCampaignScope, listProvinceOptions, remainingCampaignBudgetZar } from "./campaignEligibility.js";
 import {
@@ -510,12 +513,16 @@ const importBatchSchema = z.object({
 });
 
 const generateBatchSchema = z.object({
-  batchName: z.string().min(2),
-  count: z.coerce.number().int().min(1).max(50000),
+  batchName: z.string().min(2).optional(),
+  /** Preferred alias for brand portal “how many codes”. */
+  quantity: z.coerce.number().int().min(1).max(50000).optional(),
+  count: z.coerce.number().int().min(1).max(50000).optional(),
   productId: z.string().cuid().optional(),
   batchCode: z.string().min(1).max(4).optional(),
   codeVersion: z.string().min(2).max(8).optional(),
-  expiresAt: z.coerce.date().optional()
+  expiresAt: z.coerce.date().optional(),
+  /** When true (default), split into 50-code download packs. */
+  splitIntoPacks: z.boolean().optional()
 });
 
 campaignsRouter.post(
@@ -526,6 +533,12 @@ campaignsRouter.post(
     const payload = generateBatchSchema.safeParse(req.body);
     if (!payload.success) {
       res.status(400).json({ message: "Validation failed.", issues: payload.error.flatten() });
+      return;
+    }
+
+    const quantity = payload.data.quantity ?? payload.data.count;
+    if (!quantity) {
+      res.status(400).json({ message: "Provide quantity (or count) of codes to generate." });
       return;
     }
 
@@ -542,20 +555,92 @@ campaignsRouter.post(
       return;
     }
 
+    const usePacks = payload.data.splitIntoPacks !== false && !payload.data.batchCode;
+
     try {
+      if (usePacks) {
+        const result = await generateSecureCodeBatchPacks({
+          campaignId: req.params.campaignId,
+          quantity,
+          batchNamePrefix: payload.data.batchName ?? "Campaign codes",
+          productId: payload.data.productId,
+          codeVersion: payload.data.codeVersion,
+          expiresAt: payload.data.expiresAt,
+          createdByUserId: req.user?.id
+        });
+        res.status(201).json({
+          ...result,
+          packSize: CODE_DOWNLOAD_BATCH_SIZE,
+          message: `Generated ${result.generatedCount} codes in ${result.batchCount} packs of up to ${CODE_DOWNLOAD_BATCH_SIZE}.`
+        });
+        return;
+      }
+
       const result = await generateSecureCodeBatch({
         campaignId: req.params.campaignId,
-        batchName: payload.data.batchName,
-        count: payload.data.count,
+        batchName: payload.data.batchName ?? "Campaign codes",
+        count: quantity,
         productId: payload.data.productId,
         batchCode: payload.data.batchCode,
         codeVersion: payload.data.codeVersion,
         expiresAt: payload.data.expiresAt
       });
+      await prisma.codeBatch.update({
+        where: { id: result.batchId },
+        data: {
+          status: "AVAILABLE",
+          source: "GENERATE",
+          ...(req.user?.id ? { createdByUserId: req.user.id } : {})
+        }
+      });
+      await prisma.campaign.update({
+        where: { id: req.params.campaignId },
+        data: { codeMode: "GENERATE" }
+      });
       res.status(201).json(result);
     } catch (err) {
       res.status(404).json({ message: err instanceof Error ? err.message : "Generation failed." });
     }
+  }
+);
+
+campaignsRouter.get(
+  "/:campaignId/code-batches/:batchId/download",
+  requireAuth,
+  requireRole(["SUPER_ADMIN", "ADMIN_STAFF", "BRAND_ADMIN"]),
+  async (req, res) => {
+    const campaign = await prisma.campaign.findUnique({
+      where: { id: req.params.campaignId },
+      select: { brandId: true }
+    });
+    if (!campaign) {
+      res.status(404).json({ message: "Campaign not found." });
+      return;
+    }
+    if (campaignForbiddenForBrandAdmin(req, campaign.brandId)) {
+      res.status(403).json({ message: "Cannot download another brand's codes." });
+      return;
+    }
+
+    const brandIdForAccess =
+      req.user?.role === "BRAND_ADMIN" && req.user.brandId ? req.user.brandId : campaign.brandId;
+
+    const result = await downloadCodeBatchCsv({
+      batchId: req.params.batchId,
+      brandId: brandIdForAccess,
+      userId: req.user?.id,
+      ipAddress: req.ip,
+      userAgent: req.get("user-agent")
+    });
+
+    if ("error" in result) {
+      res.status(result.status).json({ message: result.error });
+      return;
+    }
+
+    res.setHeader("Content-Type", "text/csv; charset=utf-8");
+    res.setHeader("Content-Disposition", `attachment; filename="${result.filename}"`);
+    res.send(result.csv);
   }
 );
 

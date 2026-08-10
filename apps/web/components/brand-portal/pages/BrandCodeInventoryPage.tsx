@@ -1,24 +1,25 @@
 "use client";
 
-import Link from "next/link";
-import type { Route } from "next";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import {
   AlertTriangle,
   Boxes,
   CheckCircle2,
   Clock,
+  Download,
   Package,
   RefreshCw,
   Shield,
   ShieldCheck,
+  Sparkles,
   Upload
 } from "lucide-react";
 import { formatCount } from "../../../lib/formatCount";
 import type { BrandCodeInventoryDashboard } from "../../../lib/brandCodeInventory";
-import { CODE_STATUS_META } from "../../../lib/brandCodeInventory";
+import { BATCH_STATUS_LABELS, CODE_STATUS_META } from "../../../lib/brandCodeInventory";
 import { useBrandPortal } from "../BrandPortalContext";
 import { BrandPageHeader } from "../BrandPageHeader";
+import { CodeBatchGeneratePanel } from "../CodeBatchGeneratePanel";
 import { CodeBatchUploadPanel } from "../CodeBatchUploadPanel";
 
 function emptyDashboard(): BrandCodeInventoryDashboard {
@@ -63,6 +64,8 @@ export function BrandCodeInventoryPage(): JSX.Element {
   const [selectedCampaignId, setSelectedCampaignId] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
   const [showUpload, setShowUpload] = useState(false);
+  const [showGenerate, setShowGenerate] = useState(false);
+  const [downloadingId, setDownloadingId] = useState<string | null>(null);
 
   const refresh = useCallback(async (campaignId: string | null): Promise<void> => {
     setLoading(true);
@@ -141,9 +144,27 @@ export function BrandCodeInventoryPage(): JSX.Element {
               <RefreshCw size={16} className={loading ? "ba-spin" : undefined} />
               Refresh
             </button>
-            <button type="button" className="bp-inv-btn bp-inv-btn--primary" onClick={() => setShowUpload((v) => !v)}>
+            <button
+              type="button"
+              className="bp-inv-btn bp-inv-btn--primary"
+              onClick={() => {
+                setShowGenerate((v) => !v);
+                if (!showGenerate) setShowUpload(false);
+              }}
+            >
+              <Sparkles size={16} />
+              {showGenerate ? "Hide generate" : "Generate codes"}
+            </button>
+            <button
+              type="button"
+              className="bp-inv-btn"
+              onClick={() => {
+                setShowUpload((v) => !v);
+                if (!showUpload) setShowGenerate(false);
+              }}
+            >
               <Upload size={16} />
-              {showUpload ? "Hide upload" : "Upload batch"}
+              {showUpload ? "Hide upload" : "Upload CSV"}
             </button>
           </>
         }
@@ -161,6 +182,16 @@ export function BrandCodeInventoryPage(): JSX.Element {
           );
         })}
       </section>
+
+      {showGenerate ? (
+        <section className="bp-section">
+          <CodeBatchGeneratePanel
+            campaigns={campaigns.map((c) => ({ id: c.id, name: c.name }))}
+            defaultCampaignId={selectedCampaignId}
+            onGenerated={() => void refresh(selectedCampaignId)}
+          />
+        </section>
+      ) : null}
 
       {showUpload ? (
         <section className="bp-section">
@@ -243,11 +274,14 @@ export function BrandCodeInventoryPage(): JSX.Element {
           {batches.length === 0 ? (
             <p className="bp-empty-note">
               No batches yet.{" "}
-              <button type="button" className="bp-inv-link-btn" onClick={() => setShowUpload(true)}>
-                Upload your first batch
+              <button type="button" className="bp-inv-link-btn" onClick={() => setShowGenerate(true)}>
+                Generate codes
               </button>{" "}
-              or visit{" "}
-              <Link href={"/brand/dashboard/campaigns" as Route}>Campaigns</Link>.
+              or{" "}
+              <button type="button" className="bp-inv-link-btn" onClick={() => setShowUpload(true)}>
+                upload a CSV
+              </button>
+              .
             </p>
           ) : (
             <div className="bp-table-wrap">
@@ -256,26 +290,17 @@ export function BrandCodeInventoryPage(): JSX.Element {
                   <tr>
                     <th>Batch</th>
                     <th>Campaign</th>
-                    <th>Created</th>
-                    <th>Expires</th>
-                    <th>Total</th>
-                    <th>Redeemed</th>
+                    <th>Status</th>
+                    <th>Qty</th>
+                    <th>Used</th>
                     <th>Available</th>
-                    <th>Utilization</th>
-                    <th>Health</th>
+                    <th>Downloads</th>
+                    <th>Actions</th>
                   </tr>
                 </thead>
                 <tbody>
                   {batches.map((batch) => {
-                    const issues = batch.expired + batch.invalid + batch.flagged + batch.blocked;
-                    const health =
-                      batch.totalCodes === 0
-                        ? "empty"
-                        : issues > batch.totalCodes * 0.1
-                          ? "warning"
-                          : batch.utilizationPercent >= 75
-                            ? "strong"
-                            : "healthy";
+                    const status = batch.status ?? "AVAILABLE";
                     return (
                       <tr key={batch.id}>
                         <td>
@@ -285,32 +310,28 @@ export function BrandCodeInventoryPage(): JSX.Element {
                           </span>
                         </td>
                         <td>{batch.campaignName}</td>
-                        <td>{formatDate(batch.createdAt)}</td>
-                        <td>{formatDate(batch.expiresAt)}</td>
+                        <td>{BATCH_STATUS_LABELS[status] ?? status}</td>
                         <td>{formatCount(batch.totalCodes)}</td>
                         <td>{formatCount(batch.used)}</td>
                         <td>{formatCount(batch.unused)}</td>
+                        <td>{formatCount(batch.downloadCount ?? 0)}</td>
                         <td>
-                          <div className="bp-inv-util">
-                            <div className="bp-inv-util-track" aria-hidden="true">
-                              <div
-                                className="bp-inv-util-fill"
-                                style={{ width: `${batch.utilizationPercent}%` }}
-                              />
-                            </div>
-                            <span>{batch.utilizationPercent}%</span>
-                          </div>
-                        </td>
-                        <td>
-                          <span className={`bp-inv-health bp-inv-health--${health}`}>
-                            {health === "strong"
-                              ? "High redemption"
-                              : health === "warning"
-                                ? "Needs review"
-                                : health === "empty"
-                                  ? "Empty"
-                                  : "On track"}
-                          </span>
+                          <button
+                            type="button"
+                            className="bp-inv-btn"
+                            disabled={downloadingId === batch.id || batch.totalCodes === 0}
+                            onClick={() => {
+                              setDownloadingId(batch.id);
+                              window.location.href = `/api/campaigns/${batch.campaignId}/code-batches/${batch.id}/download`;
+                              window.setTimeout(() => {
+                                setDownloadingId(null);
+                                void refresh(selectedCampaignId);
+                              }, 1500);
+                            }}
+                          >
+                            <Download size={14} />
+                            {downloadingId === batch.id ? "…" : "CSV"}
+                          </button>
                         </td>
                       </tr>
                     );

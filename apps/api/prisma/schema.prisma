@@ -103,6 +103,21 @@ enum BillingCycle {
   ANNUAL
 }
 
+/// How campaign participation codes are sourced for a campaign.
+enum CampaignCodeMode {
+  UPLOAD
+  GENERATE
+}
+
+/// Inventory lifecycle for a downloadable code batch (50-code packs).
+enum CodeBatchStatus {
+  AVAILABLE
+  DISTRIBUTED
+  PARTIALLY_USED
+  USED
+  EXPIRED
+}
+
 enum BrandAgreementStatus {
   DRAFT
   GENERATED
@@ -696,6 +711,8 @@ model Campaign {
   partnershipLabel    String?
   sponsorshipTrack    String?
   licenseTermMonths   Int       @default(12)
+  /// UPLOAD = brand CSV; GENERATE = Brand2School secure generator.
+  codeMode            CampaignCodeMode?
   createdAt           DateTime  @default(now())
   updatedAt           DateTime  @updatedAt
   brand               Brand     @relation(fields: [brandId], references: [id], onDelete: Cascade)
@@ -770,18 +787,40 @@ model Product {
 
 /// Product code inventory per campaign — rows created via Excel/CSV/Word import or API generate.
 model CodeBatch {
-  id           String    @id @default(cuid())
-  campaignId   String
+  id             String          @id @default(cuid())
+  campaignId     String
   /// Human label from brand portal upload (e.g. "March 2026 bottle caps").
-  batchName    String
-  batchCode    String
-  codeVersion  String    @default("V1")
-  expiresAt    DateTime?
-  createdAt    DateTime  @default(now())
-  campaign     Campaign  @relation(fields: [campaignId], references: [id], onDelete: Cascade)
-  codes        Code[]
+  batchName      String
+  batchCode      String
+  codeVersion    String          @default("V1")
+  expiresAt      DateTime?
+  status         CodeBatchStatus @default(AVAILABLE)
+  /// UPLOAD | GENERATE — how this batch was created.
+  source         CampaignCodeMode?
+  downloadedAt   DateTime?
+  downloadCount  Int             @default(0)
+  createdByUserId String?
+  createdAt      DateTime        @default(now())
+  campaign       Campaign        @relation(fields: [campaignId], references: [id], onDelete: Cascade)
+  codes          Code[]
+  downloads      CodeBatchDownload[]
 
   @@unique([campaignId, batchCode, codeVersion])
+  @@index([campaignId, status])
+}
+
+/// Audit trail for batch CSV downloads (fraud / inventory).
+model CodeBatchDownload {
+  id          String    @id @default(cuid())
+  batchId     String
+  downloadedByUserId String?
+  ipAddress   String?
+  userAgent   String?
+  codeCount   Int
+  createdAt   DateTime  @default(now())
+  batch       CodeBatch @relation(fields: [batchId], references: [id], onDelete: Cascade)
+
+  @@index([batchId, createdAt])
 }
 
 model Code {

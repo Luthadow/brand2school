@@ -119,6 +119,11 @@ export type Product = $Result.DefaultSelection<Prisma.$ProductPayload>
  */
 export type CodeBatch = $Result.DefaultSelection<Prisma.$CodeBatchPayload>
 /**
+ * Model CodeBatchDownload
+ * Audit trail for batch CSV downloads (fraud / inventory).
+ */
+export type CodeBatchDownload = $Result.DefaultSelection<Prisma.$CodeBatchDownloadPayload>
+/**
  * Model Code
  * 
  */
@@ -472,6 +477,14 @@ export const CampaignRenewalStatus: {
 export type CampaignRenewalStatus = (typeof CampaignRenewalStatus)[keyof typeof CampaignRenewalStatus]
 
 
+export const CampaignCodeMode: {
+  UPLOAD: 'UPLOAD',
+  GENERATE: 'GENERATE'
+};
+
+export type CampaignCodeMode = (typeof CampaignCodeMode)[keyof typeof CampaignCodeMode]
+
+
 export const BrandAgreementStatus: {
   DRAFT: 'DRAFT',
   GENERATED: 'GENERATED',
@@ -502,6 +515,17 @@ export const CampaignInvoiceStatus: {
 };
 
 export type CampaignInvoiceStatus = (typeof CampaignInvoiceStatus)[keyof typeof CampaignInvoiceStatus]
+
+
+export const CodeBatchStatus: {
+  AVAILABLE: 'AVAILABLE',
+  DISTRIBUTED: 'DISTRIBUTED',
+  PARTIALLY_USED: 'PARTIALLY_USED',
+  USED: 'USED',
+  EXPIRED: 'EXPIRED'
+};
+
+export type CodeBatchStatus = (typeof CodeBatchStatus)[keyof typeof CodeBatchStatus]
 
 
 export const CodeStatus: {
@@ -693,6 +717,10 @@ export type CampaignRenewalStatus = $Enums.CampaignRenewalStatus
 
 export const CampaignRenewalStatus: typeof $Enums.CampaignRenewalStatus
 
+export type CampaignCodeMode = $Enums.CampaignCodeMode
+
+export const CampaignCodeMode: typeof $Enums.CampaignCodeMode
+
 export type BrandAgreementStatus = $Enums.BrandAgreementStatus
 
 export const BrandAgreementStatus: typeof $Enums.BrandAgreementStatus
@@ -704,6 +732,10 @@ export const CampaignInvoiceType: typeof $Enums.CampaignInvoiceType
 export type CampaignInvoiceStatus = $Enums.CampaignInvoiceStatus
 
 export const CampaignInvoiceStatus: typeof $Enums.CampaignInvoiceStatus
+
+export type CodeBatchStatus = $Enums.CodeBatchStatus
+
+export const CodeBatchStatus: typeof $Enums.CodeBatchStatus
 
 export type CodeStatus = $Enums.CodeStatus
 
@@ -1073,6 +1105,16 @@ export class PrismaClient<
     * ```
     */
   get codeBatch(): Prisma.CodeBatchDelegate<ExtArgs>;
+
+  /**
+   * `prisma.codeBatchDownload`: Exposes CRUD operations for the **CodeBatchDownload** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more CodeBatchDownloads
+    * const codeBatchDownloads = await prisma.codeBatchDownload.findMany()
+    * ```
+    */
+  get codeBatchDownload(): Prisma.CodeBatchDownloadDelegate<ExtArgs>;
 
   /**
    * `prisma.code`: Exposes CRUD operations for the **Code** model.
@@ -1715,6 +1757,7 @@ export namespace Prisma {
     CampaignInvoice: 'CampaignInvoice',
     Product: 'Product',
     CodeBatch: 'CodeBatch',
+    CodeBatchDownload: 'CodeBatchDownload',
     Code: 'Code',
     SubmissionAttempt: 'SubmissionAttempt',
     Submission: 'Submission',
@@ -1748,7 +1791,7 @@ export namespace Prisma {
 
   export type TypeMap<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> = {
     meta: {
-      modelProps: "user" | "passwordResetToken" | "school" | "schoolSubmittedNeed" | "schoolVolunteer" | "schoolEvent" | "schoolEventVolunteer" | "schoolAlumni" | "schoolInnovationChallenge" | "schoolEnterpriseProject" | "schoolCrmContact" | "schoolCrmActivity" | "schoolCrmTask" | "schoolVerification" | "learner" | "brand" | "campaign" | "brandAgreement" | "campaignInvoice" | "product" | "codeBatch" | "code" | "submissionAttempt" | "submission" | "auditLog" | "refreshSession" | "fraudFlag" | "adminQueuePreset" | "auditExportJob" | "whatsAppConversation" | "whatsAppMessage" | "webhookDedup" | "esgReportSchedule" | "fundingContribution" | "esgReportDelivery" | "notificationLog" | "notificationJob" | "provinceNomination" | "brandWishlistNomination"
+      modelProps: "user" | "passwordResetToken" | "school" | "schoolSubmittedNeed" | "schoolVolunteer" | "schoolEvent" | "schoolEventVolunteer" | "schoolAlumni" | "schoolInnovationChallenge" | "schoolEnterpriseProject" | "schoolCrmContact" | "schoolCrmActivity" | "schoolCrmTask" | "schoolVerification" | "learner" | "brand" | "campaign" | "brandAgreement" | "campaignInvoice" | "product" | "codeBatch" | "codeBatchDownload" | "code" | "submissionAttempt" | "submission" | "auditLog" | "refreshSession" | "fraudFlag" | "adminQueuePreset" | "auditExportJob" | "whatsAppConversation" | "whatsAppMessage" | "webhookDedup" | "esgReportSchedule" | "fundingContribution" | "esgReportDelivery" | "notificationLog" | "notificationJob" | "provinceNomination" | "brandWishlistNomination"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -3219,6 +3262,76 @@ export namespace Prisma {
           count: {
             args: Prisma.CodeBatchCountArgs<ExtArgs>
             result: $Utils.Optional<CodeBatchCountAggregateOutputType> | number
+          }
+        }
+      }
+      CodeBatchDownload: {
+        payload: Prisma.$CodeBatchDownloadPayload<ExtArgs>
+        fields: Prisma.CodeBatchDownloadFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.CodeBatchDownloadFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CodeBatchDownloadPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.CodeBatchDownloadFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CodeBatchDownloadPayload>
+          }
+          findFirst: {
+            args: Prisma.CodeBatchDownloadFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CodeBatchDownloadPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.CodeBatchDownloadFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CodeBatchDownloadPayload>
+          }
+          findMany: {
+            args: Prisma.CodeBatchDownloadFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CodeBatchDownloadPayload>[]
+          }
+          create: {
+            args: Prisma.CodeBatchDownloadCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CodeBatchDownloadPayload>
+          }
+          createMany: {
+            args: Prisma.CodeBatchDownloadCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.CodeBatchDownloadCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CodeBatchDownloadPayload>[]
+          }
+          delete: {
+            args: Prisma.CodeBatchDownloadDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CodeBatchDownloadPayload>
+          }
+          update: {
+            args: Prisma.CodeBatchDownloadUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CodeBatchDownloadPayload>
+          }
+          deleteMany: {
+            args: Prisma.CodeBatchDownloadDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.CodeBatchDownloadUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          upsert: {
+            args: Prisma.CodeBatchDownloadUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CodeBatchDownloadPayload>
+          }
+          aggregate: {
+            args: Prisma.CodeBatchDownloadAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateCodeBatchDownload>
+          }
+          groupBy: {
+            args: Prisma.CodeBatchDownloadGroupByArgs<ExtArgs>
+            result: $Utils.Optional<CodeBatchDownloadGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.CodeBatchDownloadCountArgs<ExtArgs>
+            result: $Utils.Optional<CodeBatchDownloadCountAggregateOutputType> | number
           }
         }
       }
@@ -5188,10 +5301,12 @@ export namespace Prisma {
 
   export type CodeBatchCountOutputType = {
     codes: number
+    downloads: number
   }
 
   export type CodeBatchCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     codes?: boolean | CodeBatchCountOutputTypeCountCodesArgs
+    downloads?: boolean | CodeBatchCountOutputTypeCountDownloadsArgs
   }
 
   // Custom InputTypes
@@ -5210,6 +5325,13 @@ export namespace Prisma {
    */
   export type CodeBatchCountOutputTypeCountCodesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: CodeWhereInput
+  }
+
+  /**
+   * CodeBatchCountOutputType without action
+   */
+  export type CodeBatchCountOutputTypeCountDownloadsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: CodeBatchDownloadWhereInput
   }
 
 
@@ -23148,6 +23270,7 @@ export namespace Prisma {
     partnershipLabel: string | null
     sponsorshipTrack: string | null
     licenseTermMonths: number | null
+    codeMode: $Enums.CampaignCodeMode | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -23186,6 +23309,7 @@ export namespace Prisma {
     partnershipLabel: string | null
     sponsorshipTrack: string | null
     licenseTermMonths: number | null
+    codeMode: $Enums.CampaignCodeMode | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -23231,6 +23355,7 @@ export namespace Prisma {
     partnershipLabel: number
     sponsorshipTrack: number
     licenseTermMonths: number
+    codeMode: number
     createdAt: number
     updatedAt: number
     _all: number
@@ -23295,6 +23420,7 @@ export namespace Prisma {
     partnershipLabel?: true
     sponsorshipTrack?: true
     licenseTermMonths?: true
+    codeMode?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -23333,6 +23459,7 @@ export namespace Prisma {
     partnershipLabel?: true
     sponsorshipTrack?: true
     licenseTermMonths?: true
+    codeMode?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -23378,6 +23505,7 @@ export namespace Prisma {
     partnershipLabel?: true
     sponsorshipTrack?: true
     licenseTermMonths?: true
+    codeMode?: true
     createdAt?: true
     updatedAt?: true
     _all?: true
@@ -23510,6 +23638,7 @@ export namespace Prisma {
     partnershipLabel: string | null
     sponsorshipTrack: string | null
     licenseTermMonths: number
+    codeMode: $Enums.CampaignCodeMode | null
     createdAt: Date
     updatedAt: Date
     _count: CampaignCountAggregateOutputType | null
@@ -23574,6 +23703,7 @@ export namespace Prisma {
     partnershipLabel?: boolean
     sponsorshipTrack?: boolean
     licenseTermMonths?: boolean
+    codeMode?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     brand?: boolean | BrandDefaultArgs<ExtArgs>
@@ -23629,6 +23759,7 @@ export namespace Prisma {
     partnershipLabel?: boolean
     sponsorshipTrack?: boolean
     licenseTermMonths?: boolean
+    codeMode?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     brand?: boolean | BrandDefaultArgs<ExtArgs>
@@ -23676,6 +23807,7 @@ export namespace Prisma {
     partnershipLabel?: boolean
     sponsorshipTrack?: boolean
     licenseTermMonths?: boolean
+    codeMode?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
@@ -23751,6 +23883,10 @@ export namespace Prisma {
       partnershipLabel: string | null
       sponsorshipTrack: string | null
       licenseTermMonths: number
+      /**
+       * UPLOAD = brand CSV; GENERATE = Brand2School secure generator.
+       */
+      codeMode: $Enums.CampaignCodeMode | null
       createdAt: Date
       updatedAt: Date
     }, ExtArgs["result"]["campaign"]>
@@ -24195,6 +24331,7 @@ export namespace Prisma {
     readonly partnershipLabel: FieldRef<"Campaign", 'String'>
     readonly sponsorshipTrack: FieldRef<"Campaign", 'String'>
     readonly licenseTermMonths: FieldRef<"Campaign", 'Int'>
+    readonly codeMode: FieldRef<"Campaign", 'CampaignCodeMode'>
     readonly createdAt: FieldRef<"Campaign", 'DateTime'>
     readonly updatedAt: FieldRef<"Campaign", 'DateTime'>
   }
@@ -27807,8 +27944,18 @@ export namespace Prisma {
 
   export type AggregateCodeBatch = {
     _count: CodeBatchCountAggregateOutputType | null
+    _avg: CodeBatchAvgAggregateOutputType | null
+    _sum: CodeBatchSumAggregateOutputType | null
     _min: CodeBatchMinAggregateOutputType | null
     _max: CodeBatchMaxAggregateOutputType | null
+  }
+
+  export type CodeBatchAvgAggregateOutputType = {
+    downloadCount: number | null
+  }
+
+  export type CodeBatchSumAggregateOutputType = {
+    downloadCount: number | null
   }
 
   export type CodeBatchMinAggregateOutputType = {
@@ -27818,6 +27965,11 @@ export namespace Prisma {
     batchCode: string | null
     codeVersion: string | null
     expiresAt: Date | null
+    status: $Enums.CodeBatchStatus | null
+    source: $Enums.CampaignCodeMode | null
+    downloadedAt: Date | null
+    downloadCount: number | null
+    createdByUserId: string | null
     createdAt: Date | null
   }
 
@@ -27828,6 +27980,11 @@ export namespace Prisma {
     batchCode: string | null
     codeVersion: string | null
     expiresAt: Date | null
+    status: $Enums.CodeBatchStatus | null
+    source: $Enums.CampaignCodeMode | null
+    downloadedAt: Date | null
+    downloadCount: number | null
+    createdByUserId: string | null
     createdAt: Date | null
   }
 
@@ -27838,10 +27995,23 @@ export namespace Prisma {
     batchCode: number
     codeVersion: number
     expiresAt: number
+    status: number
+    source: number
+    downloadedAt: number
+    downloadCount: number
+    createdByUserId: number
     createdAt: number
     _all: number
   }
 
+
+  export type CodeBatchAvgAggregateInputType = {
+    downloadCount?: true
+  }
+
+  export type CodeBatchSumAggregateInputType = {
+    downloadCount?: true
+  }
 
   export type CodeBatchMinAggregateInputType = {
     id?: true
@@ -27850,6 +28020,11 @@ export namespace Prisma {
     batchCode?: true
     codeVersion?: true
     expiresAt?: true
+    status?: true
+    source?: true
+    downloadedAt?: true
+    downloadCount?: true
+    createdByUserId?: true
     createdAt?: true
   }
 
@@ -27860,6 +28035,11 @@ export namespace Prisma {
     batchCode?: true
     codeVersion?: true
     expiresAt?: true
+    status?: true
+    source?: true
+    downloadedAt?: true
+    downloadCount?: true
+    createdByUserId?: true
     createdAt?: true
   }
 
@@ -27870,6 +28050,11 @@ export namespace Prisma {
     batchCode?: true
     codeVersion?: true
     expiresAt?: true
+    status?: true
+    source?: true
+    downloadedAt?: true
+    downloadCount?: true
+    createdByUserId?: true
     createdAt?: true
     _all?: true
   }
@@ -27912,6 +28097,18 @@ export namespace Prisma {
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
+     * Select which fields to average
+    **/
+    _avg?: CodeBatchAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: CodeBatchSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
      * Select which fields to find the minimum value
     **/
     _min?: CodeBatchMinAggregateInputType
@@ -27942,6 +28139,8 @@ export namespace Prisma {
     take?: number
     skip?: number
     _count?: CodeBatchCountAggregateInputType | true
+    _avg?: CodeBatchAvgAggregateInputType
+    _sum?: CodeBatchSumAggregateInputType
     _min?: CodeBatchMinAggregateInputType
     _max?: CodeBatchMaxAggregateInputType
   }
@@ -27953,8 +28152,15 @@ export namespace Prisma {
     batchCode: string
     codeVersion: string
     expiresAt: Date | null
+    status: $Enums.CodeBatchStatus
+    source: $Enums.CampaignCodeMode | null
+    downloadedAt: Date | null
+    downloadCount: number
+    createdByUserId: string | null
     createdAt: Date
     _count: CodeBatchCountAggregateOutputType | null
+    _avg: CodeBatchAvgAggregateOutputType | null
+    _sum: CodeBatchSumAggregateOutputType | null
     _min: CodeBatchMinAggregateOutputType | null
     _max: CodeBatchMaxAggregateOutputType | null
   }
@@ -27980,9 +28186,15 @@ export namespace Prisma {
     batchCode?: boolean
     codeVersion?: boolean
     expiresAt?: boolean
+    status?: boolean
+    source?: boolean
+    downloadedAt?: boolean
+    downloadCount?: boolean
+    createdByUserId?: boolean
     createdAt?: boolean
     campaign?: boolean | CampaignDefaultArgs<ExtArgs>
     codes?: boolean | CodeBatch$codesArgs<ExtArgs>
+    downloads?: boolean | CodeBatch$downloadsArgs<ExtArgs>
     _count?: boolean | CodeBatchCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["codeBatch"]>
 
@@ -27993,6 +28205,11 @@ export namespace Prisma {
     batchCode?: boolean
     codeVersion?: boolean
     expiresAt?: boolean
+    status?: boolean
+    source?: boolean
+    downloadedAt?: boolean
+    downloadCount?: boolean
+    createdByUserId?: boolean
     createdAt?: boolean
     campaign?: boolean | CampaignDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["codeBatch"]>
@@ -28004,12 +28221,18 @@ export namespace Prisma {
     batchCode?: boolean
     codeVersion?: boolean
     expiresAt?: boolean
+    status?: boolean
+    source?: boolean
+    downloadedAt?: boolean
+    downloadCount?: boolean
+    createdByUserId?: boolean
     createdAt?: boolean
   }
 
   export type CodeBatchInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     campaign?: boolean | CampaignDefaultArgs<ExtArgs>
     codes?: boolean | CodeBatch$codesArgs<ExtArgs>
+    downloads?: boolean | CodeBatch$downloadsArgs<ExtArgs>
     _count?: boolean | CodeBatchCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type CodeBatchIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -28021,6 +28244,7 @@ export namespace Prisma {
     objects: {
       campaign: Prisma.$CampaignPayload<ExtArgs>
       codes: Prisma.$CodePayload<ExtArgs>[]
+      downloads: Prisma.$CodeBatchDownloadPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -28032,6 +28256,14 @@ export namespace Prisma {
       batchCode: string
       codeVersion: string
       expiresAt: Date | null
+      status: $Enums.CodeBatchStatus
+      /**
+       * UPLOAD | GENERATE — how this batch was created.
+       */
+      source: $Enums.CampaignCodeMode | null
+      downloadedAt: Date | null
+      downloadCount: number
+      createdByUserId: string | null
       createdAt: Date
     }, ExtArgs["result"]["codeBatch"]>
     composites: {}
@@ -28399,6 +28631,7 @@ export namespace Prisma {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     campaign<T extends CampaignDefaultArgs<ExtArgs> = {}>(args?: Subset<T, CampaignDefaultArgs<ExtArgs>>): Prisma__CampaignClient<$Result.GetResult<Prisma.$CampaignPayload<ExtArgs>, T, "findUniqueOrThrow"> | Null, Null, ExtArgs>
     codes<T extends CodeBatch$codesArgs<ExtArgs> = {}>(args?: Subset<T, CodeBatch$codesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CodePayload<ExtArgs>, T, "findMany"> | Null>
+    downloads<T extends CodeBatch$downloadsArgs<ExtArgs> = {}>(args?: Subset<T, CodeBatch$downloadsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CodeBatchDownloadPayload<ExtArgs>, T, "findMany"> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -28434,6 +28667,11 @@ export namespace Prisma {
     readonly batchCode: FieldRef<"CodeBatch", 'String'>
     readonly codeVersion: FieldRef<"CodeBatch", 'String'>
     readonly expiresAt: FieldRef<"CodeBatch", 'DateTime'>
+    readonly status: FieldRef<"CodeBatch", 'CodeBatchStatus'>
+    readonly source: FieldRef<"CodeBatch", 'CampaignCodeMode'>
+    readonly downloadedAt: FieldRef<"CodeBatch", 'DateTime'>
+    readonly downloadCount: FieldRef<"CodeBatch", 'Int'>
+    readonly createdByUserId: FieldRef<"CodeBatch", 'String'>
     readonly createdAt: FieldRef<"CodeBatch", 'DateTime'>
   }
     
@@ -28773,6 +29011,26 @@ export namespace Prisma {
   }
 
   /**
+   * CodeBatch.downloads
+   */
+  export type CodeBatch$downloadsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CodeBatchDownload
+     */
+    select?: CodeBatchDownloadSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CodeBatchDownloadInclude<ExtArgs> | null
+    where?: CodeBatchDownloadWhereInput
+    orderBy?: CodeBatchDownloadOrderByWithRelationInput | CodeBatchDownloadOrderByWithRelationInput[]
+    cursor?: CodeBatchDownloadWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: CodeBatchDownloadScalarFieldEnum | CodeBatchDownloadScalarFieldEnum[]
+  }
+
+  /**
    * CodeBatch without action
    */
   export type CodeBatchDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -28784,6 +29042,997 @@ export namespace Prisma {
      * Choose, which related nodes to fetch as well
      */
     include?: CodeBatchInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model CodeBatchDownload
+   */
+
+  export type AggregateCodeBatchDownload = {
+    _count: CodeBatchDownloadCountAggregateOutputType | null
+    _avg: CodeBatchDownloadAvgAggregateOutputType | null
+    _sum: CodeBatchDownloadSumAggregateOutputType | null
+    _min: CodeBatchDownloadMinAggregateOutputType | null
+    _max: CodeBatchDownloadMaxAggregateOutputType | null
+  }
+
+  export type CodeBatchDownloadAvgAggregateOutputType = {
+    codeCount: number | null
+  }
+
+  export type CodeBatchDownloadSumAggregateOutputType = {
+    codeCount: number | null
+  }
+
+  export type CodeBatchDownloadMinAggregateOutputType = {
+    id: string | null
+    batchId: string | null
+    downloadedByUserId: string | null
+    ipAddress: string | null
+    userAgent: string | null
+    codeCount: number | null
+    createdAt: Date | null
+  }
+
+  export type CodeBatchDownloadMaxAggregateOutputType = {
+    id: string | null
+    batchId: string | null
+    downloadedByUserId: string | null
+    ipAddress: string | null
+    userAgent: string | null
+    codeCount: number | null
+    createdAt: Date | null
+  }
+
+  export type CodeBatchDownloadCountAggregateOutputType = {
+    id: number
+    batchId: number
+    downloadedByUserId: number
+    ipAddress: number
+    userAgent: number
+    codeCount: number
+    createdAt: number
+    _all: number
+  }
+
+
+  export type CodeBatchDownloadAvgAggregateInputType = {
+    codeCount?: true
+  }
+
+  export type CodeBatchDownloadSumAggregateInputType = {
+    codeCount?: true
+  }
+
+  export type CodeBatchDownloadMinAggregateInputType = {
+    id?: true
+    batchId?: true
+    downloadedByUserId?: true
+    ipAddress?: true
+    userAgent?: true
+    codeCount?: true
+    createdAt?: true
+  }
+
+  export type CodeBatchDownloadMaxAggregateInputType = {
+    id?: true
+    batchId?: true
+    downloadedByUserId?: true
+    ipAddress?: true
+    userAgent?: true
+    codeCount?: true
+    createdAt?: true
+  }
+
+  export type CodeBatchDownloadCountAggregateInputType = {
+    id?: true
+    batchId?: true
+    downloadedByUserId?: true
+    ipAddress?: true
+    userAgent?: true
+    codeCount?: true
+    createdAt?: true
+    _all?: true
+  }
+
+  export type CodeBatchDownloadAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which CodeBatchDownload to aggregate.
+     */
+    where?: CodeBatchDownloadWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of CodeBatchDownloads to fetch.
+     */
+    orderBy?: CodeBatchDownloadOrderByWithRelationInput | CodeBatchDownloadOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: CodeBatchDownloadWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` CodeBatchDownloads from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` CodeBatchDownloads.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned CodeBatchDownloads
+    **/
+    _count?: true | CodeBatchDownloadCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: CodeBatchDownloadAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: CodeBatchDownloadSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: CodeBatchDownloadMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: CodeBatchDownloadMaxAggregateInputType
+  }
+
+  export type GetCodeBatchDownloadAggregateType<T extends CodeBatchDownloadAggregateArgs> = {
+        [P in keyof T & keyof AggregateCodeBatchDownload]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateCodeBatchDownload[P]>
+      : GetScalarType<T[P], AggregateCodeBatchDownload[P]>
+  }
+
+
+
+
+  export type CodeBatchDownloadGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: CodeBatchDownloadWhereInput
+    orderBy?: CodeBatchDownloadOrderByWithAggregationInput | CodeBatchDownloadOrderByWithAggregationInput[]
+    by: CodeBatchDownloadScalarFieldEnum[] | CodeBatchDownloadScalarFieldEnum
+    having?: CodeBatchDownloadScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: CodeBatchDownloadCountAggregateInputType | true
+    _avg?: CodeBatchDownloadAvgAggregateInputType
+    _sum?: CodeBatchDownloadSumAggregateInputType
+    _min?: CodeBatchDownloadMinAggregateInputType
+    _max?: CodeBatchDownloadMaxAggregateInputType
+  }
+
+  export type CodeBatchDownloadGroupByOutputType = {
+    id: string
+    batchId: string
+    downloadedByUserId: string | null
+    ipAddress: string | null
+    userAgent: string | null
+    codeCount: number
+    createdAt: Date
+    _count: CodeBatchDownloadCountAggregateOutputType | null
+    _avg: CodeBatchDownloadAvgAggregateOutputType | null
+    _sum: CodeBatchDownloadSumAggregateOutputType | null
+    _min: CodeBatchDownloadMinAggregateOutputType | null
+    _max: CodeBatchDownloadMaxAggregateOutputType | null
+  }
+
+  type GetCodeBatchDownloadGroupByPayload<T extends CodeBatchDownloadGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<CodeBatchDownloadGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof CodeBatchDownloadGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], CodeBatchDownloadGroupByOutputType[P]>
+            : GetScalarType<T[P], CodeBatchDownloadGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type CodeBatchDownloadSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    batchId?: boolean
+    downloadedByUserId?: boolean
+    ipAddress?: boolean
+    userAgent?: boolean
+    codeCount?: boolean
+    createdAt?: boolean
+    batch?: boolean | CodeBatchDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["codeBatchDownload"]>
+
+  export type CodeBatchDownloadSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    batchId?: boolean
+    downloadedByUserId?: boolean
+    ipAddress?: boolean
+    userAgent?: boolean
+    codeCount?: boolean
+    createdAt?: boolean
+    batch?: boolean | CodeBatchDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["codeBatchDownload"]>
+
+  export type CodeBatchDownloadSelectScalar = {
+    id?: boolean
+    batchId?: boolean
+    downloadedByUserId?: boolean
+    ipAddress?: boolean
+    userAgent?: boolean
+    codeCount?: boolean
+    createdAt?: boolean
+  }
+
+  export type CodeBatchDownloadInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    batch?: boolean | CodeBatchDefaultArgs<ExtArgs>
+  }
+  export type CodeBatchDownloadIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    batch?: boolean | CodeBatchDefaultArgs<ExtArgs>
+  }
+
+  export type $CodeBatchDownloadPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "CodeBatchDownload"
+    objects: {
+      batch: Prisma.$CodeBatchPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      batchId: string
+      downloadedByUserId: string | null
+      ipAddress: string | null
+      userAgent: string | null
+      codeCount: number
+      createdAt: Date
+    }, ExtArgs["result"]["codeBatchDownload"]>
+    composites: {}
+  }
+
+  type CodeBatchDownloadGetPayload<S extends boolean | null | undefined | CodeBatchDownloadDefaultArgs> = $Result.GetResult<Prisma.$CodeBatchDownloadPayload, S>
+
+  type CodeBatchDownloadCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = 
+    Omit<CodeBatchDownloadFindManyArgs, 'select' | 'include' | 'distinct'> & {
+      select?: CodeBatchDownloadCountAggregateInputType | true
+    }
+
+  export interface CodeBatchDownloadDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['CodeBatchDownload'], meta: { name: 'CodeBatchDownload' } }
+    /**
+     * Find zero or one CodeBatchDownload that matches the filter.
+     * @param {CodeBatchDownloadFindUniqueArgs} args - Arguments to find a CodeBatchDownload
+     * @example
+     * // Get one CodeBatchDownload
+     * const codeBatchDownload = await prisma.codeBatchDownload.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends CodeBatchDownloadFindUniqueArgs>(args: SelectSubset<T, CodeBatchDownloadFindUniqueArgs<ExtArgs>>): Prisma__CodeBatchDownloadClient<$Result.GetResult<Prisma.$CodeBatchDownloadPayload<ExtArgs>, T, "findUnique"> | null, null, ExtArgs>
+
+    /**
+     * Find one CodeBatchDownload that matches the filter or throw an error with `error.code='P2025'` 
+     * if no matches were found.
+     * @param {CodeBatchDownloadFindUniqueOrThrowArgs} args - Arguments to find a CodeBatchDownload
+     * @example
+     * // Get one CodeBatchDownload
+     * const codeBatchDownload = await prisma.codeBatchDownload.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends CodeBatchDownloadFindUniqueOrThrowArgs>(args: SelectSubset<T, CodeBatchDownloadFindUniqueOrThrowArgs<ExtArgs>>): Prisma__CodeBatchDownloadClient<$Result.GetResult<Prisma.$CodeBatchDownloadPayload<ExtArgs>, T, "findUniqueOrThrow">, never, ExtArgs>
+
+    /**
+     * Find the first CodeBatchDownload that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CodeBatchDownloadFindFirstArgs} args - Arguments to find a CodeBatchDownload
+     * @example
+     * // Get one CodeBatchDownload
+     * const codeBatchDownload = await prisma.codeBatchDownload.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends CodeBatchDownloadFindFirstArgs>(args?: SelectSubset<T, CodeBatchDownloadFindFirstArgs<ExtArgs>>): Prisma__CodeBatchDownloadClient<$Result.GetResult<Prisma.$CodeBatchDownloadPayload<ExtArgs>, T, "findFirst"> | null, null, ExtArgs>
+
+    /**
+     * Find the first CodeBatchDownload that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CodeBatchDownloadFindFirstOrThrowArgs} args - Arguments to find a CodeBatchDownload
+     * @example
+     * // Get one CodeBatchDownload
+     * const codeBatchDownload = await prisma.codeBatchDownload.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends CodeBatchDownloadFindFirstOrThrowArgs>(args?: SelectSubset<T, CodeBatchDownloadFindFirstOrThrowArgs<ExtArgs>>): Prisma__CodeBatchDownloadClient<$Result.GetResult<Prisma.$CodeBatchDownloadPayload<ExtArgs>, T, "findFirstOrThrow">, never, ExtArgs>
+
+    /**
+     * Find zero or more CodeBatchDownloads that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CodeBatchDownloadFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all CodeBatchDownloads
+     * const codeBatchDownloads = await prisma.codeBatchDownload.findMany()
+     * 
+     * // Get first 10 CodeBatchDownloads
+     * const codeBatchDownloads = await prisma.codeBatchDownload.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const codeBatchDownloadWithIdOnly = await prisma.codeBatchDownload.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends CodeBatchDownloadFindManyArgs>(args?: SelectSubset<T, CodeBatchDownloadFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CodeBatchDownloadPayload<ExtArgs>, T, "findMany">>
+
+    /**
+     * Create a CodeBatchDownload.
+     * @param {CodeBatchDownloadCreateArgs} args - Arguments to create a CodeBatchDownload.
+     * @example
+     * // Create one CodeBatchDownload
+     * const CodeBatchDownload = await prisma.codeBatchDownload.create({
+     *   data: {
+     *     // ... data to create a CodeBatchDownload
+     *   }
+     * })
+     * 
+     */
+    create<T extends CodeBatchDownloadCreateArgs>(args: SelectSubset<T, CodeBatchDownloadCreateArgs<ExtArgs>>): Prisma__CodeBatchDownloadClient<$Result.GetResult<Prisma.$CodeBatchDownloadPayload<ExtArgs>, T, "create">, never, ExtArgs>
+
+    /**
+     * Create many CodeBatchDownloads.
+     * @param {CodeBatchDownloadCreateManyArgs} args - Arguments to create many CodeBatchDownloads.
+     * @example
+     * // Create many CodeBatchDownloads
+     * const codeBatchDownload = await prisma.codeBatchDownload.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends CodeBatchDownloadCreateManyArgs>(args?: SelectSubset<T, CodeBatchDownloadCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many CodeBatchDownloads and returns the data saved in the database.
+     * @param {CodeBatchDownloadCreateManyAndReturnArgs} args - Arguments to create many CodeBatchDownloads.
+     * @example
+     * // Create many CodeBatchDownloads
+     * const codeBatchDownload = await prisma.codeBatchDownload.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many CodeBatchDownloads and only return the `id`
+     * const codeBatchDownloadWithIdOnly = await prisma.codeBatchDownload.createManyAndReturn({ 
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends CodeBatchDownloadCreateManyAndReturnArgs>(args?: SelectSubset<T, CodeBatchDownloadCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CodeBatchDownloadPayload<ExtArgs>, T, "createManyAndReturn">>
+
+    /**
+     * Delete a CodeBatchDownload.
+     * @param {CodeBatchDownloadDeleteArgs} args - Arguments to delete one CodeBatchDownload.
+     * @example
+     * // Delete one CodeBatchDownload
+     * const CodeBatchDownload = await prisma.codeBatchDownload.delete({
+     *   where: {
+     *     // ... filter to delete one CodeBatchDownload
+     *   }
+     * })
+     * 
+     */
+    delete<T extends CodeBatchDownloadDeleteArgs>(args: SelectSubset<T, CodeBatchDownloadDeleteArgs<ExtArgs>>): Prisma__CodeBatchDownloadClient<$Result.GetResult<Prisma.$CodeBatchDownloadPayload<ExtArgs>, T, "delete">, never, ExtArgs>
+
+    /**
+     * Update one CodeBatchDownload.
+     * @param {CodeBatchDownloadUpdateArgs} args - Arguments to update one CodeBatchDownload.
+     * @example
+     * // Update one CodeBatchDownload
+     * const codeBatchDownload = await prisma.codeBatchDownload.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends CodeBatchDownloadUpdateArgs>(args: SelectSubset<T, CodeBatchDownloadUpdateArgs<ExtArgs>>): Prisma__CodeBatchDownloadClient<$Result.GetResult<Prisma.$CodeBatchDownloadPayload<ExtArgs>, T, "update">, never, ExtArgs>
+
+    /**
+     * Delete zero or more CodeBatchDownloads.
+     * @param {CodeBatchDownloadDeleteManyArgs} args - Arguments to filter CodeBatchDownloads to delete.
+     * @example
+     * // Delete a few CodeBatchDownloads
+     * const { count } = await prisma.codeBatchDownload.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends CodeBatchDownloadDeleteManyArgs>(args?: SelectSubset<T, CodeBatchDownloadDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more CodeBatchDownloads.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CodeBatchDownloadUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many CodeBatchDownloads
+     * const codeBatchDownload = await prisma.codeBatchDownload.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends CodeBatchDownloadUpdateManyArgs>(args: SelectSubset<T, CodeBatchDownloadUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one CodeBatchDownload.
+     * @param {CodeBatchDownloadUpsertArgs} args - Arguments to update or create a CodeBatchDownload.
+     * @example
+     * // Update or create a CodeBatchDownload
+     * const codeBatchDownload = await prisma.codeBatchDownload.upsert({
+     *   create: {
+     *     // ... data to create a CodeBatchDownload
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the CodeBatchDownload we want to update
+     *   }
+     * })
+     */
+    upsert<T extends CodeBatchDownloadUpsertArgs>(args: SelectSubset<T, CodeBatchDownloadUpsertArgs<ExtArgs>>): Prisma__CodeBatchDownloadClient<$Result.GetResult<Prisma.$CodeBatchDownloadPayload<ExtArgs>, T, "upsert">, never, ExtArgs>
+
+
+    /**
+     * Count the number of CodeBatchDownloads.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CodeBatchDownloadCountArgs} args - Arguments to filter CodeBatchDownloads to count.
+     * @example
+     * // Count the number of CodeBatchDownloads
+     * const count = await prisma.codeBatchDownload.count({
+     *   where: {
+     *     // ... the filter for the CodeBatchDownloads we want to count
+     *   }
+     * })
+    **/
+    count<T extends CodeBatchDownloadCountArgs>(
+      args?: Subset<T, CodeBatchDownloadCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], CodeBatchDownloadCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a CodeBatchDownload.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CodeBatchDownloadAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends CodeBatchDownloadAggregateArgs>(args: Subset<T, CodeBatchDownloadAggregateArgs>): Prisma.PrismaPromise<GetCodeBatchDownloadAggregateType<T>>
+
+    /**
+     * Group by CodeBatchDownload.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CodeBatchDownloadGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends CodeBatchDownloadGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: CodeBatchDownloadGroupByArgs['orderBy'] }
+        : { orderBy?: CodeBatchDownloadGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, CodeBatchDownloadGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetCodeBatchDownloadGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the CodeBatchDownload model
+   */
+  readonly fields: CodeBatchDownloadFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for CodeBatchDownload.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__CodeBatchDownloadClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    batch<T extends CodeBatchDefaultArgs<ExtArgs> = {}>(args?: Subset<T, CodeBatchDefaultArgs<ExtArgs>>): Prisma__CodeBatchClient<$Result.GetResult<Prisma.$CodeBatchPayload<ExtArgs>, T, "findUniqueOrThrow"> | Null, Null, ExtArgs>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the CodeBatchDownload model
+   */ 
+  interface CodeBatchDownloadFieldRefs {
+    readonly id: FieldRef<"CodeBatchDownload", 'String'>
+    readonly batchId: FieldRef<"CodeBatchDownload", 'String'>
+    readonly downloadedByUserId: FieldRef<"CodeBatchDownload", 'String'>
+    readonly ipAddress: FieldRef<"CodeBatchDownload", 'String'>
+    readonly userAgent: FieldRef<"CodeBatchDownload", 'String'>
+    readonly codeCount: FieldRef<"CodeBatchDownload", 'Int'>
+    readonly createdAt: FieldRef<"CodeBatchDownload", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * CodeBatchDownload findUnique
+   */
+  export type CodeBatchDownloadFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CodeBatchDownload
+     */
+    select?: CodeBatchDownloadSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CodeBatchDownloadInclude<ExtArgs> | null
+    /**
+     * Filter, which CodeBatchDownload to fetch.
+     */
+    where: CodeBatchDownloadWhereUniqueInput
+  }
+
+  /**
+   * CodeBatchDownload findUniqueOrThrow
+   */
+  export type CodeBatchDownloadFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CodeBatchDownload
+     */
+    select?: CodeBatchDownloadSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CodeBatchDownloadInclude<ExtArgs> | null
+    /**
+     * Filter, which CodeBatchDownload to fetch.
+     */
+    where: CodeBatchDownloadWhereUniqueInput
+  }
+
+  /**
+   * CodeBatchDownload findFirst
+   */
+  export type CodeBatchDownloadFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CodeBatchDownload
+     */
+    select?: CodeBatchDownloadSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CodeBatchDownloadInclude<ExtArgs> | null
+    /**
+     * Filter, which CodeBatchDownload to fetch.
+     */
+    where?: CodeBatchDownloadWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of CodeBatchDownloads to fetch.
+     */
+    orderBy?: CodeBatchDownloadOrderByWithRelationInput | CodeBatchDownloadOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for CodeBatchDownloads.
+     */
+    cursor?: CodeBatchDownloadWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` CodeBatchDownloads from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` CodeBatchDownloads.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of CodeBatchDownloads.
+     */
+    distinct?: CodeBatchDownloadScalarFieldEnum | CodeBatchDownloadScalarFieldEnum[]
+  }
+
+  /**
+   * CodeBatchDownload findFirstOrThrow
+   */
+  export type CodeBatchDownloadFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CodeBatchDownload
+     */
+    select?: CodeBatchDownloadSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CodeBatchDownloadInclude<ExtArgs> | null
+    /**
+     * Filter, which CodeBatchDownload to fetch.
+     */
+    where?: CodeBatchDownloadWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of CodeBatchDownloads to fetch.
+     */
+    orderBy?: CodeBatchDownloadOrderByWithRelationInput | CodeBatchDownloadOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for CodeBatchDownloads.
+     */
+    cursor?: CodeBatchDownloadWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` CodeBatchDownloads from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` CodeBatchDownloads.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of CodeBatchDownloads.
+     */
+    distinct?: CodeBatchDownloadScalarFieldEnum | CodeBatchDownloadScalarFieldEnum[]
+  }
+
+  /**
+   * CodeBatchDownload findMany
+   */
+  export type CodeBatchDownloadFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CodeBatchDownload
+     */
+    select?: CodeBatchDownloadSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CodeBatchDownloadInclude<ExtArgs> | null
+    /**
+     * Filter, which CodeBatchDownloads to fetch.
+     */
+    where?: CodeBatchDownloadWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of CodeBatchDownloads to fetch.
+     */
+    orderBy?: CodeBatchDownloadOrderByWithRelationInput | CodeBatchDownloadOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing CodeBatchDownloads.
+     */
+    cursor?: CodeBatchDownloadWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` CodeBatchDownloads from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` CodeBatchDownloads.
+     */
+    skip?: number
+    distinct?: CodeBatchDownloadScalarFieldEnum | CodeBatchDownloadScalarFieldEnum[]
+  }
+
+  /**
+   * CodeBatchDownload create
+   */
+  export type CodeBatchDownloadCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CodeBatchDownload
+     */
+    select?: CodeBatchDownloadSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CodeBatchDownloadInclude<ExtArgs> | null
+    /**
+     * The data needed to create a CodeBatchDownload.
+     */
+    data: XOR<CodeBatchDownloadCreateInput, CodeBatchDownloadUncheckedCreateInput>
+  }
+
+  /**
+   * CodeBatchDownload createMany
+   */
+  export type CodeBatchDownloadCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many CodeBatchDownloads.
+     */
+    data: CodeBatchDownloadCreateManyInput | CodeBatchDownloadCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * CodeBatchDownload createManyAndReturn
+   */
+  export type CodeBatchDownloadCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CodeBatchDownload
+     */
+    select?: CodeBatchDownloadSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * The data used to create many CodeBatchDownloads.
+     */
+    data: CodeBatchDownloadCreateManyInput | CodeBatchDownloadCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CodeBatchDownloadIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * CodeBatchDownload update
+   */
+  export type CodeBatchDownloadUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CodeBatchDownload
+     */
+    select?: CodeBatchDownloadSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CodeBatchDownloadInclude<ExtArgs> | null
+    /**
+     * The data needed to update a CodeBatchDownload.
+     */
+    data: XOR<CodeBatchDownloadUpdateInput, CodeBatchDownloadUncheckedUpdateInput>
+    /**
+     * Choose, which CodeBatchDownload to update.
+     */
+    where: CodeBatchDownloadWhereUniqueInput
+  }
+
+  /**
+   * CodeBatchDownload updateMany
+   */
+  export type CodeBatchDownloadUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update CodeBatchDownloads.
+     */
+    data: XOR<CodeBatchDownloadUpdateManyMutationInput, CodeBatchDownloadUncheckedUpdateManyInput>
+    /**
+     * Filter which CodeBatchDownloads to update
+     */
+    where?: CodeBatchDownloadWhereInput
+  }
+
+  /**
+   * CodeBatchDownload upsert
+   */
+  export type CodeBatchDownloadUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CodeBatchDownload
+     */
+    select?: CodeBatchDownloadSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CodeBatchDownloadInclude<ExtArgs> | null
+    /**
+     * The filter to search for the CodeBatchDownload to update in case it exists.
+     */
+    where: CodeBatchDownloadWhereUniqueInput
+    /**
+     * In case the CodeBatchDownload found by the `where` argument doesn't exist, create a new CodeBatchDownload with this data.
+     */
+    create: XOR<CodeBatchDownloadCreateInput, CodeBatchDownloadUncheckedCreateInput>
+    /**
+     * In case the CodeBatchDownload was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<CodeBatchDownloadUpdateInput, CodeBatchDownloadUncheckedUpdateInput>
+  }
+
+  /**
+   * CodeBatchDownload delete
+   */
+  export type CodeBatchDownloadDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CodeBatchDownload
+     */
+    select?: CodeBatchDownloadSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CodeBatchDownloadInclude<ExtArgs> | null
+    /**
+     * Filter which CodeBatchDownload to delete.
+     */
+    where: CodeBatchDownloadWhereUniqueInput
+  }
+
+  /**
+   * CodeBatchDownload deleteMany
+   */
+  export type CodeBatchDownloadDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which CodeBatchDownloads to delete
+     */
+    where?: CodeBatchDownloadWhereInput
+  }
+
+  /**
+   * CodeBatchDownload without action
+   */
+  export type CodeBatchDownloadDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CodeBatchDownload
+     */
+    select?: CodeBatchDownloadSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CodeBatchDownloadInclude<ExtArgs> | null
   }
 
 
@@ -47266,6 +48515,7 @@ export namespace Prisma {
     partnershipLabel: 'partnershipLabel',
     sponsorshipTrack: 'sponsorshipTrack',
     licenseTermMonths: 'licenseTermMonths',
+    codeMode: 'codeMode',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
   };
@@ -47332,10 +48582,28 @@ export namespace Prisma {
     batchCode: 'batchCode',
     codeVersion: 'codeVersion',
     expiresAt: 'expiresAt',
+    status: 'status',
+    source: 'source',
+    downloadedAt: 'downloadedAt',
+    downloadCount: 'downloadCount',
+    createdByUserId: 'createdByUserId',
     createdAt: 'createdAt'
   };
 
   export type CodeBatchScalarFieldEnum = (typeof CodeBatchScalarFieldEnum)[keyof typeof CodeBatchScalarFieldEnum]
+
+
+  export const CodeBatchDownloadScalarFieldEnum: {
+    id: 'id',
+    batchId: 'batchId',
+    downloadedByUserId: 'downloadedByUserId',
+    ipAddress: 'ipAddress',
+    userAgent: 'userAgent',
+    codeCount: 'codeCount',
+    createdAt: 'createdAt'
+  };
+
+  export type CodeBatchDownloadScalarFieldEnum = (typeof CodeBatchDownloadScalarFieldEnum)[keyof typeof CodeBatchDownloadScalarFieldEnum]
 
 
   export const CodeScalarFieldEnum: {
@@ -48128,6 +49396,20 @@ export namespace Prisma {
 
 
   /**
+   * Reference to a field of type 'CampaignCodeMode'
+   */
+  export type EnumCampaignCodeModeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'CampaignCodeMode'>
+    
+
+
+  /**
+   * Reference to a field of type 'CampaignCodeMode[]'
+   */
+  export type ListEnumCampaignCodeModeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'CampaignCodeMode[]'>
+    
+
+
+  /**
    * Reference to a field of type 'BrandAgreementStatus'
    */
   export type EnumBrandAgreementStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'BrandAgreementStatus'>
@@ -48166,6 +49448,20 @@ export namespace Prisma {
    * Reference to a field of type 'CampaignInvoiceStatus[]'
    */
   export type ListEnumCampaignInvoiceStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'CampaignInvoiceStatus[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'CodeBatchStatus'
+   */
+  export type EnumCodeBatchStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'CodeBatchStatus'>
+    
+
+
+  /**
+   * Reference to a field of type 'CodeBatchStatus[]'
+   */
+  export type ListEnumCodeBatchStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'CodeBatchStatus[]'>
     
 
 
@@ -50061,6 +51357,7 @@ export namespace Prisma {
     partnershipLabel?: StringNullableFilter<"Campaign"> | string | null
     sponsorshipTrack?: StringNullableFilter<"Campaign"> | string | null
     licenseTermMonths?: IntFilter<"Campaign"> | number
+    codeMode?: EnumCampaignCodeModeNullableFilter<"Campaign"> | $Enums.CampaignCodeMode | null
     createdAt?: DateTimeFilter<"Campaign"> | Date | string
     updatedAt?: DateTimeFilter<"Campaign"> | Date | string
     brand?: XOR<BrandRelationFilter, BrandWhereInput>
@@ -50115,6 +51412,7 @@ export namespace Prisma {
     partnershipLabel?: SortOrderInput | SortOrder
     sponsorshipTrack?: SortOrderInput | SortOrder
     licenseTermMonths?: SortOrder
+    codeMode?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     brand?: BrandOrderByWithRelationInput
@@ -50173,6 +51471,7 @@ export namespace Prisma {
     partnershipLabel?: StringNullableFilter<"Campaign"> | string | null
     sponsorshipTrack?: StringNullableFilter<"Campaign"> | string | null
     licenseTermMonths?: IntFilter<"Campaign"> | number
+    codeMode?: EnumCampaignCodeModeNullableFilter<"Campaign"> | $Enums.CampaignCodeMode | null
     createdAt?: DateTimeFilter<"Campaign"> | Date | string
     updatedAt?: DateTimeFilter<"Campaign"> | Date | string
     brand?: XOR<BrandRelationFilter, BrandWhereInput>
@@ -50227,6 +51526,7 @@ export namespace Prisma {
     partnershipLabel?: SortOrderInput | SortOrder
     sponsorshipTrack?: SortOrderInput | SortOrder
     licenseTermMonths?: SortOrder
+    codeMode?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     _count?: CampaignCountOrderByAggregateInput
@@ -50280,6 +51580,7 @@ export namespace Prisma {
     partnershipLabel?: StringNullableWithAggregatesFilter<"Campaign"> | string | null
     sponsorshipTrack?: StringNullableWithAggregatesFilter<"Campaign"> | string | null
     licenseTermMonths?: IntWithAggregatesFilter<"Campaign"> | number
+    codeMode?: EnumCampaignCodeModeNullableWithAggregatesFilter<"Campaign"> | $Enums.CampaignCodeMode | null
     createdAt?: DateTimeWithAggregatesFilter<"Campaign"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Campaign"> | Date | string
   }
@@ -50563,9 +51864,15 @@ export namespace Prisma {
     batchCode?: StringFilter<"CodeBatch"> | string
     codeVersion?: StringFilter<"CodeBatch"> | string
     expiresAt?: DateTimeNullableFilter<"CodeBatch"> | Date | string | null
+    status?: EnumCodeBatchStatusFilter<"CodeBatch"> | $Enums.CodeBatchStatus
+    source?: EnumCampaignCodeModeNullableFilter<"CodeBatch"> | $Enums.CampaignCodeMode | null
+    downloadedAt?: DateTimeNullableFilter<"CodeBatch"> | Date | string | null
+    downloadCount?: IntFilter<"CodeBatch"> | number
+    createdByUserId?: StringNullableFilter<"CodeBatch"> | string | null
     createdAt?: DateTimeFilter<"CodeBatch"> | Date | string
     campaign?: XOR<CampaignRelationFilter, CampaignWhereInput>
     codes?: CodeListRelationFilter
+    downloads?: CodeBatchDownloadListRelationFilter
   }
 
   export type CodeBatchOrderByWithRelationInput = {
@@ -50575,9 +51882,15 @@ export namespace Prisma {
     batchCode?: SortOrder
     codeVersion?: SortOrder
     expiresAt?: SortOrderInput | SortOrder
+    status?: SortOrder
+    source?: SortOrderInput | SortOrder
+    downloadedAt?: SortOrderInput | SortOrder
+    downloadCount?: SortOrder
+    createdByUserId?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     campaign?: CampaignOrderByWithRelationInput
     codes?: CodeOrderByRelationAggregateInput
+    downloads?: CodeBatchDownloadOrderByRelationAggregateInput
   }
 
   export type CodeBatchWhereUniqueInput = Prisma.AtLeast<{
@@ -50591,9 +51904,15 @@ export namespace Prisma {
     batchCode?: StringFilter<"CodeBatch"> | string
     codeVersion?: StringFilter<"CodeBatch"> | string
     expiresAt?: DateTimeNullableFilter<"CodeBatch"> | Date | string | null
+    status?: EnumCodeBatchStatusFilter<"CodeBatch"> | $Enums.CodeBatchStatus
+    source?: EnumCampaignCodeModeNullableFilter<"CodeBatch"> | $Enums.CampaignCodeMode | null
+    downloadedAt?: DateTimeNullableFilter<"CodeBatch"> | Date | string | null
+    downloadCount?: IntFilter<"CodeBatch"> | number
+    createdByUserId?: StringNullableFilter<"CodeBatch"> | string | null
     createdAt?: DateTimeFilter<"CodeBatch"> | Date | string
     campaign?: XOR<CampaignRelationFilter, CampaignWhereInput>
     codes?: CodeListRelationFilter
+    downloads?: CodeBatchDownloadListRelationFilter
   }, "id" | "campaignId_batchCode_codeVersion">
 
   export type CodeBatchOrderByWithAggregationInput = {
@@ -50603,10 +51922,17 @@ export namespace Prisma {
     batchCode?: SortOrder
     codeVersion?: SortOrder
     expiresAt?: SortOrderInput | SortOrder
+    status?: SortOrder
+    source?: SortOrderInput | SortOrder
+    downloadedAt?: SortOrderInput | SortOrder
+    downloadCount?: SortOrder
+    createdByUserId?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     _count?: CodeBatchCountOrderByAggregateInput
+    _avg?: CodeBatchAvgOrderByAggregateInput
     _max?: CodeBatchMaxOrderByAggregateInput
     _min?: CodeBatchMinOrderByAggregateInput
+    _sum?: CodeBatchSumOrderByAggregateInput
   }
 
   export type CodeBatchScalarWhereWithAggregatesInput = {
@@ -50619,7 +51945,79 @@ export namespace Prisma {
     batchCode?: StringWithAggregatesFilter<"CodeBatch"> | string
     codeVersion?: StringWithAggregatesFilter<"CodeBatch"> | string
     expiresAt?: DateTimeNullableWithAggregatesFilter<"CodeBatch"> | Date | string | null
+    status?: EnumCodeBatchStatusWithAggregatesFilter<"CodeBatch"> | $Enums.CodeBatchStatus
+    source?: EnumCampaignCodeModeNullableWithAggregatesFilter<"CodeBatch"> | $Enums.CampaignCodeMode | null
+    downloadedAt?: DateTimeNullableWithAggregatesFilter<"CodeBatch"> | Date | string | null
+    downloadCount?: IntWithAggregatesFilter<"CodeBatch"> | number
+    createdByUserId?: StringNullableWithAggregatesFilter<"CodeBatch"> | string | null
     createdAt?: DateTimeWithAggregatesFilter<"CodeBatch"> | Date | string
+  }
+
+  export type CodeBatchDownloadWhereInput = {
+    AND?: CodeBatchDownloadWhereInput | CodeBatchDownloadWhereInput[]
+    OR?: CodeBatchDownloadWhereInput[]
+    NOT?: CodeBatchDownloadWhereInput | CodeBatchDownloadWhereInput[]
+    id?: StringFilter<"CodeBatchDownload"> | string
+    batchId?: StringFilter<"CodeBatchDownload"> | string
+    downloadedByUserId?: StringNullableFilter<"CodeBatchDownload"> | string | null
+    ipAddress?: StringNullableFilter<"CodeBatchDownload"> | string | null
+    userAgent?: StringNullableFilter<"CodeBatchDownload"> | string | null
+    codeCount?: IntFilter<"CodeBatchDownload"> | number
+    createdAt?: DateTimeFilter<"CodeBatchDownload"> | Date | string
+    batch?: XOR<CodeBatchRelationFilter, CodeBatchWhereInput>
+  }
+
+  export type CodeBatchDownloadOrderByWithRelationInput = {
+    id?: SortOrder
+    batchId?: SortOrder
+    downloadedByUserId?: SortOrderInput | SortOrder
+    ipAddress?: SortOrderInput | SortOrder
+    userAgent?: SortOrderInput | SortOrder
+    codeCount?: SortOrder
+    createdAt?: SortOrder
+    batch?: CodeBatchOrderByWithRelationInput
+  }
+
+  export type CodeBatchDownloadWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: CodeBatchDownloadWhereInput | CodeBatchDownloadWhereInput[]
+    OR?: CodeBatchDownloadWhereInput[]
+    NOT?: CodeBatchDownloadWhereInput | CodeBatchDownloadWhereInput[]
+    batchId?: StringFilter<"CodeBatchDownload"> | string
+    downloadedByUserId?: StringNullableFilter<"CodeBatchDownload"> | string | null
+    ipAddress?: StringNullableFilter<"CodeBatchDownload"> | string | null
+    userAgent?: StringNullableFilter<"CodeBatchDownload"> | string | null
+    codeCount?: IntFilter<"CodeBatchDownload"> | number
+    createdAt?: DateTimeFilter<"CodeBatchDownload"> | Date | string
+    batch?: XOR<CodeBatchRelationFilter, CodeBatchWhereInput>
+  }, "id">
+
+  export type CodeBatchDownloadOrderByWithAggregationInput = {
+    id?: SortOrder
+    batchId?: SortOrder
+    downloadedByUserId?: SortOrderInput | SortOrder
+    ipAddress?: SortOrderInput | SortOrder
+    userAgent?: SortOrderInput | SortOrder
+    codeCount?: SortOrder
+    createdAt?: SortOrder
+    _count?: CodeBatchDownloadCountOrderByAggregateInput
+    _avg?: CodeBatchDownloadAvgOrderByAggregateInput
+    _max?: CodeBatchDownloadMaxOrderByAggregateInput
+    _min?: CodeBatchDownloadMinOrderByAggregateInput
+    _sum?: CodeBatchDownloadSumOrderByAggregateInput
+  }
+
+  export type CodeBatchDownloadScalarWhereWithAggregatesInput = {
+    AND?: CodeBatchDownloadScalarWhereWithAggregatesInput | CodeBatchDownloadScalarWhereWithAggregatesInput[]
+    OR?: CodeBatchDownloadScalarWhereWithAggregatesInput[]
+    NOT?: CodeBatchDownloadScalarWhereWithAggregatesInput | CodeBatchDownloadScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"CodeBatchDownload"> | string
+    batchId?: StringWithAggregatesFilter<"CodeBatchDownload"> | string
+    downloadedByUserId?: StringNullableWithAggregatesFilter<"CodeBatchDownload"> | string | null
+    ipAddress?: StringNullableWithAggregatesFilter<"CodeBatchDownload"> | string | null
+    userAgent?: StringNullableWithAggregatesFilter<"CodeBatchDownload"> | string | null
+    codeCount?: IntWithAggregatesFilter<"CodeBatchDownload"> | number
+    createdAt?: DateTimeWithAggregatesFilter<"CodeBatchDownload"> | Date | string
   }
 
   export type CodeWhereInput = {
@@ -54206,6 +55604,7 @@ export namespace Prisma {
     partnershipLabel?: string | null
     sponsorshipTrack?: string | null
     licenseTermMonths?: number
+    codeMode?: $Enums.CampaignCodeMode | null
     createdAt?: Date | string
     updatedAt?: Date | string
     brand: BrandCreateNestedOneWithoutCampaignsInput
@@ -54260,6 +55659,7 @@ export namespace Prisma {
     partnershipLabel?: string | null
     sponsorshipTrack?: string | null
     licenseTermMonths?: number
+    codeMode?: $Enums.CampaignCodeMode | null
     createdAt?: Date | string
     updatedAt?: Date | string
     overflowFor?: CampaignUncheckedCreateNestedManyWithoutOverflowCampaignInput
@@ -54310,6 +55710,7 @@ export namespace Prisma {
     partnershipLabel?: NullableStringFieldUpdateOperationsInput | string | null
     sponsorshipTrack?: NullableStringFieldUpdateOperationsInput | string | null
     licenseTermMonths?: IntFieldUpdateOperationsInput | number
+    codeMode?: NullableEnumCampaignCodeModeFieldUpdateOperationsInput | $Enums.CampaignCodeMode | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     brand?: BrandUpdateOneRequiredWithoutCampaignsNestedInput
@@ -54364,6 +55765,7 @@ export namespace Prisma {
     partnershipLabel?: NullableStringFieldUpdateOperationsInput | string | null
     sponsorshipTrack?: NullableStringFieldUpdateOperationsInput | string | null
     licenseTermMonths?: IntFieldUpdateOperationsInput | number
+    codeMode?: NullableEnumCampaignCodeModeFieldUpdateOperationsInput | $Enums.CampaignCodeMode | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     overflowFor?: CampaignUncheckedUpdateManyWithoutOverflowCampaignNestedInput
@@ -54416,6 +55818,7 @@ export namespace Prisma {
     partnershipLabel?: string | null
     sponsorshipTrack?: string | null
     licenseTermMonths?: number
+    codeMode?: $Enums.CampaignCodeMode | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -54459,6 +55862,7 @@ export namespace Prisma {
     partnershipLabel?: NullableStringFieldUpdateOperationsInput | string | null
     sponsorshipTrack?: NullableStringFieldUpdateOperationsInput | string | null
     licenseTermMonths?: IntFieldUpdateOperationsInput | number
+    codeMode?: NullableEnumCampaignCodeModeFieldUpdateOperationsInput | $Enums.CampaignCodeMode | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -54504,6 +55908,7 @@ export namespace Prisma {
     partnershipLabel?: NullableStringFieldUpdateOperationsInput | string | null
     sponsorshipTrack?: NullableStringFieldUpdateOperationsInput | string | null
     licenseTermMonths?: IntFieldUpdateOperationsInput | number
+    codeMode?: NullableEnumCampaignCodeModeFieldUpdateOperationsInput | $Enums.CampaignCodeMode | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -54816,9 +56221,15 @@ export namespace Prisma {
     batchCode: string
     codeVersion?: string
     expiresAt?: Date | string | null
+    status?: $Enums.CodeBatchStatus
+    source?: $Enums.CampaignCodeMode | null
+    downloadedAt?: Date | string | null
+    downloadCount?: number
+    createdByUserId?: string | null
     createdAt?: Date | string
     campaign: CampaignCreateNestedOneWithoutCodeBatchesInput
     codes?: CodeCreateNestedManyWithoutBatchInput
+    downloads?: CodeBatchDownloadCreateNestedManyWithoutBatchInput
   }
 
   export type CodeBatchUncheckedCreateInput = {
@@ -54828,8 +56239,14 @@ export namespace Prisma {
     batchCode: string
     codeVersion?: string
     expiresAt?: Date | string | null
+    status?: $Enums.CodeBatchStatus
+    source?: $Enums.CampaignCodeMode | null
+    downloadedAt?: Date | string | null
+    downloadCount?: number
+    createdByUserId?: string | null
     createdAt?: Date | string
     codes?: CodeUncheckedCreateNestedManyWithoutBatchInput
+    downloads?: CodeBatchDownloadUncheckedCreateNestedManyWithoutBatchInput
   }
 
   export type CodeBatchUpdateInput = {
@@ -54838,9 +56255,15 @@ export namespace Prisma {
     batchCode?: StringFieldUpdateOperationsInput | string
     codeVersion?: StringFieldUpdateOperationsInput | string
     expiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    status?: EnumCodeBatchStatusFieldUpdateOperationsInput | $Enums.CodeBatchStatus
+    source?: NullableEnumCampaignCodeModeFieldUpdateOperationsInput | $Enums.CampaignCodeMode | null
+    downloadedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    downloadCount?: IntFieldUpdateOperationsInput | number
+    createdByUserId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     campaign?: CampaignUpdateOneRequiredWithoutCodeBatchesNestedInput
     codes?: CodeUpdateManyWithoutBatchNestedInput
+    downloads?: CodeBatchDownloadUpdateManyWithoutBatchNestedInput
   }
 
   export type CodeBatchUncheckedUpdateInput = {
@@ -54850,8 +56273,14 @@ export namespace Prisma {
     batchCode?: StringFieldUpdateOperationsInput | string
     codeVersion?: StringFieldUpdateOperationsInput | string
     expiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    status?: EnumCodeBatchStatusFieldUpdateOperationsInput | $Enums.CodeBatchStatus
+    source?: NullableEnumCampaignCodeModeFieldUpdateOperationsInput | $Enums.CampaignCodeMode | null
+    downloadedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    downloadCount?: IntFieldUpdateOperationsInput | number
+    createdByUserId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     codes?: CodeUncheckedUpdateManyWithoutBatchNestedInput
+    downloads?: CodeBatchDownloadUncheckedUpdateManyWithoutBatchNestedInput
   }
 
   export type CodeBatchCreateManyInput = {
@@ -54861,6 +56290,11 @@ export namespace Prisma {
     batchCode: string
     codeVersion?: string
     expiresAt?: Date | string | null
+    status?: $Enums.CodeBatchStatus
+    source?: $Enums.CampaignCodeMode | null
+    downloadedAt?: Date | string | null
+    downloadCount?: number
+    createdByUserId?: string | null
     createdAt?: Date | string
   }
 
@@ -54870,6 +56304,11 @@ export namespace Prisma {
     batchCode?: StringFieldUpdateOperationsInput | string
     codeVersion?: StringFieldUpdateOperationsInput | string
     expiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    status?: EnumCodeBatchStatusFieldUpdateOperationsInput | $Enums.CodeBatchStatus
+    source?: NullableEnumCampaignCodeModeFieldUpdateOperationsInput | $Enums.CampaignCodeMode | null
+    downloadedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    downloadCount?: IntFieldUpdateOperationsInput | number
+    createdByUserId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -54880,6 +56319,80 @@ export namespace Prisma {
     batchCode?: StringFieldUpdateOperationsInput | string
     codeVersion?: StringFieldUpdateOperationsInput | string
     expiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    status?: EnumCodeBatchStatusFieldUpdateOperationsInput | $Enums.CodeBatchStatus
+    source?: NullableEnumCampaignCodeModeFieldUpdateOperationsInput | $Enums.CampaignCodeMode | null
+    downloadedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    downloadCount?: IntFieldUpdateOperationsInput | number
+    createdByUserId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type CodeBatchDownloadCreateInput = {
+    id?: string
+    downloadedByUserId?: string | null
+    ipAddress?: string | null
+    userAgent?: string | null
+    codeCount: number
+    createdAt?: Date | string
+    batch: CodeBatchCreateNestedOneWithoutDownloadsInput
+  }
+
+  export type CodeBatchDownloadUncheckedCreateInput = {
+    id?: string
+    batchId: string
+    downloadedByUserId?: string | null
+    ipAddress?: string | null
+    userAgent?: string | null
+    codeCount: number
+    createdAt?: Date | string
+  }
+
+  export type CodeBatchDownloadUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    downloadedByUserId?: NullableStringFieldUpdateOperationsInput | string | null
+    ipAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    userAgent?: NullableStringFieldUpdateOperationsInput | string | null
+    codeCount?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    batch?: CodeBatchUpdateOneRequiredWithoutDownloadsNestedInput
+  }
+
+  export type CodeBatchDownloadUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    batchId?: StringFieldUpdateOperationsInput | string
+    downloadedByUserId?: NullableStringFieldUpdateOperationsInput | string | null
+    ipAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    userAgent?: NullableStringFieldUpdateOperationsInput | string | null
+    codeCount?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type CodeBatchDownloadCreateManyInput = {
+    id?: string
+    batchId: string
+    downloadedByUserId?: string | null
+    ipAddress?: string | null
+    userAgent?: string | null
+    codeCount: number
+    createdAt?: Date | string
+  }
+
+  export type CodeBatchDownloadUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    downloadedByUserId?: NullableStringFieldUpdateOperationsInput | string | null
+    ipAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    userAgent?: NullableStringFieldUpdateOperationsInput | string | null
+    codeCount?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type CodeBatchDownloadUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    batchId?: StringFieldUpdateOperationsInput | string
+    downloadedByUserId?: NullableStringFieldUpdateOperationsInput | string | null
+    ipAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    userAgent?: NullableStringFieldUpdateOperationsInput | string | null
+    codeCount?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -58511,6 +60024,13 @@ export namespace Prisma {
     not?: NestedEnumCampaignRenewalStatusFilter<$PrismaModel> | $Enums.CampaignRenewalStatus
   }
 
+  export type EnumCampaignCodeModeNullableFilter<$PrismaModel = never> = {
+    equals?: $Enums.CampaignCodeMode | EnumCampaignCodeModeFieldRefInput<$PrismaModel> | null
+    in?: $Enums.CampaignCodeMode[] | ListEnumCampaignCodeModeFieldRefInput<$PrismaModel> | null
+    notIn?: $Enums.CampaignCodeMode[] | ListEnumCampaignCodeModeFieldRefInput<$PrismaModel> | null
+    not?: NestedEnumCampaignCodeModeNullableFilter<$PrismaModel> | $Enums.CampaignCodeMode | null
+  }
+
   export type BrandRelationFilter = {
     is?: BrandWhereInput
     isNot?: BrandWhereInput
@@ -58597,6 +60117,7 @@ export namespace Prisma {
     partnershipLabel?: SortOrder
     sponsorshipTrack?: SortOrder
     licenseTermMonths?: SortOrder
+    codeMode?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -58647,6 +60168,7 @@ export namespace Prisma {
     partnershipLabel?: SortOrder
     sponsorshipTrack?: SortOrder
     licenseTermMonths?: SortOrder
+    codeMode?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -58685,6 +60207,7 @@ export namespace Prisma {
     partnershipLabel?: SortOrder
     sponsorshipTrack?: SortOrder
     licenseTermMonths?: SortOrder
+    codeMode?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -58729,6 +60252,16 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedEnumCampaignRenewalStatusFilter<$PrismaModel>
     _max?: NestedEnumCampaignRenewalStatusFilter<$PrismaModel>
+  }
+
+  export type EnumCampaignCodeModeNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.CampaignCodeMode | EnumCampaignCodeModeFieldRefInput<$PrismaModel> | null
+    in?: $Enums.CampaignCodeMode[] | ListEnumCampaignCodeModeFieldRefInput<$PrismaModel> | null
+    notIn?: $Enums.CampaignCodeMode[] | ListEnumCampaignCodeModeFieldRefInput<$PrismaModel> | null
+    not?: NestedEnumCampaignCodeModeNullableWithAggregatesFilter<$PrismaModel> | $Enums.CampaignCodeMode | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedEnumCampaignCodeModeNullableFilter<$PrismaModel>
+    _max?: NestedEnumCampaignCodeModeNullableFilter<$PrismaModel>
   }
 
   export type EnumBrandAgreementStatusFilter<$PrismaModel = never> = {
@@ -58940,6 +60473,23 @@ export namespace Prisma {
     createdAt?: SortOrder
   }
 
+  export type EnumCodeBatchStatusFilter<$PrismaModel = never> = {
+    equals?: $Enums.CodeBatchStatus | EnumCodeBatchStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.CodeBatchStatus[] | ListEnumCodeBatchStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.CodeBatchStatus[] | ListEnumCodeBatchStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumCodeBatchStatusFilter<$PrismaModel> | $Enums.CodeBatchStatus
+  }
+
+  export type CodeBatchDownloadListRelationFilter = {
+    every?: CodeBatchDownloadWhereInput
+    some?: CodeBatchDownloadWhereInput
+    none?: CodeBatchDownloadWhereInput
+  }
+
+  export type CodeBatchDownloadOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
   export type CodeBatchCampaignIdBatchCodeCodeVersionCompoundUniqueInput = {
     campaignId: string
     batchCode: string
@@ -58953,7 +60503,16 @@ export namespace Prisma {
     batchCode?: SortOrder
     codeVersion?: SortOrder
     expiresAt?: SortOrder
+    status?: SortOrder
+    source?: SortOrder
+    downloadedAt?: SortOrder
+    downloadCount?: SortOrder
+    createdByUserId?: SortOrder
     createdAt?: SortOrder
+  }
+
+  export type CodeBatchAvgOrderByAggregateInput = {
+    downloadCount?: SortOrder
   }
 
   export type CodeBatchMaxOrderByAggregateInput = {
@@ -58963,6 +60522,11 @@ export namespace Prisma {
     batchCode?: SortOrder
     codeVersion?: SortOrder
     expiresAt?: SortOrder
+    status?: SortOrder
+    source?: SortOrder
+    downloadedAt?: SortOrder
+    downloadCount?: SortOrder
+    createdByUserId?: SortOrder
     createdAt?: SortOrder
   }
 
@@ -58973,7 +60537,69 @@ export namespace Prisma {
     batchCode?: SortOrder
     codeVersion?: SortOrder
     expiresAt?: SortOrder
+    status?: SortOrder
+    source?: SortOrder
+    downloadedAt?: SortOrder
+    downloadCount?: SortOrder
+    createdByUserId?: SortOrder
     createdAt?: SortOrder
+  }
+
+  export type CodeBatchSumOrderByAggregateInput = {
+    downloadCount?: SortOrder
+  }
+
+  export type EnumCodeBatchStatusWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.CodeBatchStatus | EnumCodeBatchStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.CodeBatchStatus[] | ListEnumCodeBatchStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.CodeBatchStatus[] | ListEnumCodeBatchStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumCodeBatchStatusWithAggregatesFilter<$PrismaModel> | $Enums.CodeBatchStatus
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumCodeBatchStatusFilter<$PrismaModel>
+    _max?: NestedEnumCodeBatchStatusFilter<$PrismaModel>
+  }
+
+  export type CodeBatchRelationFilter = {
+    is?: CodeBatchWhereInput
+    isNot?: CodeBatchWhereInput
+  }
+
+  export type CodeBatchDownloadCountOrderByAggregateInput = {
+    id?: SortOrder
+    batchId?: SortOrder
+    downloadedByUserId?: SortOrder
+    ipAddress?: SortOrder
+    userAgent?: SortOrder
+    codeCount?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type CodeBatchDownloadAvgOrderByAggregateInput = {
+    codeCount?: SortOrder
+  }
+
+  export type CodeBatchDownloadMaxOrderByAggregateInput = {
+    id?: SortOrder
+    batchId?: SortOrder
+    downloadedByUserId?: SortOrder
+    ipAddress?: SortOrder
+    userAgent?: SortOrder
+    codeCount?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type CodeBatchDownloadMinOrderByAggregateInput = {
+    id?: SortOrder
+    batchId?: SortOrder
+    downloadedByUserId?: SortOrder
+    ipAddress?: SortOrder
+    userAgent?: SortOrder
+    codeCount?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type CodeBatchDownloadSumOrderByAggregateInput = {
+    codeCount?: SortOrder
   }
 
   export type EnumCodeStatusFilter<$PrismaModel = never> = {
@@ -58981,11 +60607,6 @@ export namespace Prisma {
     in?: $Enums.CodeStatus[] | ListEnumCodeStatusFieldRefInput<$PrismaModel>
     notIn?: $Enums.CodeStatus[] | ListEnumCodeStatusFieldRefInput<$PrismaModel>
     not?: NestedEnumCodeStatusFilter<$PrismaModel> | $Enums.CodeStatus
-  }
-
-  export type CodeBatchRelationFilter = {
-    is?: CodeBatchWhereInput
-    isNot?: CodeBatchWhereInput
   }
 
   export type ProductNullableRelationFilter = {
@@ -61889,6 +63510,10 @@ export namespace Prisma {
     set?: $Enums.CampaignRenewalStatus
   }
 
+  export type NullableEnumCampaignCodeModeFieldUpdateOperationsInput = {
+    set?: $Enums.CampaignCodeMode | null
+  }
+
   export type BrandUpdateOneRequiredWithoutCampaignsNestedInput = {
     create?: XOR<BrandCreateWithoutCampaignsInput, BrandUncheckedCreateWithoutCampaignsInput>
     connectOrCreate?: BrandCreateOrConnectWithoutCampaignsInput
@@ -62212,11 +63837,29 @@ export namespace Prisma {
     connect?: CodeWhereUniqueInput | CodeWhereUniqueInput[]
   }
 
+  export type CodeBatchDownloadCreateNestedManyWithoutBatchInput = {
+    create?: XOR<CodeBatchDownloadCreateWithoutBatchInput, CodeBatchDownloadUncheckedCreateWithoutBatchInput> | CodeBatchDownloadCreateWithoutBatchInput[] | CodeBatchDownloadUncheckedCreateWithoutBatchInput[]
+    connectOrCreate?: CodeBatchDownloadCreateOrConnectWithoutBatchInput | CodeBatchDownloadCreateOrConnectWithoutBatchInput[]
+    createMany?: CodeBatchDownloadCreateManyBatchInputEnvelope
+    connect?: CodeBatchDownloadWhereUniqueInput | CodeBatchDownloadWhereUniqueInput[]
+  }
+
   export type CodeUncheckedCreateNestedManyWithoutBatchInput = {
     create?: XOR<CodeCreateWithoutBatchInput, CodeUncheckedCreateWithoutBatchInput> | CodeCreateWithoutBatchInput[] | CodeUncheckedCreateWithoutBatchInput[]
     connectOrCreate?: CodeCreateOrConnectWithoutBatchInput | CodeCreateOrConnectWithoutBatchInput[]
     createMany?: CodeCreateManyBatchInputEnvelope
     connect?: CodeWhereUniqueInput | CodeWhereUniqueInput[]
+  }
+
+  export type CodeBatchDownloadUncheckedCreateNestedManyWithoutBatchInput = {
+    create?: XOR<CodeBatchDownloadCreateWithoutBatchInput, CodeBatchDownloadUncheckedCreateWithoutBatchInput> | CodeBatchDownloadCreateWithoutBatchInput[] | CodeBatchDownloadUncheckedCreateWithoutBatchInput[]
+    connectOrCreate?: CodeBatchDownloadCreateOrConnectWithoutBatchInput | CodeBatchDownloadCreateOrConnectWithoutBatchInput[]
+    createMany?: CodeBatchDownloadCreateManyBatchInputEnvelope
+    connect?: CodeBatchDownloadWhereUniqueInput | CodeBatchDownloadWhereUniqueInput[]
+  }
+
+  export type EnumCodeBatchStatusFieldUpdateOperationsInput = {
+    set?: $Enums.CodeBatchStatus
   }
 
   export type CampaignUpdateOneRequiredWithoutCodeBatchesNestedInput = {
@@ -62241,6 +63884,20 @@ export namespace Prisma {
     deleteMany?: CodeScalarWhereInput | CodeScalarWhereInput[]
   }
 
+  export type CodeBatchDownloadUpdateManyWithoutBatchNestedInput = {
+    create?: XOR<CodeBatchDownloadCreateWithoutBatchInput, CodeBatchDownloadUncheckedCreateWithoutBatchInput> | CodeBatchDownloadCreateWithoutBatchInput[] | CodeBatchDownloadUncheckedCreateWithoutBatchInput[]
+    connectOrCreate?: CodeBatchDownloadCreateOrConnectWithoutBatchInput | CodeBatchDownloadCreateOrConnectWithoutBatchInput[]
+    upsert?: CodeBatchDownloadUpsertWithWhereUniqueWithoutBatchInput | CodeBatchDownloadUpsertWithWhereUniqueWithoutBatchInput[]
+    createMany?: CodeBatchDownloadCreateManyBatchInputEnvelope
+    set?: CodeBatchDownloadWhereUniqueInput | CodeBatchDownloadWhereUniqueInput[]
+    disconnect?: CodeBatchDownloadWhereUniqueInput | CodeBatchDownloadWhereUniqueInput[]
+    delete?: CodeBatchDownloadWhereUniqueInput | CodeBatchDownloadWhereUniqueInput[]
+    connect?: CodeBatchDownloadWhereUniqueInput | CodeBatchDownloadWhereUniqueInput[]
+    update?: CodeBatchDownloadUpdateWithWhereUniqueWithoutBatchInput | CodeBatchDownloadUpdateWithWhereUniqueWithoutBatchInput[]
+    updateMany?: CodeBatchDownloadUpdateManyWithWhereWithoutBatchInput | CodeBatchDownloadUpdateManyWithWhereWithoutBatchInput[]
+    deleteMany?: CodeBatchDownloadScalarWhereInput | CodeBatchDownloadScalarWhereInput[]
+  }
+
   export type CodeUncheckedUpdateManyWithoutBatchNestedInput = {
     create?: XOR<CodeCreateWithoutBatchInput, CodeUncheckedCreateWithoutBatchInput> | CodeCreateWithoutBatchInput[] | CodeUncheckedCreateWithoutBatchInput[]
     connectOrCreate?: CodeCreateOrConnectWithoutBatchInput | CodeCreateOrConnectWithoutBatchInput[]
@@ -62253,6 +63910,34 @@ export namespace Prisma {
     update?: CodeUpdateWithWhereUniqueWithoutBatchInput | CodeUpdateWithWhereUniqueWithoutBatchInput[]
     updateMany?: CodeUpdateManyWithWhereWithoutBatchInput | CodeUpdateManyWithWhereWithoutBatchInput[]
     deleteMany?: CodeScalarWhereInput | CodeScalarWhereInput[]
+  }
+
+  export type CodeBatchDownloadUncheckedUpdateManyWithoutBatchNestedInput = {
+    create?: XOR<CodeBatchDownloadCreateWithoutBatchInput, CodeBatchDownloadUncheckedCreateWithoutBatchInput> | CodeBatchDownloadCreateWithoutBatchInput[] | CodeBatchDownloadUncheckedCreateWithoutBatchInput[]
+    connectOrCreate?: CodeBatchDownloadCreateOrConnectWithoutBatchInput | CodeBatchDownloadCreateOrConnectWithoutBatchInput[]
+    upsert?: CodeBatchDownloadUpsertWithWhereUniqueWithoutBatchInput | CodeBatchDownloadUpsertWithWhereUniqueWithoutBatchInput[]
+    createMany?: CodeBatchDownloadCreateManyBatchInputEnvelope
+    set?: CodeBatchDownloadWhereUniqueInput | CodeBatchDownloadWhereUniqueInput[]
+    disconnect?: CodeBatchDownloadWhereUniqueInput | CodeBatchDownloadWhereUniqueInput[]
+    delete?: CodeBatchDownloadWhereUniqueInput | CodeBatchDownloadWhereUniqueInput[]
+    connect?: CodeBatchDownloadWhereUniqueInput | CodeBatchDownloadWhereUniqueInput[]
+    update?: CodeBatchDownloadUpdateWithWhereUniqueWithoutBatchInput | CodeBatchDownloadUpdateWithWhereUniqueWithoutBatchInput[]
+    updateMany?: CodeBatchDownloadUpdateManyWithWhereWithoutBatchInput | CodeBatchDownloadUpdateManyWithWhereWithoutBatchInput[]
+    deleteMany?: CodeBatchDownloadScalarWhereInput | CodeBatchDownloadScalarWhereInput[]
+  }
+
+  export type CodeBatchCreateNestedOneWithoutDownloadsInput = {
+    create?: XOR<CodeBatchCreateWithoutDownloadsInput, CodeBatchUncheckedCreateWithoutDownloadsInput>
+    connectOrCreate?: CodeBatchCreateOrConnectWithoutDownloadsInput
+    connect?: CodeBatchWhereUniqueInput
+  }
+
+  export type CodeBatchUpdateOneRequiredWithoutDownloadsNestedInput = {
+    create?: XOR<CodeBatchCreateWithoutDownloadsInput, CodeBatchUncheckedCreateWithoutDownloadsInput>
+    connectOrCreate?: CodeBatchCreateOrConnectWithoutDownloadsInput
+    upsert?: CodeBatchUpsertWithoutDownloadsInput
+    connect?: CodeBatchWhereUniqueInput
+    update?: XOR<XOR<CodeBatchUpdateToOneWithWhereWithoutDownloadsInput, CodeBatchUpdateWithoutDownloadsInput>, CodeBatchUncheckedUpdateWithoutDownloadsInput>
   }
 
   export type CodeBatchCreateNestedOneWithoutCodesInput = {
@@ -63421,6 +65106,13 @@ export namespace Prisma {
     not?: NestedEnumCampaignRenewalStatusFilter<$PrismaModel> | $Enums.CampaignRenewalStatus
   }
 
+  export type NestedEnumCampaignCodeModeNullableFilter<$PrismaModel = never> = {
+    equals?: $Enums.CampaignCodeMode | EnumCampaignCodeModeFieldRefInput<$PrismaModel> | null
+    in?: $Enums.CampaignCodeMode[] | ListEnumCampaignCodeModeFieldRefInput<$PrismaModel> | null
+    notIn?: $Enums.CampaignCodeMode[] | ListEnumCampaignCodeModeFieldRefInput<$PrismaModel> | null
+    not?: NestedEnumCampaignCodeModeNullableFilter<$PrismaModel> | $Enums.CampaignCodeMode | null
+  }
+
   export type NestedEnumCampaignScopeTypeWithAggregatesFilter<$PrismaModel = never> = {
     equals?: $Enums.CampaignScopeType | EnumCampaignScopeTypeFieldRefInput<$PrismaModel>
     in?: $Enums.CampaignScopeType[] | ListEnumCampaignScopeTypeFieldRefInput<$PrismaModel>
@@ -63449,6 +65141,16 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedEnumCampaignRenewalStatusFilter<$PrismaModel>
     _max?: NestedEnumCampaignRenewalStatusFilter<$PrismaModel>
+  }
+
+  export type NestedEnumCampaignCodeModeNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.CampaignCodeMode | EnumCampaignCodeModeFieldRefInput<$PrismaModel> | null
+    in?: $Enums.CampaignCodeMode[] | ListEnumCampaignCodeModeFieldRefInput<$PrismaModel> | null
+    notIn?: $Enums.CampaignCodeMode[] | ListEnumCampaignCodeModeFieldRefInput<$PrismaModel> | null
+    not?: NestedEnumCampaignCodeModeNullableWithAggregatesFilter<$PrismaModel> | $Enums.CampaignCodeMode | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedEnumCampaignCodeModeNullableFilter<$PrismaModel>
+    _max?: NestedEnumCampaignCodeModeNullableFilter<$PrismaModel>
   }
 
   export type NestedEnumBrandAgreementStatusFilter<$PrismaModel = never> = {
@@ -63500,6 +65202,23 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedEnumCampaignInvoiceStatusFilter<$PrismaModel>
     _max?: NestedEnumCampaignInvoiceStatusFilter<$PrismaModel>
+  }
+
+  export type NestedEnumCodeBatchStatusFilter<$PrismaModel = never> = {
+    equals?: $Enums.CodeBatchStatus | EnumCodeBatchStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.CodeBatchStatus[] | ListEnumCodeBatchStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.CodeBatchStatus[] | ListEnumCodeBatchStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumCodeBatchStatusFilter<$PrismaModel> | $Enums.CodeBatchStatus
+  }
+
+  export type NestedEnumCodeBatchStatusWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.CodeBatchStatus | EnumCodeBatchStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.CodeBatchStatus[] | ListEnumCodeBatchStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.CodeBatchStatus[] | ListEnumCodeBatchStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumCodeBatchStatusWithAggregatesFilter<$PrismaModel> | $Enums.CodeBatchStatus
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumCodeBatchStatusFilter<$PrismaModel>
+    _max?: NestedEnumCodeBatchStatusFilter<$PrismaModel>
   }
 
   export type NestedEnumCodeStatusFilter<$PrismaModel = never> = {
@@ -68542,6 +70261,7 @@ export namespace Prisma {
     partnershipLabel?: string | null
     sponsorshipTrack?: string | null
     licenseTermMonths?: number
+    codeMode?: $Enums.CampaignCodeMode | null
     createdAt?: Date | string
     updatedAt?: Date | string
     overflowCampaign?: CampaignCreateNestedOneWithoutOverflowForInput
@@ -68594,6 +70314,7 @@ export namespace Prisma {
     partnershipLabel?: string | null
     sponsorshipTrack?: string | null
     licenseTermMonths?: number
+    codeMode?: $Enums.CampaignCodeMode | null
     createdAt?: Date | string
     updatedAt?: Date | string
     overflowFor?: CampaignUncheckedCreateNestedManyWithoutOverflowCampaignInput
@@ -68886,6 +70607,7 @@ export namespace Prisma {
     partnershipLabel?: StringNullableFilter<"Campaign"> | string | null
     sponsorshipTrack?: StringNullableFilter<"Campaign"> | string | null
     licenseTermMonths?: IntFilter<"Campaign"> | number
+    codeMode?: EnumCampaignCodeModeNullableFilter<"Campaign"> | $Enums.CampaignCodeMode | null
     createdAt?: DateTimeFilter<"Campaign"> | Date | string
     updatedAt?: DateTimeFilter<"Campaign"> | Date | string
   }
@@ -69163,6 +70885,7 @@ export namespace Prisma {
     partnershipLabel?: string | null
     sponsorshipTrack?: string | null
     licenseTermMonths?: number
+    codeMode?: $Enums.CampaignCodeMode | null
     createdAt?: Date | string
     updatedAt?: Date | string
     brand: BrandCreateNestedOneWithoutCampaignsInput
@@ -69216,6 +70939,7 @@ export namespace Prisma {
     partnershipLabel?: string | null
     sponsorshipTrack?: string | null
     licenseTermMonths?: number
+    codeMode?: $Enums.CampaignCodeMode | null
     createdAt?: Date | string
     updatedAt?: Date | string
     products?: ProductUncheckedCreateNestedManyWithoutCampaignInput
@@ -69270,6 +70994,7 @@ export namespace Prisma {
     partnershipLabel?: string | null
     sponsorshipTrack?: string | null
     licenseTermMonths?: number
+    codeMode?: $Enums.CampaignCodeMode | null
     createdAt?: Date | string
     updatedAt?: Date | string
     brand: BrandCreateNestedOneWithoutCampaignsInput
@@ -69322,6 +71047,7 @@ export namespace Prisma {
     partnershipLabel?: string | null
     sponsorshipTrack?: string | null
     licenseTermMonths?: number
+    codeMode?: $Enums.CampaignCodeMode | null
     createdAt?: Date | string
     updatedAt?: Date | string
     overflowFor?: CampaignUncheckedCreateNestedManyWithoutOverflowCampaignInput
@@ -69377,8 +71103,14 @@ export namespace Prisma {
     batchCode: string
     codeVersion?: string
     expiresAt?: Date | string | null
+    status?: $Enums.CodeBatchStatus
+    source?: $Enums.CampaignCodeMode | null
+    downloadedAt?: Date | string | null
+    downloadCount?: number
+    createdByUserId?: string | null
     createdAt?: Date | string
     codes?: CodeCreateNestedManyWithoutBatchInput
+    downloads?: CodeBatchDownloadCreateNestedManyWithoutBatchInput
   }
 
   export type CodeBatchUncheckedCreateWithoutCampaignInput = {
@@ -69387,8 +71119,14 @@ export namespace Prisma {
     batchCode: string
     codeVersion?: string
     expiresAt?: Date | string | null
+    status?: $Enums.CodeBatchStatus
+    source?: $Enums.CampaignCodeMode | null
+    downloadedAt?: Date | string | null
+    downloadCount?: number
+    createdByUserId?: string | null
     createdAt?: Date | string
     codes?: CodeUncheckedCreateNestedManyWithoutBatchInput
+    downloads?: CodeBatchDownloadUncheckedCreateNestedManyWithoutBatchInput
   }
 
   export type CodeBatchCreateOrConnectWithoutCampaignInput = {
@@ -69720,6 +71458,7 @@ export namespace Prisma {
     partnershipLabel?: NullableStringFieldUpdateOperationsInput | string | null
     sponsorshipTrack?: NullableStringFieldUpdateOperationsInput | string | null
     licenseTermMonths?: IntFieldUpdateOperationsInput | number
+    codeMode?: NullableEnumCampaignCodeModeFieldUpdateOperationsInput | $Enums.CampaignCodeMode | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     brand?: BrandUpdateOneRequiredWithoutCampaignsNestedInput
@@ -69773,6 +71512,7 @@ export namespace Prisma {
     partnershipLabel?: NullableStringFieldUpdateOperationsInput | string | null
     sponsorshipTrack?: NullableStringFieldUpdateOperationsInput | string | null
     licenseTermMonths?: IntFieldUpdateOperationsInput | number
+    codeMode?: NullableEnumCampaignCodeModeFieldUpdateOperationsInput | $Enums.CampaignCodeMode | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     products?: ProductUncheckedUpdateManyWithoutCampaignNestedInput
@@ -69853,6 +71593,11 @@ export namespace Prisma {
     batchCode?: StringFilter<"CodeBatch"> | string
     codeVersion?: StringFilter<"CodeBatch"> | string
     expiresAt?: DateTimeNullableFilter<"CodeBatch"> | Date | string | null
+    status?: EnumCodeBatchStatusFilter<"CodeBatch"> | $Enums.CodeBatchStatus
+    source?: EnumCampaignCodeModeNullableFilter<"CodeBatch"> | $Enums.CampaignCodeMode | null
+    downloadedAt?: DateTimeNullableFilter<"CodeBatch"> | Date | string | null
+    downloadCount?: IntFilter<"CodeBatch"> | number
+    createdByUserId?: StringNullableFilter<"CodeBatch"> | string | null
     createdAt?: DateTimeFilter<"CodeBatch"> | Date | string
   }
 
@@ -70179,6 +71924,7 @@ export namespace Prisma {
     partnershipLabel?: string | null
     sponsorshipTrack?: string | null
     licenseTermMonths?: number
+    codeMode?: $Enums.CampaignCodeMode | null
     createdAt?: Date | string
     updatedAt?: Date | string
     brand: BrandCreateNestedOneWithoutCampaignsInput
@@ -70232,6 +71978,7 @@ export namespace Prisma {
     partnershipLabel?: string | null
     sponsorshipTrack?: string | null
     licenseTermMonths?: number
+    codeMode?: $Enums.CampaignCodeMode | null
     createdAt?: Date | string
     updatedAt?: Date | string
     overflowFor?: CampaignUncheckedCreateNestedManyWithoutOverflowCampaignInput
@@ -70297,6 +72044,7 @@ export namespace Prisma {
     partnershipLabel?: NullableStringFieldUpdateOperationsInput | string | null
     sponsorshipTrack?: NullableStringFieldUpdateOperationsInput | string | null
     licenseTermMonths?: IntFieldUpdateOperationsInput | number
+    codeMode?: NullableEnumCampaignCodeModeFieldUpdateOperationsInput | $Enums.CampaignCodeMode | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     brand?: BrandUpdateOneRequiredWithoutCampaignsNestedInput
@@ -70350,6 +72098,7 @@ export namespace Prisma {
     partnershipLabel?: NullableStringFieldUpdateOperationsInput | string | null
     sponsorshipTrack?: NullableStringFieldUpdateOperationsInput | string | null
     licenseTermMonths?: IntFieldUpdateOperationsInput | number
+    codeMode?: NullableEnumCampaignCodeModeFieldUpdateOperationsInput | $Enums.CampaignCodeMode | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     overflowFor?: CampaignUncheckedUpdateManyWithoutOverflowCampaignNestedInput
@@ -70399,6 +72148,7 @@ export namespace Prisma {
     partnershipLabel?: string | null
     sponsorshipTrack?: string | null
     licenseTermMonths?: number
+    codeMode?: $Enums.CampaignCodeMode | null
     createdAt?: Date | string
     updatedAt?: Date | string
     brand: BrandCreateNestedOneWithoutCampaignsInput
@@ -70452,6 +72202,7 @@ export namespace Prisma {
     partnershipLabel?: string | null
     sponsorshipTrack?: string | null
     licenseTermMonths?: number
+    codeMode?: $Enums.CampaignCodeMode | null
     createdAt?: Date | string
     updatedAt?: Date | string
     overflowFor?: CampaignUncheckedCreateNestedManyWithoutOverflowCampaignInput
@@ -70563,6 +72314,7 @@ export namespace Prisma {
     partnershipLabel?: NullableStringFieldUpdateOperationsInput | string | null
     sponsorshipTrack?: NullableStringFieldUpdateOperationsInput | string | null
     licenseTermMonths?: IntFieldUpdateOperationsInput | number
+    codeMode?: NullableEnumCampaignCodeModeFieldUpdateOperationsInput | $Enums.CampaignCodeMode | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     brand?: BrandUpdateOneRequiredWithoutCampaignsNestedInput
@@ -70616,6 +72368,7 @@ export namespace Prisma {
     partnershipLabel?: NullableStringFieldUpdateOperationsInput | string | null
     sponsorshipTrack?: NullableStringFieldUpdateOperationsInput | string | null
     licenseTermMonths?: IntFieldUpdateOperationsInput | number
+    codeMode?: NullableEnumCampaignCodeModeFieldUpdateOperationsInput | $Enums.CampaignCodeMode | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     overflowFor?: CampaignUncheckedUpdateManyWithoutOverflowCampaignNestedInput
@@ -70681,6 +72434,7 @@ export namespace Prisma {
     partnershipLabel?: string | null
     sponsorshipTrack?: string | null
     licenseTermMonths?: number
+    codeMode?: $Enums.CampaignCodeMode | null
     createdAt?: Date | string
     updatedAt?: Date | string
     brand: BrandCreateNestedOneWithoutCampaignsInput
@@ -70734,6 +72488,7 @@ export namespace Prisma {
     partnershipLabel?: string | null
     sponsorshipTrack?: string | null
     licenseTermMonths?: number
+    codeMode?: $Enums.CampaignCodeMode | null
     createdAt?: Date | string
     updatedAt?: Date | string
     overflowFor?: CampaignUncheckedCreateNestedManyWithoutOverflowCampaignInput
@@ -70795,6 +72550,34 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type CodeBatchDownloadCreateWithoutBatchInput = {
+    id?: string
+    downloadedByUserId?: string | null
+    ipAddress?: string | null
+    userAgent?: string | null
+    codeCount: number
+    createdAt?: Date | string
+  }
+
+  export type CodeBatchDownloadUncheckedCreateWithoutBatchInput = {
+    id?: string
+    downloadedByUserId?: string | null
+    ipAddress?: string | null
+    userAgent?: string | null
+    codeCount: number
+    createdAt?: Date | string
+  }
+
+  export type CodeBatchDownloadCreateOrConnectWithoutBatchInput = {
+    where: CodeBatchDownloadWhereUniqueInput
+    create: XOR<CodeBatchDownloadCreateWithoutBatchInput, CodeBatchDownloadUncheckedCreateWithoutBatchInput>
+  }
+
+  export type CodeBatchDownloadCreateManyBatchInputEnvelope = {
+    data: CodeBatchDownloadCreateManyBatchInput | CodeBatchDownloadCreateManyBatchInput[]
+    skipDuplicates?: boolean
+  }
+
   export type CampaignUpsertWithoutCodeBatchesInput = {
     update: XOR<CampaignUpdateWithoutCodeBatchesInput, CampaignUncheckedUpdateWithoutCodeBatchesInput>
     create: XOR<CampaignCreateWithoutCodeBatchesInput, CampaignUncheckedCreateWithoutCodeBatchesInput>
@@ -70845,6 +72628,7 @@ export namespace Prisma {
     partnershipLabel?: NullableStringFieldUpdateOperationsInput | string | null
     sponsorshipTrack?: NullableStringFieldUpdateOperationsInput | string | null
     licenseTermMonths?: IntFieldUpdateOperationsInput | number
+    codeMode?: NullableEnumCampaignCodeModeFieldUpdateOperationsInput | $Enums.CampaignCodeMode | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     brand?: BrandUpdateOneRequiredWithoutCampaignsNestedInput
@@ -70898,6 +72682,7 @@ export namespace Prisma {
     partnershipLabel?: NullableStringFieldUpdateOperationsInput | string | null
     sponsorshipTrack?: NullableStringFieldUpdateOperationsInput | string | null
     licenseTermMonths?: IntFieldUpdateOperationsInput | number
+    codeMode?: NullableEnumCampaignCodeModeFieldUpdateOperationsInput | $Enums.CampaignCodeMode | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     overflowFor?: CampaignUncheckedUpdateManyWithoutOverflowCampaignNestedInput
@@ -70924,14 +72709,129 @@ export namespace Prisma {
     data: XOR<CodeUpdateManyMutationInput, CodeUncheckedUpdateManyWithoutBatchInput>
   }
 
+  export type CodeBatchDownloadUpsertWithWhereUniqueWithoutBatchInput = {
+    where: CodeBatchDownloadWhereUniqueInput
+    update: XOR<CodeBatchDownloadUpdateWithoutBatchInput, CodeBatchDownloadUncheckedUpdateWithoutBatchInput>
+    create: XOR<CodeBatchDownloadCreateWithoutBatchInput, CodeBatchDownloadUncheckedCreateWithoutBatchInput>
+  }
+
+  export type CodeBatchDownloadUpdateWithWhereUniqueWithoutBatchInput = {
+    where: CodeBatchDownloadWhereUniqueInput
+    data: XOR<CodeBatchDownloadUpdateWithoutBatchInput, CodeBatchDownloadUncheckedUpdateWithoutBatchInput>
+  }
+
+  export type CodeBatchDownloadUpdateManyWithWhereWithoutBatchInput = {
+    where: CodeBatchDownloadScalarWhereInput
+    data: XOR<CodeBatchDownloadUpdateManyMutationInput, CodeBatchDownloadUncheckedUpdateManyWithoutBatchInput>
+  }
+
+  export type CodeBatchDownloadScalarWhereInput = {
+    AND?: CodeBatchDownloadScalarWhereInput | CodeBatchDownloadScalarWhereInput[]
+    OR?: CodeBatchDownloadScalarWhereInput[]
+    NOT?: CodeBatchDownloadScalarWhereInput | CodeBatchDownloadScalarWhereInput[]
+    id?: StringFilter<"CodeBatchDownload"> | string
+    batchId?: StringFilter<"CodeBatchDownload"> | string
+    downloadedByUserId?: StringNullableFilter<"CodeBatchDownload"> | string | null
+    ipAddress?: StringNullableFilter<"CodeBatchDownload"> | string | null
+    userAgent?: StringNullableFilter<"CodeBatchDownload"> | string | null
+    codeCount?: IntFilter<"CodeBatchDownload"> | number
+    createdAt?: DateTimeFilter<"CodeBatchDownload"> | Date | string
+  }
+
+  export type CodeBatchCreateWithoutDownloadsInput = {
+    id?: string
+    batchName: string
+    batchCode: string
+    codeVersion?: string
+    expiresAt?: Date | string | null
+    status?: $Enums.CodeBatchStatus
+    source?: $Enums.CampaignCodeMode | null
+    downloadedAt?: Date | string | null
+    downloadCount?: number
+    createdByUserId?: string | null
+    createdAt?: Date | string
+    campaign: CampaignCreateNestedOneWithoutCodeBatchesInput
+    codes?: CodeCreateNestedManyWithoutBatchInput
+  }
+
+  export type CodeBatchUncheckedCreateWithoutDownloadsInput = {
+    id?: string
+    campaignId: string
+    batchName: string
+    batchCode: string
+    codeVersion?: string
+    expiresAt?: Date | string | null
+    status?: $Enums.CodeBatchStatus
+    source?: $Enums.CampaignCodeMode | null
+    downloadedAt?: Date | string | null
+    downloadCount?: number
+    createdByUserId?: string | null
+    createdAt?: Date | string
+    codes?: CodeUncheckedCreateNestedManyWithoutBatchInput
+  }
+
+  export type CodeBatchCreateOrConnectWithoutDownloadsInput = {
+    where: CodeBatchWhereUniqueInput
+    create: XOR<CodeBatchCreateWithoutDownloadsInput, CodeBatchUncheckedCreateWithoutDownloadsInput>
+  }
+
+  export type CodeBatchUpsertWithoutDownloadsInput = {
+    update: XOR<CodeBatchUpdateWithoutDownloadsInput, CodeBatchUncheckedUpdateWithoutDownloadsInput>
+    create: XOR<CodeBatchCreateWithoutDownloadsInput, CodeBatchUncheckedCreateWithoutDownloadsInput>
+    where?: CodeBatchWhereInput
+  }
+
+  export type CodeBatchUpdateToOneWithWhereWithoutDownloadsInput = {
+    where?: CodeBatchWhereInput
+    data: XOR<CodeBatchUpdateWithoutDownloadsInput, CodeBatchUncheckedUpdateWithoutDownloadsInput>
+  }
+
+  export type CodeBatchUpdateWithoutDownloadsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    batchName?: StringFieldUpdateOperationsInput | string
+    batchCode?: StringFieldUpdateOperationsInput | string
+    codeVersion?: StringFieldUpdateOperationsInput | string
+    expiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    status?: EnumCodeBatchStatusFieldUpdateOperationsInput | $Enums.CodeBatchStatus
+    source?: NullableEnumCampaignCodeModeFieldUpdateOperationsInput | $Enums.CampaignCodeMode | null
+    downloadedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    downloadCount?: IntFieldUpdateOperationsInput | number
+    createdByUserId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    campaign?: CampaignUpdateOneRequiredWithoutCodeBatchesNestedInput
+    codes?: CodeUpdateManyWithoutBatchNestedInput
+  }
+
+  export type CodeBatchUncheckedUpdateWithoutDownloadsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    campaignId?: StringFieldUpdateOperationsInput | string
+    batchName?: StringFieldUpdateOperationsInput | string
+    batchCode?: StringFieldUpdateOperationsInput | string
+    codeVersion?: StringFieldUpdateOperationsInput | string
+    expiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    status?: EnumCodeBatchStatusFieldUpdateOperationsInput | $Enums.CodeBatchStatus
+    source?: NullableEnumCampaignCodeModeFieldUpdateOperationsInput | $Enums.CampaignCodeMode | null
+    downloadedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    downloadCount?: IntFieldUpdateOperationsInput | number
+    createdByUserId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    codes?: CodeUncheckedUpdateManyWithoutBatchNestedInput
+  }
+
   export type CodeBatchCreateWithoutCodesInput = {
     id?: string
     batchName: string
     batchCode: string
     codeVersion?: string
     expiresAt?: Date | string | null
+    status?: $Enums.CodeBatchStatus
+    source?: $Enums.CampaignCodeMode | null
+    downloadedAt?: Date | string | null
+    downloadCount?: number
+    createdByUserId?: string | null
     createdAt?: Date | string
     campaign: CampaignCreateNestedOneWithoutCodeBatchesInput
+    downloads?: CodeBatchDownloadCreateNestedManyWithoutBatchInput
   }
 
   export type CodeBatchUncheckedCreateWithoutCodesInput = {
@@ -70941,7 +72841,13 @@ export namespace Prisma {
     batchCode: string
     codeVersion?: string
     expiresAt?: Date | string | null
+    status?: $Enums.CodeBatchStatus
+    source?: $Enums.CampaignCodeMode | null
+    downloadedAt?: Date | string | null
+    downloadCount?: number
+    createdByUserId?: string | null
     createdAt?: Date | string
+    downloads?: CodeBatchDownloadUncheckedCreateNestedManyWithoutBatchInput
   }
 
   export type CodeBatchCreateOrConnectWithoutCodesInput = {
@@ -71085,6 +72991,7 @@ export namespace Prisma {
     partnershipLabel?: string | null
     sponsorshipTrack?: string | null
     licenseTermMonths?: number
+    codeMode?: $Enums.CampaignCodeMode | null
     createdAt?: Date | string
     updatedAt?: Date | string
     brand: BrandCreateNestedOneWithoutCampaignsInput
@@ -71138,6 +73045,7 @@ export namespace Prisma {
     partnershipLabel?: string | null
     sponsorshipTrack?: string | null
     licenseTermMonths?: number
+    codeMode?: $Enums.CampaignCodeMode | null
     createdAt?: Date | string
     updatedAt?: Date | string
     overflowFor?: CampaignUncheckedCreateNestedManyWithoutOverflowCampaignInput
@@ -71236,8 +73144,14 @@ export namespace Prisma {
     batchCode?: StringFieldUpdateOperationsInput | string
     codeVersion?: StringFieldUpdateOperationsInput | string
     expiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    status?: EnumCodeBatchStatusFieldUpdateOperationsInput | $Enums.CodeBatchStatus
+    source?: NullableEnumCampaignCodeModeFieldUpdateOperationsInput | $Enums.CampaignCodeMode | null
+    downloadedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    downloadCount?: IntFieldUpdateOperationsInput | number
+    createdByUserId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     campaign?: CampaignUpdateOneRequiredWithoutCodeBatchesNestedInput
+    downloads?: CodeBatchDownloadUpdateManyWithoutBatchNestedInput
   }
 
   export type CodeBatchUncheckedUpdateWithoutCodesInput = {
@@ -71247,7 +73161,13 @@ export namespace Prisma {
     batchCode?: StringFieldUpdateOperationsInput | string
     codeVersion?: StringFieldUpdateOperationsInput | string
     expiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    status?: EnumCodeBatchStatusFieldUpdateOperationsInput | $Enums.CodeBatchStatus
+    source?: NullableEnumCampaignCodeModeFieldUpdateOperationsInput | $Enums.CampaignCodeMode | null
+    downloadedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    downloadCount?: IntFieldUpdateOperationsInput | number
+    createdByUserId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    downloads?: CodeBatchDownloadUncheckedUpdateManyWithoutBatchNestedInput
   }
 
   export type BrandUpsertWithoutCodesInput = {
@@ -71403,6 +73323,7 @@ export namespace Prisma {
     partnershipLabel?: NullableStringFieldUpdateOperationsInput | string | null
     sponsorshipTrack?: NullableStringFieldUpdateOperationsInput | string | null
     licenseTermMonths?: IntFieldUpdateOperationsInput | number
+    codeMode?: NullableEnumCampaignCodeModeFieldUpdateOperationsInput | $Enums.CampaignCodeMode | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     brand?: BrandUpdateOneRequiredWithoutCampaignsNestedInput
@@ -71456,6 +73377,7 @@ export namespace Prisma {
     partnershipLabel?: NullableStringFieldUpdateOperationsInput | string | null
     sponsorshipTrack?: NullableStringFieldUpdateOperationsInput | string | null
     licenseTermMonths?: IntFieldUpdateOperationsInput | number
+    codeMode?: NullableEnumCampaignCodeModeFieldUpdateOperationsInput | $Enums.CampaignCodeMode | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     overflowFor?: CampaignUncheckedUpdateManyWithoutOverflowCampaignNestedInput
@@ -71705,6 +73627,7 @@ export namespace Prisma {
     partnershipLabel?: string | null
     sponsorshipTrack?: string | null
     licenseTermMonths?: number
+    codeMode?: $Enums.CampaignCodeMode | null
     createdAt?: Date | string
     updatedAt?: Date | string
     brand: BrandCreateNestedOneWithoutCampaignsInput
@@ -71758,6 +73681,7 @@ export namespace Prisma {
     partnershipLabel?: string | null
     sponsorshipTrack?: string | null
     licenseTermMonths?: number
+    codeMode?: $Enums.CampaignCodeMode | null
     createdAt?: Date | string
     updatedAt?: Date | string
     overflowFor?: CampaignUncheckedCreateNestedManyWithoutOverflowCampaignInput
@@ -72057,6 +73981,7 @@ export namespace Prisma {
     partnershipLabel?: NullableStringFieldUpdateOperationsInput | string | null
     sponsorshipTrack?: NullableStringFieldUpdateOperationsInput | string | null
     licenseTermMonths?: IntFieldUpdateOperationsInput | number
+    codeMode?: NullableEnumCampaignCodeModeFieldUpdateOperationsInput | $Enums.CampaignCodeMode | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     brand?: BrandUpdateOneRequiredWithoutCampaignsNestedInput
@@ -72110,6 +74035,7 @@ export namespace Prisma {
     partnershipLabel?: NullableStringFieldUpdateOperationsInput | string | null
     sponsorshipTrack?: NullableStringFieldUpdateOperationsInput | string | null
     licenseTermMonths?: IntFieldUpdateOperationsInput | number
+    codeMode?: NullableEnumCampaignCodeModeFieldUpdateOperationsInput | $Enums.CampaignCodeMode | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     overflowFor?: CampaignUncheckedUpdateManyWithoutOverflowCampaignNestedInput
@@ -72965,6 +74891,7 @@ export namespace Prisma {
     partnershipLabel?: string | null
     sponsorshipTrack?: string | null
     licenseTermMonths?: number
+    codeMode?: $Enums.CampaignCodeMode | null
     createdAt?: Date | string
     updatedAt?: Date | string
     brand: BrandCreateNestedOneWithoutCampaignsInput
@@ -73018,6 +74945,7 @@ export namespace Prisma {
     partnershipLabel?: string | null
     sponsorshipTrack?: string | null
     licenseTermMonths?: number
+    codeMode?: $Enums.CampaignCodeMode | null
     createdAt?: Date | string
     updatedAt?: Date | string
     overflowFor?: CampaignUncheckedCreateNestedManyWithoutOverflowCampaignInput
@@ -73227,6 +75155,7 @@ export namespace Prisma {
     partnershipLabel?: NullableStringFieldUpdateOperationsInput | string | null
     sponsorshipTrack?: NullableStringFieldUpdateOperationsInput | string | null
     licenseTermMonths?: IntFieldUpdateOperationsInput | number
+    codeMode?: NullableEnumCampaignCodeModeFieldUpdateOperationsInput | $Enums.CampaignCodeMode | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     brand?: BrandUpdateOneRequiredWithoutCampaignsNestedInput
@@ -73280,6 +75209,7 @@ export namespace Prisma {
     partnershipLabel?: NullableStringFieldUpdateOperationsInput | string | null
     sponsorshipTrack?: NullableStringFieldUpdateOperationsInput | string | null
     licenseTermMonths?: IntFieldUpdateOperationsInput | number
+    codeMode?: NullableEnumCampaignCodeModeFieldUpdateOperationsInput | $Enums.CampaignCodeMode | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     overflowFor?: CampaignUncheckedUpdateManyWithoutOverflowCampaignNestedInput
@@ -74921,6 +76851,7 @@ export namespace Prisma {
     partnershipLabel?: string | null
     sponsorshipTrack?: string | null
     licenseTermMonths?: number
+    codeMode?: $Enums.CampaignCodeMode | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -75021,6 +76952,7 @@ export namespace Prisma {
     partnershipLabel?: NullableStringFieldUpdateOperationsInput | string | null
     sponsorshipTrack?: NullableStringFieldUpdateOperationsInput | string | null
     licenseTermMonths?: IntFieldUpdateOperationsInput | number
+    codeMode?: NullableEnumCampaignCodeModeFieldUpdateOperationsInput | $Enums.CampaignCodeMode | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     overflowCampaign?: CampaignUpdateOneWithoutOverflowForNestedInput
@@ -75073,6 +77005,7 @@ export namespace Prisma {
     partnershipLabel?: NullableStringFieldUpdateOperationsInput | string | null
     sponsorshipTrack?: NullableStringFieldUpdateOperationsInput | string | null
     licenseTermMonths?: IntFieldUpdateOperationsInput | number
+    codeMode?: NullableEnumCampaignCodeModeFieldUpdateOperationsInput | $Enums.CampaignCodeMode | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     overflowFor?: CampaignUncheckedUpdateManyWithoutOverflowCampaignNestedInput
@@ -75124,6 +77057,7 @@ export namespace Prisma {
     partnershipLabel?: NullableStringFieldUpdateOperationsInput | string | null
     sponsorshipTrack?: NullableStringFieldUpdateOperationsInput | string | null
     licenseTermMonths?: IntFieldUpdateOperationsInput | number
+    codeMode?: NullableEnumCampaignCodeModeFieldUpdateOperationsInput | $Enums.CampaignCodeMode | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -75351,6 +77285,7 @@ export namespace Prisma {
     partnershipLabel?: string | null
     sponsorshipTrack?: string | null
     licenseTermMonths?: number
+    codeMode?: $Enums.CampaignCodeMode | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -75369,6 +77304,11 @@ export namespace Prisma {
     batchCode: string
     codeVersion?: string
     expiresAt?: Date | string | null
+    status?: $Enums.CodeBatchStatus
+    source?: $Enums.CampaignCodeMode | null
+    downloadedAt?: Date | string | null
+    downloadCount?: number
+    createdByUserId?: string | null
     createdAt?: Date | string
   }
 
@@ -75471,6 +77411,7 @@ export namespace Prisma {
     partnershipLabel?: NullableStringFieldUpdateOperationsInput | string | null
     sponsorshipTrack?: NullableStringFieldUpdateOperationsInput | string | null
     licenseTermMonths?: IntFieldUpdateOperationsInput | number
+    codeMode?: NullableEnumCampaignCodeModeFieldUpdateOperationsInput | $Enums.CampaignCodeMode | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     brand?: BrandUpdateOneRequiredWithoutCampaignsNestedInput
@@ -75523,6 +77464,7 @@ export namespace Prisma {
     partnershipLabel?: NullableStringFieldUpdateOperationsInput | string | null
     sponsorshipTrack?: NullableStringFieldUpdateOperationsInput | string | null
     licenseTermMonths?: IntFieldUpdateOperationsInput | number
+    codeMode?: NullableEnumCampaignCodeModeFieldUpdateOperationsInput | $Enums.CampaignCodeMode | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     overflowFor?: CampaignUncheckedUpdateManyWithoutOverflowCampaignNestedInput
@@ -75574,6 +77516,7 @@ export namespace Prisma {
     partnershipLabel?: NullableStringFieldUpdateOperationsInput | string | null
     sponsorshipTrack?: NullableStringFieldUpdateOperationsInput | string | null
     licenseTermMonths?: IntFieldUpdateOperationsInput | number
+    codeMode?: NullableEnumCampaignCodeModeFieldUpdateOperationsInput | $Enums.CampaignCodeMode | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -75610,8 +77553,14 @@ export namespace Prisma {
     batchCode?: StringFieldUpdateOperationsInput | string
     codeVersion?: StringFieldUpdateOperationsInput | string
     expiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    status?: EnumCodeBatchStatusFieldUpdateOperationsInput | $Enums.CodeBatchStatus
+    source?: NullableEnumCampaignCodeModeFieldUpdateOperationsInput | $Enums.CampaignCodeMode | null
+    downloadedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    downloadCount?: IntFieldUpdateOperationsInput | number
+    createdByUserId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     codes?: CodeUpdateManyWithoutBatchNestedInput
+    downloads?: CodeBatchDownloadUpdateManyWithoutBatchNestedInput
   }
 
   export type CodeBatchUncheckedUpdateWithoutCampaignInput = {
@@ -75620,8 +77569,14 @@ export namespace Prisma {
     batchCode?: StringFieldUpdateOperationsInput | string
     codeVersion?: StringFieldUpdateOperationsInput | string
     expiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    status?: EnumCodeBatchStatusFieldUpdateOperationsInput | $Enums.CodeBatchStatus
+    source?: NullableEnumCampaignCodeModeFieldUpdateOperationsInput | $Enums.CampaignCodeMode | null
+    downloadedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    downloadCount?: IntFieldUpdateOperationsInput | number
+    createdByUserId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     codes?: CodeUncheckedUpdateManyWithoutBatchNestedInput
+    downloads?: CodeBatchDownloadUncheckedUpdateManyWithoutBatchNestedInput
   }
 
   export type CodeBatchUncheckedUpdateManyWithoutCampaignInput = {
@@ -75630,6 +77585,11 @@ export namespace Prisma {
     batchCode?: StringFieldUpdateOperationsInput | string
     codeVersion?: StringFieldUpdateOperationsInput | string
     expiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    status?: EnumCodeBatchStatusFieldUpdateOperationsInput | $Enums.CodeBatchStatus
+    source?: NullableEnumCampaignCodeModeFieldUpdateOperationsInput | $Enums.CampaignCodeMode | null
+    downloadedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    downloadCount?: IntFieldUpdateOperationsInput | number
+    createdByUserId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -75909,6 +77869,15 @@ export namespace Prisma {
     usedBySubmissionId?: string | null
   }
 
+  export type CodeBatchDownloadCreateManyBatchInput = {
+    id?: string
+    downloadedByUserId?: string | null
+    ipAddress?: string | null
+    userAgent?: string | null
+    codeCount: number
+    createdAt?: Date | string
+  }
+
   export type CodeUpdateWithoutBatchInput = {
     id?: StringFieldUpdateOperationsInput | string
     value?: StringFieldUpdateOperationsInput | string
@@ -75961,6 +77930,33 @@ export namespace Prisma {
     redeemedProvince?: NullableStringFieldUpdateOperationsInput | string | null
     redeemedBy?: NullableStringFieldUpdateOperationsInput | string | null
     usedBySubmissionId?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type CodeBatchDownloadUpdateWithoutBatchInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    downloadedByUserId?: NullableStringFieldUpdateOperationsInput | string | null
+    ipAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    userAgent?: NullableStringFieldUpdateOperationsInput | string | null
+    codeCount?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type CodeBatchDownloadUncheckedUpdateWithoutBatchInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    downloadedByUserId?: NullableStringFieldUpdateOperationsInput | string | null
+    ipAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    userAgent?: NullableStringFieldUpdateOperationsInput | string | null
+    codeCount?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type CodeBatchDownloadUncheckedUpdateManyWithoutBatchInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    downloadedByUserId?: NullableStringFieldUpdateOperationsInput | string | null
+    ipAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    userAgent?: NullableStringFieldUpdateOperationsInput | string | null
+    codeCount?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type FraudFlagCreateManySubmissionInput = {
@@ -76188,6 +78184,10 @@ export namespace Prisma {
      * @deprecated Use CodeBatchDefaultArgs instead
      */
     export type CodeBatchArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = CodeBatchDefaultArgs<ExtArgs>
+    /**
+     * @deprecated Use CodeBatchDownloadDefaultArgs instead
+     */
+    export type CodeBatchDownloadArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = CodeBatchDownloadDefaultArgs<ExtArgs>
     /**
      * @deprecated Use CodeDefaultArgs instead
      */
