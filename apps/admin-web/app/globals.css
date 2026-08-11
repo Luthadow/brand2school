@@ -176,8 +176,10 @@ body:has(.admin-app) {
 /* —— Admin shell (sidebar layout) —— */
 .admin-shell {
   display: grid;
-  grid-template-columns: 240px 1fr;
+  grid-template-columns: 240px minmax(0, 1fr);
   min-height: 100vh;
+  max-width: 100%;
+  overflow-x: clip;
 }
 
 .admin-shell--loading {
@@ -365,6 +367,9 @@ body:has(.admin-app) {
 .admin-content {
   padding: 1.25rem 1.5rem 2rem;
   flex: 1;
+  min-width: 0;
+  max-width: 100%;
+  overflow-x: clip;
 }
 
 /* —— Dashboard overview —— */
@@ -926,7 +931,7 @@ body:has(.admin-app) {
 
 .school-profile__grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 18rem), 1fr));
   gap: 1rem;
 }
 

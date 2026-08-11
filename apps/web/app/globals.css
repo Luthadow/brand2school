@@ -999,7 +999,7 @@ button:disabled {
 
 .lp-benefits-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr));
   gap: 1.25rem;
 }
 
@@ -2274,8 +2274,9 @@ button:disabled {
 .lp-hero-glow {
   position: absolute;
   top: -20%;
-  right: -10%;
-  width: min(60%, 100vw);
+  right: 0;
+  width: 60%;
+  max-width: 100%;
   height: 80%;
   background: radial-gradient(ellipse, rgba(108, 194, 74, 0.12) 0%, transparent 70%);
   pointer-events: none;
@@ -3049,7 +3050,7 @@ button:disabled {
 
 .reg-province-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(10.5rem, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 10.5rem), 1fr));
   gap: 0.5rem;
   margin-top: 0.75rem;
 }
@@ -6138,7 +6139,7 @@ body:has(.bp-root) .b2s-top-strip {
 
 .bp-cmd-kpi-strip {
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: repeat(5, minmax(0, 1fr));
   gap: 0.75rem;
   margin-bottom: 1.25rem;
 }
@@ -6340,21 +6341,27 @@ body:has(.bp-root) .b2s-top-strip {
 
 @media (max-width: 1100px) {
   .bp-cmd-kpi-strip {
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 }
 
 @media (max-width: 768px) {
   .bp-cmd-kpi-strip {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .bp-cmd-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
   }
 
   .bp-cmd-province-row {
-    grid-template-columns: 90px 1fr 40px;
+    grid-template-columns: minmax(0, 90px) minmax(0, 1fr) minmax(0, 40px);
+  }
+}
+
+@media (max-width: 480px) {
+  .bp-cmd-kpi-strip {
+    grid-template-columns: minmax(0, 1fr);
   }
 }
 
@@ -6430,7 +6437,10 @@ body:has(.bp-root) .b2s-top-strip {
   margin: 0;
   display: flex;
   align-items: center;
+  flex-wrap: wrap;
   gap: 0.4rem;
+  min-width: 0;
+  overflow-wrap: anywhere;
   color: var(--brand-navy);
   font-size: 1.05rem;
 }
@@ -6448,7 +6458,9 @@ body:has(.bp-root) .b2s-top-strip {
 }
 
 .bp-contrib-option {
-  min-width: 5.5rem;
+  flex: 1 1 5.5rem;
+  min-width: min(5.5rem, 100%);
+  max-width: 100%;
   padding: 0.75rem 1rem;
   border: 1px solid #d7e6ff;
   border-radius: var(--ds-radius-md);
@@ -6471,6 +6483,9 @@ body:has(.bp-root) .b2s-top-strip {
   background: #fff;
   padding: 1.25rem 1.4rem;
   box-shadow: var(--ds-shadow-sm);
+  min-width: 0;
+  max-width: 100%;
+  overflow-wrap: anywhere;
 }
 
 .cm-milestone-eyebrow {
@@ -6510,8 +6525,8 @@ body:has(.bp-root) .b2s-top-strip {
   height: 10px;
   border-radius: 999px;
   background: #e8eef8;
-  overflow: visible;
-  margin-bottom: 0.45rem;
+  overflow: hidden;
+  margin: 0.35rem 0 0.45rem;
 }
 
 .cm-milestone-track-fill {
@@ -6522,17 +6537,20 @@ body:has(.bp-root) .b2s-top-strip {
 
 .cm-milestone-track-marker {
   position: absolute;
-  top: -3px;
-  width: 16px;
-  height: 16px;
+  top: 50%;
+  width: 14px;
+  height: 14px;
   border-radius: 50%;
   background: #fff;
   border: 3px solid #1565c0;
+  transform: translate(-50%, -50%);
 }
 
 .cm-milestone-scale {
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-between;
+  gap: 0.25rem 0.5rem;
   font-size: 0.78rem;
   color: #64748b;
   margin-bottom: 0.85rem;
@@ -6553,10 +6571,18 @@ body:has(.bp-root) .b2s-top-strip {
 
 .cm-milestone-list li {
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-between;
-  gap: 0.75rem;
+  gap: 0.25rem 0.75rem;
   font-size: 0.9rem;
   color: #475569;
+  min-width: 0;
+}
+
+.cm-milestone-list li > span,
+.cm-milestone-list em {
+  min-width: 0;
+  overflow-wrap: anywhere;
 }
 
 .cm-milestone-list--reached {
@@ -6590,7 +6616,7 @@ body:has(.bp-root) .b2s-top-strip {
 
 .bp-inv-kpi-strip {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 0.75rem;
   margin-bottom: 1.25rem;
 }
@@ -6621,7 +6647,7 @@ body:has(.bp-root) .b2s-top-strip {
 
 .bp-inv-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 1rem;
 }
 
@@ -6818,21 +6844,27 @@ body:has(.bp-root) .b2s-top-strip {
 
 @media (max-width: 1100px) {
   .bp-inv-kpi-strip {
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 }
 
 @media (max-width: 768px) {
   .bp-inv-kpi-strip {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .bp-inv-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
   }
 
   .bp-page-actions {
     width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .bp-inv-kpi-strip {
+    grid-template-columns: minmax(0, 1fr);
   }
 }
 
@@ -6953,7 +6985,7 @@ body:has(.bp-root) .b2s-top-strip {
 
 .bp-wizard-provinces {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 160px), 1fr));
   gap: 0.45rem;
   margin-bottom: 1rem;
 }
@@ -7309,7 +7341,7 @@ body:has(.bp-root) .b2s-top-strip {
 
 .bp-roi-province-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 180px), 1fr));
   gap: 0.65rem;
 }
 
@@ -7336,7 +7368,7 @@ body:has(.bp-root) .b2s-top-strip {
 
 .bp-roi-infra-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 220px), 1fr));
   gap: 0.75rem;
 }
 
@@ -7433,7 +7465,7 @@ body:has(.bp-root) .b2s-top-strip {
 }
 
 .bp-school-grid--full {
-  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 260px), 1fr));
 }
 
 .bp-school-card {
@@ -7494,7 +7526,7 @@ body:has(.bp-root) .b2s-top-strip {
 }
 
 .bp-media-row--full {
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 280px), 1fr));
 }
 
 .bp-story-card {
@@ -7635,7 +7667,7 @@ body:has(.bp-root) .b2s-top-strip {
 
 .bp-report-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 240px), 1fr));
   gap: 1rem;
 }
 
@@ -7679,7 +7711,7 @@ body:has(.bp-root) .b2s-top-strip {
 @media (min-width: 1024px) {
   .bp {
     display: grid;
-    grid-template-columns: 260px 1fr;
+    grid-template-columns: 260px minmax(0, 1fr);
     padding-bottom: 0;
   }
 
@@ -7959,6 +7991,9 @@ body:has(.sp-root) .chat-widget {
   padding: 1rem 1rem 1.5rem;
   max-width: 720px;
   margin: 0 auto;
+  overflow-x: clip;
+  min-width: 0;
+  width: 100%;
 }
 
 .sp-page-head h1,
@@ -8454,7 +8489,7 @@ body:has(.sp-root) .chat-widget {
 
 .sp-needs-cards {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 280px), 1fr));
   gap: 1rem;
 }
 
@@ -8527,7 +8562,7 @@ body:has(.sp-root) .chat-widget {
 
 .sp-vault-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 200px), 1fr));
   gap: 0.75rem;
   margin-top: 1rem;
 }
@@ -8902,7 +8937,7 @@ body:has(.sp-root) .chat-widget {
 
 .ps-directory-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 260px), 1fr));
   gap: 1rem;
 }
 
@@ -9197,7 +9232,7 @@ body:has(.sp-root) .chat-widget {
 
 .sp-community-supporters {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 220px), 1fr));
   gap: 0.75rem;
 }
 
@@ -9509,7 +9544,7 @@ body:has(.sp-root) .chat-widget {
   margin: 1rem 0 0;
   padding: 0;
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 220px), 1fr));
   gap: 0.75rem;
 }
 
@@ -9590,7 +9625,7 @@ body:has(.sp-root) .chat-widget {
 
 .sp-enterprise-form--inline {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 180px), 1fr));
   align-items: end;
 }
 
@@ -9683,7 +9718,7 @@ body:has(.sp-root) .chat-widget {
   margin: 1rem 0 0;
   padding: 0;
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 220px), 1fr));
   gap: 0.75rem;
 }
 
@@ -9778,7 +9813,7 @@ body:has(.sp-root) .chat-widget {
 
 .sp-crm-form--inline {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 180px), 1fr));
   align-items: end;
 }
 
@@ -10204,7 +10239,7 @@ body:has(.sp-root) .chat-widget {
 @media (min-width: 900px) {
   .sp {
     display: grid;
-    grid-template-columns: 220px 1fr;
+    grid-template-columns: 220px minmax(0, 1fr);
     padding-bottom: 0;
   }
 
@@ -10451,7 +10486,7 @@ body:has(.sp-root) .chat-widget {
 
 .pp-directory-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 260px), 1fr));
   gap: 1rem;
 }
 
@@ -10520,13 +10555,13 @@ body:has(.sp-root) .chat-widget {
 
 .pp-campaign-detail-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
   gap: 1rem;
 }
 
 .pp-rankings-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
   gap: 1rem;
 }
 
@@ -10538,7 +10573,7 @@ body:has(.sp-root) .chat-widget {
 
 .pp-trust-metrics {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 160px), 1fr));
   gap: 1rem;
 }
 
@@ -10570,7 +10605,7 @@ body:has(.sp-root) .chat-widget {
 /* Who we service — organisation types */
 .lp-who-we-service-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 240px), 1fr));
   gap: 1rem;
   margin-top: 1.25rem;
 }
@@ -10685,7 +10720,7 @@ body:has(.sp-root) .chat-widget {
 
 .impact-kpi-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 160px), 1fr));
   gap: 1rem;
 }
 
@@ -10766,7 +10801,7 @@ body:has(.sp-root) .chat-widget {
 
 .impact-fraud-stats {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 140px), 1fr));
   gap: 0.75rem;
 }
 
@@ -12153,7 +12188,7 @@ span,
 .cp-badge-grid,
 .cp-badge-all-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 200px), 1fr));
   gap: 0.65rem;
 }
 
@@ -12180,7 +12215,7 @@ span,
 
 .cp-schools-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 260px), 1fr));
   gap: 0.75rem;
 }
 
@@ -12286,7 +12321,7 @@ span,
 
 .cp-vault-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 180px), 1fr));
   gap: 0.5rem;
 }
 

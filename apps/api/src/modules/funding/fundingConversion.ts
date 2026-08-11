@@ -62,10 +62,11 @@ export function allocateContribution(grossZar: number, split: FundSplit): FundAl
 }
 
 export function contributionPerCodeFromCampaign(campaign: {
-  contributionPerCodeZar: Prisma.Decimal | number | null;
+  contributionPerCodeZar: Prisma.Decimal | number | string | { toString(): string } | null;
 }): number {
   if (campaign.contributionPerCodeZar == null) return DEFAULT_CONTRIBUTION_PER_CODE_ZAR;
-  return Number(campaign.contributionPerCodeZar);
+  const n = Number(campaign.contributionPerCodeZar);
+  return Number.isFinite(n) ? n : DEFAULT_CONTRIBUTION_PER_CODE_ZAR;
 }
 
 export async function recordVerifiedCodeFunding(input: {

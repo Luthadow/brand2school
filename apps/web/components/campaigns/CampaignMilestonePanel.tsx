@@ -43,7 +43,7 @@ export function CampaignMilestonePanel({
         <div className="cm-milestone-track-fill" style={{ width: `${progress}%` }} />
         <div
           className="cm-milestone-track-marker"
-          style={{ left: `calc(${progress}% - 6px)` }}
+          style={{ left: `${progress}%` }}
           title={`${formatCount(campaign.validSubmissions)} verified`}
         />
       </div>

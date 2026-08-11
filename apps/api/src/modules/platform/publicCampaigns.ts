@@ -87,7 +87,12 @@ function mapCampaignRow(campaign: {
     campaign.targetSubmissions > 0
       ? Math.min(100, Math.round((validSubmissions / campaign.targetSubmissions) * 1000) / 10)
       : 0;
-  const perCode = contributionPerCodeFromCampaign(campaign);
+  const perCode = contributionPerCodeFromCampaign({
+    contributionPerCodeZar:
+      campaign.contributionPerCodeZar == null
+        ? null
+        : Number(campaign.contributionPerCodeZar)
+  });
   const generated = schoolSupportGeneratedZar(validSubmissions, perCode);
 
   return {
@@ -205,7 +210,12 @@ export async function getPublicCampaignBySlug(slug: string): Promise<PublicCampa
     prisma.submission.count({ where: { campaignId: campaign.id } })
   ]);
 
-  const perCode = contributionPerCodeFromCampaign(campaign);
+  const perCode = contributionPerCodeFromCampaign({
+    contributionPerCodeZar:
+      campaign.contributionPerCodeZar == null
+        ? null
+        : Number(campaign.contributionPerCodeZar)
+  });
   const milestones = buildCampaignMilestones({
     targetSubmissions: campaign.targetSubmissions,
     verifiedCount: card.validSubmissions,
